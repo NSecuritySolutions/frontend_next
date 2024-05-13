@@ -4,7 +4,7 @@ type TLogoImageProps = {
 };
 
 type TLogoProps = {
-  imageUrl: string;
+  imageUrl: { src: string };
 };
 
 export type { TLogoImageProps, TLogoProps };

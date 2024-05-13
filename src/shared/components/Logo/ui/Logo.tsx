@@ -6,7 +6,7 @@ const Logo: FC<TLogoProps> = ({ imageUrl }) => {
   return (
     <LogoContainer>
       <LogoLink href="/">
-        <LogoImage src={imageUrl} alt="Логотип" />
+        <LogoImage src={imageUrl.src} alt="Логотип" />
       </LogoLink>
     </LogoContainer>
   );
