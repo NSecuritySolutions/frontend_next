@@ -5,7 +5,7 @@ import alarmIcon from '../../../assets/icons/examples/ic-alarm.svg';
 import remoteIcon from '../../../assets/icons/examples/ic-remote.svg';
 import fingerPrintIcon from '../../../assets/icons/examples/ic-fingerprint.svg';
 
-import noImCard from '../../../assets/icons/examples/ic-no-img.png';
+import noImCard from '../../../assets/icons/examples/no-image.svg';
 
 import firstWorksImg from '../../../assets/images/works/works-image-1.webp';
 import secondWorksImg from '../../../assets/images/works/works-image-2.webp';

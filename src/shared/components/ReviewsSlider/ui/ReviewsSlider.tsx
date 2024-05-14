@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 
 import Slider from 'react-slick';
@@ -19,7 +17,9 @@ import {
   ReviewsParagraph,
   ReviewsText,
   CustomDot,
-  ReviewsLink
+  ReviewsLink,
+  UserIcon,
+  TitleWrapper
 } from './styled.ts';
 
 const ReviewsSlider = () => {
@@ -92,14 +92,19 @@ const ReviewsSlider = () => {
       <Slider {...settings} afterChange={handleAfterChange}>
         {projectReviews.map((item, i) => (
           <ReviewsContainer className="slick-slide" key={i}>
-            <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
+            <TitleWrapper>
+              <UserIcon src={item.img}></UserIcon>
+              <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
+            </TitleWrapper>
             <ReviewsParagraph>
               {truncate(item.product, TITLE_LIMIT)}
             </ReviewsParagraph>
             <ReviewsText>
               {truncate(item.review, TEXT_LIMIT)}
               {item.review.length >= TEXT_LIMIT && (
-                <ReviewsLink href={item.link}>(Читать далее)</ReviewsLink>
+                <p>
+                  <ReviewsLink href={item.link}>Читать далее</ReviewsLink>
+                </p>
               )}
             </ReviewsText>
           </ReviewsContainer>

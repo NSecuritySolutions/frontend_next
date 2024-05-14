@@ -11,7 +11,7 @@ export type TTeamContacts = {
   name: string;
   position: string;
   tel: string;
-  image: string;
+  image: StaticImageData;
 };
 
 export type TError505 = {
@@ -47,7 +47,7 @@ export type TWorkExamples = {
   }[];
   title: string;
   quantities: { number: string; description: string }[];
-  img: string[];
+  img: StaticImageData[];
   equipment: string[];
   text: string;
 };
@@ -96,8 +96,8 @@ export type TProjectReviews = {
 export type TOurServices = {
   id: number;
   title: string;
-  text: string;
-  img: string;
+  text: string[];
+  img: StaticImageData;
   btnName: string;
   link: string;
 };

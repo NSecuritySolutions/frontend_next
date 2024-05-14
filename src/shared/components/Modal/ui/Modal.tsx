@@ -2,6 +2,8 @@ import { MouseEvent, useEffect } from 'react';
 
 import { ImgSlider } from '../../ImgSlider';
 
+import closeBtn from './../../../../assets/icons/+.svg';
+
 import TModalProps from './type.ts';
 
 import {

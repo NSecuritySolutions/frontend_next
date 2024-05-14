@@ -14,7 +14,7 @@ import {
 import { BtnLink } from '../../../shared/components/BtnLink/index.ts';
 import { TWorkExamples } from '../../../shared/constants/texts/types.ts';
 
-import blankImg from '../../../assets/icons/examples/ic-no-img.png';
+import blankImg from '../../../assets/icons/examples/no-image.svg';
 
 import { ChangeFormateDate } from '../../../shared/constants/utils/utils.ts';
 

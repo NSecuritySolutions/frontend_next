@@ -1,7 +1,7 @@
+import colors from '../../../../shared/constants/colors';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
-import colors from '../../../constants/colors';
 
 const SliderContainer = styled.div`
   max-width: 900px;
@@ -48,7 +48,7 @@ const ReviewsTitle = styled.h3`
 const ReviewsParagraph = styled.span`
   font-weight: 600;
   font-size: 16px;
-  text-align: center;
+  text-align: start;
 `;
 
 const ReviewsText = styled.p`
@@ -66,11 +66,30 @@ const CustomDot = styled.div<{ $active?: boolean }>`
     props.$active ? `${colors.btnPrimary}` : '#d7d7d7'};
 `;
 
-const ReviewsLink = styled.a`
-  cursor: poinetr;
-  font-size: 14px;
-  color: ${colors.darkPrimary};
-  opacity: 0.5;
+const ReviewsLink = styled.a<{ $active?: boolean }>`
+  margin-top: 12px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 16px;
+  color: ${colors.titleBlueColor};
+  opacity: 1;
+  &:hover {
+    opacity: 0.5;
+    transform: opacity 1s ease-in;
+  }
+`;
+
+const UserIcon = styled.img.attrs(props => ({
+  src: props.src
+}))`
+  width: 40px;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
 `;
 
 export {
@@ -80,5 +99,7 @@ export {
   ReviewsParagraph,
   ReviewsText,
   CustomDot,
-  ReviewsLink
+  ReviewsLink,
+  UserIcon,
+  TitleWrapper
 };

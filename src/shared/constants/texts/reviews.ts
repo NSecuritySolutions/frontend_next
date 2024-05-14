@@ -1,8 +1,8 @@
 import { TProjectReviews } from './types';
 
-import firstReview from '../../../assets/images/feedback/webp/feedback-image-1.webp';
-import secondReview from '../../../assets/images/feedback/webp/feedback-image-2.webp';
-import thirdReview from '../../../assets/images/feedback/webp/feedback-image-3.webp';
+import firstReview from '../../../assets/images/feedback/svg/Ic_User_1.svg';
+import secondReview from '../../../assets/images/feedback/svg/Ic_User_2.svg';
+import thirdReview from '../../../assets/images/feedback/svg/Ic_User_3.svg';
 
 export const TEXT_LIMIT: number = 145;
 export const TITLE_LIMIT: number = 23;
