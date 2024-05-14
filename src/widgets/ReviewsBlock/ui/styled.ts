@@ -1,7 +1,8 @@
-import colors from "../../../shared/constants/colors";
+import styled from 'styled-components';
 
-import styled from "styled-components";
-import yandexLogo from "src/assets/images/yandex/yandex.webp";
+import colors from '../../../shared/constants/colors';
+
+import yandexLogo from '../../../assets/images/yandex/yandex.webp';
 
 const Section = styled.section`
   margin: 0 auto;
@@ -24,8 +25,8 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   max-width: 1180px;
   width: 100%;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   background: ${colors.backgroundBase2};
 
   @media (max-width: 1300px) {
@@ -53,6 +54,7 @@ const ColumnTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
+  margin-bottom: 20px;
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
@@ -74,7 +76,6 @@ const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(1, 1fr 3fr);
-  column-gap: 20px;
 
   @media (max-width: 1300px) {
     padding: 40px 0;
@@ -105,7 +106,7 @@ const Column = styled.div`
 `;
 const CardImg = styled.img.attrs(({ src }) => ({
   src: src,
-  alt: "Аватар пользователя",
+  alt: 'Аватар пользователя'
 }))`
   border-radius: 500px;
   background-color: ${colors.backgroundCardBl};
@@ -118,7 +119,8 @@ const TextWrapper = styled.div`
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -158,8 +160,8 @@ const ImageWrapper = styled.p`
 `;
 
 const ColumnImage = styled.img`
-  margin: 0 0 0 0;
-  padding: 127px 0 0 0;
+  margin: 0;
+  padding: 0;
   max-width: 280px;
   width: 100%;
 
@@ -172,10 +174,12 @@ const ColumnImage = styled.img`
   }
 `;
 
-// ColumnImage.defaultProps = {
-//   src: yandexLogo,
-// };
-
+ColumnImage.defaultProps = {
+  src: yandexLogo
+};
+const StyledParagraph = styled.p`
+  font: 800 18px Manrope, sans-serif;
+`;
 const ContactsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -206,4 +210,5 @@ export {
   ContactsWrapper,
   ColumnImage,
   CardImg,
+  StyledParagraph
 };

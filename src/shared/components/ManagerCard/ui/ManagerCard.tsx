@@ -1,16 +1,16 @@
-import { teamContacts } from "../../../constants/texts/our-team";
+import { teamContacts } from '../../../constants/texts/our-team';
 import {
   CardContainer,
   CardImg,
   CardName,
   CardPosition,
-  CardTel,
-} from "./styled";
+  CardTel
+} from './styled';
 
 const ManagerCard = () => {
   return (
     <>
-      {teamContacts.map((item) => (
+      {teamContacts.map(item => (
         <CardContainer key={item.id}>
           <CardImg $imgUrl={item.image} alt="Фотография сотрудника" />
           <CardName>{item.name}</CardName>

@@ -1,11 +1,22 @@
-import { useState } from "react";
-import colors from "../../../shared/constants/colors";
+import { useState } from 'react';
+import colors from '../../../shared/constants/colors';
 
-// import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import blankImg from "src/assets/icons/examples/ic-no-img.png";
+import {
+  TEXT_LIMIT,
+  TITLE_LIMIT,
+  workExamples
+} from '../../../shared/constants/texts/examples.ts';
+
+import { BtnLink } from '../../../shared/components/BtnLink/index.ts';
+import { TWorkExamples } from '../../../shared/constants/texts/types.ts';
+
+import blankImg from '../../../assets/icons/examples/ic-no-img.png';
+
+import { ChangeFormateDate } from '../../../shared/constants/utils/utils.ts';
 
 import {
   SliderContainer,
@@ -19,14 +30,9 @@ import {
   ExamplesImg,
   IconWrapper,
   ExamplesLink,
-  SecondButtonWrapper,
-} from "./styled";
-import { workExamples } from "../../../shared/constants/texts/examples";
-import {
-  TEXT_LIMIT,
-  TITLE_LIMIT,
-} from "../../../shared/constants/texts/services";
-import { TWorkExamples } from "../../../shared/constants/texts/types";
+  SecondButtonWrapper
+} from './styled.ts';
+import Modal from '../../../shared/components/Modal/ui/Modal';
 
 const ExamplesSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -47,7 +53,7 @@ const ExamplesSlider: React.FC = () => {
   };
 
   const settings = {
-    className: "reviews-slider",
+    className: 'reviews-slider',
     dots: true,
     infinite: false,
     speed: 200,
@@ -62,16 +68,16 @@ const ExamplesSlider: React.FC = () => {
         breakpoint: 1280,
         settings: {
           rows: 1,
-          slidesPerRow: 2,
-        },
+          slidesPerRow: 2
+        }
       },
       {
         breakpoint: 619,
         settings: {
           rows: 1,
-          slidesPerRow: 1,
-        },
-      },
+          slidesPerRow: 1
+        }
+      }
     ],
     customPaging: function (i: number) {
       let activePage = 0;
@@ -80,16 +86,20 @@ const ExamplesSlider: React.FC = () => {
       }
 
       return <CustomDot $active={i === activePage} />;
-    },
+    }
   };
 
   function truncate(str: string, maxlength: number) {
     if (str.length > maxlength) {
-      return str.substring(0, maxlength - 3) + "...";
+      return str.substring(0, maxlength - 3) + '...';
     } else {
       return str;
     }
   }
+
+  const newDate = modalItem?.date
+    ? ChangeFormateDate(modalItem.date.toString())
+    : '';
 
   return (
     <>
@@ -107,13 +117,11 @@ const ExamplesSlider: React.FC = () => {
                 {item.cardImage ? (
                   <ExamplesLink onClick={() => openModal(item)}>
                     <ExamplesImg
-                      src={item?.img[0]}
-                      // src={item?.cardImage}
-                      alt={item.cardTitle}
-                    ></ExamplesImg>
+                      src={item?.cardImage}
+                      alt={item.cardTitle}></ExamplesImg>
                   </ExamplesLink>
                 ) : (
-                  // <ExamplesImg src={(item.cardImage = blankImg)}></ExamplesImg>
+                  <ExamplesImg src={(item.cardImage = blankImg)}></ExamplesImg>
                 )}
                 <ExamplesContainer className="slick-slide" key={i}>
                   <ExamplesTitle>
@@ -127,25 +135,14 @@ const ExamplesSlider: React.FC = () => {
                   <ButtonWrapper>
                     <BtnLink
                       btnType="transparent"
-                      text={"Подробнее"}
+                      text={'Подробнее'}
                       width="134px"
                       height="44px"
                       color={colors.darkPrimary}
                       size="15px"
-                      onClick={() => openModal(item)}
-                    ></BtnLink>
+                      onClick={() => openModal(item)}></BtnLink>
 
-                    <IconWrapper>
-                      {/* {item.cardIcons?.map((item, i) => (
-                        <img
-                          key={i}
-                          src={item.link}
-                          alt={item.alt}
-                          aria-label={item.alt}
-                          title={item.alt}
-                        ></img>
-                      ))} */}
-                    </IconWrapper>
+                    <IconWrapper>{newDate}</IconWrapper>
                   </ButtonWrapper>
                 </ExamplesContainer>
               </CardWrapper>
@@ -154,7 +151,7 @@ const ExamplesSlider: React.FC = () => {
         <SecondButtonWrapper>
           <BtnLink
             size="15px"
-            width="100%"
+            width="277px"
             height="44px"
             color={colors.darkPrimary}
             text="Смотреть все примеры работ"
@@ -162,11 +159,11 @@ const ExamplesSlider: React.FC = () => {
           />
         </SecondButtonWrapper>
       </SliderContainer>
-      {/* {isOpen ? (
+      {isOpen ? (
         <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} />
       ) : (
-        ""
-      )} */}
+        ''
+      )}
     </>
   );
 };

@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export type TProjectMilestones = {
   id: number;
   title: string;
@@ -36,7 +38,7 @@ export type TWorkExamples = {
   cardTitle: string;
   cardText: string;
   cardLink: string;
-  cardImage?: string | undefined;
+  cardImage?: StaticImageData | undefined;
   cardSectionButton?: string | undefined;
   cardSectionLink?: string | undefined;
   cardIcons?: {
@@ -87,7 +89,7 @@ export type TProjectReviews = {
   name: string;
   product: string;
   review: string;
-  img: string;
+  img: StaticImageData;
   link?: string | undefined;
 };
 

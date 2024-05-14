@@ -1,13 +1,17 @@
+'use client';
+
 import { useState } from 'react';
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
 import {
   TEXT_LIMIT,
   TITLE_LIMIT,
   projectReviews
-} from 'src/shared/constants/texts/reviews.ts';
+} from '../../../../shared/constants/texts/reviews.ts';
+
 import {
   ReviewsContainer,
   SliderContainer,

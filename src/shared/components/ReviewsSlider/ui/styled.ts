@@ -1,7 +1,7 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import styled from 'styled-components';
+import colors from '../../../constants/colors';
 
 const SliderContainer = styled.div`
   max-width: 900px;
@@ -62,11 +62,11 @@ const CustomDot = styled.div<{ $active?: boolean }>`
   height: 13px;
   border-radius: 50%;
   margin-top: 10px;
-  background-color: ${(props) =>
-    props.$active ? `${colors.btnPrimary}` : "#d7d7d7"};
+  background-color: ${props =>
+    props.$active ? `${colors.btnPrimary}` : '#d7d7d7'};
 `;
 
-const ReviewsLink = styled.a<{ $active?: boolean }>`
+const ReviewsLink = styled.a`
   cursor: poinetr;
   font-size: 14px;
   color: ${colors.darkPrimary};
@@ -80,5 +80,5 @@ export {
   ReviewsParagraph,
   ReviewsText,
   CustomDot,
-  ReviewsLink,
+  ReviewsLink
 };

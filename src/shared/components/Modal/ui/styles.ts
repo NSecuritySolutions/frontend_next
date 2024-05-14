@@ -1,7 +1,7 @@
-import closeBtn from "src/assets/icons/+.svg";
+import closeBtn from './../../../../assets/icons/+.svg';
 
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import styled from 'styled-components';
+import colors from '../../../constants/colors';
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -118,7 +118,7 @@ const TextParagraph = styled.p`
   br {
     margin-top: 20px;
     display: block;
-    content: "";
+    content: '';
   }
 
   a {
@@ -160,5 +160,5 @@ export {
   EquipmentListItem,
   SubTitle,
   TextParagraph,
-  TextWrapper,
+  TextWrapper
 };
