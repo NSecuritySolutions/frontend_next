@@ -29,7 +29,7 @@ const ReviewsBlock = () => {
 
           <Column>
             <TextWrapper>
-              <StyledParagraph>Еще больше отзывов о нас на Яндекс.Услуги</StyledParagraph>
+              <StyledParagraph> Еще больше отзывов о нас на Яндекс.Услуги</StyledParagraph>
               <a href={YANDEX_URL}>
                 <ColumnImageWrapper>
                   <Image
@@ -46,5 +46,6 @@ const ReviewsBlock = () => {
     </Section>
   )
 }
+console.log('dd')
 
 export default ReviewsBlock
