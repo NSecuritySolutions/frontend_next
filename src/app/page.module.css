@@ -4,3 +4,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
