@@ -28,12 +28,12 @@ const TabsContainer = styled.div`
 `
 
 type TTabButtonProps = {
-  active: boolean
+  $activetab: boolean
 }
 
 const TabButton = styled.button<TTabButtonProps>`
-  background-color: ${(props) => (props.active ? colors.btnPrimary : colors.backgroundPrimary)};
-  color: ${(props) => (props.active ? colors.darkPrimary : colors.darkPrimaryOpacity)};
+  background-color: ${(props) => (props.$activetab ? colors.btnPrimary : colors.backgroundPrimary)};
+  color: ${(props) => (props.$activetab ? colors.darkPrimary : colors.darkPrimaryOpacity)};
   border: none;
   padding: 10px 20px;
   font-size: 16px;

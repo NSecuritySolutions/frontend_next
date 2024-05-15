@@ -150,8 +150,8 @@ const Calculator: React.FC = () => {
                 src="/icons/calculator/cross.svg"
                 width={22}
                 height={22}
-                objectFit="cover"
                 alt="Reset"
+                style={{ objectFit: 'cover' }}
               />
             </ImgWrap>
             <Typography size={16} width="fit-content" color={colors.textSecondary}>
