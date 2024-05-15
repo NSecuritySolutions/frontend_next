@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 const TheHeader = styled.header`
   // Приклеивает меню к верхнему краю страницы
-  position: sticky;
+  // position: sticky;
+  // position: fixed;
   top: 0;
   right: 0;
 
