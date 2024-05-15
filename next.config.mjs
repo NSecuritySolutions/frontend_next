@@ -1,9 +1,4 @@
-import withImages from 'next-images'
+/** @type {import('next').NextConfig} */
+const nextConfig = {}
 
-const nextConfig = {
-  images: {
-    disableStaticImages: true,
-  },
-}
-
-export default withImages(nextConfig)
+export default nextConfig
