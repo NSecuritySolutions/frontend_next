@@ -17,20 +17,22 @@ import { Footer } from '@/widgets/Footer'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <>
       <Header navLinks={headerNavLinks} />
-      <Info />
-      <OurServices />
-      <ReadySolutionSection />
-      <AdvantagesBlock />
-      <ProjectStage />
-      <OurTeam />
-      <Questions />
-      <ReviewsBlock />
-      <ExamplesSlider />
-      <OurClients />
-      <ContactForm />
+      <main className={styles.main}>
+        <Info />
+        <OurServices />
+        <ReadySolutionSection />
+        <AdvantagesBlock />
+        <ProjectStage />
+        <OurTeam />
+        <Questions />
+        <ReviewsBlock />
+        <ExamplesSlider />
+        <OurClients />
+        <ContactForm />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
