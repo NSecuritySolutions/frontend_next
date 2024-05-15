@@ -50,7 +50,7 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
           <HeaderList>
             {navLinks.map(({ label, to }, index) => (
               <HeaderNavItem key={index}>
-                <HeaderNavLink href={'/'}>{label}</HeaderNavLink>
+                <HeaderNavLink href={to}>{label}</HeaderNavLink>
               </HeaderNavItem>
             ))}
           </HeaderList>
