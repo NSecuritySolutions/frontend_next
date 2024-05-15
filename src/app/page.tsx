@@ -1,8 +1,5 @@
 'use client'
 
-import styles from './page.module.css'
-import { Header } from '@/widgets/Header'
-import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
@@ -14,28 +11,24 @@ import { ReviewsBlock } from '@/widgets/ReviewsBlock'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { ContactForm } from '@/widgets/ContactForm'
-import { Footer } from '@/widgets/Footer'
+
 import { Calculator } from '@/widgets/Calculator'
 
 export default function Home() {
   return (
     <>
-      <Header navLinks={headerNavLinks} />
-      <main className={styles.main} id="content">
-        <Info />
-        <OurServices />
-        <ReadySolutionSection />
-        <Calculator />
-        <AdvantagesBlock />
-        <ProjectStage />
-        <OurTeam />
-        <Questions />
-        <ReviewsBlock />
-        <ExamplesSlider />
-        <OurClients />
-        <ContactForm />
-      </main>
-      <Footer />
+      <Info />
+      <OurServices />
+      <ReadySolutionSection />
+      <Calculator />
+      <AdvantagesBlock />
+      <ProjectStage />
+      <OurTeam />
+      <Questions />
+      <ReviewsBlock />
+      <ExamplesSlider />
+      <OurClients />
+      <ContactForm />
     </>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { navColumnLists, contacts } from './temporaryConsts'
 
 import {
