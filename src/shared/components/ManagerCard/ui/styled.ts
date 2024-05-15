@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import styled from 'styled-components';
+import colors from '../../../constants/colors';
 
 const CardContainer = styled.article`
   display: flex;
@@ -16,7 +16,7 @@ const CardImg = styled.div<{ $imgUrl?: string; alt?: string }>`
   background-color: ${colors.backgroundCardBl};
   width: 180px;
   height: 180px;
-  background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
+  background: ${props => `url(${props.$imgUrl}) no-repeat center`};
   background-size: cover;
 `;
 

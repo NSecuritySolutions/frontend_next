@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { BtnLink } from "../../BtnLink";
+import { BtnLink } from '../../BtnLink';
 
 import {
   Card,
@@ -9,13 +9,15 @@ import {
   CardImg,
   ImgWrapper,
   TextWrapper,
-} from "./styled";
-import colors from "../../../constants/colors";
+  TextContainer
+} from './styled';
+
+import colors from '../../../../shared/constants/colors';
 
 type TCardProps = {
   title: string;
   img: string;
-  text: string;
+  text: string[];
   btnName: string;
   link: string;
   backgroundColor: string;
@@ -27,7 +29,7 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
   text,
   link,
   btnName,
-  backgroundColor,
+  backgroundColor
 }) => {
   return (
     <Card $backgroundColor={backgroundColor}>
@@ -36,7 +38,11 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
       </ImgWrapper>
       <TextWrapper>
         <CardTitle>{title}</CardTitle>
-        <CardText>{text}</CardText>
+        <TextContainer>
+          {text.map((item, index) => (
+            <CardText key={index}>{item}</CardText>
+          ))}
+        </TextContainer>
         <BtnLink
           btnType="transparent"
           text={btnName}
@@ -44,8 +50,7 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
           height="44px"
           link={link}
           color={colors.darkPrimary}
-          size="15px"
-        ></BtnLink>
+          size="15px"></BtnLink>
       </TextWrapper>
     </Card>
   );

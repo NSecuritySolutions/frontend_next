@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export type TProjectMilestones = {
   id: number;
   title: string;
@@ -9,7 +11,7 @@ export type TTeamContacts = {
   name: string;
   position: string;
   tel: string;
-  image: string;
+  image: string | StaticImageData;
 };
 
 export type TError505 = {
@@ -36,7 +38,7 @@ export type TWorkExamples = {
   cardTitle: string;
   cardText: string;
   cardLink: string;
-  cardImage?: string | undefined;
+  cardImage?: StaticImageData | undefined;
   cardSectionButton?: string | undefined;
   cardSectionLink?: string | undefined;
   cardIcons?: {
@@ -45,7 +47,7 @@ export type TWorkExamples = {
   }[];
   title: string;
   quantities: { number: string; description: string }[];
-  img: string[];
+  img: StaticImageData[];
   equipment: string[];
   text: string;
 };
@@ -87,15 +89,15 @@ export type TProjectReviews = {
   name: string;
   product: string;
   review: string;
-  img: string;
+  img: string | StaticImageData;
   link?: string | undefined;
 };
 
 export type TOurServices = {
   id: number;
   title: string;
-  text: string;
-  img: string;
+  text: string[];
+  img: StaticImageData;
   btnName: string;
   link: string;
 };

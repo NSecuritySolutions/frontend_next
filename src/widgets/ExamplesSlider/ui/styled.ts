@@ -1,6 +1,6 @@
-import colors from "../../../shared/constants/colors";
+import colors from '../../../shared/constants/colors';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const SliderContainer = styled.section`
   margin: 60px auto;
@@ -8,7 +8,7 @@ const SliderContainer = styled.section`
   display: flex;
   flex-direction: column;
   min-height: 644px;
-  max-width: 1170px;
+  max-width: 1180px;
   width: 100%;
   row-gap: 20px !important;
 
@@ -95,7 +95,7 @@ const CardWrapper = styled.div`
   display: flex !important;
   flex-direction: row;
   gap: 20px !important;
-  background-color: ${colors.backgroundBase3};
+  background-color: ${colors.backgroundPrimary};
   border-radius: 20px !important;
   padding: 20px;
 
@@ -118,7 +118,7 @@ const ExamplesContainer = styled.article`
   max-width: 320px;
   width: 100%;
   min-height: 202px;
-  background-color: ${colors.backgroundBase3};
+  background-color: ${colors.backgroundPrimary};
   font-family: Manrope, sans-serif;
   justify-content: center;
 
@@ -175,8 +175,8 @@ const CustomDot = styled.div<{ $active?: boolean }>`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background-color: ${(props) =>
-    props.$active ? `${colors.btnPrimary}` : "#d7d7d7"};
+  background-color: ${props =>
+    props.$active ? `${colors.btnPrimary}` : '#d7d7d7'};
 `;
 
 const ButtonWrapper = styled.div`
@@ -189,7 +189,7 @@ const ButtonWrapper = styled.div`
 const SecondButtonWrapper = styled.div`
   display: flex !important;
   column-gap: 0 !important;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 const ExamplesButton = styled.a<{ $active?: boolean }>`
@@ -245,5 +245,5 @@ export {
   ExamplesIcons,
   IconWrapper,
   ExamplesLink,
-  SecondButtonWrapper,
+  SecondButtonWrapper
 };

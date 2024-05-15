@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import { BtnLink } from "../../BtnLink";
+import { BtnLink } from '../../BtnLink';
 
 import {
   Card,
@@ -13,9 +13,9 @@ import {
   InfoBtn,
   CardImgWrapper,
   TooltipContainer,
-  ToolTipParagraph,
-} from "./styled";
-import colors from "../../../constants/colors";
+  ToolTipParagraph
+} from './styled';
+import colors from '../../../constants/colors';
 
 export type TCardSolutionProps = {
   id?: number;
@@ -31,9 +31,9 @@ const CardSolution: FC<TCardSolutionProps> = ({
   img,
   listItem,
   price,
-  toolTipText,
+  toolTipText
 }) => {
-  const formattedPrice = Number(price).toLocaleString("ru-RU");
+  const formattedPrice = Number(price).toLocaleString('ru-RU');
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleMouseEnter = () => {

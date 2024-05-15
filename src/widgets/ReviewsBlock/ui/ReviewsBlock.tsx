@@ -1,44 +1,44 @@
+import { ReviewsSlider } from '../../../shared/components/ReviewsSlider/index.ts';
+
 import {
   Section,
   SectionWrapper,
   ColumnTitle,
   Column,
-  ImageWrapper,
   TextWrapper,
   ColumnWrapper,
   ContactsWrapper,
   ColumnImage,
-  CardImg,
-} from "./styled";
+  StyledParagraph
+} from './styled.ts';
 
-import { projectReviews } from "../../../shared/constants/texts/reviews";
-import { YANDEX_URL } from "../../../shared/constants/url/url";
+import yandexLogo from '../../../assets/images/yandex/yandex.webp';
+import { YANDEX_URL } from '../../../shared/constants/url/url.ts';
 
 const ReviewsBlock = () => {
-  // const imageArray = projectReviews.filter((obj) =>
-  //   Object.keys(obj).some((el) => el === "img")
-  // );
   return (
     <Section>
       <SectionWrapper>
+        <ColumnTitle>О нас говорят</ColumnTitle>
+
         <ColumnWrapper>
+          <ContactsWrapper>
+            <ReviewsSlider />
+          </ContactsWrapper>
+
           <Column>
             <TextWrapper>
-              <ColumnTitle>О нас говорят</ColumnTitle>
-              <ImageWrapper>
-                {/* {imageArray.slice(0, 3).map((item) => (
-                  <CardImg key={item.id} src={item?.img} />
-                ))} */}
-              </ImageWrapper>
+              <StyledParagraph>
+                Еще больше отзывов о нас на Яндекс.Услуги
+              </StyledParagraph>
               <a href={YANDEX_URL}>
-                {/* <ColumnImage
+                <ColumnImage
                   src={yandexLogo}
                   alt="Логотип и переход на страницу отзывов магазина в Яндекс Маркет"
-                /> */}
+                />
               </a>
             </TextWrapper>
           </Column>
-          <ContactsWrapper>{/* <ReviewsSlider /> */}</ContactsWrapper>
         </ColumnWrapper>
       </SectionWrapper>
     </Section>

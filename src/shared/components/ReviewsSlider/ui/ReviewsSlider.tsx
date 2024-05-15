@@ -3,11 +3,13 @@ import { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
 import {
   TEXT_LIMIT,
   TITLE_LIMIT,
   projectReviews
-} from 'src/shared/constants/texts/reviews.ts';
+} from '../../../../shared/constants/texts/reviews.ts';
+
 import {
   ReviewsContainer,
   SliderContainer,
@@ -15,7 +17,9 @@ import {
   ReviewsParagraph,
   ReviewsText,
   CustomDot,
-  ReviewsLink
+  ReviewsLink,
+  UserIcon,
+  TitleWrapper
 } from './styled.ts';
 
 const ReviewsSlider = () => {
@@ -64,12 +68,14 @@ const ReviewsSlider = () => {
     ],
     customPaging: function (i: number) {
       let activePage = 0;
-      if (window.innerWidth >= 1300) {
-        activePage = Math.ceil(currentSlide / 3);
-      } else if (window.innerWidth >= 619) {
-        activePage = Math.ceil(currentSlide / 2);
-      } else {
-        activePage = currentSlide;
+      if (typeof window !== 'undefined') {
+        if (window.innerWidth >= 1300) {
+          activePage = Math.ceil(currentSlide / 3);
+        } else if (window.innerWidth >= 619) {
+          activePage = Math.ceil(currentSlide / 2);
+        } else {
+          activePage = currentSlide;
+        }
       }
       return <CustomDot $active={i === activePage} />;
     }
@@ -88,14 +94,19 @@ const ReviewsSlider = () => {
       <Slider {...settings} afterChange={handleAfterChange}>
         {projectReviews.map((item, i) => (
           <ReviewsContainer className="slick-slide" key={i}>
-            <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
+            <TitleWrapper>
+              <UserIcon src={item.img}></UserIcon>
+              <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
+            </TitleWrapper>
             <ReviewsParagraph>
               {truncate(item.product, TITLE_LIMIT)}
             </ReviewsParagraph>
             <ReviewsText>
               {truncate(item.review, TEXT_LIMIT)}
               {item.review.length >= TEXT_LIMIT && (
-                <ReviewsLink href={item.link}>(Читать далее)</ReviewsLink>
+                <p>
+                  <ReviewsLink href={item.link}>Читать далее</ReviewsLink>
+                </p>
               )}
             </ReviewsText>
           </ReviewsContainer>

@@ -1,7 +1,8 @@
-import closeBtn from "src/assets/icons/+.svg";
+import colors from '../../../../shared/constants/colors';
 
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import closeBtn from '../../../../assets/icons/+.svg';
+
+import styled from 'styled-components';
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -118,7 +119,7 @@ const TextParagraph = styled.p`
   br {
     margin-top: 20px;
     display: block;
-    content: "";
+    content: '';
   }
 
   a {
@@ -130,7 +131,7 @@ const TextParagraph = styled.p`
 const CloseButton = styled.button`
   background-image: ${`url("${closeBtn}")`};
   object-fit: contain;
-
+  border: none;
   position: sticky;
   top: 0px;
   left: 1080px;
@@ -160,5 +161,5 @@ export {
   EquipmentListItem,
   SubTitle,
   TextParagraph,
-  TextWrapper,
+  TextWrapper
 };

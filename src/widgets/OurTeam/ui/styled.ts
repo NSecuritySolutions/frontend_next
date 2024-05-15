@@ -1,10 +1,11 @@
-import colors from "../../../shared/constants/colors";
-import styled from "styled-components";
+import colors from '../../../shared/constants/colors';
+
+import styled from 'styled-components';
 
 const Section = styled.section`
   margin: 0 auto;
   background-color: ${colors.backgroundBase2};
-  padding: 60px 0;
+  padding: 40px;
 
   @media (max-width: 1300px) {
     padding: 60px 0;
@@ -24,8 +25,7 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   max-width: 1180px;
   width: 100%;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding: 40px;
   border-radius: 20px;
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   background: ${colors.backgroundPrimary};
@@ -51,12 +51,25 @@ const SectionWrapper = styled.div`
   }
 `;
 
+const ListItem = styled.li`
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+`;
+
+const ListItemText = styled.span`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 136%;
+`;
+
 const ColumnTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
   // white-space: nowrap;
   // text-overflow: ellipsis;
+  margin-bottom: 20px;
 
   font: 700 24px Manrope, sans-serif;
 
@@ -75,7 +88,7 @@ const ColumnTitle = styled.h2`
 const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(1, minmax(120px, 400px) minmax(120px, 580px));
+  grid-template-columns: repeat(1, minmax(120px, 540px) minmax(120px, 540px));
   column-gap: 20px;
   gap: 40px;
 
@@ -125,15 +138,15 @@ const TextWrapper = styled.div`
   }
 `;
 
-const ColumnParagraph = styled.p`
+const ColumnParagraph = styled.div`
   font-family: Manrope, sans-serif;
-  max-width: 400px;
+  max-width: 518px;
   width: 100%;
-  font-weight: 400;
-  margin-top: 12px;
-  font-size: 16px;
-  line-height: 1.5;
   letter-spacing: -0.5px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -150,7 +163,7 @@ const ContactsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
+  gap: 12px;
 
   @media (max-width: 1300px) {
     gap: 130px;
@@ -173,4 +186,6 @@ export {
   TextWrapper,
   ColumnParagraph,
   ContactsWrapper,
+  ListItem,
+  ListItemText
 };

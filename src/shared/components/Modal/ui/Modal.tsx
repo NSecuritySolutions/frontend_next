@@ -1,8 +1,10 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, useEffect } from 'react';
 
-import { ImgSlider } from "src/shared/components/ImgSlider";
+import { ImgSlider } from '../../ImgSlider';
 
-import TModalProps from "./type.ts";
+import closeBtn from './../../../../assets/icons/+.svg';
+
+import TModalProps from './type.ts';
 
 import {
   ModalContainer,
@@ -20,8 +22,8 @@ import {
   EquipmentListItem,
   SubTitle,
   TextParagraph,
-  TextWrapper,
-} from "./styles.ts";
+  TextWrapper
+} from './styles.ts';
 
 const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
   const createMarkup = (text: string) => ({ __html: text });
@@ -34,31 +36,31 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         closeModal();
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
 
-    document.body.classList.add("modal-open");
+    document.body.classList.add('modal-open');
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
 
-      document.body.classList.remove("modal-open");
+      document.body.classList.remove('modal-open');
     };
   }, [closeModal]);
 
   if (!isOpen) return null;
 
   function ChangeFormateDate(date: string) {
-    return date.toString().split("-").reverse().join(".");
+    return date.toString().split('-').reverse().join('.');
   }
 
   const newDate = modalItem?.date
     ? ChangeFormateDate(modalItem.date.toString())
-    : "";
+    : '';
 
   return (
     <ModalContainer key={modalItem?.id} onClick={handleBackdrop}>
@@ -94,7 +96,7 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
                 dangerouslySetInnerHTML={
                   modalItem && modalItem.text
                     ? createMarkup(modalItem.text)
-                    : { __html: "" }
+                    : { __html: '' }
                 }
               />
             </TextWrapper>
