@@ -25,7 +25,7 @@ const Tooltip: FC<{ text: string }> = ({ text }) => {
               {text}
             </Typography>
           </Tip>,
-          document.getElementById('root')!,
+          document.getElementById('content')!,
         )}
     </TooltipImage>
   )

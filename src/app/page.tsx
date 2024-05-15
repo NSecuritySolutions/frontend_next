@@ -18,7 +18,7 @@ import { Calculator } from '@/widgets/Calculator'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main className={styles.main} id="content">
       <Header navLinks={headerNavLinks} />
       <Info />
       <OurServices />
