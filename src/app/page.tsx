@@ -1,4 +1,5 @@
 'use client'
+
 import styles from './page.module.css'
 import { Header } from '@/widgets/Header'
 import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
