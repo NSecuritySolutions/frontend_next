@@ -10,29 +10,27 @@ import {
   ErrorText,
   ErrorButton,
   ErrorImgWrapper,
-  ImgColumn,
   TextColumn,
-  ErrorImgHiddenWrapper,
 } from './styled.ts'
 
-const Error: FC<TError> = ({ errorText, errorImg, warningImg, errorMessage, errorCode }) => {
+const Error: FC<TError> = ({ errorText, errorImg, errorMessage, errorCode }) => {
   return (
     <Section>
       <ColumnConatiner>
         <ColumnWrapper>
-          <ImgColumn>
-            <Image src={warningImg} alt="aa" />
-          </ImgColumn>
           <TextColumn>
             <ErrorName>{errorMessage}</ErrorName>
-            <ErrorImgHiddenWrapper>
-              <Image src={errorImg} alt={`Ошибка ${errorCode} - ${errorMessage}`} />
-            </ErrorImgHiddenWrapper>
+
             <ErrorText>{errorText}</ErrorText>
             <ErrorButton href="/">На главную</ErrorButton>
           </TextColumn>
           <ErrorImgWrapper>
-            <Image src={errorImg} alt={`Ошибка ${errorCode} - ${errorMessage}`} />
+            <Image
+              src={errorImg}
+              alt={`Ошибка ${errorCode} - ${errorMessage}`}
+              width={572}
+              height={325}
+            />
           </ErrorImgWrapper>
         </ColumnWrapper>
       </ColumnConatiner>

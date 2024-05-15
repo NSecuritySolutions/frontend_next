@@ -9,20 +9,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: 'https://opticontrol.ru/surveillance',
+      url: 'https://opticontrol.ru/security',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://opticontrol.ru/acces-control-system',
+      url: 'https://opticontrol.ru/video-surveillance',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.5,
     },
-
     {
       url: 'https://opticontrol.ru/examples',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://opticontrol.ru/ourworks',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://opticontrol.ru/domofon',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.5,

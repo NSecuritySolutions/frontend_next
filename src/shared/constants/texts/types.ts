@@ -19,7 +19,6 @@ export type TError505 = {
   errorCode: string
   errorMessage: string
   errorText: string
-  errorImg: StaticImageData
   warningImg: StaticImageData
 }
 
@@ -28,7 +27,6 @@ export type TError404 = {
   errorCode: string
   errorText: string
   errorImg: StaticImageData
-  warningImg: StaticImageData
   errorMessage: string
 }
 
