@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Header navLinks={headerNavLinks} />
-      <main className={styles.main}>
+      <main className={styles.main} id="content">
         <Info />
         <OurServices />
         <ReadySolutionSection />

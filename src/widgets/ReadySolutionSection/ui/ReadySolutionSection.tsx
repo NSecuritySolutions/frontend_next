@@ -36,16 +36,19 @@ const ReadySolutionSection = () => {
       <TabsContainer>
         <TabButton
           onClick={() => handleTabChange('VideoSurveillance')}
-          active={activeTab === 'VideoSurveillance'}
+          $activetab={activeTab === 'VideoSurveillance'}
         >
           Видеонаблюдение
         </TabButton>
-        <TabButton onClick={() => handleTabChange('Intercom')} active={activeTab === 'Intercom'}>
+        <TabButton
+          onClick={() => handleTabChange('Intercom')}
+          $activetab={activeTab === 'Intercom'}
+        >
           Домофония/СКУД
         </TabButton>
         <TabButton
           onClick={() => handleTabChange('SecurityFireAlarms')}
-          active={activeTab === 'SecurityFireAlarms'}
+          $activetab={activeTab === 'SecurityFireAlarms'}
         >
           Охранно-пожарные сигнализации
         </TabButton>

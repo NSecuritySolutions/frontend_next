@@ -146,13 +146,7 @@ const Calculator: React.FC = () => {
           </div>
           <ImageButton>
             <ImgWrap>
-              <Image
-                src="/icons/calculator/cross.svg"
-                width={22}
-                height={22}
-                objectFit="cover"
-                alt="Reset"
-              />
+              <Image src="/icons/calculator/cross.svg" width={22} height={22} alt="Reset" />
             </ImgWrap>
             <Typography size={16} width="fit-content" color={colors.textSecondary}>
               Сбросить настройки
