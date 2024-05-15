@@ -14,6 +14,7 @@ import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { ContactForm } from '@/widgets/ContactForm'
 import { Footer } from '@/widgets/Footer'
+import { Calculator } from '@/widgets/Calculator'
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <Info />
       <OurServices />
       <ReadySolutionSection />
+      <Calculator />
       <AdvantagesBlock />
       <ProjectStage />
       <OurTeam />

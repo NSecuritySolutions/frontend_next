@@ -12,6 +12,7 @@ const colors = {
   backgroundCardYe: '#F7F2E4',
   backgroundCardGr: '#DEF6F7',
   backgroundCardBl: '#E1E7F4',
+  textSecondary: '#686868',
   accentInfo: '#0DC0BE',
   accentNegative: '#FD4D61',
   scrollActive: '#D7D7D7',
