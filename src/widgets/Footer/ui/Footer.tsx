@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 import { navColumnLists, contacts } from './temporaryConsts'
 
 import {
@@ -28,7 +26,7 @@ import colors from '@/shared/constants/colors'
 import { Logo } from '@/shared/components/Logo'
 import { NavColumn } from '@/shared/components/NavColumn'
 
-const Footer: FC = () => {
+export default function Footer() {
   return (
     <FooterWrapper>
       <FooterTop>
@@ -93,5 +91,3 @@ const Footer: FC = () => {
     </FooterWrapper>
   )
 }
-
-export default Footer

@@ -18,21 +18,24 @@ import { Calculator } from '@/widgets/Calculator'
 
 export default function Home() {
   return (
-    <main className={styles.main} id="content">
+
+    <>
       <Header navLinks={headerNavLinks} />
-      <Info />
-      <OurServices />
-      <ReadySolutionSection />
-      <Calculator />
-      <AdvantagesBlock />
-      <ProjectStage />
-      <OurTeam />
-      <Questions />
-      <ReviewsBlock />
-      <ExamplesSlider />
-      <OurClients />
-      <ContactForm />
+      <main className={styles.main}>
+        <Info />
+        <OurServices />
+        <ReadySolutionSection />
+         <Calculator />
+        <AdvantagesBlock />
+        <ProjectStage />
+        <OurTeam />
+        <Questions />
+        <ReviewsBlock />
+        <ExamplesSlider />
+        <OurClients />
+        <ContactForm />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
