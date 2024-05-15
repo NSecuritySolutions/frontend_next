@@ -1,5 +1,5 @@
-import { TQuestionType } from "../../../constants/texts/types";
-import { CardContainer, QuestionText, AnswerText } from "./styled";
+import { TQuestionType } from '@/shared/constants/texts/types'
+import { CardContainer, QuestionText, AnswerText } from './styled'
 
 const AnswerCard = (item: TQuestionType) => {
   return (
@@ -9,7 +9,7 @@ const AnswerCard = (item: TQuestionType) => {
         <AnswerText>{item.answer}</AnswerText>
       </CardContainer>
     </>
-  );
-};
+  )
+}
 
-export default AnswerCard;
+export default AnswerCard

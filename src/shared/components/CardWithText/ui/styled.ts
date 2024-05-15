@@ -1,6 +1,6 @@
-import colors from '../../../../shared/constants/colors';
+import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Card = styled.div`
   position: relative;
@@ -16,22 +16,24 @@ const Card = styled.div`
   max-width: 580px;
   width: 100%;
   overflow: hidden;
-`;
+`
 
 const CardTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   max-width: 500px;
   width: 100%;
-`;
+`
 
 const TextContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-self: flex-start;
   height: 145px;
-  font: 400 16px Manrope, sans-serif;
-`;
+  font:
+    400 16px Manrope,
+    sans-serif;
+`
 
 const CardText = styled.li`
   text-indent: 0;
@@ -52,7 +54,7 @@ const CardText = styled.li`
   //   max-width: 5px;
   //   min-width: 5px;
   // }
-`;
+`
 
 const CardImg = styled.img`
   position: absolute;
@@ -61,6 +63,6 @@ const CardImg = styled.img`
   width: 300px;
   height: 169px;
   object-fit: cover;
-`;
+`
 
-export { Card, CardText, CardTitle, CardImg, TextContainer };
+export { Card, CardText, CardTitle, CardImg, TextContainer }

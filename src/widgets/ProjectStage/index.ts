@@ -1,3 +1,3 @@
-import ProjectStage from './ui/ProjectStage';
+import ProjectStage from './ui/ProjectStage'
 
-export { ProjectStage };
+export { ProjectStage }

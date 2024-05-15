@@ -1,1 +1,1 @@
-export const YANDEX_URL = 'https://market.yandex.ru/';
+export const YANDEX_URL = 'https://market.yandex.ru/'

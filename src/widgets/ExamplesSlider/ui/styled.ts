@@ -1,6 +1,6 @@
-import colors from '../../../shared/constants/colors';
+import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const SliderContainer = styled.section`
   margin: 60px auto;
@@ -89,7 +89,7 @@ const SliderContainer = styled.section`
       }
     }
   }
-`;
+`
 
 const CardWrapper = styled.div`
   display: flex !important;
@@ -109,7 +109,7 @@ const CardWrapper = styled.div`
   @media (max-width: 916px) {
     min-height: 528px;
   }
-`;
+`
 
 const ExamplesContainer = styled.article`
   display: flex !important;
@@ -125,11 +125,11 @@ const ExamplesContainer = styled.article`
   @media (max-width: 916px) {
     max-width: 240px;
   }
-`;
+`
 
 const ExamplesLink = styled.a`
   text-decoration: none;
-`;
+`
 const ExamplesImg = styled.img`
   border-radius: 12px;
   background-color: #fff;
@@ -146,15 +146,17 @@ const ExamplesImg = styled.img`
     min-width: 240px;
     height: 219px;
   }
-`;
+`
 
 const ColumnTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
   margin-bottom: 30px;
-  font: 700 24px Manrope, sans-serif;
-`;
+  font:
+    700 24px Manrope,
+    sans-serif;
+`
 
 const ExamplesTitle = styled.h3`
   max-width: 320px;
@@ -162,35 +164,34 @@ const ExamplesTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   text-align: start;
-`;
+`
 
 const ExamplesText = styled.p`
   max-width: 320px;
   width: 100%;
   font-weight: 400;
   font-size: 80%;
-`;
+`
 
 const CustomDot = styled.div<{ $active?: boolean }>`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background-color: ${props =>
-    props.$active ? `${colors.btnPrimary}` : '#d7d7d7'};
-`;
+  background-color: ${(props) => (props.$active ? `${colors.btnPrimary}` : '#d7d7d7')};
+`
 
 const ButtonWrapper = styled.div`
   display: flex !important;
   column-gap: 0 !important;
   justify-content: space-between;
   align-items: flex-end;
-`;
+`
 
 const SecondButtonWrapper = styled.div`
   display: flex !important;
   column-gap: 0 !important;
   justify-content: center;
-`;
+`
 
 const ExamplesButton = styled.a<{ $active?: boolean }>`
   cursor: pointer;
@@ -206,12 +207,14 @@ const ExamplesButton = styled.a<{ $active?: boolean }>`
   height: 44px;
   opacity: 1;
 
-  font: 800 15px/133% Manrope, sans-serif;
+  font:
+    800 15px/133% Manrope,
+    sans-serif;
 
   &:hover {
     background-color: ${colors.btnOutlineHover};
   }
-`;
+`
 
 const IconWrapper = styled.div`
   display: flex !important;
@@ -225,11 +228,11 @@ const IconWrapper = styled.div`
     width: 76px;
     height: 76px;
   }
-`;
+`
 const ExamplesIcons = styled.div`
   display: flex !important;
   flex-direction: row;
-`;
+`
 
 export {
   ExamplesContainer,
@@ -245,5 +248,5 @@ export {
   ExamplesIcons,
   IconWrapper,
   ExamplesLink,
-  SecondButtonWrapper
-};
+  SecondButtonWrapper,
+}

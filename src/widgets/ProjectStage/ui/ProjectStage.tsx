@@ -1,4 +1,4 @@
-import { projectMilestones } from "../../../shared/constants/texts/project-milestones";
+import { projectMilestones } from '@/shared/constants/texts/project-milestones'
 import {
   Section,
   SectionWrapper,
@@ -11,7 +11,7 @@ import {
   StageTitle,
   StageParagraph,
   TextWrapper,
-} from "./styled";
+} from './styled'
 
 const ProjectStage = () => {
   return (
@@ -34,7 +34,7 @@ const ProjectStage = () => {
         </ColumnWrapper>
       </SectionWrapper>
     </Section>
-  );
-};
+  )
+}
 
-export default ProjectStage;
+export default ProjectStage

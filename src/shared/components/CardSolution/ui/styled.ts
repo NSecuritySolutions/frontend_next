@@ -1,7 +1,7 @@
-import infoBtn from "../../../../assets/icons/additionalInfoBtn.svg";
+import infoBtn from '../../../../assets/icons/additionalInfoBtn.svg'
 
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import styled from 'styled-components'
+import colors from '../../../constants/colors'
 
 const Card = styled.div`
   position: relative;
@@ -17,53 +17,57 @@ const Card = styled.div`
   width: 100%;
 
   position: relative;
-`;
+`
 
 const CardTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   width: 100%;
   text-align: center;
-`;
+`
 
 const ListTitle = styled.h4`
   font-weight: 700;
   font-size: 16px;
   width: 100%;
   text-align: center;
-`;
+`
 
 const CardText = styled.p`
   font-weight: 400;
   font-size: 16px;
   width: 100%;
-`;
+`
 
 const CardImgWrapper = styled.div`
   width: fit-content;
   height: 207px;
   overflow: hidden;
-`;
+`
 
 const CardImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-`;
+`
 
 const CharacteristicsList = styled.ul`
   list-style-type: disc;
   margin-left: 20px;
   padding-left: 10px;
-`;
+`
 
 const ListItem = styled.li`
-  font: 400 16px Manrope, sans-serif;
-`;
+  font:
+    400 16px Manrope,
+    sans-serif;
+`
 
 const PriceText = styled.span`
-  font: 700 24px Manrope, sans-serif;
-`;
+  font:
+    700 24px Manrope,
+    sans-serif;
+`
 
 const InfoBtn = styled.div`
   position: absolute;
@@ -73,7 +77,7 @@ const InfoBtn = styled.div`
   width: 15px;
   height: 15px;
   cursor: pointer;
-`;
+`
 
 const TooltipContainer = styled.div`
   position: absolute;
@@ -91,11 +95,13 @@ const TooltipContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
+`
 
 const ToolTipParagraph = styled.p`
-  font: 400 15px Manrope, sans-serif;
-`;
+  font:
+    400 15px Manrope,
+    sans-serif;
+`
 
 export {
   Card,
@@ -110,4 +116,4 @@ export {
   CardImgWrapper,
   TooltipContainer,
   ToolTipParagraph,
-};
+}

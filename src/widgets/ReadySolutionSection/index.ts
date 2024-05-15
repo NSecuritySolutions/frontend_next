@@ -1,3 +1,3 @@
-import ReadySolutionSection from "./ui/ReadySolutionSection";
+import ReadySolutionSection from './ui/ReadySolutionSection'
 
-export { ReadySolutionSection };
+export { ReadySolutionSection }

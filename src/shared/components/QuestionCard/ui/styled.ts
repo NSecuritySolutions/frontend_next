@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
 
 const CardContainer = styled.article<{ $chosen?: boolean }>`
-  background: ${(props) =>
-    props.$chosen ? `${colors.backgroundCardBl}` : "#FFFFFF"};
+  background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
   width: 280px;
@@ -32,20 +31,21 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   @media (max-width: 640px) {
     width: 100%;
   }
-`;
+`
 
 const CardText = styled.h3`
   align-self: center;
   margin: 0;
-  text-wrap: wrap;
+  overflow-wrap: break-word;
   max-width: 190px;
 
-  font: 700 15px Manrope, sans-serif;
-`;
+  font:
+    700 15px Manrope,
+    sans-serif;
+`
 
 const QuestionNumber = styled.div<{ $chosen?: boolean }>`
-  background-color: ${(props) =>
-    props.$chosen ? "#FFFFFF" : `${colors.backgroundCardBl}`};
+  background-color: ${(props) => (props.$chosen ? '#FFFFFF' : `${colors.backgroundCardBl}`)};
   font-family: Manrope, sans-serif;
   justify-content: center;
   align-items: center;
@@ -63,6 +63,6 @@ const QuestionNumber = styled.div<{ $chosen?: boolean }>`
   @media (max-width: 940px) {
     white-space: initial;
   }
-`;
+`
 
-export { CardContainer, CardText, QuestionNumber };
+export { CardContainer, CardText, QuestionNumber }

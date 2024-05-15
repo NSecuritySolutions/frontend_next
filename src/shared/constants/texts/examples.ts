@@ -1,23 +1,23 @@
-import { TWorkExamples } from './types';
+import { TWorkExamples } from './types'
 
-import cameraIcon from '../../../assets/icons/examples/ic-camera.svg';
-import alarmIcon from '../../../assets/icons/examples/ic-alarm.svg';
-import remoteIcon from '../../../assets/icons/examples/ic-remote.svg';
-import fingerPrintIcon from '../../../assets/icons/examples/ic-fingerprint.svg';
+import cameraIcon from '@/assets/icons/examples/ic-camera.svg'
+import alarmIcon from '@/assets/icons/examples/ic-alarm.svg'
+import remoteIcon from '@/assets/icons/examples/ic-remote.svg'
+import fingerPrintIcon from '@/assets/icons/examples/ic-fingerprint.svg'
 
-import noImCard from '../../../assets/icons/examples/no-image.svg';
+import noImCard from '@/assets/icons/examples/no-image.svg'
 
-import firstWorksImg from '../../../assets/images/works/works-image-1.webp';
-import secondWorksImg from '../../../assets/images/works/works-image-2.webp';
-import thirdWorksImg from '../../../assets/images/works/works-image-3.webp';
-import fourthWorksImg from '../../../assets/images/works/works-image-4.webp';
-import fifthWorksImg from '../../../assets/images/works/works-image-5.webp';
-import sixthWorksImg from '../../../assets/images/works/works-image-6.webp';
-import seventhWorksImg from '../../../assets/images/works/works-image-7.webp';
-import eighthWorksImg from '../../../assets/images/works/works-image-8.webp';
+import firstWorksImg from '@/assets/images/works/works-image-1.webp'
+import secondWorksImg from '@/assets/images/works/works-image-2.webp'
+import thirdWorksImg from '@/assets/images/works/works-image-3.webp'
+import fourthWorksImg from '@/assets/images/works/works-image-4.webp'
+import fifthWorksImg from '@/assets/images/works/works-image-5.webp'
+import sixthWorksImg from '@/assets/images/works/works-image-6.webp'
+import seventhWorksImg from '@/assets/images/works/works-image-7.webp'
+import eighthWorksImg from '@/assets/images/works/works-image-8.webp'
 
-export const TITLE_LIMIT: number = 60;
-export const TEXT_LIMIT: number = 120;
+export const TITLE_LIMIT: number = 60
+export const TEXT_LIMIT: number = 120
 
 export const workExamples: TWorkExamples[] = [
   {
@@ -31,19 +31,19 @@ export const workExamples: TWorkExamples[] = [
     cardIcons: [
       {
         link: cameraIcon,
-        alt: 'Видеонаблюдение'
+        alt: 'Видеонаблюдение',
       },
 
       {
         link: alarmIcon,
-        alt: 'Сигнализация'
-      }
+        alt: 'Сигнализация',
+      },
     ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' }
+      { number: '265 м\u00B2', description: 'оборудовано' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
     equipment: ['Камера 4 шт', 'Провода 480 м'],
@@ -53,7 +53,7 @@ export const workExamples: TWorkExamples[] = [
   <br/>
   Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
   <br/>
-  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
   },
   {
     id: 2,
@@ -65,27 +65,27 @@ export const workExamples: TWorkExamples[] = [
     cardIcons: [
       {
         link: fingerPrintIcon,
-        alt: 'СКУД'
+        alt: 'СКУД',
       },
       {
         link: cameraIcon,
-        alt: 'Видеонаблюдение'
+        alt: 'Видеонаблюдение',
       },
 
       {
         link: remoteIcon,
-        alt: 'Домофония'
+        alt: 'Домофония',
       },
       {
         link: alarmIcon,
-        alt: 'Сигнализация'
-      }
+        alt: 'Сигнализация',
+      },
     ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' }
+      { number: '265 м\u00B2', description: 'оборудовано' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 4 шт', 'Провода 480 м', 'Видеокамера - 1 шт'],
@@ -95,7 +95,7 @@ export const workExamples: TWorkExamples[] = [
   <br/>
   Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
   <br/>
-  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
   },
 
   {
@@ -108,27 +108,27 @@ export const workExamples: TWorkExamples[] = [
     cardIcons: [
       {
         link: fingerPrintIcon,
-        alt: 'СКУД'
+        alt: 'СКУД',
       },
       {
         link: cameraIcon,
-        alt: 'Видеонаблюдение'
+        alt: 'Видеонаблюдение',
       },
 
       {
         link: remoteIcon,
-        alt: 'Домофония'
+        alt: 'Домофония',
       },
       {
         link: alarmIcon,
-        alt: 'Сигнализация'
-      }
+        alt: 'Сигнализация',
+      },
     ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' }
+      { number: '265 м\u00B2', description: 'оборудовано' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
     equipment: ['Камера 6 шт', 'Провода 900 м'],
@@ -138,7 +138,7 @@ export const workExamples: TWorkExamples[] = [
   <br/>
   Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
   <br/>
-  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
   },
   {
     id: 4,
@@ -150,22 +150,22 @@ export const workExamples: TWorkExamples[] = [
     cardIcons: [
       {
         link: fingerPrintIcon,
-        alt: 'СКУД'
+        alt: 'СКУД',
       },
       {
         link: cameraIcon,
-        alt: 'Видеонаблюдение'
+        alt: 'Видеонаблюдение',
       },
       {
         link: alarmIcon,
-        alt: 'Сигнализация'
-      }
+        alt: 'Сигнализация',
+      },
     ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' }
+      { number: '265 м\u00B2', description: 'оборудовано' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 10 шт', 'Провода 1200 м'],
@@ -175,7 +175,7 @@ export const workExamples: TWorkExamples[] = [
   <br/>
   Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
   <br/>
-  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
   },
   {
     id: 5,
@@ -190,7 +190,7 @@ export const workExamples: TWorkExamples[] = [
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' }
+      { number: '265 м\u00B2', description: 'оборудовано' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
     equipment: ['Камера 4 шт', 'Провода 480 м'],
@@ -200,7 +200,7 @@ export const workExamples: TWorkExamples[] = [
   <br/>
   Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
   <br/>
-  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
   },
   {
     id: 6,
@@ -213,7 +213,7 @@ export const workExamples: TWorkExamples[] = [
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' }
+      { number: '265 м\u00B2', description: 'оборудовано' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 68 шт', 'Провода 1480м'],
@@ -223,6 +223,6 @@ export const workExamples: TWorkExamples[] = [
   <br/>
   Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
   <br/>
-  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`
-  }
-];
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
+  },
+]

@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
 
 const CardContainer = styled.article<{ $chosen?: boolean }>`
-  background: ${(props) =>
-    props.$chosen ? `${colors.backgroundCardBl}` : "#FFFFFF"};
+  background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
   width: 280px;
@@ -35,29 +34,30 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   @media (max-width: 640px) {
     width: 90px;
   }
-`;
+`
 
 const CardImg = styled.div<{
-  $imgUrl?: string;
-  alt?: string;
-  $chosen?: boolean;
+  $imgUrl?: string
+  alt?: string
+  $chosen?: boolean
 }>`
   border-radius: 50%;
   background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
-  background-color: ${(props) =>
-    props.$chosen ? "#FFFFFF" : `${colors.backgroundCardBl}`};
+  background-color: ${(props) => (props.$chosen ? '#FFFFFF' : `${colors.backgroundCardBl}`)};
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-`;
+`
 
 const CardName = styled.h2`
   align-self: center;
   margin: 0;
-  text-wrap: wrap;
+  overflow-wrap: break-word;
   max-width: 190px;
 
-  font: 700 16px Manrope, sans-serif;
+  font:
+    700 16px Manrope,
+    sans-serif;
 
   @media (max-width: 1300px) {
     display: none;
@@ -70,6 +70,6 @@ const CardName = styled.h2`
   @media (max-width: 640px) {
     display: none;
   }
-`;
+`
 
-export { CardContainer, CardImg, CardName };
+export { CardContainer, CardImg, CardName }

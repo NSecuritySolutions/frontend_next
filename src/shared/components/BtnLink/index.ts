@@ -1,3 +1,3 @@
-import BtnLink from "./ui/BtnLink";
+import BtnLink from './ui/BtnLink'
 
-export { BtnLink };
+export { BtnLink }

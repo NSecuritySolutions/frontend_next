@@ -1,8 +1,8 @@
-import colors from "../../../shared/constants/colors";
+import colors from '@/shared/constants/colors'
 // import { IMaskMixin } from "react-imask";
-import React from "react";
+import React from 'react'
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
@@ -22,7 +22,7 @@ const Section = styled.section`
   @media (max-width: 640px) {
     padding: 30px 0;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   display: flex;
@@ -47,14 +47,16 @@ const SectionWrapper = styled.div`
     max-width: 1180px;
     border-radius: 0;
   }
-`;
+`
 
 const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
 
-  font: 700 24px Manrope, sans-serif;
+  font:
+    700 24px Manrope,
+    sans-serif;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -79,7 +81,7 @@ const SectionTitle = styled.h2`
   @media (max-width: 340px) {
     max-width: 280px;
   }
-`;
+`
 
 const ColumnWrapper = styled.div`
   margin: 0 auto;
@@ -110,7 +112,7 @@ const ColumnWrapper = styled.div`
   @media (max-width: 660px) {
     flex-direction: column;
   }
-`;
+`
 
 const InfoColumn = styled.div`
   display: flex;
@@ -121,7 +123,7 @@ const InfoColumn = styled.div`
     max-width: 280px;
     gap: 20px;
   }
-`;
+`
 
 const Form = styled.form`
   display: flex;
@@ -134,7 +136,7 @@ const Form = styled.form`
 
   @media (max-width: 619px) {
   }
-`;
+`
 
 const ColumnParagraph = styled.p`
   font-family: Manrope, sans-serif;
@@ -147,7 +149,7 @@ const ColumnParagraph = styled.p`
   @media (max-width: 880px) {
     max-width: 280px;
   }
-`;
+`
 
 const FormParagraph = styled.p`
   font-family: Manrope, sans-serif;
@@ -160,7 +162,7 @@ const FormParagraph = styled.p`
   @media (max-width: 880px) {
     max-width: 280px;
   }
-`;
+`
 
 const Input = styled.input`
   color: ${colors.darkPrimary};
@@ -193,7 +195,7 @@ const Input = styled.input`
   @media (max-width: 880px) {
     max-width: 280px;
   }
-`;
+`
 
 // const MaskedStyledInput = IMaskMixin(({ inputRef, ...props }) => (
 //   <Input {...props} ref={inputRef as React.LegacyRef<HTMLInputElement>} />
@@ -231,7 +233,7 @@ const TextInput = styled.textarea`
   @media (max-width: 880px) {
     max-width: 280px;
   }
-`;
+`
 
 const Link = styled.a`
   color: ${colors.darkPrimary};
@@ -248,7 +250,7 @@ const Link = styled.a`
     opacity: 0.5;
     transition: 0.7s;
   }
-`;
+`
 
 const CardImage = styled.div<{ $imgUrl?: string; alt?: string }>`
   background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
@@ -270,7 +272,7 @@ const CardImage = styled.div<{ $imgUrl?: string; alt?: string }>`
   @media (max-width: 660px) {
     display: none;
   }
-`;
+`
 
 export {
   Section,
@@ -285,4 +287,4 @@ export {
   Input,
   TextInput,
   CardImage,
-};
+}

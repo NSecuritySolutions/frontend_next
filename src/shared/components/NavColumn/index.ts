@@ -1,3 +1,3 @@
-import NavColumn from "./ui/NavColumn";
+import NavColumn from './ui/NavColumn'
 
-export { NavColumn };
+export { NavColumn }

@@ -1,32 +1,25 @@
-import { TAnswerProps } from 'src/shared/constants/texts/types.ts';
+import { TAnswerProps } from '@/shared/constants/texts/types.ts'
 
-import {
-  CardContainer,
-  QuestionNumber,
-  CardText,
-} from './styled.ts';
+import { CardContainer, QuestionNumber, CardText } from './styled.ts'
 
-const QuestionCard = ({ id, question, answer, onClick, chosen }:  TAnswerProps) => {
-
-    function handleClick() {
-      onClick({id: id, question: question, answer: answer})
-    }
+const QuestionCard = ({ id, question, answer, onClick, chosen }: TAnswerProps) => {
+  function handleClick() {
+    onClick({ id: id, question: question, answer: answer })
+  }
 
   return (
     <>
-      <CardContainer 
-        onClick={handleClick} 
-        $chosen={chosen !== null && chosen.question === question}>
-        <QuestionNumber 
-        $chosen={chosen !== null && chosen.question === question} >
+      <CardContainer
+        onClick={handleClick}
+        $chosen={chosen !== null && chosen.question === question}
+      >
+        <QuestionNumber $chosen={chosen !== null && chosen.question === question}>
           {id}
         </QuestionNumber>
-        <CardText>
-          {question}
-        </CardText>
+        <CardText>{question}</CardText>
       </CardContainer>
     </>
-  );
-};
+  )
+}
 
-export default QuestionCard;
+export default QuestionCard

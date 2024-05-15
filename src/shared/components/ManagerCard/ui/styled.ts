@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import colors from '../../../constants/colors';
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
+import { StaticImageData } from 'next/image'
 
 const CardContainer = styled.article`
   display: flex;
@@ -9,16 +10,16 @@ const CardContainer = styled.article`
   color: ${colors.darkPrimary};
   font-weight: 400;
   font-size: 16px;
-`;
+`
 
-const CardImg = styled.div<{ $imgUrl?: string; alt?: string }>`
+const CardImg = styled.div<{ $imgUrl: StaticImageData; alt?: string }>`
   border-radius: 500px;
   background-color: ${colors.backgroundCardBl};
   width: 180px;
   height: 180px;
-  background: ${props => `url(${props.$imgUrl}) no-repeat center`};
+  background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
   background-size: cover;
-`;
+`
 
 const CardName = styled.div`
   display: flex;
@@ -28,10 +29,12 @@ const CardName = styled.div`
   margin-top: 6px;
   width: 100%;
   justify-content: center;
-  text-wrap: wrap;
+  overflow-wrap: break-word;
   text-align: center;
-  font: 800 18px Manrope, sans-serif;
-`;
+  font:
+    800 18px Manrope,
+    sans-serif;
+`
 
 const CardPosition = styled.div`
   display: flex;
@@ -42,7 +45,7 @@ const CardPosition = styled.div`
   justify-content: center;
   margin-top: 6px;
   text-align: center;
-`;
+`
 
 const CardTel = styled.div`
   display: flex;
@@ -52,8 +55,8 @@ const CardTel = styled.div`
   font-family: Manrope, sans-serif;
   justify-content: center;
   margin-top: 6px;
-  text-wrap: wrap;
+  overflow-wrap: break-word;
   text-align: center;
-`;
+`
 
-export { CardContainer, CardImg, CardName, CardPosition, CardTel };
+export { CardContainer, CardImg, CardName, CardPosition, CardTel }

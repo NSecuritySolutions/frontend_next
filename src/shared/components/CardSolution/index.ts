@@ -1,3 +1,3 @@
-import CardSolution from "./ui/CardSolution";
+import CardSolution from './ui/CardSolution'
 
-export { CardSolution };
+export { CardSolution }

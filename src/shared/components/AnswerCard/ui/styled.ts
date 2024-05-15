@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
 
 const CardContainer = styled.article`
   display: flex;
@@ -48,7 +48,7 @@ const CardContainer = styled.article`
     margin: 0;
     border-radius: 0;
   }
-`;
+`
 
 const CardImg = styled.div<{ $imgUrl?: string }>`
   border-radius: 500px;
@@ -57,16 +57,20 @@ const CardImg = styled.div<{ $imgUrl?: string }>`
   height: 180px;
   background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
   background-size: cover;
-`;
+`
 
 const QuestionText = styled.h3`
   text-wrap: wrap;
-  font: 700 16px Manrope, sans-serif;
-`;
+  font:
+    700 16px Manrope,
+    sans-serif;
+`
 
 const AnswerText = styled.p`
   text-wrap: wrap;
-  font: 400 16px Manrope, sans-serif;
-`;
+  font:
+    400 16px Manrope,
+    sans-serif;
+`
 
-export { CardContainer, CardImg, QuestionText, AnswerText };
+export { CardContainer, CardImg, QuestionText, AnswerText }

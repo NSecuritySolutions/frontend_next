@@ -1,8 +1,8 @@
-import React, { useState, useEffect, ChangeEvent, useRef } from "react";
+import React, { useState, useEffect, ChangeEvent, useRef } from 'react'
 // import { IMaskInput } from "react-imask";
 
-import colors from "../../../shared/constants/colors";
-import card from "src/assets/images/form/webp/card.webp";
+import colors from '@/shared/constants/colors'
+// import card from "@/assets/images/form/webp/card.webp";
 import {
   Section,
   SectionWrapper,
@@ -16,7 +16,7 @@ import {
   Input,
   TextInput,
   CardImage,
-} from "./styled";
+} from './styled'
 
 const ContactForm = () => {
   // const [form, setValue] = useState<TFormTypes>({
@@ -149,7 +149,7 @@ const ContactForm = () => {
         </SectionWrapper>
       </Section>
     </>
-  );
-};
+  )
+}
 
-export default ContactForm;
+export default ContactForm

@@ -1,3 +1,3 @@
-import ReviewsBlock from './ui/ReviewsBlock';
+import ReviewsBlock from './ui/ReviewsBlock'
 
-export { ReviewsBlock };
+export { ReviewsBlock }

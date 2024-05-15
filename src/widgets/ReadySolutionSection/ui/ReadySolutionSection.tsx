@@ -1,39 +1,33 @@
-import { useState } from "react";
-import {
-  CardsContainer,
-  Section,
-  SectionTitle,
-  TabButton,
-  TabsContainer,
-} from "./styled";
+import { useState } from 'react'
+import { CardsContainer, Section, SectionTitle, TabButton, TabsContainer } from './styled'
 import {
   cardSolutionData,
   cardSolutionData2,
   cardSolutionData3,
-} from "../../../shared/constants/texts/cards-solution";
-import { CardSolution } from "../../../shared/components/CardSolution";
-import { TCardSolutionProps } from "../../../shared/components/CardSolution/ui/CardSolution";
+} from '@/shared/constants/texts/cards-solution'
+import { CardSolution } from '@/shared/components/CardSolution'
+import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 
 const ReadySolutionSection = () => {
-  const [activeTab, setActiveTab] = useState("VideoSurveillance");
+  const [activeTab, setActiveTab] = useState('VideoSurveillance')
   const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-  };
+    setActiveTab(tab)
+  }
 
-  let activeTabData: TCardSolutionProps[] = [];
+  let activeTabData: TCardSolutionProps[] = []
 
   switch (activeTab) {
-    case "VideoSurveillance":
-      activeTabData = cardSolutionData;
-      break;
-    case "Intercom":
-      activeTabData = cardSolutionData2;
-      break;
-    case "SecurityFireAlarms":
-      activeTabData = cardSolutionData3;
-      break;
+    case 'VideoSurveillance':
+      activeTabData = cardSolutionData
+      break
+    case 'Intercom':
+      activeTabData = cardSolutionData2
+      break
+    case 'SecurityFireAlarms':
+      activeTabData = cardSolutionData3
+      break
     default:
-      break;
+      break
   }
 
   return (
@@ -41,20 +35,17 @@ const ReadySolutionSection = () => {
       <SectionTitle>Готовые решения</SectionTitle>
       <TabsContainer>
         <TabButton
-          onClick={() => handleTabChange("VideoSurveillance")}
-          active={activeTab === "VideoSurveillance"}
+          onClick={() => handleTabChange('VideoSurveillance')}
+          active={activeTab === 'VideoSurveillance'}
         >
           Видеонаблюдение
         </TabButton>
-        <TabButton
-          onClick={() => handleTabChange("Intercom")}
-          active={activeTab === "Intercom"}
-        >
+        <TabButton onClick={() => handleTabChange('Intercom')} active={activeTab === 'Intercom'}>
           Домофония/СКУД
         </TabButton>
         <TabButton
-          onClick={() => handleTabChange("SecurityFireAlarms")}
-          active={activeTab === "SecurityFireAlarms"}
+          onClick={() => handleTabChange('SecurityFireAlarms')}
+          active={activeTab === 'SecurityFireAlarms'}
         >
           Охранно-пожарные сигнализации
         </TabButton>
@@ -72,7 +63,7 @@ const ReadySolutionSection = () => {
         ))}
       </CardsContainer>
     </Section>
-  );
-};
+  )
+}
 
-export default ReadySolutionSection;
+export default ReadySolutionSection

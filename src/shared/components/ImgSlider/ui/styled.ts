@@ -1,7 +1,7 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
-import colors from "../../../constants/colors";
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
 
 const SliderWrapper = styled.div`
   margin: 0px auto 40px auto;
@@ -106,7 +106,7 @@ const SliderWrapper = styled.div`
   .slick-track:before,
   .slick-track:after {
     display: table;
-    content: "";
+    content: '';
   }
   .slick-track:after {
     clear: both;
@@ -126,7 +126,7 @@ const SliderWrapper = styled.div`
       display: flex;
     }
   }
-  [dir="rtl"] .slick-slide {
+  [dir='rtl'] .slick-slide {
     float: right;
   }
 
@@ -190,6 +190,6 @@ const SliderWrapper = styled.div`
   @media (max-width: 619px) {
     max-width: 280px;
   }
-`;
+`
 
-export { SliderWrapper };
+export { SliderWrapper }

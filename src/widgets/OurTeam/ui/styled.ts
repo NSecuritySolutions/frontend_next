@@ -1,6 +1,6 @@
-import colors from '../../../shared/constants/colors';
+import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Section = styled.section`
   margin: 0 auto;
@@ -17,7 +17,7 @@ const Section = styled.section`
     background-color: ${colors.backgroundPrimary};
     padding: 40px 0;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   margin: 0 auto;
@@ -49,19 +49,19 @@ const SectionWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const ListItem = styled.li`
   display: flex;
   gap: 12px;
   align-items: flex-start;
-`;
+`
 
 const ListItemText = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 136%;
-`;
+`
 
 const ColumnTitle = styled.h2`
   color: ${colors.darkPrimary};
@@ -71,7 +71,9 @@ const ColumnTitle = styled.h2`
   // text-overflow: ellipsis;
   margin-bottom: 20px;
 
-  font: 700 24px Manrope, sans-serif;
+  font:
+    700 24px Manrope,
+    sans-serif;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -84,7 +86,7 @@ const ColumnTitle = styled.h2`
     width: 100%;
     align-self: center;
   }
-`;
+`
 const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
@@ -104,7 +106,7 @@ const ColumnWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const Column = styled.div`
   display: flex;
@@ -117,7 +119,7 @@ const Column = styled.div`
   @media (max-width: 619px) {
     flex-direction: row;
   }
-`;
+`
 
 const TextWrapper = styled.div`
   margin: 0 auto;
@@ -136,7 +138,7 @@ const TextWrapper = styled.div`
     font-size: 16px;
     padding: 0 0 0 12px;
   }
-`;
+`
 
 const ColumnParagraph = styled.div`
   font-family: Manrope, sans-serif;
@@ -157,7 +159,7 @@ const ColumnParagraph = styled.div`
     max-width: 277px;
     width: 100%;
   }
-`;
+`
 
 const ContactsWrapper = styled.div`
   display: flex;
@@ -176,7 +178,7 @@ const ContactsWrapper = styled.div`
     flex-direction: column;
     justify-self: center;
   }
-`;
+`
 export {
   Section,
   SectionWrapper,
@@ -187,5 +189,5 @@ export {
   ColumnParagraph,
   ContactsWrapper,
   ListItem,
-  ListItemText
-};
+  ListItemText,
+}

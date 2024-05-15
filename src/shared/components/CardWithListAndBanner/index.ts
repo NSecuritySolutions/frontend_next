@@ -1,3 +1,3 @@
-import CardWithListAndBanner from "./ui/CardWithListAndBanner";
+import CardWithListAndBanner from './ui/CardWithListAndBanner'
 
-export { CardWithListAndBanner };
+export { CardWithListAndBanner }

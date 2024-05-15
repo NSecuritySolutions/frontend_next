@@ -1,6 +1,7 @@
-import colors from "../../../shared/constants/colors";
+import colors from '@/shared/constants/colors'
+import { StaticImageData } from 'next/image'
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
@@ -10,7 +11,7 @@ const Section = styled.section`
     align-items: center;
     justify-content: center;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ const SectionWrapper = styled.div`
   @media (max-width: 504px) {
     padding: 0;
   }
-`;
+`
 
 const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
@@ -45,7 +46,9 @@ const SectionTitle = styled.h2`
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
-  font: 700 24px Manrope, sans-serif;
+  font:
+    700 24px Manrope,
+    sans-serif;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -58,7 +61,7 @@ const SectionTitle = styled.h2`
     width: auto;
     align-self: center;
   }
-`;
+`
 
 const LogoWrapper = styled.div`
   margin-top: 40px;
@@ -88,12 +91,12 @@ const LogoWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const LogoYandex = styled.div<{
-  $imgUrl?: string;
-  $imgUrl1?: string;
-  alt?: string;
+  $imgUrl?: StaticImageData | string
+  $imgUrl1?: string
+  alt?: string
 }>`
   background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
   background-position: 0px -160px;
@@ -109,9 +112,9 @@ const LogoYandex = styled.div<{
   @media (max-width: 1300px) {
     align-self: center;
   }
-`;
+`
 
-const LogoSamokat = styled.div<{ $imgUrl?: string; alt?: string }>`
+const LogoSamokat = styled.div<{ $imgUrl?: StaticImageData | string; alt?: string }>`
   background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
   background-position: -0.2px -190.3px;
   background-size: cover;
@@ -133,9 +136,9 @@ const LogoSamokat = styled.div<{ $imgUrl?: string; alt?: string }>`
     height: 130px;
     width: 300px;
   }
-`;
+`
 
-const LogoRostelecom = styled.div<{ $imgUrl?: string; alt?: string }>`
+const LogoRostelecom = styled.div<{ $imgUrl?: StaticImageData | string; alt?: string }>`
   background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
   background-position: 0px -150.9px;
   background-size: cover;
@@ -150,9 +153,9 @@ const LogoRostelecom = styled.div<{ $imgUrl?: string; alt?: string }>`
   @media (max-width: 1300px) {
     align-self: center;
   }
-`;
+`
 
-const LogoAvon = styled.div<{ $imgUrl?: string; alt?: string }>`
+const LogoAvon = styled.div<{ $imgUrl?: StaticImageData | string; alt?: string }>`
   background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
   background-position: -1px -151.5px;
   background-size: cover;
@@ -167,7 +170,7 @@ const LogoAvon = styled.div<{ $imgUrl?: string; alt?: string }>`
   @media (max-width: 1300px) {
     align-self: center;
   }
-`;
+`
 
 export {
   Section,
@@ -178,4 +181,4 @@ export {
   LogoSamokat,
   LogoRostelecom,
   LogoAvon,
-};
+}

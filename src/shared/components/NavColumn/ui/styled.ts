@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import colors from "../../../constants/colors";
-import Link from "next/link";
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
+import Link from 'next/link'
 
 const Container = styled.div`
   display: grid;
@@ -14,25 +14,25 @@ const Container = styled.div`
   @media (max-width: 879px) {
     display: none;
   }
-`;
+`
 
 const Title = styled.h3`
   font-size: 18px;
   line-height: 136%;
   font-weight: 800;
   margin-bottom: 20px;
-`;
+`
 
 const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 12px;
   max-width: 220px;
-`;
+`
 
 const ListItem = styled.li`
   cursor: pointer;
-`;
+`
 
 const NavLinkStyled = styled(Link)`
   font-size: 16px;
@@ -43,6 +43,6 @@ const NavLinkStyled = styled(Link)`
   &:hover {
     color: ${colors.accentInfo};
   }
-`;
+`
 
-export { Container, Title, List, ListItem, NavLinkStyled };
+export { Container, Title, List, ListItem, NavLinkStyled }

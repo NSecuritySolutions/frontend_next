@@ -1,11 +1,11 @@
-import { TProjectReviews } from './types';
+import { TProjectReviews } from './types'
 
-import firstReview from '../../../assets/images/feedback/svg/Ic_User_1.svg';
-import secondReview from '../../../assets/images/feedback/svg/Ic_User_2.svg';
-import thirdReview from '../../../assets/images/feedback/svg/Ic_User_3.svg';
+import firstReview from '@/assets/images/feedback/svg/Ic_User_1.svg'
+import secondReview from '@/assets/images/feedback/svg/Ic_User_2.svg'
+import thirdReview from '@/assets/images/feedback/svg/Ic_User_3.svg'
 
-export const TEXT_LIMIT: number = 145;
-export const TITLE_LIMIT: number = 23;
+export const TEXT_LIMIT: number = 145
+export const TITLE_LIMIT: number = 23
 
 export const projectReviews: TProjectReviews[] = [
   {
@@ -14,7 +14,7 @@ export const projectReviews: TProjectReviews[] = [
     product: 'Система видеонаблюдения',
     review:
       'Большое спасибо за установку системы видеонаблюдения. Все выполнили быстро и качественно. Нам очень понравилось, будем рекомендовать вас.',
-    img: firstReview
+    img: firstReview,
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const projectReviews: TProjectReviews[] = [
     review:
       'Большое спасибо за установку системы видеонаблюдения. Все выполнили быстро и качественно. Нам очень понравилось, будем рекомендовать вас. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed vitae atque illo soluta voluptas inventore cum perspiciatis laudantium esse rerum eos tenetur harum similique consectetur distinctio ducimus, necessitatibus, reprehenderit earum.',
     link: 'https://market.yandex.ru/',
-    img: secondReview
+    img: secondReview,
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ export const projectReviews: TProjectReviews[] = [
     review:
       'Большое спасибо за установку системы видеонаблюдения. Все выполнили быстро и качественно. Нам очень понравилось, будем рекомендо. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed vitae atque illo soluta voluptas inventore cum perspiciatis laudantium esse rerum eos tenetur harum similique consectetur distinctio ducimus, necessitatibus, reprehenderit earum.',
     link: 'https://market.yandex.ru/',
-    img: thirdReview
+    img: thirdReview,
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ export const projectReviews: TProjectReviews[] = [
     review:
       'Большое спасибо за установку системы видеонаблюдения. Все выполнили быстро и качественно. Нам очень понравилось.',
     link: 'https://market.yandex.ru/',
-    img: firstReview
+    img: firstReview,
   },
   {
     id: 5,
@@ -50,6 +50,6 @@ export const projectReviews: TProjectReviews[] = [
     review:
       'Большое спасибо за установку системы видеонаблюдения. Все выполнили быстро и качественно. Нам очень понравилось, будем рекомендовать вас.',
     link: 'https://market.yandex.ru/',
-    img: secondReview
-  }
-];
+    img: secondReview,
+  },
+]

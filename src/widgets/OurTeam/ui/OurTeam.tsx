@@ -1,6 +1,8 @@
-import { ManagerCard } from '../../../shared/components/ManagerCard/index.ts';
+import Image from 'next/image'
 
-import listMarker from '../../../assets/icons/list-item.svg';
+import { ManagerCard } from '@/shared/components/ManagerCard/index.ts'
+
+import listMarker from '@/assets/icons/list-item.svg'
 
 import {
   Section,
@@ -12,9 +14,9 @@ import {
   ColumnWrapper,
   ContactsWrapper,
   ListItem,
-  ListItemText
-} from './styled.ts';
-import { teamText } from '../../../shared/constants/texts/our-team.ts';
+  ListItemText,
+} from './styled.ts'
+import { teamText } from '@/shared/constants/texts/our-team.ts'
 
 const OurTeam = () => {
   return (
@@ -27,7 +29,7 @@ const OurTeam = () => {
               <ColumnParagraph>
                 {teamText.map((item, index) => (
                   <ListItem key={index}>
-                    <img src={listMarker} alt="List Marker" />
+                    {/* <Image src={listMarker} alt="List Marker" width={20} height={20} /> */}
                     <ListItemText>{item}</ListItemText>
                   </ListItem>
                 ))}
@@ -40,7 +42,7 @@ const OurTeam = () => {
         </ColumnWrapper>
       </SectionWrapper>
     </Section>
-  );
-};
+  )
+}
 
-export default OurTeam;
+export default OurTeam

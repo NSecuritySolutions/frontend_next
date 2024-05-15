@@ -1,3 +1,3 @@
-import AnswerCard from './ui/AnswerCard';
+import AnswerCard from './ui/AnswerCard'
 
-export { AnswerCard };
+export { AnswerCard }

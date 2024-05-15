@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react'
 import {
   TheHeader,
   HeaderWrapper,
@@ -12,15 +12,15 @@ import {
   HeaderTel,
   HeaderBtnWrapper,
   HeaderBurgerMenuWrapper,
-} from "./styles";
-import { BtnLink } from "../../../shared/components/BtnLink";
-import colors from "../../../shared/constants/colors";
-import { Logo } from "../../../shared/components/Logo";
-import ProjectLogo from "../../../assets/icons/logo.svg";
+} from './styles'
+import { BtnLink } from '@/shared/components/BtnLink'
+import colors from '@/shared/constants/colors'
+import { Logo } from '@/shared/components/Logo'
+import ProjectLogo from '@/assets/icons/logo.svg'
 
 type THeaderProps = {
-  navLinks: { label: string; to: string }[];
-};
+  navLinks: { label: string; to: string }[]
+}
 
 const Header: FC<THeaderProps> = ({ navLinks }) => {
   return (
@@ -28,7 +28,7 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
       <HeaderWrapper>
         <HeaderTop>
           <HeaderTopItem>
-            <Logo imageUrl={ProjectLogo} />
+            {/* <Logo imageUrl={ProjectLogo} /> */}
             <HeaderText>Безопастность вашего дома и бизнеса</HeaderText>
           </HeaderTopItem>
           <HeaderTopItem>
@@ -44,22 +44,20 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
               />
             </HeaderBtnWrapper>
           </HeaderTopItem>
-          <HeaderBurgerMenuWrapper>
-            {/* <BurgerMenu /> */}
-          </HeaderBurgerMenuWrapper>
+          <HeaderBurgerMenuWrapper>{/* <BurgerMenu /> */}</HeaderBurgerMenuWrapper>
         </HeaderTop>
         <HeaderNav>
           <HeaderList>
             {navLinks.map(({ label, to }, index) => (
               <HeaderNavItem key={index}>
-                <HeaderNavLink href={"/"}>{label}</HeaderNavLink>
+                <HeaderNavLink href={'/'}>{label}</HeaderNavLink>
               </HeaderNavItem>
             ))}
           </HeaderList>
         </HeaderNav>
       </HeaderWrapper>
     </TheHeader>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

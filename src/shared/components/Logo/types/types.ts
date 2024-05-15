@@ -1,10 +1,10 @@
 type TLogoImageProps = {
-  src: string;
-  alt: string;
-};
+  src: string
+  alt: string
+}
 
 type TLogoProps = {
-  imageUrl: { src: string };
-};
+  imageUrl: string
+}
 
-export type { TLogoImageProps, TLogoProps };
+export type { TLogoImageProps, TLogoProps }

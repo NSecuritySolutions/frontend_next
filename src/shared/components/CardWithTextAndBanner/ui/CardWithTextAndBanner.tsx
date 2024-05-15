@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC } from 'react'
 
-import { BtnLink } from '../../BtnLink';
+import { BtnLink } from '../../BtnLink'
 
 import {
   Card,
@@ -9,19 +9,20 @@ import {
   CardImg,
   ImgWrapper,
   TextWrapper,
-  TextContainer
-} from './styled';
+  TextContainer,
+} from './styled'
 
-import colors from '../../../../shared/constants/colors';
+import colors from '@/shared/constants/colors'
+import { StaticImageData } from 'next/image'
 
 type TCardProps = {
-  title: string;
-  img: string;
-  text: string[];
-  btnName: string;
-  link: string;
-  backgroundColor: string;
-};
+  title: string
+  img: StaticImageData | string
+  text: string[]
+  btnName: string
+  link: string
+  backgroundColor: string
+}
 
 const CardWithTextAndBanner: FC<TCardProps> = ({
   title,
@@ -29,13 +30,11 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
   text,
   link,
   btnName,
-  backgroundColor
+  backgroundColor,
 }) => {
   return (
     <Card $backgroundColor={backgroundColor}>
-      <ImgWrapper>
-        <CardImg src={img} alt={title} />
-      </ImgWrapper>
+      <ImgWrapper>{/* <CardImg src={img} alt={title} /> */}</ImgWrapper>
       <TextWrapper>
         <CardTitle>{title}</CardTitle>
         <TextContainer>
@@ -50,10 +49,11 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
           height="44px"
           link={link}
           color={colors.darkPrimary}
-          size="15px"></BtnLink>
+          size="15px"
+        ></BtnLink>
       </TextWrapper>
     </Card>
-  );
-};
+  )
+}
 
-export default CardWithTextAndBanner;
+export default CardWithTextAndBanner

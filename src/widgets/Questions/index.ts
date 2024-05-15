@@ -1,3 +1,3 @@
-import Questions from './ui/Questions';
+import Questions from './ui/Questions'
 
-export { Questions };
+export { Questions }

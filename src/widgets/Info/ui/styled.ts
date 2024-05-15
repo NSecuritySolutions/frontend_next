@@ -1,6 +1,7 @@
-import colors from "../../../shared/constants/colors";
+import colors from '@/shared/constants/colors'
+import { StaticImageData } from 'next/image'
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Section = styled.section`
   margin: 0 auto;
@@ -10,7 +11,7 @@ const Section = styled.section`
   @media (max-width: 500px) {
     padding-bottom: 24px;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   margin: 0 auto;
@@ -40,7 +41,7 @@ const SectionWrapper = styled.div`
   @media (max-width: 620px) {
     max-width: 340px;
   }
-`;
+`
 
 const ContentWrapper = styled.div`
   width: 83%;
@@ -55,7 +56,7 @@ const ContentWrapper = styled.div`
   @media (max-width: 940px) {
     max-width: 86%;
   }
-`;
+`
 
 const Title = styled.h2`
   font-weight: 700;
@@ -72,7 +73,7 @@ const Title = styled.h2`
   @media (max-width: 940px) {
     max-width: 100%;
   }
-`;
+`
 
 const Text = styled.p`
   max-width: 439px;
@@ -86,7 +87,7 @@ const Text = styled.p`
     margin-bottom: 20px;
     max-width: 343px;
   }
-`;
+`
 const InfoBtnWrapper = styled.div`
   width: 158px;
   height: 56px;
@@ -102,7 +103,7 @@ const InfoBtnWrapper = styled.div`
   @media (max-width: 620px) {
     margin-bottom: 195px;
   }
-`;
+`
 
 const HistoryWrapper = styled.div`
   display: flex;
@@ -111,13 +112,13 @@ const HistoryWrapper = styled.div`
   @media (max-width: 620px) {
     display: none;
   }
-`;
+`
 
 const HistoryItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+`
 
 const YearsText = styled.span`
   font-weight: 700;
@@ -127,15 +128,15 @@ const YearsText = styled.span`
   @media (max-width: 1300px) {
     font-size: 24px;
   }
-`;
+`
 
 const AchievementsText = styled.span`
   font-weight: 700;
   font-size: 16px;
   line-height: 136%;
-`;
+`
 
-const Banner = styled.div<{ $imgUrl?: string; alt?: string }>`
+const Banner = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
   width: 545px;
   height: 380px;
   background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
@@ -161,7 +162,7 @@ const Banner = styled.div<{ $imgUrl?: string; alt?: string }>`
     height: 207px;
     right: 40px;
   }
-`;
+`
 
 const CardWrapper = styled.div`
   max-width: 1180px;
@@ -171,7 +172,7 @@ const CardWrapper = styled.div`
   grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
   margin-top: 40px;
-`;
+`
 
 export {
   Section,
@@ -186,4 +187,4 @@ export {
   AchievementsText,
   Banner,
   CardWrapper,
-};
+}

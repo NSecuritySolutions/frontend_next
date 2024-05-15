@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import colors from '../../../shared/constants/colors';
+import colors from '@/shared/constants/colors'
 
-import yandexLogo from '../../../assets/images/yandex/yandex.webp';
+import yandexLogo from '@/assets/images/yandex/yandex.webp'
 
 const Section = styled.section`
   margin: 0 auto;
@@ -17,7 +17,7 @@ const Section = styled.section`
   @media (max-width: 940px) {
     padding: 40px 0;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   margin: 0 auto;
@@ -48,7 +48,7 @@ const SectionWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const ColumnTitle = styled.h2`
   color: ${colors.darkPrimary};
@@ -58,7 +58,9 @@ const ColumnTitle = styled.h2`
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
-  font: 700 24px Manrope, sans-serif;
+  font:
+    700 24px Manrope,
+    sans-serif;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -71,7 +73,7 @@ const ColumnTitle = styled.h2`
     width: 100%;
     align-self: center;
   }
-`;
+`
 const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
@@ -90,7 +92,7 @@ const ColumnWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const Column = styled.div`
   display: flex;
@@ -103,17 +105,17 @@ const Column = styled.div`
   @media (max-width: 619px) {
     flex-direction: row;
   }
-`;
+`
 const CardImg = styled.img.attrs(({ src }) => ({
   src: src,
-  alt: 'Аватар пользователя'
+  alt: 'Аватар пользователя',
 }))`
   border-radius: 500px;
   background-color: ${colors.backgroundCardBl};
   width: 48px;
   height: 48px;
   background-size: cover;
-`;
+`
 const TextWrapper = styled.div`
   margin: 0 auto;
   padding: 0;
@@ -133,7 +135,7 @@ const TextWrapper = styled.div`
     font-size: 16px;
     padding: 0 0 0 12px;
   }
-`;
+`
 
 const ImageWrapper = styled.p`
   font-family: Manrope, sans-serif;
@@ -157,13 +159,12 @@ const ImageWrapper = styled.p`
     max-width: 277px;
     width: 100%;
   }
-`;
+`
 
-const ColumnImage = styled.img`
-  margin: 0;
-  padding: 0;
-  max-width: 280px;
-  width: 100%;
+const ColumnImageWrapper = styled.div`
+  width: 280px;
+  height: 74px;
+  position: relative;
 
   @media (max-width: 940px) {
     padding: 30px 0 0 0;
@@ -172,14 +173,13 @@ const ColumnImage = styled.img`
   @media (max-width: 619px) {
     display: none;
   }
-`;
+`
 
-ColumnImage.defaultProps = {
-  src: yandexLogo
-};
 const StyledParagraph = styled.p`
-  font: 800 18px Manrope, sans-serif;
-`;
+  font:
+    800 18px Manrope,
+    sans-serif;
+`
 const ContactsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -198,7 +198,7 @@ const ContactsWrapper = styled.div`
     flex-direction: column;
     justify-self: center;
   }
-`;
+`
 export {
   Section,
   SectionWrapper,
@@ -208,7 +208,7 @@ export {
   TextWrapper,
   ImageWrapper,
   ContactsWrapper,
-  ColumnImage,
+  ColumnImageWrapper,
   CardImg,
-  StyledParagraph
-};
+  StyledParagraph,
+}

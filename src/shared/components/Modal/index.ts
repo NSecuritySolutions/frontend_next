@@ -1,3 +1,3 @@
-import Modal from './ui/Modal.tsx';
+import Modal from './ui/Modal.tsx'
 
-export { Modal };
+export { Modal }

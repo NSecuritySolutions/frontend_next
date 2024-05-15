@@ -1,10 +1,6 @@
-import React from 'react';
-import { TBtnLinkProps } from '../types/types';
-import {
-  StyledBtnLink,
-  StyledAccentBtnLink,
-  StyledTransparentBtnLink
-} from './styles';
+import React from 'react'
+import { TBtnLinkProps } from '../types/types'
+import { StyledBtnLink, StyledAccentBtnLink, StyledTransparentBtnLink } from './styles'
 
 const BtnLink: React.FC<TBtnLinkProps> = ({
   width,
@@ -14,7 +10,7 @@ const BtnLink: React.FC<TBtnLinkProps> = ({
   link,
   size,
   btnType,
-  onClick
+  onClick,
 }) => {
   const renderButton = () => {
     switch (btnType) {
@@ -26,10 +22,11 @@ const BtnLink: React.FC<TBtnLinkProps> = ({
             width={width}
             height={height}
             href={link}
-            onClick={onClick}>
+            onClick={onClick}
+          >
             {text}
           </StyledAccentBtnLink>
-        );
+        )
       case 'transparent':
         return (
           <StyledTransparentBtnLink
@@ -38,25 +35,21 @@ const BtnLink: React.FC<TBtnLinkProps> = ({
             width={width}
             height={height}
             href={link}
-            onClick={onClick}>
+            onClick={onClick}
+          >
             {text}
           </StyledTransparentBtnLink>
-        );
+        )
       default:
         return (
-          <StyledBtnLink
-            size={size}
-            color={color}
-            width={width}
-            height={height}
-            href={link}>
+          <StyledBtnLink size={size} color={color} width={width} height={height} href={link}>
             {text}
           </StyledBtnLink>
-        );
+        )
     }
-  };
+  }
 
-  return renderButton();
-};
+  return renderButton()
+}
 
-export default BtnLink;
+export default BtnLink

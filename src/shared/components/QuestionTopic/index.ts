@@ -1,3 +1,3 @@
-import QuestionTopic from './ui/QuestionTopic';
+import QuestionTopic from './ui/QuestionTopic'
 
-export { QuestionTopic };
+export { QuestionTopic }

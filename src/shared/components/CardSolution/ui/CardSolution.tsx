@@ -1,6 +1,7 @@
-import { FC, useState } from 'react';
+import { FC, useState } from 'react'
+import Image, { StaticImageData } from 'next/image'
 
-import { BtnLink } from '../../BtnLink';
+import { BtnLink } from '@/shared/components/BtnLink'
 
 import {
   Card,
@@ -13,45 +14,36 @@ import {
   InfoBtn,
   CardImgWrapper,
   TooltipContainer,
-  ToolTipParagraph
-} from './styled';
-import colors from '../../../constants/colors';
+  ToolTipParagraph,
+} from './styled'
+import colors from '@/shared/constants/colors'
 
 export type TCardSolutionProps = {
-  id?: number;
-  title: string;
-  img: string;
-  listItem: string[];
-  price: string;
-  toolTipText: string[];
-};
+  id?: number
+  title: string
+  img: StaticImageData
+  listItem: string[]
+  price: string
+  toolTipText: string[]
+}
 
-const CardSolution: FC<TCardSolutionProps> = ({
-  title,
-  img,
-  listItem,
-  price,
-  toolTipText
-}) => {
-  const formattedPrice = Number(price).toLocaleString('ru-RU');
-  const [showTooltip, setShowTooltip] = useState(false);
+const CardSolution: FC<TCardSolutionProps> = ({ title, img, listItem, price, toolTipText }) => {
+  const formattedPrice = Number(price).toLocaleString('ru-RU')
+  const [showTooltip, setShowTooltip] = useState(false)
 
   const handleMouseEnter = () => {
-    setShowTooltip(true);
-  };
+    setShowTooltip(true)
+  }
 
   const handleMouseLeave = () => {
     setTimeout(() => {
-      setShowTooltip(false);
-    }, 1000);
-  };
+      setShowTooltip(false)
+    }, 1000)
+  }
 
   return (
     <Card>
-      <InfoBtn
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      />
+      <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
       {showTooltip && (
         <TooltipContainer>
           <CardTitle>{title}</CardTitle>
@@ -61,7 +53,12 @@ const CardSolution: FC<TCardSolutionProps> = ({
         </TooltipContainer>
       )}
       <CardImgWrapper>
-        <CardImg src={img} alt={title} />
+        {/* <Image
+          src={img}
+          alt={title}
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          fill
+        /> */}
       </CardImgWrapper>
       <CardTitle>{title}</CardTitle>
       <ListTitle>Характеристики</ListTitle>
@@ -91,7 +88,7 @@ const CardSolution: FC<TCardSolutionProps> = ({
         size="15px"
       />
     </Card>
-  );
-};
+  )
+}
 
-export default CardSolution;
+export default CardSolution

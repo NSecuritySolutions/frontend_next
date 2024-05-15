@@ -1,3 +1,3 @@
-import ReviewsSlider from './ui/ReviewsSlider';
+import ReviewsSlider from './ui/ReviewsSlider'
 
-export { ReviewsSlider };
+export { ReviewsSlider }

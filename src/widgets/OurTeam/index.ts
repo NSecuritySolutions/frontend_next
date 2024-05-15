@@ -1,3 +1,3 @@
-import OurTeam from './ui/OurTeam';
+import OurTeam from './ui/OurTeam'
 
-export { OurTeam };
+export { OurTeam }

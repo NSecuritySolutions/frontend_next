@@ -1,27 +1,19 @@
-import { FC } from "react";
+import { FC } from 'react'
 
-import {
-  Section,
-  SectionWrapper,
-  Title,
-  CardsContainer,
-  CardWithBannerContainer,
-} from "./styled";
+import { Section, SectionWrapper, Title, CardsContainer, CardWithBannerContainer } from './styled'
 
 import {
   cardAdvantagesData,
   cardAdvantagesWithBannerData,
-} from "../../../shared/constants/texts/card-advantages";
-import { CardWithList } from "../../../shared/components/CardWithList";
-import { CardWithListAndBanner } from "../../../shared/components/CardWithListAndBanner";
+} from '@/shared/constants/texts/card-advantages'
+import { CardWithList } from '@/shared/components/CardWithList'
+import { CardWithListAndBanner } from '@/shared/components/CardWithListAndBanner'
 
 const AdvantagesBlock: FC = () => {
   return (
     <Section>
       <SectionWrapper>
-        <Title>
-          Профессиональная установка систем безопасности в Новосибирске
-        </Title>
+        <Title>Профессиональная установка систем безопасности в Новосибирске</Title>
         <CardsContainer>
           {cardAdvantagesData.map((card) => (
             <CardWithList
@@ -46,7 +38,7 @@ const AdvantagesBlock: FC = () => {
         </CardWithBannerContainer>
       </SectionWrapper>
     </Section>
-  );
-};
+  )
+}
 
-export default AdvantagesBlock;
+export default AdvantagesBlock

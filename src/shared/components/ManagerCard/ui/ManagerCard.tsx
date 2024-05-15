@@ -1,16 +1,10 @@
-import { teamContacts } from '../../../constants/texts/our-team';
-import {
-  CardContainer,
-  CardImg,
-  CardName,
-  CardPosition,
-  CardTel
-} from './styled';
+import { teamContacts } from '@/shared/constants/texts/our-team'
+import { CardContainer, CardImg, CardName, CardPosition, CardTel } from './styled'
 
 const ManagerCard = () => {
   return (
     <>
-      {teamContacts.map(item => (
+      {teamContacts.map((item) => (
         <CardContainer key={item.id}>
           <CardImg $imgUrl={item.image} alt="Фотография сотрудника" />
           <CardName>{item.name}</CardName>
@@ -19,7 +13,7 @@ const ManagerCard = () => {
         </CardContainer>
       ))}
     </>
-  );
-};
+  )
+}
 
-export default ManagerCard;
+export default ManagerCard

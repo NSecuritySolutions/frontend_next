@@ -1,3 +1,3 @@
-import OurServices from './ui/OurServices';
+import OurServices from './ui/OurServices'
 
-export { OurServices };
+export { OurServices }

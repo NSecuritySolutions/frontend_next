@@ -1,3 +1,3 @@
-import Info from "./ui/Info";
+import Info from './ui/Info'
 
-export { Info };
+export { Info }

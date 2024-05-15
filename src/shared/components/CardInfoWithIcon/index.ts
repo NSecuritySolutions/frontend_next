@@ -1,3 +1,3 @@
-import CardInfoWithIcon from "./ui/CardInfoWithIcon";
+import CardInfoWithIcon from './ui/CardInfoWithIcon'
 
-export { CardInfoWithIcon };
+export { CardInfoWithIcon }

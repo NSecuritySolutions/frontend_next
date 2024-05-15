@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react'
 
-import { navColumnLists, contacts } from "./temporaryConsts";
+import { navColumnLists, contacts } from './temporaryConsts'
 
 import {
   FooterBottom,
@@ -22,11 +22,11 @@ import {
   FooterWrapper,
   FooterBtnWrapper,
   FooterContactsContentWrapper,
-} from "./styled";
-import { BtnLink } from "../../../shared/components/BtnLink";
-import colors from "../../../shared/constants/colors";
-import { Logo } from "../../../shared/components/Logo";
-import { NavColumn } from "../../../shared/components/NavColumn";
+} from './styled'
+import { BtnLink } from '@/shared/components/BtnLink'
+import colors from '@/shared/constants/colors'
+import { Logo } from '@/shared/components/Logo'
+import { NavColumn } from '@/shared/components/NavColumn'
 
 const Footer: FC = () => {
   return (
@@ -34,25 +34,23 @@ const Footer: FC = () => {
       <FooterTop>
         <FooterTopContainer>
           <FooterSocialContainer>
-            <Logo imageUrl={""} />
+            <Logo imageUrl={''} />
             <FooterSocialIconsContainer>
               <FooterSocialIconLink href="#" target="_blank">
-                <FooterSocialIcon src={""} alt="Лого" />
+                <FooterSocialIcon src={''} alt="Лого" />
               </FooterSocialIconLink>
               <FooterSocialIconLink href="#" target="_blank">
-                <FooterSocialIcon src={""} alt="Лого" />
+                <FooterSocialIcon src={''} alt="Лого" />
               </FooterSocialIconLink>
             </FooterSocialIconsContainer>
           </FooterSocialContainer>
-          {/* <NavColumn lists={navColumnLists} /> */}
+          <NavColumn lists={navColumnLists} />
           <FooterContactsContainer>
             <FooterContactsContentWrapper>
               {contacts.map((contact, index) => (
                 <FooterContactContainer key={index}>
                   <FooterContactLogo src={contact.icon} />
-                  <FooterContactLink href={contact.link}>
-                    {contact.text}
-                  </FooterContactLink>
+                  <FooterContactLink href={contact.link}>{contact.text}</FooterContactLink>
                 </FooterContactContainer>
               ))}
             </FooterContactsContentWrapper>
@@ -78,12 +76,8 @@ const Footer: FC = () => {
                 ХХХ
               </FooterDeveloperLink>
             </FooterRightsText>
-            <FooterRightsText>
-              Информация на сайте не является публичной офертой
-            </FooterRightsText>
-            <FooterRightsText>
-              Актуальные цены уточняйте у менеджеров
-            </FooterRightsText>
+            <FooterRightsText>Информация на сайте не является публичной офертой</FooterRightsText>
+            <FooterRightsText>Актуальные цены уточняйте у менеджеров</FooterRightsText>
             <FooterDeveloperInfoBox>
               <FooterRightsText>
                 Сайт разработан командой
@@ -97,7 +91,7 @@ const Footer: FC = () => {
         </FooterBottomContainer>
       </FooterBottom>
     </FooterWrapper>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

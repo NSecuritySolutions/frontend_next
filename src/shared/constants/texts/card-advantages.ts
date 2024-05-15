@@ -1,11 +1,11 @@
-import efficiencyLogo from '../../../assets/icons/Icons/new_releases.svg';
-import safetyLogo from '../../../assets/icons/Icons/encrypted.svg';
-import reliabilityLogo from '../../../assets/icons/Icons/charger.svg';
-import thumbsLogo from '../../../assets/icons/Icons/thumb_up.svg';
-import mobileLogo from '../../../assets/icons/speed.svg';
+import efficiencyLogo from '@/assets/icons/Icons/new_releases.svg'
+import safetyLogo from '@/assets/icons/Icons/encrypted.svg'
+import reliabilityLogo from '@/assets/icons/Icons/charger.svg'
+import thumbsLogo from '@/assets/icons/Icons/thumb_up.svg'
+import mobileLogo from '@/assets/icons/speed.svg'
 
-import banner from '../../../assets/images/mobile/png/mobile-app.png';
-import colors from '../colors';
+import banner from '@/assets/images/mobile/png/mobile-app.png'
+import colors from '../colors'
 
 export const cardAdvantagesData = [
   {
@@ -16,8 +16,8 @@ export const cardAdvantagesData = [
     listItem: [
       'Современное оборудование',
       'Система газоанализа',
-      'Проводные/беспроводные извещатели'
-    ]
+      'Проводные/беспроводные извещатели',
+    ],
   },
   {
     id: 2,
@@ -27,8 +27,8 @@ export const cardAdvantagesData = [
     listItem: [
       'Современное оборудование',
       'Система газоанализа',
-      'Проводные/беспроводные извещатели'
-    ]
+      'Проводные/беспроводные извещатели',
+    ],
   },
   {
     id: 3,
@@ -37,8 +37,8 @@ export const cardAdvantagesData = [
     backgroundColor: `${colors.backgroundCardGr}`,
     listItem: [
       'Удаленный доступ к прямому эфиру и архиву 24/7 с любых устройств (macOS, windows, iOS, Android)',
-      'Учет рабочего времени, управление доступом на обьект, гостевые пропуска'
-    ]
+      'Учет рабочего времени, управление доступом на обьект, гостевые пропуска',
+    ],
   },
   {
     id: 4,
@@ -47,10 +47,10 @@ export const cardAdvantagesData = [
     backgroundColor: `${colors.backgroundCardYe}`,
     listItem: [
       'Команда проектировщиков с огромным опытом',
-      'Техники занимающиеся обслуживанием и монтажными работами оснащены профессиональным инструментом, ежегодно проходят тестирование'
-    ]
-  }
-];
+      'Техники занимающиеся обслуживанием и монтажными работами оснащены профессиональным инструментом, ежегодно проходят тестирование',
+    ],
+  },
+]
 
 export const cardAdvantagesWithBannerData = [
   {
@@ -61,7 +61,7 @@ export const cardAdvantagesWithBannerData = [
     listItem: [
       'Смотрите видео с камер в личном кабинете через приложение на любом устройстве из любой точки мира',
       'Выводите трансляцию с камеры на сайт, чтобы клиенты могли наблюдать за приготовлением блюд или сбором заказов в прямом эфире',
-      'Настраивате права доступа для разных пользователей'
-    ]
-  }
-];
+      'Настраивате права доступа для разных пользователей',
+    ],
+  },
+]

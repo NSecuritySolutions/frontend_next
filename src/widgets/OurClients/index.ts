@@ -1,3 +1,3 @@
-import OurClients from './ui/OurClients';
+import OurClients from './ui/OurClients'
 
-export { OurClients };
+export { OurClients }

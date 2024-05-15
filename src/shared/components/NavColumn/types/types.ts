@@ -1,10 +1,10 @@
 type TNavColumnItem = {
-  title: string;
-  items: { text: string; navLink: string }[];
-};
+  title: string
+  items: { text: string; navLink: string }[]
+}
 
 type TNavColumnProps = {
-  lists: TNavColumnItem[];
-};
+  lists: TNavColumnItem[]
+}
 
-export type { TNavColumnItem, TNavColumnProps };
+export type { TNavColumnItem, TNavColumnProps }

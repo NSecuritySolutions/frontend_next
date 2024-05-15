@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { TNavColumnProps } from "../types/types";
-import { Container, List, ListItem, NavLinkStyled, Title } from "./styled";
+import { FC } from 'react'
+import { TNavColumnProps } from '../types/types'
+import { Container, List, ListItem, NavLinkStyled, Title } from './styled'
 
 const NavColumn: FC<TNavColumnProps> = ({ lists }) => {
   return (
@@ -11,14 +11,14 @@ const NavColumn: FC<TNavColumnProps> = ({ lists }) => {
           <List>
             {list.items.map((item, idx) => (
               <ListItem key={idx}>
-                <NavLinkStyled to={item.navLink}>{item.text}</NavLinkStyled>
+                <NavLinkStyled href={item.navLink}>{item.text}</NavLinkStyled>
               </ListItem>
             ))}
           </List>
         </div>
       ))}
     </Container>
-  );
-};
+  )
+}
 
-export default NavColumn;
+export default NavColumn

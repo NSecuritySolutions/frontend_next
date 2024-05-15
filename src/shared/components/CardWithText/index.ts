@@ -1,3 +1,3 @@
-import CardWithText from './ui/CardWithText.tsx';
+import CardWithText from './ui/CardWithText.tsx'
 
-export { CardWithText };
+export { CardWithText }

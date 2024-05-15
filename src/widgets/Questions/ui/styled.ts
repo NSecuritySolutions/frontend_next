@@ -1,6 +1,6 @@
-import colors from "../../../shared/constants/colors";
+import colors from '@/shared/constants/colors'
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
@@ -14,7 +14,7 @@ const Section = styled.section`
   @media (max-width: 640px) {
     padding: 0;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const SectionWrapper = styled.div`
   @media (max-width: 640px) {
     padding: 60px 0;
   }
-`;
+`
 
 const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
@@ -49,7 +49,9 @@ const SectionTitle = styled.h2`
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
-  font: 700 24px Manrope, sans-serif;
+  font:
+    700 24px Manrope,
+    sans-serif;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -68,7 +70,7 @@ const SectionTitle = styled.h2`
   @media (max-width: 340px) {
     max-width: 280px;
   }
-`;
+`
 
 const ColumnWrapper = styled.div`
   margin: 0 auto;
@@ -97,7 +99,7 @@ const ColumnWrapper = styled.div`
   @media (max-width: 644px) {
     justify-content: center;
   }
-`;
+`
 
 const TopicsColumn = styled.div`
   display: flex;
@@ -121,7 +123,7 @@ const TopicsColumn = styled.div`
   @media (max-width: 400px) {
     padding: 0;
   }
-`;
+`
 
 const QuestionsColumn = styled.div`
   display: flex;
@@ -151,7 +153,7 @@ const QuestionsColumn = styled.div`
 
   @media (max-width: 619px) {
   }
-`;
+`
 
 const TextWrapper = styled.div`
   margin: 0 auto;
@@ -170,7 +172,7 @@ const TextWrapper = styled.div`
     font-size: 16px;
     padding: 0 0 0 12px;
   }
-`;
+`
 
 const ColumnParagraph = styled.p`
   font-family: Manrope, sans-serif;
@@ -191,7 +193,7 @@ const ColumnParagraph = styled.p`
     max-width: 277px;
     width: 100%;
   }
-`;
+`
 
 const ContactsWrapper = styled.div`
   display: flex;
@@ -210,7 +212,7 @@ const ContactsWrapper = styled.div`
     flex-direction: column;
     justify-self: center;
   }
-`;
+`
 export {
   Section,
   SectionWrapper,
@@ -221,4 +223,4 @@ export {
   TextWrapper,
   ColumnParagraph,
   ContactsWrapper,
-};
+}

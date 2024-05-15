@@ -1,12 +1,9 @@
-import { Section, SectionTitle, CardsGridContainer } from "./styled";
+import { Section, SectionTitle, CardsGridContainer } from './styled'
 
-import { CardWithText } from "../../../shared/components/CardWithText";
-import {
-  cardServices,
-  cardServicesWithBannerData,
-} from "../../../shared/constants/texts/services";
-import { CardWithTextAndBanner } from "../../../shared/components/CardWithTextAndBanner";
-import colors from "../../../shared/constants/colors";
+import { CardWithText } from '@/shared/components/CardWithText'
+import { cardServices, cardServicesWithBannerData } from '@/shared/constants/texts/services'
+import { CardWithTextAndBanner } from '@/shared/components/CardWithTextAndBanner'
+import colors from '@/shared/constants/colors'
 
 const OurServices = () => {
   return (
@@ -36,7 +33,7 @@ const OurServices = () => {
         />
       ))}
     </Section>
-  );
-};
+  )
+}
 
-export default OurServices;
+export default OurServices

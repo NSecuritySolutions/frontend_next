@@ -1,44 +1,41 @@
-import { FC } from "react";
+import { FC } from 'react'
+import Image, { StaticImageData } from 'next/image'
 
-import listMarker from "../../../../assets/icons/list-item.svg";
-import {
-  Card,
-  CardTitle,
-  List,
-  ListItem,
-  ListItemText,
-  TitleContainer,
-} from "./styled";
+import listMarker from '@/assets/icons/list-item.svg'
+import { Card, CardTitle, List, ListItem, ListItemText, TitleContainer } from './styled'
 
 type TCardProps = {
-  title: string;
-  logo: string;
-  listItem: string[];
-  backgroundColor: string;
-};
+  title: string
+  logo: StaticImageData
+  listItem: string[]
+  backgroundColor: string
+}
 
-const CardWithList: FC<TCardProps> = ({
-  title,
-  logo,
-  listItem,
-  backgroundColor,
-}) => {
+const CardWithList: FC<TCardProps> = ({ title, logo, listItem, backgroundColor }) => {
   return (
     <Card $backgroundColor={backgroundColor}>
       <TitleContainer>
-        <img src={logo} alt="Logo" />
+        <div style={{ width: '40px', height: '40px' }}>
+          {/* <Image
+            src={logo}
+            alt="Logo"
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            fill
+          /> */}
+        </div>
+
         <CardTitle>{title}</CardTitle>
       </TitleContainer>
       <List>
         {listItem.map((item, index) => (
           <ListItem key={index}>
-            <img src={listMarker} alt="List Marker" />
+            <Image src={listMarker} alt="List Marker" width={100} height={100} />
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
       </List>
     </Card>
-  );
-};
+  )
+}
 
-export default CardWithList;
+export default CardWithList

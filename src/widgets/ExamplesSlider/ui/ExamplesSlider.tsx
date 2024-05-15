@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import colors from '../../../shared/constants/colors';
+import { useState } from 'react'
+import colors from '@/shared/constants/colors'
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-import {
-  TEXT_LIMIT,
-  TITLE_LIMIT,
-  workExamples
-} from '../../../shared/constants/texts/examples.ts';
+import { TEXT_LIMIT, TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
-import { BtnLink } from '../../../shared/components/BtnLink/index.ts';
-import { TWorkExamples } from '../../../shared/constants/texts/types.ts';
+import { BtnLink } from '@/shared/components/BtnLink/index.ts'
+import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 
-import blankImg from '../../../assets/icons/examples/no-image.svg';
+import blankImg from '@/assets/icons/examples/no-image.svg'
 
-import { ChangeFormateDate } from '../../../shared/constants/utils/utils.ts';
+import { ChangeFormateDate } from '@/shared/constants/utils/utils.ts'
 
 import {
   SliderContainer,
@@ -30,27 +26,27 @@ import {
   ExamplesImg,
   IconWrapper,
   ExamplesLink,
-  SecondButtonWrapper
-} from './styled.ts';
-import Modal from '../../../shared/components/Modal/ui/Modal';
+  SecondButtonWrapper,
+} from './styled.ts'
+import Modal from '@/shared/components/Modal/ui/Modal'
 
 const ExamplesSlider: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [modalItem, setModalItem] = useState<TWorkExamples | undefined>();
+  const [currentSlide, setCurrentSlide] = useState<number>(0)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [modalItem, setModalItem] = useState<TWorkExamples | undefined>()
 
   const openModal = (item: TWorkExamples) => {
-    setIsOpen(true);
-    setModalItem(item);
-  };
+    setIsOpen(true)
+    setModalItem(item)
+  }
 
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const handleAfterChange = (slideIndex: number) => {
-    setCurrentSlide(slideIndex);
-  };
+    setCurrentSlide(slideIndex)
+  }
 
   const settings = {
     className: 'reviews-slider',
@@ -68,37 +64,35 @@ const ExamplesSlider: React.FC = () => {
         breakpoint: 1280,
         settings: {
           rows: 1,
-          slidesPerRow: 2
-        }
+          slidesPerRow: 2,
+        },
       },
       {
         breakpoint: 619,
         settings: {
           rows: 1,
-          slidesPerRow: 1
-        }
-      }
+          slidesPerRow: 1,
+        },
+      },
     ],
     customPaging: function (i: number) {
-      let activePage = 0;
+      let activePage = 0
       if (typeof window !== 'undefined' && window.innerWidth >= 1280) {
-        activePage = Math.ceil(currentSlide / 2);
+        activePage = Math.ceil(currentSlide / 2)
       }
-      return <CustomDot $active={i === activePage} />;
-    }
-  };
+      return <CustomDot $active={i === activePage} />
+    },
+  }
 
   function truncate(str: string, maxlength: number) {
     if (str.length > maxlength) {
-      return str.substring(0, maxlength - 3) + '...';
+      return str.substring(0, maxlength - 3) + '...'
     } else {
-      return str;
+      return str
     }
   }
 
-  const newDate = modalItem?.date
-    ? ChangeFormateDate(modalItem.date.toString())
-    : '';
+  const newDate = modalItem?.date ? ChangeFormateDate(modalItem.date.toString()) : ''
 
   return (
     <>
@@ -109,27 +103,22 @@ const ExamplesSlider: React.FC = () => {
             .sort(
               (newDate: TWorkExamples, olderDate: TWorkExamples) =>
                 new Date(olderDate.date as string).getTime() -
-                new Date(newDate.date as string).getTime()
+                new Date(newDate.date as string).getTime(),
             )
             .map((item: TWorkExamples, i) => (
               <CardWrapper key={item.id}>
                 {item.cardImage ? (
                   <ExamplesLink onClick={() => openModal(item)}>
-                    <ExamplesImg
-                      src={item?.cardImage}
-                      alt={item.cardTitle}></ExamplesImg>
+                    {/* <ExamplesImg src={item?.cardImage} alt={item.cardTitle}></ExamplesImg> */}
                   </ExamplesLink>
                 ) : (
-                  <ExamplesImg src={(item.cardImage = blankImg)}></ExamplesImg>
+                  ''
+                  // <ExamplesImg src={(item.cardImage = blankImg)}></ExamplesImg>
                 )}
                 <ExamplesContainer className="slick-slide" key={i}>
-                  <ExamplesTitle>
-                    {truncate(item.cardTitle, TITLE_LIMIT)}
-                  </ExamplesTitle>
+                  <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                  <ExamplesText>
-                    {truncate(item.cardText, TEXT_LIMIT)}
-                  </ExamplesText>
+                  <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText>
 
                   <ButtonWrapper>
                     <BtnLink
@@ -139,7 +128,8 @@ const ExamplesSlider: React.FC = () => {
                       height="44px"
                       color={colors.darkPrimary}
                       size="15px"
-                      onClick={() => openModal(item)}></BtnLink>
+                      onClick={() => openModal(item)}
+                    ></BtnLink>
 
                     <IconWrapper>{newDate}</IconWrapper>
                   </ButtonWrapper>
@@ -158,13 +148,9 @@ const ExamplesSlider: React.FC = () => {
           />
         </SecondButtonWrapper>
       </SliderContainer>
-      {isOpen ? (
-        <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} />
-      ) : (
-        ''
-      )}
+      {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
     </>
-  );
-};
+  )
+}
 
-export default ExamplesSlider;
+export default ExamplesSlider

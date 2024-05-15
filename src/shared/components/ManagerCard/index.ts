@@ -1,3 +1,3 @@
-import ManagerCard from './ui/ManagerCard';
+import ManagerCard from './ui/ManagerCard'
 
-export { ManagerCard };
+export { ManagerCard }

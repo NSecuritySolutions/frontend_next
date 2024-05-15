@@ -1,6 +1,6 @@
-import colors from "../../../shared/constants/colors";
+import colors from '@/shared/constants/colors'
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
@@ -10,7 +10,7 @@ const Section = styled.section`
     align-items: center;
     justify-content: center;
   }
-`;
+`
 
 const SectionWrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const SectionWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
@@ -44,7 +44,9 @@ const SectionTitle = styled.h2`
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
-  font: 700 24px Manrope, sans-serif;
+  font:
+    700 24px Manrope,
+    sans-serif;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -57,7 +59,7 @@ const SectionTitle = styled.h2`
     width: 100%;
     align-self: center;
   }
-`;
+`
 const ColumnWrapper = styled.div`
   margin-top: 30px;
   width: 100%;
@@ -78,7 +80,7 @@ const ColumnWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
-`;
+`
 
 const Column = styled.div`
   display: flex;
@@ -94,7 +96,7 @@ const Column = styled.div`
   @media (max-width: 619px) {
     flex-direction: row;
   }
-`;
+`
 
 const StageWrapper = styled.div`
   display: flex;
@@ -110,7 +112,7 @@ const StageWrapper = styled.div`
   @media (max-width: 619px) {
     flex-direction: column;
   }
-`;
+`
 const StageNumber = styled.div`
   font-family: Manrope, sans-serif;
   justify-content: center;
@@ -128,7 +130,7 @@ const StageNumber = styled.div`
   @media (max-width: 940px) {
     white-space: initial;
   }
-`;
+`
 
 const StageLine = styled.div`
   border-color: rgba(16, 16, 16, 1);
@@ -148,7 +150,7 @@ const StageLine = styled.div`
     height: 50px;
     margin: 0;
   }
-`;
+`
 const TextWrapper = styled.div`
   margin: 0 auto;
   padding: 0;
@@ -161,7 +163,7 @@ const TextWrapper = styled.div`
     font-size: 16px;
     padding: 0 0 0 12px;
   }
-`;
+`
 
 const StageTitle = styled.h4`
   font-family: Manrope, sans-serif;
@@ -173,7 +175,7 @@ const StageTitle = styled.h4`
   @media (max-width: 619px) {
     margin-top: 0;
   }
-`;
+`
 
 const StageParagraph = styled.p`
   font-family: Manrope, sans-serif;
@@ -181,7 +183,7 @@ const StageParagraph = styled.p`
   margin-top: 12px;
   font-size: 16px;
   display: flex;
-`;
+`
 export {
   Section,
   SectionWrapper,
@@ -194,4 +196,4 @@ export {
   TextWrapper,
   StageTitle,
   StageParagraph,
-};
+}

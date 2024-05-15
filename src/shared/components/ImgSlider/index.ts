@@ -1,3 +1,3 @@
-import ImgSlider from './ui/ImgSlider';
+import ImgSlider from './ui/ImgSlider'
 
-export { ImgSlider };
+export { ImgSlider }

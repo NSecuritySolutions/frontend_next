@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from 'react'
 
 import {
   ContentWrapper,
@@ -13,12 +13,13 @@ import {
   AchievementsText,
   Banner,
   CardWrapper,
-} from "./styled";
+} from './styled'
 
-import bannerImg from "src/assets/images/banner/png/banner-image.png";
-import { cardInfoWithLogoData } from "../../../shared/constants/texts/card-with-logo-text";
-import { BtnLink } from "../../../shared/components/BtnLink";
-import colors from "../../../shared/constants/colors";
+import bannerImg from '@/assets/images/banner/png/banner-image.png'
+import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-text'
+import { BtnLink } from '@/shared/components/BtnLink'
+import colors from '@/shared/constants/colors'
+import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
 
 const Info: FC = () => {
   return (
@@ -26,12 +27,12 @@ const Info: FC = () => {
       <SectionWrapper>
         <ContentWrapper>
           <Title>
-            Установка систем безопасности в Новосибирске и Новосибирской области
-            для дома и Вашего бизнеса
+            Установка систем безопасности в Новосибирске и Новосибирской области для дома и Вашего
+            бизнеса
           </Title>
           <Text>
-            Наша компания предоставляет специалистов высокой квалификации,
-            которые быстро и качественно установят все необходимое оборудование.{" "}
+            Наша компания предоставляет специалистов высокой квалификации, которые быстро и
+            качественно установят все необходимое оборудование.{' '}
           </Text>
           <InfoBtnWrapper>
             <BtnLink
@@ -55,20 +56,21 @@ const Info: FC = () => {
             </HistoryItem>
           </HistoryWrapper>
         </ContentWrapper>
-        {/* <Banner $imgUrl={bannerImg} alt="Баннер" /> */}
+        <Banner $imgUrl={bannerImg} alt="Баннер" />
       </SectionWrapper>
       <CardWrapper>
-        {/* {cardInfoWithLogoData.map((cardData) => (
+        {cardInfoWithLogoData.map((cardData) => (
           <CardInfoWithIcon
+            key={cardData.id}
             title={cardData.title}
             logo={cardData.logo}
             backgroundColor={cardData.backgroundColor}
             text={cardData.text}
           />
-        ))} */}
+        ))}
       </CardWrapper>
     </Section>
-  );
-};
+  )
+}
 
-export default Info;
+export default Info

@@ -1,3 +1,3 @@
-import AdvantagesBlock from "./ui/AdvantagesBlock";
+import AdvantagesBlock from './ui/AdvantagesBlock'
 
-export { AdvantagesBlock };
+export { AdvantagesBlock }

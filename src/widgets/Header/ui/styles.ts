@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import colors from "../../../shared/constants/colors";
-import Link from "next/link";
+import styled from 'styled-components'
+import colors from '@/shared/constants/colors'
+import Link from 'next/link'
 
 const TheHeader = styled.header`
   // Приклеивает меню к верхнему краю страницы
@@ -12,7 +12,7 @@ const TheHeader = styled.header`
   background-color: ${colors.backgroundBase2};
   color: ${colors.darkPrimary};
   z-index: 5;
-`;
+`
 
 const HeaderWrapper = styled.div`
   max-width: 1180px;
@@ -34,19 +34,19 @@ const HeaderWrapper = styled.div`
     padding-left: 20px;
     padding-right: 20px;
   }
-`;
+`
 
 const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 8px;
-`;
+`
 const HeaderTopItem = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-`;
+`
 
 const HeaderText = styled.p`
   font-size: 15px;
@@ -56,7 +56,7 @@ const HeaderText = styled.p`
   @media (max-width: 940px) {
     display: none;
   }
-`;
+`
 
 const HeaderTel = styled.p`
   font-size: 18px;
@@ -71,7 +71,7 @@ const HeaderTel = styled.p`
   @media (max-width: 940px) {
     display: none;
   }
-`;
+`
 
 const HeaderBtnWrapper = styled.div`
   width: 198px;
@@ -85,14 +85,14 @@ const HeaderBtnWrapper = styled.div`
   @media (max-width: 620px) {
     display: none;
   }
-`;
+`
 
 const HeaderBurgerMenuWrapper = styled.div`
   display: none;
   @media (max-width: 940px) {
     display: block;
   }
-`;
+`
 
 const HeaderNav = styled.div`
   align-self: flex-end;
@@ -106,13 +106,13 @@ const HeaderNav = styled.div`
   @media (max-width: 940px) {
     display: none;
   }
-`;
+`
 
 const HeaderList = styled.ul`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`;
+`
 
 const HeaderNavItem = styled.li`
   font-size: 17px;
@@ -124,7 +124,7 @@ const HeaderNavItem = styled.li`
     font-weight: 700;
     flex-grow: 1;
   }
-`;
+`
 
 const HeaderNavLink = styled(Link)`
   padding-bottom: 6px;
@@ -140,7 +140,7 @@ const HeaderNavLink = styled(Link)`
     border-bottom: 1px solid ${colors.darkPrimary};
     cursor: default;
   }
-`;
+`
 
 export {
   TheHeader,
@@ -155,4 +155,4 @@ export {
   HeaderTel,
   HeaderBtnWrapper,
   HeaderBurgerMenuWrapper,
-};
+}
