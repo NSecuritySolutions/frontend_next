@@ -11,7 +11,7 @@ export type TTeamContacts = {
   name: string;
   position: string;
   tel: string;
-  image: StaticImageData;
+  image: string | StaticImageData;
 };
 
 export type TError505 = {
@@ -89,7 +89,7 @@ export type TProjectReviews = {
   name: string;
   product: string;
   review: string;
-  img: StaticImageData;
+  img: string | StaticImageData;
   link?: string | undefined;
 };
 

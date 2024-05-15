@@ -81,10 +81,9 @@ const ExamplesSlider: React.FC = () => {
     ],
     customPaging: function (i: number) {
       let activePage = 0;
-      if (window.innerWidth >= 1280) {
+      if (typeof window !== 'undefined' && window.innerWidth >= 1280) {
         activePage = Math.ceil(currentSlide / 2);
       }
-
       return <CustomDot $active={i === activePage} />;
     }
   };

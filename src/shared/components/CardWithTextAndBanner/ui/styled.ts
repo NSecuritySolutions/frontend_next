@@ -1,10 +1,10 @@
-import colors from "../../../../shared/constants/colors";
+import colors from '../../../../shared/constants/colors';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Card = styled.div<{ $backgroundColor: string }>`
   margin-top: 15px;
-  background-color: ${(props) =>
+  background-color: ${props =>
     props.$backgroundColor || colors.backgroundBase3};
   border-radius: 20px;
   padding-left: 40px;
@@ -48,9 +48,7 @@ const TextContainer = styled.ul`
   justify-self: flex-start;
   height: 145px;
   min-width: 540px;
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font: 400 16px Manrope, sans-serif;
   list-style: none;
 `;
 const CardText = styled.li`
@@ -72,5 +70,5 @@ export {
   CardImg,
   ImgWrapper,
   TextWrapper,
-  TextContainer,
+  TextContainer
 };

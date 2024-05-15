@@ -68,12 +68,14 @@ const ReviewsSlider = () => {
     ],
     customPaging: function (i: number) {
       let activePage = 0;
-      if (window.innerWidth >= 1300) {
-        activePage = Math.ceil(currentSlide / 3);
-      } else if (window.innerWidth >= 619) {
-        activePage = Math.ceil(currentSlide / 2);
-      } else {
-        activePage = currentSlide;
+      if (typeof window !== 'undefined') {
+        if (window.innerWidth >= 1300) {
+          activePage = Math.ceil(currentSlide / 3);
+        } else if (window.innerWidth >= 619) {
+          activePage = Math.ceil(currentSlide / 2);
+        } else {
+          activePage = currentSlide;
+        }
       }
       return <CustomDot $active={i === activePage} />;
     }
