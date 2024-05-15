@@ -1,3 +1,4 @@
+'use client'
 import { FC } from 'react'
 import {
   TheHeader,
@@ -15,8 +16,8 @@ import {
 } from './styles'
 import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
-import { Logo } from '@/shared/components/Logo'
-import ProjectLogo from '@/assets/icons/logo.svg'
+// import { Logo } from '@/shared/components/Logo'
+// import ProjectLogo from '@/assets/icons/logo.svg'
 
 type THeaderProps = {
   navLinks: { label: string; to: string }[]

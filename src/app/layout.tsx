@@ -3,6 +3,10 @@ import { Manrope } from 'next/font/google'
 import './globals.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { Header } from '@/widgets/Header'
+import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
+import { Footer } from '@/widgets/Footer'
+import StyledComponentsRegistry from '../lib/registry'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -21,7 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={manrope.className}>{children}</body>
+      <body className={manrope.className}>
+        <StyledComponentsRegistry>
+          <Header navLinks={headerNavLinks} />
+          {children}
+          <Footer />
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
