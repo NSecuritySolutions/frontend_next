@@ -46,6 +46,5 @@ const ReviewsBlock = () => {
     </Section>
   )
 }
-console.log('dd')
 
 export default ReviewsBlock
