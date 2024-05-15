@@ -1,10 +1,7 @@
 'use client'
-
-import React, { useEffect, useState } from 'react'
-
+import styles from './page.module.css'
+import { Header } from '@/widgets/Header'
 import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
-import Loader from '@/shared/components/Loader/Loader'
-
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
@@ -31,25 +28,19 @@ export default function Home() {
   }, [])
   return (
     <main className={styles.main}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <Header navLinks={headerNavLinks} />
-          <Info />
-          <OurServices />
-          <ReadySolutionSection />
-          <AdvantagesBlock />
-          <ProjectStage />
-          <OurTeam />
-          <Questions />
-          <ReviewsBlock />
-          <ExamplesSlider />
-          <OurClients />
-          <ContactForm />
-          <Footer />
-        </>
-      )}
+      <Header navLinks={headerNavLinks} />
+      <Info />
+      <OurServices />
+      <ReadySolutionSection />
+      <AdvantagesBlock />
+      <ProjectStage />
+      <OurTeam />
+      <Questions />
+      <ReviewsBlock />
+      <ExamplesSlider />
+      <OurClients />
+      <ContactForm />
+      <Footer />
     </main>
   )
 }

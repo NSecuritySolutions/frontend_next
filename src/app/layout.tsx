@@ -2,9 +2,14 @@ import type { Metadata } from 'next'
 
 import { Manrope } from 'next/font/google'
 
+import './globals.css'
+import styles from './page.module.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import './globals.css'
+import StyledComponentsRegistry from './styling/registry'
+import { Footer } from '../widgets/Footer'
+import { Header } from '../widgets/Header'
+import { headerNavLinks } from '../shared/constants/texts/header-nav-items'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -53,7 +58,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={manrope.className}>{children}</body>
+      <body className={manrope.className}>
+        <StyledComponentsRegistry>
+          <Header navLinks={headerNavLinks} />
+          <main className={styles.main} id="content">
+            {children}
+          </main>
+          <Footer />
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
