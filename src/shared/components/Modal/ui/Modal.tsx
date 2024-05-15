@@ -1,6 +1,8 @@
+import Image from 'next/image'
+
 import { MouseEvent, useEffect } from 'react'
 
-import { ImgSlider } from '../../ImgSlider'
+import ImgSlider from '../../ImgSlider/ui/ImgSlider'
 
 import closeBtn from '@/assets/icons/+.svg'
 
@@ -63,7 +65,9 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
   return (
     <ModalContainer key={modalItem?.id} onClick={handleBackdrop}>
       <ModalContent>
-        <CloseButton onClick={closeModal} />
+        <CloseButton onClick={closeModal}>
+          <Image src={closeBtn} alt={'Кнопка закрытия модального окна'}></Image>
+        </CloseButton>
         <ContentWrapper>
           <TitleWrapper>
             <Title>{modalItem?.title}</Title>

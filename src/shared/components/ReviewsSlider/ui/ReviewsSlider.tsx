@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import Image from 'next/image'
 
@@ -92,9 +93,8 @@ const ReviewsSlider = () => {
           <ReviewsContainer className="slick-slide" key={i}>
             <TitleWrapper>
               <div style={{ width: '40px', height: '40px' }}>
-                {/* <Image src={item.img} alt={item.name} fill /> */}
+                <Image src={item.img} alt={item.name} width={40} height={40} />
               </div>
-              {/* <UserIcon src={item.img}></UserIcon> */}
               <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
             </TitleWrapper>
             <ReviewsParagraph>{truncate(item.product, TITLE_LIMIT)}</ReviewsParagraph>

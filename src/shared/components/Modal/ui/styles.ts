@@ -143,7 +143,7 @@ const TextParagraph = styled.p`
   margin-bottom: 80px;
 `
 const CloseButton = styled.button`
-  background-image: ${`url("${closeBtn}")`};
+  background-color: #fff;
   object-fit: contain;
   border: none;
   position: sticky;

@@ -1,10 +1,5 @@
 import { TWorkExamples } from './types'
 
-import cameraIcon from '@/assets/icons/examples/ic-camera.svg'
-import alarmIcon from '@/assets/icons/examples/ic-alarm.svg'
-import remoteIcon from '@/assets/icons/examples/ic-remote.svg'
-import fingerPrintIcon from '@/assets/icons/examples/ic-fingerprint.svg'
-
 import noImCard from '@/assets/icons/examples/no-image.svg'
 
 import firstWorksImg from '@/assets/images/works/works-image-1.webp'
@@ -27,18 +22,8 @@ export const workExamples: TWorkExamples[] = [
     cardText:
       'Преимущества и возможности системы видеонаблюдения на примере складов в Новосибирске.',
     cardLink: '/',
-    cardImage: firstWorksImg,
-    cardIcons: [
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
+    cardImage: fifthWorksImg,
 
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
@@ -58,29 +43,11 @@ export const workExamples: TWorkExamples[] = [
   {
     id: 2,
     date: '2023-10-11',
-    cardImage: thirdWorksImg,
+    cardImage: sixthWorksImg,
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
     cardLink: '/',
-    cardIcons: [
-      {
-        link: fingerPrintIcon,
-        alt: 'СКУД',
-      },
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
 
-      {
-        link: remoteIcon,
-        alt: 'Домофония',
-      },
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
@@ -104,26 +71,8 @@ export const workExamples: TWorkExamples[] = [
     cardTitle: 'Обеспечьте безопасность вашей дачи',
     cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
     cardLink: '/',
-    cardImage: secondWorksImg,
-    cardIcons: [
-      {
-        link: fingerPrintIcon,
-        alt: 'СКУД',
-      },
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
+    cardImage: seventhWorksImg,
 
-      {
-        link: remoteIcon,
-        alt: 'Домофония',
-      },
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
@@ -146,21 +95,8 @@ export const workExamples: TWorkExamples[] = [
     cardTitle: 'Заголовок',
     cardText: 'Небольшой текст.',
     cardLink: '/',
-    cardImage: thirdWorksImg,
-    cardIcons: [
-      {
-        link: fingerPrintIcon,
-        alt: 'СКУД',
-      },
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
+    cardImage: eighthWorksImg,
+
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },

@@ -130,12 +130,11 @@ const ExamplesContainer = styled.article`
 const ExamplesLink = styled.a`
   text-decoration: none;
 `
-const ExamplesImg = styled.img`
+const ExamplesImg = styled.div`
   border-radius: 12px;
   background-color: #fff;
   max-width: 200px;
   min-height: 200px;
-  object-fit: cover;
 
   @media (max-width: 1280px) {
     min-width: 390px;

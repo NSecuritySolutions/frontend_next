@@ -1,4 +1,7 @@
 import { useState } from 'react'
+
+import Image from 'next/image'
+
 import colors from '@/shared/constants/colors'
 
 import Slider from 'react-slick'
@@ -109,11 +112,25 @@ const ExamplesSlider: React.FC = () => {
               <CardWrapper key={item.id}>
                 {item.cardImage ? (
                   <ExamplesLink onClick={() => openModal(item)}>
-                    {/* <ExamplesImg src={item?.cardImage} alt={item.cardTitle}></ExamplesImg> */}
+                    <ExamplesImg>
+                      <Image
+                        src={item?.cardImage}
+                        alt={item.cardTitle}
+                        width={200}
+                        height={200}
+                        style={{ objectFit: 'cover', borderRadius: '12px' }}
+                      />
+                    </ExamplesImg>
                   </ExamplesLink>
                 ) : (
-                  ''
-                  // <ExamplesImg src={(item.cardImage = blankImg)}></ExamplesImg>
+                  <ExamplesImg>
+                    <Image
+                      src={(item.cardImage = blankImg)}
+                      width={200}
+                      height={200}
+                      alt={'Пустая картинка'}
+                    ></Image>
+                  </ExamplesImg>
                 )}
                 <ExamplesContainer className="slick-slide" key={i}>
                   <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>

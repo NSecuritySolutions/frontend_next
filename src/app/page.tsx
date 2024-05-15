@@ -1,7 +1,10 @@
 'use client'
-import styles from './page.module.css'
-import { Header } from '@/widgets/Header'
+
+import React, { useEffect, useState } from 'react'
+
 import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
+import Loader from '@/shared/components/Loader/Loader'
+
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
@@ -14,23 +17,39 @@ import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { ContactForm } from '@/widgets/ContactForm'
 import { Footer } from '@/widgets/Footer'
+import { Header } from '@/widgets/Header'
+
+import styles from './page.module.css'
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+  }, [])
   return (
     <main className={styles.main}>
-      <Header navLinks={headerNavLinks} />
-      <Info />
-      <OurServices />
-      <ReadySolutionSection />
-      <AdvantagesBlock />
-      <ProjectStage />
-      <OurTeam />
-      <Questions />
-      <ReviewsBlock />
-      <ExamplesSlider />
-      <OurClients />
-      <ContactForm />
-      <Footer />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Header navLinks={headerNavLinks} />
+          <Info />
+          <OurServices />
+          <ReadySolutionSection />
+          <AdvantagesBlock />
+          <ProjectStage />
+          <OurTeam />
+          <Questions />
+          <ReviewsBlock />
+          <ExamplesSlider />
+          <OurClients />
+          <ContactForm />
+          <Footer />
+        </>
+      )}
     </main>
   )
 }
