@@ -5,7 +5,9 @@ import colors from '@/shared/constants/colors/index.ts'
 
 import { LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import calculatorStore from '../store'
+import { observer } from 'mobx-react-lite'
 
 const camera = '/icons/calculator/camera-white.svg'
 const innerCamera = '/icons/calculator/inner-camera.svg'
@@ -51,7 +53,7 @@ const cameraOptions = [
   {
     title: 'Длина кабеля, м',
     tooltip: 'Прикинуться змеей и посчитать расстояние',
-    type: 'input',
+    type: 'number',
   },
 ]
 
@@ -64,12 +66,12 @@ const scud = [
   {
     title: 'Кол-во считывателей, шт.',
     tooltip: 'Что-то из прикладной математики похоже',
-    type: 'input',
+    type: 'number',
   },
   {
     title: 'Длин кабеля, м',
     tooltip: 'Прикинуться змеей и посчитать расстояние',
-    type: 'input',
+    type: 'number',
   },
 ]
 
@@ -81,17 +83,20 @@ const scaner = [
   },
 ]
 
-const Calculator: React.FC = () => {
+const Calculator: React.FC = observer(() => {
   const [height, setHeight] = useState(0)
   const section = useRef<HTMLDivElement | null>(null)
 
+  console.log(calculatorStore.data)
+
+  useEffect(() => {
+    calculatorStore.fetchData()
+  }, [])
+
   const handleAmountChange = (condition: boolean) => {
     const currentHeight = section.current!.clientHeight
-    console.log(currentHeight)
-    console.log(condition)
     if (condition) {
       setTimeout(() => {
-        console.log(section.current!.clientHeight)
         if (section.current!.clientHeight < currentHeight + 80) {
           setHeight(1000)
         } else {
@@ -102,6 +107,20 @@ const Calculator: React.FC = () => {
     setTimeout(() => {
       setHeight(section.current!.clientHeight + 195)
     }, 1000)
+  }
+
+  const calculateResult = () => {
+    let result = 0
+    calculatorStore.variables.forEach((value, key) => {
+      if (typeof value === 'number') {
+        result += value
+      }
+    })
+    return result
+  }
+
+  if (calculatorStore.isLoading) {
+    return <div></div>
   }
 
   return (
@@ -118,30 +137,15 @@ const Calculator: React.FC = () => {
             }}
           >
             <LayoutGroup>
-              <CalculatorCard
-                title="Наружные камеры"
-                img={camera}
-                handleAmountChange={handleAmountChange}
-                options={cameraOptions}
-              />
-              <CalculatorCard
-                title="Внутренние камеры"
-                img={innerCamera}
-                handleAmountChange={handleAmountChange}
-                options={cameraOptions}
-              />
-              <CalculatorCard
-                title="СКУД"
-                img={remoteIcon}
-                handleAmountChange={handleAmountChange}
-                options={scud}
-              />
-              <CalculatorCard
-                title="Биометрические сканеры"
-                img={bio}
-                handleAmountChange={handleAmountChange}
-                options={scaner}
-              />
+              {calculatorStore.data.map((block) => (
+                <CalculatorCard
+                  key={block.id}
+                  title={block.title}
+                  img={camera}
+                  handleAmountChange={handleAmountChange}
+                  options={block.options}
+                />
+              ))}
             </LayoutGroup>
           </div>
           <ImageButton>
@@ -158,10 +162,13 @@ const Calculator: React.FC = () => {
               Сбросить настройки
             </Typography>
           </ImageButton>
+          <Typography size={16} width="fit-content">
+            {calculatorStore.formula}
+          </Typography>
         </LayoutGroup>
       </div>
     </Section>
   )
-}
+})
 
 export default Calculator
