@@ -9,5 +9,4 @@ export const error505: TError505 = {
   errorMessage: 'Ошибка сервера',
   errorText: 'Что-то пошло не так. Lorem ipsum dolor sit amet consectetur adipisicing elit. ',
   errorImg: error505Img,
-  warningImg: warning505Img,
 }
