@@ -1,5 +1,5 @@
 import Image from 'next/image'
-
+import { useRouter } from 'next/navigation'
 import { MouseEvent, useEffect } from 'react'
 
 import ImgSlider from '../../ImgSlider/ui/ImgSlider'
@@ -27,12 +27,40 @@ import {
   TextWrapper,
 } from './styles.ts'
 
+const containerVariants = {
+  initial: {
+    y: '-100vh',
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: 'easeOut',
+      type: 'spring',
+      damping: 25,
+    },
+  },
+  exit: {
+    y: '100vh',
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: 'easeIn',
+    },
+  },
+}
+
 const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
+  const router = useRouter()
+
   const createMarkup = (text: string) => ({ __html: text })
 
   const handleBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       closeModal()
+      router.push('/#examples')
     }
   }
 
@@ -42,17 +70,21 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
         closeModal()
       }
     }
+    const modal = document.getElementById('modal')
 
     document.addEventListener('keydown', handleKeyDown)
+
+    modal?.classList.add('modal-open2')
 
     document.body.classList.add('modal-open')
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
 
+      modal?.classList.remove('modal-open2')
       document.body.classList.remove('modal-open')
     }
-  }, [closeModal])
+  }, [closeModal, router])
 
   if (!isOpen) return null
 
@@ -63,7 +95,15 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
   const newDate = modalItem?.date ? ChangeFormateDate(modalItem.date.toString()) : ''
 
   return (
-    <ModalContainer key={modalItem?.id} onClick={handleBackdrop}>
+    <ModalContainer
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      key={modalItem?.id}
+      onClick={handleBackdrop}
+      id="modal"
+    >
       <ModalContent>
         <CloseButton onClick={closeModal}>
           <Image src={closeBtn} alt={'Кнопка закрытия модального окна'}></Image>

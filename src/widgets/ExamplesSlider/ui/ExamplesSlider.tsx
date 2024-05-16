@@ -1,4 +1,7 @@
+'use client'
+
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
 
@@ -10,7 +13,6 @@ import 'slick-carousel/slick/slick-theme.css'
 
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
-import Loader from '@/shared/components/Loader/Loader'
 
 import blankImg from '@/assets/icons/examples/no-image.svg'
 
@@ -39,6 +41,8 @@ const ExamplesSlider: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [modalItem, setModalItem] = useState<TWorkExamples | undefined>()
 
+  const router = useRouter()
+
   const openModal = (item: TWorkExamples) => {
     setIsOpen(true)
     setModalItem(item)
@@ -46,6 +50,7 @@ const ExamplesSlider: React.FC = () => {
 
   const closeModal = () => {
     setIsOpen(false)
+    router.push('/#examples')
   }
 
   const handleAfterChange = (slideIndex: number) => {
@@ -100,7 +105,7 @@ const ExamplesSlider: React.FC = () => {
 
   return (
     <>
-      <SliderContainer className="slider-container">
+      <SliderContainer className="slider-container" id="examples">
         <ColumnTitle>Примеры наших работ</ColumnTitle>
         <Slider {...settings} afterChange={handleAfterChange}>
           {workExamples

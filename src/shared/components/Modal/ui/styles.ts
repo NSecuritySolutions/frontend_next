@@ -1,10 +1,10 @@
 import colors from '@/shared/constants/colors'
-
+import { motion } from 'framer-motion'
 import closeBtn from '@/assets/icons/+.svg'
 
 import styled from 'styled-components'
 
-const ModalContainer = styled.div`
+const ModalContainer = styled(motion.div)`
   position: fixed;
   top: 107px;
   left: 0;

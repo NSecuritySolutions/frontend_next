@@ -11,14 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: 'https://opticontrol.ru/security',
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: 'https://opticontrol.ru/video-surveillance',
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.5,
+      priority: 0.8,
     },
     {
       url: 'https://opticontrol.ru/examples',

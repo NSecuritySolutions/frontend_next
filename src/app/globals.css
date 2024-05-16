@@ -71,6 +71,10 @@ body.modal-open {
   animation-duration: 4s;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 @keyframes l24 {
   100% {
     transform: rotate(1turn);
