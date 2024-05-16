@@ -1,5 +1,6 @@
 import colors from '@/shared/constants/colors'
 import { motion } from 'framer-motion'
+
 import closeBtn from '@/assets/icons/+.svg'
 
 import styled from 'styled-components'

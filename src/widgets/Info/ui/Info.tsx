@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import Image from 'next/image'
 
 import {
   ContentWrapper,
@@ -16,10 +17,12 @@ import {
 } from './styled'
 
 import bannerImg from '@/assets/images/banner/png/banner-image.png'
+
 import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-text'
 import { BtnLink } from '@/shared/components/BtnLink'
-import colors from '@/shared/constants/colors'
 import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
+
+import colors from '@/shared/constants/colors'
 
 const Info: FC = () => {
   return (
@@ -40,7 +43,7 @@ const Info: FC = () => {
               text="Подробнее"
               width="100%"
               height="100%"
-              link="#"
+              link="#contact-form"
               color={colors.darkPrimary}
               size="15px"
             />
@@ -56,7 +59,9 @@ const Info: FC = () => {
             </HistoryItem>
           </HistoryWrapper>
         </ContentWrapper>
-        <Banner $imgUrl={bannerImg} alt="Баннер" />
+        <Banner $imgUrl={bannerImg}>
+          <Image src={bannerImg} alt="Баннер" width={702} height={368} />
+        </Banner>
       </SectionWrapper>
       <CardWrapper>
         {cardInfoWithLogoData.map((cardData) => (

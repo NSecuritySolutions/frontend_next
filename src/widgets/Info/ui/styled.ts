@@ -4,7 +4,7 @@ import { StaticImageData } from 'next/image'
 import styled from 'styled-components'
 
 const Section = styled.section`
-  margin: 0 auto;
+  margin: 120px auto 0;
   background-color: ${colors.backgroundBase2};
   padding-bottom: 40px;
 
@@ -137,13 +137,13 @@ const AchievementsText = styled.span`
 `
 
 const Banner = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
-  width: 545px;
-  height: 380px;
+  width: 702px;
+  height: 368px;
   background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
   background-size: cover;
   position: absolute;
-  bottom: 0;
-  right: 100px;
+  bottom: 0px;
+  right: 0px;
 
   @media (max-width: 1300px) {
     width: 405px;

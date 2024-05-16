@@ -29,7 +29,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className={styles.main}>
+    <>
       {isLoading ? (
         <Loader />
       ) : (
@@ -48,6 +48,6 @@ export default function Home() {
           <ContactForm />
         </>
       )}
-    </main>
+    </>
   )
 }

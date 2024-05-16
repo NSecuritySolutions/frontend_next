@@ -9,6 +9,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -69,10 +70,6 @@ body.modal-open {
 }
 .loader:after {
   animation-duration: 4s;
-}
-
-* {
-  scroll-behavior: smooth;
 }
 
 @keyframes l24 {

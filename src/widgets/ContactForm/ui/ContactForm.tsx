@@ -82,7 +82,7 @@ const ContactForm = () => {
 
   return (
     <>
-      <Section>
+      <Section id="contact-form">
         <SectionWrapper>
           <ColumnWrapper>
             <InfoColumn>

@@ -8,6 +8,8 @@ import closeBtn from '@/assets/icons/+.svg'
 
 import TModalProps from './type.ts'
 
+import containerVariants from './animation'
+
 import {
   ModalContainer,
   ModalContent,
@@ -26,31 +28,6 @@ import {
   TextParagraph,
   TextWrapper,
 } from './styles.ts'
-
-const containerVariants = {
-  initial: {
-    y: '-100vh',
-    opacity: 0,
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      ease: 'easeOut',
-      type: 'spring',
-      damping: 25,
-    },
-  },
-  exit: {
-    y: '100vh',
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-      ease: 'easeIn',
-    },
-  },
-}
 
 const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
   const router = useRouter()
