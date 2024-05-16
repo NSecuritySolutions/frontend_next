@@ -12,7 +12,7 @@ const Section = styled.section`
 
 const ColumnConatiner = styled.div`
   position: relative;
-  margin: 40px auto;
+  margin: 140px auto 40px;
   border-radius: 20px;
   width: 1180px;
   height: 565px;

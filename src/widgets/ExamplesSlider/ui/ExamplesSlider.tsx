@@ -33,6 +33,8 @@ import {
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
+  InfoIcon,
+  InfoIconWrapper,
 } from './styled.ts'
 import Modal from '@/shared/components/Modal/ui/Modal'
 
@@ -101,7 +103,15 @@ const ExamplesSlider: React.FC = () => {
     }
   }
 
-  const newDate = modalItem?.date ? ChangeFormateDate(modalItem.date.toString()) : ''
+  const newDateFormat = (data: string | undefined) => {
+    if (data === undefined) {
+      return '--'
+    }
+
+    const newDate: string = ChangeFormateDate(data).toString()
+
+    return newDate
+  }
 
   return (
     <>
@@ -143,6 +153,12 @@ const ExamplesSlider: React.FC = () => {
 
                   <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText>
 
+                  <InfoIconWrapper>
+                    {item.quantities.map((item, i) => (
+                      <InfoIcon key={i}>{item.number}</InfoIcon>
+                    ))}
+                  </InfoIconWrapper>
+
                   <ButtonWrapper>
                     <BtnLink
                       btnType="transparent"
@@ -154,7 +170,7 @@ const ExamplesSlider: React.FC = () => {
                       onClick={() => openModal(item)}
                     ></BtnLink>
 
-                    <IconWrapper>{newDate}</IconWrapper>
+                    <IconWrapper>{newDateFormat(item.date?.toString())}</IconWrapper>
                   </ButtonWrapper>
                 </ExamplesContainer>
               </CardWrapper>

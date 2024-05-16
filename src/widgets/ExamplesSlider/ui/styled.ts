@@ -219,6 +219,9 @@ const IconWrapper = styled.div`
   display: flex !important;
   flex-direction: row;
   column-gap: 12px !important;
+  font-weight: 400;
+  font-size: 16px;
+  color: #101010;
 
   @media (max-width: 916px) {
     flex-direction: row;
@@ -232,7 +235,34 @@ const ExamplesIcons = styled.div`
   display: flex !important;
   flex-direction: row;
 `
+const InfoIconWrapper = styled.div`
+  width: 100%;
+  display: flex !important;
+  flex-direction: row;
+  font-weight: 800;
+  font-size: 15px;
+  color: #101010;
+  line-height: 133%;
+  gap: 12px !important;
+  justify-content: flex-start;
+  align-content: center;
 
+  @media (max-width: 916px) {
+    display: flex !important;
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+`
+const InfoIcon = styled.div`
+  border-radius: 8px;
+  padding: 8px 12px;
+  height: 36px;
+  background-color: #e1e7f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 export {
   ExamplesContainer,
   CardWrapper,
@@ -248,4 +278,6 @@ export {
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
+  InfoIcon,
+  InfoIconWrapper,
 }
