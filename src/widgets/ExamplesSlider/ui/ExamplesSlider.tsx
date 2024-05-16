@@ -8,14 +8,15 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-import { TEXT_LIMIT, TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
-
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
+import Loader from '@/shared/components/Loader/Loader'
 
 import blankImg from '@/assets/icons/examples/no-image.svg'
 
 import { ChangeFormateDate } from '@/shared/constants/utils/utils.ts'
+
+import { TEXT_LIMIT, TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
 import {
   SliderContainer,

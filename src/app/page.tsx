@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-
 import Loader from '@/shared/components/Loader/Loader'
 
 import styles from './page.module.css'
