@@ -1,7 +1,7 @@
-import mobileIcon from '@/assets/icons/cardInfo/phone.svg'
-import shareIcon from '@/assets/icons/cardInfo/device.svg'
-import cloudIcon from '@/assets/icons/cardInfo/filter.svg'
-import desktopIcon from '@/assets/icons/cardInfo/desktop.svg'
+import mobileIcon from '@/assets/icons/cardwithlogo/phone.svg'
+import shareIcon from '@/assets/icons/cardwithlogo/Ic_workspace_premium.svg'
+import cloudIcon from '@/assets/icons/cardwithlogo/Ic_acute.svg'
+import desktopIcon from '@/assets/icons/cardwithlogo/Ic_id_card.svg'
 
 import colors from '@/shared/constants/colors'
 
@@ -11,27 +11,27 @@ export const cardInfoWithLogoData = [
     title: 'Онлайн- управление',
     logo: mobileIcon,
     backgroundColor: `${colors.backgroundBase4}`,
-    text: 'Подключение к настройкам из любого места, где есть интернет',
+    text: 'Удаленный контроль объекта из любой точки мира, где есть интернет',
   },
   {
     id: 2,
-    title: 'Простое масштабирование',
+    title: 'Гарантия качества',
     logo: shareIcon,
     backgroundColor: `${colors.backgroundCardYe}`,
-    text: 'Подключение неограниченного количества камер',
+    text: 'Расширенная гарантия на монтажные работы и оборудование до 5 лет',
   },
   {
     id: 3,
-    title: 'Архив записей',
+    title: 'Оперативный монтаж',
     logo: cloudIcon,
     backgroundColor: `${colors.backgroundCardGr}`,
-    text: 'Просмотр записей в мобильном приложении или браузере',
+    text: 'Выезд на замеры для проведения монтажа в течение 24 часов',
   },
   {
     id: 4,
-    title: 'Публичные трансляции',
+    title: 'Лицензия МЧС',
     logo: desktopIcon,
     backgroundColor: `${colors.backgroundBase3}`,
-    text: 'Трансляция видео с камер на сайте вашей компании',
+    text: 'Бессрочная лицензия МЧС на все виды работ',
   },
 ]
