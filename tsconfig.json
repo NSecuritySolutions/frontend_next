@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "images.d.ts",
-    "src/app/loading.js"
+    "src/app/loading.tsx"
   ],
   "exclude": ["node_modules"]
 }
