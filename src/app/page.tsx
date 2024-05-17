@@ -15,9 +15,9 @@ import { Questions } from '@/widgets/Questions'
 import { ReviewsBlock } from '@/widgets/ReviewsBlock'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
-import { ContactForm } from '@/widgets/ContactForm'
 
 import { Calculator } from '@/widgets/Calculator'
+import { ContactForm } from '../widgets/ContactForm'
 
 export default function Home() {
   //@TODO : если вдруг понадобится в последствии
