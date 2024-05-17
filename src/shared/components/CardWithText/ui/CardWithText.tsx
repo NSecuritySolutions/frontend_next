@@ -37,7 +37,7 @@ const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
         size="15px"
       ></BtnLink>
       <CardImg>
-        <Image src={img} alt={title} fill />
+        <Image src={img} alt={title} width={300} height={169} />
       </CardImg>
     </Card>
   )
