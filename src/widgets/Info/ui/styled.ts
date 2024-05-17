@@ -136,10 +136,9 @@ const AchievementsText = styled.span`
   line-height: 136%;
 `
 
-const Banner = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
+const BannerWrapper = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
   width: 702px;
   height: 368px;
-  background: ${(props) => `url(${props.$imgUrl}) no-repeat center`};
   background-size: cover;
   position: absolute;
   bottom: 0px;
@@ -185,6 +184,6 @@ export {
   HistoryItem,
   YearsText,
   AchievementsText,
-  Banner,
+  BannerWrapper,
   CardWrapper,
 }

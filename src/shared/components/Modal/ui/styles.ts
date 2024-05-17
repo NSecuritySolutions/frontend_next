@@ -99,7 +99,7 @@ const Date = styled.div`
 
   // line-height: 20px;
   line-height: 1.33333;
-  color: #101010;
+  color: ${colors.darkPrimary};
   opacity: 0.5;
 `
 const Quantity = styled.div`
@@ -144,7 +144,7 @@ const TextParagraph = styled.p`
   margin-bottom: 80px;
 `
 const CloseButton = styled.button`
-  background-color: #fff;
+  background-color: ${colors.backgroundPrimary};
   object-fit: contain;
   border: none;
   position: sticky;

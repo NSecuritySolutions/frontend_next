@@ -3,10 +3,7 @@ import colors from '@/shared/constants/colors'
 import Link from 'next/link'
 
 const TheHeader = styled.header`
-  // Приклеивает меню к верхнему краю страницы
-  position: sticky;
   position: fixed;
-
   top: 0;
   right: 0;
   width: 100%;

@@ -166,7 +166,7 @@ const FormParagraph = styled.p`
 
 const Input = styled.input`
   color: ${colors.darkPrimary};
-  background: #ffffff;
+  background: ${colors.backgroundPrimary};
   border: none;
   border-radius: 12px;
   max-width: 348px;
@@ -203,7 +203,7 @@ const Input = styled.input`
 
 const TextInput = styled.textarea`
   color: ${colors.darkPrimary};
-  background: #ffffff;
+  background: ${colors.backgroundPrimary};
   border: none;
   border-radius: 12px;
   max-width: 348px;

@@ -39,7 +39,7 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
               <BtnLink
                 color={colors.darkPrimary}
                 text="Оставить заявку"
-                link="#"
+                link="#contact-form"
                 width="100%"
                 height="100%"
                 size="15px"

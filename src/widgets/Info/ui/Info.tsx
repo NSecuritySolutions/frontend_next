@@ -12,7 +12,7 @@ import {
   HistoryItem,
   YearsText,
   AchievementsText,
-  Banner,
+  BannerWrapper,
   CardWrapper,
 } from './styled'
 
@@ -59,9 +59,9 @@ const Info: FC = () => {
             </HistoryItem>
           </HistoryWrapper>
         </ContentWrapper>
-        <Banner $imgUrl={bannerImg}>
+        <BannerWrapper>
           <Image src={bannerImg} alt="Баннер" width={702} height={368} />
-        </Banner>
+        </BannerWrapper>
       </SectionWrapper>
       <CardWrapper>
         {cardInfoWithLogoData.map((cardData) => (

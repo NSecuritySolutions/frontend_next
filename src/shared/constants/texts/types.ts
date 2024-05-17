@@ -32,7 +32,7 @@ export type TError404 = {
 
 export type TWorkExamples = {
   id: number
-  date?: string | number | Date
+  date?: string
   cardTitle: string
   cardText: string
   cardLink: string

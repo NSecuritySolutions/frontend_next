@@ -29,12 +29,12 @@ import {
   ExamplesContainer,
   ExamplesTitle,
   ExamplesText,
-  ExamplesImg,
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
   InfoIcon,
   InfoIconWrapper,
+  ExamplesImgWrapper,
 } from './styled.ts'
 import Modal from '@/shared/components/Modal/ui/Modal'
 
@@ -103,16 +103,6 @@ const ExamplesSlider: React.FC = () => {
     }
   }
 
-  const newDateFormat = (data: string | undefined) => {
-    if (data === undefined) {
-      return '--'
-    }
-
-    const newDate: string = ChangeFormateDate(data).toString()
-
-    return newDate
-  }
-
   return (
     <>
       <SliderContainer className="slider-container" id="examples">
@@ -128,7 +118,7 @@ const ExamplesSlider: React.FC = () => {
               <CardWrapper key={item.id}>
                 {item.cardImage ? (
                   <ExamplesLink onClick={() => openModal(item)}>
-                    <ExamplesImg>
+                    <ExamplesImgWrapper>
                       <Image
                         src={item?.cardImage}
                         alt={item.cardTitle}
@@ -136,22 +126,22 @@ const ExamplesSlider: React.FC = () => {
                         height={200}
                         style={{ objectFit: 'cover', borderRadius: '12px' }}
                       />
-                    </ExamplesImg>
+                    </ExamplesImgWrapper>
                   </ExamplesLink>
                 ) : (
-                  <ExamplesImg>
+                  <ExamplesImgWrapper>
                     <Image
                       src={(item.cardImage = blankImg)}
                       width={200}
                       height={200}
                       alt={'Пустая картинка'}
                     ></Image>
-                  </ExamplesImg>
+                  </ExamplesImgWrapper>
                 )}
                 <ExamplesContainer className="slick-slide" key={i}>
                   <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                  <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText>
+                  {/* <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText> */}
 
                   <InfoIconWrapper>
                     {item.quantities.map((item, i) => (
@@ -170,7 +160,7 @@ const ExamplesSlider: React.FC = () => {
                       onClick={() => openModal(item)}
                     ></BtnLink>
 
-                    <IconWrapper>{newDateFormat(item.date?.toString())}</IconWrapper>
+                    <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
                   </ButtonWrapper>
                 </ExamplesContainer>
               </CardWrapper>
@@ -183,7 +173,7 @@ const ExamplesSlider: React.FC = () => {
             height="44px"
             color={colors.darkPrimary}
             text="Смотреть все примеры работ"
-            link="#"
+            link="/ourworks"
           />
         </SecondButtonWrapper>
       </SliderContainer>

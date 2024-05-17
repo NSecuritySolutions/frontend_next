@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
-import { ManagerCard } from '@/shared/components/ManagerCard/index.ts'
-
 import listMarker from '@/assets/icons/list-item.svg'
+
+import { ManagerCard } from '@/shared/components/ManagerCard/index.ts'
 
 import {
   Section,

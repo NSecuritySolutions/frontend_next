@@ -2,11 +2,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { MouseEvent, useEffect } from 'react'
 
-import ImgSlider from '../../ImgSlider/ui/ImgSlider'
+import ImgSlider from '@/shared/components/ImgSlider/ui/ImgSlider'
 
-import closeBtn from '@/assets/icons/+.svg'
+import CloseBtn from '@/assets/icons/+.svg'
 
-import TModalProps from './type.ts'
+import TModalProps from '../types/types.ts'
 
 import containerVariants from './animation'
 
@@ -51,14 +51,13 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
 
     document.addEventListener('keydown', handleKeyDown)
 
-    modal?.classList.add('modal-open2')
-
+    modal?.classList.add('popup-open')
     document.body.classList.add('modal-open')
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
 
-      modal?.classList.remove('modal-open2')
+      modal?.classList.remove('popup-open')
       document.body.classList.remove('modal-open')
     }
   }, [closeModal, router])
@@ -83,7 +82,12 @@ const Modal: React.FC<TModalProps> = ({ modalItem, isOpen, closeModal }) => {
     >
       <ModalContent>
         <CloseButton onClick={closeModal}>
-          <Image src={closeBtn} alt={'Кнопка закрытия модального окна'}></Image>
+          <Image
+            src={CloseBtn}
+            alt={'Кнопка закрытия модального окна'}
+            width={40}
+            height={40}
+          ></Image>
         </CloseButton>
         <ContentWrapper>
           <TitleWrapper>

@@ -20,34 +20,36 @@ import { ContactForm } from '@/widgets/ContactForm'
 import { Calculator } from '@/widgets/Calculator'
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  //@TODO : если вдруг понадобится в последствии
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 0)
-  }, [])
+  // const [isLoading, setIsLoading] = useState(true)
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false)
+  //   }, 0)
+  // }, [])
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <Loader />
-      ) : (
-        <>
-          <Info />
-          <OurServices />
-          <ReadySolutionSection />
-          <Calculator />
-          <AdvantagesBlock />
-          <ProjectStage />
-          <OurTeam />
-          <Questions />
-          <ReviewsBlock />
-          <ExamplesSlider />
-          <OurClients />
-          <ContactForm />
-        </>
-      )}
+      ) : ( */}
+      <>
+        <Info />
+        <OurServices />
+        <ReadySolutionSection />
+        <Calculator />
+        <AdvantagesBlock />
+        <ProjectStage />
+        <OurTeam />
+        <Questions />
+        <ReviewsBlock />
+        <ExamplesSlider />
+        <OurClients />
+        <ContactForm />
+      </>
+      {/* )} */}
     </>
   )
 }

@@ -130,9 +130,9 @@ const ExamplesContainer = styled.article`
 const ExamplesLink = styled.a`
   text-decoration: none;
 `
-const ExamplesImg = styled.div`
+const ExamplesImgWrapper = styled.div`
   border-radius: 12px;
-  background-color: #fff;
+  background-color: ${colors.backgroundPrimary};
   max-width: 200px;
   min-height: 200px;
 
@@ -221,7 +221,7 @@ const IconWrapper = styled.div`
   column-gap: 12px !important;
   font-weight: 400;
   font-size: 16px;
-  color: #101010;
+  color: ${colors.darkPrimary};
 
   @media (max-width: 916px) {
     flex-direction: row;
@@ -241,7 +241,7 @@ const InfoIconWrapper = styled.div`
   flex-direction: row;
   font-weight: 800;
   font-size: 15px;
-  color: #101010;
+  color: ${colors.darkPrimary};
   line-height: 133%;
   gap: 12px !important;
   justify-content: flex-start;
@@ -258,7 +258,7 @@ const InfoIcon = styled.div`
   border-radius: 8px;
   padding: 8px 12px;
   height: 36px;
-  background-color: #e1e7f4;
+  background-color: ${colors.backgroundBase4};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -269,7 +269,6 @@ export {
   ExamplesTitle,
   ExamplesText,
   ExamplesButton,
-  ExamplesImg,
   SliderContainer,
   CustomDot,
   ColumnTitle,
@@ -280,4 +279,5 @@ export {
   SecondButtonWrapper,
   InfoIcon,
   InfoIconWrapper,
+  ExamplesImgWrapper,
 }

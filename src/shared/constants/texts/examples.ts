@@ -17,7 +17,7 @@ export const TEXT_LIMIT: number = 120
 export const workExamples: TWorkExamples[] = [
   {
     id: 1,
-    date: '2023-10-12',
+    date: '07.12.2022',
     cardTitle: 'Установка видеонаблюдения в складском помещении',
     cardText:
       'Преимущества и возможности системы видеонаблюдения на примере складов в Новосибирске.',
@@ -42,7 +42,7 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 2,
-    date: '2023-10-11',
+    date: '07.10.2021',
     cardImage: sixthWorksImg,
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
@@ -67,7 +67,7 @@ export const workExamples: TWorkExamples[] = [
 
   {
     id: 3,
-    date: '2023-10-10',
+    date: '17.10.2022',
     cardTitle: 'Обеспечьте безопасность вашей дачи',
     cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
     cardLink: '/',
@@ -91,7 +91,7 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 4,
-    date: '2023-10-09',
+    date: '12.10.2022',
     cardTitle: 'Заголовок',
     cardText: 'Небольшой текст.',
     cardLink: '/',
@@ -140,7 +140,7 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 6,
-    date: '2023-10-07',
+    date: '07.10.2022',
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
     cardLink: '/',
@@ -164,7 +164,7 @@ export const workExamples: TWorkExamples[] = [
 
   {
     id: 7,
-    date: '2023-01-10',
+    date: '06.10.2022',
     cardTitle: 'Обеспечьте безопасность вашей дачи',
     cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
     cardLink: '/',

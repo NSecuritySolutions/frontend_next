@@ -17,7 +17,7 @@ const ColumnConatiner = styled.div`
   width: 1180px;
   height: 565px;
   box-shadow: 2px 2px 25px 0px rgba(16, 16, 16, 0.05);
-  background-color: #fff;
+  background-color: ${colors.backgroundPrimary};
   display: flex;
   flex-direction: column;
   padding: 120px 84px;
@@ -140,8 +140,8 @@ const ErrorButton = styled.a`
   display: flex;
   justify-content: center;
   border-radius: 12px;
-  background-color: var(--primary, #fcc12d);
-  color: var(--text-01, #101010);
+  background-color: ${colors.btnPrimary};
+  color: ${colors.darkPrimary};
   max-width: 160px;
   width: 100%;
   min-height: 56px;

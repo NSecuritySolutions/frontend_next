@@ -165,7 +165,7 @@ const ColumnImageWrapper = styled.div`
   width: 280px;
   height: 74px;
   position: relative;
-  background-color: #fff;
+  background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
 
   @media (max-width: 940px) {

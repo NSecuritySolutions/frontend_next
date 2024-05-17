@@ -20,7 +20,7 @@ export const cardServices: TOurServices[] = [
       'Комплексные решения, онлайн-консультации в сети и по телефону, проектирование от сбора первичных требований и выезда на замер до установки и подключения',
     ],
     img: securityImg,
-    link: '#form',
+    link: '/ourworks',
     btnName: 'Заказать',
   },
   {
@@ -31,7 +31,7 @@ export const cardServices: TOurServices[] = [
       'Просмотр в приложении на смартфоне и через веб-браузер',
     ],
     img: fireAlarmImg,
-    link: '#',
+    link: '/video-surveillance',
     btnName: 'Подробнее',
   },
   {
@@ -43,7 +43,7 @@ export const cardServices: TOurServices[] = [
       'Автономные и сетевые СКУД',
     ],
     img: videoSurvImg,
-    link: '#',
+    link: '/domofon',
     btnName: 'Подробнее',
   },
   {
@@ -54,7 +54,7 @@ export const cardServices: TOurServices[] = [
       'Имеем бессрочную лицензию МЧС на осуществление деятельности',
     ],
     img: intercomImg,
-    link: '#',
+    link: '/security',
     btnName: 'Подробнее',
   },
 ]
