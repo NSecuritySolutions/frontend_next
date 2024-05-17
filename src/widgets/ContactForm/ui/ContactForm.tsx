@@ -1,12 +1,17 @@
-import React, { useState, useEffect, ChangeEvent, useRef } from 'react'
-// import { IMaskInput } from "react-imask";
+import React, { useState, useRef } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+import { IMaskInput } from 'react-imask'
+
+import Image from 'next/image'
 
 import colors from '@/shared/constants/colors'
-// import card from "@/assets/images/form/webp/card.webp";
+import card from '@/assets/images/form/webp/card.webp'
 import {
   Section,
   SectionWrapper,
-  ColumnWrapper,
   InfoColumn,
   Form,
   FormParagraph,
@@ -15,140 +20,142 @@ import {
   ColumnParagraph,
   Input,
   TextInput,
-  CardImage,
+  FromImgWrapper,
+  FormColumn,
+  ErrorText,
+  InputWrapper,
+  UploadBtn,
+  UploadBtnText,
 } from './styled'
+import { Button } from '@/shared/components/Button'
+import MaskedStyledInput from './mask'
+
+const schema = yup.object({
+  name: yup.string().required('Заполните поле'),
+  phone: yup.string().min(18, 'Не похоже на телефон').required('Заполните поле'),
+  email: yup.string().email('Не похоже на email').required('Заполните поле'),
+  message: yup.string(),
+})
+
+type IFormInput = yup.InferType<typeof schema>
 
 const ContactForm = () => {
-  // const [form, setValue] = useState<TFormTypes>({
-  //   name: "",
-  //   phone: "",
-  //   email: "",
-  //   text: "",
-  // });
-  // const [isValid, setIsValid] = useState(false);
-  // const PhoneMask = "+{7} (000) 000-00-00";
-  // const inputRef = useRef<typeof IMaskInput>(null);
-  // const [isFocused, setIsFocused] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors, isValid },
+  } = useForm<IFormInput>({
+    mode: 'onChange',
+    shouldFocusError: false,
+    defaultValues: {
+      name: '',
+      phone: '',
+      email: '',
+      message: undefined,
+    },
+    resolver: yupResolver(schema),
+  })
 
-  // const handleEditorFocus = () => {
-  //   setIsFocused(true);
-  // };
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
-  // const handleEditorBlur = () => {
-  //   setIsFocused(false);
-  // };
+  const PhoneMask = '+{7} (000) 000-00-00'
+  const inputRef = useRef<typeof IMaskInput>(null)
 
-  // useEffect(() => {
-  //   if (form.phone.length === 11) handleEditorBlur();
-  // }, [form]);
-
-  // useEffect(() => {
-  //   if (isFocused && form.phone === "" && !inputRef.current) {
-  //     console.log(inputRef.current);
-  //   }
-  // }, [isFocused]);
-
-  // const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setValue({ ...form, [e.target.name]: e.target.value });
-  // };
-
-  // function onChangePhone(value: string) {
-  //   setValue({ ...form, phone: value });
-  // }
-
-  // useEffect(() => {
-  //   const res = /[^а-яА-Я ]/g.exec(form.name);
-  //   setValue({ ...form, name: form.name.replace(`${res}`, "") });
-  // }, [form.name]);
-
-  // useEffect(() => {
-  //   if (form.name.length > 2 && form.phone.length === 11) {
-  //     setIsValid(true);
-  //   } else setIsValid(false);
-  // }, [form]);
-
-  // useEffect(() => {
-  //   const res = /[^a-zA-Z.@_-]/g.exec(form.email);
-  //   setValue({ ...form, email: form.email.replace(`${res}`, "") });
-  // }, [form.email]);
-
-  // const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   setValue({ ...form, [e.target.name]: e.target.value });
-  // };
-
-  // function handleSubmit(e: React.FormEvent) {
-  //   e.preventDefault();
-  // }
+  const onFormSubmit: SubmitHandler<IFormInput> = async (data) => {
+    try {
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          console.log('Данные формы', data)
+          resolve()
+        }, 1000)
+      })
+      setSubmitSuccess(true)
+      setTimeout(() => {
+        setSubmitSuccess(false)
+      }, 300)
+      reset()
+    } catch (error) {
+      console.error('Ошибка:', error)
+    }
+  }
 
   return (
-    <>
-      <Section>
-        <SectionWrapper>
-          <ColumnWrapper>
-            <InfoColumn>
-              <SectionTitle>Оставить заявку</SectionTitle>
-              <ColumnParagraph>
-                Заполните форму заявки и наш менеджер вам перезвонит
-              </ColumnParagraph>
-              {/* <CardImage $imgUrl={card} alt="Картинка карты" /> */}
-            </InfoColumn>
-            <Form>
-              {/* <Input
-                placeholder="Имя*"
-                value={form.name}
-                name="name"
+    <Section>
+      <SectionWrapper>
+        <InfoColumn>
+          <FromImgWrapper>
+            <Image src={card} alt="Картинка карты" fill />
+          </FromImgWrapper>
+        </InfoColumn>
+        <FormColumn>
+          <SectionTitle>Оставить заявку</SectionTitle>
+          <ColumnParagraph>Заполните форму заявки и наш менеджер вам перезвонит</ColumnParagraph>
+          <Form onSubmit={handleSubmit(onFormSubmit)}>
+            <InputWrapper>
+              <Input
+                {...register('name')}
                 type="text"
-                onChange={onChange}
+                placeholder="* Имя"
                 maxLength={20}
-                required
-              /> */}
-              {/* <MaskedStyledInput
-                mask={PhoneMask}
-                inputRef={inputRef}
-                radix="."
-                unmask={true}
-                placeholder="Телефон*"
-                name="phone"
-                type="text"
-                maxLength={18}
-                required
-                onAccept={(value: string) => {
-                  onChangePhone(value);
-                }}
-                lazy={true}
-                onFocus={handleEditorFocus}
-                onBlur={handleEditorBlur}
-              /> */}
-              {/* <Input
-                placeholder="E-mail"
-                value={form.email}
-                name="email"
-                type="email"
-                onChange={onChange}
+                error={errors.name ? 'true' : 'false'}
               />
-              <TextInput
-                placeholder="Комментарий"
-                value={form.text}
-                name="text"
-                onChange={onChangeText}
-              /> */}
-              <FormParagraph>
-                Нажимая Отправить, вы принимаете условия&nbsp;
-                <Link>Правил политики конфиденциальности</Link>
-              </FormParagraph>
-              {/* <Button
-                width="130px"
-                height="44px"
-                color={colors.btnOpacityColor}
-                text="Отправить"
-                onClick={handleSubmit}
-                disabled={!isValid}
-              /> */}
-            </Form>
-          </ColumnWrapper>
-        </SectionWrapper>
-      </Section>
-    </>
+              {errors.name && <ErrorText>{errors.name?.message}</ErrorText>}
+            </InputWrapper>
+            <InputWrapper>
+              <Controller
+                name="phone"
+                control={control}
+                render={({ field }) => (
+                  <MaskedStyledInput
+                    {...field}
+                    mask={PhoneMask}
+                    inputRef={inputRef}
+                    error={errors.phone ? 'true' : 'false'}
+                    placeholder="* Телефон"
+                  />
+                )}
+              />
+              {errors.phone && <ErrorText>{errors.phone?.message}</ErrorText>}
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                {...register('email')}
+                type="email"
+                placeholder="* E-mail"
+                error={errors.email ? 'true' : 'false'}
+              />
+              {errors.email && <ErrorText>{errors.email?.message}</ErrorText>}
+            </InputWrapper>
+            <InputWrapper>
+              <TextInput {...register('message')} placeholder="Комментарий" maxLength={1000} />
+            </InputWrapper>
+            <UploadBtn>
+              <Image
+                src="/icons/upload.svg"
+                width={16}
+                height={16}
+                alt="Upload"
+                style={{ objectFit: 'cover' }}
+              />
+              <UploadBtnText>Загрузить спецификацию (в формате xlx, pdf, word)</UploadBtnText>
+            </UploadBtn>
+            <FormParagraph>
+              Нажимая oтправить, вы принимаете условия&nbsp;
+              <Link>Правил политики конфиденциальности</Link>
+            </FormParagraph>
+            <Button
+              width="130px"
+              height="44px"
+              color={colors.btnOpacityColor}
+              text="Отправить"
+              disabled={!isValid}
+            />
+          </Form>
+        </FormColumn>
+      </SectionWrapper>
+    </Section>
   )
 }
 
