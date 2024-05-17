@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { TStyledBtnProps } from '../types/types'
+import { TStyledBtnLinkProps } from '../types/types'
 import colors from '@/shared/constants/colors'
 
-const StyledBtnLink = styled.button<TStyledBtnProps>`
+const StyledBtnLink = styled.button<TStyledBtnLinkProps>`
   display: flex;
   align-items: center;
   justify-content: center;

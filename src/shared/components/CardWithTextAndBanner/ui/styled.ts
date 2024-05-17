@@ -59,9 +59,12 @@ const CardText = styled.li`
   width: 70%;
 `
 
-const CardImg = styled.img`
+const CardImg = styled.div`
   margin: 0;
-  padding: 0;
+  padding-top: 20px;
+  max-width: 540px;
+  max-height: 305px;
+  width: 100%;
 `
 
 export { Card, CardText, CardTitle, CardImg, ImgWrapper, TextWrapper, TextContainer }

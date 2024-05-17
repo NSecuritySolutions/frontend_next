@@ -1,19 +1,19 @@
 import { FormEvent } from 'react'
 
-type TBtnProps = {
+type TBtnLinkProps = {
   width: string
   height: string
   color: string
   text: string
   disabled: boolean
-  onClick?: (e: FormEvent<Element>) => void
+  onClick: (e: FormEvent<Element>) => void
 }
 
-type TStyledBtnProps = {
+type TStyledBtnLinkProps = {
   width: string
   height: string
   color: string
-  onClick?: (e: FormEvent<Element>) => void
+  onClick: (e: FormEvent<Element>) => void
 }
 
-export type { TBtnProps, TStyledBtnProps }
+export type { TBtnLinkProps, TStyledBtnLinkProps }

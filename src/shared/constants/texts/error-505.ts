@@ -7,7 +7,7 @@ export const error505: TError505 = {
   id: 1,
   errorCode: '505',
   errorMessage: 'Ошибка сервера',
-  errorText: 'Что-то пошло не так. Lorem ipsum dolor sit amet consectetur adipisicing elit. ',
+  errorText:
+    'Мы уже работаем над решением проблемы. Вы всегда можете заказать обратный звонок или связаться с нами по указанным контактам ',
   errorImg: error505Img,
-  warningImg: warning505Img,
 }

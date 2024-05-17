@@ -20,7 +20,6 @@ export type TError505 = {
   errorMessage: string
   errorText: string
   errorImg: StaticImageData
-  warningImg: StaticImageData
 }
 
 export type TError404 = {
@@ -28,13 +27,12 @@ export type TError404 = {
   errorCode: string
   errorText: string
   errorImg: StaticImageData
-  warningImg: StaticImageData
   errorMessage: string
 }
 
 export type TWorkExamples = {
   id: number
-  date?: string | number | Date
+  date?: string
   cardTitle: string
   cardText: string
   cardLink: string

@@ -15,7 +15,6 @@ const colors = {
   textSecondary: '#686868',
   accentInfo: '#0DC0BE',
   accentNegative: '#FD4D61',
-  textNegative: '#E64255',
   scrollActive: '#D7D7D7',
   btnOutlineHover: '#0dc0be',
   btnOpacityColor: '#27272799',

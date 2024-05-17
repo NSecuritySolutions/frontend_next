@@ -61,7 +61,7 @@ export default function Footer() {
                 height="56px"
                 color={colors.darkPrimary}
                 text="Оставить заявку"
-                link="#"
+                link="#contact-form"
               />
             </FooterBtnWrapper>
           </FooterContactsContainer>

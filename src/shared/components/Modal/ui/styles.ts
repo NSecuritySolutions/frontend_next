@@ -1,10 +1,11 @@
 import colors from '@/shared/constants/colors'
+import { motion } from 'framer-motion'
 
 import closeBtn from '@/assets/icons/+.svg'
 
 import styled from 'styled-components'
 
-const ModalContainer = styled.div`
+const ModalContainer = styled(motion.div)`
   position: fixed;
   top: 107px;
   left: 0;
@@ -98,7 +99,7 @@ const Date = styled.div`
 
   // line-height: 20px;
   line-height: 1.33333;
-  color: #101010;
+  color: ${colors.darkPrimary};
   opacity: 0.5;
 `
 const Quantity = styled.div`
@@ -143,7 +144,7 @@ const TextParagraph = styled.p`
   margin-bottom: 80px;
 `
 const CloseButton = styled.button`
-  background-image: ${`url("${closeBtn}")`};
+  background-color: ${colors.backgroundPrimary};
   object-fit: contain;
   border: none;
   position: sticky;

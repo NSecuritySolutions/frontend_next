@@ -1,5 +1,10 @@
 'use client'
 
+import React, { useEffect, useState } from 'react'
+import Loader from '@/shared/components/Loader/Loader'
+
+import styles from './page.module.css'
+
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
@@ -15,20 +20,36 @@ import { ContactForm } from '@/widgets/ContactForm'
 import { Calculator } from '@/widgets/Calculator'
 
 export default function Home() {
+  //@TODO : если вдруг понадобится в последствии
+
+  // const [isLoading, setIsLoading] = useState(true)
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false)
+  //   }, 0)
+  // }, [])
+
   return (
     <>
-      <Info />
-      <OurServices />
-      <ReadySolutionSection />
-      <Calculator />
-      <AdvantagesBlock />
-      <ProjectStage />
-      <OurTeam />
-      <Questions />
-      <ReviewsBlock />
-      <ExamplesSlider />
-      <OurClients />
-      <ContactForm />
+      {/* {isLoading ? (
+        <Loader />
+      ) : ( */}
+      <>
+        <Info />
+        <OurServices />
+        <ReadySolutionSection />
+        <Calculator />
+        <AdvantagesBlock />
+        <ProjectStage />
+        <OurTeam />
+        <Questions />
+        <ReviewsBlock />
+        <ExamplesSlider />
+        <OurClients />
+        <ContactForm />
+      </>
+      {/* )} */}
     </>
   )
 }

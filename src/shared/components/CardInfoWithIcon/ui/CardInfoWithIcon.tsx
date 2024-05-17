@@ -15,7 +15,7 @@ const CardInfoWithIcon: FC<TCardInfoWithIconProps> = ({ title, logo, text, backg
   return (
     <Card $backgroundColor={backgroundColor}>
       <TitleContainer>
-        <Image src={logo} alt="Logo" width={40} height={40} />
+        {/* <Image src={logo} alt="Logo" width={30} height={30} /> */}
         <CardTitle>{title}</CardTitle>
       </TitleContainer>
       <CardText>{text}</CardText>

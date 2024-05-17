@@ -9,7 +9,6 @@ const NotFound = () => {
       errorCode={error404.errorCode}
       errorText={error404.errorText}
       errorImg={error404.errorImg}
-      warningImg={error404.warningImg}
       errorMessage={error404.errorMessage}
     />
   )
