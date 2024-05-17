@@ -2,12 +2,27 @@ import { Section, SectionTitle, ImgWrap, ImageButton } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/CalculatorCard/ui/styled'
 import colors from '@/shared/constants/colors/index.ts'
+// import { evaluate } from 'mathjs'
 
 import { LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
 import { observer } from 'mobx-react-lite'
+
+import { create, all } from 'mathjs'
+
+const config = {}
+const math = create(all, config)
+
+math.import(
+  {
+    if: function (condition: boolean, trueValue: number, falseValue: number) {
+      return condition ? trueValue : falseValue
+    },
+  },
+  { override: true },
+)
 
 const camera = '/icons/calculator/camera-white.svg'
 const innerCamera = '/icons/calculator/inner-camera.svg'
@@ -87,8 +102,6 @@ const Calculator: React.FC = observer(() => {
   const [height, setHeight] = useState(0)
   const section = useRef<HTMLDivElement | null>(null)
 
-  console.log(calculatorStore.data)
-
   useEffect(() => {
     calculatorStore.fetchData()
   }, [])
@@ -109,65 +122,62 @@ const Calculator: React.FC = observer(() => {
     }, 1000)
   }
 
-  const calculateResult = () => {
-    let result = 0
-    calculatorStore.variables.forEach((value, key) => {
-      if (typeof value === 'number') {
-        result += value
-      }
-    })
-    return result
-  }
-
   if (calculatorStore.isLoading) {
     return <div></div>
   }
 
   return (
-    <Section height={height}>
-      <div>
-        <SectionTitle>Калькулятор</SectionTitle>
-        <LayoutGroup>
-          <div
-            ref={section}
-            style={{
-              display: 'grid',
-              gap: '20px',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-            }}
-          >
-            <LayoutGroup>
-              {calculatorStore.data.map((block) => (
-                <CalculatorCard
-                  key={block.id}
-                  title={block.title}
-                  img={camera}
-                  handleAmountChange={handleAmountChange}
-                  options={block.options}
+    <>
+      <Section height={height}>
+        <div>
+          <SectionTitle>Калькулятор</SectionTitle>
+          <LayoutGroup>
+            <div
+              ref={section}
+              style={{
+                display: 'grid',
+                gap: '20px',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+              }}
+            >
+              <LayoutGroup>
+                {calculatorStore.data.map((block) => (
+                  <CalculatorCard
+                    key={block.id}
+                    title={block.title}
+                    img={block.image}
+                    handleAmountChange={handleAmountChange}
+                    options={block.options}
+                  />
+                ))}
+              </LayoutGroup>
+            </div>
+            <ImageButton>
+              <ImgWrap>
+                <Image
+                  src="/icons/calculator/cross.svg"
+                  width={22}
+                  height={22}
+                  alt="Reset"
+                  style={{ objectFit: 'cover' }}
                 />
-              ))}
-            </LayoutGroup>
-          </div>
-          <ImageButton>
-            <ImgWrap>
-              <Image
-                src="/icons/calculator/cross.svg"
-                width={22}
-                height={22}
-                alt="Reset"
-                style={{ objectFit: 'cover' }}
-              />
-            </ImgWrap>
-            <Typography size={16} width="fit-content" color={colors.textSecondary}>
-              Сбросить настройки
+              </ImgWrap>
+              <Typography size={16} width="fit-content" color={colors.textSecondary}>
+                Сбросить настройки
+              </Typography>
+            </ImageButton>
+            <Typography size={16} width="fit-content">
+              {math.evaluate(calculatorStore.formula, calculatorStore.variables) || 0}
             </Typography>
-          </ImageButton>
-          <Typography size={16} width="fit-content">
-            {calculatorStore.formula}
-          </Typography>
-        </LayoutGroup>
-      </div>
-    </Section>
+          </LayoutGroup>
+        </div>
+      </Section>
+      {/* {Object.entries(calculatorStore.variables).map((variable) => (
+        <Typography size={16} width="fit-content">
+          {variable[0]}: {variable[1]}
+        </Typography>
+      ))} */}
+    </>
   )
 })
 

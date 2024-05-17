@@ -1,6 +1,6 @@
 import {
   Card,
-  CardImg,
+  CardImgWrapper,
   CardHeader,
   ImageTitle,
   Title,
@@ -14,10 +14,11 @@ import {
 import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '../../AmountComponent'
 import { RadioGroup } from '../../RadioGroup'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Tooltip } from '../../Tooltip/index.ts'
 import { observer } from 'mobx-react-lite'
 import calculatorStore from '@/widgets/Calculator/store.ts'
+import Image from 'next/image'
 
 interface CalculatorCardProps {
   title: string
@@ -28,16 +29,22 @@ interface CalculatorCardProps {
     description: string
     option_type: string // 'radio' | 'checkbox' | 'input';
     choices?: string
-    name?: string
+    name: string
   }[]
 }
 
 const CalculatorCard: React.FC<CalculatorCardProps> = observer(
   ({ title, img, handleAmountChange, options }) => {
-    const amount = parseInt(calculatorStore.getVariable(title)) || 0
+    const amount = parseInt(calculatorStore.getVariable(title) as string) || 0
     const ref = useRef<HTMLDivElement | null>(null)
 
     calculatorStore.printInputsData()
+
+    // useEffect(() => {
+    //   options.forEach((option) => {
+    //     calculatorStore.setVariable(option.name, '0')
+    //   })
+    // }, [])
 
     const handleChange = (v: number) => {
       calculatorStore.printInputsData()
@@ -50,7 +57,9 @@ const CalculatorCard: React.FC<CalculatorCardProps> = observer(
         <div>
           <CardHeader>
             <ImageTitle>
-              <CardImg $imgUrl={img} />
+              <CardImgWrapper>
+                <Image src={img} width={37} height={37} alt={title} />
+              </CardImgWrapper>
               <Title>{title}</Title>
             </ImageTitle>
             <AmountComponent amount={amount} onChange={handleChange} />
@@ -73,10 +82,23 @@ const CalculatorCard: React.FC<CalculatorCardProps> = observer(
                 <Tooltip text={option.description} />
               </OptionHeader>
               {option.option_type === 'radio' && (
-                <RadioGroup options={option.choices!.split('; ')} name={option.name!} />
+                <RadioGroup options={option.choices!.split('; ')} name={option.name} />
               )}
-              {option.option_type === 'checkbox' && <CheckBox />}
-              {option.option_type === 'number' && <InputNumber />}
+              {option.option_type === 'checkbox' && (
+                <CheckBox
+                  checked={calculatorStore.getVariable(option.name) as boolean}
+                  onChange={(e) => {
+                    console.log(e.target.checked)
+                    calculatorStore.setVariable(option.name, e.target.checked)
+                  }}
+                />
+              )}
+              {option.option_type === 'number' && (
+                <InputNumber
+                  value={calculatorStore.getVariable(option.name) as number}
+                  onChange={(e) => calculatorStore.setVariable(option.name, e.target.value)}
+                />
+              )}
             </Option>
           ))}
         </div>

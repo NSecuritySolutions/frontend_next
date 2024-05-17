@@ -38,11 +38,11 @@ const Card = styled(motion.div).attrs({
     `}
 `
 
-const CardImg = styled.div<{
-  $imgUrl?: string
-}>`
+const CardImgWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
-  background: ${(props) => `url("${props.$imgUrl}") no-repeat center`};
   background-color: ${colors.darkPrimary};
   width: 48px;
   height: 48px;
@@ -155,7 +155,7 @@ const InputNumber = styled.input.attrs({ type: 'number', min: 0 })`
 
 export {
   Card,
-  CardImg,
+  CardImgWrapper,
   CardHeader,
   ImageTitle,
   Title,

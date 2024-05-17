@@ -57,8 +57,7 @@ interface ICalculatorData {
 class CalculatorStore {
   data: IBlock[] | [] = []
   formula: string = ''
-  variables = new Map<string, string>()
-  // inputs = new Map<string, string>()
+  variables: Record<string, string | number | boolean> = {}
   isLoading = true
   error: null | unknown = null
 
@@ -66,12 +65,12 @@ class CalculatorStore {
     makeAutoObservable(this)
   }
 
-  setVariable(name: string, value: string) {
-    this.variables.set(name, value)
+  setVariable(name: string, value: string | number | boolean) {
+    this.variables[name] = value
   }
 
   getVariable(name: string) {
-    return this.variables.get(name) || ''
+    return this.variables[name] || ''
   }
 
   printInputsData() {
@@ -85,11 +84,9 @@ class CalculatorStore {
         const fullData: ICalculatorData[] = response.data
         this.formula = fullData[0].formula.expression
         this.data = fullData[0].blocks
-        Object.entries(fullData[0].price_list).map((price) => {
-          if (price[0] != 'id' && price[0] != 'is_current') {
-            this.variables.set(price[0], price[1])
-          }
-        })
+        const prices = fullData[0].price_list
+        this.variables = Object.assign(prices, this.variables)
+        this.setVariables()
         this.isLoading = false
       }),
       action('fetchError', (error) => {
@@ -99,18 +96,14 @@ class CalculatorStore {
     )
   }
 
-  // formInputs() {
-  //   this.data.map((input) => this.setInput(input.title, ''))
-  // }
-
-  calculateResult() {
-    let result = 0
-    this.variables.forEach((value, key) => {
-      if (typeof value === 'number') {
-        result += value
-      }
+  setVariables = () => {
+    this.data.forEach((block) => {
+      block.options.forEach((option) => {
+        option.option_type === 'checkbox' && this.setVariable(option.name, false)
+        option.option_type === 'radio' && this.setVariable(option.name, 'unknown')
+        option.option_type === 'number' && this.setVariable(option.name, 0)
+      })
     })
-    return result
   }
 }
 
