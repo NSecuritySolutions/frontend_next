@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default function SecurityPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
