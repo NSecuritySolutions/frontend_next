@@ -1,5 +1,41 @@
+import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
+import { BASE_URL } from '@/shared/constants/url/url'
 import axios from 'axios'
-import { makeAutoObservable, action } from 'mobx'
+import { makeAutoObservable, action, computed, observable } from 'mobx'
+
+interface IProduct {
+  id: number
+  category: { id: number; title: string }
+  manufacturer: { id: number; title: string }
+  article: string
+  model: string
+  image: string
+  price: number
+}
+
+interface ICamera extends IProduct {
+  description: string
+  type: string
+  form_factor: string
+  accomodation: string
+  resolution: string
+  dark: string
+  temperature: string
+  power_supply: string
+  microphone: string
+  micro_sd: string
+  viewing_anlge: string
+  focus: string
+}
+
+interface IRegister extends IProduct {
+  description: string
+  max_resolution: string
+  quantity_cam: number
+  quantity_hdd: number
+  max_size_hdd: number
+  power_supply: string
+}
 
 interface IOption {
   id: number
@@ -8,6 +44,8 @@ interface IOption {
   option_type: 'number' | 'checkbox' | 'radio'
   name: string
   choices?: string
+  product?: string
+  filters?: string
   block: number
 }
 
@@ -15,6 +53,7 @@ interface IBlock {
   id: number
   title: string
   image: string
+  formula: IFormula
   calculator: number
   options: IOption[]
 }
@@ -50,43 +89,55 @@ interface IPriceList {
 interface ICalculatorData {
   id: number
   blocks: IBlock[]
-  formula: IFormula
   price_list: IPriceList
 }
 
 class CalculatorStore {
-  data: IBlock[] | [] = []
-  formula: string = ''
-  variables: Record<string, string | number | boolean> = {}
+  products: (ICamera | IRegister)[] | [] = []
+  blocks: CalculatorBlockStore[] = []
   isLoading = true
   error: null | unknown = null
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, {
+      blocks: observable,
+      result: computed,
+    })
   }
 
-  setVariable(name: string, value: string | number | boolean) {
-    this.variables[name] = value
+  get result() {
+    const sum = this.blocks.reduce((sum, block) => {
+      return sum + block.result
+    }, 0)
+    const formatedSum = sum.toLocaleString('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+    return formatedSum
   }
 
-  getVariable(name: string) {
-    return this.variables[name] || ''
-  }
-
-  printInputsData() {
-    console.log(this.variables)
+  setBlocks(blocksData: IBlock[], price: IPriceList) {
+    this.blocks = blocksData.map((blockData) => new CalculatorBlockStore(blockData, price))
   }
 
   fetchData() {
     this.isLoading = true
-    axios.get('http://localhost:8000/api/v1/calculator/').then(
+    axios.get(`${BASE_URL}/api/v1/product/`).then(
+      action('fetchProducts', (response) => {
+        this.products = response.data
+      }),
+      action('fetchProductsError', (error) => {
+        this.error = error
+        this.isLoading = false
+      }),
+    )
+    axios.get(`${BASE_URL}/api/v1/calculator/`).then(
       action('fetchData', (response) => {
         const fullData: ICalculatorData[] = response.data
-        this.formula = fullData[0].formula.expression
-        this.data = fullData[0].blocks
         const prices = fullData[0].price_list
-        this.variables = Object.assign(prices, this.variables)
-        this.setVariables()
+        this.setBlocks(fullData[0].blocks, prices)
         this.isLoading = false
       }),
       action('fetchError', (error) => {
@@ -94,16 +145,6 @@ class CalculatorStore {
         this.isLoading = false
       }),
     )
-  }
-
-  setVariables = () => {
-    this.data.forEach((block) => {
-      block.options.forEach((option) => {
-        option.option_type === 'checkbox' && this.setVariable(option.name, false)
-        option.option_type === 'radio' && this.setVariable(option.name, 'unknown')
-        option.option_type === 'number' && this.setVariable(option.name, 0)
-      })
-    })
   }
 }
 

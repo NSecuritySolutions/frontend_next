@@ -1,4 +1,4 @@
-import { Section, SectionTitle, ImgWrap, ImageButton } from './styled'
+import { Section, SectionTitle, ImgWrap, ImageButton, FooterWrapper } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/CalculatorCard/ui/styled'
 import colors from '@/shared/constants/colors/index.ts'
@@ -123,35 +123,33 @@ const Calculator: React.FC = observer(() => {
   }
 
   if (calculatorStore.isLoading) {
-    return <div></div>
+    return <></>
   }
 
   return (
-    <>
-      <Section height={height}>
-        <div>
-          <SectionTitle>Калькулятор</SectionTitle>
-          <LayoutGroup>
-            <div
-              ref={section}
-              style={{
-                display: 'grid',
-                gap: '20px',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-              }}
-            >
-              <LayoutGroup>
-                {calculatorStore.data.map((block) => (
-                  <CalculatorCard
-                    key={block.id}
-                    title={block.title}
-                    img={block.image}
-                    handleAmountChange={handleAmountChange}
-                    options={block.options}
-                  />
-                ))}
-              </LayoutGroup>
-            </div>
+    <Section height={height}>
+      <div>
+        <SectionTitle>Калькулятор</SectionTitle>
+        <LayoutGroup>
+          <div
+            ref={section}
+            style={{
+              display: 'grid',
+              gap: '20px',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+            }}
+          >
+            <LayoutGroup>
+              {calculatorStore.blocks.map((block) => (
+                <CalculatorCard
+                  store={block}
+                  key={block.data.id}
+                  handleAmountChange={handleAmountChange}
+                />
+              ))}
+            </LayoutGroup>
+          </div>
+          <FooterWrapper>
             <ImageButton>
               <ImgWrap>
                 <Image
@@ -166,18 +164,13 @@ const Calculator: React.FC = observer(() => {
                 Сбросить настройки
               </Typography>
             </ImageButton>
-            <Typography size={16} width="fit-content">
-              {math.evaluate(calculatorStore.formula, calculatorStore.variables) || 0}
+            <Typography size={18} width="fit-content" style={{ marginTop: 5 }}>
+              Итого система «под ключ»: ~{calculatorStore.result}
             </Typography>
-          </LayoutGroup>
-        </div>
-      </Section>
-      {/* {Object.entries(calculatorStore.variables).map((variable) => (
-        <Typography size={16} width="fit-content">
-          {variable[0]}: {variable[1]}
-        </Typography>
-      ))} */}
-    </>
+          </FooterWrapper>
+        </LayoutGroup>
+      </div>
+    </Section>
   )
 })
 

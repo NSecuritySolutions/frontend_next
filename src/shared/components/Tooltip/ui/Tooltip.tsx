@@ -15,7 +15,7 @@ const Tooltip: FC<{ text: string }> = ({ text }) => {
       {isVisible &&
         ReactDOM.createPortal(
           <Tip
-            maxWidth="200px"
+            $maxWidth="200px"
             style={{
               top: ref.current!.offsetTop,
               left: ref.current!.offsetLeft + ref.current!.offsetWidth,

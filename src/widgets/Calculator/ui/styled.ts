@@ -28,10 +28,7 @@ const ImgWrap = styled.div`
   flex-shrink: 0;
 `
 
-const ImageButton = styled(motion.button).attrs({
-  layout: 'position',
-  transition: { type: 'tween', duration: 1.5, ease: 'backOut' },
-})`
+const ImageButton = styled.button`
   background-color: transparent;
   border: none;
   display: flex;
@@ -40,4 +37,13 @@ const ImageButton = styled(motion.button).attrs({
   margin-top: 12px;
 `
 
-export { Section, SectionTitle, ImgWrap, ImageButton }
+const FooterWrapper = styled(motion.div).attrs({
+  layout: 'position',
+  transition: { type: 'tween', duration: 1.5, ease: 'backOut' },
+})`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+export { Section, SectionTitle, ImgWrap, ImageButton, FooterWrapper }
