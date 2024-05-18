@@ -1,6 +1,7 @@
 import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
+
 import { motion } from 'framer-motion'
 
 const Section = styled.div<{ height?: number }>`

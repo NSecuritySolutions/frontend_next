@@ -17,7 +17,7 @@ const Tip = styled.div<{ $maxWidth: string }>`
   z-index: 9999;
   max-width: ${(props) => props.$maxWidth};
   background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
+  color: ${colors.backgroundPrimary};
   padding: 8px;
   border-radius: 4px;
   transform: translateY(-100%);

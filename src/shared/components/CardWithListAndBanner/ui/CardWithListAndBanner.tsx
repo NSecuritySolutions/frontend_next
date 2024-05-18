@@ -29,7 +29,7 @@ const CardWithListAndBanner: FC<TCardProps> = ({ title, banner, listItem, backgr
         <List>
           {listItem.map((item, index) => (
             <ListItem key={index}>
-              {/* <Image src={listMarker} alt="List Marker" width={20} height={20} /> */}
+              <Image src={listMarker} alt="List Marker" width={20} height={20} />
               <ListItemText>{item}</ListItemText>
             </ListItem>
           ))}

@@ -11,7 +11,7 @@ const CardContainer = styled.article`
   font-size: 16px;
   color: ${colors.darkPrimary};
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
-  background: #ffffff;
+  background: ${colors.backgroundPrimary};
   padding: 46px 40px;
   align-items: flex-start;
   gap: 12px;

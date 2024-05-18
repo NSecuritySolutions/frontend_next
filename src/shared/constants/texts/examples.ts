@@ -1,10 +1,5 @@
 import { TWorkExamples } from './types'
 
-import cameraIcon from '@/assets/icons/examples/ic-camera.svg'
-import alarmIcon from '@/assets/icons/examples/ic-alarm.svg'
-import remoteIcon from '@/assets/icons/examples/ic-remote.svg'
-import fingerPrintIcon from '@/assets/icons/examples/ic-fingerprint.svg'
-
 import noImCard from '@/assets/icons/examples/no-image.svg'
 
 import firstWorksImg from '@/assets/images/works/works-image-1.webp'
@@ -22,23 +17,13 @@ export const TEXT_LIMIT: number = 120
 export const workExamples: TWorkExamples[] = [
   {
     id: 1,
-    date: '2023-10-12',
+    date: '07.12.2022',
     cardTitle: 'Установка видеонаблюдения в складском помещении',
     cardText:
       'Преимущества и возможности системы видеонаблюдения на примере складов в Новосибирске.',
     cardLink: '/',
-    cardImage: firstWorksImg,
-    cardIcons: [
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
+    cardImage: fifthWorksImg,
 
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
@@ -57,30 +42,12 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 2,
-    date: '2023-10-11',
-    cardImage: thirdWorksImg,
+    date: '07.10.2021',
+    cardImage: sixthWorksImg,
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
     cardLink: '/',
-    cardIcons: [
-      {
-        link: fingerPrintIcon,
-        alt: 'СКУД',
-      },
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
 
-      {
-        link: remoteIcon,
-        alt: 'Домофония',
-      },
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
@@ -100,37 +67,19 @@ export const workExamples: TWorkExamples[] = [
 
   {
     id: 3,
-    date: '2023-10-10',
+    date: '17.10.2022',
     cardTitle: 'Обеспечьте безопасность вашей дачи',
     cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
     cardLink: '/',
-    cardImage: secondWorksImg,
-    cardIcons: [
-      {
-        link: fingerPrintIcon,
-        alt: 'СКУД',
-      },
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
+    cardImage: seventhWorksImg,
 
-      {
-        link: remoteIcon,
-        alt: 'Домофония',
-      },
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
       { number: '136 970 ₽', description: 'бюджет' },
       { number: '265 м\u00B2', description: 'оборудовано' },
     ],
-    img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
+    img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 6 шт', 'Провода 900 м'],
     text: `Видеонаблюдение становится все более популярным вариантом обеспечения безопасности в загородных домах. Оно позволяет в режиме реального времени следить за происходящим на участке и в случае необходимости принимать меры.
   <br/>
@@ -142,25 +91,12 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 4,
-    date: '2023-10-09',
+    date: '12.10.2022',
     cardTitle: 'Заголовок',
     cardText: 'Небольшой текст.',
     cardLink: '/',
-    cardImage: thirdWorksImg,
-    cardIcons: [
-      {
-        link: fingerPrintIcon,
-        alt: 'СКУД',
-      },
-      {
-        link: cameraIcon,
-        alt: 'Видеонаблюдение',
-      },
-      {
-        link: alarmIcon,
-        alt: 'Сигнализация',
-      },
-    ],
+    cardImage: eighthWorksImg,
+
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
       { number: '10 дней', description: 'сроки' },
@@ -179,7 +115,7 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 5,
-    date: '2023-10-08',
+    //date: '2023-10-08',
     cardTitle:
       'Установка видеонаблюдения в складском помещении dfgdfbgdfghsfghsfghbsfgnf dfgsdghbfgbc dfgsfgnsf sfgndgf',
     cardText:
@@ -204,7 +140,7 @@ export const workExamples: TWorkExamples[] = [
   },
   {
     id: 6,
-    date: '2023-10-07',
+    date: '07.10.2022',
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
     cardLink: '/',
@@ -217,6 +153,31 @@ export const workExamples: TWorkExamples[] = [
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 68 шт', 'Провода 1480м'],
+    text: `Видеонаблюдение становится все более популярным вариантом обеспечения безопасности в загородных домах. Оно позволяет в режиме реального времени следить за происходящим на участке и в случае необходимости принимать меры.
+  <br/>
+  Перед установкой видеонаблюдения необходимо подключить интернет. Для загородных домов, где нет возможности подключения проводного интернета, можно использовать 3G модемы и роутеры.
+  <br/>
+  Одной из лучших моделей 3G модемов является <a href='/' target='_blank'>Huawei E8372</a>. Он поддерживает высокую скорость передачи данных (до 150 Мбит/с) и имеет функцию Wi-Fi, что позволяет подключать к нему несколько устройств одновременно.
+  <br/>
+  Для создания беспроводной сети можно использовать роутер <a href='/' target='_blank'>TP-Link Archer MR600</a> . Он поддерживает современный стандарт Wi-Fi 802.11ac и имеет 4G LTE модем, что позволяет получать высокую скорость интернета.`,
+  },
+
+  {
+    id: 7,
+    date: '06.10.2022',
+    cardTitle: 'Обеспечьте безопасность вашей дачи',
+    cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
+    cardLink: '/',
+    cardImage: seventhWorksImg,
+
+    title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
+    quantities: [
+      { number: '10 дней', description: 'сроки' },
+      { number: '136 970 ₽', description: 'бюджет' },
+      { number: '265 м\u00B2', description: 'оборудовано' },
+    ],
+    img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
+    equipment: ['Камера 6 шт', 'Провода 900 м'],
     text: `Видеонаблюдение становится все более популярным вариантом обеспечения безопасности в загородных домах. Оно позволяет в режиме реального времени следить за происходящим на участке и в случае необходимости принимать меры.
   <br/>
   Перед установкой видеонаблюдения необходимо подключить интернет. Для загородных домов, где нет возможности подключения проводного интернета, можно использовать 3G модемы и роутеры.

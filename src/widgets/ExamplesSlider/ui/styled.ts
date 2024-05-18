@@ -130,12 +130,11 @@ const ExamplesContainer = styled.article`
 const ExamplesLink = styled.a`
   text-decoration: none;
 `
-const ExamplesImg = styled.img`
+const ExamplesImgWrapper = styled.div`
   border-radius: 12px;
-  background-color: #fff;
+  background-color: ${colors.backgroundPrimary};
   max-width: 200px;
   min-height: 200px;
-  object-fit: cover;
 
   @media (max-width: 1280px) {
     min-width: 390px;
@@ -220,6 +219,9 @@ const IconWrapper = styled.div`
   display: flex !important;
   flex-direction: row;
   column-gap: 12px !important;
+  font-weight: 400;
+  font-size: 16px;
+  color: ${colors.darkPrimary};
 
   @media (max-width: 916px) {
     flex-direction: row;
@@ -233,14 +235,40 @@ const ExamplesIcons = styled.div`
   display: flex !important;
   flex-direction: row;
 `
+const InfoIconWrapper = styled.div`
+  width: 100%;
+  display: flex !important;
+  flex-direction: row;
+  font-weight: 800;
+  font-size: 15px;
+  color: ${colors.darkPrimary};
+  line-height: 133%;
+  gap: 12px !important;
+  justify-content: flex-start;
+  align-content: center;
 
+  @media (max-width: 916px) {
+    display: flex !important;
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+`
+const InfoIcon = styled.div`
+  border-radius: 8px;
+  padding: 8px 12px;
+  height: 36px;
+  background-color: ${colors.backgroundBase4};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 export {
   ExamplesContainer,
   CardWrapper,
   ExamplesTitle,
   ExamplesText,
   ExamplesButton,
-  ExamplesImg,
   SliderContainer,
   CustomDot,
   ColumnTitle,
@@ -249,4 +277,7 @@ export {
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
+  InfoIcon,
+  InfoIconWrapper,
+  ExamplesImgWrapper,
 }

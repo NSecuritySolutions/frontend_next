@@ -41,22 +41,9 @@ const CardText = styled.li`
   font-size: 16px;
   max-width: 500px;
   width: 90%;
-
-  // &:before {
-  //   content: '';
-  //   display: inline-block;
-  //   width: 5px;
-  //   height: 5px;
-  //   border-radius: 50%;
-  //   background-color: #000;
-  //   margin-right: 10px;
-  //   flex: 1;
-  //   max-width: 5px;
-  //   min-width: 5px;
-  // }
 `
 
-const CardImg = styled.img`
+const CardImg = styled.div`
   position: absolute;
   top: 151px;
   right: 0px;

@@ -127,7 +127,7 @@ const Calculator: React.FC = observer(() => {
   }
 
   return (
-    <Section height={height}>
+    <Section height={height} id="calculator">
       <div>
         <SectionTitle>Калькулятор</SectionTitle>
         <LayoutGroup>
