@@ -61,12 +61,7 @@ const CalculatorCard: React.FC<CalculatorCardProps> = ({
         {options.map((option, index) => (
           <Option style={{ marginTop: index != 0 ? '8px' : 0 }} key={index}>
             <OptionHeader>
-              <Typography
-                size={13}
-                width="100%"
-                $justifyContent="start"
-                color={colors.textSecondary}
-              >
+              <Typography size={13} width="100%" color={colors.textSecondary}>
                 {option.title}
               </Typography>
               <Tooltip text={option.tooltip} />

@@ -1,3 +1,4 @@
+'use client'
 import colors from '@/shared/constants/colors'
 import { StaticImageData } from 'next/image'
 

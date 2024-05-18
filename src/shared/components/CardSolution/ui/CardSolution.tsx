@@ -17,18 +17,24 @@ import {
   ToolTipParagraph,
 } from './styled'
 import colors from '@/shared/constants/colors'
+import Link from 'next/link'
+import { Typography } from '../../CalculatorCard/ui/styled'
 
 export type TCardSolutionProps = {
   id?: number
   title: string
   img: StaticImageData
   listItem: string[]
-  price: string
+  price: number
   toolTipText: string[]
 }
 
-const CardSolution: FC<TCardSolutionProps> = ({ title, img, listItem, price, toolTipText }) => {
-  const formattedPrice = Number(price).toLocaleString('ru-RU')
+interface CardSolutionProps {
+  data: TCardSolutionProps
+}
+
+const CardSolution: FC<CardSolutionProps> = ({ data }) => {
+  const formattedPrice = Number(data.price).toLocaleString('ru-RU')
   const [showTooltip, setShowTooltip] = useState(false)
 
   const handleMouseEnter = () => {
@@ -46,27 +52,27 @@ const CardSolution: FC<TCardSolutionProps> = ({ title, img, listItem, price, too
       <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
       {showTooltip && (
         <TooltipContainer>
-          <CardTitle>{title}</CardTitle>
-          {toolTipText.map((paragraph, index) => (
+          <CardTitle>{data.title}</CardTitle>
+          {data.toolTipText.map((paragraph, index) => (
             <ToolTipParagraph key={index}>{paragraph}</ToolTipParagraph>
           ))}
         </TooltipContainer>
       )}
       <CardImgWrapper>
-        {/* <Image
-          src={img}
-          alt={title}
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          fill
-        /> */}
+        <Image src={data.img} alt={data.title} />
       </CardImgWrapper>
-      <CardTitle>{title}</CardTitle>
+      <CardTitle>{data.title}</CardTitle>
       <ListTitle>Характеристики</ListTitle>
       <CharacteristicsList>
-        {listItem.map((item, index) => (
+        {data.listItem.map((item, index) => (
           <ListItem key={index}>{item}</ListItem>
         ))}
       </CharacteristicsList>
+      <Link href={`/products/${data.id}`}>
+        <Typography size={16} $weight={400} color={colors.titleBlueColor}>
+          Подробнее...
+        </Typography>
+      </Link>
       <ListTitle>Выезд инженера - Бесплатно!</ListTitle>
       <PriceText>{`${formattedPrice} ₽`}</PriceText>
       <BtnLink

@@ -73,17 +73,18 @@ const Title = styled.p`
 `
 
 const Typography = styled.p<{
-  width: string
-  size: number
+  width?: string
+  size?: number
+  $weight?: number
   $justifyContent?: 'start' | 'center' | 'end'
   color?: string
 }>`
   display: flex;
-  font-size: ${(props) => props.size}px;
+  font-size: ${(props) => props.size || 20}px;
   font: Manrope;
-  font-weight: 700;
-  justify-content: ${(props) => props.$justifyContent || 'center'};
-  width: ${(props) => props.width};
+  font-weight: ${(props) => props.$weight || 700};
+  justify-content: ${(props) => props.$justifyContent || 'start'};
+  width: ${(props) => props.width || 'fit-content'};
   color: ${(props) => props.color || colors.darkPrimary}}
 `
 

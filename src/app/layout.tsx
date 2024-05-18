@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     siteName: 'Оптиконтроль',
     images: [
       {
-        url: 'http://localhost:3000/src/app/icon7.png', //@TODO дописать путь к картинке для твиттера
+        url: '/icon7.png', //@TODO дописать путь к картинке для твиттера
         width: 800,
         height: 600,
       },
       {
-        url: 'http://localhost:3000/src/app/icon6.png', //@TODO дописать путь к картинке для твиттера
+        url: '/icon6.png', //@TODO дописать путь к картинке для твиттера
         width: 1800,
         height: 1600,
         alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
