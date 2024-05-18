@@ -1,4 +1,4 @@
-import { Product } from '@/pages/Product'
+import { Product } from '@/widgets/Product'
 import { cardSolutionData } from '@/shared/constants/texts/cards-solution'
 
 export default function Page({ params }: { params: { id: string } }) {
