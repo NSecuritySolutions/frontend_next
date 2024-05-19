@@ -4,15 +4,20 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['localhost'],
     formats: ['image/avif', 'image/webp'],
 
     remotePatterns: [
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '3000',
-        pathname: '*',
+        port: '8000',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
