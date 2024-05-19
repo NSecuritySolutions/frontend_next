@@ -10,7 +10,6 @@ import {
   FooterContactLink,
   FooterContactLogo,
   FooterContactsContainer,
-  FooterDeveloperInfoBox,
   FooterDeveloperLink,
   FooterRights,
   FooterRightsText,

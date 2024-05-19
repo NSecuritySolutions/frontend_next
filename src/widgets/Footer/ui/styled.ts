@@ -137,10 +137,6 @@ const FooterRights = styled.div`
   } */
 `
 
-const FooterDeveloperInfoBox = styled.div`
-  padding-top: 16px;
-`
-
 const FooterRightsText = styled.p`
   font-size: 16px;
   line-height: 136%;
@@ -170,7 +166,6 @@ export {
   FooterBottomContainer,
   FooterRights,
   FooterRightsText,
-  FooterDeveloperInfoBox,
   FooterDeveloperLink,
   FooterLogoContainer,
   FooterContactsContainer,
