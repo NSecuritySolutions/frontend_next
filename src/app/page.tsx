@@ -18,6 +18,7 @@ import { OurClients } from '@/widgets/OurClients'
 
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
+import { ScrollButton } from '@/shared/components/ScrollButton'
 
 export default function Home() {
   //@TODO : если вдруг понадобится в последствии
@@ -48,6 +49,7 @@ export default function Home() {
         <ExamplesSlider />
         <OurClients />
         <ContactForm />
+        <ScrollButton />
       </>
       {/* )} */}
     </>

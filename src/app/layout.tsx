@@ -13,6 +13,7 @@ import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
 import StyledComponentsRegistry from '@/app/styling/registry'
 
 import styles from './page.module.css'
+import { ScrollButton } from '@/shared/components/ScrollButton'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
