@@ -75,10 +75,7 @@ const ScrollButton = () => {
               padding: 7,
             }}
           />
-          {/* @TODO Не забыть убрать width, после мержа */}
-          <Typography size={13} width="fit-content">
-            наверх
-          </Typography>
+          <Typography size={13}>наверх</Typography>
         </FloatDiv>
       )}
     </AnimatePresence>
