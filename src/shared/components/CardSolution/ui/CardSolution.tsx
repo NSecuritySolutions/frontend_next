@@ -19,6 +19,7 @@ import {
 import colors from '@/shared/constants/colors'
 import Link from 'next/link'
 import { Typography } from '../../CalculatorCard/ui/styled'
+import { ProductButtonGroup } from '../../ProductButtonGroup'
 
 export type TCardSolutionProps = {
   id?: number
@@ -53,6 +54,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
       {showTooltip && (
         <TooltipContainer>
           <CardTitle>{data.title}</CardTitle>
+          {/* @TODO Сделать нормальный tooltip */}
           {data.toolTipText.map((paragraph, index) => (
             <ToolTipParagraph key={index}>{paragraph}</ToolTipParagraph>
           ))}
@@ -75,24 +77,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
       </Link>
       <ListTitle>Выезд инженера - Бесплатно!</ListTitle>
       <PriceText>{`${formattedPrice} ₽`}</PriceText>
-      <BtnLink
-        btnType="accent"
-        text="В калькулятор"
-        width="235px"
-        height="44px"
-        link=""
-        color={colors.darkPrimary}
-        size="15px"
-      />
-      <BtnLink
-        btnType="transparent"
-        text="Заказать звонок"
-        width="235px"
-        height="44px"
-        link=""
-        color={colors.darkPrimary}
-        size="15px"
-      />
+      <ProductButtonGroup link="" />
     </Card>
   )
 }

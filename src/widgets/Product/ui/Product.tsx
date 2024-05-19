@@ -6,13 +6,14 @@ import Image from 'next/image'
 import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs'
+import Loader from '@/shared/components/Loader/Loader'
 
 interface ProductProps {
   data: TCardSolutionProps
 }
 
 const Product: FC<ProductProps> = ({ data }) => {
-  if (!data) return <></> // Почему-то next не видит сразу data
+  if (!data) return Loader()
 
   return (
     <div>
