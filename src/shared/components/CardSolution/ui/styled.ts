@@ -1,5 +1,3 @@
-import infoBtn from '../../../../assets/icons/additionalInfoBtn.svg'
-
 import styled from 'styled-components'
 import colors from '../../../constants/colors'
 
@@ -73,9 +71,9 @@ const InfoBtn = styled.div`
   position: absolute;
   top: 14px;
   right: 14px;
-  background-image: ${`url("${infoBtn}")`};
-  width: 15px;
-  height: 15px;
+  background-image: url('/icons/additionalInfoBtn.svg');
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 `
 
