@@ -77,3 +77,7 @@ body.modal-open {
     transform: rotate(1turn);
   }
 }
+
+main {
+  position: relative;
+}
