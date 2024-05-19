@@ -94,11 +94,9 @@ const LogoWrapper = styled.div`
 `
 
 const LogoYandex = styled.div<{
-  $imgUrl?: StaticImageData | string
-  $imgUrl1?: string
   alt?: string
 }>`
-  background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
+  background: url('/images/clients/webp/yandex.webp') no-repeat;
   background-position: 0px -160px;
   background-size: cover;
   height: 160px;
@@ -114,8 +112,8 @@ const LogoYandex = styled.div<{
   }
 `
 
-const LogoSamokat = styled.div<{ $imgUrl?: StaticImageData | string; alt?: string }>`
-  background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
+const LogoSamokat = styled.div<{ alt?: string }>`
+  background: url('/images/clients/webp/samokat.webp') no-repeat;
   background-position: -0.2px -190.3px;
   background-size: cover;
   height: 190px;
@@ -138,8 +136,8 @@ const LogoSamokat = styled.div<{ $imgUrl?: StaticImageData | string; alt?: strin
   }
 `
 
-const LogoRostelecom = styled.div<{ $imgUrl?: StaticImageData | string; alt?: string }>`
-  background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
+const LogoRostelecom = styled.div<{ alt?: string }>`
+  background: url('/images/clients/webp/rostelekom.webp') no-repeat;
   background-position: 0px -150.9px;
   background-size: cover;
   height: 151px;
@@ -155,8 +153,8 @@ const LogoRostelecom = styled.div<{ $imgUrl?: StaticImageData | string; alt?: st
   }
 `
 
-const LogoAvon = styled.div<{ $imgUrl?: StaticImageData | string; alt?: string }>`
-  background: ${(props) => `url(${props.$imgUrl}) no-repeat`};
+const LogoAvon = styled.div<{ alt?: string }>`
+  background: url('/images/clients/webp/avon.webp') no-repeat;
   background-position: -1px -151.5px;
   background-size: cover;
   height: 160px;

@@ -11,7 +11,6 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   border-radius: 20px;
   color: ${colors.darkPrimary};
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
-  //background: #FFFFFF;
   font-weight: 400;
   font-size: 16px;
   gap: 20px;
