@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-import { TBtnLinkProps } from '../types/types'
+import { TBtnProps } from '../types/types'
 import { StyledBtnLink } from './styles'
 
-const BtnLink: React.FC<TBtnLinkProps> = ({ width, height, color, text, disabled, onClick }) => {
+const Btn: FC<TBtnProps> = ({ width, height, color, text, disabled, onClick }) => {
   return (
     <StyledBtnLink
       color={color}
@@ -17,4 +17,4 @@ const BtnLink: React.FC<TBtnLinkProps> = ({ width, height, color, text, disabled
   )
 }
 
-export default BtnLink
+export default Btn

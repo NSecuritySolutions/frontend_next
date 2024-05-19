@@ -21,7 +21,6 @@ const FooterTop = styled.div`
 const FooterTopContainer = styled.div`
   max-width: 1180px;
   margin: 0 auto;
-  border-top: 1px solid ${colors.darkSecondary};
   padding-top: 24px;
   padding-bottom: 60px;
   display: flex;

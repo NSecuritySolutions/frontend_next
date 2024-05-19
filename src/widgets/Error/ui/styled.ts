@@ -3,10 +3,8 @@ import colors from '@/shared/constants/colors'
 import styled from 'styled-components'
 
 const Section = styled.section`
-  padding-top: 118px;
-  padding-bottom: 170px;
   background-color: ${colors.backgroundBase2};
-  height: 100vh;
+
   @media (max-width: 760px) {
     background-color: ${colors.backgroundPrimary};
   }
@@ -14,17 +12,17 @@ const Section = styled.section`
 
 const ColumnConatiner = styled.div`
   position: relative;
-  margin: 0 auto;
+  margin: 140px auto 40px;
   border-radius: 20px;
-  max-width: 1180px;
-  width: 100%;
-  height: 700px;
+  width: 1180px;
+  height: 565px;
   box-shadow: 2px 2px 25px 0px rgba(16, 16, 16, 0.05);
-  background-color: var(--base-01, #fff);
+  background-color: ${colors.backgroundPrimary};
   display: flex;
   flex-direction: column;
-  padding: 90px 80px 8px;
+  padding: 120px 84px;
 
+  justify-content: center;
   @media (max-width: 1300px) {
     padding: 80px 60px 8px;
     height: 522px;
@@ -48,9 +46,9 @@ const ColumnConatiner = styled.div`
 `
 
 const ColumnWrapper = styled.div`
-  max-width: 539px;
+  max-width: 1180px;
   width: 100%;
-  gap: 20px;
+  gap: 40px;
   display: flex;
 
   @media (max-width: 1300px) {
@@ -76,9 +74,14 @@ const ImgColumn = styled.div`
   display: flex;
   flex-direction: column;
   line-height: normal;
-  max-width: 80px;
+  min-width: 572px;
   width: 100%;
   margin-left: 0px;
+  position: relative;
+
+  @media (max-width: 1280px) {
+    display: none;
+  }
 
   @media (max-width: 760px) {
     display: none;
@@ -88,20 +91,15 @@ const ImgColumn = styled.div`
   }
 `
 
-const Img = styled.img`
-  aspect-ratio: 1;
-  object-fit: auto;
-  object-position: center;
-  width: 80px;
-`
-
 const TextColumn = styled.div`
   display: flex;
   flex-direction: column;
   line-height: normal;
   margin-top: 14px;
   gap: 24px;
+  min-width: 400px;
   width: 100%;
+
   @media (max-width: 1300px) {
     margin-top: 20px;
     width: 100%;
@@ -127,6 +125,7 @@ const ErrorText = styled.p`
   font:
     400 16px Manrope,
     sans-serif;
+
   @media (max-width: 1300px) {
     max-width: 100%;
   }
@@ -141,8 +140,8 @@ const ErrorButton = styled.a`
   display: flex;
   justify-content: center;
   border-radius: 12px;
-  background-color: var(--primary, #fcc12d);
-  color: var(--text-01, #101010);
+  background-color: ${colors.btnPrimary};
+  color: ${colors.darkPrimary};
   max-width: 160px;
   width: 100%;
   min-height: 56px;
@@ -163,33 +162,35 @@ const ErrorButton = styled.a`
 `
 
 const ErrorImgWrapper = styled.div`
-  position: absolute;
-  top: 250px;
-  left: 522px;
   max-width: 556px;
   width: 100%;
   max-height: 415px;
   align-self: center;
 
   @media (max-width: 1300px) {
-    top: 195px;
-    left: 450px;
-    max-width: 419px;
-    width: 100%;
-    max-height: 318px;
+    // top: 195px;
+    // left: 450px;
+    // max-width: 419px;
+    // width: 100%;
+    // max-height: 318px;
+
+    display: none;
   }
 
   @media (max-width: 940px) {
-    top: 177px;
-    left: 388px;
-    max-width: 286px;
-    width: 100%;
-    max-height: 221px;
+    // top: 177px;
+    // left: 388px;
+    // max-width: 286px;
+    // width: 100%;
+    // max-height: 221px;
+    display: none;
   }
   @media (max-width: 760px) {
-    position: relative;
-    left: 0;
-    top: 0;
+    // position: relative;
+    // left: 0;
+    // top: 0;
+    // display: none;
+
     display: none;
   }
 `
@@ -218,7 +219,6 @@ export {
   ErrorName,
   ErrorText,
   ErrorButton,
-  Img,
   ErrorImgWrapper,
   ImgColumn,
   TextColumn,

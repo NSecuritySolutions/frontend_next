@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import Image from 'next/image'
+
 import { BtnLink } from '@/shared/components/BtnLink'
 
 import colors from '@/shared/constants/colors/index.ts'
@@ -34,7 +36,9 @@ const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
         color={colors.darkPrimary}
         size="15px"
       ></BtnLink>
-      {/* <CardImg src={img} alt={title} /> */}
+      <CardImg>
+        <Image src={img} alt={title} width={300} height={169} />
+      </CardImg>
     </Card>
   )
 }

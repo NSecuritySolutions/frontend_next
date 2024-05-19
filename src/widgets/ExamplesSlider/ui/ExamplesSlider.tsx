@@ -1,11 +1,15 @@
+'use client'
+
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
+import Image from 'next/image'
+
 import colors from '@/shared/constants/colors'
 
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-
-import { TEXT_LIMIT, TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
@@ -13,6 +17,8 @@ import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 import blankImg from '@/assets/icons/examples/no-image.svg'
 
 import { ChangeFormateDate } from '@/shared/constants/utils/utils.ts'
+
+import { TEXT_LIMIT, TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
 import {
   SliderContainer,
@@ -23,10 +29,12 @@ import {
   ExamplesContainer,
   ExamplesTitle,
   ExamplesText,
-  ExamplesImg,
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
+  InfoIcon,
+  InfoIconWrapper,
+  ExamplesImgWrapper,
 } from './styled.ts'
 import Modal from '@/shared/components/Modal/ui/Modal'
 
@@ -35,6 +43,8 @@ const ExamplesSlider: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [modalItem, setModalItem] = useState<TWorkExamples | undefined>()
 
+  const router = useRouter()
+
   const openModal = (item: TWorkExamples) => {
     setIsOpen(true)
     setModalItem(item)
@@ -42,6 +52,7 @@ const ExamplesSlider: React.FC = () => {
 
   const closeModal = () => {
     setIsOpen(false)
+    router.push('/#examples')
   }
 
   const handleAfterChange = (slideIndex: number) => {
@@ -92,11 +103,9 @@ const ExamplesSlider: React.FC = () => {
     }
   }
 
-  const newDate = modalItem?.date ? ChangeFormateDate(modalItem.date.toString()) : ''
-
   return (
     <>
-      <SliderContainer className="slider-container">
+      <SliderContainer className="slider-container" id="examples">
         <ColumnTitle>Примеры наших работ</ColumnTitle>
         <Slider {...settings} afterChange={handleAfterChange}>
           {workExamples
@@ -109,16 +118,36 @@ const ExamplesSlider: React.FC = () => {
               <CardWrapper key={item.id}>
                 {item.cardImage ? (
                   <ExamplesLink onClick={() => openModal(item)}>
-                    {/* <ExamplesImg src={item?.cardImage} alt={item.cardTitle}></ExamplesImg> */}
+                    <ExamplesImgWrapper>
+                      <Image
+                        src={item?.cardImage}
+                        alt={item.cardTitle}
+                        width={200}
+                        height={200}
+                        style={{ objectFit: 'cover', borderRadius: '12px' }}
+                      />
+                    </ExamplesImgWrapper>
                   </ExamplesLink>
                 ) : (
-                  ''
-                  // <ExamplesImg src={(item.cardImage = blankImg)}></ExamplesImg>
+                  <ExamplesImgWrapper>
+                    <Image
+                      src={(item.cardImage = blankImg)}
+                      width={200}
+                      height={200}
+                      alt={'Пустая картинка'}
+                    ></Image>
+                  </ExamplesImgWrapper>
                 )}
                 <ExamplesContainer className="slick-slide" key={i}>
                   <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                  <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText>
+                  {/* <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText> */}
+
+                  <InfoIconWrapper>
+                    {item.quantities.map((item, i) => (
+                      <InfoIcon key={i}>{item.number}</InfoIcon>
+                    ))}
+                  </InfoIconWrapper>
 
                   <ButtonWrapper>
                     <BtnLink
@@ -131,7 +160,7 @@ const ExamplesSlider: React.FC = () => {
                       onClick={() => openModal(item)}
                     ></BtnLink>
 
-                    <IconWrapper>{newDate}</IconWrapper>
+                    <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
                   </ButtonWrapper>
                 </ExamplesContainer>
               </CardWrapper>
@@ -144,7 +173,7 @@ const ExamplesSlider: React.FC = () => {
             height="44px"
             color={colors.darkPrimary}
             text="Смотреть все примеры работ"
-            link="#"
+            link="/ourworks"
           />
         </SecondButtonWrapper>
       </SliderContainer>

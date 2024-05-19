@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import Image from 'next/image'
+
 import { BtnLink } from '../../BtnLink'
 
 import {
@@ -34,7 +36,9 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
 }) => {
   return (
     <Card $backgroundColor={backgroundColor}>
-      <ImgWrapper>{/* <CardImg src={img} alt={title} /> */}</ImgWrapper>
+      <CardImg>
+        <Image src={img} alt={title} width={540} height={305} />
+      </CardImg>
       <TextWrapper>
         <CardTitle>{title}</CardTitle>
         <TextContainer>

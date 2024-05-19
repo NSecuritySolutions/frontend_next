@@ -16,12 +16,11 @@ const CardWithList: FC<TCardProps> = ({ title, logo, listItem, backgroundColor }
     <Card $backgroundColor={backgroundColor}>
       <TitleContainer>
         <div style={{ width: '40px', height: '40px' }}>
-          {/* <Image
+          <Image
             src={logo}
-            alt="Logo"
+            alt="Логотип"
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-            fill
-          /> */}
+          />
         </div>
 
         <CardTitle>{title}</CardTitle>
@@ -29,7 +28,7 @@ const CardWithList: FC<TCardProps> = ({ title, logo, listItem, backgroundColor }
       <List>
         {listItem.map((item, index) => (
           <ListItem key={index}>
-            <Image src={listMarker} alt="List Marker" width={100} height={100} />
+            <Image src={listMarker} alt="Маркер списка" width={20} height={20} />
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
