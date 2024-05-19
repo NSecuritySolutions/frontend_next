@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { navColumnLists, contacts } from './temporaryConsts'
 
 import {
@@ -9,12 +10,10 @@ import {
   FooterContactLink,
   FooterContactLogo,
   FooterContactsContainer,
-  FooterDeveloperInfoBox,
   FooterDeveloperLink,
   FooterRights,
   FooterRightsText,
-  FooterSocialContainer,
-  FooterSocialIcon,
+  FooterLogoContainer,
   FooterSocialIconLink,
   FooterSocialIconsContainer,
   FooterTop,
@@ -22,28 +21,31 @@ import {
   FooterWrapper,
   FooterBtnWrapper,
   FooterContactsContentWrapper,
+  FooterTextInfoWrapper,
 } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
 import { Logo } from '@/shared/components/Logo'
 import { NavColumn } from '@/shared/components/NavColumn'
 
-export default function Footer() {
+const Footer = () => {
   return (
     <FooterWrapper>
       <FooterTop>
         <FooterTopContainer>
-          <FooterSocialContainer>
-            <Logo imageUrl={''} />
-            <FooterSocialIconsContainer>
-              <FooterSocialIconLink href="#" target="_blank">
-                <FooterSocialIcon src={''} alt="Лого" />
-              </FooterSocialIconLink>
-              <FooterSocialIconLink href="#" target="_blank">
-                <FooterSocialIcon src={''} alt="Лого" />
-              </FooterSocialIconLink>
-            </FooterSocialIconsContainer>
-          </FooterSocialContainer>
+          <FooterLogoContainer>
+            <Logo />
+          </FooterLogoContainer>
+          <FooterBtnWrapper>
+            <BtnLink
+              size="15px"
+              width="100%"
+              height="56px"
+              color={colors.darkPrimary}
+              text="Обратный звонок"
+              link="#contact-form"
+            />
+          </FooterBtnWrapper>
           <NavColumn lists={navColumnLists} />
           <FooterContactsContainer>
             <FooterContactsContentWrapper>
@@ -54,42 +56,49 @@ export default function Footer() {
                 </FooterContactContainer>
               ))}
             </FooterContactsContentWrapper>
-            <FooterBtnWrapper>
-              <BtnLink
-                size="15px"
-                width="100%"
-                height="56px"
-                color={colors.darkPrimary}
-                text="Оставить заявку"
-                link="#contact-form"
-              />
-            </FooterBtnWrapper>
+            <FooterSocialIconsContainer>
+              <FooterSocialIconLink href="#" target="_blank">
+                <Image src="/icons/telegram.svg" width={32} height={32} alt="tg" />
+              </FooterSocialIconLink>
+              <FooterSocialIconLink href="#" target="_blank">
+                <Image src="/icons/whatsapp.svg" width={32} height={32} alt="wa" />
+              </FooterSocialIconLink>
+            </FooterSocialIconsContainer>
           </FooterContactsContainer>
         </FooterTopContainer>
       </FooterTop>
       <FooterBottom>
         <FooterBottomContainer>
           <FooterRights>
-            <FooterRightsText>
-              © 2020-2024 Интернет-компания
-              <FooterDeveloperLink href="#" target="_blank">
-                ХХХ
-              </FooterDeveloperLink>
-            </FooterRightsText>
-            <FooterRightsText>Информация на сайте не является публичной офертой</FooterRightsText>
-            <FooterRightsText>Актуальные цены уточняйте у менеджеров</FooterRightsText>
-            <FooterDeveloperInfoBox>
+            <FooterTextInfoWrapper>
+              <FooterRightsText>© 2020-2024 </FooterRightsText>
               <FooterRightsText>
-                Сайт разработан командой
+                Интернет-компания{' '}
+                <FooterDeveloperLink href="#" target="_blank">
+                  ХХХ
+                </FooterDeveloperLink>
+              </FooterRightsText>
+            </FooterTextInfoWrapper>
+
+            <FooterTextInfoWrapper>
+              <FooterRightsText>Информация на сайте не является публичной офертой</FooterRightsText>
+              <FooterRightsText>Актуальные цены уточняйте у менеджеров</FooterRightsText>
+            </FooterTextInfoWrapper>
+
+            <FooterTextInfoWrapper>
+              <FooterRightsText>
+                Сайт разработан{' '}
                 <FooterDeveloperLink href="#" target="_blank">
                   ХХХ Studio
                 </FooterDeveloperLink>
-                . 2024
               </FooterRightsText>
-            </FooterDeveloperInfoBox>
+              <FooterRightsText>2024</FooterRightsText>
+            </FooterTextInfoWrapper>
           </FooterRights>
         </FooterBottomContainer>
       </FooterBottom>
     </FooterWrapper>
   )
 }
+
+export default Footer

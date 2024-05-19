@@ -1,21 +1,39 @@
 import styled from 'styled-components'
-import { TLogoImageProps } from '../types/types'
 import Link from 'next/link'
+import colors from '@/shared/constants/colors'
 
-//TODO сделать когда будет лого готов у дизайнеров
 const LogoContainer = styled.div`
   display: flex;
-  width: 136px;
-  height: 40px;
+  width: 344px;
+  height: 61px;
 `
 
-//TODO сделать когда будет лого готов у дизайнеров: добавить стили если лого будет с текстом
 const LogoLink = styled(Link)`
   text-decoration: none;
+  display: flex;
+  gap: 6px;
+  align-items: center;
 `
 
-const LogoImage = styled.img<TLogoImageProps>`
-  background: transparent;
+const LogoTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
-export { LogoContainer, LogoImage, LogoLink }
+const LogoTitle = styled.h1`
+  font-size: 24px;
+  font-weight: 700;
+  color: ${colors.textSecondary};
+`
+
+const LogoSubTitle = styled.h2`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${colors.darkPrimary};
+`
+
+const LogoTitleSpan = styled.span`
+  color: ${colors.btnPrimary};
+`
+
+export { LogoContainer, LogoLink, LogoTextWrapper, LogoTitle, LogoSubTitle, LogoTitleSpan }
