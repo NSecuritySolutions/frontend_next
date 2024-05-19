@@ -17,6 +17,8 @@ const Card = styled(motion.div).attrs({
   padding: ${(props) => (props.$expanded ? '12px' : '23px 12px')};
   max-height: ${(props) => (props.$expanded ? `${89 + props.len * 36}px` : '89px')};
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   width: 430px;
   grid-row: span 3;
@@ -90,12 +92,12 @@ const Typography = styled.p<{
 const Divider = styled.div<{ $show: boolean }>`
   border: 1px solid ${colors.backgroundCardBl};
   width: 100%;
-  margin-block: 12px;
   opacity: ${(props) => (props.$show ? 1 : 0)};
   transition: opacity 0.5s;
 `
 
 const Option = styled.div`
+  height: 36px;
   display: flex;
   align-items: center;
   gap: 20px;

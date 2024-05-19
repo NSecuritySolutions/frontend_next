@@ -22,7 +22,7 @@ import CalculatorBlockStore from '../store.ts'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore
-  handleAmountChange: (condition: boolean) => void
+  handleAmountChange: (condition: boolean, len: number, card: HTMLDivElement) => void
 }
 
 const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleAmountChange }) => {
@@ -32,32 +32,32 @@ const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleA
 
   const handleChange = (v: number) => {
     store.setVariable(data.title, v.toString())
-    handleAmountChange(amount === 0 && v !== 0)
+    handleAmountChange(amount === 0 && v !== 0, data.options.length, ref.current!)
   }
 
   return (
     <Card $center={amount === 0} $expanded={amount > 0} len={data.options.length} ref={ref}>
-      <div>
-        <CardHeader>
-          <ImageTitle>
-            <CardImgWrapper>
-              <Image src={data.image} width={37} height={37} alt={data.title} />
-            </CardImgWrapper>
-            <Title>{data.title}</Title>
-          </ImageTitle>
-          <AmountComponent amount={amount} onChange={handleChange} />
-          <Typography size={18} width="120px" $justifyContent="end">
-            {store.result.toLocaleString('ru-RU', {
-              style: 'currency',
-              currency: 'RUB',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </Typography>
-        </CardHeader>
-        <Divider $show={amount > 0} />
+      <CardHeader>
+        <ImageTitle>
+          <CardImgWrapper>
+            <Image src={data.image} width={37} height={37} alt={data.title} />
+          </CardImgWrapper>
+          <Title>{data.title}</Title>
+        </ImageTitle>
+        <AmountComponent amount={amount} onChange={handleChange} />
+        <Typography size={18} width="120px" $justifyContent="end">
+          {store.result.toLocaleString('ru-RU', {
+            style: 'currency',
+            currency: 'RUB',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </Typography>
+      </CardHeader>
+      <Divider $show={amount > 0} />
+      <div style={{ width: '100%' }}>
         {data.options.map((option, index) => (
-          <Option style={{ marginTop: index != 0 ? '8px' : 0 }} key={index}>
+          <Option key={index}>
             <OptionHeader>
               <Typography
                 size={13}

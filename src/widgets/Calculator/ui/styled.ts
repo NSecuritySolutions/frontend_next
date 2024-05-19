@@ -9,7 +9,7 @@ const Section = styled.div<{ height?: number }>`
   width: 100%;
   display: flex;
   justify-content: center;
-  max-height: ${(props) => (props.height ? props.height : 393)}px;
+  max-height: ${(props) => (props.height ? props.height : 0)}px;
   gap: 12px;
   transition: max-height 1s;
 `
