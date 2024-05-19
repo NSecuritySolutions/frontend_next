@@ -30,8 +30,8 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
       <HeaderWrapper>
         <HeaderTop>
           <HeaderTopItem>
-            {/* <Logo imageUrl={ProjectLogo} /> */}
-            <HeaderText>Безопастность вашего дома и бизнеса</HeaderText>
+            <Logo />
+            {/* <HeaderText>Безопастность вашего дома и бизнеса</HeaderText> */}
           </HeaderTopItem>
           <HeaderTopItem>
             <HeaderTel>+7 (913) 011-06-45</HeaderTel>

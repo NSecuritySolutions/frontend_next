@@ -1,7 +1,3 @@
-import SvgPhone from '@/assets/icons/phone.svg'
-import SvgHome from '@/assets/icons/home.svg'
-import SvgMail from '@/assets/icons/mail.svg'
-
 //TODO настроить якоря когда будут все блоки сверстаны
 
 const navColumnLists = [
@@ -17,11 +13,11 @@ const navColumnLists = [
   {
     title: 'Каталог оборудования',
     items: [
-      { text: 'Видеонаблюдение', navLink: '/home#video-surveillance' },
-      { text: 'Домофония/СКУД', navLink: '/home#intercom-access-control' },
+      { text: 'Видеонаблюдение', navLink: '/video-surveillance' },
+      { text: 'Домофония/СКУД', navLink: '/domofon' },
       {
         text: 'Охранно-пожарная сигнализация',
-        navLink: '/home#security-fire-alarm',
+        navLink: '/security',
       },
     ],
   },
@@ -32,7 +28,7 @@ const navColumnLists = [
       { text: 'Наши услуги', navLink: '/home#our-services' },
       { text: 'Часто задаваемые вопросы', navLink: '/home#faq' },
       { text: 'Отзывы', navLink: '/home#reviews' },
-      { text: 'Примеры наших работ', navLink: '/home#portfolio' },
+      { text: 'Примеры наших работ', navLink: '/ourworks' },
       { text: 'Блог', navLink: '/home#blog' },
       { text: 'Политика конфиденциальности', navLink: '/home#privacy-policy' },
     ],
@@ -41,19 +37,19 @@ const navColumnLists = [
 
 const contacts = [
   {
-    icon: '',
+    icon: '/icons/footer/phone.svg',
     text: '+7 (913) 011-06-45',
     link: 'tel:+79130110645',
   },
+  // {
+  //   icon: '/icons/footer/home.svg',
+  //   text: 'Новосибирск, ул. Сухарная д. 96',
+  //   link: '',
+  // },
   {
-    icon: '',
-    text: 'Новосибирск, ул. Сухарная д. 96',
-    link: '',
-  },
-  {
-    icon: '',
-    text: 'kvick154@gmail.com',
-    link: 'mailto:kvick154@gmail.com',
+    icon: '/icons/footer/mail.svg',
+    text: 'info@opticontrol.ru',
+    link: 'mailto:info@opticontrol.ru',
   },
 ]
 

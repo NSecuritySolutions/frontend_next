@@ -23,8 +23,10 @@ const FooterTopContainer = styled.div`
   margin: 0 auto;
   padding-top: 24px;
   padding-bottom: 60px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-row-gap: 32px;
+  // justify-content: space-between;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -41,7 +43,7 @@ const FooterTopContainer = styled.div`
   }
 `
 
-const FooterSocialContainer = styled.div`
+const FooterLogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -55,11 +57,6 @@ const FooterSocialIconsContainer = styled.div`
 
 const FooterSocialIconLink = styled.a`
   cursor: pointer;
-`
-
-const FooterSocialIcon = styled.img`
-  width: 32px;
-  height: 32px;
 `
 
 const FooterContactsContainer = styled.div`
@@ -98,7 +95,7 @@ const FooterContactLink = styled.a`
 `
 
 const FooterBtnWrapper = styled.div`
-  width: 205px;
+  width: 280px;
   @media (max-width: 560px) {
     width: 280px;
   }
@@ -131,14 +128,13 @@ const FooterBottomContainer = styled.div`
 
 const FooterRights = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: space-between;
 
-  @media (max-width: 560px) {
+  /* @media (max-width: 560px) {
     align-items: center;
     justify-content: center;
     text-align: center;
-  }
+  } */
 `
 
 const FooterDeveloperInfoBox = styled.div`
@@ -161,6 +157,11 @@ const FooterDeveloperLink = styled.a`
   }
 `
 
+const FooterTextInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export {
   FooterWrapper,
   FooterTop,
@@ -171,14 +172,14 @@ export {
   FooterRightsText,
   FooterDeveloperInfoBox,
   FooterDeveloperLink,
-  FooterSocialContainer,
+  FooterLogoContainer,
   FooterContactsContainer,
   FooterContactContainer,
   FooterSocialIconsContainer,
   FooterSocialIconLink,
-  FooterSocialIcon,
   FooterContactLogo,
   FooterContactLink,
   FooterBtnWrapper,
   FooterContactsContentWrapper,
+  FooterTextInfoWrapper,
 }
