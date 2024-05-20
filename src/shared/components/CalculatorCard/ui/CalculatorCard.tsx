@@ -1,6 +1,6 @@
 import {
   Card,
-  CardImg,
+  CardImgWrapper,
   CardHeader,
   ImageTitle,
   Title,
@@ -14,68 +14,88 @@ import {
 import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '../../AmountComponent'
 import { RadioGroup } from '../../RadioGroup'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { Tooltip } from '../../Tooltip/index.ts'
+import { observer } from 'mobx-react-lite'
+import Image from 'next/image'
+import CalculatorBlockStore from '../store.ts'
 
 interface CalculatorCardProps {
-  title: string
-  img: string
-  handleAmountChange: (condition: boolean) => void
-  options: {
-    title: string
-    tooltip: string
-    type: string // 'radio' | 'checkbox' | 'input';
-    options?: string[]
-    name?: string
-  }[]
+  store: CalculatorBlockStore
+  handleAmountChange: (condition: boolean, len: number, card: HTMLDivElement) => void
 }
 
-const CalculatorCard: React.FC<CalculatorCardProps> = ({
-  title,
-  img,
-  handleAmountChange,
-  options,
-}) => {
-  const [amount, setAmount] = useState(0)
+const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleAmountChange }) => {
+  const data = store.data
+  const amount = parseInt(store.getVariable(data.title) as string) || 0
   const ref = useRef<HTMLDivElement | null>(null)
 
   const handleChange = (v: number) => {
-    setAmount(v)
-    handleAmountChange(amount === 0 && v !== 0)
+    store.setVariable(data.title, v.toString())
+    handleAmountChange(amount === 0 && v !== 0, data.options.length, ref.current!)
   }
 
   return (
-    <Card $center={amount === 0} $expanded={amount > 0} len={options.length} ref={ref}>
-      <div>
-        <CardHeader>
-          <ImageTitle>
-            <CardImg $imgUrl={img} />
-            <Title>{title}</Title>
-          </ImageTitle>
-          <AmountComponent amount={amount} onChange={handleChange} />
-          <Typography size={24} width="120px" $justifyContent="end">
-            14 958 ₽
-          </Typography>
-        </CardHeader>
-        <Divider $show={amount > 0} />
-        {options.map((option, index) => (
-          <Option style={{ marginTop: index != 0 ? '8px' : 0 }} key={index}>
+    <Card $center={amount === 0} $expanded={amount > 0} len={data.options.length} ref={ref}>
+      <CardHeader>
+        <ImageTitle>
+          <CardImgWrapper>
+            <Image src={data.image} width={37} height={37} alt={data.title} />
+          </CardImgWrapper>
+          <Title>{data.title}</Title>
+        </ImageTitle>
+        <AmountComponent amount={amount} onChange={handleChange} />
+        <Typography size={18} width="120px" $justifyContent="end">
+          {store.result.toLocaleString('ru-RU', {
+            style: 'currency',
+            currency: 'RUB',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </Typography>
+      </CardHeader>
+      <Divider $show={amount > 0} />
+      <div style={{ width: '100%' }}>
+        {data.options.map((option, index) => (
+          <Option key={index}>
             <OptionHeader>
               <Typography size={13} width="100%" color={colors.textSecondary}>
                 {option.title}
               </Typography>
-              <Tooltip text={option.tooltip} />
+              <Tooltip text={option.description} />
             </OptionHeader>
-            {option.type === 'radio' && (
-              <RadioGroup options={option.options!} name={option.name!} />
+            {option.option_type === 'radio' && (
+              <RadioGroup
+                options={option
+                  .choices!.split(';')
+                  .map((part) => part.trim())
+                  .filter((part) => part !== '')}
+                name={option.name}
+                value={store.getVariable(option.name) as string}
+                onChange={(e) => {
+                  store.setVariable(option.name, e.target.value)
+                }}
+              />
             )}
-            {option.type === 'checkbox' && <CheckBox />}
-            {option.type === 'input' && <InputNumber />}
+            {option.option_type === 'checkbox' && (
+              <CheckBox
+                checked={store.getVariable(option.name) as boolean}
+                onChange={(e) => {
+                  store.setVariable(option.name, e.target.checked)
+                }}
+              />
+            )}
+            {option.option_type === 'number' && (
+              <InputNumber
+                value={store.getVariable(option.name) as number}
+                onChange={(e) => store.setVariable(option.name, e.target.value)}
+              />
+            )}
           </Option>
         ))}
       </div>
     </Card>
   )
-}
+})
 
 export default CalculatorCard
