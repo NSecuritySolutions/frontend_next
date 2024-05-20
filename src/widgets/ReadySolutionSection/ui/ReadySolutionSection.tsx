@@ -55,14 +55,7 @@ const ReadySolutionSection = () => {
       </TabsContainer>
       <CardsContainer>
         {activeTabData.map((solution) => (
-          <CardSolution
-            key={solution.id}
-            title={solution.title}
-            img={solution.img}
-            listItem={solution.listItem}
-            price={solution.price}
-            toolTipText={solution.toolTipText}
-          />
+          <CardSolution data={solution} key={solution.id} />
         ))}
       </CardsContainer>
     </Section>

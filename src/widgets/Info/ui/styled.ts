@@ -4,7 +4,7 @@ import { StaticImageData } from 'next/image'
 import styled from 'styled-components'
 
 const Section = styled.section`
-  margin: 120px auto 0;
+  margin: 0 auto;
   background-color: ${colors.backgroundBase2};
   padding-bottom: 40px;
 

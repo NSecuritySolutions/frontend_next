@@ -59,12 +59,7 @@ const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleA
         {data.options.map((option, index) => (
           <Option key={index}>
             <OptionHeader>
-              <Typography
-                size={13}
-                width="100%"
-                $justifyContent="start"
-                color={colors.textSecondary}
-              >
+              <Typography size={13} width="100%" color={colors.textSecondary}>
                 {option.title}
               </Typography>
               <Tooltip text={option.description} />
