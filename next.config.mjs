@@ -19,6 +19,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'nssolution.sytes.net',
+        port: '',
+        pathname: '/media/**',
+      },
     ],
   },
 }
