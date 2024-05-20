@@ -2,7 +2,7 @@ import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
 
-const Radio = styled.input.attrs({ type: 'radio' })`
+const Radio = styled.input.attrs({ type: 'checkbox' })`
   display: none;
 `
 

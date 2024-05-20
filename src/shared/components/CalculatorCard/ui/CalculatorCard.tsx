@@ -32,7 +32,11 @@ const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleA
 
   const handleChange = (v: number) => {
     store.setVariable(data.title, v.toString())
-    handleAmountChange(amount === 0 && v !== 0, data.options.length, ref.current!)
+    if (amount !== 0 && v === 0) {
+      store.resetVariables()
+      handleAmountChange(false, data.options.length, ref.current!)
+    }
+    if (amount === 0 && v !== 0) handleAmountChange(true, data.options.length, ref.current!)
   }
 
   return (
@@ -71,10 +75,7 @@ const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleA
                   .map((part) => part.trim())
                   .filter((part) => part !== '')}
                 name={option.name}
-                value={store.getVariable(option.name) as string}
-                onChange={(e) => {
-                  store.setVariable(option.name, e.target.value)
-                }}
+                store={store}
               />
             )}
             {option.option_type === 'checkbox' && (
