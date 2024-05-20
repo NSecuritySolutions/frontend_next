@@ -17,12 +17,6 @@ const Calculator: React.FC = observer(() => {
     calculatorStore.fetchData()
   }, [])
 
-  useEffect(() => {
-    if (section.current) {
-      setHeight(section.current.offsetHeight + 193)
-    }
-  }, [section.current])
-
   const handleAmountChange = (condition: boolean, len: number, card: HTMLDivElement) => {
     const cardContainer = section.current!
     const cardTop = card.offsetTop
@@ -81,6 +75,7 @@ const Calculator: React.FC = observer(() => {
               display: 'grid',
               gap: '20px',
               gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateRows: 'repeat(auto-fit, 1fr)',
             }}
           >
             <LayoutGroup>
