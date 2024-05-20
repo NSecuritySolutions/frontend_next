@@ -33,7 +33,7 @@ const ReviewsBlock = () => {
               <a href={YANDEX_URL}>
                 <ColumnImageWrapper>
                   <Image
-                    src={yandexLogo}
+                    src="/yandex-link.png"
                     alt="Логотип и переход на страницу отзывов магазина в Яндекс Маркет"
                     fill
                   />

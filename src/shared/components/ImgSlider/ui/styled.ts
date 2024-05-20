@@ -8,30 +8,33 @@ const SliderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 702px;
+  max-width: 1100px;
   width: 100%;
 
   .image-container {
     margin: 0 auto;
     border-radius: 20px;
-    max-width: 702px;
-    height: 396px;
+    min-width: 1100px;
+    width: 100%;
+    height: 600px;
     background-color: black;
     display: flex;
     border-radius: 20px;
 
     img {
       margin: 0 auto;
-      max-width: 702px;
-      height: 396px;
+      min-width: 1100px;
+      width: 100%;
+      height: 600px;
       object-fit: fill;
+      border-radius: 20px;
     }
   }
 
   .slick-dots {
     position: relative;
     margin: 0 auto;
-    max-width: 702px;
+    min-width: 1100px;
     display: flex !important;
     width: 100%;
     flex-direction: row;
@@ -40,17 +43,17 @@ const SliderWrapper = styled.div`
 
     li {
       border-radius: 20px;
-      max-width: 165px;
+      max-width: 260px;
       width: 100%;
-      height: 117px;
+      height: 195px;
       background-color: black;
       object-fit: fill;
     }
 
     img {
-      max-width: 165px;
+      max-width: 260px;
       width: 100%;
-      height: 117px;
+      height: 195px;
       border-radius: 20px;
     }
   }
@@ -134,8 +137,8 @@ const SliderWrapper = styled.div`
     margin: 0 auto;
     display: block;
     object-fit: fill;
-    max-width: 702px;
-    min-height: 396px;
+    max-width: 1100px;
+    min-height: 600px;
   }
   .slick-slide.slick-loading img {
     display: none;
@@ -166,7 +169,7 @@ const SliderWrapper = styled.div`
 
   .slick-next {
     top: 42%;
-    left: 670px;
+    left: 1070px;
     position: absolute;
     z-index: 99;
   }

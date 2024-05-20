@@ -10,6 +10,7 @@ import fifthWorksImg from '@/assets/images/works/works-image-5.webp'
 import sixthWorksImg from '@/assets/images/works/works-image-6.webp'
 import seventhWorksImg from '@/assets/images/works/works-image-7.webp'
 import eighthWorksImg from '@/assets/images/works/works-image-8.webp'
+import translit from '../utils/utils'
 
 export const TITLE_LIMIT: number = 60
 export const TEXT_LIMIT: number = 120
@@ -21,17 +22,28 @@ export const workExamples: TWorkExamples[] = [
     cardTitle: 'Установка видеонаблюдения в складском помещении',
     cardText:
       'Преимущества и возможности системы видеонаблюдения на примере складов в Новосибирске.',
-    cardLink: '/',
+    cardLink: `/${translit('Установка видеонаблюдения в складском помещении')}`,
     cardImage: fifthWorksImg,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
-    equipment: ['Камера 4 шт', 'Провода 480 м'],
+    equipment: [
+      'Извещатель домовой 20шт.',
+      'Извещятель пожарный-ручной 1шт.',
+      'Табло "выход" 2шт.',
+      'Звуковой оповещатель 3шт.',
+      'Блок питания 1шт.',
+      'Приемо-контрольный прибор 1шт.',
+      'Кабель 190м',
+      'Гофра Д.16 70м',
+      'Огнетушитель 2шт.',
+      'План эвакуации 1шт.',
+    ],
     text: `Видеонаблюдение становится все более популярным вариантом обеспечения безопасности в загородных домах. Оно позволяет в режиме реального времени следить за происходящим на участке и в случае необходимости принимать меры.
   <br/>
   Перед установкой видеонаблюдения необходимо подключить интернет. Для загородных домов, где нет возможности подключения проводного интернета, можно использовать 3G модемы и роутеры.
@@ -46,16 +58,27 @@ export const workExamples: TWorkExamples[] = [
     cardImage: sixthWorksImg,
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
-    cardLink: '/',
+    cardLink: `/${translit('Установка видеонаблюдения в складском помещении')}`,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
-    equipment: ['Камера 4 шт', 'Провода 480 м', 'Видеокамера - 1 шт'],
+    equipment: [
+      'Извещатель домовой 20шт.',
+      'Извещятель пожарный-ручной 1шт.',
+      'Табло "выход" 2шт.',
+      'Звуковой оповещатель 3шт.',
+      'Блок питания 1шт.',
+      'Приемо-контрольный прибор 1шт.',
+      'Кабель 190м',
+      'Гофра Д.16 70м',
+      'Огнетушитель 2шт.',
+      'План эвакуации 1шт.',
+    ],
     text: `Видеонаблюдение становится все более популярным вариантом обеспечения безопасности в загородных домах. Оно позволяет в режиме реального времени следить за происходящим на участке и в случае необходимости принимать меры.
   <br/>
   Перед установкой видеонаблюдения необходимо подключить интернет. Для загородных домов, где нет возможности подключения проводного интернета, можно использовать 3G модемы и роутеры.
@@ -70,14 +93,14 @@ export const workExamples: TWorkExamples[] = [
     date: '17.10.2022',
     cardTitle: 'Обеспечьте безопасность вашей дачи',
     cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
-    cardLink: '/',
+    cardLink: `/${translit('Обеспечьте безопасность вашей дачи')}`,
     cardImage: seventhWorksImg,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 6 шт', 'Провода 900 м'],
@@ -94,17 +117,28 @@ export const workExamples: TWorkExamples[] = [
     date: '12.10.2022',
     cardTitle: 'Заголовок',
     cardText: 'Небольшой текст.',
-    cardLink: '/',
+    cardLink: `/${translit('Небольшой текст.')}`,
     cardImage: eighthWorksImg,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
-    equipment: ['Камера 10 шт', 'Провода 1200 м'],
+    equipment: [
+      'Извещатель домовой 20шт.',
+      'Извещятель пожарный-ручной 1шт.',
+      'Табло "выход" 2шт.',
+      'Звуковой оповещатель 3шт.',
+      'Блок питания 1шт.',
+      'Приемо-контрольный прибор 1шт.',
+      'Кабель 190м',
+      'Гофра Д.16 70м',
+      'Огнетушитель 2шт.',
+      'План эвакуации 1шт.',
+    ],
     text: `Видеонаблюдение становится все более популярным вариантом обеспечения безопасности в загородных домах. Оно позволяет в режиме реального времени следить за происходящим на участке и в случае необходимости принимать меры.
   <br/>
   Перед установкой видеонаблюдения необходимо подключить интернет. Для загородных домов, где нет возможности подключения проводного интернета, можно использовать 3G модемы и роутеры.
@@ -124,9 +158,9 @@ export const workExamples: TWorkExamples[] = [
     cardImage: firstWorksImg,
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
     equipment: ['Камера 4 шт', 'Провода 480 м'],
@@ -147,9 +181,9 @@ export const workExamples: TWorkExamples[] = [
     cardImage: noImCard,
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 68 шт', 'Провода 1480м'],
@@ -172,9 +206,9 @@ export const workExamples: TWorkExamples[] = [
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дней', description: 'сроки' },
-      { number: '136 970 ₽', description: 'бюджет' },
-      { number: '265 м\u00B2', description: 'оборудовано' },
+      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
+      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 6 шт', 'Провода 900 м'],

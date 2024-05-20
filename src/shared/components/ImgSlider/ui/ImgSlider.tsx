@@ -37,8 +37,8 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
               key={i}
               src={modalItem.img[i]}
               alt={`Миниатюра фото - ${modalItem.title}`}
-              width={100}
-              height={100}
+              width={260}
+              height={195}
             />
           )}
         </a>
