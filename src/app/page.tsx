@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 
 import React, { useEffect, useState } from 'react'
 import Loader from '@/shared/components/Loader/Loader'
@@ -15,9 +15,10 @@ import { Questions } from '@/widgets/Questions'
 import { ReviewsBlock } from '@/widgets/ReviewsBlock'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
-import { ContactForm } from '@/widgets/ContactForm'
 
 import { Calculator } from '@/widgets/Calculator'
+import { ContactForm } from '../widgets/ContactForm'
+import { ScrollButton } from '@/shared/components/ScrollButton'
 
 export default function Home() {
   //@TODO : если вдруг понадобится в последствии
@@ -48,6 +49,7 @@ export default function Home() {
         <ExamplesSlider />
         <OurClients />
         <ContactForm />
+        <ScrollButton />
       </>
       {/* )} */}
     </>

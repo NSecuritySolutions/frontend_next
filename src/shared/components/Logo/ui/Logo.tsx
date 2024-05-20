@@ -1,12 +1,26 @@
 import { FC } from 'react'
-import { LogoContainer, LogoImage, LogoLink } from './styled'
-import { TLogoProps } from '../types/types'
+import Image from 'next/image'
 
-const Logo: FC<TLogoProps> = ({ imageUrl }) => {
+import {
+  LogoContainer,
+  LogoLink,
+  LogoSubTitle,
+  LogoTextWrapper,
+  LogoTitle,
+  LogoTitleSpan,
+} from './styled'
+
+const Logo: FC = () => {
   return (
     <LogoContainer>
       <LogoLink href="/">
-        <LogoImage src={imageUrl} alt="Логотип" />
+        <Image src="/icons/logo.svg" alt="Логотип" width={40} height={40} />
+        <LogoTextWrapper>
+          <LogoTitle>
+            <LogoTitleSpan>ОПТИ</LogoTitleSpan> КОНТРОЛЬ
+          </LogoTitle>
+          <LogoSubTitle>Безопасность вашего дома и бизнеса</LogoSubTitle>
+        </LogoTextWrapper>
       </LogoLink>
     </LogoContainer>
   )

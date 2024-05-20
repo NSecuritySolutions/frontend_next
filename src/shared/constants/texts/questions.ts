@@ -1,13 +1,8 @@
-import camera from '@/assets/images/questions/webp/camera-icon.webp'
-import alarm from '@/assets/images/questions/webp/alarm-icon.webp'
-import controller from '@/assets/images/questions/webp/controller-icon.webp'
-import fingerprint from '@/assets/images/questions/webp/fingerprint-icon.webp'
-import general from '@/assets/images/questions/webp/general-icon.webp'
 import { TTabs } from './types'
 
 export const tabs: Array<TTabs> = [
   {
-    icon: 'general',
+    icon: '/images/questions/webp/general-icon.webp',
     text: 'Общие вопросы',
     items: [
       {
@@ -43,7 +38,7 @@ export const tabs: Array<TTabs> = [
     ],
   },
   {
-    icon: 'camera',
+    icon: '/images/questions/webp/camera-icon.webp',
     text: 'Вопросы по видеонаблюдению',
     items: [
       {
@@ -85,7 +80,7 @@ export const tabs: Array<TTabs> = [
     ],
   },
   {
-    icon: 'alarm',
+    icon: '/images/questions/webp/controller-icon.webp',
     text: 'Вопросы по домофонии',
     items: [
       {
@@ -126,7 +121,7 @@ export const tabs: Array<TTabs> = [
     ],
   },
   {
-    icon: 'fingerprint',
+    icon: '/images/questions/webp/fingerprint-icon.webp',
     text: 'Вопросы по биометрии и СКУД',
     items: [
       {
@@ -168,8 +163,8 @@ export const tabs: Array<TTabs> = [
     ],
   },
   {
-    icon: 'controller',
-    text: 'Вопросы по шлагбаумам и турникетам',
+    icon: '/images/questions/webp/alarm-icon.webp',
+    text: 'Вопросы по охранно-пожарной сигнализации',
     items: [
       {
         id: 1,
