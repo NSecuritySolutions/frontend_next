@@ -10,7 +10,6 @@ import fifthWorksImg from '@/assets/images/works/works-image-5.webp'
 import sixthWorksImg from '@/assets/images/works/works-image-6.webp'
 import seventhWorksImg from '@/assets/images/works/works-image-7.webp'
 import eighthWorksImg from '@/assets/images/works/works-image-8.webp'
-import translit from '../utils/utils'
 
 export const TITLE_LIMIT: number = 60
 export const TEXT_LIMIT: number = 120
@@ -22,7 +21,7 @@ export const workExamples: TWorkExamples[] = [
     cardTitle: 'Установка видеонаблюдения в складском помещении',
     cardText:
       'Преимущества и возможности системы видеонаблюдения на примере складов в Новосибирске.',
-    cardLink: `/${translit('Установка видеонаблюдения в складском помещении')}`,
+    cardLink: '/',
     cardImage: fifthWorksImg,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
