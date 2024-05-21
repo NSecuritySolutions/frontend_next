@@ -2,11 +2,12 @@ import { Metadata } from 'next'
 
 import { Manrope } from 'next/font/google'
 
-import OurworksPage from '../examples/[id]/page.tsx'
+import OurworksPage from './page'
 
 import '@/app/globals.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import styles from './page.module.css'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -55,5 +56,5 @@ export default function OurworksPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <OurworksPage params={{ id: '1' }} />
+  return <OurworksPage></OurworksPage>
 }

@@ -2,6 +2,12 @@ import { FC } from 'react'
 
 import Image from 'next/image'
 
+import NotFound from '@/app/not-found.tsx'
+
+import { ImgSlider } from '@/shared/components/ImgSlider/index.ts'
+import { Breadcrumbs } from '@/shared/components/BreadCrumbs'
+import { TWorkExamples } from '@/shared/constants/texts/types.ts'
+
 import {
   ModalContent,
   TitleWrapper,
@@ -21,9 +27,6 @@ import {
   InfoColumn,
 } from './styles.ts'
 
-import { ImgSlider } from '@/shared/components/ImgSlider/index.ts'
-import { Breadcrumbs } from '@/shared/components/BreadCrumbs'
-import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 import styles from './page.module.css'
 
 interface ExampleProps {
@@ -33,9 +36,11 @@ interface ExampleProps {
 const Example: FC<ExampleProps> = ({ data }) => {
   const createMarkup = (text: string) => ({ __html: text })
 
+  if (!data) return NotFound()
+
   return (
     <section className={styles.main}>
-      <Breadcrumbs title={data?.title} />
+      <Breadcrumbs title={data.cardTitle} />
       <>
         <ModalContent>
           <ContentWrapper>
