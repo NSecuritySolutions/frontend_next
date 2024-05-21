@@ -16,7 +16,7 @@ const CookiesContainer = styled.div`
   left: 40px;
   background-color: ${colors.backgroundPrimary};
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
-
+  z-index: 10;
   a:first-of-type {
     font-size: 13px;
     color: ${colors.titleBlueColor};

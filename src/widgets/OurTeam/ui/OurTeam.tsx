@@ -1,7 +1,5 @@
 import Image from 'next/image'
 
-import listMarker from '@/assets/icons/list-item.svg'
-
 import { ManagerCard } from '@/shared/components/ManagerCard/index.ts'
 
 import {
@@ -16,6 +14,7 @@ import {
   ListItem,
   ListItemText,
 } from './styled.ts'
+
 import { teamText } from '@/shared/constants/texts/our-team.ts'
 
 const OurTeam = () => {
@@ -29,13 +28,7 @@ const OurTeam = () => {
               <ColumnParagraph>
                 {teamText.map((item, index) => (
                   <ListItem key={index}>
-                    <Image
-                      src="/icons/list-item.svg"
-                      priority
-                      alt="List Marker"
-                      width={20}
-                      height={20}
-                    />
+                    <Image src="/icons/list-item.svg" alt="List Marker" width={20} height={20} />
                     <ListItemText>{item}</ListItemText>
                   </ListItem>
                 ))}

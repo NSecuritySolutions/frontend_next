@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import { teamContacts } from '@/shared/constants/texts/our-team'
 import { CardContainer, CardImg, CardName, CardPosition, CardTel } from './styled'
+import { rgbDataURL } from '@/shared/constants/utils/utils'
 
 const ManagerCard = () => {
   return (
@@ -11,6 +12,8 @@ const ManagerCard = () => {
           <CardImg>
             <Image
               src={item.image}
+              placeholder="blur"
+              blurDataURL={rgbDataURL(225, 231, 244)}
               alt="Фотография сотрудника"
               style={{
                 borderRadius: '500px',
