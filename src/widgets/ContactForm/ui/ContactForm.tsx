@@ -82,7 +82,7 @@ const ContactForm = () => {
   }
 
   return (
-    <Section>
+    <Section id="contact-form">
       <SectionWrapper>
         <InfoColumn>
           <FromImgWrapper>
@@ -99,7 +99,7 @@ const ContactForm = () => {
                 type="text"
                 placeholder="* Имя"
                 maxLength={20}
-                error={errors.name ? 'true' : 'false'}
+                $error={errors.name ? 'true' : 'false'}
               />
               {errors.name && <ErrorText>{errors.name?.message}</ErrorText>}
             </InputWrapper>
@@ -112,7 +112,7 @@ const ContactForm = () => {
                     {...field}
                     mask={PhoneMask}
                     inputRef={inputRef}
-                    error={errors.phone ? 'true' : 'false'}
+                    $error={errors.phone ? 'true' : 'false'}
                     placeholder="* Телефон"
                   />
                 )}
@@ -124,7 +124,7 @@ const ContactForm = () => {
                 {...register('email')}
                 type="email"
                 placeholder="* E-mail"
-                error={errors.email ? 'true' : 'false'}
+                $error={errors.email ? 'true' : 'false'}
               />
               {errors.email && <ErrorText>{errors.email?.message}</ErrorText>}
             </InputWrapper>

@@ -25,7 +25,7 @@ const SliderWrapper = styled.div`
       margin: 0 auto;
       min-width: 1100px;
       width: 100%;
-      height: 600px;
+      height: auto;
       object-fit: fill;
       border-radius: 20px;
     }

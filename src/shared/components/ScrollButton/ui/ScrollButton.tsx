@@ -27,7 +27,7 @@ const ScrollButton = () => {
       if (mainElement && ref.current) {
         const mainRect = mainElement.getBoundingClientRect()
 
-        console.log(mainElement.offsetTop + mainElement.offsetHeight, mainRect.bottom)
+        //console.log(mainElement.offsetTop + mainElement.offsetHeight, mainRect.bottom)
 
         if (mainRect.bottom <= window.innerHeight) {
           setIsFixed(false)

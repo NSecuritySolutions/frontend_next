@@ -35,7 +35,8 @@ const ReviewsBlock = () => {
                   <Image
                     src="/yandex-link.png"
                     alt="Логотип и переход на страницу отзывов магазина в Яндекс Маркет"
-                    fill
+                    width={280}
+                    height={74}
                   />
                 </ColumnImageWrapper>
               </a>

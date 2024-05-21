@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Slider from 'react-slick'
+
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -38,7 +39,6 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
               src={modalItem.img[i]}
               alt={`Миниатюра фото - ${modalItem.title}`}
               width={260}
-              height={195}
             />
           )}
         </a>
@@ -61,7 +61,7 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
       <Slider {...settings}>
         {modalItem?.img.map((item: any, i: number) => (
           <div key={i} className="image-container">
-            <Image src={item} alt={modalItem.title} />
+            <Image src={item} alt={modalItem.title} width={1100} />
           </div>
         ))}
       </Slider>
