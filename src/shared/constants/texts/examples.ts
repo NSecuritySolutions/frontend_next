@@ -57,7 +57,7 @@ export const workExamples: TWorkExamples[] = [
     cardImage: sixthWorksImg,
     cardTitle: 'Системы безопасности Новосибирск',
     cardText: 'О нашей компании.',
-    cardLink: `/${translit('Установка видеонаблюдения в складском помещении')}`,
+    cardLink: `/`,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
@@ -92,7 +92,7 @@ export const workExamples: TWorkExamples[] = [
     date: '17.10.2022',
     cardTitle: 'Обеспечьте безопасность вашей дачи',
     cardText: 'Надежные датчики и камеры для непрерывного мониторинга.',
-    cardLink: `/${translit('Обеспечьте безопасность вашей дачи')}`,
+    cardLink: `/`,
     cardImage: seventhWorksImg,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
@@ -116,7 +116,7 @@ export const workExamples: TWorkExamples[] = [
     date: '12.10.2022',
     cardTitle: 'Заголовок',
     cardText: 'Небольшой текст.',
-    cardLink: `/${translit('Небольшой текст.')}`,
+    cardLink: `/`,
     cardImage: eighthWorksImg,
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
