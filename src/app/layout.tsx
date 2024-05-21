@@ -13,7 +13,6 @@ import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
 import StyledComponentsRegistry from '@/app/styling/registry'
 
 import styles from './page.module.css'
-import { ScrollButton } from '@/shared/components/ScrollButton'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -21,8 +20,10 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  // ДААААА, ХАРДКОД!!!!
-  //  -  OMG!!!!
+  metadataBase: new URL('http://localhost:3000'),
+  category: 'services',
+  manifest: 'http://localhost:3000/manifest.json',
+
   icons: {
     icon: [
       { url: '/favicons/icon.ico', sizes: '48x48', type: 'image/x-icon' },
@@ -61,19 +62,21 @@ export const metadata: Metadata = {
     'Новосибирск',
   ],
   openGraph: {
+    url: 'http://localhost:3000',
+
     title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
     description:
       'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    url: 'https://', //@TODO Дописать атуальный url
+    // url: 'https://', //@TODO Дописать атуальный url
     siteName: 'Оптиконтроль',
     images: [
       {
-        url: '/icon7.png', //@TODO дописать путь к картинке для твиттера
+        url: 'http://localhost:3000/public/favicons/icon6.png',
         width: 800,
         height: 600,
       },
       {
-        url: '/icon6.png', //@TODO дописать путь к картинке для твиттера
+        url: 'http://localhost:3000/public/favicons/icon7.png',
         width: 1800,
         height: 1600,
         alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
