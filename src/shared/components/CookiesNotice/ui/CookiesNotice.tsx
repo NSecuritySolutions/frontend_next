@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import Link from 'next/link'
 
-import { CookiesContainer, CookiesTitle, CookiesPragraph } from './styled.ts'
+import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './styled.ts'
 import { StyledBtnLink } from '../../BtnLink/ui/styles.ts'
 
 const CookiesNotice: React.FC = () => {
@@ -13,12 +13,19 @@ const CookiesNotice: React.FC = () => {
 
   const handleBtnClick = () => {
     setCookiesVisible(false)
-    console.log('11111')
   }
   return (
     <>
       {isCookiesVisible ? (
         <CookiesContainer id="cookie-notice">
+          <CloseButton onClick={handleBtnClick}>
+            <Image
+              src="/icons/closeBtn.svg"
+              alt={'Кнопка закрытия модального окна'}
+              width={22}
+              height={22}
+            ></Image>
+          </CloseButton>
           <CookiesTitle>На сайте используются файлы cookie</CookiesTitle>
           <CookiesPragraph>
             Мы используем файлы cookie для обеспечения наилучшего взаимодействия с сайтом.

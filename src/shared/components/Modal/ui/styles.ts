@@ -149,10 +149,10 @@ const CloseButton = styled.button`
   border: none;
   position: sticky;
   top: 0px;
-  left: 1080px;
+  left: 80px;
 
-  width: 27px;
-  height: 27px;
+  width: 20px;
+  height: 20px;
   opacity: 1;
 
   &:hover {
