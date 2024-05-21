@@ -18,7 +18,7 @@ const CookiesNotice: React.FC = () => {
   }
   return (
     <>
-      {isCookiesVisible ? (
+      {isCookiesVisible && (
         <CookiesContainer id="cookie-notice">
           <CloseButton onClick={handleBtnClick}>
             <Image
@@ -47,8 +47,6 @@ const CookiesNotice: React.FC = () => {
             Подтвердить
           </StyledBtnLink>
         </CookiesContainer>
-      ) : (
-        ''
       )}
     </>
   )

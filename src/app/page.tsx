@@ -1,9 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Loader from '@/shared/components/Loader/Loader'
-
-import styles from './page.module.css'
+//import Loader from '@/shared/components/Loader/Loader'
 
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
@@ -34,26 +32,26 @@ export default function Home() {
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <Loader />
       ) : (
-        <>
-          <Info />
-          <OurServices />
-          <ReadySolutionSection />
-          <Calculator />
-          <AdvantagesBlock />
-          <ProjectStage />
-          <OurTeam />
-          <Questions />
-          <ReviewsBlock />
-          <ExamplesSlider />
-          <OurClients />
-          <ContactForm />
-          <ScrollButton />
-          <CookiesNotice /> :
-        </>
-      )}
+        <> */}
+      <Info />
+      <OurServices />
+      <ReadySolutionSection />
+      <Calculator />
+      <AdvantagesBlock />
+      <ProjectStage />
+      <OurTeam />
+      <Questions />
+      <ReviewsBlock />
+      <ExamplesSlider />
+      <OurClients />
+      <ContactForm />
+      <ScrollButton />
+      <CookiesNotice />
+      {/* </>
+      )} */}
     </>
   )
 }

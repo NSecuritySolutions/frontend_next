@@ -130,14 +130,14 @@ export type TInputProps = {
   error: string
 }
 
-const focusStyles = (props: { error: string }) => `
+const focusStyles = (props: { $error: string }) => `
   outline: none;
   border: 1px solid ${props.$error === 'true' ? colors.textNegative : colors.btnPrimary};
 `
 
 const Input = styled.input<TInputProps>`
   background: ${colors.backgroundPrimary};
-  border: ${(props) => (props.$error === 'true' ? `1px solid ${colors.textNegative}` : 'none')};
+  border: ${(props) => (props.error === 'true' ? `1px solid ${colors.textNegative}` : 'none')};
   border-radius: 12px;
   width: 100%;
   height: 42px;
@@ -146,7 +146,7 @@ const Input = styled.input<TInputProps>`
   font-size: 16px;
   font-weight: 400;
   color: ${(props) =>
-    props.$error === 'true' ? `${colors.textNegative}` : `${colors.darkPrimary}`};
+    props.error === 'true' ? `${colors.textNegative}` : `${colors.darkPrimary}`};
 
   &:active,
   &:focus,

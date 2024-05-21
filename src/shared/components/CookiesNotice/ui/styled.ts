@@ -12,7 +12,6 @@ const CookiesContainer = styled.div`
   min-height: 241px;
   border-radius: 20px;
   padding: 40px;
-  z-index: 99;
   bottom: 30px;
   left: 40px;
   background-color: ${colors.backgroundPrimary};
@@ -23,19 +22,18 @@ const CookiesContainer = styled.div`
     color: ${colors.titleBlueColor};
   }
 `
-const CookiesTitle = styled.h4`
+const CookiesTitle = styled.h3`
   display: flex;
   font:
-    700 24px Monrope,
+    700 24px Manrope,
     sans-serif;
   color: black;
-  z-index: 99;
   color: ${colors.darkPrimary};
 `
 
 const CookiesPragraph = styled.p`
   font:
-    400 16px Monrope,
+    400 16px Manrope,
     sans-serif;
   color: ${colors.darkPrimary};
 `
