@@ -5,9 +5,8 @@ import { Typography } from '@/shared/components/CalculatorCard/ui/styled'
 import Image from 'next/image'
 import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
-import { Breadcrumbs } from '@/shared/components/Breadcrumbs'
 import Loader from '@/shared/components/Loader/Loader'
-
+import { Breadcrumbs } from '@/shared/components/BreadCrumbs'
 interface ProductProps {
   data: TCardSolutionProps
 }

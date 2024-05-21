@@ -19,7 +19,6 @@ import { OurClients } from '@/widgets/OurClients'
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
-import { CookiesContainer } from '@/shared/components/CookiesNotice/ui/styled'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
 export default function Home() {

@@ -1,12 +1,14 @@
 'use client'
+
 import { useState } from 'react'
 
 import Image from 'next/image'
 
 import Link from 'next/link'
 
-import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './styled.ts'
 import { StyledBtnLink } from '../../BtnLink/ui/styles.ts'
+
+import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './styled.ts'
 
 const CookiesNotice: React.FC = () => {
   const [isCookiesVisible, setCookiesVisible] = useState<boolean>(true)

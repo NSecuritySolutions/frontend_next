@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { Manrope } from 'next/font/google'
 
-import OurworksPage from './page.tsx'
+import OurworksPage from '../examples/[id]/page.tsx'
 
 import '@/app/globals.css'
 import 'slick-carousel/slick/slick.css'
@@ -55,5 +55,5 @@ export default function OurworksPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <OurworksPage />
+  return <OurworksPage params={{ id: '1' }} />
 }
