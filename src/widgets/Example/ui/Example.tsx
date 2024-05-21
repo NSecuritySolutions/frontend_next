@@ -5,7 +5,9 @@ import Image from 'next/image'
 import NotFound from '@/app/not-found.tsx'
 
 import { ImgSlider } from '@/shared/components/ImgSlider/index.ts'
-import { Breadcrumbs } from '@/shared/components/BreadCrumbs'
+
+import { Breadcrumbs } from '@/shared/components/Breadcrumbs'
+
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 
 import {
