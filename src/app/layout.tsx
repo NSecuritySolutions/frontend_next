@@ -22,6 +22,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   // ДААААА, ХАРДКОД!!!!
+  //  -  OMG!!!!
   icons: {
     icon: [
       { url: '/favicons/icon.ico', sizes: '48x48', type: 'image/x-icon' },

@@ -106,3 +106,10 @@ export type TFormTypes = {
   email: string
   text: string
 }
+
+export type TCookieText = {
+  id: number
+  title: string
+  text: string
+  button: string
+}

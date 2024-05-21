@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 
 import React, { useEffect, useState } from 'react'
 import Loader from '@/shared/components/Loader/Loader'
@@ -19,39 +19,42 @@ import { OurClients } from '@/widgets/OurClients'
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
+import { CookiesContainer } from '@/shared/components/CookiesNotice/ui/styled'
+import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
 export default function Home() {
-  //@TODO : если вдруг понадобится в последствии
+  //@TODO : если вдруг понадобится в последствии - лоудер работает до тех пор пока не загрузит картинки...
 
-  // const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false)
-  //   }, 0)
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 0)
+  }, [])
 
   return (
     <>
-      {/* {isLoading ? (
+      {isLoading ? (
         <Loader />
-      ) : ( */}
-      <>
-        <Info />
-        <OurServices />
-        <ReadySolutionSection />
-        <Calculator />
-        <AdvantagesBlock />
-        <ProjectStage />
-        <OurTeam />
-        <Questions />
-        <ReviewsBlock />
-        <ExamplesSlider />
-        <OurClients />
-        <ContactForm />
-        <ScrollButton />
-      </>
-      {/* )} */}
+      ) : (
+        <>
+          <Info />
+          <OurServices />
+          <ReadySolutionSection />
+          <Calculator />
+          <AdvantagesBlock />
+          <ProjectStage />
+          <OurTeam />
+          <Questions />
+          <ReviewsBlock />
+          <ExamplesSlider />
+          <OurClients />
+          <ContactForm />
+          <ScrollButton />
+          <CookiesNotice /> :
+        </>
+      )}
     </>
   )
 }

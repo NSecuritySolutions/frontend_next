@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/shared/components/BreadCrumbs'
 
 import ImgSlider from '@/shared/components/ImgSlider/ui/ImgSlider'
 
-import styles from './page.module.css'
+import styles from './styles/page.module.css'
 
 import {
   ModalContent,
@@ -25,7 +25,7 @@ import {
   TextWrapper,
   ImageColumn,
   InfoColumn,
-} from './styles.ts'
+} from './styles/styles.ts'
 
 import TOurWorksProps from './types/types.ts'
 import { workExamples } from '@/shared/constants/texts/examples'
@@ -35,6 +35,7 @@ console.log(modalItem.cardLink)
 
 const OurworksPage: React.FC<TOurWorksProps> = () => {
   const createMarkup = (text: string) => ({ __html: text })
+
   return (
     <>
       <section className={styles.main}>
