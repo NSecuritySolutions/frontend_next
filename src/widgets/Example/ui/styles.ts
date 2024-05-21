@@ -2,6 +2,11 @@ import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
 
+const SectionWrapper = styled.section`
+  margin: 0;
+  padding: 0;
+`
+
 const ModalContent = styled.div`
   overflow-y: auto;
   background-color: ${colors.backgroundPrimary};
@@ -175,4 +180,5 @@ export {
   TextWrapper,
   ImageColumn,
   InfoColumn,
+  SectionWrapper,
 }

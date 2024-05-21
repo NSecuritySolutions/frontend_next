@@ -5,8 +5,7 @@ import Image from 'next/image'
 import NotFound from '@/app/not-found.tsx'
 
 import { ImgSlider } from '@/shared/components/ImgSlider/index.ts'
-
-import { Breadcrumbs } from '@/shared/components/Breadcrumbs'
+import { Breadcrumbs } from '@/shared/components/Breadcrumbs/index.ts'
 
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 
@@ -27,9 +26,8 @@ import {
   TextWrapper,
   ImageColumn,
   InfoColumn,
+  SectionWrapper,
 } from './styles.ts'
-
-import styles from './page.module.css'
 
 interface ExampleProps {
   data: TWorkExamples
@@ -41,7 +39,7 @@ const Example: FC<ExampleProps> = ({ data }) => {
   if (!data) return NotFound()
 
   return (
-    <section className={styles.main}>
+    <SectionWrapper>
       <Breadcrumbs title={data.cardTitle} />
       <>
         <ModalContent>
@@ -92,7 +90,7 @@ const Example: FC<ExampleProps> = ({ data }) => {
           </ContentWrapper>
         </ModalContent>
       </>
-    </section>
+    </SectionWrapper>
   )
 }
 export default Example
