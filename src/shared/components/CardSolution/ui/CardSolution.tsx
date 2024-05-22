@@ -1,12 +1,9 @@
 import { FC, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 
-import { BtnLink } from '@/shared/components/BtnLink'
-
 import {
   Card,
   CardTitle,
-  CardImg,
   CharacteristicsList,
   ListTitle,
   ListItem,
@@ -18,8 +15,8 @@ import {
 } from './styled'
 import colors from '@/shared/constants/colors'
 import Link from 'next/link'
-import { Typography } from '../../CalculatorCard/ui/styled'
-import { ProductButtonGroup } from '../../ProductButtonGroup'
+import { Typography } from '@/shared/components/Typography'
+import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 
 export type TCardSolutionProps = {
   id?: number

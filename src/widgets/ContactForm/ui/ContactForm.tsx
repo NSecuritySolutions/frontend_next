@@ -26,11 +26,13 @@ import {
   InputWrapper,
   UploadBtn,
   UploadBtnText,
+  FormHeader,
+  FileWrapper,
 } from './styled'
 import { Button } from '@/shared/components/Button'
 import MaskedStyledInput from './mask'
-import { Typography } from '@/shared/components/CalculatorCard/ui/styled'
-import DocumentImage from './documentImage'
+import { Typography } from '@/shared/components/Typography'
+import { DocumentImage } from '@/shared/components/DocumentImage'
 
 const MAX_FILE_SIZE = 5
 
@@ -122,10 +124,10 @@ const ContactForm = () => {
           </FromImgWrapper>
         </InfoColumn>
         <FormColumn>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <FormHeader>
             <SectionTitle>Оставить заявку</SectionTitle>
             <ColumnParagraph>Заполните форму заявки и наш менеджер вам перезвонит</ColumnParagraph>
-          </div>
+          </FormHeader>
           <Form onSubmit={handleSubmit(onFormSubmit)}>
             <InputWrapper>
               <Input
@@ -167,15 +169,7 @@ const ContactForm = () => {
             </InputWrapper>
 
             {watch('file')?.name ? (
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '8px',
-                  width: '100%',
-                  height: '50px',
-                  alignItems: 'center',
-                }}
-              >
+              <FileWrapper>
                 <DocumentImage name={watch('file')!.name} />
                 <Typography size={13}>{watch('file')!.name}</Typography>
                 <Image
@@ -187,13 +181,13 @@ const ContactForm = () => {
                   alt="Удалить"
                   onClick={() => setValue('file', undefined)}
                 />
-              </div>
+              </FileWrapper>
             ) : (
-              <UploadBtn>
+              <UploadBtn role="button">
                 <input
                   {...register('file')}
                   type="file"
-                  style={{ display: 'none' }}
+                  hidden
                   accept=".doc,.docx,application/msword,.xls,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/pdf,application/vnd.ms-excel"
                   onChange={handleFileChange}
                 />

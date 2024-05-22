@@ -4,7 +4,6 @@ import {
   CardHeader,
   ImageTitle,
   Title,
-  Typography,
   Divider,
   Option,
   OptionHeader,
@@ -12,13 +11,14 @@ import {
   InputNumber,
 } from './styled'
 import colors from '@/shared/constants/colors/index'
-import { AmountComponent } from '../../AmountComponent'
-import { RadioGroup } from '../../RadioGroup'
+import { AmountComponent } from '@/shared/components/AmountComponent'
+import { RadioGroup } from '@/shared/components/RadioGroup'
 import { useRef } from 'react'
-import { Tooltip } from '../../Tooltip/index.ts'
+import { Tooltip } from '@/shared/components/Tooltip/index.ts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import CalculatorBlockStore from '../store.ts'
+import { Typography } from '@/shared/components/Typography'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore

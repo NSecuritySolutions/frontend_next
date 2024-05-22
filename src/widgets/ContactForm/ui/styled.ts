@@ -101,6 +101,12 @@ const FormColumn = styled.div`
   } */
 `
 
+const FormHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -222,6 +228,15 @@ const Link = styled.a`
     transition: 0.7s;
   }
 `
+
+const FileWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+`
+
 export {
   Section,
   SectionWrapper,
@@ -239,4 +254,6 @@ export {
   ErrorText,
   UploadBtn,
   UploadBtnText,
+  FormHeader,
+  FileWrapper,
 }

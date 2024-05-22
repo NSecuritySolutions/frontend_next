@@ -1,5 +1,6 @@
-import { Typography } from '@/shared/components/CalculatorCard/ui/styled'
+import { Typography } from '@/shared/components/Typography'
 import { FC } from 'react'
+import { ImageWrapper, ExtensionWrapper } from './styled'
 
 interface DocumentImageProps {
   name: string
@@ -24,7 +25,7 @@ const DocumentImage: FC<DocumentImageProps> = ({ name }) => {
   }
 
   return (
-    <div style={{ position: 'relative' }}>
+    <ImageWrapper>
       <svg
         width="28"
         height="28"
@@ -52,23 +53,12 @@ const DocumentImage: FC<DocumentImageProps> = ({ name }) => {
           fillOpacity="0.5"
         />
       </svg>
-      <div
-        style={{
-          position: 'absolute',
-          left: 1.75,
-          top: 13.13,
-          height: 10.5,
-          width: 21,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <ExtensionWrapper>
         <Typography size={7} $weight={800} color="white">
           {extension.slice(0, 3).toUpperCase()}
         </Typography>
-      </div>
-    </div>
+      </ExtensionWrapper>
+    </ImageWrapper>
   )
 }
 
