@@ -11,11 +11,9 @@ import { ModalContainer, ModalContent, CloseButton, ContentWrapper } from './sty
 const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal }) => {
   console.log(image?.src, 'image - 2')
   const router = useRouter()
-
   const handleBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       closeModal()
-      router.push('/#examples')
     }
   }
 
@@ -62,8 +60,8 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal }) => {
           <Image
             src={image?.src}
             alt={`Пример готового проекта`}
-            width={image.width}
-            height={image.height}
+            width={image?.width}
+            height={image?.height}
           />
         </ContentWrapper>
       </ModalContent>

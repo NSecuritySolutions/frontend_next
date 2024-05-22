@@ -10,6 +10,7 @@ import { SliderWrapper } from './styled.ts'
 import { IArrowProps, TSliderProps } from './types.ts'
 import { useState } from 'react'
 import ImageModal from '../../ImageModal/ui/ImageModal.tsx'
+import TImageModalProps from '../../ImageModal/types/types.ts'
 
 function SampleNextArrow(props: IArrowProps) {
   const { className = '', style = {}, onClick } = props
@@ -31,8 +32,8 @@ function SamplePrevArrow(props: IArrowProps) {
 }
 
 const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
-  const [showModal, setShowModal] = useState<boolean>(true)
-  const [selectedImage, setSelectedImage] = useState({})
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [selectedImage, setSelectedImage] = useState<TImageModalProps>()
 
   const settings = {
     customPaging: function (i: number) {
@@ -63,6 +64,8 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
   }
   return (
     <>
+      {/* @TODO - привести переменные к одному типу */}
+
       {showModal && <ImageModal image={selectedImage} closeModal={() => setShowModal(false)} />}
       <SliderWrapper>
         <Slider {...settings}>
