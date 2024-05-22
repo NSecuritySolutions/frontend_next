@@ -1,6 +1,8 @@
 import { FC, useRef, useState } from 'react'
-import { TooltipImage, Tip, Typography } from './styled'
+import { TooltipImage, Tip } from './styled'
 import ReactDOM from 'react-dom'
+import colors from '@/shared/constants/colors'
+import { Typography } from '@/shared/components/Typography'
 
 const Tooltip: FC<{ text: string }> = ({ text }) => {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -21,7 +23,7 @@ const Tooltip: FC<{ text: string }> = ({ text }) => {
               left: ref.current!.offsetLeft + ref.current!.offsetWidth,
             }}
           >
-            <Typography width="100%" size={15} $justifyContent="start">
+            <Typography width="100%" size={15} $weight={500} color={colors.backgroundPrimary}>
               {text}
             </Typography>
           </Tip>,

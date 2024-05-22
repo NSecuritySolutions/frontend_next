@@ -92,13 +92,19 @@ const FormColumn = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   padding-bottom: 40px;
 
   /* @media (max-width: 880px) {
     max-width: 280px;
     gap: 20px;
   } */
+`
+
+const FormHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `
 
 const Form = styled.form`
@@ -118,6 +124,7 @@ const FormParagraph = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
+  margin-top: 20px;
   margin-bottom: 12px;
 `
 
@@ -185,7 +192,8 @@ const ErrorText = styled.span`
   left: 0;
 `
 
-const UploadBtn = styled.button`
+const UploadBtn = styled.label`
+  position: relative;
   width: 100%;
   height: 50px;
   display: flex;
@@ -195,7 +203,6 @@ const UploadBtn = styled.button`
   border: none;
   border-radius: 8px;
   background-color: ${colors.backgroundPrimary};
-  margin-bottom: 20px;
   cursor: pointer;
 `
 
@@ -221,6 +228,15 @@ const Link = styled.a`
     transition: 0.7s;
   }
 `
+
+const FileWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+`
+
 export {
   Section,
   SectionWrapper,
@@ -238,4 +254,6 @@ export {
   ErrorText,
   UploadBtn,
   UploadBtnText,
+  FormHeader,
+  FileWrapper,
 }
