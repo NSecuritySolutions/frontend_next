@@ -107,6 +107,7 @@ type TCondition = {
 class CalculatorBlockStore {
   data: IBlock
   formula: string = ''
+  initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
   filters: Record<string, TCondition[]> = {}
 
@@ -115,6 +116,7 @@ class CalculatorBlockStore {
     this.formula = data.formula.expression
     this.variables = { ...price }
     this.setVariables()
+    this.initialVariables = { ...this.variables }
     makeAutoObservable(this, {
       variables: observable,
       filters: observable,
@@ -125,7 +127,9 @@ class CalculatorBlockStore {
   get result() {
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
-    const result = mathResult + filterResult * (this.variables[this.data.title] as number)
+    const result =
+      (this.variables[this.data.title] && this.variables[this.data.title] != 0 ? mathResult : 0) +
+      filterResult * (this.variables[this.data.title] as number)
     return result || 0
   }
 
@@ -196,9 +200,19 @@ class CalculatorBlockStore {
   setVariables = () => {
     // Формируем общий словарь для переменных
     this.data.options.forEach((option) => {
-      option.option_type === 'checkbox' && this.setVariable(option.name, false)
-      option.option_type === 'radio' && this.setVariable(option.name, 'unknown')
-      option.option_type === 'number' && this.setVariable(option.name, 0)
+      switch (option.option_type) {
+        case 'checkbox':
+          this.setVariable(option.name, false)
+          break
+        case 'radio':
+          this.setVariable(option.name, 'unknown')
+          break
+        case 'number':
+          this.setVariable(option.name, 0)
+          break
+        default:
+          throw new Error(`Unknown option type: ${option.option_type}`)
+      }
 
       // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
       if (option.product) {
@@ -207,6 +221,10 @@ class CalculatorBlockStore {
         this.filters[option.product].push({ leftPart: option.name as keyof (ICamera | IRegister) })
       }
     })
+  }
+
+  resetVariables = () => {
+    this.variables = { ...this.initialVariables }
   }
 
   parseFilters = (str: string) => {

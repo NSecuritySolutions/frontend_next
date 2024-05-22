@@ -16,24 +16,14 @@ const ScrollButton = () => {
       const screenHeight = window.innerHeight
 
       // Проверяем, проскроллил ли пользователь два экрана
-      if (scrollPosition > 2 * screenHeight) {
-        setHasScrolledTwoScreens(true)
-      } else {
-        setHasScrolledTwoScreens(false)
-      }
+      setHasScrolledTwoScreens(scrollPosition > 2 * screenHeight)
 
       const mainElement = document.querySelector('main')
 
       if (mainElement && ref.current) {
         const mainRect = mainElement.getBoundingClientRect()
 
-        console.log(mainElement.offsetTop + mainElement.offsetHeight, mainRect.bottom)
-
-        if (mainRect.bottom <= window.innerHeight) {
-          setIsFixed(false)
-        } else {
-          setIsFixed(true)
-        }
+        setIsFixed(mainRect.bottom >= window.innerHeight)
       }
     }
 
