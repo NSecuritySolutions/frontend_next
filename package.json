@@ -43,5 +43,9 @@
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "typescript": "^5"
-  }
+  },
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "maintained node versions"
+  ]
 }
