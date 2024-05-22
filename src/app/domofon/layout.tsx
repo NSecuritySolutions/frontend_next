@@ -7,6 +7,8 @@ import DomofonPage from './page'
 import '@/app/globals.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { BASE_URL } from '@/shared/constants/url/url'
+import { DomofonPageMetaData } from '@/shared/constants/texts/metadata'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -14,32 +16,25 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL(`${BASE_URL}`),
 
-  title: 'Купить готовые системы СКУД и домофонии в Новосибирске',
-  description:
-    'Широкий ассортимент системы СКУД и домофонии в наличии в Новосибирске. Лучшее решение на рынке систем видеонаблюдения с официальной гарантией и доставкой по всей России.',
-  keywords: [
-    'купить системы СКУД/Домофонии',
-    'готовые системы СКУД/Домофонии',
-    'интернет магазин СКУД/Домофонии',
-    'Опти Контроль',
-    'Новосибирск',
-  ],
+  title: `${DomofonPageMetaData.title}`,
+  description: `${DomofonPageMetaData.description}`,
+  keywords: `${DomofonPageMetaData.keywords}`,
   openGraph: {
+    url: `${BASE_URL}`,
     title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
     description:
       'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    url: 'https://', //@TODO Дописать атуальный url
-    siteName: 'Оптиконтроль',
+    siteName: 'Опти Контроль',
     images: [
       {
-        url: 'http://localhost:3000/src/app/icon7.png', //@TODO дописать путь к картинке для твиттера
+        url: '/favicons/icon6.png',
         width: 800,
         height: 600,
       },
       {
-        url: 'http://localhost:3000/src/app/icon6.png', //@TODO дописать путь к картинке для твиттера
+        url: '/favicons/icon7.png',
         width: 1800,
         height: 1600,
         alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',

@@ -9,20 +9,21 @@ import 'slick-carousel/slick/slick-theme.css'
 import { Footer } from '@/widgets/Footer'
 import { Header } from '@/widgets/Header'
 import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
+import { RootPageMetaData } from '@/shared/constants/texts/metadata'
 
 import StyledComponentsRegistry from '@/app/styling/registry'
 
 import styles from './page.module.css'
-
+import { BASE_URL } from '@/shared/constants/url/url'
 const manrope = Manrope({
   subsets: ['cyrillic'],
   weight: ['400', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL(`${BASE_URL}`),
   category: 'services',
-  manifest: 'http://localhost:3000/manifest.json',
+  manifest: `${BASE_URL}/manifest.json`,
 
   icons: {
     icon: [
@@ -49,34 +50,24 @@ export const metadata: Metadata = {
       { url: '/favicons/apple-icon9.png', sizes: '180x180', type: 'image/png' },
     ],
   },
-  title:
-    'Готовые решения систем видеонаблюдения, СКУД, охранно-пожарной сигнализации в Новосибирске',
-  description:
-    'Широкий ассортимент готовых решений по охране домов, офисов, складов, помещений в наличии в Новосибирске. Лучшие решения на рынке систем видеонаблюдения с официальной гарантией и доставкой по всей России.',
-  keywords: [
-    'готовые решения СКУД/Домофонии',
-    'готовые решения видеонаблюдения',
-    'готовые решения охранно-пожарной сигнализациия',
-    'интернет магазин систем видеонаблюдения',
-    'Опти Контроль',
-    'Новосибирск',
-  ],
+  title: `${RootPageMetaData.title}`,
+  description: `${RootPageMetaData.description}`,
+  keywords: `${RootPageMetaData.keywords}`,
   openGraph: {
-    url: 'http://localhost:3000',
+    url: `${BASE_URL}`,
 
     title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
     description:
       'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    // url: 'https://', //@TODO Дописать атуальный url
-    siteName: 'Оптиконтроль',
+    siteName: 'Опти Контроль',
     images: [
       {
-        url: 'http://localhost:3000/public/favicons/icon6.png',
+        url: '/favicons/icon6.png',
         width: 800,
         height: 600,
       },
       {
-        url: 'http://localhost:3000/public/favicons/icon7.png',
+        url: '/favicons/icon7.png',
         width: 1800,
         height: 1600,
         alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',

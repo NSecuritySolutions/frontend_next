@@ -8,6 +8,8 @@ import 'slick-carousel/slick/slick-theme.css'
 
 import { SliderWrapper } from './styled.ts'
 import { IArrowProps, TSliderProps } from './types.ts'
+import { useState } from 'react'
+import ImageModal from '../../ImageModal/ui/ImageModal.tsx'
 
 function SampleNextArrow(props: IArrowProps) {
   const { className = '', style = {}, onClick } = props
@@ -29,6 +31,9 @@ function SamplePrevArrow(props: IArrowProps) {
 }
 
 const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
+  const [showModal, setShowModal] = useState<boolean>(true)
+  const [selectedImage, setSelectedImage] = useState({})
+
   const settings = {
     customPaging: function (i: number) {
       return (
@@ -57,15 +62,27 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
     prevArrow: <SamplePrevArrow />,
   }
   return (
-    <SliderWrapper>
-      <Slider {...settings}>
-        {modalItem?.img.map((item: any, i: number) => (
-          <div key={i} className="image-container">
-            <Image src={item} alt={modalItem.title} width={1100} />
-          </div>
-        ))}
-      </Slider>
-    </SliderWrapper>
+    <>
+      {showModal && <ImageModal image={selectedImage} closeModal={() => setShowModal(false)} />}
+      <SliderWrapper>
+        <Slider {...settings}>
+          {modalItem?.img.map((item: any, i: number) => (
+            <div key={i} className="image-container">
+              <Image
+                src={item}
+                alt={modalItem.title}
+                width={1100}
+                onClick={() => {
+                  setShowModal(true)
+                  setSelectedImage(item)
+                  console.log(selectedImage, 'selected')
+                }}
+              />
+            </div>
+          ))}
+        </Slider>
+      </SliderWrapper>
+    </>
   )
 }
 
