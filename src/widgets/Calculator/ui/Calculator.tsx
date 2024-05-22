@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
 import { observer } from 'mobx-react-lite'
+import Loader from '@/shared/components/Loader/Loader'
 
 const Calculator: React.FC = observer(() => {
   const [height, setHeight] = useState(0)
@@ -43,7 +44,6 @@ const Calculator: React.FC = observer(() => {
         if (cardLeft !== containerLeft) {
           // если в раскрытом виде не выходит за пределы контейнера
           if (cardBottom + len * 36 <= containerBottom) {
-            console.log(containerHeight + (containerBottom - cardBottom))
             setHeight(containerHeight + (containerBottom - cardBottom) + 193)
             // если выходит за предели контейнера + элементы между ними
           } else if (cardBottom + len * 36 > containerBottom + (containerBottom - cardBottom)) {
@@ -61,7 +61,11 @@ const Calculator: React.FC = observer(() => {
   }
 
   if (calculatorStore.isLoading) {
-    return <></>
+    return Loader()
+  }
+
+  if (calculatorStore.error) {
+    return <Typography>Извините, калькулятор сломався...</Typography>
   }
 
   return (
