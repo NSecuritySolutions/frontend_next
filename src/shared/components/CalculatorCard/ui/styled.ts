@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 const Card = styled(motion.div).attrs({
-  layout: true,
+  layout: 'position',
   initial: { scale: 0, y: -49 },
   animate: { scale: 1, y: 0 },
   exit: { scale: 0, y: -49 },

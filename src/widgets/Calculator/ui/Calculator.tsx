@@ -41,6 +41,12 @@ const Calculator: React.FC = observer(() => {
     // ставим слушатели, чтобы закрыть выбор при клике вне его
     if (showDropdown) {
       window.addEventListener('click', handleClickOutside)
+      window.addEventListener('keydown', (e) => {
+        console.log(e.key)
+        if (e.key === 'Escape') {
+          setShowDropdown(!showDropdown)
+        }
+      })
       window.addEventListener('blur', () => {
         setShowDropdown(!showDropdown)
       })
