@@ -7,7 +7,7 @@ import TImageModalProps from '../types/types.ts'
 
 import containerVariants from './animation.tsx'
 
-import { ModalContainer, ModalContent, CloseButton } from './styles.ts'
+import { ModalContainer, ModalContent, CloseButton, RevertButton, Button } from './styles.ts'
 
 const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) => {
   const router = useRouter()
@@ -44,13 +44,11 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
     const modal = document.getElementById('modal')
 
     document.addEventListener('keydown', handleKeyDown)
-
     modal?.classList.add('popup-open')
     document.body.classList.add('modal-open')
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-
       modal?.classList.remove('popup-open')
       document.body.classList.remove('modal-open')
     }
@@ -65,29 +63,29 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
       onClick={handleBackdrop}
       id="modal"
     >
-      <button
-        onClick={() => {
-          prevSlide()
-        }}
-      >
-        Prev
-      </button>
       <ModalContent>
         <CloseButton onClick={closeModal}></CloseButton>
-
+        <RevertButton
+          onClick={() => {
+            prevSlide()
+          }}
+        >
+          <Image src={'/icons/ic-next-button.svg'} alt="Кнопка назад" width={64} height={64} />
+        </RevertButton>
         {isClicked && images && images[selectedImageIndex] ? (
           <Image src={images[selectedImageIndex]} alt={`Пример готового проекта`} fill />
         ) : (
           <Image src={image?.src} alt={`Пример готового проекта`} fill />
         )}
+
+        <Button
+          onClick={() => {
+            nextSlide()
+          }}
+        >
+          <Image src={'/icons/ic-next-button.svg'} alt="Кнопка назад" width={64} height={64} />
+        </Button>
       </ModalContent>
-      <button
-        onClick={() => {
-          nextSlide()
-        }}
-      >
-        Next
-      </button>
     </ModalContainer>
   )
 }

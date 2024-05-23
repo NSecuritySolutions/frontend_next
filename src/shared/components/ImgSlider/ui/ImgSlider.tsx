@@ -33,7 +33,7 @@ function SamplePrevArrow(props: IArrowProps) {
 
 const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [selectedImage, setSelectedImage] = useState<TImageModalProps>()
+  const [selectedImage, setSelectedImage] = useState<TImageModalProps['image']>()
 
   const settings = {
     customPaging: function (i: number) {
@@ -64,8 +64,6 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
   }
   return (
     <>
-      {/* @TODO - привести переменные к одному типу */}
-
       {showModal && modalItem && (
         <ImageModal
           image={selectedImage}
@@ -84,7 +82,6 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
                 onClick={() => {
                   setShowModal(true)
                   setSelectedImage(item)
-                  console.log(selectedImage, 'selected')
                 }}
               />
             </div>

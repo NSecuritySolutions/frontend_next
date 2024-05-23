@@ -1,8 +1,6 @@
 import colors from '@/shared/constants/colors'
 import { motion } from 'framer-motion'
 
-import closeBtn from '@/assets/icons/+.svg'
-
 import styled from 'styled-components'
 
 const ModalContainer = styled(motion.div)`
@@ -56,4 +54,28 @@ const CloseButton = styled.button`
     transition: opacity 0.1s ease-in;
   }
 `
-export { ModalContainer, ModalContent, CloseButton }
+
+const Button = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 1%;
+  opacity: 1;
+  z-index: 99;
+  &:hover {
+    opacity: 0.7;
+    transform: opacity 1s ease-in;
+  }
+`
+const RevertButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 94%;
+  z-index: 99;
+  transform: rotate(180deg);
+  opacity: 1;
+  &:hover {
+    opacity: 0.7;
+    transform: opacity 1s ease-in;
+  }
+`
+export { ModalContainer, ModalContent, CloseButton, RevertButton, Button }
