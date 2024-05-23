@@ -22,17 +22,4 @@ const ChangeAmount = styled.button`
   cursor: pointer;
 `
 
-const Typography = styled.p<{
-  width?: string
-  size?: number
-  $justifyContent?: 'start' | 'center' | 'end'
-}>`
-  display: flex;
-  font-size: ${(props) => (props.size ? props.size : 24)}px;
-  font: Manrope;
-  font-weight: 700;
-  justify-content: ${(props) => props.$justifyContent || 'center'};
-  width: ${(props) => (props.width ? props.width : '100%')};
-`
-
-export { Amount, ChangeAmount, Typography }
+export { Amount, ChangeAmount }

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Frontend сайта по продаже видеооборудования
 
-## Getting Started
+[Увидеть проект в браузере](https://nssolution.sytes.net/)
 
-First, run the development server:
+### Стек технологий
+
+<div> 
+ <img src="https://img.shields.io/badge/next.js-%23404d59.svg?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next Badge" />
+ <img src="https://img.shields.io/badge/TypeScript-%23404d59.svg?style=for-the-badge&logo=typescript&logoColor=blue" alt="TypeScript Badge" /> 
+ <img src="https://img.shields.io/badge/css3-%23404d59.svg?style=for-the-badge&logo=css3&logoColor=lightblue" alt="CSS3 Badge" />
+ <img src="https://img.shields.io/badge/html5-%23404d59.svg?style=for-the-badge&logo=html5&logoColor=orange" alt="HTML5 Badge" />
+</div>
+
+### Инструменты разработчика
+
+<div style="display: inline">
+  <img src="https://img.shields.io/badge/git-%23404d59.svg?style=for-the-badge&logo=git&logoColor=red" alt="Git Badge" />
+  <img src="https://img.shields.io/badge/ESLint-%23404d59?style=for-the-badge&logo=eslint&logoColor=violet" alt="ESLint Badge" />
+  <img src="https://img.shields.io/badge/babel-%23404d59?style=for-the-badge&logo=vscode&logoColor=white" alt="Babel" />
+  <img src="https://img.shields.io/badge/NPM-%23404d59?style=for-the-badge&logo=npm&logoColor=red" alt="NPM Badge" />
+  <img src="https://img.shields.io/badge/vscode-%23404d59?style=for-the-badge&logo=vscode&logoColor=white" alt="VScode Badge" />
+</div>
+
+### Установка
+
+Клонировать репозиторий:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:NSecuritySolutions/frontend_next.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Установаить зависимости:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Собрать проект:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Запустить проект:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run start
+```

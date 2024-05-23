@@ -1,6 +1,6 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Typography } from '../../CalculatorCard/ui/styled'
+import { Typography } from '@/shared/components/Typography'
 import { FC } from 'react'
 import { Nav } from './styled'
 

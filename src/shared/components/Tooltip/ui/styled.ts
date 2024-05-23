@@ -23,19 +23,4 @@ const Tip = styled.div<{ $maxWidth: string }>`
   transform: translateY(-100%);
 `
 
-const Typography = styled.p<{
-  width: string
-  size: number
-  $justifyContent?: 'start' | 'center' | 'end'
-  color?: string
-}>`
-  display: flex;
-  font-size: ${(props) => props.size}px;
-  font: Manrope;
-  font-weight: 500;
-  justify-content: ${(props) => props.$justifyContent || 'center'};
-  width: ${(props) => props.width};
-  color: ${(props) => props.color || colors.backgroundPrimary}}
-`
-
-export { TooltipImage, Tip, Typography }
+export { TooltipImage, Tip }

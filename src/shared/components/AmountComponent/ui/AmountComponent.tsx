@@ -1,6 +1,7 @@
 import React from 'react'
-import { Amount, ChangeAmount, Typography } from './styled'
+import { Amount, ChangeAmount } from './styled'
 import Image from 'next/image'
+import { Typography } from '@/shared/components/Typography'
 
 interface AmountComponentProps {
   amount: number
@@ -13,7 +14,9 @@ const AmountComponent: React.FC<AmountComponentProps> = ({ amount, onChange }) =
       <ChangeAmount onClick={() => amount > 0 && onChange(amount - 1)}>
         <Image src="/icons/calculator/minus.svg" height={2} width={7} alt="Decrement" />
       </ChangeAmount>
-      <Typography width="30px">{amount}</Typography>
+      <Typography width="30px" size={24} $justifyContent="center">
+        {amount}
+      </Typography>
       <ChangeAmount onClick={() => onChange(amount + 1)}>
         <Image src="/icons/calculator/plus.svg" height={10} width={9} alt="Increment" />
       </ChangeAmount>

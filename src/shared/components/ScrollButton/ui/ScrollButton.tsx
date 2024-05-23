@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Typography } from '../../CalculatorCard/ui/styled'
+import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors'
 import { useEffect, useRef, useState } from 'react'
 import { FloatDiv } from './styled'
