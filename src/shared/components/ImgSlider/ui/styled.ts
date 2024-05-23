@@ -137,9 +137,9 @@ const SliderWrapper = styled.div`
   .slick-slide img {
     margin: 0 auto;
     display: block;
-    object-fit: fill;
+    object-fit: cover;
     max-width: 1100px;
-    min-height: 600px;
+    max-height: 600px;
   }
   .slick-slide.slick-loading img {
     display: none;
