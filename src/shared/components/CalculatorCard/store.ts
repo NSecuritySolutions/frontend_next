@@ -1,4 +1,5 @@
 import { makeAutoObservable, computed, observable } from 'mobx'
+import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
@@ -105,6 +106,7 @@ type TCondition = {
 }
 
 class CalculatorBlockStore {
+  id: string
   data: IBlock
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
@@ -112,6 +114,7 @@ class CalculatorBlockStore {
   filters: Record<string, TCondition[]> = {}
 
   constructor(data: IBlock, price: IPriceList) {
+    this.id = uuidv4()
     this.data = data
     this.formula = data.formula.expression
     this.variables = { ...price }

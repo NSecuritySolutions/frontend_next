@@ -93,7 +93,10 @@ interface ICalculatorData {
 }
 
 class CalculatorStore {
-  products: (ICamera | IRegister)[] | [] = []
+  data: IBlock[] = []
+  // @TODO Не забыть переделать модель цен на бэке!!!!
+  prices: IPriceList | undefined = undefined
+  products: (ICamera | IRegister)[] = []
   blocks: CalculatorBlockStore[] = []
   isLoading = true
   error: null | unknown = null
@@ -118,12 +121,23 @@ class CalculatorStore {
     return formatedSum
   }
 
-  setBlocks(blocksData: IBlock[], price: IPriceList) {
-    this.blocks = blocksData.map((blockData) => new CalculatorBlockStore(blockData, price))
+  setBlocks() {
+    this.blocks = this.data.map((blockData) => new CalculatorBlockStore(blockData, this.prices!))
+  }
+
+  setNewBlock(id: number) {
+    this.blocks.push(
+      new CalculatorBlockStore(this.data.filter((block) => block.id == id)[0], this.prices!),
+    )
+  }
+
+  removeBlock(id: number) {
+    this.blocks.splice(id, 1)
   }
 
   fetchData() {
     this.isLoading = true
+    // Не забывать добавить timeout
     axios.get(`${BASE_URL}/api/v1/product/`).then(
       action('fetchProducts', (response) => {
         this.products = response.data
@@ -137,7 +151,9 @@ class CalculatorStore {
       action('fetchData', (response) => {
         const fullData: ICalculatorData[] = response.data
         const prices = fullData[0].price_list
-        this.setBlocks(fullData[0].blocks, prices)
+        this.data = fullData[0].blocks
+        this.prices = fullData[0].price_list
+        this.setBlocks()
         this.isLoading = false
       }),
       action('fetchError', (error) => {
