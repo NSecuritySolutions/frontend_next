@@ -1,6 +1,6 @@
 import { Section, SectionTitle, ImgWrap, ImageButton, FooterWrapper } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
-import { Typography } from '@/shared/components/CalculatorCard/ui/styled'
+import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors/index.ts'
 
 import { LayoutGroup } from 'framer-motion'
@@ -103,11 +103,11 @@ const Calculator: React.FC = observer(() => {
                   style={{ objectFit: 'cover' }}
                 />
               </ImgWrap>
-              <Typography size={16} width="fit-content" color={colors.textSecondary}>
+              <Typography size={16} color={colors.textSecondary}>
                 Сбросить настройки
               </Typography>
             </ImageButton>
-            <Typography size={18} width="fit-content" style={{ marginTop: 5 }}>
+            <Typography size={18} style={{ marginTop: 5 }}>
               Итого система «под ключ»: ~{calculatorStore.result}
             </Typography>
           </FooterWrapper>
