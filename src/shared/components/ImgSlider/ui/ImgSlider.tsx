@@ -2,13 +2,14 @@
 
 import Image from 'next/image'
 import Slider from 'react-slick'
+import { useState } from 'react'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import { SliderWrapper } from './styled.ts'
 import { IArrowProps, TSliderProps } from './types.ts'
-import { useState } from 'react'
+
 import ImageModal from '../../ImageModal/ui/ImageModal.tsx'
 import TImageModalProps from '../../ImageModal/types/types.ts'
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
