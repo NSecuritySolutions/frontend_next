@@ -7,25 +7,51 @@ import {
   AddBlockButton,
   Select,
   Option,
+  TitleWrapper,
+  GridContainer,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors/index.ts'
 
-import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
 import { observer } from 'mobx-react-lite'
 import Loader from '@/shared/components/Loader/Loader'
+import ReactDOM from 'react-dom'
 
 const Calculator: React.FC = observer(() => {
   const [showDropdown, setShowDropdown] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const addButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     calculatorStore.fetchData()
   }, [])
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (addButtonRef.current && !addButtonRef.current.contains(event.target as Node)) {
+      setShowDropdown(!showDropdown)
+    }
+  }
+
+  useEffect(() => {
+    // ставим слушатели, чтобы закрыть выбор при клике вне его
+    if (showDropdown) {
+      window.addEventListener('click', handleClickOutside)
+      window.addEventListener('blur', () => {
+        setShowDropdown(!showDropdown)
+      })
+    } else {
+      window.removeEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside)
+    }
+  }, [showDropdown, handleClickOutside])
 
   const handleSelect = (value: number) => {
     calculatorStore.setNewBlock(value)
@@ -42,22 +68,12 @@ const Calculator: React.FC = observer(() => {
 
   return (
     <div style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
-      <div
-        style={{
-          width: ref.current?.offsetWidth || 1180,
-          marginTop: 40,
-          position: 'absolute',
-          display: 'flex',
-          gap: 12,
-          alignItems: 'center',
-          zIndex: 2,
-        }}
-      >
+      <TitleWrapper $width={ref.current?.offsetWidth}>
         <SectionTitle style={{ height: 28 }}>Калькулятор</SectionTitle>
-        <div style={{ position: 'relative', width: '100%' }}>
-          <AddBlockButton onClick={() => setShowDropdown(!showDropdown)}>
-            <Image src="/icons/calculator/plus.svg" height={10} width={9} alt="Добавить блок" />
-            {showDropdown && (
+        <AddBlockButton onClick={() => setShowDropdown(!showDropdown)} ref={addButtonRef}>
+          <Image src="/icons/calculator/plus.svg" height={10} width={9} alt="Добавить блок" />
+          {showDropdown &&
+            ReactDOM.createPortal(
               <Select>
                 {calculatorStore.data.map((block) => (
                   <Option key={block.id} onClick={() => handleSelect(block.id)}>
@@ -66,27 +82,20 @@ const Calculator: React.FC = observer(() => {
                     </Typography>
                   </Option>
                 ))}
-              </Select>
+              </Select>,
+              addButtonRef.current!,
             )}
-          </AddBlockButton>
-        </div>
-      </div>
+        </AddBlockButton>
+      </TitleWrapper>
       <Section id="calculator">
         <div ref={ref}>
-          <div
-            style={{
-              marginTop: 58,
-              display: 'grid',
-              gap: '20px',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-            }}
-          >
+          <GridContainer>
             <LayoutGroup>
               {calculatorStore.blocks.map((block, index) => (
                 <CalculatorCard store={block} key={block.id} index={index} />
               ))}
             </LayoutGroup>
-          </div>
+          </GridContainer>
           <FooterWrapper>
             <ImageButton onClick={() => calculatorStore.setBlocks()}>
               <ImgWrap>

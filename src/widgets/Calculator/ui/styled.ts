@@ -18,6 +18,16 @@ const Section = styled(motion.div).attrs({
   align-items: center;
 `
 
+const TitleWrapper = styled.div<{ $width?: number }>`
+  width: ${(props) => props.$width || 880}px;
+  margin-top: 40px;
+  position: absolute;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  z-index: 2;
+`
+
 const SectionTitle = styled.h3`
   color: ${colors.darkPrimary};
   font:
@@ -62,13 +72,14 @@ const AddBlockButton = styled.button`
 `
 
 const Select = styled.div`
-  top: -3px;
-  left: 25px;
-  width: fit-content;
   position: absolute;
+  top: 30px;
+  left: 0px;
+  width: max-content;
   border: 1px solid ${colors.backgroundBase3};
   border-radius: 8px;
   background-color: ${colors.backgroundPrimary};
+  z-index: 99;
 `
 
 const Option = styled.div`
@@ -81,6 +92,13 @@ const Option = styled.div`
   }
 `
 
+const GridContainer = styled.div`
+  margin-top: 58px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+`
+
 export {
   Section,
   SectionTitle,
@@ -90,4 +108,6 @@ export {
   AddBlockButton,
   Select,
   Option,
+  TitleWrapper,
+  GridContainer,
 }
