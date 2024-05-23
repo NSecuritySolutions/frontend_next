@@ -1,7 +1,5 @@
 import { FC } from 'react'
 import Image from 'next/image'
-
-import { Card, ColumnWrapper, ContentWrapper, UnorderedList } from './styled'
 import { Typography } from '@/shared/components/Typography'
 import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
