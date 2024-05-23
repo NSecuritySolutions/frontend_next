@@ -14,6 +14,8 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
+
   title: 'Купить готовые системы СКУД и домофонии в Новосибирске',
   description:
     'Широкий ассортимент системы СКУД и домофонии в наличии в Новосибирске. Лучшее решение на рынке систем видеонаблюдения с официальной гарантией и доставкой по всей России.',
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default function DomofonPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

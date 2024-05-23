@@ -35,7 +35,7 @@ export type TWorkExamples = {
   date?: string
   cardTitle: string
   cardText: string
-  cardLink: string
+  cardLink?: string
   cardImage?: StaticImageData | undefined
   cardSectionButton?: string | undefined
   cardSectionLink?: string | undefined
@@ -44,7 +44,7 @@ export type TWorkExamples = {
     alt: string
   }[]
   title: string
-  quantities: { number: string; description: string }[]
+  quantities: { number: string; description: string; color?: string }[]
   img: StaticImageData[]
   equipment: string[]
   text: string
@@ -105,4 +105,11 @@ export type TFormTypes = {
   phone: string
   email: string
   text: string
+}
+
+export type TCookieText = {
+  id: number
+  title: string
+  text: string
+  button: string
 }

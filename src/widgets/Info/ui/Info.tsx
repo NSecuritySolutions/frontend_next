@@ -60,7 +60,7 @@ const Info: FC = () => {
           </HistoryWrapper>
         </ContentWrapper>
         <BannerWrapper>
-          <Image src={bannerImg} alt="Баннер" width={702} height={368} />
+          <Image priority src={bannerImg} alt="Баннер" width={702} height={368} />
         </BannerWrapper>
       </SectionWrapper>
       <CardWrapper>

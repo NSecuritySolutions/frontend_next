@@ -14,6 +14,7 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
   title: 'Купить готовые комплекты видеолнаблюдения в Новосибирске',
   description:
     'Широкий ассортимент систем видеонаблюдения в наличии в Новосибирске. Лучшее решение на рынке систем видеонаблюдения с официальной гарантией и доставкой по всей России.',
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default function VideoPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

@@ -4,18 +4,13 @@ import Image from 'next/image'
 
 import { BtnLink } from '@/shared/components/BtnLink'
 
+import { Card, CardTitle, CardText, CardImg, TextContainer } from './styled'
+
+import { TCardProps } from '../types/types'
+
 import colors from '@/shared/constants/colors/index.ts'
 
-import { Card, CardTitle, CardText, CardImg, TextContainer } from './styled'
-import { StaticImageData } from 'next/image'
-
-type TCardProps = {
-  title: string
-  img: StaticImageData | string
-  text: string[]
-  btnName: string
-  link: string
-}
+import { rgbDataURL } from '@/shared/constants/utils/utils'
 
 const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
   return (
@@ -37,7 +32,15 @@ const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
         size="15px"
       ></BtnLink>
       <CardImg>
-        <Image src={img} alt={title} width={300} height={169} />
+        <Image
+          placeholder="blur"
+          src={img}
+          alt={title}
+          width={300}
+          height={169}
+          // blurDataURL="/blurData/blur2.png"
+          blurDataURL={rgbDataURL(225, 231, 244)}
+        />
       </CardImg>
     </Card>
   )

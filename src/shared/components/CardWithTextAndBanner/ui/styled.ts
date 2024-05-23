@@ -57,6 +57,7 @@ const CardText = styled.li`
   font-size: 16px;
   max-width: 540px;
   width: 70%;
+  z-index: 1;
 `
 
 const CardImg = styled.div`

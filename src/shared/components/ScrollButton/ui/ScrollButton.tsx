@@ -24,6 +24,7 @@ const ScrollButton = () => {
         const mainRect = mainElement.getBoundingClientRect()
 
         setIsFixed(mainRect.bottom >= window.innerHeight)
+
       }
     }
 

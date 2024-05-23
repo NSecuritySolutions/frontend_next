@@ -14,6 +14,8 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('http://localhost:3000'),
+
   title: 'Купить системы охранно-пожарной сигнализации в Новосибирске',
   description:
     'Широкий ассортимент систем охранно-пожарной сигнализации в наличии в Новосибирске. Лучшее решение на рынке систем пожаротушения с официальной гарантией и доставкой по всей России.',
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default function SecurityPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

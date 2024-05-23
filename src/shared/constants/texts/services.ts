@@ -20,7 +20,7 @@ export const cardServices: TOurServices[] = [
       'Комплексные решения, онлайн-консультации в сети и по телефону, проектирование от сбора первичных требований и выезда на замер до установки и подключения',
     ],
     img: securityImg,
-    link: '/ourworks',
+    link: '/#contact-form',
     btnName: 'Заказать',
   },
   {

@@ -1,13 +1,12 @@
 import { FC } from 'react'
-
-import { Card, ColumnWrapper, ContentWrapper, UnorderedList } from './styled'
-import { Typography } from '@/shared/components/Typography'
 import Image from 'next/image'
+import { Typography } from '@/shared/components/Typography'
 import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs'
 import Loader from '@/shared/components/Loader/Loader'
 
+import { Card, ColumnWrapper, ContentWrapper, UnorderedList } from './styled'
 interface ProductProps {
   data: TCardSolutionProps
 }

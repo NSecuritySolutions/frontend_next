@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { Manrope } from 'next/font/google'
 
-import OurworksPage from './page.tsx'
+import OurworksPage from './page'
 
 import '@/app/globals.css'
 import 'slick-carousel/slick/slick.css'
@@ -50,10 +50,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default function OurworksPageLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <OurworksPage />
+  return <OurworksPage></OurworksPage>
 }

@@ -28,7 +28,7 @@ const CardWithList: FC<TCardProps> = ({ title, logo, listItem, backgroundColor }
       <List>
         {listItem.map((item, index) => (
           <ListItem key={index}>
-            <Image src={listMarker} alt="Маркер списка" width={20} height={20} />
+            <Image src="/icons/list-item.svg" alt="Маркер списка" width={20} height={20} />
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}

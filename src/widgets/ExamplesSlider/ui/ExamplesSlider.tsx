@@ -16,9 +16,9 @@ import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 
 import blankImg from '@/assets/icons/examples/no-image.svg'
 
-import { ChangeFormateDate } from '@/shared/constants/utils/utils.ts'
+//import { ChangeFormateDate } from '@/shared/constants/utils/utils.ts'
 
-import { TEXT_LIMIT, TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
+import { TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
 import {
   SliderContainer,
@@ -117,7 +117,7 @@ const ExamplesSlider: React.FC = () => {
             .map((item: TWorkExamples, i) => (
               <CardWrapper key={item.id}>
                 {item.cardImage ? (
-                  <ExamplesLink onClick={() => openModal(item)}>
+                  <ExamplesLink href={`/examples/${item.id}`}>
                     <ExamplesImgWrapper>
                       <Image
                         src={item?.cardImage}
@@ -141,8 +141,6 @@ const ExamplesSlider: React.FC = () => {
                 <ExamplesContainer className="slick-slide" key={i}>
                   <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                  {/* <ExamplesText>{truncate(item.cardText, TEXT_LIMIT)}</ExamplesText> */}
-
                   <InfoIconWrapper>
                     {item.quantities.map((item, i) => (
                       <InfoIcon key={i}>{item.number}</InfoIcon>
@@ -157,7 +155,7 @@ const ExamplesSlider: React.FC = () => {
                       height="44px"
                       color={colors.darkPrimary}
                       size="15px"
-                      onClick={() => openModal(item)}
+                      link={`/examples/${item.id}`}
                     ></BtnLink>
 
                     <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
