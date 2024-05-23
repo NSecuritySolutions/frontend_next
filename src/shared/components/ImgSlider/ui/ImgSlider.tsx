@@ -68,7 +68,7 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
   }
   return (
     <>
-      {showModal && modalItem && (
+      {showModal && modalItem && selectedImage && (
         <ImageModal
           image={selectedImage}
           closeModal={() => setShowModal(false)}
