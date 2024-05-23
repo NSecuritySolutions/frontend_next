@@ -5,18 +5,17 @@ import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
 
-import colors from '@/shared/constants/colors'
-
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
+
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
+import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
+import colors from '@/shared/constants/colors'
 
 import blankImg from '@/assets/icons/examples/no-image.svg'
-
-//import { ChangeFormateDate } from '@/shared/constants/utils/utils.ts'
 
 import { TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
@@ -28,7 +27,6 @@ import {
   ButtonWrapper,
   ExamplesContainer,
   ExamplesTitle,
-  ExamplesText,
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
@@ -68,7 +66,7 @@ const ExamplesSlider: React.FC = () => {
     rows: 2,
     slidesPerRow: 2,
 
-    appendDots: (dots: boolean) => <div>{dots}</div>,
+    appendDots: (dots: boolean) => <ul>{dots}</ul>,
 
     responsive: [
       {
@@ -120,6 +118,7 @@ const ExamplesSlider: React.FC = () => {
                   <ExamplesLink href={`/examples/${item.id}`}>
                     <ExamplesImgWrapper>
                       <Image
+                        blurDataURL={rgbDataURL(225, 231, 244)}
                         src={item?.cardImage}
                         alt={item.cardTitle}
                         width={200}
@@ -135,6 +134,8 @@ const ExamplesSlider: React.FC = () => {
                       width={200}
                       height={200}
                       alt={'Пустая картинка'}
+                      placeholder="blur"
+                      blurDataURL={rgbDataURL(225, 231, 244)}
                     ></Image>
                   </ExamplesImgWrapper>
                 )}

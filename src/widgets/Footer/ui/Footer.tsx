@@ -51,17 +51,17 @@ const Footer = () => {
             <FooterContactsContentWrapper>
               {contacts.map((contact, index) => (
                 <FooterContactContainer key={index}>
-                  <FooterContactLogo src={contact.icon} />
+                  <FooterContactLogo src={contact.icon} alt={`Контакты - ${contact.text}`} />
                   <FooterContactLink href={contact.link}>{contact.text}</FooterContactLink>
                 </FooterContactContainer>
               ))}
             </FooterContactsContentWrapper>
             <FooterSocialIconsContainer>
               <FooterSocialIconLink href="#" target="_blank">
-                <Image src="/icons/telegram.svg" width={32} height={32} alt="tg" />
+                <Image src="/icons/telegram.svg" width={32} height={32} alt="Telegram" />
               </FooterSocialIconLink>
               <FooterSocialIconLink href="#" target="_blank">
-                <Image src="/icons/whatsapp.svg" width={32} height={32} alt="wa" />
+                <Image src="/icons/whatsapp.svg" width={32} height={32} alt="WhatsApp" />
               </FooterSocialIconLink>
             </FooterSocialIconsContainer>
           </FooterContactsContainer>
@@ -87,7 +87,7 @@ const Footer = () => {
 
             <FooterTextInfoWrapper>
               <FooterRightsText>
-                Сайт разработан{' '}
+                Сайт разработан
                 <FooterDeveloperLink href="#" target="_blank">
                   ХХХ Studio
                 </FooterDeveloperLink>

@@ -17,9 +17,10 @@ const SliderWrapper = styled.div`
     min-width: 1100px;
     width: 100%;
     height: 600px;
-    background-color: black;
+    background-color: ${colors.textSecondary};
     display: flex;
     border-radius: 20px;
+    cursor: zoom-in;
 
     img {
       margin: 0 auto;
@@ -46,7 +47,7 @@ const SliderWrapper = styled.div`
       max-width: 260px;
       width: 100%;
       height: 195px;
-      background-color: black;
+      background-color: ${colors.textSecondary};
       object-fit: fill;
     }
 

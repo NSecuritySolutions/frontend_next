@@ -26,12 +26,14 @@ const OurTeam = () => {
             <TextWrapper>
               <ColumnTitle>Наша команда</ColumnTitle>
               <ColumnParagraph>
-                {teamText.map((item, index) => (
-                  <ListItem key={index}>
-                    <Image src="/icons/list-item.svg" alt="List Marker" width={20} height={20} />
-                    <ListItemText>{item}</ListItemText>
-                  </ListItem>
-                ))}
+                <ul>
+                  {teamText.map((item, index) => (
+                    <ListItem key={index}>
+                      <Image src="/icons/list-item.svg" alt="List Marker" width={20} height={20} />
+                      <ListItemText>{item}</ListItemText>
+                    </ListItem>
+                  ))}
+                </ul>
               </ColumnParagraph>
             </TextWrapper>
           </Column>

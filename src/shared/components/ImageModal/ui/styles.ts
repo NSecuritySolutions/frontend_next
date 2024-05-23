@@ -32,7 +32,7 @@ const ModalContent = styled.div`
 `
 
 const CloseButton = styled.button`
-  color: ${colors.textSecondary};
+  color: ${colors.backgroundBase3};
   background-color: transparent;
   object-fit: contain;
   border: none;
@@ -49,6 +49,7 @@ const CloseButton = styled.button`
   &:after {
     content: '\2715';
   }
+
   &:hover {
     opacity: 0.6;
     transition: opacity 0.1s ease-in;
@@ -58,9 +59,10 @@ const CloseButton = styled.button`
 const Button = styled.button`
   position: absolute;
   top: 50%;
-  right: 1%;
+  right: 10px;
   opacity: 1;
   z-index: 99;
+
   &:hover {
     opacity: 0.7;
     transform: opacity 1s ease-in;
@@ -69,10 +71,11 @@ const Button = styled.button`
 const RevertButton = styled.button`
   position: absolute;
   top: 50%;
-  right: 94%;
+  left: 10px;
   z-index: 99;
   transform: rotate(180deg);
   opacity: 1;
+
   &:hover {
     opacity: 0.7;
     transform: opacity 1s ease-in;

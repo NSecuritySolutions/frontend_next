@@ -11,6 +11,7 @@ import { IArrowProps, TSliderProps } from './types.ts'
 import { useState } from 'react'
 import ImageModal from '../../ImageModal/ui/ImageModal.tsx'
 import TImageModalProps from '../../ImageModal/types/types.ts'
+import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 
 function SampleNextArrow(props: IArrowProps) {
   const { className = '', style = {}, onClick } = props
@@ -45,6 +46,8 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
               src={modalItem.img[i]}
               alt={`Миниатюра фото - ${modalItem.title}`}
               width={260}
+              placeholder="blur"
+              blurDataURL={rgbDataURL(225, 231, 244)}
             />
           )}
         </a>
@@ -76,6 +79,8 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
           {modalItem?.img.map((item: any, i: number) => (
             <div key={i} className="image-container">
               <Image
+                placeholder="blur"
+                blurDataURL={rgbDataURL(225, 231, 244)}
                 src={item}
                 alt={modalItem.title}
                 width={1100}

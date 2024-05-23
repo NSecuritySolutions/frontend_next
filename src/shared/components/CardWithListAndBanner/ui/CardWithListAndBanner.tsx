@@ -1,7 +1,9 @@
 import { FC } from 'react'
+
 import Image, { StaticImageData } from 'next/image'
 
-import listMarker from '@/assets/icons/list-item.svg'
+import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
+
 import {
   Card,
   CardTitle,
@@ -29,14 +31,21 @@ const CardWithListAndBanner: FC<TCardProps> = ({ title, banner, listItem, backgr
         <List>
           {listItem.map((item, index) => (
             <ListItem key={index}>
-              <Image src={listMarker} alt="List Marker" width={20} height={20} />
+              <Image src="/icons/list-item.svg" alt="Маркер списка" width={20} height={20} />
               <ListItemText>{item}</ListItemText>
             </ListItem>
           ))}
         </List>
       </ContentContainer>
 
-      <Image src={banner} alt="Banner" width={200} height={200} />
+      <Image
+        src={banner}
+        alt="Баннер"
+        width={200}
+        height={200}
+        placeholder="blur"
+        blurDataURL={rgbDataURL(225, 231, 244)}
+      />
     </Card>
   )
 }

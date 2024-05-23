@@ -7,6 +7,8 @@ import TImageModalProps from '../types/types.ts'
 
 import containerVariants from './animation.tsx'
 
+import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
+
 import { ModalContainer, ModalContent, CloseButton, RevertButton, Button } from './styles.ts'
 
 const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) => {
@@ -73,9 +75,21 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
           <Image src={'/icons/ic-next-button.svg'} alt="Кнопка назад" width={64} height={64} />
         </RevertButton>
         {isClicked && images && images[selectedImageIndex] ? (
-          <Image src={images[selectedImageIndex]} alt={`Пример готового проекта`} fill />
+          <Image
+            src={images[selectedImageIndex]}
+            alt={`Пример готового проекта`}
+            fill
+            placeholder="blur"
+            blurDataURL={rgbDataURL(225, 231, 244)}
+          />
         ) : (
-          <Image src={image?.src} alt={`Пример готового проекта`} fill />
+          <Image
+            src={image?.src}
+            alt={`Пример готового проекта`}
+            fill
+            placeholder="blur"
+            blurDataURL={rgbDataURL(225, 231, 244)}
+          />
         )}
 
         <Button
