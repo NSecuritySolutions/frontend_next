@@ -66,7 +66,13 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
     <>
       {/* @TODO - привести переменные к одному типу */}
 
-      {showModal && <ImageModal image={selectedImage} closeModal={() => setShowModal(false)} />}
+      {showModal && modalItem && (
+        <ImageModal
+          image={selectedImage}
+          closeModal={() => setShowModal(false)}
+          images={modalItem?.img}
+        />
+      )}
       <SliderWrapper>
         <Slider {...settings}>
           {modalItem?.img.map((item: any, i: number) => (

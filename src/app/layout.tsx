@@ -10,6 +10,7 @@ import { Footer } from '@/widgets/Footer'
 import { Header } from '@/widgets/Header'
 import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
 import { RootPageMetaData } from '@/shared/constants/texts/metadata'
+import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
 
 import StyledComponentsRegistry from '@/app/styling/registry'
 
@@ -55,22 +56,21 @@ export const metadata: Metadata = {
   keywords: `${RootPageMetaData.keywords}`,
   openGraph: {
     url: `${BASE_URL}`,
-
-    title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
-    description:
-      'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    siteName: 'Опти Контроль',
+    title: `${OpenGraphMetaData.title}`,
+    description: `${OpenGraphMetaData.description}`,
+    siteName: `${OpenGraphMetaData.siteName}`,
     images: [
       {
         url: '/favicons/icon6.png',
         width: 800,
         height: 600,
+        alt: `${OpenGraphMetaData.alt}`,
       },
       {
         url: '/favicons/icon7.png',
         width: 1800,
         height: 1600,
-        alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
+        alt: `${OpenGraphMetaData.alt}`,
       },
     ],
     locale: 'ru_RU',

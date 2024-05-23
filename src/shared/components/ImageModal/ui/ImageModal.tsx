@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { MouseEvent, useEffect } from 'react'
@@ -6,11 +7,28 @@ import TImageModalProps from '../types/types.ts'
 
 import containerVariants from './animation.tsx'
 
-import { ModalContainer, ModalContent, CloseButton, ContentWrapper } from './styles.ts'
+import { ModalContainer, ModalContent, CloseButton } from './styles.ts'
 
-const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal }) => {
-  console.log(image?.src, 'image - 2')
+const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) => {
   const router = useRouter()
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [isClicked, setisClicked] = useState<boolean>(false)
+
+  const nextSlide = () => {
+    setisClicked(true)
+    if (images) {
+      setSelectedImageIndex((selectedImageIndex + 1) % images.length)
+    }
+  }
+
+  const prevSlide = () => {
+    setisClicked(true)
+    if (images) {
+      setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length)
+    }
+  }
+
   const handleBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       closeModal()
@@ -47,24 +65,29 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal }) => {
       onClick={handleBackdrop}
       id="modal"
     >
+      <button
+        onClick={() => {
+          prevSlide()
+        }}
+      >
+        Prev
+      </button>
       <ModalContent>
-        <CloseButton onClick={closeModal}>
-          <Image
-            src="/icons/closeBtn.svg"
-            alt={'Кнопка закрытия модального окна'}
-            height={40}
-            width={40}
-          ></Image>
-        </CloseButton>
-        <ContentWrapper>
-          <Image
-            src={image?.src}
-            alt={`Пример готового проекта`}
-            width={image?.width}
-            height={image?.height}
-          />
-        </ContentWrapper>
+        <CloseButton onClick={closeModal}></CloseButton>
+
+        {isClicked && images && images[selectedImageIndex] ? (
+          <Image src={images[selectedImageIndex]} alt={`Пример готового проекта`} fill />
+        ) : (
+          <Image src={image?.src} alt={`Пример готового проекта`} fill />
+        )}
       </ModalContent>
+      <button
+        onClick={() => {
+          nextSlide()
+        }}
+      >
+        Next
+      </button>
     </ModalContainer>
   )
 }

@@ -3,6 +3,14 @@ export type TMetaData = {
   description: string | undefined
   keywords: string | undefined
 }
+
+export type TOgMetaData = {
+  title: string | undefined
+  description: string | undefined
+  siteName: string | undefined
+  alt: string | undefined
+}
+
 export const RootPageMetaData: TMetaData = {
   title:
     'Установка и обслуживание ОПС, СКУД, видеонаблюдения и домофонов | Системы безопасности в Новосибирске | Опти Контроль',
@@ -36,4 +44,12 @@ export const DomofonPageMetaData: TMetaData = {
     'Монтаж систем контроля доступа (СКУД) и домофонов - это важный элемент безопасности для домов, офисов и других объектов. Наша компания предоставляет услуги по установке и настройке СКУД и домофонных систем любой сложности',
   keywords:
     'Вызывная панель в Новосибирске, Видеодомофон Новосибирск, Установить СКУД в Новосибирске, монтаж СКУД Новосибирск, установка СКУД, установка домофонов, системы контроля доступа, входная группа, домофонные системы',
+}
+
+export const OpenGraphMetaData: TOgMetaData = {
+  title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
+  description:
+    'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
+  siteName: 'Опти Контроль',
+  alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
 }

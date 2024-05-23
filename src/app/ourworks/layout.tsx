@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { BASE_URL } from '@/shared/constants/url/url'
 import { RootPageMetaData } from '@/shared/constants/texts/metadata'
+import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -22,21 +23,21 @@ export const metadata: Metadata = {
 
   openGraph: {
     url: `${BASE_URL}`,
-    title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
-    description:
-      'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    siteName: 'Опти Контроль',
+    title: `${OpenGraphMetaData.title}`,
+    description: `${OpenGraphMetaData.description}`,
+    siteName: `${OpenGraphMetaData.siteName}`,
     images: [
       {
         url: '/favicons/icon6.png',
         width: 800,
         height: 600,
+        alt: `${OpenGraphMetaData.alt}`,
       },
       {
         url: '/favicons/icon7.png',
         width: 1800,
         height: 1600,
-        alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
+        alt: `${OpenGraphMetaData.alt}`,
       },
     ],
     locale: 'ru_RU',
