@@ -179,9 +179,10 @@ const ErrorText = styled.p`
     max-width: 100%;
   }
 
-  @media (max-width: 620px) {
-    400 14px Manrope,
-    sans-serif;
+  @media (max-width: 940px) {
+    font:
+      400 14px Manrope,
+      sans-serif;
   }
 `
 
