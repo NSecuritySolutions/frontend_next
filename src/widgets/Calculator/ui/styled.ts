@@ -4,6 +4,13 @@ import styled from 'styled-components'
 
 import { motion } from 'framer-motion'
 
+const CalculatorContainer = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+`
+
 const Section = styled(motion.div).attrs({
   layout: 'size',
   transition: { type: 'linear' },
@@ -103,6 +110,7 @@ const GridContainer = styled.div`
 `
 
 export {
+  CalculatorContainer,
   Section,
   SectionTitle,
   ImgWrap,

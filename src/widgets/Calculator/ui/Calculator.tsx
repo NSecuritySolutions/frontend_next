@@ -1,4 +1,5 @@
 import {
+  CalculatorContainer,
   Section,
   SectionTitle,
   ImgWrap,
@@ -70,7 +71,7 @@ const Calculator: React.FC = observer(() => {
   }
 
   return (
-    <div style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+    <CalculatorContainer>
       <TitleWrapper $width={ref.current?.offsetWidth}>
         <SectionTitle style={{ height: 28 }}>Калькулятор</SectionTitle>
         <AddBlockButton onClick={() => setShowDropdown(!showDropdown)} ref={addButtonRef}>
@@ -120,7 +121,7 @@ const Calculator: React.FC = observer(() => {
           </FooterWrapper>
         </div>
       </Section>
-    </div>
+    </CalculatorContainer>
   )
 })
 
