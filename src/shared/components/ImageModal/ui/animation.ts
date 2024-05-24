@@ -1,4 +1,4 @@
-const containerVariants = {
+const containerVariants: {} = {
   initial: {
     y: '-100vh',
     opacity: 0,

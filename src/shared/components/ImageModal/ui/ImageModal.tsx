@@ -5,7 +5,7 @@ import { MouseEvent, useEffect } from 'react'
 
 import TImageModalProps from '../types/types.ts'
 
-import containerVariants from './animation.tsx'
+import containerVariants from './animation.ts'
 
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 
@@ -15,17 +15,17 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
   const router = useRouter()
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-  const [isClicked, setisClicked] = useState<boolean>(false)
+  const [isClicked, setIsClicked] = useState<boolean>(false)
 
   const nextSlide = () => {
-    setisClicked(true)
+    setIsClicked(true)
     if (images) {
       setSelectedImageIndex((selectedImageIndex + 1) % images.length)
     }
   }
 
   const prevSlide = () => {
-    setisClicked(true)
+    setIsClicked(true)
     if (images) {
       setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length)
     }
@@ -46,12 +46,10 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
     const modal = document.getElementById('modal')
 
     document.addEventListener('keydown', handleKeyDown)
-    modal?.classList.add('popup-open')
     document.body.classList.add('modal-open')
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      modal?.classList.remove('popup-open')
       document.body.classList.remove('modal-open')
     }
   }, [closeModal, router])
@@ -97,7 +95,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
             nextSlide()
           }}
         >
-          <Image src={'/icons/ic-next-button.svg'} alt="Кнопка назад" width={64} height={64} />
+          <Image src="/icons/ic-next-button.svg" alt="Кнопка назад" width={64} height={64} />
         </Button>
       </ModalContent>
     </ModalContainer>

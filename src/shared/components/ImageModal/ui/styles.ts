@@ -5,30 +5,31 @@ import styled from 'styled-components'
 
 const ModalContainer = styled(motion.div)`
   position: fixed;
-  top: 107px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: ${colors.backgroundBase3};
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  z-index: 100;
+  align-items: center;
+  z-index: 11;
   opacity: 0.7;
 `
 const ModalContent = styled.div`
   overflow-y: auto;
   position: relative;
+  display: flex;
   background-color: ${colors.textSecondary};
-  margin-bottom: 80px;
-  padding-top: 60px;
+  justify-content: center;
   border-radius: 20px;
   max-width: 1180px;
   width: 100%;
   min-height: 780px;
   display: flex;
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
-  z-index: 100;
+  z-index: 11;
+  opacity: 1;
 `
 
 const CloseButton = styled.button`
@@ -61,7 +62,7 @@ const Button = styled.button`
   top: 50%;
   right: 10px;
   opacity: 1;
-  z-index: 99;
+  z-index: 11;
 
   &:hover {
     opacity: 0.7;

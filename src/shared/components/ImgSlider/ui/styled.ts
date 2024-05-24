@@ -165,14 +165,14 @@ const SliderWrapper = styled.div`
     top: 42%;
     left: 10px;
     position: absolute;
-    z-index: 99;
+    z-index: 10;
   }
 
   .slick-next {
     top: 42%;
     left: 1070px;
     position: absolute;
-    z-index: 99;
+    z-index: 10;
   }
 
   .slick-prev:before,
