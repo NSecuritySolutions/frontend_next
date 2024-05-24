@@ -33,7 +33,12 @@ const CookiesNotice: React.FC = () => {
             Мы используем файлы cookie для обеспечения наилучшего взаимодействия с сайтом.
           </CookiesPragraph>
 
-          <Link className="link" href="/home#privacy-policy">
+          <Link
+            className="link"
+            href="%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Политика конфиденциальности
           </Link>
 

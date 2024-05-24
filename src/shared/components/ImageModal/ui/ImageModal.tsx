@@ -19,6 +19,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
 
   const nextSlide = () => {
     setIsClicked(true)
+
     if (images) {
       setSelectedImageIndex((selectedImageIndex + 1) % images.length)
     }
@@ -26,6 +27,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
 
   const prevSlide = () => {
     setIsClicked(true)
+
     if (images) {
       setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length)
     }
@@ -43,7 +45,6 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
         closeModal()
       }
     }
-    const modal = document.getElementById('modal')
 
     document.addEventListener('keydown', handleKeyDown)
     document.body.classList.add('modal-open')
@@ -70,7 +71,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
             prevSlide()
           }}
         >
-          <Image src={'/icons/ic-next-button.svg'} alt="Кнопка назад" width={64} height={64} />
+          <Image src="/icons/ic-next-button.svg" alt="Кнопка назад" width={64} height={64} />
         </RevertButton>
         {isClicked && images && images[selectedImageIndex] ? (
           <Image
