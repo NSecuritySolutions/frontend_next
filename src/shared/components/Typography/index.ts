@@ -9,8 +9,7 @@ const Typography = styled.p<{
   color?: string
 }>`
   display: flex;
-  font-size: ${(props) => props.size || 20}px;
-  font: Manrope;
+  font: ${(props) => props.size || 20}px 'Manrope', sans-serif;
   font-weight: ${(props) => props.$weight || 700};
   justify-content: ${(props) => props.$justifyContent || 'start'};
   width: ${(props) => props.width || 'fit-content'};
