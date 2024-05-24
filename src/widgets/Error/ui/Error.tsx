@@ -20,7 +20,6 @@ const Error: FC<TError> = ({ errorText, errorImg, errorMessage, errorCode }) => 
         <ColumnWrapper>
           <TextColumn>
             <ErrorName>{errorMessage}</ErrorName>
-
             <ErrorText>{errorText}</ErrorText>
             <ErrorButton href="/">На главную</ErrorButton>
           </TextColumn>
