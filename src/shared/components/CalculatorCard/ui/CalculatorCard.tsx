@@ -13,34 +13,40 @@ import {
 import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '@/shared/components/AmountComponent'
 import { RadioGroup } from '@/shared/components/RadioGroup'
-import { useRef } from 'react'
+import { FC } from 'react'
 import { Tooltip } from '@/shared/components/Tooltip/index.ts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import CalculatorBlockStore from '../store.ts'
 import { Typography } from '@/shared/components/Typography'
+import calculatorStore from '@/widgets/Calculator/store.ts'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore
-  handleAmountChange: (condition: boolean, len: number, card: HTMLDivElement) => void
+  index: number
 }
 
-const CalculatorCard: React.FC<CalculatorCardProps> = observer(({ store, handleAmountChange }) => {
+const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
   const data = store.data
   const amount = parseInt(store.getVariable(data.title) as string) || 0
-  const ref = useRef<HTMLDivElement | null>(null)
 
   const handleChange = (v: number) => {
     store.setVariable(data.title, v.toString())
     if (amount !== 0 && v === 0) {
       store.resetVariables()
-      handleAmountChange(false, data.options.length, ref.current!)
     }
-    if (amount === 0 && v !== 0) handleAmountChange(true, data.options.length, ref.current!)
   }
 
   return (
-    <Card $center={amount === 0} $expanded={amount > 0} len={data.options.length} ref={ref}>
+    <Card $center={amount === 0} $expanded={amount > 0} len={data.options.length}>
+      {index > 3 && (
+        <button
+          style={{ position: 'absolute', top: 6, right: 11 }}
+          onClick={() => calculatorStore.removeBlock(index)}
+        >
+          <Image src="/icons/closeBtn.svg" width={10} height={10} alt="Убрать" />
+        </button>
+      )}
       <CardHeader>
         <ImageTitle>
           <CardImgWrapper>

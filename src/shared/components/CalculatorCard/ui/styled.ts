@@ -5,13 +5,16 @@ import styled, { css } from 'styled-components'
 
 const Card = styled(motion.div).attrs({
   layout: 'position',
-  initial: false,
-  transition: { duration: 0.5, ease: 'easeOut', type: 'tween' },
+  initial: { scale: 0, y: -49 },
+  animate: { scale: 1, y: 0 },
+  exit: { scale: 0, y: -49 },
+  transition: { duration: 1, type: 'spring', damping: 15 },
 })<{
   $center?: boolean
   $expanded: boolean
   len: number
 }>`
+  position: relative;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: ${(props) => (props.$expanded ? '12px' : '23px 12px')};
@@ -36,7 +39,6 @@ const Card = styled(motion.div).attrs({
     props.$expanded &&
     css`
       grid-row: span ${3 + props.len};
-      // grid-row: span 3;
     `}
 `
 
