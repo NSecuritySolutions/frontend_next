@@ -13,7 +13,8 @@ const TooltipImage = styled.div<{ alt?: string }>`
 
 const Tip = styled.div<{ $maxWidth: string }>`
   z-index: 9999;
-  width: ${(props) => props.$maxWidth};
+  max-width: ${(props) => props.$maxWidth};
+  width: max-content;
   background-color: rgba(0, 0, 0, 0.75);
   color: ${colors.backgroundPrimary};
   padding: 8px;
