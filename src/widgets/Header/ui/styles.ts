@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import colors from '@/shared/constants/colors'
 import Link from 'next/link'
 
@@ -7,18 +7,19 @@ const TheHeader = styled.header`
   top: 0;
   right: 0;
   width: 100%;
-  background-color: ${colors.backgroundBase2};
+  height: 101px;
+  background-color: ${colors.backgroundPrimary};
   color: ${colors.darkPrimary};
   z-index: 5;
 `
 
 const HeaderWrapper = styled.div`
   max-width: 1180px;
+  height: 100%;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  padding-top: 10px;
-  padding-bottom: 10px;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -38,7 +39,6 @@ const HeaderTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 8px;
 `
 const HeaderTopItem = styled.div`
   display: flex;
@@ -47,13 +47,25 @@ const HeaderTopItem = styled.div`
 `
 
 const HeaderText = styled.p`
-  font-size: 15px;
-  line-height: 133%;
-  font-weight: 800;
+  font-size: 16px;
+  line-height: 21.86px;
+  font-weight: 700;
+`
 
-  @media (max-width: 940px) {
-    display: none;
-  }
+const HeaderContacts = styled.div`
+  display: flex;
+  gap: 32px;
+`
+
+const IconTextWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`
+
+const SocialWrapper = styled.div`
+  display: flex;
+  gap: 12px;
 `
 
 const HeaderTel = styled.p`
@@ -92,9 +104,11 @@ const HeaderBurgerMenuWrapper = styled.div`
   }
 `
 
-const HeaderNav = styled.div`
-  align-self: flex-end;
-  width: 83%;
+const HeaderNav = styled.nav`
+  display: flex;
+  justify-content: center;
+  margin-top: 101px;
+  width: 100%;
 
   @media (max-width: 1300px) {
     align-self: flex-start;
@@ -107,15 +121,16 @@ const HeaderNav = styled.div`
 `
 
 const HeaderList = styled.ul`
-  width: 100%;
+  width: 1180px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  padding: 20px 0px;
 `
 
 const HeaderNavItem = styled.li`
-  font-size: 17px;
+  font-size: 16px;
   line-height: 136%;
-  font-weight: 800;
+  font-weight: 400;
 
   @media (max-width: 1300px) {
     font-size: 16px;
@@ -125,8 +140,8 @@ const HeaderNavItem = styled.li`
 `
 
 const HeaderNavLink = styled(Link)`
-  padding-bottom: 6px;
   color: ${colors.darkPrimaryOpacity};
+  border-bottom: 1px solid transparent;
   transition: color 0.3s ease;
 
   &:hover:not(.active) {
@@ -153,4 +168,7 @@ export {
   HeaderTel,
   HeaderBtnWrapper,
   HeaderBurgerMenuWrapper,
+  HeaderContacts,
+  IconTextWrapper,
+  SocialWrapper,
 }

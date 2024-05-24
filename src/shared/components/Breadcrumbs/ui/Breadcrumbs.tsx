@@ -8,6 +8,13 @@ interface BreadcrumbsProps {
   title?: string
 }
 
+const names = {
+  'video-surveillance': 'Видеонаблюдение',
+  domofon: 'Домофония/Скуд',
+  security: 'Охранно-пожарная сигнализация',
+  ourworks: 'Наши работы',
+}
+
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ title }) => {
   const pathname = usePathname()
   const excludePathnames = ['products', 'examples']
@@ -18,14 +25,6 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ title }) => {
     .split('/')
     .filter((path) => !excludePathnames.includes(path) && path !== '')
 
-  const names = {
-    'video-surveillance': 'Видеонаблюдение',
-    domofon: 'Домофония/Скуд',
-    security: 'Охранно-пожарная сигнализация',
-    ourworks: 'Наши работы',
-  }
-  // console.log(pathname, 'name')
-  // console.log(pathnames, 'names')
   return (
     <Nav>
       <Link href="/">

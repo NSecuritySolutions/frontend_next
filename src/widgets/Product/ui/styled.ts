@@ -2,7 +2,6 @@ import colors from '@/shared/constants/colors'
 import styled from 'styled-components'
 
 const Card = styled.div`
-  margin-top: 40px;
   display: flex;
   flex-direction: column;
   position: relative;
