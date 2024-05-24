@@ -32,7 +32,7 @@ const FooterTopContainer = styled.div`
     max-width: 880px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
   }
 
@@ -121,7 +121,7 @@ const FooterBottomContainer = styled.div`
     max-width: 880px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
   }
 `

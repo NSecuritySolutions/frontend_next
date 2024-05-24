@@ -48,7 +48,7 @@ const ColumnConatiner = styled.div`
     min-height: 450px;
   }
 
-  @media (max-width: 620px) {
+  @media (max-width: 420px) {
     max-width: 328px;
 
     flex-direction: column;
