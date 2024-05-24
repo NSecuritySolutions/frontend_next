@@ -12,6 +12,7 @@ import {
   ErrorImgWrapper,
   TextColumn,
 } from './styled.ts'
+import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 
 const Error: FC<TError> = ({ errorText, errorImg, errorMessage, errorCode }) => {
   return (
@@ -25,10 +26,12 @@ const Error: FC<TError> = ({ errorText, errorImg, errorMessage, errorCode }) => 
           </TextColumn>
           <ErrorImgWrapper>
             <Image
+              placeholder="blur"
               src={errorImg}
               alt={`Ошибка ${errorCode} - ${errorMessage}`}
               width={572}
               height={325}
+              blurDataURL={rgbDataURL(225, 231, 244)}
             />
           </ErrorImgWrapper>
         </ColumnWrapper>

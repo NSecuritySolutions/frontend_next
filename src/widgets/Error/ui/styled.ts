@@ -207,24 +207,6 @@ const ErrorButton = styled.a`
   }
 `
 
-const ErrorImgHiddenWrapper = styled.div`
-  position: absolute;
-  top: 250px;
-  left: 522px;
-  max-width: 556px;
-  width: 100%;
-  max-height: 415px;
-  align-self: center;
-  display: none;
-
-  @media (max-width: 760px) {
-    position: relative;
-    left: 0;
-    top: 0;
-    display: block;
-  }
-`
-
 export {
   Section,
   ColumnConatiner,
@@ -234,5 +216,4 @@ export {
   ErrorButton,
   ErrorImgWrapper,
   TextColumn,
-  ErrorImgHiddenWrapper,
 }
