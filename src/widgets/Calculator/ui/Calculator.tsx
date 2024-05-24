@@ -14,13 +14,12 @@ import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors/index.ts'
 
-import { LayoutGroup } from 'framer-motion'
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
 import { observer } from 'mobx-react-lite'
 import Loader from '@/shared/components/Loader/Loader'
-import ReactDOM from 'react-dom'
 
 const Calculator: React.FC = observer(() => {
   const [showDropdown, setShowDropdown] = useState(false)
@@ -31,18 +30,16 @@ const Calculator: React.FC = observer(() => {
     calculatorStore.fetchData()
   }, [])
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (addButtonRef.current && !addButtonRef.current.contains(event.target as Node)) {
-      setShowDropdown(!showDropdown)
-    }
-  }
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (addButtonRef.current && !addButtonRef.current.contains(event.target as Node)) {
+        setShowDropdown(!showDropdown)
+      }
+    }
     // ставим слушатели, чтобы закрыть выбор при клике вне его
     if (showDropdown) {
       window.addEventListener('click', handleClickOutside)
       window.addEventListener('keydown', (e) => {
-        console.log(e.key)
         if (e.key === 'Escape') {
           setShowDropdown(!showDropdown)
         }
@@ -57,7 +54,7 @@ const Calculator: React.FC = observer(() => {
     return () => {
       window.removeEventListener('click', handleClickOutside)
     }
-  }, [showDropdown, handleClickOutside])
+  }, [showDropdown])
 
   const handleSelect = (value: number) => {
     calculatorStore.setNewBlock(value)
@@ -78,8 +75,8 @@ const Calculator: React.FC = observer(() => {
         <SectionTitle style={{ height: 28 }}>Калькулятор</SectionTitle>
         <AddBlockButton onClick={() => setShowDropdown(!showDropdown)} ref={addButtonRef}>
           <Image src="/icons/calculator/plus.svg" height={10} width={9} alt="Добавить блок" />
-          {showDropdown &&
-            ReactDOM.createPortal(
+          <AnimatePresence>
+            {showDropdown && (
               <Select>
                 {calculatorStore.data.map((block) => (
                   <Option key={block.id} onClick={() => handleSelect(block.id)}>
@@ -88,9 +85,9 @@ const Calculator: React.FC = observer(() => {
                     </Typography>
                   </Option>
                 ))}
-              </Select>,
-              addButtonRef.current!,
+              </Select>
             )}
+          </AnimatePresence>
         </AddBlockButton>
       </TitleWrapper>
       <Section id="calculator">

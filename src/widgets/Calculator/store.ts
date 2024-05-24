@@ -137,8 +137,7 @@ class CalculatorStore {
 
   fetchData() {
     this.isLoading = true
-    // Не забывать добавить timeout
-    axios.get(`${BASE_URL}/api/v1/product/`).then(
+    axios.get(`${BASE_URL}/api/v1/product/`, { timeout: 10000 }).then(
       action('fetchProducts', (response) => {
         this.products = response.data
       }),
@@ -147,10 +146,9 @@ class CalculatorStore {
         this.isLoading = false
       }),
     )
-    axios.get(`${BASE_URL}/api/v1/calculator/`).then(
+    axios.get(`${BASE_URL}/api/v1/calculator/`, { timeout: 10000 }).then(
       action('fetchData', (response) => {
         const fullData: ICalculatorData[] = response.data
-        const prices = fullData[0].price_list
         this.data = fullData[0].blocks
         this.prices = fullData[0].price_list
         this.setBlocks()
