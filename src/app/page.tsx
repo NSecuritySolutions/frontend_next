@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-//import Loader from '@/shared/components/Loader/Loader'
 
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
@@ -13,15 +12,13 @@ import { Questions } from '@/widgets/Questions'
 import { ReviewsBlock } from '@/widgets/ReviewsBlock'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
-
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
+
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
 export default function Home() {
-  //@TODO : если вдруг понадобится в последствии - лоудер работает до тех пор пока не загрузит картинки...
-
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -32,10 +29,6 @@ export default function Home() {
 
   return (
     <>
-      {/* {isLoading ? (
-        <Loader />
-      ) : (
-        <> */}
       <Info />
       <OurServices />
       <ReadySolutionSection />
@@ -50,8 +43,6 @@ export default function Home() {
       <ContactForm />
       <ScrollButton />
       <CookiesNotice />
-      {/* </>
-      )} */}
     </>
   )
 }

@@ -4,6 +4,8 @@ import Image from 'next/image'
 
 import { BtnLink } from '../../BtnLink'
 
+import { rgbDataURL } from '@/shared/constants/utils/utils'
+
 import {
   Card,
   CardText,
@@ -37,7 +39,14 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
   return (
     <Card $backgroundColor={backgroundColor}>
       <CardImg>
-        <Image src={img} alt={title} width={540} height={305} />
+        <Image
+          src={img}
+          alt={title}
+          width={540}
+          height={305}
+          placeholder="blur"
+          blurDataURL={rgbDataURL(225, 231, 244)}
+        />
       </CardImg>
       <TextWrapper>
         <CardTitle>{title}</CardTitle>

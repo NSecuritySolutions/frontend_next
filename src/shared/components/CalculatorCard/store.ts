@@ -154,7 +154,7 @@ class CalculatorBlockStore {
 
   filterProduct(category: string) {
     // Отфильтровываем по категории
-    const products = calculatorStore.products.filter((item) => item.category.title === category)
+    const products = calculatorStore.products.filter((item) => item?.category?.title === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
     const filteredProducts = products.filter((item) =>
       this.applyConditions(item, this.filters[category]),

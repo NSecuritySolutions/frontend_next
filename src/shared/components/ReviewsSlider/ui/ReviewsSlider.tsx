@@ -6,6 +6,8 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
+import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
+
 import { TEXT_LIMIT, TITLE_LIMIT, projectReviews } from '@/shared/constants/texts/reviews.ts'
 
 import {
@@ -35,7 +37,7 @@ const ReviewsSlider = () => {
     arrows: false,
     focusOnSelect: true,
 
-    appendDots: (dots: boolean) => <div>{dots}</div>,
+    appendDots: (dots: boolean) => <ul>{dots}</ul>,
 
     responsive: [
       {
@@ -93,7 +95,14 @@ const ReviewsSlider = () => {
           <ReviewsContainer className="slick-slide" key={i}>
             <TitleWrapper>
               <div style={{ width: '40px', height: '40px' }}>
-                <Image src={item.img} alt={item.name} width={40} height={40} />
+                <Image
+                  src={item.img}
+                  alt={item.name}
+                  width={40}
+                  height={40}
+                  placeholder="blur"
+                  blurDataURL={rgbDataURL(225, 231, 244)}
+                />
               </div>
               <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
             </TitleWrapper>

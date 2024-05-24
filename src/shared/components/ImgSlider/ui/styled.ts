@@ -17,9 +17,10 @@ const SliderWrapper = styled.div`
     min-width: 1100px;
     width: 100%;
     height: 600px;
-    background-color: black;
+    background-color: ${colors.textSecondary};
     display: flex;
     border-radius: 20px;
+    cursor: zoom-in;
 
     img {
       margin: 0 auto;
@@ -46,7 +47,7 @@ const SliderWrapper = styled.div`
       max-width: 260px;
       width: 100%;
       height: 195px;
-      background-color: black;
+      background-color: ${colors.textSecondary};
       object-fit: fill;
     }
 
@@ -136,9 +137,9 @@ const SliderWrapper = styled.div`
   .slick-slide img {
     margin: 0 auto;
     display: block;
-    object-fit: fill;
+    object-fit: cover;
     max-width: 1100px;
-    min-height: 600px;
+    max-height: 600px;
   }
   .slick-slide.slick-loading img {
     display: none;
@@ -164,14 +165,14 @@ const SliderWrapper = styled.div`
     top: 42%;
     left: 10px;
     position: absolute;
-    z-index: 99;
+    z-index: 10;
   }
 
   .slick-next {
     top: 42%;
     left: 1070px;
     position: absolute;
-    z-index: 99;
+    z-index: 10;
   }
 
   .slick-prev:before,

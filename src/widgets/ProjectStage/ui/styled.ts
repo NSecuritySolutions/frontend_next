@@ -165,7 +165,7 @@ const TextWrapper = styled.div`
   }
 `
 
-const StageTitle = styled.h4`
+const StageTitle = styled.h3`
   font-family: Manrope, sans-serif;
   font-weight: 700;
   margin-top: 16px;

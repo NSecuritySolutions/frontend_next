@@ -3,6 +3,7 @@
 
 //Пример МВидео : https://www.mvideo.ru/robots.txt
 
+import { BASE_URL } from '@/shared/constants/url/url'
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
@@ -11,11 +12,12 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'Googlebot', allow: ['/'], disallow: [] },
       {
         userAgent: ['Yandex'],
-        allow: ['/'],
-        disallow: [],
+        allow: [],
+        //@TODO : после диплоя на настоящий домен здесь надо будет прописать правила
+        disallow: ['/'],
       },
     ],
-    sitemap: 'http://localhost:3000/sitemap.xml',
-    host: 'http://localhost:3000',
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: `${BASE_URL}`,
   }
 }

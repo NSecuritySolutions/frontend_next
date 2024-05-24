@@ -7,6 +7,9 @@ import OurworksPage from './page'
 import '@/app/globals.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { BASE_URL } from '@/shared/constants/url/url'
+import { RootPageMetaData } from '@/shared/constants/texts/metadata'
+import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -14,35 +17,27 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title:
-    'Готовые решения систем видеонаблюдения, СКУД, охранно-пожарной сигнализации в Новосибирске',
-  description:
-    'Широкий ассортимент готовых решений по охране домов, офисов, складов, помещений в наличии в Новосибирске. Лучшие решения на рынке систем видеонаблюдения с официальной гарантией и доставкой по всей России.',
-  keywords: [
-    'готовые решения СКУД/Домофонии',
-    'готовые решения видеонаблюдения',
-    'готовые решения охранно-пожарной сигнализациия',
-    'интернет магазин систем видеонаблюдения',
-    'Опти Контроль',
-    'Новосибирск',
-  ],
+  title: `${RootPageMetaData.title}`,
+  description: `${RootPageMetaData.description}`,
+  keywords: `${RootPageMetaData.keywords}`,
+
   openGraph: {
-    title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
-    description:
-      'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    url: 'https://', //@TODO Дописать атуальный url
-    siteName: 'Оптиконтроль',
+    url: `${BASE_URL}`,
+    title: `${OpenGraphMetaData.title}`,
+    description: `${OpenGraphMetaData.description}`,
+    siteName: `${OpenGraphMetaData.siteName}`,
     images: [
       {
-        url: 'http://localhost:3000/src/app/icon7.png', //@TODO дописать путь к картинке для твиттера
+        url: '/favicons/icon6.png',
         width: 800,
         height: 600,
+        alt: `${OpenGraphMetaData.alt}`,
       },
       {
-        url: 'http://localhost:3000/src/app/icon6.png', //@TODO дописать путь к картинке для твиттера
+        url: '/favicons/icon7.png',
         width: 1800,
         height: 1600,
-        alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
+        alt: `${OpenGraphMetaData.alt}`,
       },
     ],
     locale: 'ru_RU',

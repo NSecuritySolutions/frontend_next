@@ -7,40 +7,38 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import VideoPage from './page'
-
+import { BASE_URL } from '@/shared/constants/url/url'
+import { VideoPageMetaData } from '@/shared/constants/texts/metadata'
+import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
 const manrope = Manrope({
   subsets: ['cyrillic'],
   weight: ['400', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
-  title: 'Купить готовые комплекты видеолнаблюдения в Новосибирске',
-  description:
-    'Широкий ассортимент систем видеонаблюдения в наличии в Новосибирске. Лучшее решение на рынке систем видеонаблюдения с официальной гарантией и доставкой по всей России.',
-  keywords: [
-    'купить системы видеонаблюдения',
-    'купить готовые комплекты видеонаблюдения',
-    'Опти Контроль',
-    'Новосибирск',
-  ],
+  metadataBase: new URL(`${BASE_URL}`),
+
+  title: `${VideoPageMetaData.title}`,
+  description: `${VideoPageMetaData.description}`,
+  keywords: `${VideoPageMetaData.keywords}`,
+
   openGraph: {
-    title: 'Купить готовые комплекты видеонаблюдения в Новосибирске',
-    description:
-      'Широкий ассортимент комплектов и готовых систем видеонаблюдения в наличии в Новосибирске.',
-    url: 'https://', //@TODO Дописать атуальный url
-    siteName: 'Оптиконтроль',
+    url: `${BASE_URL}`,
+    title: `${OpenGraphMetaData.title}`,
+    description: `${OpenGraphMetaData.description}`,
+    siteName: `${OpenGraphMetaData.siteName}`,
     images: [
       {
-        url: 'http://localhost:3000/src/app/icon7.png', //@TODO дописать путь к картинке для твиттера
+        url: '/favicons/icon6.png',
         width: 800,
         height: 600,
+        alt: `${OpenGraphMetaData.alt}`,
       },
       {
-        url: 'http://localhost:3000/src/app/icon6.png', //@TODO дописать путь к картинке для твиттера
+        url: '/favicons/icon7.png',
         width: 1800,
         height: 1600,
-        alt: 'Оптиконтроль - Безопасность вашего дома и бизнеса.',
+        alt: `${OpenGraphMetaData.alt}`,
       },
     ],
     locale: 'ru_RU',
