@@ -30,6 +30,10 @@ const LogoSubTitle = styled.h2`
   font-size: 16px;
   font-weight: 400;
   color: ${colors.darkPrimary};
+
+  @media (max-width: 360px) {
+    display: none;
+  }
 `
 
 const LogoTitleSpan = styled.span`
