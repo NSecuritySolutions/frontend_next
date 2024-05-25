@@ -13,7 +13,6 @@ import {
   FooterDeveloperLink,
   FooterRights,
   FooterRightsText,
-  FooterLogoContainer,
   FooterSocialIconLink,
   FooterSocialIconsContainer,
   FooterTop,
@@ -25,7 +24,6 @@ import {
 } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
-import { Logo } from '@/shared/components/Logo'
 import { NavColumn } from '@/shared/components/NavColumn'
 
 const Footer = () => {
@@ -33,21 +31,18 @@ const Footer = () => {
     <FooterWrapper>
       <FooterTop>
         <FooterTopContainer>
-          <FooterLogoContainer>
-            <Logo />
-          </FooterLogoContainer>
-          <FooterBtnWrapper>
-            <BtnLink
-              size="15px"
-              width="100%"
-              height="56px"
-              color={colors.darkPrimary}
-              text="Обратный звонок"
-              link="#contact-form"
-            />
-          </FooterBtnWrapper>
           <NavColumn lists={navColumnLists} />
           <FooterContactsContainer>
+            <FooterBtnWrapper>
+              <BtnLink
+                size="15px"
+                width="100%"
+                height="56px"
+                color={colors.darkPrimary}
+                text="Обратный звонок"
+                link="#contact-form"
+              />
+            </FooterBtnWrapper>
             <FooterContactsContentWrapper>
               {contacts.map((contact, index) => (
                 <FooterContactContainer key={index}>

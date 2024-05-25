@@ -4,11 +4,11 @@ import Link from 'next/link'
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, 280px);
+  gap: 20px;
 
   @media (max-width: 1300px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 205px);
   }
 
   @media (max-width: 879px) {
@@ -27,7 +27,7 @@ const List = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 220px;
+  max-width: 280px;
 `
 
 const ListItem = styled.li`

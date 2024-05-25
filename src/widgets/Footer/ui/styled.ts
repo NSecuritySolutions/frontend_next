@@ -3,10 +3,13 @@ import colors from '@/shared/constants/colors'
 
 const FooterWrapper = styled.footer`
   width: 100%;
+  padding-top: 40px;
   background-color: ${colors.backgroundBase2};
   color: ${colors.darkPrimary};
+  justify-content: center;
   display: flex;
   flex-direction: column;
+  gap: 32px;
   margin: 0 auto;
 `
 
@@ -21,11 +24,11 @@ const FooterTop = styled.div`
 const FooterTopContainer = styled.div`
   max-width: 1180px;
   margin: 0 auto;
-  padding-top: 24px;
-  padding-bottom: 60px;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-row-gap: 32px;
+  display: flex;
+  gap: 20px;
+  // display: grid;
+  // grid-template-columns: repeat(2, auto);
+  // grid-row-gap: 32px;
   // justify-content: space-between;
 
   @media (max-width: 1300px) {
