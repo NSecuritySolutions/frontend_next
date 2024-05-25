@@ -177,7 +177,8 @@ const CardWrapper = styled.div`
   }
 
   @media (max-width: 940px) {
-    width: 580px;
+    padding-inline: calc((100vw - 580px) / 2);
+    width: 100vw;
     display: flex;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -190,7 +191,7 @@ const CardWrapper = styled.div`
   }
 
   @media (max-width: 620px) {
-    width: 360px;
+    padding-inline: calc((100vw - 360px) / 2);
   }
 `
 
