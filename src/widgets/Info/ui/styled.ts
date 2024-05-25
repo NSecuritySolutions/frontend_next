@@ -167,10 +167,31 @@ const CardWrapper = styled.div`
   max-width: 1180px;
   width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 20px;
+  display: flex;
+  gap: 20px;
   margin-top: 40px;
+
+  @media (max-width: 1300px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 940px) {
+    width: 580px;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
+  }
+
+  @media (max-width: 620px) {
+    width: 360px;
+  }
 `
 
 export {
