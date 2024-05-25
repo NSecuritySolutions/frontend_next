@@ -51,13 +51,13 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
         <HeaderWrapper $openMenu={openBurger}>
           <HeaderTop>
             <Logo />
-            <HeaderBurgerMenuWrapper
-              onClick={() => {
-                setOpenBurger(!openBurger)
-                console.log(!openBurger)
-              }}
-            >
-              <Image src="/icons/header/burger.svg" width={40} height={40} alt="menu" />
+            <HeaderBurgerMenuWrapper onClick={() => setOpenBurger(!openBurger)}>
+              <Image
+                src={openBurger ? '/icons/header/close.svg' : '/icons/header/burger.svg'}
+                width={40}
+                height={40}
+                alt="menu"
+              />
             </HeaderBurgerMenuWrapper>
             <HeaderTopItem>
               <HeaderContacts>
