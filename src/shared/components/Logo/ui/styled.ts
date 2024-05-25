@@ -31,7 +31,7 @@ const LogoSubTitle = styled.h2`
   font-weight: 400;
   color: ${colors.darkPrimary};
 
-  @media (max-width: 360px) {
+  @media (max-width: 620px) {
     display: none;
   }
 `
