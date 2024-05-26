@@ -200,6 +200,7 @@ const FooterBottomContainer = styled.div`
   }
 
   @media (max-width: 620px) {
+    max-width: 328px;
     grid-template-columns: repeat(2, 154px);
 
     p:nth-child(1) {
