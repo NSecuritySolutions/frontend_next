@@ -32,6 +32,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
     max-width: 328px;
     max-height: 434px;
     flex-direction: column-reverse;
+    padding: 20px;
   }
 `
 
