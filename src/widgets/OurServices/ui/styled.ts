@@ -10,6 +10,11 @@ const Section = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+  }
 `
 
 const SectionTitle = styled.h3`
@@ -24,6 +29,18 @@ const CardsGridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
+
+  & > div:nth-child(3) {
+    @media (max-width: 880px) {
+      div {
+        top: 180px;
+      }
+    }
+  }
+
+  @media (max-width: 880px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export { Section, SectionTitle, CardsGridContainer }

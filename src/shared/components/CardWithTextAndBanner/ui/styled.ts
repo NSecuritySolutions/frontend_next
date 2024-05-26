@@ -14,15 +14,13 @@ const Card = styled.div<{ $backgroundColor: string }>`
   max-width: 1180px;
   max-height: 320px;
   overflow: hidden;
+
+  @media (max-width: 880px) {
+    max-height: 266px;
+    padding: 20px;
+  }
 `
 
-const ImgWrapper = styled.div`
-  max-width: 540px;
-  width: 100%;
-  padding-top: 13px;
-  display: flex;
-  flex-direction: column;
-`
 const TextWrapper = styled.div`
   max-width: 540px;
   width: 100%;
@@ -32,6 +30,15 @@ const TextWrapper = styled.div`
   flex-direction: column;
   gap: 12px;
   justify-content: center;
+
+  @media (max-width: 880px) {
+    max-width: 260px;
+    width: 100%;
+
+    a {
+      margin-top: 20px;
+    }
+  }
 `
 
 const CardTitle = styled.h3`
@@ -47,10 +54,10 @@ const TextContainer = styled.ul`
   justify-self: flex-start;
   height: 145px;
   min-width: 540px;
-  font:
-    400 16px Manrope,
-    sans-serif;
-  list-style: none;
+
+  @media (max-width: 880px) {
+    line-height: 1.2;
+  }
 `
 const CardText = styled.li`
   font-weight: 400;
@@ -58,6 +65,15 @@ const CardText = styled.li`
   max-width: 540px;
   width: 70%;
   z-index: 1;
+
+  font-size: 16px;
+  fornt-weight: 400;
+  list-style: none;
+
+  @media (max-width: 880px) {
+    max-width: 260px;
+    line-height: 1.2;
+  }
 `
 
 const CardImg = styled.div`
@@ -66,6 +82,18 @@ const CardImg = styled.div`
   max-width: 540px;
   max-height: 305px;
   width: 100%;
+
+  @media (max-width: 880px) {
+    max-width: 300px;
+    width: 100%;
+    max-height: 227px;
+
+    img {
+      max-width: 300px;
+      width: 100%;
+      max-height: 227px;
+    }
+  }
 `
 
-export { Card, CardText, CardTitle, CardImg, ImgWrapper, TextWrapper, TextContainer }
+export { Card, CardText, CardTitle, CardImg, TextWrapper, TextContainer }
