@@ -42,11 +42,12 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
   let timer: NodeJS.Timeout
 
   const handleBurger = () => {
-    clearTimeout(timer)
-    setSafeForClick(false)
     if (safeForClick) {
-      timer = setTimeout(() => setSafeForClick(true), 500)
+      setSafeForClick(false)
       setOpenBurger(!openBurger)
+      timer = setTimeout(() => setSafeForClick(true), 600)
+    } else {
+      clearTimeout(timer)
     }
   }
 

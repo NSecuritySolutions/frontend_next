@@ -35,7 +35,7 @@ const HeaderWrapper = styled.div<{ $openMenu: boolean }>`
   }
 
   @media (max-width: 620px) {
-    width: 360px;
+    width: 100%;
     height: ${(props) => (props.$openMenu ? '514px' : '71px')};
     min-height: 71px;
     max-height: none;
