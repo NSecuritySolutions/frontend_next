@@ -70,7 +70,6 @@ const ImageTitle = styled.div`
 
 const Title = styled.p`
   font-size: 16px;
-  font: Manrope;
   font-weight: 700;
   color: ${colors.darkPrimary};
   line-height: 21.86px;

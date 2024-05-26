@@ -4,6 +4,13 @@ import styled from 'styled-components'
 
 import { motion } from 'framer-motion'
 
+const CalculatorContainer = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+`
+
 const Section = styled(motion.div).attrs({
   layout: 'size',
   transition: { type: 'linear' },
@@ -30,9 +37,9 @@ const TitleWrapper = styled.div<{ $width?: number }>`
 
 const SectionTitle = styled.h3`
   color: ${colors.darkPrimary};
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
 `
 
 const ImgWrap = styled.div`
@@ -49,16 +56,14 @@ const ImageButton = styled.button`
   margin-top: 12px;
 `
 
-const FooterWrapper = styled(motion.div).attrs({
-  layout: 'position',
-  transition: { type: 'spring', duration: 1, ease: 'backOut' },
-})`
+const FooterWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `
 
 const AddBlockButton = styled.button`
+  position: relative;
   display: flex;
   margin-top: 2px;
   align-items: center;
@@ -71,21 +76,26 @@ const AddBlockButton = styled.button`
   cursor: pointer;
 `
 
-const Select = styled.div`
+const Select = styled(motion.ul).attrs({
+  layout: true,
+  initial: { height: 0 },
+  animate: { height: 'auto' },
+  exit: { height: 0 },
+})`
   position: absolute;
-  top: 30px;
+  top: 25px;
   left: 0px;
   width: max-content;
   border: 1px solid ${colors.backgroundBase3};
   border-radius: 8px;
   background-color: ${colors.backgroundPrimary};
+  overflow: hidden;
   z-index: 99;
 `
 
-const Option = styled.div`
+const Option = styled.li`
   padding: 6px 10px;
   border-radius: 8px;
-  border: 1px solid transparent;
 
   &:hover {
     background-color: ${colors.backgroundBase3};
@@ -100,6 +110,7 @@ const GridContainer = styled.div`
 `
 
 export {
+  CalculatorContainer,
   Section,
   SectionTitle,
   ImgWrap,
