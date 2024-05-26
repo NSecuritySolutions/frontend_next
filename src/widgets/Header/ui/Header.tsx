@@ -27,7 +27,7 @@ import { Logo } from '@/shared/components/Logo'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { urlNames } from '@/shared/constants/texts/url-names'
-import { AnimatePresence, motion, useIsPresent, usePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type THeaderProps = {
   navLinks: { label: string; to: string }[]
