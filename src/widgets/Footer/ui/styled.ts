@@ -150,9 +150,30 @@ const FooterBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
+  p:nth-child(1) {
+    max-width: 230px;
+  }
+
+  p:nth-child(2) {
+    max-width: 422px;
+  }
+
+  p:nth-child(3) {
+    max-width: 230px;
+    line-height: 19.36px;
+  }
+
   @media (max-width: 1300px) {
     max-width: 880px;
     padding: 16px 0 20px 0;
+
+    p:nth-child(1) {
+      max-width: 187px;
+    }
+
+    p:nth-child(3) {
+      max-width: 224px;
+    }
   }
 
   @media (max-width: 940px) {
@@ -163,16 +184,34 @@ const FooterBottomContainer = styled.div`
     gap: 20px;
     max-width: 580px;
 
-    div:nth-child(1) {
+    p:nth-child(1) {
       grid-area: a;
+      max-width: 280px;
     }
 
-    div:nth-child(2) {
+    p:nth-child(2) {
       grid-area: b;
     }
 
-    div:nth-child(3) {
+    p:nth-child(3) {
       grid-area: c;
+      max-width: 240px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    grid-template-columns: repeat(2, 154px);
+
+    p:nth-child(1) {
+      max-width: 154px;
+    }
+
+    p:nth-child(2) {
+      text-align: center;
+    }
+
+    p:nth-child(3) {
+      max-width: 154px;
     }
   }
 `
@@ -181,6 +220,14 @@ const FooterRightsText = styled.p`
   font-size: 16px;
   line-height: 136%;
   font-weight: 400;
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
+`
+
+const NoBr = styled.span`
+  white-space: nowrap;
 `
 
 const FooterDeveloperLink = styled.a`
@@ -191,11 +238,6 @@ const FooterDeveloperLink = styled.a`
   &:hover {
     color: ${colors.accentInfo};
   }
-`
-
-const FooterTextInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
 `
 
 export {
@@ -214,5 +256,5 @@ export {
   FooterContactLink,
   FooterBtnWrapper,
   FooterContactsContentWrapper,
-  FooterTextInfoWrapper,
+  NoBr,
 }
