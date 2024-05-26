@@ -17,7 +17,7 @@ const TheHeader = styled.header`
 
 const HeaderWrapper = styled.div<{ $openMenu: boolean }>`
   max-width: 1180px;
-  height: 100%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -28,6 +28,7 @@ const HeaderWrapper = styled.div<{ $openMenu: boolean }>`
 
   @media (max-width: 940px) {
     width: 580px;
+    min-height: 101px;
     max-height: ${(props) => (props.$openMenu ? '379px' : '101px')};
     overflow: hidden;
     transition: max-height 1s;
@@ -35,8 +36,11 @@ const HeaderWrapper = styled.div<{ $openMenu: boolean }>`
 
   @media (max-width: 620px) {
     width: 360px;
-    max-height: ${(props) => (props.$openMenu ? '514px' : '72px')};
+    height: ${(props) => (props.$openMenu ? '514px' : '71px')};
+    min-height: 71px;
+    max-height: none;
     padding: 0px 16px;
+    transition: height 1s;
   }
 `
 
@@ -47,6 +51,7 @@ const HeaderTop = styled.div`
   padding: 20px 0px;
 
   @media (max-width: 620px) {
+    min-height: 71px;
     padding: 0px 16px;
   }
 `
@@ -70,10 +75,6 @@ const HeaderContacts = styled.div`
   display: flex;
   align-items: center;
   gap: 32px;
-
-  @media (max-width: 940px) {
-    display: none;
-  }
 `
 
 const PhoneMailWrapper = styled.div`
@@ -124,11 +125,6 @@ const HeaderTel = styled.p`
 const HeaderBtnWrapper = styled.div`
   width: 198px;
   height: 56px;
-
-  @media (max-width: 1300px) {
-    // width: 173px;
-    // height: 44px;
-  }
 `
 
 const HeaderBurgerMenuWrapper = styled.div`
@@ -192,12 +188,6 @@ const HeaderNavItem = styled.li`
   font-size: 16px;
   line-height: 136%;
   font-weight: 400;
-
-  @media (max-width: 1300px) {
-    font-size: 16px;
-    font-weight: 700;
-    flex-grow: 1;
-  }
 `
 
 const HeaderNavLink = styled(Link)`
@@ -237,7 +227,7 @@ const BurgerMenu = styled.div`
 const ContactsBurger = styled.div`
   display: none;
 
-  @media (max-width: 620px) {
+  @media (max-width: 940px) {
     display: flex;
     flex-direction: column;
     gap: 20px;

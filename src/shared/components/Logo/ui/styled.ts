@@ -6,6 +6,11 @@ const LogoContainer = styled.div`
   display: flex;
   width: 344px;
   height: 61px;
+
+  @media (max-width: 620px) {
+    align-items: center;
+    height: auto;
+  }
 `
 
 const LogoLink = styled(Link)`
@@ -18,6 +23,10 @@ const LogoLink = styled(Link)`
 const LogoTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 const LogoTitle = styled.h1`
@@ -30,10 +39,6 @@ const LogoSubTitle = styled.h2`
   font-size: 16px;
   font-weight: 400;
   color: ${colors.darkPrimary};
-
-  @media (max-width: 620px) {
-    display: none;
-  }
 `
 
 const LogoTitleSpan = styled.span`

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import {
   TheHeader,
   HeaderWrapper,
@@ -26,24 +26,33 @@ import colors from '@/shared/constants/colors'
 import { Logo } from '@/shared/components/Logo'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { urlNames } from '@/shared/constants/texts/url-names'
+import { AnimatePresence, motion, useIsPresent, usePresence } from 'framer-motion'
 
 type THeaderProps = {
   navLinks: { label: string; to: string }[]
 }
 
-const names = {
-  '': 'Главная',
-  'video-surveillance': 'Видеонаблюдение',
-  domofon: 'Домофония/СКУД',
-  security: 'Охранно-пожарная сигнализация',
-  ourworks: 'Наши работы',
-}
-
 const Header: FC<THeaderProps> = ({ navLinks }) => {
+  const [safeForClick, setSafeForClick] = useState(true)
   const pathname = usePathname()
   const pathnames = pathname.split('/')
   const current = pathnames[pathnames.length - 1]
   const [openBurger, setOpenBurger] = useState(false)
+  let timer: NodeJS.Timeout
+
+  const handleBurger = () => {
+    clearTimeout(timer)
+    setSafeForClick(false)
+    if (safeForClick) {
+      timer = setTimeout(() => setSafeForClick(true), 500)
+      setOpenBurger(!openBurger)
+    }
+  }
+
+  useEffect(() => {
+    setOpenBurger(false)
+  }, [pathname])
 
   return (
     <>
@@ -51,13 +60,25 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
         <HeaderWrapper $openMenu={openBurger}>
           <HeaderTop>
             <Logo />
-            <HeaderBurgerMenuWrapper onClick={() => setOpenBurger(!openBurger)}>
-              <Image
-                src={openBurger ? '/icons/header/close.svg' : '/icons/header/burger.svg'}
-                width={40}
-                height={40}
-                alt="menu"
-              />
+            <HeaderBurgerMenuWrapper onClick={handleBurger}>
+              <AnimatePresence mode="popLayout">
+                <motion.div
+                  key={openBurger ? '/icons/header/close.svg' : '/icons/header/burger.svg'}
+                  layout="size"
+                  initial={{ rotate: -360, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 360, scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  style={{ height: '40px' }}
+                >
+                  <Image
+                    src={openBurger ? '/icons/header/close.svg' : '/icons/header/burger.svg'}
+                    width={40}
+                    height={40}
+                    alt="menu"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </HeaderBurgerMenuWrapper>
             <HeaderTopItem>
               <HeaderContacts>
@@ -99,7 +120,7 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
                     <HeaderNavLink
                       href={to}
                       className={
-                        label === names[current as keyof typeof names] ? 'active' : undefined
+                        label === urlNames[current as keyof typeof urlNames] ? 'active' : undefined
                       }
                     >
                       {label}
@@ -145,7 +166,9 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
               <HeaderNavItem key={index}>
                 <HeaderNavLink
                   href={to}
-                  className={label === names[current as keyof typeof names] ? 'active' : undefined}
+                  className={
+                    label === urlNames[current as keyof typeof urlNames] ? 'active' : undefined
+                  }
                 >
                   {label}
                 </HeaderNavLink>

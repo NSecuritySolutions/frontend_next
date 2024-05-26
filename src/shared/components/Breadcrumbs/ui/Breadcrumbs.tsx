@@ -3,21 +3,15 @@ import Link from 'next/link'
 import { Typography } from '@/shared/components/Typography'
 import { FC } from 'react'
 import { Nav } from './styled'
+import { urlNames } from '@/shared/constants/texts/url-names'
 
 interface BreadcrumbsProps {
   title?: string
 }
 
-const names = {
-  'video-surveillance': 'Видеонаблюдение',
-  domofon: 'Домофония/Скуд',
-  security: 'Охранно-пожарная сигнализация',
-  ourworks: 'Наши работы',
-}
-
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ title }) => {
   const pathname = usePathname()
-  const excludePathnames = ['products', 'examples']
+  const excludePathnames = ['', 'products', 'examples']
 
   if (!pathname) return <></>
 
@@ -38,7 +32,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ title }) => {
           <Typography $weight={800} size={18} key={index} style={{ gap: 12 }}>
             /
             <Link href={to} key={index}>
-              {names[path as keyof typeof names] || title}
+              {urlNames[path as keyof typeof urlNames] || title}
             </Link>
           </Typography>
         )
