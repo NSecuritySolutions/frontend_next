@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import Image from 'next/image'
 
 import {
   HeaderWrapper,
@@ -14,7 +15,6 @@ import {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
-  Banner,
 } from './styled'
 
 import bannerImg from '@/assets/images/banner/png/banner-img.png'
@@ -63,7 +63,7 @@ const Info: FC = () => {
           </HistoryItem>
         </HistoryWrapper>
         <BannerWrapper>
-          <Banner src={bannerImg} alt="Баннер" />
+          <Image src={bannerImg} alt="Баннер" fill />
         </BannerWrapper>
       </MainCard>
       <CardWrapper>

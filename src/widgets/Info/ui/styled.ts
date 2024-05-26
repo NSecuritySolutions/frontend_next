@@ -1,5 +1,4 @@
 import colors from '@/shared/constants/colors'
-import Image, { StaticImageData } from 'next/image'
 
 import styled from 'styled-components'
 
@@ -26,6 +25,7 @@ const MainCard = styled.div`
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   background: ${colors.backgroundPrimary};
   position: relative;
+  overflow: hidden;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -61,11 +61,11 @@ const Title = styled.h2`
   font-size: 36px;
   line-height: 136%;
 
-  @media (max-width: 920px) {
+  @media (max-width: 940px) {
     font-size: 24px;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 620px) {
     font-weight: 800;
     font-size: 20px;
   }
@@ -83,7 +83,11 @@ const Text = styled.p`
     max-width: 650px;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 940px) {
+    max-width: 450px;
+  }
+
+  @media (max-width: 620px) {
     font-size: 14px;
   }
 `
@@ -91,7 +95,7 @@ const InfoBtnWrapper = styled.div`
   width: 158px;
   height: 56px;
 
-  @media (max-width: 640px) {
+  @media (max-width: 620px) {
     align-self: center;
     width: 122px;
     height: 44px;
@@ -102,7 +106,7 @@ const HistoryWrapper = styled.div`
   display: flex;
   gap: 50px;
 
-  @media (max-width: 920px) {
+  @media (max-width: 940px) {
     display: none;
   }
 `
@@ -129,59 +133,32 @@ const AchievementsText = styled.span`
   line-height: 136%;
 `
 
-const BannerWrapper = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
+const BannerWrapper = styled.div`
   width: 702px;
   height: 368px;
   background-size: cover;
   position: absolute;
   right: 0px;
   bottom: 0px;
-  padding-bottom: 14px;
-  padding-left: 55px;
-  overflow: hidden;
+  transform: translateY(14px) translateX(55px);
 
   @media (max-width: 1300px) {
     width: 540px;
     height: 284px;
-    padding-bottom: 11px;
-    padding-left: 42px;
+    transform: translateY(11px) translateX(42px);
   }
 
   @media (max-width: 940px) {
     width: 283px;
     height: 164px;
-    padding-bottom: 6px;
-    padding-left: 0px;
+    transform: translateY(6px) translateX(35px);
   }
 
   @media (max-width: 620px) {
-    position: static;
-    align-self: center;
+    position: relative;
     width: 283px;
     height: 161px;
-    padding: 0px;
-  }
-`
-
-const Banner = styled(Image).attrs({
-  priority: true,
-})`
-  width: 738px;
-  height: 415px;
-
-  @media (max-width: 1300px) {
-    width: 568px;
-    height: 320px;
-  }
-
-  @media (max-width: 920px) {
-    width: 314px;
-    height: 185px;
-  }
-
-  @media (max-width: 640px) {
-    width: 284px;
-    height: 160px;
+    transform: none;
   }
 `
 
@@ -231,5 +208,4 @@ export {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
-  Banner,
 }

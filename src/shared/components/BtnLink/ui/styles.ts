@@ -65,7 +65,7 @@ const StyledTransparentBtnLink = styled.a<TStyledBtnLinkProps>`
     background-color: ${colors.btnOutlineHover};
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 620px) {
     font-size: ${(props) => `calc(${props.size} - 2px)`};
     font-weight: 700;
   }
