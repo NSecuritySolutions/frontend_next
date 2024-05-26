@@ -146,13 +146,13 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
                   <HeaderText>+7 (913) 011-06-45</HeaderText>
                 </IconTextWrapper>
                 <IconTextWrapper>
-                  <Image src="/icons/header/mail.svg" width={24} height={24} alt="phone" />
+                  <Image src="/icons/header/mail.svg" width={24} height={24} alt="mail" />
                   <HeaderText>info@opticontrol.ru</HeaderText>
                 </IconTextWrapper>
               </PhoneMailWrapper>
               <SocialWrapper>
-                <Image src="/icons/header/telegram.svg" width={32} height={32} alt="phone" />
-                <Image src="/icons/header/whatsapp.svg" width={32} height={32} alt="phone" />
+                <Image src="/icons/header/telegram.svg" width={32} height={32} alt="telegram" />
+                <Image src="/icons/header/whatsapp.svg" width={32} height={32} alt="whatsapp" />
               </SocialWrapper>
             </ContactsBurger>
           </BurgerMenu>
