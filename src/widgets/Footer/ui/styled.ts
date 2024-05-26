@@ -69,15 +69,15 @@ const FooterContactsContainer = styled.div`
     align-items: center;
     gap: 40px;
 
-    div:nth-child(1) {
+    & > div:nth-child(1) {
       order: 3;
     }
 
-    div:nth-child(2) {
+    & > div:nth-child(2) {
       order: 1;
     }
 
-    div:nth-child(3) {
+    & > div:nth-child(3) {
       order: 2;
     }
   }
@@ -87,11 +87,11 @@ const FooterContactsContainer = styled.div`
     flex-direction: column;
     gap: 16px;
 
-    div:nth-child(2) {
+    & > div:nth-child(2) {
       order: 2;
     }
 
-    div:nth-child(3) {
+    & > div:nth-child(3) {
       order: 1;
     }
   }
@@ -150,15 +150,15 @@ const FooterBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  p:nth-child(1) {
+  & > p:nth-child(1) {
     max-width: 230px;
   }
 
-  p:nth-child(2) {
+  & > p:nth-child(2) {
     max-width: 422px;
   }
 
-  p:nth-child(3) {
+  & > p:nth-child(3) {
     max-width: 230px;
     line-height: 19.36px;
   }
@@ -167,11 +167,11 @@ const FooterBottomContainer = styled.div`
     max-width: 880px;
     padding: 16px 0 20px 0;
 
-    p:nth-child(1) {
+    & > p:nth-child(1) {
       max-width: 187px;
     }
 
-    p:nth-child(3) {
+    & > p:nth-child(3) {
       max-width: 224px;
     }
   }
@@ -184,16 +184,16 @@ const FooterBottomContainer = styled.div`
     gap: 20px;
     max-width: 580px;
 
-    p:nth-child(1) {
+    & > p:nth-child(1) {
       grid-area: a;
       max-width: 280px;
     }
 
-    p:nth-child(2) {
+    & > p:nth-child(2) {
       grid-area: b;
     }
 
-    p:nth-child(3) {
+    & > p:nth-child(3) {
       grid-area: c;
       max-width: 240px;
     }
@@ -203,15 +203,15 @@ const FooterBottomContainer = styled.div`
     max-width: 328px;
     grid-template-columns: repeat(2, 154px);
 
-    p:nth-child(1) {
+    & > p:nth-child(1) {
       max-width: 154px;
     }
 
-    p:nth-child(2) {
+    & > p:nth-child(2) {
       text-align: center;
     }
 
-    p:nth-child(3) {
+    & > p:nth-child(3) {
       max-width: 154px;
     }
   }
