@@ -8,10 +8,10 @@ const Container = styled.div`
   gap: 20px;
 
   @media (max-width: 1300px) {
-    grid-template-columns: repeat(2, 205px);
+    grid-template-columns: repeat(3, 205px);
   }
 
-  @media (max-width: 879px) {
+  @media (max-width: 940px) {
     display: none;
   }
 `

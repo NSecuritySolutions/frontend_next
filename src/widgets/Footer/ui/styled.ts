@@ -11,35 +11,30 @@ const FooterWrapper = styled.footer`
   flex-direction: column;
   gap: 32px;
   margin: 0 auto;
+
+  @media (max-width: 620px) {
+    padding-top: 16px;
+    gap: 16px;
+  }
 `
 
 const FooterTop = styled.div`
-  @media (max-width: 1300px) {
-    padding: 0 20px;
-    align-items: center;
-    justify-content: center;
-  }
-`
-
-const FooterTopContainer = styled.div`
-  max-width: 1180px;
+  width: 1180px;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
   gap: 20px;
-  // display: grid;
-  // grid-template-columns: repeat(2, auto);
-  // grid-row-gap: 32px;
-  // justify-content: space-between;
 
   @media (max-width: 1300px) {
-    max-width: 880px;
+    width: 880px;
   }
 
-  @media (max-width: 880px) {
-    max-width: 580px;
+  @media (max-width: 940px) {
+    width: 580px;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 620px) {
+    width: 360px;
     flex-direction: column;
     align-items: center;
     gap: 40px;
@@ -67,9 +62,38 @@ const FooterContactsContainer = styled.div`
   flex-direction: column;
   gap: 16px;
 
-  @media (max-width: 560px) {
+  @media (max-width: 940px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     gap: 40px;
+
+    div:nth-child(1) {
+      order: 3;
+    }
+
+    div:nth-child(2) {
+      order: 1;
+    }
+
+    div:nth-child(3) {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 620px) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    div:nth-child(2) {
+      order: 2;
+    }
+
+    div:nth-child(3) {
+      order: 1;
+    }
   }
 `
 const FooterContactContainer = styled.div`
@@ -99,8 +123,9 @@ const FooterContactLink = styled.a`
 
 const FooterBtnWrapper = styled.div`
   width: 280px;
-  @media (max-width: 560px) {
-    width: 280px;
+
+  @media (max-width: 1300px) {
+    width: 205px;
   }
 `
 
@@ -109,35 +134,47 @@ const FooterBottom = styled.div`
   background-color: ${colors.backgroundBase3};
 
   @media (max-width: 1300px) {
-    padding: 0 20px;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (max-width: 620px) {
+    padding-inline: 16px;
   }
 `
 
 const FooterBottomContainer = styled.div`
   max-width: 1180px;
   margin: 0 auto;
-  padding: 24px 0 24px 0;
-
-  @media (max-width: 1300px) {
-    max-width: 880px;
-  }
-
-  @media (max-width: 880px) {
-    max-width: 580px;
-  }
-`
-
-const FooterRights = styled.div`
+  padding: 20px 0 20px 0;
   display: flex;
   justify-content: space-between;
 
-  /* @media (max-width: 560px) {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  } */
+  @media (max-width: 1300px) {
+    max-width: 880px;
+    padding: 16px 0 20px 0;
+  }
+
+  @media (max-width: 940px) {
+    display: grid;
+    grid-template-areas:
+      'b b'
+      'a c';
+    gap: 20px;
+    max-width: 580px;
+
+    div:nth-child(1) {
+      grid-area: a;
+    }
+
+    div:nth-child(2) {
+      grid-area: b;
+    }
+
+    div:nth-child(3) {
+      grid-area: c;
+    }
+  }
 `
 
 const FooterRightsText = styled.p`
@@ -164,10 +201,8 @@ const FooterTextInfoWrapper = styled.div`
 export {
   FooterWrapper,
   FooterTop,
-  FooterTopContainer,
   FooterBottom,
   FooterBottomContainer,
-  FooterRights,
   FooterRightsText,
   FooterDeveloperLink,
   FooterLogoContainer,
