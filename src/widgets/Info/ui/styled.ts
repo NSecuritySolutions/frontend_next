@@ -1,5 +1,5 @@
 import colors from '@/shared/constants/colors'
-import { StaticImageData } from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 
 import styled from 'styled-components'
 
@@ -13,14 +13,15 @@ const Section = styled.section`
   }
 `
 
-const SectionWrapper = styled.div`
+const MainCard = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   max-width: 1180px;
   width: 100%;
-  padding-top: 56px;
-  padding-bottom: 31px;
+  height: 526px;
+  padding: 40px;
   border-radius: 20px;
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   background: ${colors.backgroundPrimary};
@@ -28,80 +29,72 @@ const SectionWrapper = styled.div`
 
   @media (max-width: 1300px) {
     max-width: 880px;
-    padding-top: 46px;
-    padding-bottom: 34px;
   }
 
   @media (max-width: 940px) {
     max-width: 580px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    height: auto;
   }
 
   @media (max-width: 620px) {
-    max-width: 340px;
+    max-width: 328px;
+    padding: 20px;
+    padding-bottom: 0px;
+    gap: 20px;
   }
 `
 
-const ContentWrapper = styled.div`
-  width: 83%;
-  margin: 0 auto;
+const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 32px;
+`
 
-  @media (max-width: 1300px) {
-    max-width: 93%;
-  }
-
-  @media (max-width: 940px) {
-    max-width: 86%;
-  }
+const TextBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `
 
 const Title = styled.h2`
   font-weight: 700;
   font-size: 36px;
   line-height: 136%;
-  margin-bottom: 24px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 920px) {
     font-size: 24px;
-    max-width: 650px;
-    margin-bottom: 20px;
   }
 
-  @media (max-width: 940px) {
-    max-width: 100%;
+  @media (max-width: 640px) {
+    font-weight: 800;
+    font-size: 20px;
   }
 `
 
 const Text = styled.p`
-  max-width: 439px;
+  max-width: 600px;
   font-weight: 400;
   font-size: 16px;
   line-height: 136%;
-  letter-spacing: -0.5px;
-  margin-bottom: 36px;
+  background-color: #ffffff80;
+  overflow: hidden;
 
   @media (max-width: 1300px) {
-    margin-bottom: 20px;
-    max-width: 343px;
+    max-width: 650px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 14px;
   }
 `
 const InfoBtnWrapper = styled.div`
   width: 158px;
   height: 56px;
-  margin-bottom: 148px;
 
-  @media (max-width: 1300px) {
-    margin-bottom: 61px;
-  }
-
-  @media (max-width: 940px) {
-    margin-bottom: 40px;
-  }
-  @media (max-width: 620px) {
-    margin-bottom: 195px;
+  @media (max-width: 640px) {
+    align-self: center;
+    width: 122px;
+    height: 44px;
   }
 `
 
@@ -109,7 +102,7 @@ const HistoryWrapper = styled.div`
   display: flex;
   gap: 50px;
 
-  @media (max-width: 620px) {
+  @media (max-width: 920px) {
     display: none;
   }
 `
@@ -141,25 +134,54 @@ const BannerWrapper = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
   height: 368px;
   background-size: cover;
   position: absolute;
-  bottom: 0px;
   right: 0px;
+  bottom: 0px;
+  padding-bottom: 14px;
+  padding-left: 55px;
+  overflow: hidden;
 
   @media (max-width: 1300px) {
-    width: 405px;
-    height: 280px;
-    right: 50px;
+    width: 540px;
+    height: 284px;
+    padding-bottom: 11px;
+    padding-left: 42px;
   }
 
   @media (max-width: 940px) {
-    width: 170px;
-    height: 117px;
-    right: 25px;
+    width: 283px;
+    height: 164px;
+    padding-bottom: 6px;
+    padding-left: 0px;
   }
 
   @media (max-width: 620px) {
-    width: 304px;
-    height: 207px;
-    right: 40px;
+    position: static;
+    align-self: center;
+    width: 283px;
+    height: 161px;
+    padding: 0px;
+  }
+`
+
+const Banner = styled(Image).attrs({
+  priority: true,
+})`
+  width: 738px;
+  height: 415px;
+
+  @media (max-width: 1300px) {
+    width: 568px;
+    height: 320px;
+  }
+
+  @media (max-width: 920px) {
+    width: 314px;
+    height: 185px;
+  }
+
+  @media (max-width: 640px) {
+    width: 284px;
+    height: 160px;
   }
 `
 
@@ -197,8 +219,9 @@ const CardWrapper = styled.div`
 
 export {
   Section,
-  SectionWrapper,
-  ContentWrapper,
+  MainCard,
+  HeaderWrapper,
+  TextBlock,
   Title,
   Text,
   InfoBtnWrapper,
@@ -208,4 +231,5 @@ export {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
+  Banner,
 }
