@@ -58,7 +58,6 @@ body.modal-open {
   left: 0;
   right: 0;
   display: block;
-  text-align: center;
 }
 
 .loadingScreen {
@@ -73,7 +72,7 @@ body.modal-open {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  z-index: 99;
+  z-index: 12;
   background: white;
 }
 .loader {

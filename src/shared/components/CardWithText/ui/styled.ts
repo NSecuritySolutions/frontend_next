@@ -16,6 +16,10 @@ const Card = styled.div`
   max-width: 580px;
   width: 100%;
   overflow: hidden;
+
+  @media (max-width: 880px) {
+    padding: 20px;
+  }
 `
 
 const CardTitle = styled.h3`
@@ -30,9 +34,8 @@ const TextContainer = styled.ul`
   flex-direction: column;
   justify-self: flex-start;
   height: 145px;
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 `
 
 const CardText = styled.li`
@@ -42,6 +45,10 @@ const CardText = styled.li`
   max-width: 500px;
   width: 90%;
   z-index: 1;
+
+  @media (max-width: 880px) {
+    line-height: 1.2;
+  }
 `
 
 const CardImg = styled.div`
@@ -51,6 +58,16 @@ const CardImg = styled.div`
   width: 300px;
   height: 169px;
   object-fit: cover;
+
+  @media (max-width: 880px) {
+    width: 220px;
+    height: 124px;
+
+    img {
+      width: 220px;
+      height: 124px;
+    }
+  }
 `
 
 export { Card, CardText, CardTitle, CardImg, TextContainer }
