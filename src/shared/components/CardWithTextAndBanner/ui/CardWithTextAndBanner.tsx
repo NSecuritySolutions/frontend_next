@@ -6,15 +6,7 @@ import { BtnLink } from '../../BtnLink'
 
 import { rgbDataURL } from '@/shared/constants/utils/utils'
 
-import {
-  Card,
-  CardText,
-  CardTitle,
-  CardImg,
-  ImgWrapper,
-  TextWrapper,
-  TextContainer,
-} from './styled'
+import { Card, CardText, CardTitle, CardImg, TextWrapper, TextContainer } from './styled'
 
 import colors from '@/shared/constants/colors'
 import { StaticImageData } from 'next/image'
