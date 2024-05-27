@@ -17,7 +17,7 @@ const Card = styled.div`
   width: 100%;
   overflow: hidden;
 
-  @media (max-width: 880px) {
+  @media (max-width: 1180px) {
     padding: 20px;
   }
 `
@@ -45,10 +45,7 @@ const CardText = styled.li`
   max-width: 500px;
   width: 90%;
   z-index: 1;
-
-  @media (max-width: 880px) {
-    line-height: 1.2;
-  }
+  line-height: 1.2;
 `
 
 const CardImg = styled.div`
@@ -59,14 +56,20 @@ const CardImg = styled.div`
   height: 169px;
   object-fit: cover;
 
-  @media (max-width: 880px) {
+  @media (max-width: 1180px) {
     width: 220px;
     height: 124px;
+    top: 165px;
+    right: 0px;
 
     img {
       width: 220px;
       height: 124px;
     }
+  }
+
+  @media (max-width: 620px) {
+    display: none;
   }
 `
 
