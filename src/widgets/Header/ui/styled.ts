@@ -7,6 +7,7 @@ const TheHeader = styled.header`
   display: flex;
   flex-direction: column;
   width: 100%;
+  color: ${colors.darkPrimaryOpacity};
   background-color: ${colors.backgroundBase2};
   z-index: 5;
 `
@@ -155,6 +156,7 @@ const HeaderNav = styled.nav`
 
 const HeaderNavBurger = styled.nav`
   display: none;
+  color: ${colors.darkPrimary};
 
   @media (max-width: 940px) {
     display: flex;
@@ -192,7 +194,6 @@ const HeaderNavItem = styled.li`
 `
 
 const HeaderNavLink = styled(Link)`
-  color: ${colors.darkPrimaryOpacity};
   border-bottom: 1px solid transparent;
   transition: color 0.3s ease;
 
@@ -219,6 +220,8 @@ const BurgerMenu = styled.div`
   }
 
   @media (max-width: 620px) {
+    width: 360px;
+    align-self: start;
     display: flex;
     flex-direction: column;
     align-items: center;
