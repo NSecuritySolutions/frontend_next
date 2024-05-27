@@ -1,9 +1,17 @@
 .main {
-  margin: 120px auto 0;
+  margin-top: 163px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 940px) {
+    margin-top: 133px;
+  }
+
+  @media (max-width: 620px) {
+    margin-top: 87px;
+  }
 }
 
 .layout {
