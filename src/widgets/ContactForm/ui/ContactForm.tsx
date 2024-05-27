@@ -8,7 +8,6 @@ import { IMaskInput } from 'react-imask'
 import Image from 'next/image'
 
 import colors from '@/shared/constants/colors'
-import card from '@/assets/images/form/webp/card.webp'
 import {
   Section,
   SectionWrapper,
@@ -20,7 +19,7 @@ import {
   ColumnParagraph,
   Input,
   TextInput,
-  FromImgWrapper,
+  FormImgWrapper,
   FormColumn,
   ErrorText,
   InputWrapper,
@@ -28,11 +27,13 @@ import {
   UploadBtnText,
   FormHeader,
   FileWrapper,
+  NoBr,
 } from './styled'
 import { Button } from '@/shared/components/Button'
 import MaskedStyledInput from './mask'
 import { Typography } from '@/shared/components/Typography'
 import { DocumentImage } from '@/shared/components/DocumentImage'
+import { BtnLink } from '@/shared/components/BtnLink'
 
 const MAX_FILE_SIZE = 5
 
@@ -119,9 +120,9 @@ const ContactForm = () => {
     <Section id="contact-form">
       <SectionWrapper>
         <InfoColumn>
-          <FromImgWrapper>
-            <Image src={card} alt="Картинка карты" fill />
-          </FromImgWrapper>
+          <FormImgWrapper>
+            <Image src="/images/form/png/card2.png" alt="Картинка карты" fill quality={100} />
+          </FormImgWrapper>
         </InfoColumn>
         <FormColumn>
           <FormHeader>
@@ -198,7 +199,9 @@ const ContactForm = () => {
                   alt="Upload"
                   style={{ objectFit: 'cover' }}
                 />
-                <UploadBtnText>Загрузить спецификацию (в формате xlx, pdf, word)</UploadBtnText>
+                <UploadBtnText>
+                  Загрузить спецификацию <NoBr>(в формате xlx, pdf, word)</NoBr>
+                </UploadBtnText>
                 {fileError && <ErrorText style={{ bottom: -20 }}>{fileError}</ErrorText>}
               </UploadBtn>
             )}
@@ -213,12 +216,12 @@ const ContactForm = () => {
                 Правил политики конфиденциальности
               </Link>
             </FormParagraph>
-            <Button
+            <BtnLink
               width="130px"
               height="44px"
               color={colors.btnOpacityColor}
               text="Отправить"
-              disabled={!isValid}
+              size="15px"
             />
           </Form>
         </FormColumn>
