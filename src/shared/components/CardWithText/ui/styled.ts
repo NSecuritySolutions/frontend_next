@@ -50,7 +50,7 @@ const CardText = styled.li`
   &:before {
     content: '•';
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 2px;
   }
 `
 
