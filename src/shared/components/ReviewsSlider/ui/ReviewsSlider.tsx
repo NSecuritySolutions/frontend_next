@@ -41,7 +41,7 @@ const ReviewsSlider = () => {
 
     responsive: [
       {
-        breakpoint: 1300,
+        breakpoint: 1180,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -50,7 +50,7 @@ const ReviewsSlider = () => {
         },
       },
       {
-        breakpoint: 1180,
+        breakpoint: 840,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -58,7 +58,7 @@ const ReviewsSlider = () => {
         },
       },
       {
-        breakpoint: 619,
+        breakpoint: 620,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,

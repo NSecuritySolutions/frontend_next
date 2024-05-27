@@ -7,14 +7,24 @@ const SliderContainer = styled.div`
   max-width: 900px;
   width: 100%;
   background-color: ${colors.backgroundBase2};
-  @media (max-width: 1300px) {
-    max-width: 580px;
+
+  .slick-dots {
+    display: block;
   }
-  @media (max-width: 940px) {
+
+  @media (max-width: 1180px) {
     max-width: 580px;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 880px) {
+    max-width: 580px;
+
+    .slick-dots {
+      display: none;
+    }
+  }
+
+  @media (max-width: 620px) {
     max-width: 280px;
   }
 `

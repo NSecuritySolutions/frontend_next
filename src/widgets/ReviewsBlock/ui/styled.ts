@@ -2,20 +2,13 @@ import styled from 'styled-components'
 
 import colors from '@/shared/constants/colors'
 
-import yandexLogo from '@/assets/images/yandex/yandex.webp'
-
 const Section = styled.section`
   margin: 0 auto;
   background-color: ${colors.backgroundBase2};
 
-  @media (max-width: 1300px) {
-    // padding: 60px 0;
+  @media (max-width: 1180px) {
     align-items: center;
     justify-content: center;
-  }
-
-  @media (max-width: 940px) {
-    padding: 40px 0;
   }
 `
 
@@ -29,24 +22,18 @@ const SectionWrapper = styled.div`
   padding-bottom: 40px;
   background: ${colors.backgroundBase2};
 
-  @media (max-width: 1300px) {
-    flex-direction: row;
+  @media (max-width: 1180px) {
     max-width: 880px;
-    width: 100%;
-    gap: 120px;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     flex-direction: column;
     border-radius: 0;
     max-width: 579px;
     width: 100%;
     box-shadow: none;
-  }
-
-  @media (max-width: 504px) {
   }
 `
 
@@ -62,16 +49,19 @@ const ColumnTitle = styled.h2`
     700 24px Manrope,
     sans-serif;
 
-  @media (max-width: 940px) {
-    max-width: 580px;
-    width: 100%;
-    align-self: center;
+  @media (max-width: 1180px) {
+    margin-bottom: 0px;
   }
 
-  @media (max-width: 619px) {
-    max-width: 268px;
+  @media (max-width: 880px) {
+    max-width: 580px;
     width: 100%;
-    align-self: center;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 328px;
+    width: 100%;
+    padding-left: 16px;
   }
 `
 const ColumnWrapper = styled.div`
@@ -79,18 +69,18 @@ const ColumnWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr 3fr);
 
-  @media (max-width: 1300px) {
-    padding: 40px 0;
+  @media (max-width: 1180px) {
+    padding: 20px 0 25px 0;
     display: grid;
   }
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     padding: 0;
     grid-template-columns: none;
     grid-template-rows: 1fr;
   }
-
-  @media (max-width: 504px) {
+  @media (max-width: 620px) {
+    padding: 0 16px;
   }
 `
 
@@ -98,11 +88,12 @@ const Column = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     width: 100%;
+    padding-top: 20px;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     flex-direction: row;
   }
 `
@@ -124,16 +115,22 @@ const TextWrapper = styled.div`
   justify-content: center;
   gap: 20px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1180px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+    gap: 12px;
+  }
+
+  @media (max-width: 620px) {
     justify-content: center;
-    align-self: start;
     font-size: 16px;
-    padding: 0 0 0 12px;
+    align-items: center;
+    align-content: center;
   }
 `
 
@@ -150,13 +147,17 @@ const ImageWrapper = styled.p`
   flex-direction: row;
   gap: 11.5px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1180px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 619px) {
-    max-width: 277px;
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+  }
+  @media (max-width: 620px) {
+    max-width: 328px;
     width: 100%;
   }
 `
@@ -167,20 +168,20 @@ const ColumnImageWrapper = styled.div`
   position: relative;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
-
-  @media (max-width: 940px) {
-    padding: 30px 0 0 0;
-  }
-
-  @media (max-width: 619px) {
-    display: none;
-  }
 `
 
 const StyledParagraph = styled.p`
   font:
     800 18px Manrope,
     sans-serif;
+
+  @media (max-width: 620px) {
+    padding: 0 30px;
+    font:
+      700 16px Manrope,
+      sans-serif;
+    text-align: center;
+  }
 `
 const ContactsWrapper = styled.div`
   display: flex;
