@@ -26,66 +26,53 @@ const Section = styled.section`
 
 const SectionWrapper = styled.div`
   display: grid;
-  grid-template-columns: auto 580px;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
   justify-content: center;
   margin: 0 auto;
   max-width: 1180px;
   width: 100%;
   padding-top: 40px;
-  gap: 40px;
+  gap: 20px;
 
-  /* @media (max-width: 1300px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
-    width: 100%;
-    gap: 40px;
   }
 
-  @media (max-width: 1180px) {
-    max-width: 1180px;
-    border-radius: 0;
-  } */
+  @media (max-width: 940px) {
+    max-width: 580px;
+    display: flex;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 328px;
+  }
 `
 
 const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
-
-  /* @media (max-width: 940px) {
-    max-width: 580px;
-    width: 100%;
-    align-self: center;
-  }
-
-  @media (max-width: 880px) {
-    max-width: 280px;
-    width: 100%;
-    align-self: flex-start;
-  }
-
-  @media (max-width: 640px) {
-    max-width: 410px;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 305px;
-  }
-
-  @media (max-width: 340px) {
-    max-width: 280px;
-  } */
 `
 
 const InfoColumn = styled.div`
   align-self: flex-end;
   justify-self: flex-start;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
 `
 
-const FromImgWrapper = styled.div`
-  width: 490px;
-  height: 454px;
+const FormImgWrapper = styled.div`
+  width: 580px;
+  height: 537px;
   position: relative;
+
+  @media (max-width: 1300px) {
+    width: 430px;
+    height: 398px;
+  }
 `
 
 const FormColumn = styled.div`
@@ -210,6 +197,7 @@ const UploadBtnText = styled.span`
   margin-left: 8px;
   font-size: 13px;
   font-weight: 700;
+  text-align: center;
 `
 
 const Link = styled.a`
@@ -237,6 +225,10 @@ const FileWrapper = styled.div`
   align-items: center;
 `
 
+const NoBr = styled.span`
+  white-space: nowrap;
+`
+
 export {
   Section,
   SectionWrapper,
@@ -250,10 +242,11 @@ export {
   InputWrapper,
   Input,
   TextInput,
-  FromImgWrapper,
+  FormImgWrapper,
   ErrorText,
   UploadBtn,
   UploadBtnText,
   FormHeader,
   FileWrapper,
+  NoBr,
 }
