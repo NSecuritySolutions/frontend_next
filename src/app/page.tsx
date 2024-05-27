@@ -14,7 +14,6 @@ import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
-import Cookies from 'js-cookie'
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
@@ -25,9 +24,6 @@ export default function Home() {
       setIsLoading(false)
     }, 0)
   }, [])
-
-  // Cookies.set('guest', 'first-visit', { expires: 7 })
-  // Cookies.remove('')
 
   return (
     <>
