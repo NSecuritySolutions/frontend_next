@@ -16,7 +16,6 @@ import StyledComponentsRegistry from '@/app/styling/registry'
 
 import styles from './page.module.css'
 import { BASE_URL } from '@/shared/constants/url/url'
-import WelcomeMessage from './cookie'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
