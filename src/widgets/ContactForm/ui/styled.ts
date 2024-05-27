@@ -198,6 +198,10 @@ const UploadBtnText = styled.span`
   font-size: 13px;
   font-weight: 700;
   text-align: center;
+
+  @media (max-width: 620px) {
+    max-width: 250px;
+  }
 `
 
 const Link = styled.a`
