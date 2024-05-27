@@ -22,10 +22,9 @@ const SectionWrapper = styled.div`
   padding-bottom: 60px;
 
   @media (max-width: 1300px) {
-    flex-direction: row;
     max-width: 880px;
     width: 100%;
-    gap: 120px;
+    gap: 20px;
   }
 
   @media (max-width: 940px) {
@@ -71,7 +70,7 @@ const ColumnWrapper = styled.div`
   @media (max-width: 1300px) {
     margin: 0 auto;
     padding: 0;
-    max-width: 580px;
+    max-width: 880px;
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
@@ -87,6 +86,12 @@ const Column = styled.div`
   line-height: normal;
   max-width: 280px;
   width: 100%;
+
+  @media (max-width: 1180px) {
+    max-width: 430px;
+
+    width: 100%;
+  }
 
   @media (max-width: 940px) {
     width: 100%;
@@ -137,8 +142,12 @@ const StageLine = styled.div`
   border-width: 1px;
   background-color: ${colors.darkPrimary};
   width: 175px;
-  height: 1px;
+  height: 0;
   margin: auto 0;
+
+  @media (max-width: 1180px) {
+    width: 430px;
+  }
 
   @media (max-width: 619px) {
     border-style: solid;
@@ -151,7 +160,6 @@ const StageLine = styled.div`
   }
 `
 const TextWrapper = styled.div`
-  margin: 0 auto;
   padding: 0;
   display: flex;
   flex-direction: column;
