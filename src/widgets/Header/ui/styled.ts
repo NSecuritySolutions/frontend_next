@@ -5,29 +5,20 @@ import Link from 'next/link'
 const TheHeader = styled.header`
   position: fixed;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  right: 0;
+  flex-direction: column;
   width: 100%;
-  background-color: ${colors.backgroundPrimary};
-  color: ${colors.darkPrimary};
+  background-color: ${colors.backgroundBase2};
   z-index: 5;
 `
 
-const HeaderWrapper = styled.div<{ $openMenu: boolean }>`
-  max-width: 1180px;
+const HeaderTopWrapper = styled.div<{ $openMenu: boolean }>`
   width: 100%;
-  margin: 0 auto;
+  background-color: ${colors.backgroundPrimary};
+  color: ${colors.darkPrimary};
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 1300px) {
-    max-width: 880px;
-  }
-
   @media (max-width: 940px) {
-    width: 580px;
     min-height: 101px;
     max-height: ${(props) => (props.$openMenu ? '379px' : '101px')};
     overflow: hidden;
@@ -35,26 +26,37 @@ const HeaderWrapper = styled.div<{ $openMenu: boolean }>`
   }
 
   @media (max-width: 620px) {
-    width: 100%;
-    height: ${(props) => (props.$openMenu ? '514px' : '71px')};
+    height: ${(props) => (props.$openMenu ? '100vh' : '71px')};
     min-height: 71px;
     max-height: none;
-    padding: 0px 16px;
     transition: height 1s;
   }
 `
 
 const HeaderTop = styled.div`
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
 
+  @media (max-width: 1300px) {
+    max-width: 880px;
+  }
+
+  @media (max-width: 940px) {
+    width: 580px;
+  }
+
   @media (max-width: 620px) {
     min-height: 71px;
+    width: 100%;
     padding: 0px 16px;
   }
 `
+
 const HeaderTopItem = styled.div`
   display: flex;
   align-items: center;
@@ -139,7 +141,6 @@ const HeaderBurgerMenuWrapper = styled.div`
 const HeaderNav = styled.nav`
   display: flex;
   justify-content: center;
-  margin-top: 101px;
   width: 100%;
 
   @media (max-width: 1300px) {
@@ -208,8 +209,10 @@ const HeaderNavLink = styled(Link)`
 
 const BurgerMenu = styled.div`
   display: none;
+  align-self: center;
 
   @media (max-width: 940px) {
+    width: 580px;
     display: flex;
     justify-content: space-between;
     padding: 20px 0px;
@@ -236,7 +239,7 @@ const ContactsBurger = styled.div`
 
 export {
   TheHeader,
-  HeaderWrapper,
+  HeaderTopWrapper,
   HeaderNav,
   HeaderList,
   HeaderNavItem,

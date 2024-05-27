@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from 'react'
 import {
   TheHeader,
-  HeaderWrapper,
+  HeaderTopWrapper,
   HeaderNav,
   HeaderList,
   HeaderNavItem,
@@ -58,7 +58,7 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
   return (
     <>
       <TheHeader>
-        <HeaderWrapper $openMenu={openBurger}>
+        <HeaderTopWrapper $openMenu={openBurger}>
           <HeaderTop>
             <Logo />
             <HeaderBurgerMenuWrapper onClick={handleBurger}>
@@ -157,27 +157,26 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
               </SocialWrapper>
             </ContactsBurger>
           </BurgerMenu>
-        </HeaderWrapper>
+        </HeaderTopWrapper>
+        {pathname.split('/').length < 3 && (
+          <HeaderNav>
+            <HeaderList>
+              {navLinks.map(({ label, to }, index) => (
+                <HeaderNavItem key={index}>
+                  <HeaderNavLink
+                    href={to}
+                    className={
+                      label === urlNames[current as keyof typeof urlNames] ? 'active' : undefined
+                    }
+                  >
+                    {label}
+                  </HeaderNavLink>
+                </HeaderNavItem>
+              ))}
+            </HeaderList>
+          </HeaderNav>
+        )}
       </TheHeader>
-      {pathname.split('/').length < 3 && (
-        // Не знаю нужно ли делать так чтобы это было фиксировано, поэтому пока это не фиксировано на странице
-        <HeaderNav>
-          <HeaderList>
-            {navLinks.map(({ label, to }, index) => (
-              <HeaderNavItem key={index}>
-                <HeaderNavLink
-                  href={to}
-                  className={
-                    label === urlNames[current as keyof typeof urlNames] ? 'active' : undefined
-                  }
-                >
-                  {label}
-                </HeaderNavLink>
-              </HeaderNavItem>
-            ))}
-          </HeaderList>
-        </HeaderNav>
-      )}
     </>
   )
 }
