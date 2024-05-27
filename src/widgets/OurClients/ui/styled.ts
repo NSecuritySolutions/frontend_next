@@ -47,9 +47,8 @@ const SectionTitle = styled.h2`
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 
   @media (max-width: 940px) {
     max-width: 580px;

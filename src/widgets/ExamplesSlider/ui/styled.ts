@@ -152,9 +152,8 @@ const ColumnTitle = styled.h2`
   display: flex;
   overflow: hidden;
   margin-bottom: 30px;
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 `
 
 const ExamplesTitle = styled.h3`
@@ -206,9 +205,9 @@ const ExamplesButton = styled.a<{ $active?: boolean }>`
   height: 44px;
   opacity: 1;
 
-  font:
-    800 15px/133% Manrope,
-    sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 133%;
 
   &:hover {
     background-color: ${colors.btnOutlineHover};

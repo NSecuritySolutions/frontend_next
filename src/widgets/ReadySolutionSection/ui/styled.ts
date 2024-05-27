@@ -16,9 +16,8 @@ const SectionTitle = styled.h3`
   margin-bottom: 30px;
 
   color: ${colors.darkPrimary};
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 `
 
 const TabsContainer = styled.div`
@@ -39,9 +38,9 @@ const TabButton = styled.button<TTabButtonProps>`
   font-size: 16px;
   cursor: pointer;
   border-radius: 8px;
-  font:
-    700 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+
   transition:
     background-color 0.3s,
     color 0.3s;

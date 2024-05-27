@@ -56,15 +56,13 @@ const CharacteristicsList = styled.ul`
 `
 
 const ListItem = styled.li`
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 `
 
 const PriceText = styled.span`
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 `
 
 const InfoBtn = styled.div`
@@ -96,9 +94,8 @@ const TooltipContainer = styled.div`
 `
 
 const ToolTipParagraph = styled.p`
-  font:
-    400 15px Manrope,
-    sans-serif;
+  font-size: 15px;
+  font-weight: 400;
 `
 
 export {

@@ -88,12 +88,6 @@ const ReviewsLink = styled.a<{ $active?: boolean }>`
   }
 `
 
-// const UserIcon = styled.img.attrs((props) => ({
-//   src: props.src,
-// }))`
-//   width: 40px;
-// `
-
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;

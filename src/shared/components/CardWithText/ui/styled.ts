@@ -46,6 +46,12 @@ const CardText = styled.li`
   width: 90%;
   z-index: 1;
   line-height: 1.2;
+
+  &:before {
+    content: '•';
+    display: inline-block;
+    margin-right: 5px;
+  }
 `
 
 const CardImg = styled.div`
