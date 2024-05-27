@@ -14,6 +14,20 @@ const CardContainer = styled.article`
   @media (max-width: 1180px) {
     max-width: 122px;
   }
+
+  @media (max-width: 620px) {
+    flex-direction: row;
+    gap: 8px;
+    max-width: 308px;
+  }
+`
+
+const TextWrapper = styled.div`
+  @media (max-width: 620px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 const CardImg = styled.div`
@@ -82,4 +96,4 @@ const CardTel = styled.div`
   text-align: center;
 `
 
-export { CardContainer, CardImg, CardName, CardPosition, CardTel }
+export { CardContainer, CardImg, CardName, CardPosition, CardTel, TextWrapper }
