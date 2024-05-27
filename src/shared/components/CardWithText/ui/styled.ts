@@ -7,7 +7,7 @@ const Card = styled.div`
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 40px 50.5px;
-  max-height: 320px;
+  // max-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,7 +33,6 @@ const TextContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-self: flex-start;
-  height: 145px;
   font-weight: 400;
   font-size: 16px;
 `
