@@ -39,9 +39,8 @@ const CardText = styled.h3`
   overflow-wrap: break-word;
   max-width: 190px;
 
-  font:
-    700 15px Manrope,
-    sans-serif;
+  font-size: 15px;
+  font-weight: 700;
 `
 
 const QuestionNumber = styled.div<{ $chosen?: boolean }>`

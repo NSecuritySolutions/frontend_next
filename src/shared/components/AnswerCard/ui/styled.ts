@@ -61,16 +61,14 @@ const CardImg = styled.div<{ $imgUrl?: string }>`
 
 const QuestionText = styled.h3`
   text-wrap: wrap;
-  font:
-    700 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 700;
 `
 
 const AnswerText = styled.p`
   text-wrap: wrap;
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 `
 
 export { CardContainer, CardImg, QuestionText, AnswerText }

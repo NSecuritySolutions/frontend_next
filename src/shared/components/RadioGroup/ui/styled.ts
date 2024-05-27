@@ -16,7 +16,7 @@ const LabelText = styled.p`
   border: 1px solid ${colors.backgroundBase3};
   border-radius: 8px;
   user-select: none;
-  font: 13px 'Manrope';
+  font-size: 13px;
   font-weight: 700;
   line-height: 24px;
   background-color: ${colors.backgroundPrimary};
