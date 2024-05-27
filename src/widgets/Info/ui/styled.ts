@@ -1,10 +1,12 @@
 import colors from '@/shared/constants/colors'
-import { StaticImageData } from 'next/image'
 
 import styled from 'styled-components'
 
 const Section = styled.section`
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background-color: ${colors.backgroundBase2};
   padding-bottom: 40px;
 
@@ -13,95 +15,93 @@ const Section = styled.section`
   }
 `
 
-const SectionWrapper = styled.div`
+const MainCard = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   max-width: 1180px;
   width: 100%;
-  padding-top: 56px;
-  padding-bottom: 31px;
+  height: 526px;
+  padding: 40px;
   border-radius: 20px;
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   background: ${colors.backgroundPrimary};
   position: relative;
+  overflow: hidden;
 
   @media (max-width: 1300px) {
     max-width: 880px;
-    padding-top: 46px;
-    padding-bottom: 34px;
   }
 
   @media (max-width: 940px) {
     max-width: 580px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    height: auto;
   }
 
   @media (max-width: 620px) {
-    max-width: 340px;
+    max-width: 328px;
+    padding: 20px;
+    padding-bottom: 0px;
+    gap: 20px;
   }
 `
 
-const ContentWrapper = styled.div`
-  width: 83%;
-  margin: 0 auto;
+const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 32px;
+`
 
-  @media (max-width: 1300px) {
-    max-width: 93%;
-  }
-
-  @media (max-width: 940px) {
-    max-width: 86%;
-  }
+const TextBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `
 
 const Title = styled.h2`
   font-weight: 700;
   font-size: 36px;
   line-height: 136%;
-  margin-bottom: 24px;
-
-  @media (max-width: 1300px) {
-    font-size: 24px;
-    max-width: 650px;
-    margin-bottom: 20px;
-  }
 
   @media (max-width: 940px) {
-    max-width: 100%;
+    font-size: 24px;
+  }
+
+  @media (max-width: 620px) {
+    font-weight: 800;
+    font-size: 20px;
   }
 `
 
 const Text = styled.p`
-  max-width: 439px;
+  max-width: 600px;
   font-weight: 400;
   font-size: 16px;
   line-height: 136%;
-  letter-spacing: -0.5px;
-  margin-bottom: 36px;
+  background-color: #ffffff80;
+  overflow: hidden;
 
   @media (max-width: 1300px) {
-    margin-bottom: 20px;
-    max-width: 343px;
+    max-width: 650px;
+  }
+
+  @media (max-width: 940px) {
+    max-width: 450px;
+  }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
   }
 `
 const InfoBtnWrapper = styled.div`
   width: 158px;
   height: 56px;
-  margin-bottom: 148px;
 
-  @media (max-width: 1300px) {
-    margin-bottom: 61px;
-  }
-
-  @media (max-width: 940px) {
-    margin-bottom: 40px;
-  }
   @media (max-width: 620px) {
-    margin-bottom: 195px;
+    align-self: center;
+    width: 122px;
+    height: 44px;
   }
 `
 
@@ -109,7 +109,7 @@ const HistoryWrapper = styled.div`
   display: flex;
   gap: 50px;
 
-  @media (max-width: 620px) {
+  @media (max-width: 940px) {
     display: none;
   }
 `
@@ -136,47 +136,71 @@ const AchievementsText = styled.span`
   line-height: 136%;
 `
 
-const BannerWrapper = styled.div<{ $imgUrl?: StaticImageData; alt?: string }>`
+const BannerWrapper = styled.div`
   width: 702px;
   height: 368px;
   background-size: cover;
   position: absolute;
-  bottom: 0px;
   right: 0px;
+  bottom: 0px;
+  transform: translateY(14px) translateX(55px);
 
   @media (max-width: 1300px) {
-    width: 405px;
-    height: 280px;
-    right: 50px;
+    width: 540px;
+    height: 284px;
+    transform: translateY(11px) translateX(42px);
   }
 
   @media (max-width: 940px) {
-    width: 170px;
-    height: 117px;
-    right: 25px;
+    width: 283px;
+    height: 164px;
+    transform: translateY(6px) translateX(35px);
   }
 
   @media (max-width: 620px) {
-    width: 304px;
-    height: 207px;
-    right: 40px;
+    position: relative;
+    width: 283px;
+    height: 161px;
+    transform: none;
   }
 `
 
 const CardWrapper = styled.div`
-  max-width: 1180px;
-  width: 100%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 20px;
-  margin-top: 40px;
+  .regular.slider {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: 1300px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .slick-slider {
+    width: 100vw;
+    overflow: visible;
+    @media (max-width: 940px) {
+      padding-inline: calc((100vw - 580px) / 2);
+    }
+
+    @media (max-width: 620px) {
+      padding-inline: calc((100vw - 328px) / 2);
+    }
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
 `
 
 export {
   Section,
-  SectionWrapper,
-  ContentWrapper,
+  MainCard,
+  HeaderWrapper,
+  TextBlock,
   Title,
   Text,
   InfoBtnWrapper,
