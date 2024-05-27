@@ -156,15 +156,13 @@ const CardImg = styled.div`
   }
 
   @media (max-width: 880px) {
-    max-width: 400px;
-    width: 100%;
-    max-height: 212px;
+ 
 
     img {
-      max-width: 400px;
-      width: 100%;
-      max-height: 212px;
-      object-fit: cover;
+     max-width: 400px;
+     width: 100%;
+     max-height: 230px;
+     object-fit: cover;
     }
   }
 
