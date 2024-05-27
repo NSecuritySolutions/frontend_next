@@ -4,6 +4,9 @@ import styled from 'styled-components'
 
 const Section = styled.section`
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background-color: ${colors.backgroundBase2};
   padding-bottom: 40px;
 
@@ -163,34 +166,33 @@ const BannerWrapper = styled.div`
 `
 
 const CardWrapper = styled.div`
-  max-width: 1180px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  gap: 20px;
-  margin-top: 40px;
+  .regular.slider {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
 
-  @media (max-width: 1300px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 1300px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  @media (max-width: 940px) {
-    padding-inline: calc((100vw - 580px) / 2);
+  .slick-slider {
     width: 100vw;
-    display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-
-    &::-webkit-scrollbar {
-      display: none;
+    overflow: visible;
+    @media (max-width: 940px) {
+      padding-inline: calc((100vw - 580px) / 2);
     }
 
-    scrollbar-width: none;
+    @media (max-width: 620px) {
+      padding-inline: calc((100vw - 328px) / 2);
+    }
   }
 
-  @media (max-width: 620px) {
-    padding-inline: calc((100vw - 360px) / 2);
+  .slick-list {
+    overflow: visible;
   }
 `
 

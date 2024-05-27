@@ -19,13 +19,11 @@ const Card = styled.div<{ $backgroundColor: string }>`
   @media (max-width: 940px) {
     max-width: 280px;
     min-height: 168px;
-    flex: none;
   }
 
   @media (max-width: 620px) {
     max-width: 242px;
     min-height: 153px;
-    flex: none;
   }
 `
 

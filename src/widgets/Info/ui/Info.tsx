@@ -24,8 +24,31 @@ import { BtnLink } from '@/shared/components/BtnLink'
 import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
 
 import colors from '@/shared/constants/colors'
+import Slider from 'react-slick'
 
 const Info: FC = () => {
+  const settings = {
+    responsive: [
+      { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
+      {
+        breakpoint: 940,
+        settings: {
+          infinite: false,
+          slidesToShow: 1.95,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 620,
+        settings: {
+          infinite: false,
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
+
   return (
     <Section>
       <MainCard>
@@ -67,15 +90,17 @@ const Info: FC = () => {
         </BannerWrapper>
       </MainCard>
       <CardWrapper>
-        {cardInfoWithLogoData.map((cardData) => (
-          <CardInfoWithIcon
-            key={cardData.id}
-            title={cardData.title}
-            logo={cardData.logo}
-            backgroundColor={cardData.backgroundColor}
-            text={cardData.text}
-          />
-        ))}
+        <Slider {...settings}>
+          {cardInfoWithLogoData.map((cardData) => (
+            <CardInfoWithIcon
+              key={cardData.id}
+              title={cardData.title}
+              logo={cardData.logo}
+              backgroundColor={cardData.backgroundColor}
+              text={cardData.text}
+            />
+          ))}
+        </Slider>
       </CardWrapper>
     </Section>
   )
