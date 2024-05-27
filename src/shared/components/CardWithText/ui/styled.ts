@@ -20,6 +20,12 @@ const Card = styled.div`
   @media (max-width: 1180px) {
     padding: 20px;
   }
+
+  a {
+    @media (max-width: 620px) {
+      margin-top: 20px;
+    }
+  }
 `
 
 const CardTitle = styled.h3`

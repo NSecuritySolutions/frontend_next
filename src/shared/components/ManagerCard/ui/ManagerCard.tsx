@@ -15,12 +15,6 @@ const ManagerCard = () => {
               placeholder="blur"
               blurDataURL={rgbDataURL(225, 231, 244)}
               alt="Фотография сотрудника"
-              style={{
-                borderRadius: '500px',
-                width: '172px',
-                height: '172px',
-                objectFit: 'cover',
-              }}
             ></Image>
           </CardImg>
           <CardName>{item.name}</CardName>

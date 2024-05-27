@@ -35,8 +35,6 @@ const SectionWrapper = styled.div`
     max-width: 880px;
     width: 100%;
     gap: 120px;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
   @media (max-width: 940px) {
@@ -49,6 +47,11 @@ const SectionWrapper = styled.div`
 
   @media (max-width: 504px) {
   }
+`
+const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `
 
 const ListItem = styled.li`
@@ -91,14 +94,15 @@ const ColumnWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, minmax(120px, 540px) minmax(120px, 540px));
   column-gap: 20px;
-  gap: 40px;
+  gap: 20px;
 
-  @media (max-width: 1300px) {
-    padding: 40px;
-    display: grid;
-    grid-template-columns: none;
-    grid-template-rows: 1fr;
-  }
+  // @media (max-width: 1300px) {
+  //   padding: 40px;
+  //   display: grid;
+  //   grid-template-columns: none;
+  //   grid-template-rows: 1fr;
+  // }
+
   @media (max-width: 940px) {
     padding: 0;
   }
@@ -166,9 +170,10 @@ const ContactsWrapper = styled.div`
   justify-content: center;
   gap: 12px;
 
-  @media (max-width: 1300px) {
-    gap: 130px;
-  }
+  // @media (max-width: 1300px) {
+  //   gap: 130px;
+  // }
+
   @media (max-width: 940px) {
     gap: 19.5px;
   }
@@ -189,4 +194,5 @@ export {
   ContactsWrapper,
   ListItem,
   ListItemText,
+  StyledList,
 }
