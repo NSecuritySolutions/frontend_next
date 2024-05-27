@@ -54,9 +54,8 @@ const CardName = styled.h2`
   overflow-wrap: break-word;
   max-width: 190px;
 
-  font:
-    700 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 700;
 
   @media (max-width: 1300px) {
     display: none;

@@ -6,6 +6,11 @@ const LogoContainer = styled.div`
   display: flex;
   width: 344px;
   height: 61px;
+
+  @media (max-width: 620px) {
+    align-items: center;
+    height: auto;
+  }
 `
 
 const LogoLink = styled(Link)`
@@ -18,6 +23,10 @@ const LogoLink = styled(Link)`
 const LogoTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 const LogoTitle = styled.h1`

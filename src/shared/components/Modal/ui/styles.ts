@@ -63,9 +63,8 @@ const EquipmentListItem = styled.li`
   margin: 0;
   padding: 0;
   list-style: inside;
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 `
 const TitleWrapper = styled.div`
   overflow: auto;
@@ -78,24 +77,21 @@ const TitleWrapper = styled.div`
 const Title = styled.div`
   display: flex;
   flex-direction: row;
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 `
 
 const SubTitle = styled.div`
   display: flex;
   flex-direction: row;
-  font:
-    800 18px Manrope,
-    sans-serif;
+  font-size: 18px;
+  font-weight: 800;
 `
 const Date = styled.div`
   display: flex;
   flex-direction: row;
-  font:
-    400 14px Manrope,
-    sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 
   // line-height: 20px;
   line-height: 1.33333;
@@ -105,18 +101,16 @@ const Date = styled.div`
 const Quantity = styled.div`
   display: flex;
   flex-direction: column;
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
   color: ${colors.titleBlueColor};
 `
 
 const Paragraph = styled.div`
   display: flex;
   flex-direction: column;
-  font:
-    700 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 700;
 `
 
 const TextWrapper = styled.div`
@@ -128,9 +122,9 @@ const TextWrapper = styled.div`
 `
 
 const TextParagraph = styled.p`
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
   br {
     margin-top: 20px;
     display: block;

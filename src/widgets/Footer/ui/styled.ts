@@ -3,40 +3,38 @@ import colors from '@/shared/constants/colors'
 
 const FooterWrapper = styled.footer`
   width: 100%;
+  padding-top: 40px;
   background-color: ${colors.backgroundBase2};
   color: ${colors.darkPrimary};
+  justify-content: center;
   display: flex;
   flex-direction: column;
+  gap: 32px;
   margin: 0 auto;
+
+  @media (max-width: 620px) {
+    padding-top: 16px;
+    gap: 16px;
+  }
 `
 
 const FooterTop = styled.div`
-  @media (max-width: 1300px) {
-    padding: 0 20px;
-    align-items: center;
-    justify-content: center;
-  }
-`
-
-const FooterTopContainer = styled.div`
-  max-width: 1180px;
+  width: 1180px;
   margin: 0 auto;
-  padding-top: 24px;
-  padding-bottom: 60px;
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-row-gap: 32px;
-  // justify-content: space-between;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 
   @media (max-width: 1300px) {
-    max-width: 880px;
+    width: 880px;
   }
 
   @media (max-width: 940px) {
-    max-width: 580px;
+    width: 580px;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 620px) {
+    width: 360px;
     flex-direction: column;
     align-items: center;
     gap: 40px;
@@ -64,9 +62,38 @@ const FooterContactsContainer = styled.div`
   flex-direction: column;
   gap: 16px;
 
-  @media (max-width: 560px) {
+  @media (max-width: 940px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     gap: 40px;
+
+    & > div:nth-child(1) {
+      order: 3;
+    }
+
+    & > div:nth-child(2) {
+      order: 1;
+    }
+
+    & > div:nth-child(3) {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 620px) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    & > div:nth-child(2) {
+      order: 2;
+    }
+
+    & > div:nth-child(3) {
+      order: 1;
+    }
   }
 `
 const FooterContactContainer = styled.div`
@@ -96,8 +123,9 @@ const FooterContactLink = styled.a`
 
 const FooterBtnWrapper = styled.div`
   width: 280px;
-  @media (max-width: 560px) {
-    width: 280px;
+
+  @media (max-width: 1300px) {
+    width: 205px;
   }
 `
 
@@ -106,41 +134,101 @@ const FooterBottom = styled.div`
   background-color: ${colors.backgroundBase3};
 
   @media (max-width: 1300px) {
-    padding: 0 20px;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (max-width: 620px) {
+    padding-inline: 16px;
   }
 `
 
 const FooterBottomContainer = styled.div`
   max-width: 1180px;
   margin: 0 auto;
-  padding: 24px 0 24px 0;
-
-  @media (max-width: 1300px) {
-    max-width: 880px;
-  }
-
-  @media (max-width: 940px) {
-    max-width: 580px;
-  }
-`
-
-const FooterRights = styled.div`
+  padding: 20px 0 20px 0;
   display: flex;
   justify-content: space-between;
 
-  /* @media (max-width: 560px) {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  } */
+  & > p:nth-child(1) {
+    max-width: 230px;
+  }
+
+  & > p:nth-child(2) {
+    max-width: 422px;
+  }
+
+  & > p:nth-child(3) {
+    max-width: 230px;
+    line-height: 19.36px;
+  }
+
+  @media (max-width: 1300px) {
+    max-width: 880px;
+    padding: 16px 0 20px 0;
+
+    & > p:nth-child(1) {
+      max-width: 187px;
+    }
+
+    & > p:nth-child(3) {
+      max-width: 224px;
+    }
+  }
+
+  @media (max-width: 940px) {
+    display: grid;
+    grid-template-areas:
+      'b b'
+      'a c';
+    gap: 20px;
+    max-width: 580px;
+
+    & > p:nth-child(1) {
+      grid-area: a;
+      max-width: 280px;
+    }
+
+    & > p:nth-child(2) {
+      grid-area: b;
+    }
+
+    & > p:nth-child(3) {
+      grid-area: c;
+      max-width: 240px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    max-width: 328px;
+    grid-template-columns: repeat(2, 154px);
+
+    & > p:nth-child(1) {
+      max-width: 154px;
+    }
+
+    & > p:nth-child(2) {
+      text-align: center;
+    }
+
+    & > p:nth-child(3) {
+      max-width: 154px;
+    }
+  }
 `
 
 const FooterRightsText = styled.p`
   font-size: 16px;
   line-height: 136%;
   font-weight: 400;
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
+`
+
+const NoBr = styled.span`
+  white-space: nowrap;
 `
 
 const FooterDeveloperLink = styled.a`
@@ -153,18 +241,11 @@ const FooterDeveloperLink = styled.a`
   }
 `
 
-const FooterTextInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 export {
   FooterWrapper,
   FooterTop,
-  FooterTopContainer,
   FooterBottom,
   FooterBottomContainer,
-  FooterRights,
   FooterRightsText,
   FooterDeveloperLink,
   FooterLogoContainer,
@@ -176,5 +257,5 @@ export {
   FooterContactLink,
   FooterBtnWrapper,
   FooterContactsContentWrapper,
-  FooterTextInfoWrapper,
+  NoBr,
 }

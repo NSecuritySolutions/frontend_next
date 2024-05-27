@@ -29,9 +29,8 @@ const Section = styled.section`
 const SectionTitle = styled.h3`
   margin-bottom: 30px;
   color: ${colors.darkPrimary};
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 `
 
 const CardsGridContainer = styled.div`
