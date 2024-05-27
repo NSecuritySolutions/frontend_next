@@ -33,6 +33,7 @@ import { Button } from '@/shared/components/Button'
 import MaskedStyledInput from './mask'
 import { Typography } from '@/shared/components/Typography'
 import { DocumentImage } from '@/shared/components/DocumentImage'
+import { BtnLink } from '@/shared/components/BtnLink'
 
 const MAX_FILE_SIZE = 5
 
@@ -215,12 +216,12 @@ const ContactForm = () => {
                 Правил политики конфиденциальности
               </Link>
             </FormParagraph>
-            <Button
+            <BtnLink
               width="130px"
               height="44px"
               color={colors.btnOpacityColor}
               text="Отправить"
-              disabled={!isValid}
+              size="15px"
             />
           </Form>
         </FormColumn>
