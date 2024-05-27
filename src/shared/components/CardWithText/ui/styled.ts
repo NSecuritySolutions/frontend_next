@@ -35,6 +35,8 @@ const TextContainer = styled.ul`
   justify-self: flex-start;
   font-weight: 400;
   font-size: 16px;
+  color: black;
+  padding-left: 20px;
 `
 
 const CardText = styled.li`
@@ -46,10 +48,12 @@ const CardText = styled.li`
   z-index: 1;
   line-height: 1.2;
 
+  position: relative;
+
   &:before {
     content: '•';
-    display: inline-block;
-    margin-right: 2px;
+    position: absolute;
+    left: -20px;
   }
 `
 
