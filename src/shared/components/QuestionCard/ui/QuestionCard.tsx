@@ -10,36 +10,37 @@ import {
 } from './styled.ts'
 import { FC, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, useAnimate } from 'framer-motion'
 
-const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen }) => {
+const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen, width }) => {
   const [open, setOpen] = useState(false)
-  const [initialHeight, setInitialHeight] = useState(64)
-  const ref = useRef<HTMLDivElement>(null)
+  const [initialHeight, setInitialHeight] = useState(0)
+  const [ref, animate] = useAnimate()
   const titleRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (titleRef.current) {
-      setInitialHeight(titleRef.current.offsetHeight + 40)
+    if (width <= 940) {
+      animate(ref.current, { height: initialHeight })
+    } else {
+      animate(ref.current, { height: '90px' })
     }
-  }, [titleRef.current, chosen])
+  }, [width, initialHeight])
 
   useEffect(() => {
-    const handleResize = () => {
-      if (titleRef.current && window.innerWidth <= 940) {
-        setInitialHeight(titleRef.current.offsetHeight + 40)
-      }
+    if (titleRef.current && width) {
+      setInitialHeight(titleRef.current.offsetHeight + 40)
     }
-
-    window.addEventListener('resize', handleResize)
-    handleResize()
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+  }, [titleRef.current, width])
 
   function handleClick() {
-    setOpen(!open)
+    if (width <= 940) {
+      setOpen(!open)
+      if (open) {
+        animate(ref.current, { height: initialHeight }, { duration: 0.1 })
+      } else {
+        animate(ref.current, { height: ref.current!.scrollHeight }, { duration: 0.1 })
+      }
+    }
     onClick({ id: id, question: question, answer: answer })
   }
 
@@ -49,15 +50,13 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen 
       $chosen={chosen !== null && chosen.question === question}
       $open={open}
       ref={ref}
-      $height={ref.current?.scrollHeight}
-      $heightInitial={initialHeight}
     >
       <QuestionNumber $chosen={chosen !== null && chosen.question === question}>
         {id}
       </QuestionNumber>
       <TitleContainer ref={titleRef}>
         <CardText>{question}</CardText>
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} mode="popLayout">
           <ArrowWrapper
             key={open ? 'toogle open' : 'toogle close'}
             initial={{ rotate: open ? -360 : -180 }}

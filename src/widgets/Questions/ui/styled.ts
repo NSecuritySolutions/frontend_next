@@ -1,4 +1,5 @@
 import colors from '@/shared/constants/colors'
+import { motion } from 'framer-motion'
 
 import styled from 'styled-components'
 
@@ -122,11 +123,13 @@ const TopicsColumn = styled.div`
   }
 `
 
-const QuestionsColumn = styled.div`
+const QuestionsColumn = styled(motion.div).attrs({
+  layout: 'size',
+})<{ $height?: string }>`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 514px;
+  max-height: 514px;
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-color: ${colors.scrollActive} ${colors.backgroundBase2};
@@ -147,8 +150,10 @@ const QuestionsColumn = styled.div`
 
   @media (max-width: 940px) {
     gap: 12px;
+    overflow-y: hidden;
     width: 580px;
-    height: auto;
+    height: 0px;
+    max-height: none;
   }
 
   @media (max-width: 620px) {

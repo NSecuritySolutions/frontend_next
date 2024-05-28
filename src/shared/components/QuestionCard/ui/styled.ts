@@ -2,17 +2,18 @@ import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
 import { motion } from 'framer-motion'
 
-const CardContainer = styled.article<{
+const CardContainer = styled(motion.article).attrs({
+  layout: 'size',
+})<{
   $chosen?: boolean
   $open?: boolean
-  $height?: number
-  $heightInitial: number
 }>`
   background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 90px;
+  max-height: 90px;
+  min-height: 90px;
   padding: 5px 20px;
   border-radius: 20px;
   color: ${colors.darkPrimary};
@@ -33,10 +34,10 @@ const CardContainer = styled.article<{
     background: #ffffff;
     flex-direction: column;
     padding: 20px;
-    height: ${(props) =>
-      props.$open && props.$height ? `${props.$height}px` : `${props.$heightInitial}px`};
     overflow: hidden;
-    transition: height 1s;
+    min-height: 0px;
+    max-height: none;
+    height: 0px;
   }
 `
 
