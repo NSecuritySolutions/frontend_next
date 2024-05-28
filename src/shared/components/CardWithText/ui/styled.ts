@@ -42,9 +42,11 @@ const TextContainer = styled.ul`
   height: 145px;
   font-weight: 400;
   font-size: 16px;
+  padding-left: 20px;
 `
 
 const CardText = styled.li`
+  position: relative;
   text-indent: 0;
   font-weight: 400;
   font-size: 16px;
@@ -54,9 +56,9 @@ const CardText = styled.li`
   line-height: 1.2;
 
   &:before {
-    content: '•';
-    display: inline-block;
-    margin-right: 5px;
+    content: '\2022';
+    position: absolute;
+    left: -20px;
   }
 `
 
