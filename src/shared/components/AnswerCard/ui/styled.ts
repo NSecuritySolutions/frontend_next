@@ -5,6 +5,10 @@ const CardWrapper = styled.div`
   position: relative;
   width: fit-content;
   height: fit-content;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
 `
 
 const CardContainer = styled.article`
@@ -43,10 +47,6 @@ const CardContainer = styled.article`
   @media (max-width: 1300px) {
     width: 480px;
     padding: 40px;
-  }
-
-  @media (max-width: 940px) {
-    display: none;
   }
 `
 

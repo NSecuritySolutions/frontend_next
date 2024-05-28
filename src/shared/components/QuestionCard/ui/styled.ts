@@ -84,6 +84,7 @@ const ArrowWrapper = styled(motion.div).attrs({
   layout: true,
 })`
   display: none;
+  align-self: center;
   height: 24px;
 
   @media (max-width: 940px) {

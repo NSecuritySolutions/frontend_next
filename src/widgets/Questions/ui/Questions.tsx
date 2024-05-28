@@ -14,7 +14,6 @@ import { tabs } from '@/shared/constants/texts/questions'
 import { QuestionCard } from '@/shared/components/QuestionCard'
 import { AnswerCard } from '@/shared/components/AnswerCard'
 import Slider from 'react-slick'
-import { LayoutGroup } from 'framer-motion'
 
 const Questions = () => {
   const [currentTab, setCurrentTab] = React.useState<TTabs | null>(null)
