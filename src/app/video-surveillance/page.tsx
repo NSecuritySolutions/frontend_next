@@ -1,14 +1,14 @@
 'use client'
-import { ContactForm } from '@/widgets/ContactForm'
 
-import styles from './page.module.css'
+import { ContactForm } from '@/widgets/ContactForm'
+import { SectionWrapper } from './styled.ts'
 
 export default function VideoPage() {
   return (
     <>
-      <section className={styles.main}>
+      <SectionWrapper>
         <h1>Видеонаблюдение, страница в разработке</h1>
-      </section>
+      </SectionWrapper>
       <ContactForm />
     </>
   )

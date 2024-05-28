@@ -1,14 +1,15 @@
-import { ContactForm } from '@/widgets/ContactForm'
+'use client'
 
-import styles from './page.module.css'
+import { ContactForm } from '@/widgets/ContactForm'
+import { SectionWrapper } from './styled.ts'
 
 export default function SecurityPage() {
   return (
     <>
-      <section className={styles.main}>
+      <SectionWrapper>
         <h1>Охранно-пожарная, страница в разработке</h1>
-      </section>
-      <ContactForm />
+      </SectionWrapper>
+      <ContactForm></ContactForm>
     </>
   )
 }
