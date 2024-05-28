@@ -1,42 +1,36 @@
-'use client'
 import colors from '@/shared/constants/colors'
-import { StaticImageData } from 'next/image'
+import Image from 'next/image'
 
 import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
+  padding-top: 40px;
+  padding-bottom: 40px;
 
-  @media (max-width: 1300px) {
-    padding: 0 20px;
-    align-items: center;
-    justify-content: center;
+  @media (max-width: 940px) {
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 `
 
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
   margin: 0 auto;
-  max-width: 1180px;
-  width: 100%;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  width: 1180px;
 
   @media (max-width: 1300px) {
-    flex-direction: row;
-    max-width: 880px;
-    width: 100%;
-    gap: 40px;
+    width: 880px;
   }
 
   @media (max-width: 940px) {
-    flex-direction: column;
-    gap: 30px;
+    width: 580px;
   }
 
-  @media (max-width: 504px) {
-    padding: 0;
+  @media (max-width: 620px) {
+    width: 328px;
   }
 `
 
@@ -44,129 +38,144 @@ const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
-  // white-space: nowrap;
-  // text-overflow: ellipsis;
-
   font-size: 24px;
   font-weight: 700;
 
-  @media (max-width: 940px) {
-    max-width: 580px;
-    width: 100%;
-    align-self: center;
-  }
-
-  @media (max-width: 619px) {
-    max-width: 268px;
-    width: auto;
-    align-self: center;
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
   }
 `
 
 const LogoWrapper = styled.div`
-  margin-top: 40px;
   width: 100%;
-  min-height: 160px;
-  padding: 20px 0;
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  // gap: 20px;
+  height: 160px;
+  align-items: center;
 
   @media (max-width: 1300px) {
-    margin: 0 auto;
-    padding: 0;
-    max-width: 620px;
-    justify-content: space-around;
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    height: 120px;
   }
 
   @media (max-width: 940px) {
-    padding: 0;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
   }
 
-  @media (max-width: 504px) {
+  @media (max-width: 620px) {
   }
 `
 
-const LogoYandex = styled.div<{
-  alt?: string
-}>`
-  background: url('/images/clients/webp/yandex.webp') no-repeat;
-  background-position: 0px -160px;
-  background-size: cover;
+const LogoYandex = styled(Image)`
+  filter: grayscale(100%) brightness(150%);
   height: 160px;
   width: 160px;
+  padding: 20px;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    background-position: top;
+    filter: none;
   }
 
   @media (max-width: 1300px) {
-    align-self: center;
+    height: 120px;
+    width: 120px;
+    padding: 15px;
+  }
+
+  @media (max-width: 940px) {
+    order: 1;
+  }
+
+  @media (max-width: 620px) {
+    height: 90px;
+    width: 90px;
+    padding: 11px;
   }
 `
 
-const LogoSamokat = styled.div<{ alt?: string }>`
-  background: url('/images/clients/webp/samokat.webp') no-repeat;
-  background-position: -0.2px -190.3px;
-  background-size: cover;
-  height: 190px;
-  width: 460px;
-
-  &:hover {
-    cursor: pointer;
-    background-position: top;
-  }
-
-  @media (max-width: 1300px) {
-    align-self: center;
-  }
-
-  @media (max-width: 530px) {
-    background-position: -0.2px -124.3px;
-    background-size: cover;
-    height: 130px;
-    width: 300px;
-  }
-`
-
-const LogoRostelecom = styled.div<{ alt?: string }>`
-  background: url('/images/clients/webp/rostelekom.webp') no-repeat;
-  background-position: 0px -150.9px;
-  background-size: cover;
-  height: 151px;
-  width: 164px;
-
-  &:hover {
-    cursor: pointer;
-    background-position: top;
-  }
-
-  @media (max-width: 1300px) {
-    align-self: center;
-  }
-`
-
-const LogoAvon = styled.div<{ alt?: string }>`
-  background: url('/images/clients/webp/avon.webp') no-repeat;
-  background-position: -1px -151.5px;
-  background-size: cover;
+const LogoSamokat = styled(Image)`
+  filter: grayscale(100%) brightness(135%);
+  object-fit: cover;
   height: 160px;
-  width: 279px;
+  width: 460px;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    background-position: top;
+    filter: none;
   }
 
   @media (max-width: 1300px) {
-    align-self: center;
+    height: 120px;
+    width: 345px;
+  }
+
+  @media (max-width: 940px) {
+    order: 2;
+  }
+
+  @media (max-width: 620px) {
+    height: 90px;
+    width: 226px;
+  }
+`
+
+const LogoRostelecom = styled(Image)`
+  filter: grayscale(100%) brightness(350%) contrast(50%);
+  height: 160px;
+  width: 175px;
+  padding: 5px;
+  cursor: pointer;
+
+  &:hover {
+    filter: none;
+  }
+
+  @media (max-width: 1300px) {
+    height: 120px;
+    width: 131px;
+    padding: 4px;
+  }
+
+  @media (max-width: 940px) {
+    order: 3;
+  }
+
+  @media (max-width: 620px) {
+    height: 83px;
+    width: 90px;
+    padding: 3px;
+  }
+`
+
+const LogoAvon = styled(Image)`
+  filter: contrast(0%) brightness(120%);
+  height: 160px;
+  width: 300px;
+  cursor: pointer;
+  padding: 44px 9px;
+
+  &:hover {
+    filter: none;
+  }
+
+  @media (max-width: 1300px) {
+    height: 120px;
+    width: 225px;
+    padding: 33px 7px;
+  }
+
+  @media (max-width: 940px) {
+    order: 4;
+  }
+
+  @media (max-width: 620px) {
+    height: 78px;
+    width: 146px;
+    padding: 21px 4px;
   }
 `
 
