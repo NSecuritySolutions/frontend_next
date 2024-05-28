@@ -77,7 +77,7 @@ const ColumnTitle = styled.h2`
     align-self: center;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     max-width: 277px;
     width: 100%;
     align-self: center;
@@ -113,7 +113,7 @@ const Column = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     flex-direction: row;
   }
 `
@@ -129,7 +129,7 @@ const TextWrapper = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     justify-content: center;
     align-self: start;
     font-size: 16px;
@@ -152,7 +152,7 @@ const ColumnParagraph = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     max-width: 277px;
     width: 100%;
   }
