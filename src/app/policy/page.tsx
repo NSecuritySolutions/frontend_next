@@ -20,21 +20,14 @@ export default function PolicyPage() {
 
   const handleContainerClick = () => {
     setIsEnlarged(!isEnlarged)
-
-    const element: HTMLElement | null = document.getElementById('policy')
-    console.log({ element }, 'element')
-    element?.classList.add('enlarge')
   }
 
+  //@TODO -  если понадобится скролл внутри блока Политики style={{ overflow: 'scroll', scrollbarWidth: 'none' }}
+
   return (
-    <SectionWrapper
-      additional={isEnlarged}
-      height={isEnlarged ? '2000px' : '500px'}
-      transform={isEnlarged}
-      id="policy"
-    >
+    <SectionWrapper $additional={isEnlarged} $height={isEnlarged ? '6200px' : '760px'} id="policy">
       <SectionTitle>{policy.title}</SectionTitle>
-      <div style={{ overflow: 'scroll', scrollbarWidth: 'none' }}>
+      <div style={{ overflow: 'hidden', scrollbarWidth: 'none' }}>
         {policy.paragraphs.map((item: IPolicyItem, i: number) => (
           <BlockWrapper key={i}>
             <BlockTitle>{item.title}</BlockTitle>
@@ -46,7 +39,7 @@ export default function PolicyPage() {
       <BtnLink
         onClick={handleContainerClick}
         btnType="transparent"
-        text={'Читать полностью'}
+        text={isEnlarged ? 'Вернуться' : 'Читать полностью'}
         width="214px"
         height="56px"
         color={colors.darkPrimary}

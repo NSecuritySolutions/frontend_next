@@ -3,8 +3,8 @@ import colors from '@/shared/constants/colors'
 import styled from 'styled-components'
 
 type TStyledProps = {
-  height: string
-  additional: boolean
+  $height: string
+  $additional: boolean
 }
 
 const SectionWrapper = styled.section<TStyledProps>`
@@ -17,12 +17,12 @@ const SectionWrapper = styled.section<TStyledProps>`
   padding: 40px;
   max-width: 760px;
   width: 100%;
-  height: ${(props) => props.height};
-  ${(props) => (props.additional ? 'transition: height .7s ease-in-out;' : '')}
+  height: ${(props) => props.$height};
+  ${(props) => (props.$additional ? 'transition: height 2s ease-in-out;' : '')}
 
   a {
     padding: 18px;
-    margin: 10px 0;
+    margin: 32px 0 0 0;
   }
 `
 const BlockWrapper = styled.div`
