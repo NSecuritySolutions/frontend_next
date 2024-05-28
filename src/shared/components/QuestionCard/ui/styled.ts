@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
+import { motion } from 'framer-motion'
 
-const CardContainer = styled.article<{ $chosen?: boolean }>`
+const CardContainer = styled.article<{
+  $chosen?: boolean
+  $open?: boolean
+  $height?: number
+  $heightInitial: number
+}>`
   background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
-  width: 280px;
+  width: 100%;
   height: 90px;
   padding: 5px 20px;
   border-radius: 20px;
@@ -16,7 +22,6 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   gap: 20px;
   align-items: center;
   flex-shrink: 0;
-  margin-right: 10px;
 
   &:hover {
     cursor: pointer;
@@ -24,12 +29,14 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
     transition: 0.7s;
   }
 
-  @media (max-width: 1300px) {
-    width: 267px;
-  }
-
-  @media (max-width: 640px) {
-    width: 100%;
+  @media (max-width: 940px) {
+    background: #ffffff;
+    flex-direction: column;
+    padding: 20px;
+    height: ${(props) =>
+      props.$open && props.$height ? `${props.$height}px` : `${props.$heightInitial}px`};
+    overflow: hidden;
+    transition: height 1s;
   }
 `
 
@@ -37,11 +44,51 @@ const CardText = styled.h3`
   align-self: center;
   margin: 0;
   overflow-wrap: break-word;
-  max-width: 190px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
 
-  font:
-    700 15px Manrope,
-    sans-serif;
+  @media (max-width: 940px) {
+    align-self: start;
+    font-size: 16px;
+  }
+`
+
+const CardAnswer = styled.p`
+  display: none;
+  font-weight: 400;
+  font-size: 16px;
+
+  @media (max-width: 940px) {
+    display: block;
+  }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
+`
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 940px) {
+    align-items: start;
+    align-self: start;
+    justify-content: space-between;
+    width: 100%;
+  }
+`
+
+const ArrowWrapper = styled(motion.div).attrs({
+  layout: true,
+})`
+  display: none;
+  height: 24px;
+
+  @media (max-width: 940px) {
+    display: initial;
+  }
 `
 
 const QuestionNumber = styled.div<{ $chosen?: boolean }>`
@@ -61,8 +108,8 @@ const QuestionNumber = styled.div<{ $chosen?: boolean }>`
   text-align: center;
 
   @media (max-width: 940px) {
-    white-space: initial;
+    display: none;
   }
 `
 
-export { CardContainer, CardText, QuestionNumber }
+export { CardContainer, CardText, QuestionNumber, CardAnswer, TitleContainer, ArrowWrapper }

@@ -36,6 +36,7 @@ const Info: FC = () => {
           infinite: false,
           slidesToShow: 1.95,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
       {
@@ -44,6 +45,7 @@ const Info: FC = () => {
           infinite: false,
           slidesToShow: 1.3,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
 
 const CardContainer = styled.article`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 580px;
@@ -40,13 +41,7 @@ const CardContainer = styled.article`
   }
 
   @media (max-width: 940px) {
-    width: 100%;
-    height: 420px;
-  }
-
-  @media (max-width: 600px) {
-    margin: 0;
-    border-radius: 0;
+    display: none;
   }
 `
 
@@ -68,9 +63,34 @@ const QuestionText = styled.h3`
 
 const AnswerText = styled.p`
   text-wrap: wrap;
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16ps;
+  font-weight: 400;
+  z-index: 1;
+  background-color: #ffffffc0;
 `
 
-export { CardContainer, CardImg, QuestionText, AnswerText }
+const CropWrapper = styled.div`
+  position: absolute;
+  height: 201px;
+  right: 2px;
+  bottom: 0px;
+  overflow: hidden;
+  z-index: 0;
+
+  @media (max-width: 1300px) {
+    height: 109px;
+  }
+`
+
+const ImgWrapper = styled.div`
+  position: relative;
+  width: 260px;
+  height: 261px;
+
+  @media (max-width: 1300px) {
+    width: 139px;
+    height: 140px;
+  }
+`
+
+export { CardContainer, CardImg, QuestionText, AnswerText, ImgWrapper, CropWrapper }

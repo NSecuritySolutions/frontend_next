@@ -33,12 +33,15 @@ const SectionWrapper = styled.div`
   }
 
   @media (max-width: 940px) {
+    max-width: 580px;
     flex-direction: column;
     gap: 30px;
   }
 
-  @media (max-width: 640px) {
-    padding: 60px 0;
+  @media (max-width: 620px) {
+    max-width: 328px;
+    padding: 16px;
+    gap: 16px;
   }
 `
 
@@ -46,12 +49,11 @@ const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
+  line-height: 1.36;
   // white-space: nowrap;
   // text-overflow: ellipsis;
-
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-weight: 700;
+  font-size: 24px;
 
   @media (max-width: 940px) {
     max-width: 580px;
@@ -59,69 +61,64 @@ const SectionTitle = styled.h2`
     align-self: center;
   }
 
-  @media (max-width: 640px) {
-    max-width: 410px;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 305px;
-  }
-
-  @media (max-width: 340px) {
-    max-width: 280px;
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
   }
 `
 
 const ColumnWrapper = styled.div`
   margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  //grid-template-columns: repeat(1, minmax(120px, 400px) minmax(120px, 580px));
-  //column-gap: 20px;
+  display: grid;
+  grid-template-columns: 280px 280px 583px;
   gap: 20px;
 
   @media (max-width: 1300px) {
-    max-width: 880px;
-    gap: 16px;
-  }
-
-  @media (max-width: 1180px) {
-    padding-left: 0;
-    padding-right: 0;
+    grid-template-columns: 90px 320px 430px;
   }
 
   @media (max-width: 940px) {
-    padding: 0;
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     max-width: 580px;
   }
 
-  @media (max-width: 644px) {
-    justify-content: center;
+  @media (max-width: 620px) {
+    gap: 12px;
   }
 `
 
 const TopicsColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  height: 514px;
+  .regular.slider {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 514px;
 
-  @media (max-width: 940px) {
+    @media (max-width: 940px) {
+      flex-direction: row;
+      gap: 8px;
+      height: auto;
+    }
+
+    @media (max-width: 620px) {
+      width: 100%;
+      flex-wrap: wrap;
+      align-items: center;
+      height: auto;
+      flex-flow: wrap;
+      justify-content: center;
+      padding: 0 30px;
+    }
+  }
+  .slick-slider {
+    width: 328px;
+    overflow: visible;
   }
 
-  @media (max-width: 480px) {
-    width: 100%;
-    flex-wrap: wrap;
-    align-items: center;
-    height: auto;
-    flex-flow: wrap;
-    justify-content: center;
-    padding: 0 30px;
-  }
-
-  @media (max-width: 400px) {
-    padding: 0;
+  .slick-list {
+    overflow: visible;
   }
 `
 
@@ -149,9 +146,14 @@ const QuestionsColumn = styled.div`
   }
 
   @media (max-width: 940px) {
+    gap: 12px;
+    width: 580px;
+    height: auto;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
+    width: 328px;
+    gap: 8px;
   }
 `
 

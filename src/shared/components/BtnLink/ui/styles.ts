@@ -59,7 +59,7 @@ const StyledTransparentBtnLink = styled.a<TStyledBtnLinkProps>`
   opacity: 1;
   font-size: ${(props) => props.size};
   font-weight: 800;
-  font-stretch: 15px/133%;
+  line-height: 133%;
 
   &:hover {
     background-color: ${colors.btnOutlineHover};
