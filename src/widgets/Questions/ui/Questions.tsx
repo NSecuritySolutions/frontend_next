@@ -14,6 +14,7 @@ import { tabs } from '@/shared/constants/texts/questions'
 import { QuestionCard } from '@/shared/components/QuestionCard'
 import { AnswerCard } from '@/shared/components/AnswerCard'
 import Slider from 'react-slick'
+import { LayoutGroup } from 'framer-motion'
 
 const Questions = () => {
   const [currentTab, setCurrentTab] = React.useState<TTabs | null>(null)
@@ -73,7 +74,7 @@ const Questions = () => {
           <QuestionsColumn>
             {currentTab !== null &&
               currentTab.items &&
-              currentTab.items.map((item, index) => (
+              currentTab.items.map((item) => (
                 <QuestionCard
                   question={item.question}
                   answer={item.answer}

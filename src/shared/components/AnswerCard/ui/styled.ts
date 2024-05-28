@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
 
-const CardContainer = styled.article`
+const CardWrapper = styled.div`
   position: relative;
+  width: fit-content;
+  height: fit-content;
+`
+
+const CardContainer = styled.article`
   display: flex;
   flex-direction: column;
   width: 580px;
@@ -70,11 +75,11 @@ const AnswerText = styled.p`
 `
 
 const CropWrapper = styled.div`
-  position: absolute;
   height: 201px;
-  right: 2px;
-  bottom: 0px;
+  position: absolute;
   overflow: hidden;
+  bottom: 0px;
+  right: 0px;
   z-index: 0;
 
   @media (max-width: 1300px) {
@@ -93,4 +98,4 @@ const ImgWrapper = styled.div`
   }
 `
 
-export { CardContainer, CardImg, QuestionText, AnswerText, ImgWrapper, CropWrapper }
+export { CardContainer, CardImg, QuestionText, AnswerText, ImgWrapper, CropWrapper, CardWrapper }
