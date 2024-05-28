@@ -39,12 +39,14 @@ const Card = styled.div<{ $backgroundColor: string }>`
 const TextWrapper = styled.div`
   max-width: 540px;
   width: 100%;
-  padding-top: 71px;
-  padding-bottom: 71px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   justify-content: center;
+
+  a {
+    margin-top: 8px;
+  }
 
   @media (max-width: 880px) {
     max-width: 260px;
@@ -88,7 +90,6 @@ const TextContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-self: flex-start;
-  height: 145px;
   max-width: 540px;
   width: 100%;
   line-height: 1.2;
@@ -97,7 +98,6 @@ const TextContainer = styled.ul`
     max-width: 540px;
   }
   @media (max-width: 880px) {
-    height: 100%;
   }
 
   @media (max-width: 620px) {

@@ -30,9 +30,8 @@ const CardName = styled.div`
   justify-content: center;
   text-wrap: nowrap;
   text-align: center;
-  font:
-    800 18px Manrope,
-    sans-serif;
+  font-size: 18px;
+  font-weight: 800;
 `
 
 const CardPosition = styled.div`

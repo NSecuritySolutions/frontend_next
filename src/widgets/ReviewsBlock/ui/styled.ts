@@ -45,9 +45,8 @@ const ColumnTitle = styled.h2`
   // white-space: nowrap;
   // text-overflow: ellipsis;
 
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 
   @media (max-width: 1180px) {
     margin-bottom: 0px;
@@ -171,15 +170,14 @@ const ColumnImageWrapper = styled.div`
 `
 
 const StyledParagraph = styled.p`
-  font:
-    800 18px Manrope,
-    sans-serif;
+  font-size: 18px;
+  font-weight: 800;
 
   @media (max-width: 620px) {
     padding: 0 30px;
-    font:
-      700 16px Manrope,
-      sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
     text-align: center;
   }
 `

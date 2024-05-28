@@ -20,6 +20,7 @@ import { BASE_URL } from '@/shared/constants/url/url'
 const manrope = Manrope({
   subsets: ['cyrillic'],
   weight: ['400', '600', '700', '800'],
+  variable: '--font-manrope',
 })
 
 export const metadata: Metadata = {

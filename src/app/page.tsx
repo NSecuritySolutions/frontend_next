@@ -25,6 +25,9 @@ export default function Home() {
     }, 0)
   }, [])
 
+  // Cookies.set('guest', 'first-visit', { expires: 7 })
+  // Cookies.remove('')
+
   return (
     <>
       <Info />
