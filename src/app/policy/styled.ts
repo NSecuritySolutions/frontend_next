@@ -2,17 +2,28 @@ import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
 
-const SectionWrapper = styled.section`
+type TStyledProps = {
+  height: string
+  additional: boolean
+}
+
+const SectionWrapper = styled.section<TStyledProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 40px;
   max-width: 760px;
   width: 100%;
+  height: ${(props) => props.height};
+  ${(props) => (props.additional ? 'transition: height .7s ease-in-out;' : '')}
+
+  a {
+    padding: 18px;
+    margin: 10px 0;
+  }
 `
 const BlockWrapper = styled.div`
   display: flex;

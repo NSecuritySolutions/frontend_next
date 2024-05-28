@@ -7,8 +7,8 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import { BASE_URL } from '@/shared/constants/url/url'
-import { DomofonPageMetaData } from '@/shared/constants/texts/metadata'
 import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
+import { RootPageMetaData } from '@/shared/constants/texts/metadata'
 import PolicyPage from './page'
 
 const manrope = Manrope({
@@ -19,9 +19,9 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(`${BASE_URL}`),
 
-  title: `${DomofonPageMetaData.title}`,
-  description: `${DomofonPageMetaData.description}`,
-  keywords: `${DomofonPageMetaData.keywords}`,
+  title: `${RootPageMetaData.title}`,
+  description: `${RootPageMetaData.description}`,
+  keywords: `${RootPageMetaData.keywords}`,
   openGraph: {
     url: `${BASE_URL}`,
     title: `${OpenGraphMetaData.title}`,
