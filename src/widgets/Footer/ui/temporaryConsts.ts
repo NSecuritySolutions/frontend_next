@@ -30,7 +30,7 @@ const navColumnLists = [
       { text: 'Отзывы', navLink: '/home#reviews' },
       { text: 'Примеры наших работ', navLink: '/ourworks' },
       { text: 'Блог', navLink: '/home#blog' },
-      { text: 'Политика конфиденциальности', navLink: '/home#privacy-policy' },
+      { text: 'Политика конфиденциальности', navLink: '/policy' },
     ],
   },
 ]
