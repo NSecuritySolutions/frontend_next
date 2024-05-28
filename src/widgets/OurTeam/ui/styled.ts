@@ -71,9 +71,8 @@ const ColumnTitle = styled.h2`
   // text-overflow: ellipsis;
   margin-bottom: 20px;
 
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
 
   @media (max-width: 940px) {
     max-width: 580px;

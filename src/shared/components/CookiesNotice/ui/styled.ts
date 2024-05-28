@@ -52,29 +52,26 @@ const CookiesContainer = styled.div`
 `
 const CookiesTitle = styled.h3`
   display: flex;
-  font:
-    700 24px Manrope,
-    sans-serif;
+  font-size: 24px;
+  font-weight: 700;
   color: black;
   color: ${colors.darkPrimary};
 
   @media (max-width: 620px) {
-    font:
-      700 18px Manrope,
-      sans-serif;
+    font-size: 18px;
+    font-weight: 700;
   }
 `
 
 const CookiesPragraph = styled.p`
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
   color: ${colors.darkPrimary};
 
   @media (max-width: 620px) {
-    font:
-      700 12px Manrope,
-      sans-serif;
+    font-size: 12px;
+    font-weight: 700;
   }
 `
 

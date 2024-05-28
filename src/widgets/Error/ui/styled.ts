@@ -153,36 +153,31 @@ const ErrorImgWrapper = styled.div`
 `
 
 const ErrorName = styled.h3`
-  font:
-    700 36px Manrope,
-    sans-serif;
+  font-size: 36px;
+  font-weight: 700;
 
   @media (max-width: 1300px) {
-    font:
-      700 24px Manrope,
-      sans-serif;
+    font-size: 24px;
+    font-weight: 700;
   }
 
   @media (max-width: 620px) {
-    font:
-      800 20px Manrope,
-      sans-serif;
+    font-size: 20px;
+    font-weight: 800;
   }
 `
 
 const ErrorText = styled.p`
-  font:
-    400 16px Manrope,
-    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 
   @media (max-width: 1300px) {
     max-width: 100%;
   }
 
   @media (max-width: 940px) {
-    font:
-      400 14px Manrope,
-      sans-serif;
+    font-size: 14px;
+    font-weight: 400;
   }
 `
 
@@ -196,9 +191,9 @@ const ErrorButton = styled.a`
   width: 100%;
   min-height: 56px;
   padding: 18px 6px;
-  font:
-    800 15px/133% Manrope,
-    sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 133%;
 
   @media (max-width: 620px) {
     max-width: 147px;
