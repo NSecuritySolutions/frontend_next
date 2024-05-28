@@ -9,7 +9,7 @@ export default function OurworksPage() {
       <section className={styles.main}>
         <h1 style={{ margin: '100px 0' }}>Наши работы, страница в разработке</h1>
       </section>
-      <ContactForm></ContactForm>
+      <ContactForm />
     </>
   )
 }
