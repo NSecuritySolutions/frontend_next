@@ -2,6 +2,7 @@
 
 import { ContactForm } from '@/widgets/ContactForm'
 import { SectionWrapper } from './styled.ts'
+import { ExamplesSlider } from '@/widgets/ExamplesSlider/index.ts'
 
 export default function OurworksPage() {
   return (
@@ -9,6 +10,7 @@ export default function OurworksPage() {
       <SectionWrapper>
         <h1>Наши работы, страница в разработке</h1>
       </SectionWrapper>
+      <ExamplesSlider />
       <ContactForm />
     </>
   )
