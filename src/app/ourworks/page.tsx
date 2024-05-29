@@ -1,15 +1,16 @@
 'use client'
 
 import { ContactForm } from '@/widgets/ContactForm'
-import { SectionWrapper } from './styled.ts'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider/index.ts'
+
+import styles from './page.module.css'
 
 export default function OurworksPage() {
   return (
     <>
-      <SectionWrapper>
+      <section className={styles.main}>
         <h1>Наши работы, страница в разработке</h1>
-      </SectionWrapper>
+      </section>
       <ExamplesSlider />
       <ContactForm />
     </>

@@ -51,5 +51,5 @@ export default function VideoPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <VideoPage />
+  return <>{children}</>
 }
