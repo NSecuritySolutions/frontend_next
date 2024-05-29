@@ -5,16 +5,20 @@ import styled from 'styled-components'
 const Section = styled.section`
   margin: 0 auto;
   background-color: ${colors.backgroundBase2};
-  padding: 60px 0;
+  padding: 40px 0;
   max-width: 1180px;
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+
+  @media (max-width: 1300px) {
+    max-width: 880px;
+  }
 `
 
 const SectionTitle = styled.h3`
-  margin-bottom: 30px;
-
   color: ${colors.darkPrimary};
   font-size: 24px;
   font-weight: 700;
@@ -23,7 +27,6 @@ const SectionTitle = styled.h3`
 const TabsContainer = styled.div`
   display: flex;
   gap: 16px;
-  margin-bottom: 35px;
 `
 
 type TTabButtonProps = {
@@ -51,8 +54,7 @@ const TabButton = styled.button<TTabButtonProps>`
 `
 
 const CardsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 20px;
 `
 
