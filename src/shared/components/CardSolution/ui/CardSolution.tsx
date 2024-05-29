@@ -7,8 +7,10 @@ import {
   CharacteristicsList,
   ListTitle,
   ListItem,
+  LinkChild,
   PriceWrapper,
   PriceText,
+  PriceAd,
   InfoBtn,
   ImageWrapper,
   Img,
@@ -18,7 +20,6 @@ import {
 } from './styled'
 import colors from '@/shared/constants/colors'
 import Link from 'next/link'
-import { Typography } from '@/shared/components/Typography'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 
 export type TCardSolutionProps = {
@@ -72,13 +73,13 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
           ))}
         </CharacteristicsList>
         <Link href={`/products/${data.id}`}>
-          <Typography size={16} $weight={400} color={colors.titleBlueColor}>
+          <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
             Подробнее...
-          </Typography>
+          </LinkChild>
         </Link>
       </DescriptionWrapper>
       <PriceWrapper>
-        <ListTitle>Выезд инженера - Бесплатно!</ListTitle>
+        <PriceAd>Выезд инженера - Бесплатно!</PriceAd>
         <PriceText>{`${formattedPrice} ₽`}</PriceText>
       </PriceWrapper>
       <ProductButtonGroup link="" />

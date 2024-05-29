@@ -34,8 +34,10 @@ const Info: FC = () => {
         breakpoint: 940,
         settings: {
           infinite: false,
-          slidesToShow: 1.95,
+          slidesToShow: 1,
           slidesToScroll: 1,
+          variableWidth: true,
+          dots: false,
           arrows: false,
         },
       },
@@ -43,8 +45,10 @@ const Info: FC = () => {
         breakpoint: 620,
         settings: {
           infinite: false,
-          slidesToShow: 1.3,
+          slidesToShow: 1,
           slidesToScroll: 1,
+          variableWidth: true,
+          dots: false,
           arrows: false,
         },
       },

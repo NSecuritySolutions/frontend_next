@@ -9,9 +9,19 @@ const Section = styled.section`
   gap: 20px;
   background-color: ${colors.backgroundBase2};
   padding-bottom: 40px;
+  width: 1180px;
 
-  @media (max-width: 500px) {
-    padding-bottom: 24px;
+  @media (max-width: 1300px) {
+    width: 880px;
+  }
+
+  @media (max-width: 940px) {
+    width: 580px;
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    padding-bottom: 16px;
   }
 `
 
@@ -179,16 +189,14 @@ const CardWrapper = styled.div`
     }
   }
 
-  .slick-slider {
-    width: 100vw;
-    overflow: visible;
-    @media (max-width: 940px) {
-      padding-inline: calc((100vw - 580px) / 2);
-    }
+  .slick-track {
+    display: flex;
+    gap: 20px;
+  }
 
-    @media (max-width: 620px) {
-      padding-inline: calc((100vw - 328px) / 2);
-    }
+  .slick-slider {
+    width: 100%;
+    overflow: visible;
   }
 
   .slick-list {

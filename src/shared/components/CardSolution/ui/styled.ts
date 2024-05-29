@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import colors from '../../../constants/colors'
 import Image from 'next/image'
+import { Typography } from '../../Typography'
 
 const Card = styled.div`
   position: relative;
@@ -18,6 +19,13 @@ const Card = styled.div`
 
   @media (max-width: 1300px) {
     width: 280px;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  @media (max-width: 620px) {
+    width: 242px;
+    gap: 12px;
   }
 `
 
@@ -39,12 +47,20 @@ const CardTitle = styled.p`
   @media (max-width: 1300px) {
     text-align: start;
   }
+
+  @media (max-width: 620px) {
+    font-size: 16px;
+  }
 `
 
 const ListTitle = styled.h4`
   font-weight: 700;
   font-size: 16px;
   width: 100%;
+
+  @media (max-width: 1300px) {
+    display: none;
+  }
 `
 
 const CardText = styled.p`
@@ -60,6 +76,14 @@ const ImageWrapper = styled.div`
   justify-content: center;
   height: 220px;
   overflow: hidden;
+
+  @media (max-width: 1300px) {
+    height: 140px;
+  }
+
+  @media (max-width: 620px) {
+    height: 117px;
+  }
 `
 
 const Img = styled(Image)`
@@ -85,6 +109,12 @@ const CharacteristicsList = styled.ol`
   line-height: 1.36;
   font-size: 16px;
   font-weight: 400;
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+    height: 115px;
+    -webkit-line-clamp: 6;
+  }
 `
 
 const ListItem = styled.li``
@@ -104,16 +134,38 @@ const PriceWrapper = styled.div`
       order: 1;
     }
 
-    & > h4 {
+    & > p {
       order: 2;
-      font-size: 13px;
     }
+  }
+`
+
+const LinkChild = styled(Typography)`
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
+`
+
+const PriceAd = styled.p`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.33;
+  width: 100%;
+
+  @media (max-width: 1300px) {
+    font-size: 13px;
+    line-height: 24px;
   }
 `
 
 const PriceText = styled.span`
   font-size: 24px;
   font-weight: 700;
+
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
+  }
 `
 
 const InfoBtn = styled.div`
@@ -124,7 +176,11 @@ const InfoBtn = styled.div`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  z-index: 999;
+  z-index: 2;
+
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 const TooltipContainer = styled.div`
@@ -161,8 +217,10 @@ export {
   CharacteristicsList,
   ListTitle,
   ListItem,
+  LinkChild,
   PriceWrapper,
   PriceText,
+  PriceAd,
   Img,
   TooltipContainer,
   ToolTipParagraph,

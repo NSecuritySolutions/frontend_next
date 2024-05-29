@@ -16,27 +16,60 @@ const Section = styled.section`
   @media (max-width: 1300px) {
     max-width: 880px;
   }
+
+  @media (max-width: 940px) {
+    max-width: 580px;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 328px;
+  }
 `
 
 const SectionTitle = styled.h3`
   color: ${colors.darkPrimary};
   font-size: 24px;
   font-weight: 700;
+
+  @media (max-width: 620px) {
+    font-size: 20px;
+  }
 `
 
 const TabsContainer = styled.div`
-  display: flex;
-  gap: 16px;
+  .slider.regular {
+    display: flex;
+    gap: 16px;
+  }
+
+  .slick-track {
+    display: flex;
+    gap: 16px;
+
+    @media (max-width: 620px) {
+      gap: 8px;
+    }
+  }
+
+  .slick-slider {
+    overflow: visible;
+    width: 100%;
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
 `
 
 type TTabButtonProps = {
   $activetab: boolean
 }
 
-const TabButton = styled.button<TTabButtonProps>`
+const TabButton = styled.div<TTabButtonProps>`
   background-color: ${(props) => (props.$activetab ? colors.btnPrimary : colors.backgroundPrimary)};
   color: ${(props) => (props.$activetab ? colors.darkPrimary : colors.darkPrimaryOpacity)};
   border: none;
+  width: max-content;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -51,11 +84,34 @@ const TabButton = styled.button<TTabButtonProps>`
   &:hover {
     color: ${colors.darkPrimary};
   }
+
+  @media (max-width: 940px) {
+    padding: 8px 12px;
+  }
+
+  @media (max-width: 620px) {
+    font-size: 13px;
+  }
 `
 
 const CardsContainer = styled.div`
-  display: flex;
-  gap: 20px;
+  .slider.regular {
+    display: flex;
+    gap: 20px;
+  }
+
+  .slick-track {
+    display: flex;
+    gap: 20px;
+  }
+
+  .slick-slider {
+    overflow: visible;
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
 `
 
 export { Section, SectionTitle, TabsContainer, TabButton, CardsContainer }
