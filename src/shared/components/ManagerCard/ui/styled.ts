@@ -10,6 +10,24 @@ const CardContainer = styled.article`
   color: ${colors.darkPrimary};
   font-weight: 400;
   font-size: 16px;
+
+  @media (max-width: 1180px) {
+    max-width: 122px;
+  }
+
+  @media (max-width: 620px) {
+    flex-direction: row;
+    gap: 8px;
+    max-width: 308px;
+  }
+`
+
+const TextWrapper = styled.div`
+  @media (max-width: 620px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 const CardImg = styled.div`
@@ -18,6 +36,23 @@ const CardImg = styled.div`
   height: 172px;
   background-color: ${colors.backgroundCardBl};
   background-size: cover;
+
+  img {
+    border-radius: 500px;
+    width: 172px;
+    height: 172px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1180px) {
+    width: 122px;
+    height: 122px;
+
+    img {
+      width: 122px;
+      height: 122px;
+    }
+  }
 `
 
 const CardName = styled.div`
@@ -32,6 +67,10 @@ const CardName = styled.div`
   text-align: center;
   font-size: 18px;
   font-weight: 800;
+
+  @media (max-width: 1180px) {
+    text-wrap: wrap;
+  }
 `
 
 const CardPosition = styled.div`
@@ -57,4 +96,4 @@ const CardTel = styled.div`
   text-align: center;
 `
 
-export { CardContainer, CardImg, CardName, CardPosition, CardTel }
+export { CardContainer, CardImg, CardName, CardPosition, CardTel, TextWrapper }

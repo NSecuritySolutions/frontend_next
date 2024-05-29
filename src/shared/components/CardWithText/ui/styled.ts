@@ -20,6 +20,12 @@ const Card = styled.div`
   @media (max-width: 1180px) {
     padding: 20px;
   }
+
+  a {
+    @media (max-width: 620px) {
+      margin-top: 20px;
+    }
+  }
 `
 
 const CardTitle = styled.h3`
@@ -35,19 +41,11 @@ const TextContainer = styled.ul`
   justify-self: flex-start;
   font-weight: 400;
   font-size: 16px;
-  color: black;
   padding-left: 20px;
-  padding-right: 0px;
-
-  // @media (max-width: 880px) {
-  //   padding-right: 50px;
-  // }
-  // @media (max-width: 620px) {
-  //   padding-right: 0px;
-  // }
 `
 
 const CardText = styled.li`
+  position: relative;
   text-indent: 0;
   font-weight: 400;
   font-size: 16px;

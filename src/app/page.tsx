@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
@@ -18,16 +18,6 @@ import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 0)
-  }, [])
-
-  // Cookies.set('guest', 'first-visit', { expires: 7 })
-  // Cookies.remove('')
-
   return (
     <>
       <Info />

@@ -77,6 +77,7 @@ const SliderContainer = styled.section`
       margin: 0 5px;
       width: 10px;
       height: 10px;
+
       div {
         width: 10px;
         height: 10px;

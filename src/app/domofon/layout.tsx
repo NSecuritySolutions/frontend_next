@@ -51,5 +51,5 @@ export default function DomofonPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <DomofonPage />
+  return <>{children}</>
 }

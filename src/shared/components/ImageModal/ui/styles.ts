@@ -27,7 +27,7 @@ const ModalContainer = styled(motion.div)`
 `
 const ModalContent = styled.div`
   overflow-y: auto;
-  background-color: #686868;
+  background-color: ${colors.textSecondary};
   position: relative;
   display: flex;
   justify-content: center;
