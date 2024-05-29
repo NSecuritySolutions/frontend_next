@@ -75,10 +75,11 @@ const LogoYandex = styled(Image)`
   width: 160px;
   padding: 20px;
   cursor: pointer;
-  transition: filter 0.3s;
+  transition: all 0.3s;
 
   &:hover {
     filter: none;
+    transform: scale(1.2);
   }
 
   @media (max-width: 1300px) {
@@ -104,10 +105,11 @@ const LogoSamokat = styled(Image)`
   height: 160px;
   width: 460px;
   cursor: pointer;
-  transition: filter 0.3s;
+  transition: all 0.3s;
 
   &:hover {
     filter: none;
+    transform: scale(1.2);
   }
 
   @media (max-width: 1300px) {
@@ -131,10 +133,11 @@ const LogoRostelecom = styled(Image)`
   width: 175px;
   padding: 5px;
   cursor: pointer;
-  transition: filter 0.3s;
+  transition: all 0.3s;
 
   &:hover {
     filter: none;
+    transform: scale(1.2);
   }
 
   @media (max-width: 1300px) {
@@ -160,10 +163,11 @@ const LogoAvon = styled(Image)`
   width: 300px;
   cursor: pointer;
   padding: 44px 9px;
-  transition: filter 0.3s;
+  transition: all 0.3s;
 
   &:hover {
     filter: none;
+    transform: scale(1.2);
   }
 
   @media (max-width: 1300px) {
