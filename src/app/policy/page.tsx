@@ -1,5 +1,7 @@
 'use client'
 import { useState } from 'react'
+import { useRef, useEffect } from 'react'
+
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 
 import { policy } from '@/shared/constants/texts/policy.ts'
@@ -16,16 +18,33 @@ import {
 } from './styled.ts'
 
 export default function PolicyPage() {
-  const [isEnlarged, setIsEnlarged] = useState(false)
+  const sectionRef = useRef(null)
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const [isHeight, setIsHeight] = useState('')
 
   const handleContainerClick = () => {
-    setIsEnlarged(!isEnlarged)
+    setIsExpanded(!isExpanded)
   }
+
+  useEffect(() => {
+    if (sectionRef.current) {
+      const height = sectionRef.current.clientHeight
+      setIsHeight(`${height}px`)
+      console.log(isHeight)
+    }
+  }, [isExpanded])
 
   //@TODO -  если понадобится скролл внутри блока Политики style={{ overflow: 'scroll', scrollbarWidth: 'none' }}
 
   return (
-    <SectionWrapper $additional={isEnlarged} $height={isEnlarged ? '6250px' : '760px'} id="policy">
+    <SectionWrapper
+      ref={sectionRef}
+      $additional={isExpanded}
+      $height={isExpanded ? '6250px' : '760px'}
+      id="policy"
+      // className={!isExpanded ? 'no_expanded' : ''}
+    >
       <SectionTitle>{policy.title}</SectionTitle>
       <div style={{ overflow: 'hidden', scrollbarWidth: 'none' }}>
         {policy.paragraphs.map((item: IPolicyItem, i: number) => (
@@ -39,7 +58,7 @@ export default function PolicyPage() {
       <BtnLink
         onClick={handleContainerClick}
         btnType="transparent"
-        text={isEnlarged ? 'Вернуться' : 'Читать полностью'}
+        text={isExpanded ? 'Вернуться' : 'Читать полностью'}
         width="214px"
         height="56px"
         color={colors.darkPrimary}

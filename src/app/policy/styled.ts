@@ -17,8 +17,10 @@ const SectionWrapper = styled.section<TStyledProps>`
   padding: 40px;
   max-width: 760px;
   width: 100%;
-  height: ${(props) => props.$height};
-  ${(props) => (props.$additional ? 'transition: height 2s ease-in-out;' : '')}
+
+  height: ${(props) => (props.$height ? props.$height : '760px')};
+  ${(props) =>
+    props.$additional ? 'transition: height 2s ease-in-out;' : 'transition: height 2s ease-in-out;'}
 
   a {
     padding: 18px;
