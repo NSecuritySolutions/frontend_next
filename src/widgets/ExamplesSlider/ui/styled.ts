@@ -115,13 +115,15 @@ const CardWrapper = styled.div`
 const ExamplesContainer = styled.article`
   display: flex !important;
   flex-direction: column;
-  gap: 10px;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 12px;
   max-width: 320px;
   width: 100%;
   min-height: 202px;
   background-color: ${colors.backgroundPrimary};
-  font-family: Manrope, sans-serif;
-  justify-content: center;
+  justify-content: space-between;
 
   @media (max-width: 916px) {
     max-width: 240px;
@@ -180,10 +182,14 @@ const CustomDot = styled.div<{ $active?: boolean }>`
 `
 
 const ButtonWrapper = styled.div`
+  margin-top: 15px;
   display: flex !important;
   column-gap: 0 !important;
   justify-content: space-between;
   align-items: flex-end;
+  margin-top: 35px;
+  gap: 20px;
+  white-space: nowrap;
 `
 
 const SecondButtonWrapper = styled.div`
@@ -236,13 +242,12 @@ const ExamplesIcons = styled.div`
   flex-direction: row;
 `
 const InfoIconWrapper = styled.div`
+  margin-top: 12px;
   width: 100%;
   display: flex !important;
   flex-direction: row;
-  font-weight: 800;
-  font-size: 15px;
+
   color: ${colors.darkPrimary};
-  line-height: 133%;
   gap: 12px !important;
   justify-content: flex-start;
   align-content: center;
@@ -255,6 +260,10 @@ const InfoIconWrapper = styled.div`
   }
 `
 const InfoIcon = styled.div`
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 133%;
+
   border-radius: 8px;
   padding: 8px 12px;
   height: 36px;

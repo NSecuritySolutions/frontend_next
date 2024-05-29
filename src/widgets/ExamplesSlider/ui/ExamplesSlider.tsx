@@ -34,6 +34,7 @@ import {
   InfoIconWrapper,
   ExamplesImgWrapper,
 } from './styled.ts'
+
 import Modal from '@/shared/components/Modal/ui/Modal'
 
 const ExamplesSlider: React.FC = () => {
@@ -100,7 +101,6 @@ const ExamplesSlider: React.FC = () => {
       return str
     }
   }
-
   return (
     <>
       <SliderContainer className="slider-container" id="examples">
@@ -139,12 +139,14 @@ const ExamplesSlider: React.FC = () => {
                     ></Image>
                   </ExamplesImgWrapper>
                 )}
-                <ExamplesContainer className="slick-slide" key={i}>
+                <ExamplesContainer key={i}>
                   <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
                   <InfoIconWrapper>
                     {item.quantities.map((item, i) => (
-                      <InfoIcon key={i}>{item.number}</InfoIcon>
+                      <InfoIcon key={i}>
+                        {`${new Intl.NumberFormat('ru-RU').format(item.number)} ${item.measure}`}
+                      </InfoIcon>
                     ))}
                   </InfoIconWrapper>
 
