@@ -71,14 +71,25 @@ const ExamplesSlider: React.FC = () => {
 
     responsive: [
       {
-        breakpoint: 1280,
+        breakpoint: 1180,
         settings: {
-          rows: 1,
+          rows: 2,
           slidesPerRow: 2,
         },
       },
       {
-        breakpoint: 619,
+        breakpoint: 880,
+        settings: {
+          rows: 1,
+          slidesToSow: 1,
+          slidesToScroll: 1,
+          dots: false,
+          focusOnSelect: true,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 620,
         settings: {
           rows: 1,
           slidesPerRow: 1,
@@ -121,9 +132,7 @@ const ExamplesSlider: React.FC = () => {
                         blurDataURL={rgbDataURL(225, 231, 244)}
                         src={item?.cardImage}
                         alt={item.cardTitle}
-                        width={200}
-                        height={200}
-                        style={{ objectFit: 'cover', borderRadius: '12px' }}
+                        fill
                       />
                     </ExamplesImgWrapper>
                   </ExamplesLink>
@@ -131,8 +140,7 @@ const ExamplesSlider: React.FC = () => {
                   <ExamplesImgWrapper>
                     <Image
                       src={(item.cardImage = blankImg)}
-                      width={200}
-                      height={200}
+                      fill
                       alt={'Пустая картинка'}
                       placeholder="blur"
                       blurDataURL={rgbDataURL(225, 231, 244)}

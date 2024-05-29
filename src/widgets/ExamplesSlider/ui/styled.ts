@@ -16,14 +16,15 @@ const SliderContainer = styled.section`
     display: flex;
   }
 
-  @media (max-width: 1280px) {
-    max-width: 900px;
+  @media (max-width: 1180px) {
+    max-width: 880px;
     width: 100%;
+    gap: 10px !important;
   }
 
-  @media (max-width: 916px) {
-    max-width: 600px;
-    width: 100%;
+  @media (max-width: 880px) {
+    max-width: 880px;
+    padding-left: clamp(150px, 1%, 16px);
   }
 
   @media (max-width: 619px) {
@@ -33,32 +34,41 @@ const SliderContainer = styled.section`
   }
 
   .slick-slide {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
     div {
+      margin-top: 20px;
       display: flex;
       gap: 20px;
 
-      @media (max-width: 1280px) {
+      @media (max-width: 1180px) {
         justify-content: space-between;
       }
 
       @media (max-width: 880px) {
-        justify-content: space-between;
+        outline: none;
+        gap: 20px;
       }
     }
   }
   .slick-list {
+    display: flex;
     margin-bottom: 40px;
+
+    @media (max-width: 1180px) {
+      margin-bottom: 30px;
+    }
   }
 
   .slick-initialized .slick-slide {
     row-gap: 20px;
     max-width: 1180px;
+    margin-right: 20px;
+
     article {
       row-gap: 0px;
+    }
+
+    @media (max-width: 880px) {
+      margin-right: 170px;
     }
   }
 
@@ -99,16 +109,19 @@ const CardWrapper = styled.div`
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px !important;
   padding: 20px;
+  margin-top: 0px !important;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1180px) {
     flex-direction: column;
     max-width: 430px;
     width: 100%;
     gap: 20px;
   }
 
-  @media (max-width: 916px) {
-    min-height: 528px;
+  @media (max-width: 880px) {
+    min-width: 430px;
+    width: 100%;
+    min-height: 445px;
   }
 `
 
@@ -125,8 +138,14 @@ const ExamplesContainer = styled.article`
   background-color: ${colors.backgroundPrimary};
   justify-content: space-between;
 
-  @media (max-width: 916px) {
-    max-width: 240px;
+  @media (max-width: 1180px) {
+    max-width: 430px;
+    min-height: 162px;
+  }
+
+  @media (max-width: 880px) {
+    gap: 0 !important;
+    min-height: 162px;
   }
 `
 
@@ -136,17 +155,25 @@ const ExamplesLink = styled.a`
 const ExamplesImgWrapper = styled.div`
   border-radius: 12px;
   background-color: ${colors.backgroundPrimary};
-  max-width: 200px;
-  min-height: 200px;
+  width: 200px;
+  height: 200px;
+  position: relative;
 
-  @media (max-width: 1280px) {
-    min-width: 390px;
-    height: 271.66px;
+  img {
+    border-radius: 12px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
   }
 
-  @media (max-width: 916px) {
-    min-width: 240px;
-    height: 219px;
+  @media (max-width: 1180px) {
+    width: 390px;
+    height: 180px;
+  }
+
+  @media (max-width: 880px) {
+    width: 390px;
+    height: 180px;
   }
 `
 
@@ -157,6 +184,11 @@ const ColumnTitle = styled.h2`
   margin-bottom: 30px;
   font-size: 24px;
   font-weight: 700;
+
+  @media (max-width: 880px) {
+    font-weight: 800;
+    font-size: 18px;
+  }
 `
 
 const ExamplesTitle = styled.h3`
@@ -165,6 +197,10 @@ const ExamplesTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   text-align: start;
+
+  @media (max-width: 880px) {
+    max-width: 390px;
+  }
 `
 
 const ExamplesText = styled.p`
@@ -190,6 +226,13 @@ const ButtonWrapper = styled.div`
   margin-top: 35px;
   gap: 20px;
   white-space: nowrap;
+
+  @media (max-width: 1180px) {
+    margin: 0;
+  }
+  @media (max-width: 880px) {
+    margin: 0 !important;
+  }
 `
 
 const SecondButtonWrapper = styled.div`
@@ -229,12 +272,13 @@ const IconWrapper = styled.div`
   font-size: 16px;
   color: ${colors.darkPrimary};
 
-  @media (max-width: 916px) {
+  @media (max-width: 880px) {
     flex-direction: row;
     align-items: flex-end;
     flex-wrap: wrap;
     width: 76px;
     height: 76px;
+    margin: 0 !important;
   }
 `
 const ExamplesIcons = styled.div`
@@ -252,11 +296,13 @@ const InfoIconWrapper = styled.div`
   justify-content: flex-start;
   align-content: center;
 
-  @media (max-width: 916px) {
-    display: flex !important;
-    font-size: 10px;
-    justify-content: center;
-    align-items: center;
+  @media (max-width: 1180px) {
+    margin: 0;
+    justify-content: flex-start !important;
+  }
+
+  @media (max-width: 880px) {
+    margin: 0 !important;
   }
 `
 const InfoIcon = styled.div`
@@ -271,6 +317,9 @@ const InfoIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 880px) {
+    margin: 0 !important;
+  }
 `
 export {
   ExamplesContainer,
