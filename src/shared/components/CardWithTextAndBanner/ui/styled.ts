@@ -28,7 +28,6 @@ const Card = styled.div<{ $backgroundColor: string }>`
   }
 
   @media (max-width: 620px) {
-    margin: 0 auto;
     max-width: 328px;
     max-height: 434px;
     flex-direction: column-reverse;
@@ -59,11 +58,9 @@ const TextWrapper = styled.div`
   }
 
   @media (max-width: 620px) {
-    margin: 0 auto;
     max-width: 288px;
     height 177px;
     line-height: 1.2;
-    padding:0;
     transform: none;
     gap: 12px;
 

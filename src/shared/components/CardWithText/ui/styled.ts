@@ -7,7 +7,7 @@ const Card = styled.div`
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 40px 50.5px;
-  max-height: 320px;
+  // max-height: 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,7 +39,6 @@ const TextContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-self: flex-start;
-  height: 145px;
   font-weight: 400;
   font-size: 16px;
   padding-left: 20px;
@@ -55,16 +54,24 @@ const CardText = styled.li`
   z-index: 1;
   line-height: 1.2;
 
+  position: relative;
+
   &:before {
-    content: '\2022';
+    content: '•';
     position: absolute;
     left: -20px;
+  }
+  @media (max-width: 880px) {
+    width: 80%;
+  }
+  @media (max-width: 620px) {
+    width: 90%;
   }
 `
 
 const CardImg = styled.div`
   position: absolute;
-  top: 151px;
+  top: 141px;
   right: 0px;
   width: 300px;
   height: 169px;
@@ -73,7 +80,7 @@ const CardImg = styled.div`
   @media (max-width: 1180px) {
     width: 220px;
     height: 124px;
-    top: 165px;
+    top: 145px;
     right: 0px;
 
     img {

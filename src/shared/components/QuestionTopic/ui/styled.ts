@@ -5,7 +5,7 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
-  width: 280px;
+  width: 100%;
   height: 90px;
   padding: 12px 20px;
   border-radius: 20px;
@@ -15,23 +15,18 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   font-size: 16px;
   gap: 20px;
   align-items: center;
+  cursor: pointer;
+  transition: opacity 0.7s;
 
   &:hover {
-    cursor: pointer;
     opacity: 0.5;
-    transition: 0.7s;
-  }
-
-  @media (max-width: 1300px) {
-    width: 90px;
   }
 
   @media (max-width: 940px) {
-    width: 280px;
-  }
-
-  @media (max-width: 640px) {
-    width: 90px;
+    width: 70px;
+    height: 70px;
+    padding: 12px;
+    border-radius: 8px;
   }
 `
 
@@ -53,19 +48,10 @@ const CardName = styled.h2`
   margin: 0;
   overflow-wrap: break-word;
   max-width: 190px;
-
-  font-size: 16px;
   font-weight: 700;
+  font-size: 16px;
 
   @media (max-width: 1300px) {
-    display: none;
-  }
-
-  @media (max-width: 940px) {
-    display: block;
-  }
-
-  @media (max-width: 640px) {
     display: none;
   }
 `

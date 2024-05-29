@@ -1,12 +1,19 @@
 import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
+import { motion } from 'framer-motion'
 
-const CardContainer = styled.article<{ $chosen?: boolean }>`
+const CardContainer = styled(motion.article).attrs({
+  layout: 'size',
+})<{
+  $chosen?: boolean
+  $open?: boolean
+}>`
   background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
-  width: 280px;
-  height: 90px;
+  width: 100%;
+  max-height: 90px;
+  min-height: 90px;
   padding: 5px 20px;
   border-radius: 20px;
   color: ${colors.darkPrimary};
@@ -16,20 +23,25 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   gap: 20px;
   align-items: center;
   flex-shrink: 0;
-  margin-right: 10px;
+  cursor: pointer;
+  transition: opacity 0.7s;
 
   &:hover {
-    cursor: pointer;
     opacity: 0.5;
-    transition: 0.7s;
   }
 
-  @media (max-width: 1300px) {
-    width: 267px;
-  }
+  @media (max-width: 940px) {
+    background: #ffffff;
+    flex-direction: column;
+    padding: 20px;
+    overflow: hidden;
+    min-height: 0px;
+    max-height: none;
+    height: 0px;
 
-  @media (max-width: 640px) {
-    width: 100%;
+    &:hover {
+      opacity: initial;
+    }
   }
 `
 
@@ -37,10 +49,52 @@ const CardText = styled.h3`
   align-self: center;
   margin: 0;
   overflow-wrap: break-word;
-  max-width: 190px;
-
-  font-size: 15px;
   font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
+
+  @media (max-width: 940px) {
+    align-self: start;
+    font-size: 16px;
+  }
+`
+
+const CardAnswer = styled.p`
+  display: none;
+  font-weight: 400;
+  font-size: 16px;
+
+  @media (max-width: 940px) {
+    display: block;
+  }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
+`
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 940px) {
+    align-items: start;
+    align-self: start;
+    justify-content: space-between;
+    width: 100%;
+  }
+`
+
+const ArrowWrapper = styled(motion.div).attrs({
+  layout: true,
+})`
+  display: none;
+  align-self: center;
+  height: 24px;
+
+  @media (max-width: 940px) {
+    display: initial;
+  }
 `
 
 const QuestionNumber = styled.div<{ $chosen?: boolean }>`
@@ -60,8 +114,8 @@ const QuestionNumber = styled.div<{ $chosen?: boolean }>`
   text-align: center;
 
   @media (max-width: 940px) {
-    white-space: initial;
+    display: none;
   }
 `
 
-export { CardContainer, CardText, QuestionNumber }
+export { CardContainer, CardText, QuestionNumber, CardAnswer, TitleContainer, ArrowWrapper }
