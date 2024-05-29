@@ -1,10 +1,9 @@
 :root {
   --max-width: 1920px;
 
-  /* @TODO: подключить стили по умолчания согласно макету */
+  /* @TODO: подключила стили по умолчанию согласно макету */
 
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Inter',
-    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, 'Inter', 'Monserrat', 'Exo 2', 'Courier New', monospace;
 }
 
 *,
