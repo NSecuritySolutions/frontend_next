@@ -1,5 +1,6 @@
 import colors from '@/shared/constants/colors'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 import styled, { css } from 'styled-components'
 
@@ -39,26 +40,38 @@ const Card = styled(motion.div).attrs({
     props.$expanded &&
     css`
       grid-row: span ${3 + props.len};
-    `}
+    `} //   @media (max-width: 620px) {
+  //   max-height: ${(props) => (props.$expanded ? `${60 + props.len * 28}px` : '60px')};
+  //   padding: ${(props) => (props.$expanded ? '8px' : '12px 8px')};
+  //   width: 328px;
+  //   gap: 8px;
+  // }
 `
 
-const CardImgWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const CardImgWrapper = styled(Image)`
   border-radius: 50%;
   background-color: ${colors.darkPrimary};
   width: 48px;
   height: 48px;
-  flex-shrink: 0;
+  padding: 5px;
+  object-fit: cover;
+
+  // @media (max-width: 620px) {
+  //   width: 35px;
+  //   height: 35px;
+  // }
 `
 
 const CardHeader = styled.div`
   display: flex;
-  width: 406px;
+  width: 100%;
   height: 44px;
   justify-content: space-between;
   align-items: center;
+
+  // @media (max-width: 620px) {
+  //   height: 35px;
+  // }
 `
 
 const ImageTitle = styled.div`
@@ -66,13 +79,21 @@ const ImageTitle = styled.div`
   display: flex;
   align-items: center;
   width: 188px;
+
+  @media (max-width: 620px) {
+    width: 328px;
+  }
 `
 
 const Title = styled.p`
   font-size: 16px;
   font-weight: 700;
   color: ${colors.darkPrimary};
-  line-height: 21.86px;
+  line-height: 1.33;
+
+  // @media (max-width: 620px) {
+  //   font-size: 14px;
+  // }
 `
 
 const Divider = styled.div<{ $show: boolean }>`
@@ -87,6 +108,10 @@ const Option = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  // @media (max-width: 620px) {
+  //   height: 26px;
+  // }
 `
 
 const OptionHeader = styled.div`

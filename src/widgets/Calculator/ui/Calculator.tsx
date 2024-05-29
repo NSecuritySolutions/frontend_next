@@ -24,7 +24,6 @@ import Loader from '@/shared/components/Loader/Loader'
 
 const Calculator: React.FC = observer(() => {
   const [showDropdown, setShowDropdown] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
   const addButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -72,7 +71,7 @@ const Calculator: React.FC = observer(() => {
 
   return (
     <CalculatorContainer>
-      <TitleWrapper $width={ref.current?.offsetWidth}>
+      <TitleWrapper>
         <SectionTitle style={{ height: 28 }}>Калькулятор</SectionTitle>
         <AddBlockButton onClick={() => setShowDropdown(!showDropdown)} ref={addButtonRef}>
           <Image src="/icons/calculator/plus.svg" height={10} width={9} alt="Добавить блок" />
@@ -92,34 +91,32 @@ const Calculator: React.FC = observer(() => {
         </AddBlockButton>
       </TitleWrapper>
       <Section id="calculator">
-        <div ref={ref}>
-          <GridContainer>
-            <LayoutGroup>
-              {calculatorStore.blocks.map((block, index) => (
-                <CalculatorCard store={block} key={block.id} index={index} />
-              ))}
-            </LayoutGroup>
-          </GridContainer>
-          <FooterWrapper>
-            <ImageButton onClick={() => calculatorStore.setBlocks()}>
-              <ImgWrap>
-                <Image
-                  src="/icons/calculator/cross.svg"
-                  width={22}
-                  height={22}
-                  alt="Reset"
-                  style={{ objectFit: 'cover' }}
-                />
-              </ImgWrap>
-              <Typography size={16} color={colors.textSecondary}>
-                Сбросить настройки
-              </Typography>
-            </ImageButton>
-            <Typography size={18} style={{ marginTop: 5 }}>
-              Итого система «под ключ»: ~{calculatorStore.result}
+        <GridContainer>
+          <LayoutGroup>
+            {calculatorStore.blocks.map((block, index) => (
+              <CalculatorCard store={block} key={block.id} index={index} />
+            ))}
+          </LayoutGroup>
+        </GridContainer>
+        <FooterWrapper>
+          <ImageButton onClick={() => calculatorStore.setBlocks()}>
+            <ImgWrap>
+              <Image
+                src="/icons/calculator/cross.svg"
+                width={22}
+                height={22}
+                alt="Reset"
+                style={{ objectFit: 'cover' }}
+              />
+            </ImgWrap>
+            <Typography size={16} color={colors.textSecondary}>
+              Сбросить настройки
             </Typography>
-          </FooterWrapper>
-        </div>
+          </ImageButton>
+          <Typography size={18} style={{ marginTop: 5 }}>
+            Итого система «под ключ»: ~{calculatorStore.result}
+          </Typography>
+        </FooterWrapper>
       </Section>
     </CalculatorContainer>
   )

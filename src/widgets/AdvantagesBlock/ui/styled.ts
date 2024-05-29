@@ -5,8 +5,7 @@ import styled from 'styled-components'
 const Section = styled.section`
   margin: 0 auto;
   background-color: ${colors.backgroundBase2};
-  padding-top: 120px;
-  padding-bottom: 60px;
+  padding-block: 40px;
 `
 
 const SectionWrapper = styled.div`
