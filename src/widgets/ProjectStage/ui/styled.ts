@@ -11,6 +11,24 @@ const Section = styled.section`
 `
 
 const SectionWrapper = styled.div`
+  .regular.slider {
+    margin-top: 30px;
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+
+    @media (max-width: 1180px) {
+      margin: 0 auto;
+      padding: 0;
+      max-width: 880px;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -64,22 +82,22 @@ const SectionTitle = styled.h2`
   }
 `
 const ColumnWrapper = styled.div`
-  margin-top: 30px;
-  width: 100%;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
+  // margin-top: 30px;
+  // width: 100%;
+  // padding: 20px 0;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: center;
+  // gap: 20px;
 
-  @media (max-width: 1180px) {
-    margin: 0 auto;
-    padding: 0;
-    max-width: 880px;
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+  // @media (max-width: 1180px) {
+  //   margin: 0 auto;
+  //   padding: 0;
+  //   max-width: 880px;
+  //   width: 100%;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  // }
 `
 
 const SliderWrapper = styled.div`

@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { useRef, useEffect } from 'react'
 
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 
@@ -18,40 +17,23 @@ import {
 } from './styled.ts'
 
 export default function PolicyPage() {
-  const sectionRef = useRef(null)
   const [isExpanded, setIsExpanded] = useState(false)
-
-  const [isHeight, setIsHeight] = useState('')
 
   const handleContainerClick = () => {
     setIsExpanded(!isExpanded)
   }
 
-  useEffect(() => {
-    if (sectionRef.current) {
-      const height = sectionRef.current.clientHeight
-      setIsHeight(`${height}px`)
-      console.log(isHeight)
-    }
-  }, [isExpanded])
-
-  //@TODO -  если понадобится скролл внутри блока Политики style={{ overflow: 'scroll', scrollbarWidth: 'none' }}
+  //@TODO -  useRef - сделать высоту контейнера c текстом универсальной.
 
   return (
-    <SectionWrapper
-      ref={sectionRef}
-      $additional={isExpanded}
-      $height={isExpanded ? '6250px' : '760px'}
-      id="policy"
-      // className={!isExpanded ? 'no_expanded' : ''}
-    >
+    <SectionWrapper $additional={isExpanded} $height={isExpanded ? '6150px' : '760px'} id="policy">
       <SectionTitle>{policy.title}</SectionTitle>
       <div style={{ overflow: 'hidden', scrollbarWidth: 'none' }}>
         {policy.paragraphs.map((item: IPolicyItem, i: number) => (
           <BlockWrapper key={i}>
             <BlockTitle>{item.title}</BlockTitle>
             <BlockParagraph>{item.paragraph}</BlockParagraph>
-            <BlockText style={{ whiteSpace: 'pre-wrap' }}>{item.text}</BlockText>
+            <BlockText>{item.text}</BlockText>
           </BlockWrapper>
         ))}
       </div>

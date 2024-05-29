@@ -18,9 +18,8 @@ const SectionWrapper = styled.section<TStyledProps>`
   max-width: 760px;
   width: 100%;
 
-  height: ${(props) => (props.$height ? props.$height : '760px')};
-  ${(props) =>
-    props.$additional ? 'transition: height 2s ease-in-out;' : 'transition: height 2s ease-in-out;'}
+  transition: max-height 5s ease;
+  max-height: ${(props) => (props.$height ? props.$height : '760px')};
 
   a {
     padding: 18px;
@@ -44,6 +43,8 @@ const BlockTitle = styled.h3`
 `
 const BlockParagraph = styled.p``
 
-const BlockText = styled.p``
+const BlockText = styled.p`
+  white-space: pre-wrap;
+`
 
 export { SectionWrapper, SectionTitle, BlockTitle, BlockParagraph, BlockWrapper, BlockText }
