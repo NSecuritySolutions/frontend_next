@@ -5,16 +5,6 @@ import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
-
-  @media (max-width: 1300px) {
-    padding: 0 20px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (max-width: 640px) {
-    padding: 0;
-  }
 `
 
 const SectionWrapper = styled.div`
@@ -41,7 +31,6 @@ const SectionWrapper = styled.div`
 
   @media (max-width: 620px) {
     max-width: 328px;
-    padding: 16px;
     gap: 16px;
   }
 `
@@ -181,27 +170,6 @@ const TextWrapper = styled.div`
   }
 `
 
-const ColumnParagraph = styled.p`
-  font-family: Manrope, sans-serif;
-  max-width: 400px;
-  width: 100%;
-  font-weight: 400;
-  margin-top: 12px;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: -0.5px;
-
-  @media (max-width: 1300px) {
-    max-width: 880px;
-    width: 100%;
-  }
-
-  @media (max-width: 619px) {
-    max-width: 277px;
-    width: 100%;
-  }
-`
-
 const ContactsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -228,6 +196,5 @@ export {
   QuestionsColumn,
   SectionTitle,
   TextWrapper,
-  ColumnParagraph,
   ContactsWrapper,
 }

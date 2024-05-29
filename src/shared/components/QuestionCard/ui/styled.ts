@@ -23,11 +23,11 @@ const CardContainer = styled(motion.article).attrs({
   gap: 20px;
   align-items: center;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.7s;
 
   &:hover {
-    cursor: pointer;
     opacity: 0.5;
-    transition: 0.7s;
   }
 
   @media (max-width: 940px) {
@@ -38,6 +38,10 @@ const CardContainer = styled(motion.article).attrs({
     min-height: 0px;
     max-height: none;
     height: 0px;
+
+    &:hover {
+      opacity: initial;
+    }
   }
 `
 

@@ -1,13 +1,5 @@
 import { TQuestionType } from '@/shared/constants/texts/types'
-import {
-  CardContainer,
-  QuestionText,
-  AnswerText,
-  ImgWrapper,
-  CropWrapper,
-  CardWrapper,
-} from './styled'
-import Image from 'next/image'
+import { CardContainer, QuestionText, AnswerText, Img, CardWrapper } from './styled'
 
 const AnswerCard = (item: TQuestionType) => {
   return (
@@ -16,11 +8,7 @@ const AnswerCard = (item: TQuestionType) => {
         <QuestionText>{item.question}</QuestionText>
         <AnswerText>{item.answer}</AnswerText>
       </CardContainer>
-      <CropWrapper>
-        <ImgWrapper>
-          <Image src="/images/questions/png/goPro.png" alt="GoPro" fill />
-        </ImgWrapper>
-      </CropWrapper>
+      <Img src="/images/questions/png/goPro.png" alt="GoPro" width={260} height={261} />
     </CardWrapper>
   )
 }

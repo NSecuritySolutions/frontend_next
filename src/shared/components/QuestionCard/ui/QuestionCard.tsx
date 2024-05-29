@@ -36,9 +36,9 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen,
     if (width <= 940) {
       setOpen(!open)
       if (open) {
-        animate(ref.current, { height: initialHeight }, { duration: 0.1 })
+        animate(ref.current, { height: initialHeight }, { duration: 0.3 })
       } else {
-        animate(ref.current, { height: ref.current!.scrollHeight }, { duration: 0.1 })
+        animate(ref.current, { height: ref.current!.scrollHeight }, { duration: 0.3 })
       }
     }
     onClick({ id: id, question: question, answer: answer })
