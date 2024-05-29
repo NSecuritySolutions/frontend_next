@@ -75,6 +75,7 @@ const LogoYandex = styled(Image)`
   width: 160px;
   padding: 20px;
   cursor: pointer;
+  transition: filter 0.3s;
 
   &:hover {
     filter: none;
@@ -103,6 +104,7 @@ const LogoSamokat = styled(Image)`
   height: 160px;
   width: 460px;
   cursor: pointer;
+  transition: filter 0.3s;
 
   &:hover {
     filter: none;
@@ -124,11 +126,12 @@ const LogoSamokat = styled(Image)`
 `
 
 const LogoRostelecom = styled(Image)`
-  filter: grayscale(100%) brightness(350%) contrast(50%);
+  filter: brightness(350%) contrast(40%) grayscale(100%);
   height: 160px;
   width: 175px;
   padding: 5px;
   cursor: pointer;
+  transition: filter 0.3s;
 
   &:hover {
     filter: none;
@@ -157,6 +160,7 @@ const LogoAvon = styled(Image)`
   width: 300px;
   cursor: pointer;
   padding: 44px 9px;
+  transition: filter 0.3s;
 
   &:hover {
     filter: none;
