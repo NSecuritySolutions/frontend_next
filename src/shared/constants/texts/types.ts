@@ -80,6 +80,7 @@ export type TAnswerProps = {
   answer: string
   onClick: (item: TQuestionType) => void
   chosen: TQuestionType | null
+  width: number
 }
 
 export type TProjectReviews = {

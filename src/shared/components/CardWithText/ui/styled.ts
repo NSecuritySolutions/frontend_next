@@ -37,6 +37,14 @@ const TextContainer = styled.ul`
   font-size: 16px;
   color: black;
   padding-left: 20px;
+  padding-right: 0px;
+
+  // @media (max-width: 880px) {
+  //   padding-right: 50px;
+  // }
+  // @media (max-width: 620px) {
+  //   padding-right: 0px;
+  // }
 `
 
 const CardText = styled.li`
@@ -55,11 +63,17 @@ const CardText = styled.li`
     position: absolute;
     left: -20px;
   }
+  @media (max-width: 880px) {
+    width: 80%;
+  }
+  @media (max-width: 620px) {
+    width: 90%;
+  }
 `
 
 const CardImg = styled.div`
   position: absolute;
-  top: 151px;
+  top: 141px;
   right: 0px;
   width: 300px;
   height: 169px;
@@ -68,7 +82,7 @@ const CardImg = styled.div`
   @media (max-width: 1180px) {
     width: 220px;
     height: 124px;
-    top: 165px;
+    top: 145px;
     right: 0px;
 
     img {

@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
 import Link from 'next/link'
 
 const TheHeader = styled.header`
   position: fixed;
+  top: 0;
   display: flex;
   flex-direction: column;
   width: 100%;

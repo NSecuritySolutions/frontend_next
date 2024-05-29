@@ -1,10 +1,21 @@
 import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
+import Image from 'next/image'
+
+const CardWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: fit-content;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
+`
 
 const CardContainer = styled.article`
   display: flex;
   flex-direction: column;
-  width: 580px;
+  width: 100%;
   height: 512px;
   border-radius: 20px;
   font-weight: 400;
@@ -14,7 +25,7 @@ const CardContainer = styled.article`
   background: ${colors.backgroundPrimary};
   padding: 46px 40px;
   align-items: flex-start;
-  gap: 12px;
+  gap: 20px;
   overflow-y: scroll;
 
   overflow-x: hidden;
@@ -35,18 +46,7 @@ const CardContainer = styled.article`
   }
 
   @media (max-width: 1300px) {
-    width: 480px;
     padding: 40px;
-  }
-
-  @media (max-width: 940px) {
-    width: 100%;
-    height: 420px;
-  }
-
-  @media (max-width: 600px) {
-    margin: 0;
-    border-radius: 0;
   }
 `
 
@@ -61,7 +61,7 @@ const CardImg = styled.div<{ $imgUrl?: string }>`
 
 const QuestionText = styled.h3`
   text-wrap: wrap;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
 `
 
@@ -69,6 +69,28 @@ const AnswerText = styled.p`
   text-wrap: wrap;
   font-size: 16px;
   font-weight: 400;
+  z-index: 1;
+  background-color: #ffffffc0;
 `
 
-export { CardContainer, CardImg, QuestionText, AnswerText }
+const Img = styled(Image)`
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 260px;
+  height: 261px;
+  object-fit: cover;
+  object-position: 0px 60px;
+
+  @media (max-width: 1300px) {
+    width: 139px;
+    height: 140px;
+    object-position: -10px 31px;
+  }
+
+  @media (max-width: 940px) {
+    dispaly: none;
+  }
+`
+
+export { CardContainer, CardImg, QuestionText, AnswerText, Img, CardWrapper }
