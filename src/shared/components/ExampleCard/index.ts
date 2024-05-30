@@ -1,3 +1,3 @@
-import ExamplesSlider from './ui/ExampleCard.tsx'
+import ExampleCard from './ui/ExampleCard.tsx'
 
-export { ExamplesSlider }
+export { ExampleCard }

@@ -87,7 +87,12 @@ const Info: FC = () => {
           </HistoryItem>
         </HistoryWrapper>
         <BannerWrapper>
-          <Image src={bannerImg} alt="Баннер" fill />
+          <Image
+            src={bannerImg}
+            alt="Баннер"
+            fill
+            sizes="(max-width: 620px) 283px, (max-width: 940px) 283px, (max-width: 1300px) 540px, 702px"
+          />
         </BannerWrapper>
       </MainCard>
       <CardWrapper>
