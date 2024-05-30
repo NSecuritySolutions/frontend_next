@@ -15,19 +15,14 @@ const SliderContainer = styled.section`
 `
 
 const CardWrapper = styled.div`
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  // margin: 0 auto;
+  display: flex;
+  gap: 20px;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 20px;
   max-width: 516px;
   width: 100%;
-
-  & div:last-child {
-    grid-column: 1 / -1;
-  }
 
   // @media (max-width: 1280px) {
   //   flex-direction: column;
