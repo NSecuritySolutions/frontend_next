@@ -11,7 +11,7 @@ import sixthWorksImg from '@/assets/images/works/works-image-6.webp'
 import seventhWorksImg from '@/assets/images/works/works-image-7.webp'
 import eighthWorksImg from '@/assets/images/works/works-image-8.webp'
 
-export const TITLE_LIMIT: number = 80
+export const TITLE_LIMIT: number = 60
 export const TEXT_LIMIT: number = 120
 
 export const workExamples: TWorkExamples[] = [

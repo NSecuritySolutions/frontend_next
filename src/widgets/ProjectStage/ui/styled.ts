@@ -29,6 +29,7 @@ const SectionWrapper = styled.div`
       flex-wrap: wrap;
     }
   }
+
   display: flex;
   flex-direction: column;
   margin: 0 auto;

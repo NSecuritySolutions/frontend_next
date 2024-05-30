@@ -2,8 +2,55 @@ import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
 
-const SliderContainer = styled.section`
-  margin: 60px auto;
+const ColumnTitle = styled.h2`
+  margin: 40px auto 0 auto;
+  color: ${colors.darkPrimary};
+  display: flex;
+  overflow: hidden;
+  font-size: 24px;
+  font-weight: 700;
+  max-width: 1180px;
+  width: 100%;
+
+  @media (max-width: 1180px) {
+    max-width: 880px;
+    width: 100%;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 328px;
+    width: 100%;
+  }
+`
+const SectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 1180px;
+  width: 100%;
+
+  @media (max-width: 1180px) {
+    max-width: 880px;
+    width: 100%;
+    gap: 20px;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 880px;
+    padding-left: clamp(150px, 1%, 16px);
+  }
+
+  @media (max-width: 620px) {
+    max-width: 580px;
+    padding-left: clamp(16px, 20%, 150px);
+  }
+`
+
+const SliderContainer = styled.div`
   background-color: ${colors.backgroundBase2};
   display: flex;
   flex-direction: column;
@@ -23,16 +70,20 @@ const SliderContainer = styled.section`
   }
 
   @media (max-width: 880px) {
-    max-width: 880px;
-    padding-left: clamp(150px, 1%, 16px);
-  }
-
-  @media (max-width: 619px) {
-    max-width: 300px;
-    min-height: 528px;
+    min-width: 880px;
     width: 100%;
+    min-height: 583px;
+    gap: 0px !important;
   }
 
+  @media (max-width: 620px) {
+    min-width: 620px;
+    width: 100%;
+    min-height: 464px;
+  }
+
+  .slick-slider {
+  }
   .slick-slide {
     div {
       margin-top: 20px;
@@ -45,7 +96,12 @@ const SliderContainer = styled.section`
 
       @media (max-width: 880px) {
         outline: none;
-        gap: 20px;
+        gap: 20px !important;
+      }
+
+      @media (max-width: 620px) {
+        outline: none;
+        gap: 15px !important;
       }
     }
   }
@@ -60,15 +116,11 @@ const SliderContainer = styled.section`
 
   .slick-initialized .slick-slide {
     row-gap: 20px;
-    max-width: 1180px;
+    // max-width: 1180px;
     margin-right: 20px;
 
     article {
       row-gap: 0px;
-    }
-
-    @media (max-width: 880px) {
-      margin-right: 170px;
     }
   }
 
@@ -123,6 +175,12 @@ const CardWrapper = styled.div`
     width: 100%;
     min-height: 445px;
   }
+
+  @media (max-width: 620px) {
+    min-width: 280px;
+    width: 100%;
+    min-height: 377px;
+  }
 `
 
 const ExamplesContainer = styled.article`
@@ -146,6 +204,11 @@ const ExamplesContainer = styled.article`
   @media (max-width: 880px) {
     gap: 0 !important;
     min-height: 162px;
+  }
+
+  @media (max-width: 880px) {
+    gap: 0 !important;
+    min-height: 158px;
   }
 `
 
@@ -175,19 +238,9 @@ const ExamplesImgWrapper = styled.div`
     width: 390px;
     height: 180px;
   }
-`
-
-const ColumnTitle = styled.h2`
-  color: ${colors.darkPrimary};
-  display: flex;
-  overflow: hidden;
-  margin-bottom: 30px;
-  font-size: 24px;
-  font-weight: 700;
-
-  @media (max-width: 880px) {
-    font-weight: 800;
-    font-size: 18px;
+  @media (max-width: 620px) {
+    width: 240px;
+    height: 111px;
   }
 `
 
@@ -201,13 +254,10 @@ const ExamplesTitle = styled.h3`
   @media (max-width: 880px) {
     max-width: 390px;
   }
-`
-
-const ExamplesText = styled.p`
-  max-width: 320px;
-  width: 100%;
-  font-weight: 400;
-  font-size: 80%;
+  @media (max-width: 620px) {
+    font-weight: 700;
+    font-size: 16px;
+  }
 `
 
 const CustomDot = styled.div<{ $active?: boolean }>`
@@ -317,15 +367,21 @@ const InfoIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   @media (max-width: 880px) {
     margin: 0 !important;
+  }
+
+  @media (max-width: 620px) {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 185%;
   }
 `
 export {
   ExamplesContainer,
   CardWrapper,
   ExamplesTitle,
-  ExamplesText,
   ExamplesButton,
   SliderContainer,
   CustomDot,
@@ -338,4 +394,5 @@ export {
   InfoIcon,
   InfoIconWrapper,
   ExamplesImgWrapper,
+  SectionWrapper,
 }

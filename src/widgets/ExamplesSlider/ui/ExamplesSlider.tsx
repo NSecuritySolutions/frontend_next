@@ -33,6 +33,7 @@ import {
   InfoIcon,
   InfoIconWrapper,
   ExamplesImgWrapper,
+  SectionWrapper,
 } from './styled.ts'
 
 import Modal from '@/shared/components/Modal/ui/Modal'
@@ -88,13 +89,6 @@ const ExamplesSlider: React.FC = () => {
           arrows: false,
         },
       },
-      {
-        breakpoint: 620,
-        settings: {
-          rows: 1,
-          slidesPerRow: 1,
-        },
-      },
     ],
     customPaging: function (i: number) {
       let activePage = 0
@@ -113,81 +107,84 @@ const ExamplesSlider: React.FC = () => {
     }
   }
   return (
-    <>
-      <SliderContainer className="slider-container" id="examples">
-        <ColumnTitle>Примеры наших работ</ColumnTitle>
-        <Slider {...settings} afterChange={handleAfterChange}>
-          {workExamples
-            .sort(
-              (newDate: TWorkExamples, olderDate: TWorkExamples) =>
-                new Date(olderDate.date as string).getTime() -
-                new Date(newDate.date as string).getTime(),
-            )
-            .map((item: TWorkExamples, i) => (
-              <CardWrapper key={item.id}>
-                {item.cardImage ? (
-                  <ExamplesLink href={`/examples/${item.id}`}>
+    <section>
+      <ColumnTitle>Примеры наших работ</ColumnTitle>
+
+      <SectionWrapper>
+        <SliderContainer className="slider-container" id="examples">
+          <Slider {...settings} afterChange={handleAfterChange} className="sliderMain">
+            {workExamples
+              .sort(
+                (newDate: TWorkExamples, olderDate: TWorkExamples) =>
+                  new Date(olderDate.date as string).getTime() -
+                  new Date(newDate.date as string).getTime(),
+              )
+              .map((item: TWorkExamples, i) => (
+                <CardWrapper key={item.id}>
+                  {item.cardImage ? (
+                    <ExamplesLink href={`/examples/${item.id}`}>
+                      <ExamplesImgWrapper>
+                        <Image
+                          blurDataURL={rgbDataURL(225, 231, 244)}
+                          src={item?.cardImage}
+                          alt={item.cardTitle}
+                          fill
+                        />
+                      </ExamplesImgWrapper>
+                    </ExamplesLink>
+                  ) : (
                     <ExamplesImgWrapper>
                       <Image
-                        blurDataURL={rgbDataURL(225, 231, 244)}
-                        src={item?.cardImage}
-                        alt={item.cardTitle}
+                        src={(item.cardImage = blankImg)}
                         fill
-                      />
+                        alt={'Пустая картинка'}
+                        placeholder="blur"
+                        blurDataURL={rgbDataURL(225, 231, 244)}
+                      ></Image>
                     </ExamplesImgWrapper>
-                  </ExamplesLink>
-                ) : (
-                  <ExamplesImgWrapper>
-                    <Image
-                      src={(item.cardImage = blankImg)}
-                      fill
-                      alt={'Пустая картинка'}
-                      placeholder="blur"
-                      blurDataURL={rgbDataURL(225, 231, 244)}
-                    ></Image>
-                  </ExamplesImgWrapper>
-                )}
-                <ExamplesContainer key={i}>
-                  <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
+                  )}
+                  <ExamplesContainer key={i}>
+                    <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                  <InfoIconWrapper>
-                    {item.quantities.map((item, i) => (
-                      <InfoIcon key={i}>
-                        {`${new Intl.NumberFormat('ru-RU').format(item.number)} ${item.measure}`}
-                      </InfoIcon>
-                    ))}
-                  </InfoIconWrapper>
+                    <InfoIconWrapper>
+                      {item.quantities.map((item, i) => (
+                        <InfoIcon key={i}>
+                          {`${new Intl.NumberFormat('ru-RU').format(item.number)} ${item.measure}`}
+                        </InfoIcon>
+                      ))}
+                    </InfoIconWrapper>
 
-                  <ButtonWrapper>
-                    <BtnLink
-                      btnType="transparent"
-                      text={'Подробнее'}
-                      width="134px"
-                      height="44px"
-                      color={colors.darkPrimary}
-                      size="15px"
-                      link={`/examples/${item.id}`}
-                    ></BtnLink>
+                    <ButtonWrapper>
+                      <BtnLink
+                        btnType="transparent"
+                        text={'Подробнее'}
+                        width="134px"
+                        height="44px"
+                        color={colors.darkPrimary}
+                        size="15px"
+                        link={`/examples/${item.id}`}
+                      ></BtnLink>
 
-                    <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
-                  </ButtonWrapper>
-                </ExamplesContainer>
-              </CardWrapper>
-            ))}
-        </Slider>
-        <SecondButtonWrapper>
-          <BtnLink
-            size="15px"
-            width="277px"
-            height="44px"
-            color={colors.darkPrimary}
-            text="Смотреть все примеры работ"
-            link="/ourworks"
-          />
-        </SecondButtonWrapper>
-      </SliderContainer>
-      {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
-    </>
+                      <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
+                    </ButtonWrapper>
+                  </ExamplesContainer>
+                </CardWrapper>
+              ))}
+          </Slider>
+          <SecondButtonWrapper>
+            <BtnLink
+              size="15px"
+              width="277px"
+              height="44px"
+              color={colors.darkPrimary}
+              text="Смотреть все примеры работ"
+              link="/ourworks"
+            />
+          </SecondButtonWrapper>
+        </SliderContainer>
+        {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
+      </SectionWrapper>
+    </section>
   )
 }
 
