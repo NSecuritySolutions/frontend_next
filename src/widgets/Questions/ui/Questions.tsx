@@ -59,14 +59,6 @@ const Questions = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if (width <= 940) {
-      setTimeout(() => {
-        animate(scope.current, { height: 'auto' }, { duration: 0.5 })
-      }, 600)
-    }
-  }, [currentTab])
-
   function onTopickClick(item: TTabs) {
     if (width <= 940) {
       if (item.text != currentTab?.text && safe) {
@@ -76,6 +68,9 @@ const Questions = () => {
           setSafe(true)
         }, 600)
         animate(scope.current, { height: '0px' }, { duration: 0.3 })
+        setTimeout(() => {
+          animate(scope.current, { height: 'auto' }, { duration: 0.5 })
+        }, 600)
         setCurrentTab(item)
         setCurrentQuestion(item.items[0])
       }

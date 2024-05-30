@@ -90,9 +90,7 @@ export default function RootLayout({
       <body className={manrope.className}>
         <StyledComponentsRegistry>
           <Header navLinks={headerNavLinks} />
-          <main className={styles.main} id="content">
-            {children}
-          </main>
+          {children}
           <Footer />
         </StyledComponentsRegistry>
       </body>

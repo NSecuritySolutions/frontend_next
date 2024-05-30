@@ -17,9 +17,11 @@ import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
+import styles from './page.module.css'
+
 export default function Home() {
   return (
-    <>
+    <main className={styles.main} id="content">
       <Info />
       <OurServices />
       <ReadySolutionSection />
@@ -34,6 +36,6 @@ export default function Home() {
       <ContactForm />
       <ScrollButton />
       <CookiesNotice />
-    </>
+    </main>
   )
 }
