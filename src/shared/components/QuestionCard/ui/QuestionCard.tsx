@@ -24,13 +24,13 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen,
     } else {
       animate(ref.current, { height: '90px' })
     }
-  }, [width, initialHeight])
+  }, [width, initialHeight, animate, ref])
 
   useEffect(() => {
     if (titleRef.current && width) {
       setInitialHeight(titleRef.current.offsetHeight + 40)
     }
-  }, [titleRef.current, width])
+  }, [titleRef, width])
 
   function handleClick() {
     if (width <= 940) {

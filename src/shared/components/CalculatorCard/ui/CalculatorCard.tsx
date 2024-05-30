@@ -49,9 +49,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
       )}
       <CardHeader>
         <ImageTitle>
-          <CardImgWrapper>
-            <Image src={data.image} width={37} height={37} alt={data.title} />
-          </CardImgWrapper>
+          <CardImgWrapper src={data.image} width={37} height={37} alt={data.title} />
           <Title>{data.title}</Title>
         </ImageTitle>
         <AmountComponent amount={amount} onChange={handleChange} />

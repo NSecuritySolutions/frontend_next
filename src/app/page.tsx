@@ -18,11 +18,13 @@ import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
+import styles from './page.module.css'
+
 export default function Home() {
   const cookieStore = cookies()
   const hasCookie = cookieStore.has('agreedGuest')
   return (
-    <>
+    <main className={styles.main} id="content">
       <Info />
       <OurServices />
       <ReadySolutionSection />
@@ -37,6 +39,6 @@ export default function Home() {
       <ContactForm />
       <ScrollButton />
       {!hasCookie && <CookiesNotice />}
-    </>
+    </main>
   )
 }

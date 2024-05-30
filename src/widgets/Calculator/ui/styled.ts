@@ -9,6 +9,10 @@ const CalculatorContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 const Section = styled(motion.div).attrs({
@@ -22,17 +26,26 @@ const Section = styled(motion.div).attrs({
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 12px;
   align-items: center;
 `
 
-const TitleWrapper = styled.div<{ $width?: number }>`
-  width: ${(props) => props.$width || 880}px;
+const TitleWrapper = styled.div`
+  width: 880px;
   margin-top: 40px;
   position: absolute;
   display: flex;
   gap: 12px;
   align-items: center;
   z-index: 2;
+
+  @media (max-width: 940px) {
+    width: 430px;
+  }
+
+  // @media (max-width: 620px) {
+  //   width: 328px;
+  // }
 `
 
 const SectionTitle = styled.h3`
@@ -57,9 +70,28 @@ const ImageButton = styled.button`
 `
 
 const FooterWrapper = styled.div`
+  width: 880px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 940px) {
+    flex-direction: column;
+    align-items: start;
+    width: 430px;
+
+    & > button {
+      order: 2;
+    }
+
+    & > p {
+      order: 1;
+    }
+  }
+
+  // @media (max-width: 620px) {
+  //   width: 328px;
+  // }
 `
 
 const AddBlockButton = styled.button`
@@ -107,6 +139,15 @@ const GridContainer = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 940px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // @media (max-width: 620px) {
+  //   width: 328px;
+  // }
 `
 
 export {
