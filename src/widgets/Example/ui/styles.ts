@@ -40,7 +40,7 @@ const ModalContent = styled.div`
 
   @media (max-width: 620px) {
     margin: 0 auto;
-    max-width: 296px;
+    min-width: 328px;
     width: 100%;
     padding: 16px;
   }
@@ -164,19 +164,12 @@ const NumbersRow = styled.div`
     display: none;
     float: left;
     height: 80px;
-
     // height: 100%;
     // min-height: 1px;
-    @media (max-width: 620px) {
-      min-width: 153px;
-      width: 100%;
-    }
+    max-width: 200px;
+    width: 100%;
 
     div {
-      @media (max-width: 620px) {
-        display: flex;
-        flex-direction: column;
-      }
     }
   }
   [dir='rtl'] .slick-slide {

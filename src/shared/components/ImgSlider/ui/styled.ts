@@ -69,12 +69,29 @@ const SliderWrapper = styled.div`
   .slick-dots {
     position: relative;
     margin: 0 auto;
-    min-width: 1100px;
+    max-width: 1100px;
     display: flex !important;
     width: 100%;
     flex-direction: row;
     gap: 14px;
     justify-content: center;
+
+    @media (max-width: 1180px) {
+      max-width: 816px;
+      width: 100%;
+      gap: 0;
+    }
+
+    @media (max-width: 880px) {
+      max-width: 516px;
+      width: 100%;
+      gap: 0;
+    }
+    @media (max-width: 620px) {
+      max-width: 296px;
+      width: 100%;
+      gap: 0;
+    }
 
     li {
       border-radius: 20px;
@@ -83,6 +100,24 @@ const SliderWrapper = styled.div`
       height: 195px;
       background-color: ${colors.textSecondary};
       object-fit: fill;
+
+      @media (max-width: 1180px) {
+        max-width: 189px;
+        width: 100%;
+        height: 141px;
+      }
+
+      @media (max-width: 880px) {
+        max-width: 120px;
+        width: 100%;
+        height: 90px;
+      }
+      @media (max-width: 620px) {
+        max-width: 65px;
+        width: 100%;
+        height: 49px;
+        border-radius: 8px;
+      }
     }
 
     img {
@@ -90,6 +125,24 @@ const SliderWrapper = styled.div`
       width: 100%;
       height: 195px;
       border-radius: 20px;
+
+      @media (max-width: 1180px) {
+        max-width: 189px;
+        width: 100%;
+        height: 141px;
+      }
+
+      @media (max-width: 880px) {
+        max-width: 120px;
+        width: 100%;
+        height: 90px;
+      }
+
+      @media (max-width: 620px) {
+        max-width: 65px;
+        width: 100%;
+        height: 50px;
+      }
     }
   }
 
@@ -174,7 +227,6 @@ const SliderWrapper = styled.div`
     object-fit: cover;
     max-width: 1100px;
     width: 100%;
-    // max-height: 600px;
   }
   .slick-slide.slick-loading img {
     display: none;
@@ -197,17 +249,29 @@ const SliderWrapper = styled.div`
   }
 
   .slick-prev {
-    top: 32%;
+    top: 40%;
     left: 10px;
     position: absolute;
     z-index: 10;
   }
 
   .slick-next {
-    top: 32%;
+    top: 40%;
     left: 1070px;
     position: absolute;
     z-index: 10;
+
+    @media (max-width: 1180px) {
+      left: 786px;
+    }
+
+    @media (max-width: 880px) {
+      left: 485px;
+    }
+
+    @media (max-width: 620px) {
+      left: 266px;
+    }
   }
 
   .slick-prev:before,
