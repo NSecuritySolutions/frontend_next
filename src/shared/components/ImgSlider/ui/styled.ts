@@ -191,6 +191,8 @@ const SliderWrapper = styled.div`
     top: 0;
     left: 0;
     display: block;
+    // display: flex;
+    // gap: 10px;
     margin-left: auto;
     margin-right: auto;
   }

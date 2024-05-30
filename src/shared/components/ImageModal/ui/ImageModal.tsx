@@ -74,7 +74,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
             prevSlide()
           }}
         >
-          <Image src="/icons/ic-next-button.svg" alt="Кнопка назад" width={64} height={64} />
+          <Image src="/icons/ic-next-button.svg" alt="Кнопка назад" fill />
         </RevertButton>
         {isClicked && images && images[selectedImageIndex] ? (
           <Image
@@ -99,7 +99,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
             nextSlide()
           }}
         >
-          <Image src="/icons/ic-next-button.svg" alt="Кнопка назад" width={64} height={64} />
+          <Image src="/icons/ic-next-button.svg" alt="Кнопка назад" fill />
         </Button>
       </ModalContent>
     </ModalContainer>

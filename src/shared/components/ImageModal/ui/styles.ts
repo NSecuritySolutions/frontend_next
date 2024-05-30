@@ -40,6 +40,24 @@ const ModalContent = styled.div`
   display: flex;
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   z-index: 10;
+
+  @media (max-width: 1180px) {
+    max-width: 800px;
+    width: 100%;
+    min-height: 600px;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+    min-height: 435px;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 296px;
+    width: 100%;
+    min-height: 222px;
+  }
 `
 
 const CloseButton = styled.button`
@@ -73,10 +91,26 @@ const Button = styled.button`
   right: 10px;
   opacity: 1;
   z-index: 11;
+  width: 64px;
+  height: 64px;
 
   &:hover {
     opacity: 0.7;
     transform: opacity 1s ease-in;
+  }
+
+  @media (max-width: 1180px) {
+    width: 50px;
+    height: 50px;
+  }
+  @media (max-width: 880px) {
+    width: 30px;
+    height: 30px;
+  }
+
+  @media (max-width: 620px) {
+    width: 20px;
+    height: 20px;
   }
 `
 const RevertButton = styled.button`
@@ -86,10 +120,25 @@ const RevertButton = styled.button`
   z-index: 11;
   transform: rotate(180deg);
   opacity: 1;
+  width: 64px;
+  height: 64px;
 
   &:hover {
     opacity: 0.7;
     transform: opacity 1s ease-in;
+  }
+
+  @media (max-width: 1180px) {
+    width: 50px;
+    height: 50px;
+  }
+  @media (max-width: 880px) {
+    width: 30px;
+    height: 30px;
+  }
+  @media (max-width: 620px) {
+    width: 20px;
+    height: 20px;
   }
 `
 export { ModalContainer, ModalContent, CloseButton, RevertButton, Button }
