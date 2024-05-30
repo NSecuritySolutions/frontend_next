@@ -22,13 +22,47 @@ const SliderWrapper = styled.div`
     border-radius: 20px;
     cursor: zoom-in;
 
+    @media (max-width: 1180px) {
+      min-width: 816px;
+      width: 100%;
+      height: 445px;
+    }
+    @media (max-width: 880px) {
+      min-width: 516px;
+      width: 100%;
+      height: 282px;
+    }
+
+    @media (max-width: 620px) {
+      min-width: 296px;
+      width: 100%;
+      height: 162px;
+    }
+
     img {
       margin: 0 auto;
       min-width: 1100px;
       width: 100%;
-      height: auto;
+      height: 600px;
       object-fit: fill;
       border-radius: 20px;
+
+      @media (max-width: 1180px) {
+        min-width: 816px;
+        width: 100%;
+        height: 445px;
+      }
+      @media (max-width: 880px) {
+        min-width: 516px;
+        width: 100%;
+        height: 282px;
+      }
+
+      @media (max-width: 620px) {
+        min-width: 296px;
+        width: 100%;
+        height: 162px;
+      }
     }
   }
 
@@ -139,7 +173,8 @@ const SliderWrapper = styled.div`
     display: block;
     object-fit: cover;
     max-width: 1100px;
-    max-height: 600px;
+    width: 100%;
+    // max-height: 600px;
   }
   .slick-slide.slick-loading img {
     display: none;
@@ -162,14 +197,14 @@ const SliderWrapper = styled.div`
   }
 
   .slick-prev {
-    top: 42%;
+    top: 32%;
     left: 10px;
     position: absolute;
     z-index: 10;
   }
 
   .slick-next {
-    top: 42%;
+    top: 32%;
     left: 1070px;
     position: absolute;
     z-index: 10;
@@ -182,17 +217,6 @@ const SliderWrapper = styled.div`
 
   .slick-arrow.slick-hidden {
     display: none;
-  }
-
-  @media (max-width: 1300px) {
-    max-width: 580px;
-  }
-  @media (max-width: 940px) {
-    max-width: 580px;
-  }
-
-  @media (max-width: 619px) {
-    max-width: 280px;
   }
 `
 
