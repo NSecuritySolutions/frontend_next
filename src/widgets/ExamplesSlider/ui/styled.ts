@@ -183,35 +183,6 @@ const CardWrapper = styled.div`
   }
 `
 
-const ExamplesContainer = styled.article`
-  display: flex !important;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-  align-self: stretch;
-  gap: 12px;
-  max-width: 320px;
-  width: 100%;
-  min-height: 202px;
-  background-color: ${colors.backgroundPrimary};
-  justify-content: space-between;
-
-  @media (max-width: 1180px) {
-    max-width: 430px;
-    min-height: 162px;
-  }
-
-  @media (max-width: 880px) {
-    gap: 0 !important;
-    min-height: 162px;
-  }
-
-  @media (max-width: 880px) {
-    gap: 0 !important;
-    min-height: 158px;
-  }
-`
-
 const ExamplesLink = styled.a`
   text-decoration: none;
 `
@@ -244,6 +215,35 @@ const ExamplesImgWrapper = styled.div`
   }
 `
 
+const ExamplesContainer = styled.article`
+  display: flex !important;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 12px;
+  max-width: 320px;
+  width: 100%;
+  min-height: 202px;
+  background-color: ${colors.backgroundPrimary};
+  justify-content: space-between;
+
+  @media (max-width: 1180px) {
+    max-width: 430px;
+    min-height: 162px;
+  }
+
+  @media (max-width: 880px) {
+    gap: 0 !important;
+    min-height: 162px;
+  }
+
+  @media (max-width: 880px) {
+    gap: 0 !important;
+    min-height: 158px;
+  }
+`
+
 const ExamplesTitle = styled.h3`
   max-width: 320px;
   width: 100%;
@@ -258,82 +258,6 @@ const ExamplesTitle = styled.h3`
     font-weight: 700;
     font-size: 16px;
   }
-`
-
-const CustomDot = styled.div<{ $active?: boolean }>`
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background-color: ${(props) => (props.$active ? `${colors.btnPrimary}` : '#d7d7d7')};
-`
-
-const ButtonWrapper = styled.div`
-  margin-top: 15px;
-  display: flex !important;
-  column-gap: 0 !important;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 35px;
-  gap: 20px;
-  white-space: nowrap;
-
-  @media (max-width: 1180px) {
-    margin: 0;
-  }
-  @media (max-width: 880px) {
-    margin: 0 !important;
-  }
-`
-
-const SecondButtonWrapper = styled.div`
-  display: flex !important;
-  column-gap: 0 !important;
-  justify-content: center;
-`
-
-const ExamplesButton = styled.a<{ $active?: boolean }>`
-  cursor: pointer;
-  justify-content: center;
-  border-radius: 12px;
-  border-color: rgba(16, 16, 16, 0.32);
-  border-style: solid;
-  border-width: 1px;
-  background-color: ${colors.backgroundPrimary};
-  white-space: nowrap;
-  padding: 12px 20px;
-  width: 134px;
-  height: 44px;
-  opacity: 1;
-
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 133%;
-
-  &:hover {
-    background-color: ${colors.btnOutlineHover};
-  }
-`
-
-const IconWrapper = styled.div`
-  display: flex !important;
-  flex-direction: row;
-  column-gap: 12px !important;
-  font-weight: 400;
-  font-size: 16px;
-  color: ${colors.darkPrimary};
-
-  @media (max-width: 880px) {
-    flex-direction: row;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    width: 76px;
-    height: 76px;
-    margin: 0 !important;
-  }
-`
-const ExamplesIcons = styled.div`
-  display: flex !important;
-  flex-direction: row;
 `
 const InfoIconWrapper = styled.div`
   margin-top: 12px;
@@ -352,6 +276,23 @@ const InfoIconWrapper = styled.div`
   }
 
   @media (max-width: 880px) {
+    margin: 0 !important;
+  }
+`
+const IconWrapper = styled.div`
+  display: flex !important;
+  flex-direction: row;
+  column-gap: 12px !important;
+  font-weight: 400;
+  font-size: 16px;
+  color: ${colors.darkPrimary};
+
+  @media (max-width: 880px) {
+    flex-direction: row;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    width: 76px;
+    height: 76px;
     margin: 0 !important;
   }
 `
@@ -378,16 +319,45 @@ const InfoIcon = styled.div`
     line-height: 185%;
   }
 `
+
+const ButtonWrapper = styled.div`
+  margin-top: 15px;
+  display: flex !important;
+  column-gap: 0 !important;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 35px;
+  gap: 20px;
+  white-space: nowrap;
+
+  @media (max-width: 1180px) {
+    margin: 0;
+  }
+  @media (max-width: 880px) {
+    margin: 0 !important;
+  }
+`
+
+const SecondButtonWrapper = styled.div`
+  display: flex !important;
+  column-gap: 0 !important;
+  justify-content: center;
+`
+
+const CustomDot = styled.div<{ $active?: boolean }>`
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: ${(props) => (props.$active ? `${colors.btnPrimary}` : '#d7d7d7')};
+`
 export {
   ExamplesContainer,
   CardWrapper,
   ExamplesTitle,
-  ExamplesButton,
   SliderContainer,
   CustomDot,
   ColumnTitle,
   ButtonWrapper,
-  ExamplesIcons,
   IconWrapper,
   ExamplesLink,
   SecondButtonWrapper,
