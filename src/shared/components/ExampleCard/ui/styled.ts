@@ -12,6 +12,7 @@ const SliderContainer = styled.section`
   max-width: 1180px;
   width: 100%;
   gap: 20px;
+  justify-content: space-between;
 `
 
 const CardWrapper = styled.div`
