@@ -44,7 +44,7 @@ export type TWorkExamples = {
     alt: string
   }[]
   title: string
-  quantities: { number: string; description: string; color?: string }[]
+  quantities: { number: number; measure: string; description: string; color?: string }[]
   img: StaticImageData[]
   equipment: string[]
   text: string

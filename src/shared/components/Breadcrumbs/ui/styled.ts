@@ -17,6 +17,9 @@ const Nav = styled.nav`
 
   @media (max-width: 620px) {
     width: 328px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `
 

@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -27,14 +28,14 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ title }) => {
       {pathnames.map((path, index) => {
         const to = pathname.split(path)[0] + path
         return (
-          <>
+          <React.Fragment key={index}>
             <Text>/</Text>
             <Text>
               <Link href={to} key={index}>
                 {urlNames[path as keyof typeof urlNames] || title}
               </Link>
             </Text>
-          </>
+          </React.Fragment>
         )
       })}
     </Nav>

@@ -1,6 +1,6 @@
-'use client'
-
 import React from 'react'
+
+import { cookies } from 'next/headers'
 
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
@@ -14,12 +14,15 @@ import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
+
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 
 import styles from './page.module.css'
 
 export default function Home() {
+  const cookieStore = cookies()
+  const hasCookie = cookieStore.has('agreedGuest')
   return (
     <main className={styles.main} id="content">
       <Info />
@@ -35,7 +38,7 @@ export default function Home() {
       <OurClients />
       <ContactForm />
       <ScrollButton />
-      <CookiesNotice />
+      {!hasCookie && <CookiesNotice />}
     </main>
   )
 }

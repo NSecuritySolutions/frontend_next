@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import Cookies from 'js-cookie'
 
@@ -14,12 +14,6 @@ import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './
 
 const CookiesNotice: React.FC = () => {
   const [isCookiesVisible, setCookiesVisible] = useState<boolean>(true)
-
-  useEffect(() => {
-    if (Cookies.get('agreedGuest')) {
-      setCookiesVisible(false)
-    }
-  }, [])
 
   const handleBtnClick = () => {
     setCookiesVisible(false)
