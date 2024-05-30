@@ -1,11 +1,14 @@
 import { useState } from 'react'
+
 import Image from 'next/image'
+
 import { useRouter } from 'next/navigation'
+
 import { MouseEvent, useEffect } from 'react'
 
-import TImageModalProps from '../types/types.ts'
-
 import containerVariants from './animation.ts'
+
+import TImageModalProps from '../types/types.ts'
 
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 
@@ -59,8 +62,8 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
     <ModalContainer
       variants={containerVariants}
       initial="initial"
-      animate="animate"
-      exit="exit"
+      animate={'animate'}
+      exit={'exit'}
       onClick={handleBackdrop}
       id="modal"
     >

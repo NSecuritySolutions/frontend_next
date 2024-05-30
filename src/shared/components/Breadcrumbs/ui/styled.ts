@@ -5,6 +5,12 @@ const Nav = styled.nav`
   display: flex;
   gap: 12px;
   width: 100%;
+
+  @media (max-width: 620px) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `
 
 export { Nav }

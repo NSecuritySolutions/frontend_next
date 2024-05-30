@@ -1,5 +1,12 @@
 import { FC } from 'react'
 import Image from 'next/image'
+import Slider from 'react-slick'
+
+import bannerImg from '@/assets/images/banner/png/banner-img.png'
+
+import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-text'
+import { BtnLink } from '@/shared/components/BtnLink'
+import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
 
 import {
   HeaderWrapper,
@@ -16,15 +23,7 @@ import {
   BannerWrapper,
   CardWrapper,
 } from './styled'
-
-import bannerImg from '@/assets/images/banner/png/banner-img.png'
-
-import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-text'
-import { BtnLink } from '@/shared/components/BtnLink'
-import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
-
 import colors from '@/shared/constants/colors'
-import Slider from 'react-slick'
 
 const Info: FC = () => {
   const settings = {
