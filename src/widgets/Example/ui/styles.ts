@@ -10,7 +10,6 @@ const SectionWrapper = styled.section`
     margin: 0 auto;
     max-width: 296px;
     width: 100%;
-    padding: 16px;
   }
 `
 

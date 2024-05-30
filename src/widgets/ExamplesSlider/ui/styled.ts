@@ -54,7 +54,6 @@ const SliderContainer = styled.div`
   background-color: ${colors.backgroundBase2};
   display: flex;
   flex-direction: column;
-  min-height: 644px;
   max-width: 1180px;
   width: 100%;
   row-gap: 20px !important;
@@ -72,14 +71,14 @@ const SliderContainer = styled.div`
   @media (max-width: 880px) {
     min-width: 880px;
     width: 100%;
-    min-height: 583px;
+    min-height: 383px;
     gap: 0px !important;
   }
 
   @media (max-width: 620px) {
     min-width: 620px;
     width: 100%;
-    min-height: 464px;
+    min-height: 264px;
   }
 
   .slick-slider {
@@ -339,6 +338,7 @@ const ButtonWrapper = styled.div`
 `
 
 const SecondButtonWrapper = styled.div`
+  margin-top: 20px;
   display: flex !important;
   column-gap: 0 !important;
   justify-content: center;
