@@ -11,16 +11,14 @@ import {
   PriceWrapper,
   PriceText,
   PriceAd,
-  InfoBtn,
   ImageWrapper,
   Img,
-  TooltipContainer,
-  ToolTipParagraph,
   DescriptionWrapper,
 } from './styled'
 import colors from '@/shared/constants/colors'
 import Link from 'next/link'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
+import { SolutionCardTooltip } from '@/shared/components/SolutionCardTooltip'
 
 export type TCardSolutionProps = {
   id?: number
@@ -36,22 +34,16 @@ interface CardSolutionProps {
 }
 
 const CardSolution: FC<CardSolutionProps> = ({ data }) => {
-  const formattedPrice = Number(data.price).toLocaleString('ru-RU')
-  const [showTooltip, setShowTooltip] = useState(false)
-
-  const handleMouseEnter = () => {
-    setShowTooltip(true)
-  }
-
-  const handleMouseLeave = () => {
-    setTimeout(() => {
-      setShowTooltip(false)
-    }, 1000)
-  }
+  const formattedPrice = Number(data.price).toLocaleString('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+    maximumFractionDigits: 0,
+  })
 
   return (
     <Card>
-      <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <SolutionCardTooltip title={data.title} text={data.toolTipText} key={data.title} />
+      {/* <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {showTooltip && (
           <TooltipContainer>
             <CardTitle>{data.title}</CardTitle>
@@ -60,7 +52,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
             ))}
           </TooltipContainer>
         )}
-      </InfoBtn>
+      </InfoBtn> */}
       <ImageWrapper>
         <Img src={data.img} quality={100} alt={data.title} />
       </ImageWrapper>
@@ -80,7 +72,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
       </DescriptionWrapper>
       <PriceWrapper>
         <PriceAd>Выезд инженера - Бесплатно!</PriceAd>
-        <PriceText>{`${formattedPrice} ₽`}</PriceText>
+        <PriceText>{formattedPrice}</PriceText>
       </PriceWrapper>
       <ProductButtonGroup link="" />
     </Card>

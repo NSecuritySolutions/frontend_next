@@ -147,6 +147,7 @@ const LinkChild = styled(Typography)`
 `
 
 const PriceAd = styled.p`
+  text-align: center;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.33;
@@ -155,6 +156,7 @@ const PriceAd = styled.p`
   @media (max-width: 1300px) {
     font-size: 13px;
     line-height: 24px;
+    text-align: start;
   }
 `
 
