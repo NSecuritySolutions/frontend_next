@@ -26,7 +26,7 @@ const CardContainer = styled.article`
   padding: 46px 40px;
   align-items: flex-start;
   gap: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   overflow-x: hidden;
   scrollbar-color: ${colors.scrollActive} ${colors.backgroundBase2};

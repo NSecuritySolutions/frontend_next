@@ -85,6 +85,7 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
                 src={item}
                 alt={modalItem.title}
                 width={1100}
+                height={600}
                 onClick={() => {
                   setShowModal(true)
                   setSelectedImage(item)

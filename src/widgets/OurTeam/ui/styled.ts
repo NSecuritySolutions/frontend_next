@@ -7,15 +7,10 @@ const Section = styled.section`
   background-color: ${colors.backgroundBase2};
   padding: 40px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1180px) {
     padding: 60px 0;
     align-items: center;
     justify-content: center;
-  }
-
-  @media (max-width: 940px) {
-    background-color: ${colors.backgroundPrimary};
-    padding: 40px 0;
   }
 `
 
@@ -30,25 +25,27 @@ const SectionWrapper = styled.div`
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   background: ${colors.backgroundPrimary};
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1180px) {
     flex-direction: row;
     max-width: 880px;
     width: 100%;
     gap: 120px;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     flex-direction: column;
-    border-radius: 0;
-    max-width: 579px;
+    max-width: 580px;
     width: 100%;
-    box-shadow: none;
   }
 
-  @media (max-width: 504px) {
+  @media (max-width: 620px) {
+    padding: 20px;
   }
+`
+const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `
 
 const ListItem = styled.li`
@@ -74,13 +71,13 @@ const ColumnTitle = styled.h2`
   font-size: 24px;
   font-weight: 700;
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     max-width: 580px;
     width: 100%;
     align-self: center;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     max-width: 277px;
     width: 100%;
     align-self: center;
@@ -91,15 +88,16 @@ const ColumnWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, minmax(120px, 540px) minmax(120px, 540px));
   column-gap: 20px;
-  gap: 40px;
+  gap: 20px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 880px) {
     padding: 40px;
     display: grid;
     grid-template-columns: none;
     grid-template-rows: 1fr;
   }
-  @media (max-width: 940px) {
+
+  @media (max-width: 880px) {
     padding: 0;
   }
 
@@ -111,11 +109,11 @@ const Column = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     flex-direction: row;
   }
 `
@@ -126,12 +124,12 @@ const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1180px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     justify-content: center;
     align-self: start;
     font-size: 16px;
@@ -149,12 +147,12 @@ const ColumnParagraph = styled.div`
 
   gap: 12px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1180px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     max-width: 277px;
     width: 100%;
   }
@@ -166,16 +164,14 @@ const ContactsWrapper = styled.div`
   justify-content: center;
   gap: 12px;
 
-  @media (max-width: 1300px) {
-    gap: 130px;
-  }
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     gap: 19.5px;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     flex-direction: column;
-    justify-self: center;
+    // justify-self: center;
+    gap: 12px;
   }
 `
 export {
@@ -189,4 +185,5 @@ export {
   ContactsWrapper,
   ListItem,
   ListItemText,
+  StyledList,
 }

@@ -1,6 +1,6 @@
-'use client'
+import React from 'react'
 
-import React, { useEffect, useState } from 'react'
+import { cookies } from 'next/headers'
 
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
@@ -16,20 +16,14 @@ import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
+import styles from './page.module.css'
+import NotFound from './not-found'
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 0)
-  }, [])
-
-  // Cookies.set('guest', 'first-visit', { expires: 7 })
-  // Cookies.remove('')
-
+  const cookieStore = cookies()
+  const hasCookie = cookieStore.has('agreedGuest')
   return (
-    <>
+    <main className={styles.main} id="content">
       <Info />
       <OurServices />
       <ReadySolutionSection />
@@ -43,7 +37,7 @@ export default function Home() {
       <OurClients />
       <ContactForm />
       <ScrollButton />
-      <CookiesNotice />
-    </>
+      {!hasCookie && <CookiesNotice />}
+    </main>
   )
 }

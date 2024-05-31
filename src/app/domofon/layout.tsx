@@ -2,8 +2,6 @@ import { Metadata } from 'next'
 
 import { Manrope } from 'next/font/google'
 
-import DomofonPage from './page'
-
 import '@/app/globals.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -51,5 +49,5 @@ export default function DomofonPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <DomofonPage />
+  return <>{children}</>
 }

@@ -78,7 +78,9 @@ const ColumnWrapper = styled.div`
     grid-template-columns: none;
     grid-template-rows: 1fr;
   }
+
   @media (max-width: 620px) {
+    margin: 0;
     padding: 0 16px;
   }
 `
@@ -174,6 +176,7 @@ const StyledParagraph = styled.p`
   font-weight: 800;
 
   @media (max-width: 620px) {
+    width: 328px;
     padding: 0 30px;
     font-size: 16px;
     font-weight: 700;
@@ -191,11 +194,11 @@ const ContactsWrapper = styled.div`
     gap: 130px;
   }
 
-  @media (max-width: 940px) {
+  @media (max-width: 880px) {
     gap: 19.5px;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     flex-direction: column;
     justify-self: center;
   }

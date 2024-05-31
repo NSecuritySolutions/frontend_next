@@ -25,7 +25,7 @@ const SliderContainer = styled.div`
   }
 
   @media (max-width: 620px) {
-    max-width: 280px;
+    max-width: 328px;
   }
 `
 const ReviewsContainer = styled.article`

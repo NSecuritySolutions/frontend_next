@@ -52,5 +52,5 @@ export default function SecurityPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <SecurityPage />
+  return <>{children}</>
 }

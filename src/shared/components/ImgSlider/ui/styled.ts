@@ -22,25 +22,76 @@ const SliderWrapper = styled.div`
     border-radius: 20px;
     cursor: zoom-in;
 
+    @media (max-width: 1180px) {
+      min-width: 816px;
+      width: 100%;
+      height: 445px;
+    }
+    @media (max-width: 880px) {
+      min-width: 516px;
+      width: 100%;
+      height: 282px;
+    }
+
+    @media (max-width: 620px) {
+      min-width: 296px;
+      width: 100%;
+      height: 162px;
+    }
+
     img {
       margin: 0 auto;
       min-width: 1100px;
       width: 100%;
-      height: auto;
+      height: 600px;
       object-fit: fill;
       border-radius: 20px;
+
+      @media (max-width: 1180px) {
+        min-width: 816px;
+        width: 100%;
+        height: 445px;
+      }
+      @media (max-width: 880px) {
+        min-width: 516px;
+        width: 100%;
+        height: 282px;
+      }
+
+      @media (max-width: 620px) {
+        min-width: 296px;
+        width: 100%;
+        height: 162px;
+      }
     }
   }
 
   .slick-dots {
     position: relative;
     margin: 0 auto;
-    min-width: 1100px;
+    max-width: 1100px;
     display: flex !important;
     width: 100%;
     flex-direction: row;
     gap: 14px;
     justify-content: center;
+
+    @media (max-width: 1180px) {
+      max-width: 816px;
+      width: 100%;
+      gap: 0;
+    }
+
+    @media (max-width: 880px) {
+      max-width: 516px;
+      width: 100%;
+      gap: 0;
+    }
+    @media (max-width: 620px) {
+      max-width: 296px;
+      width: 100%;
+      gap: 0;
+    }
 
     li {
       border-radius: 20px;
@@ -49,6 +100,24 @@ const SliderWrapper = styled.div`
       height: 195px;
       background-color: ${colors.textSecondary};
       object-fit: fill;
+
+      @media (max-width: 1180px) {
+        max-width: 189px;
+        width: 100%;
+        height: 141px;
+      }
+
+      @media (max-width: 880px) {
+        max-width: 120px;
+        width: 100%;
+        height: 90px;
+      }
+      @media (max-width: 620px) {
+        max-width: 65px;
+        width: 100%;
+        height: 49px;
+        border-radius: 8px;
+      }
     }
 
     img {
@@ -56,6 +125,24 @@ const SliderWrapper = styled.div`
       width: 100%;
       height: 195px;
       border-radius: 20px;
+
+      @media (max-width: 1180px) {
+        max-width: 189px;
+        width: 100%;
+        height: 141px;
+      }
+
+      @media (max-width: 880px) {
+        max-width: 120px;
+        width: 100%;
+        height: 90px;
+      }
+
+      @media (max-width: 620px) {
+        max-width: 65px;
+        width: 100%;
+        height: 50px;
+      }
     }
   }
 
@@ -104,6 +191,8 @@ const SliderWrapper = styled.div`
     top: 0;
     left: 0;
     display: block;
+    // display: flex;
+    // gap: 10px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -139,7 +228,7 @@ const SliderWrapper = styled.div`
     display: block;
     object-fit: cover;
     max-width: 1100px;
-    max-height: 600px;
+    width: 100%;
   }
   .slick-slide.slick-loading img {
     display: none;
@@ -162,17 +251,29 @@ const SliderWrapper = styled.div`
   }
 
   .slick-prev {
-    top: 42%;
+    top: 40%;
     left: 10px;
     position: absolute;
     z-index: 10;
   }
 
   .slick-next {
-    top: 42%;
+    top: 40%;
     left: 1070px;
     position: absolute;
     z-index: 10;
+
+    @media (max-width: 1180px) {
+      left: 786px;
+    }
+
+    @media (max-width: 880px) {
+      left: 485px;
+    }
+
+    @media (max-width: 620px) {
+      left: 266px;
+    }
   }
 
   .slick-prev:before,
@@ -182,17 +283,6 @@ const SliderWrapper = styled.div`
 
   .slick-arrow.slick-hidden {
     display: none;
-  }
-
-  @media (max-width: 1300px) {
-    max-width: 580px;
-  }
-  @media (max-width: 940px) {
-    max-width: 580px;
-  }
-
-  @media (max-width: 619px) {
-    max-width: 280px;
   }
 `
 

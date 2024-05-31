@@ -54,7 +54,6 @@ const CookiesTitle = styled.h3`
   display: flex;
   font-size: 24px;
   font-weight: 700;
-  color: black;
   color: ${colors.darkPrimary};
 
   @media (max-width: 620px) {

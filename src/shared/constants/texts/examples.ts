@@ -26,9 +26,9 @@ export const workExamples: TWorkExamples[] = [
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
     equipment: [
@@ -61,9 +61,9 @@ export const workExamples: TWorkExamples[] = [
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: [
@@ -97,9 +97,9 @@ export const workExamples: TWorkExamples[] = [
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 6 шт', 'Провода 900 м'],
@@ -121,9 +121,9 @@ export const workExamples: TWorkExamples[] = [
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: [
@@ -157,9 +157,9 @@ export const workExamples: TWorkExamples[] = [
     cardImage: firstWorksImg,
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [firstWorksImg, secondWorksImg, thirdWorksImg, fourthWorksImg],
     equipment: ['Камера 4 шт', 'Провода 480 м'],
@@ -180,9 +180,9 @@ export const workExamples: TWorkExamples[] = [
     cardImage: noImCard,
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 68 шт', 'Провода 1480м'],
@@ -205,9 +205,9 @@ export const workExamples: TWorkExamples[] = [
 
     title: 'Установка камер видеонаблюдения в частном доме, Новосибирск',
     quantities: [
-      { number: '10 дн.', description: 'Рабочих дней', color: '#f7f2e4' },
-      { number: '136 970 ₽', description: 'Бюджет', color: '#def6f7' },
-      { number: '265 м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
+      { number: 10, measure: 'дн.', description: 'Рабочих дней', color: '#f7f2e4' },
+      { number: 265000, measure: '\u20BD', description: 'Бюджет', color: '#def6f7' },
+      { number: 265, measure: 'м\u00B2', description: 'Оборудовано', color: '#e1e7f4' },
     ],
     img: [fifthWorksImg, sixthWorksImg, seventhWorksImg, eighthWorksImg],
     equipment: ['Камера 6 шт', 'Провода 900 м'],

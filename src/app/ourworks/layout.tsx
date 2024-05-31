@@ -50,5 +50,5 @@ export default function OurworksPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <OurworksPage></OurworksPage>
+  return <>{children}</>
 }

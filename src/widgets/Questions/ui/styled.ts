@@ -119,7 +119,7 @@ const QuestionsColumn = styled(motion.div).attrs({
   flex-direction: column;
   gap: 16px;
   max-height: 514px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   scrollbar-color: ${colors.scrollActive} ${colors.backgroundBase2};
 

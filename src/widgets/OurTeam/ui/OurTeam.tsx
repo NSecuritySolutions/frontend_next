@@ -13,6 +13,7 @@ import {
   ContactsWrapper,
   ListItem,
   ListItemText,
+  StyledList,
 } from './styled.ts'
 
 import { teamText } from '@/shared/constants/texts/our-team.ts'
@@ -26,14 +27,14 @@ const OurTeam = () => {
             <TextWrapper>
               <ColumnTitle>Наша команда</ColumnTitle>
               <ColumnParagraph>
-                <ul>
+                <StyledList>
                   {teamText.map((item, index) => (
                     <ListItem key={index}>
                       <Image src="/icons/list-item.svg" alt="List Marker" width={20} height={20} />
                       <ListItemText>{item}</ListItemText>
                     </ListItem>
                   ))}
-                </ul>
+                </StyledList>
               </ColumnParagraph>
             </TextWrapper>
           </Column>

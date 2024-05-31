@@ -13,7 +13,6 @@ import {
   StyledParagraph,
 } from './styled.ts'
 
-import yandexLogo from '/public/yandex-link.png'
 import { YANDEX_URL } from '@/shared/constants/url/url.ts'
 
 const ReviewsBlock = () => {
