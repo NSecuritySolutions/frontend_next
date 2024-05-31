@@ -1,7 +1,6 @@
-'use client'
-
 import { error505 } from '@/shared/constants/texts/error-505.ts'
 import Error from '@/widgets/Error/ui/Error'
+import styles from './page.module.css'
 
 const ErrorPage = ({
   searchParams,

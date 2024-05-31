@@ -80,7 +80,6 @@ const ListItemText = styled.span`
   font-size: 16px;
   line-height: 136%;
   @media (max-width: 620px) {
-    font-weight: 400;
     font-size: 14px;
   }
 `

@@ -15,7 +15,6 @@ const Card = styled.div<{ $backgroundColor: string }>`
 
   @media (max-width: 620px) {
     max-width: 293px;
-    width: 100%;
     min-height: 264px;
   }
 `
@@ -52,8 +51,8 @@ const ListItemText = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 136%;
+
   @media (max-width: 620px) {
-    font-weight: 400;
     font-size: 14px;
   }
 `

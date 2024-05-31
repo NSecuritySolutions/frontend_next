@@ -9,14 +9,10 @@ const SliderContainer = styled.section`
   flex-direction: row;
   flex-wrap: wrap;
   min-height: 644px;
-  max-width: 1080px;
+  max-width: 1180px;
   width: 100%;
   gap: 20px;
   justify-content: space-between;
-
-  // & > div:last-child {
-  //   margin-right: auto;
-  // }
 
   @media (max-width: 1180px) {
     justify-content: center;
