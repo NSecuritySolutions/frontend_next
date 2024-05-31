@@ -1,13 +1,16 @@
 'use client'
+// import { useEffect } from 'react'
+// import dataFetch from '@/app/store/test.ts'
 
+import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
-
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 
 import { policy } from '@/shared/constants/texts/policy.ts'
 import { IPolicyItem } from '@/shared/constants/texts/policy.ts'
 
 import colors from '@/shared/constants/colors/index.ts'
+
 import {
   SectionWrapper,
   SectionTitle,
@@ -17,12 +20,29 @@ import {
   BlockText,
 } from './styled.ts'
 
-export default function Policy() {
+const Policy = observer(() => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const handleContainerClick = () => {
     setIsExpanded(!isExpanded)
   }
+
+  //@TODO - тест на работу с запросом от сервера
+  // useEffect(() => {
+  //   dataFetch.fetchData()
+  // }, [])
+
+  // const dataArray = dataFetch.data
+  // console.log(dataArray, 'arr')
+
+  // const text =
+  //   'Большой ассортимент IP и AHD камер, регистраторов и коммутаторов для решения любой задачи и возможностью подбора необходимых функций\r\nПросмотр в приложении на смартфоне и через веб-браузер'
+
+  // const splitArr = text.split(/\r\n|\r|\n/g)
+
+  // const splitString = (string: string) => {
+  //   string.split(/\r\n|\r|\n/g)
+  // }
 
   //@TODO -  useRef - сделать высоту контейнера c текстом универсальной.
 
@@ -49,4 +69,5 @@ export default function Policy() {
       />
     </SectionWrapper>
   )
-}
+})
+export default Policy

@@ -5,7 +5,13 @@ const Card = styled.div<{ $backgroundColor: string }>`
   background-color: ${(props) => props.$backgroundColor || colors.backgroundBase3};
   border-radius: 20px;
   padding: 20px;
-  min-height: 260px;
+  min-height: 188px;
+
+  @media (max-width: 880px) {
+    max-width: 380px;
+    width: 100%;
+    min-height: 288px;
+  }
 `
 
 const TitleContainer = styled.div`

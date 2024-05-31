@@ -1,10 +1,15 @@
-'use client'
+import { cookies } from 'next/headers'
 
 import { ContactForm } from '@/widgets/ContactForm'
-import styles from './page.module.css'
+
 import ExampleCard from '@/shared/components/ExampleCard/ui/ExampleCard'
+import { CookiesNotice } from '@/shared/components/CookiesNotice'
+
+import styles from './page.module.css'
 
 export default function OurworksPage() {
+  const cookieStore = cookies()
+  const hasCookie = cookieStore.has('agreedGuest')
   return (
     <main className={styles.main} id="ourworks">
       <section style={{ marginTop: '170px' }}>
@@ -12,6 +17,7 @@ export default function OurworksPage() {
       </section>
       <ExampleCard />
       <ContactForm />
+      {!hasCookie && <CookiesNotice />}
     </main>
   )
 }
