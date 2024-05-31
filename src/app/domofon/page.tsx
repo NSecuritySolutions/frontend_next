@@ -1,15 +1,13 @@
-'use client'
-
 import { ContactForm } from '@/widgets/ContactForm'
 import styles from './page.module.css'
 
 export default function DomofonPage() {
   return (
-    <>
-      <section className={styles.main}>
+    <main className={styles.main}>
+      <section style={{ margin: '164px 0' }} id="domofon">
         <h1>Домофония, страница в разработке</h1>
       </section>
       <ContactForm />
-    </>
+    </main>
   )
 }

@@ -14,11 +14,10 @@ import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { Calculator } from '@/widgets/Calculator'
 import { ContactForm } from '../widgets/ContactForm'
-
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
-
 import styles from './page.module.css'
+import NotFound from './not-found'
 
 export default function Home() {
   const cookieStore = cookies()

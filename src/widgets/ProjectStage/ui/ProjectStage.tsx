@@ -4,12 +4,9 @@ import Slider from 'react-slick'
 
 import { projectMilestones } from '@/shared/constants/texts/project-milestones'
 
-import { TWindowSize } from '../types/types'
-
 import {
   Section,
   SectionWrapper,
-  ColumnWrapper,
   Column,
   StageWrapper,
   StageNumber,
@@ -28,7 +25,7 @@ const ProjectStage = () => {
       {
         breakpoint: 940,
         settings: {
-          arrow: false,
+          arrows: false,
           focusOnSelect: true,
           speed: 200,
           infinite: false,
@@ -39,7 +36,7 @@ const ProjectStage = () => {
       {
         breakpoint: 620,
         settings: {
-          arrow: false,
+          arrows: false,
           focusOnSelect: true,
           speed: 200,
           infinite: false,

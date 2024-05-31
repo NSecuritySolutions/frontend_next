@@ -121,7 +121,13 @@ const ContactForm = () => {
       <SectionWrapper>
         <InfoColumn>
           <FormImgWrapper>
-            <Image src="/images/form/png/card2.png" alt="Картинка карты" fill quality={100} />
+            <Image
+              src="/images/form/png/card2.png"
+              alt="Картинка карты"
+              fill
+              sizes="(max-width: 620px) 283px, (max-width: 940px) 283px, (max-width: 1300px) 540px, 702px"
+              quality={100}
+            />
           </FormImgWrapper>
         </InfoColumn>
         <FormColumn>

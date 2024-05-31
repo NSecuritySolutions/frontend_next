@@ -3,7 +3,12 @@ import colors from '@/shared/constants/colors'
 import styled from 'styled-components'
 
 const Section = styled.section`
+  max-width: 1180px;
+  width: 100%;
+  margin: 163px auto;
   background-color: ${colors.backgroundBase2};
+  display: flex;
+  justify-content: center;
 `
 
 const ColumnConatiner = styled.div`

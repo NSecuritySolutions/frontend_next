@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemText,
   TitleContainer,
+  CardImg,
 } from './styled'
 
 type TCardProps = {
@@ -19,13 +20,29 @@ type TCardProps = {
   banner: StaticImageData
   listItem: string[]
   backgroundColor: string
+  logo: string
 }
 
-const CardWithListAndBanner: FC<TCardProps> = ({ title, banner, listItem, backgroundColor }) => {
+const CardWithListAndBanner: FC<TCardProps> = ({
+  title,
+  banner,
+  listItem,
+  backgroundColor,
+  logo,
+}) => {
   return (
     <Card $backgroundColor={backgroundColor}>
       <ContentContainer>
         <TitleContainer>
+          <div style={{ width: '40px', height: '40px' }}>
+            <Image
+              src={logo}
+              alt="Логотип"
+              width={20}
+              height={20}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          </div>
           <CardTitle>{title}</CardTitle>
         </TitleContainer>
         <List>
@@ -38,14 +55,16 @@ const CardWithListAndBanner: FC<TCardProps> = ({ title, banner, listItem, backgr
         </List>
       </ContentContainer>
 
-      <Image
-        src={banner}
-        alt="Баннер"
-        width={200}
-        height={200}
-        placeholder="blur"
-        blurDataURL={rgbDataURL(225, 231, 244)}
-      />
+      <CardImg>
+        <Image
+          src={banner}
+          alt="Баннер"
+          width={430}
+          height={260}
+          placeholder="blur"
+          blurDataURL={rgbDataURL(225, 231, 244)}
+        />
+      </CardImg>
     </Card>
   )
 }

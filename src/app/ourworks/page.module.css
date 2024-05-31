@@ -1,8 +1,23 @@
 .main {
-  margin: 0 auto;
+  margin-top: 163px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 940px) {
+    margin-top: 133px;
+  }
+
+  @media (max-width: 620px) {
+    margin-top: 87px;
+  }
+}
+
+.layout {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 20vh;
+  min-height: 50vh;
 }

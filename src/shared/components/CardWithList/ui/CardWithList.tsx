@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import Image, { StaticImageData } from 'next/image'
 
-import listMarker from '@/assets/icons/list-item.svg'
 import { Card, CardTitle, List, ListItem, ListItemText, TitleContainer } from './styled'
 
 type TCardProps = {

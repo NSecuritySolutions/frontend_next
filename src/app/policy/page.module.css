@@ -1,5 +1,5 @@
 .main {
-  margin-top: 163px;
+  margin: 163px auto 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,12 +12,4 @@
   @media (max-width: 620px) {
     margin-top: 87px;
   }
-}
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
 }

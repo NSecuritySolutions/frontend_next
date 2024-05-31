@@ -25,8 +25,8 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
   img,
   text,
   link,
-  btnName,
   backgroundColor,
+  btnName,
 }) => {
   return (
     <Card $backgroundColor={backgroundColor}>

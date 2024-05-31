@@ -12,22 +12,29 @@ const SliderContainer = styled.section`
   max-width: 1180px;
   width: 100%;
   gap: 20px;
+  justify-content: space-between;
+
+  @media (max-width: 1180px) {
+    justify-content: center;
+    max-width: 880px;
+    width: 100%;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+  }
 `
 
 const CardWrapper = styled.div`
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  // margin: 0 auto;
+  display: flex;
+  gap: 20px;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 20px;
   max-width: 516px;
   width: 100%;
-
-  & div:last-child {
-    grid-column: 1 / -1;
-  }
 
   // @media (max-width: 1280px) {
   //   flex-direction: column;

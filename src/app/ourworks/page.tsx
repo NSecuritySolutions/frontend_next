@@ -1,13 +1,13 @@
-'use client'
-
 import { ContactForm } from '@/widgets/ContactForm'
-import styles from './page.module.css'
+
 import ExampleCard from '@/shared/components/ExampleCard/ui/ExampleCard'
+
+import styles from './page.module.css'
 
 export default function OurworksPage() {
   return (
     <main className={styles.main} id="ourworks">
-      <section style={{ marginTop: '170px' }}>
+      <section style={{ margin: '50px 0 0 0' }}>
         <h1>Наши работы, страница в разработке</h1>
       </section>
       <ExampleCard />
