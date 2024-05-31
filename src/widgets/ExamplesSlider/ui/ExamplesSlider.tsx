@@ -130,6 +130,7 @@ const ExamplesSlider: React.FC = () => {
                             src={item?.cardImage}
                             alt={item.cardTitle}
                             fill
+                            sizes="(max-width: 620px) 240px, (max-width: 880px) 390px, (max-width: 11180px) 390px, 200px"
                           />
                         </ExamplesImgWrapper>
                       </ExamplesLink>

@@ -159,8 +159,9 @@ const LogoRostelecom = styled(Image)`
 
 const LogoAvon = styled(Image)`
   filter: contrast(0%) brightness(120%);
-  height: 160px;
+  // height: 160px;
   width: 300px;
+  height: auto;
   cursor: pointer;
   padding: 44px 9px;
   transition: all 0.3s;

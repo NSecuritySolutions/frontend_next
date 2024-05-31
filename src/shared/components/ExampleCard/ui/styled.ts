@@ -9,10 +9,25 @@ const SliderContainer = styled.section`
   flex-direction: row;
   flex-wrap: wrap;
   min-height: 644px;
-  max-width: 1180px;
+  max-width: 1080px;
   width: 100%;
   gap: 20px;
   justify-content: space-between;
+
+  // & > div:last-child {
+  //   margin-right: auto;
+  // }
+
+  @media (max-width: 1180px) {
+    justify-content: center;
+    max-width: 880px;
+    width: 100%;
+  }
+
+  @media (max-width: 880px) {
+    max-width: 580px;
+    width: 100%;
+  }
 `
 
 const CardWrapper = styled.div`
