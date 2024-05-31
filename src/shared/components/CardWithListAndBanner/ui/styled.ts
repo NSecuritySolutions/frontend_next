@@ -8,10 +8,14 @@ const Card = styled.div<{ $backgroundColor: string }>`
   display: flex;
   min-height: 260px;
   grid-area: bigCard;
+
   @media (max-width: 880px) {
     min-width: 400px;
     min-height: 288px;
     width: 100%;
+  }
+  @media (max-width: 880px) {
+    min-height: 264px;
   }
 `
 const CardImg = styled.div`
@@ -53,6 +57,11 @@ const CardTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   line-height: 136%;
+
+  @media (max-width: 620px) {
+    font-weight: 700;
+    font-size: 16px;
+  }
 `
 const List = styled.ul`
   display: flex;
@@ -70,6 +79,10 @@ const ListItemText = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 136%;
+  @media (max-width: 620px) {
+    font-weight: 400;
+    font-size: 14px;
+  }
 `
 
 const ContentContainer = styled.div`

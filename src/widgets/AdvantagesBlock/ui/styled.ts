@@ -5,14 +5,6 @@ import styled from 'styled-components'
 const Section = styled.section`
   margin: 40px auto;
   background-color: ${colors.backgroundBase2};
-
-  @media (max-width: 880px) {
-    padding-left: clamp(16px, 20%, 100px);
-  }
-
-  @media (max-width: 620px) {
-    padding-left: clamp(16px, 20%, 100px);
-  }
 `
 
 const SectionWrapper = styled.div`
@@ -21,6 +13,14 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   max-width: 1180px;
   width: 100%;
+
+  @media (max-width: 880px) {
+    padding-left: calc(100vw - 750px);
+  }
+
+  @media (max-width: 620px) {
+    padding-left: calc(100vw - 480px);
+  }
 `
 const SliderWrapper = styled.div`
   .regular.slider {
@@ -52,9 +52,6 @@ const SliderWrapper = styled.div`
       width: 100%;
     }
   }
-
-  margin: 0;
-  padding: 0;
 
   /* Slider */
   .slick-slider {
@@ -132,6 +129,14 @@ const SliderWrapper = styled.div`
     height: 100%;
     min-height: 1px;
     max-width: 380px;
+
+    @media (max-width: 880px) {
+      max-width: 380px;
+      width: 100%;
+    }
+    @media (max-width: 620px) {
+      max-width: 293px;
+    }
   }
 
   [dir='rtl'] .slick-slide {

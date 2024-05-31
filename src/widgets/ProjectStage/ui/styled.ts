@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
   padding: 20px;
+
   @media (max-width: 1300px) {
     padding: 0;
   }

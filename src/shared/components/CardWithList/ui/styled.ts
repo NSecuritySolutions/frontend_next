@@ -12,6 +12,12 @@ const Card = styled.div<{ $backgroundColor: string }>`
     width: 100%;
     min-height: 288px;
   }
+
+  @media (max-width: 620px) {
+    max-width: 293px;
+    width: 100%;
+    min-height: 264px;
+  }
 `
 
 const TitleContainer = styled.div`
@@ -25,6 +31,10 @@ const CardTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   line-height: 136%;
+  @media (max-width: 620px) {
+    font-weight: 700;
+    font-size: 16px;
+  }
 `
 const List = styled.ul`
   display: flex;
@@ -42,6 +52,10 @@ const ListItemText = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 136%;
+  @media (max-width: 620px) {
+    font-weight: 400;
+    font-size: 14px;
+  }
 `
 
 export { Card, TitleContainer, CardTitle, List, ListItem, ListItemText }
