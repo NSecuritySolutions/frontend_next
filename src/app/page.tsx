@@ -17,6 +17,7 @@ import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 import styles from './page.module.css'
+import NotFound from './not-found'
 
 export default function Home() {
   const cookieStore = cookies()
