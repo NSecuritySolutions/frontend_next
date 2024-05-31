@@ -87,7 +87,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={manrope.className}>
+      <body className={manrope.className} id="content">
         <StyledComponentsRegistry>
           <Header navLinks={headerNavLinks} />
           {children}

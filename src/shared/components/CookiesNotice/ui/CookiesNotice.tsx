@@ -8,9 +8,9 @@ import Image from 'next/image'
 
 import Link from 'next/link'
 
-import { StyledBtnLink } from '../../BtnLink/ui/styles.ts'
+import { StyledBtnLink } from '../../BtnLink/ui/styled'
 
-import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './styled.ts'
+import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './styled'
 
 const CookiesNotice: React.FC = () => {
   const [isCookiesVisible, setCookiesVisible] = useState<boolean>(true)

@@ -7,11 +7,68 @@ import {
 } from '@/shared/constants/texts/cards-solution'
 import { CardSolution } from '@/shared/components/CardSolution'
 import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
+import Slider from 'react-slick'
 
 const ReadySolutionSection = () => {
   const [activeTab, setActiveTab] = useState('VideoSurveillance')
   const handleTabChange = (tab: string) => {
     setActiveTab(tab)
+  }
+
+  const tabSettings = {
+    responsive: [
+      { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
+      {
+        breakpoint: 940,
+        settings: {
+          infinite: false,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          variableWidth: true,
+          arrows: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 620,
+        settings: {
+          infinite: false,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          variableWidth: true,
+          arrows: false,
+          dots: false,
+        },
+      },
+    ],
+  }
+
+  const cardSettings = {
+    responsive: [
+      { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
+      {
+        breakpoint: 940,
+        settings: {
+          infinite: false,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          variableWidth: true,
+          arrows: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 620,
+        settings: {
+          infinite: false,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          variableWidth: true,
+          arrows: false,
+          dots: false,
+        },
+      },
+    ],
   }
 
   let activeTabData: TCardSolutionProps[] = []
@@ -34,29 +91,34 @@ const ReadySolutionSection = () => {
     <Section>
       <SectionTitle>Готовые решения</SectionTitle>
       <TabsContainer>
-        <TabButton
-          onClick={() => handleTabChange('VideoSurveillance')}
-          $activetab={activeTab === 'VideoSurveillance'}
-        >
-          Видеонаблюдение
-        </TabButton>
-        <TabButton
-          onClick={() => handleTabChange('Intercom')}
-          $activetab={activeTab === 'Intercom'}
-        >
-          Домофония/СКУД
-        </TabButton>
-        <TabButton
-          onClick={() => handleTabChange('SecurityFireAlarms')}
-          $activetab={activeTab === 'SecurityFireAlarms'}
-        >
-          Охранно-пожарные сигнализации
-        </TabButton>
+        <Slider {...tabSettings}>
+          <TabButton
+            onClick={() => handleTabChange('VideoSurveillance')}
+            $activetab={activeTab === 'VideoSurveillance'}
+          >
+            Видеонаблюдение
+          </TabButton>
+          <TabButton
+            onClick={() => handleTabChange('Intercom')}
+            $activetab={activeTab === 'Intercom'}
+          >
+            Домофония/СКУД
+          </TabButton>
+          <TabButton
+            onClick={() => handleTabChange('SecurityFireAlarms')}
+            $activetab={activeTab === 'SecurityFireAlarms'}
+          >
+            Охранно-пожарные сигнализации
+          </TabButton>
+        </Slider>
       </TabsContainer>
+
       <CardsContainer>
-        {activeTabData.map((solution) => (
-          <CardSolution data={solution} key={solution.id} />
-        ))}
+        <Slider {...cardSettings}>
+          {activeTabData.map((solution) => (
+            <CardSolution data={solution} key={solution.id} />
+          ))}
+        </Slider>
       </CardsContainer>
     </Section>
   )

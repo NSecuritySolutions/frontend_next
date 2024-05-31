@@ -1,6 +1,6 @@
 import React from 'react'
 import { TBtnLinkProps } from '../types/types'
-import { StyledBtnLink, StyledAccentBtnLink, StyledTransparentBtnLink } from './styles'
+import { StyledBtnLink, StyledAccentBtnLink, StyledTransparentBtnLink } from './styled'
 
 const BtnLink: React.FC<TBtnLinkProps> = ({
   width,
