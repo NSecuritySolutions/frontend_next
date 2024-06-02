@@ -9,6 +9,8 @@ import {
   OptionHeader,
   CheckBox,
   InputNumber,
+  CloseButton,
+  OptionsWrapper,
 } from './styled'
 import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '@/shared/components/AmountComponent'
@@ -40,12 +42,9 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
   return (
     <Card $center={amount === 0} $expanded={amount > 0} len={data.options.length}>
       {index > 3 && (
-        <button
-          style={{ position: 'absolute', top: 6, right: 11 }}
-          onClick={() => calculatorStore.removeBlock(index)}
-        >
+        <CloseButton onClick={() => calculatorStore.removeBlock(index)}>
           <Image src="/icons/closeBtn.svg" width={10} height={10} alt="Убрать" />
-        </button>
+        </CloseButton>
       )}
       <CardHeader>
         <ImageTitle>
@@ -63,7 +62,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
         </Typography>
       </CardHeader>
       <Divider $show={amount > 0} />
-      <div style={{ width: '100%' }}>
+      <OptionsWrapper>
         {data.options.map((option, index) => (
           <Option key={index}>
             <OptionHeader>
@@ -98,7 +97,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
             )}
           </Option>
         ))}
-      </div>
+      </OptionsWrapper>
     </Card>
   )
 })
