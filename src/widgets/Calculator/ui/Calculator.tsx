@@ -67,7 +67,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     }
 
     return (
-      <CalculatorContainer>
+      <CalculatorContainer id="calculator">
         <TitleWrapper>
           <SectionTitle>Калькулятор</SectionTitle>
           <AddBlockButton onClick={() => setShowDropdown(!showDropdown)} ref={addButtonRef}>

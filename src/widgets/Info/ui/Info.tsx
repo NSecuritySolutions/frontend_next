@@ -30,7 +30,7 @@ import colors from '@/shared/constants/colors'
 const Info: FC = () => {
   const settings = {
     responsive: [
-      { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
+      { breakpoint: 999999999, settings: 'unslick' as 'unslick', arrows: false },
       {
         breakpoint: 940,
         settings: {
@@ -57,7 +57,7 @@ const Info: FC = () => {
   }
 
   return (
-    <Section>
+    <Section id="banner">
       <MainCard>
         <HeaderWrapper>
           <TextBlock>
@@ -94,6 +94,7 @@ const Info: FC = () => {
         </HistoryWrapper>
         <BannerWrapper>
           <Image
+            priority
             src={bannerImg}
             alt="Баннер"
             fill
@@ -107,13 +108,13 @@ const Info: FC = () => {
             <motion.div
               key={i}
               whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.7 }}
+              whileTap={{ scale: 0.9 }}
               style={{
                 margin: '0',
                 padding: '0',
                 background: 'transparent',
-                cursor: 'pointer',
               }}
+              transition={{ type: 'spring', stiffness: 500, damping: 40, duration: '0.2' }}
             >
               <CardInfoWithIcon
                 key={cardData.id}

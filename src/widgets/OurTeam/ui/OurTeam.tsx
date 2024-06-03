@@ -20,7 +20,7 @@ import { teamText } from '@/shared/constants/texts/our-team.ts'
 
 const OurTeam = () => {
   return (
-    <Section>
+    <Section id="team">
       <SectionWrapper>
         <ColumnWrapper>
           <Column>

@@ -8,7 +8,7 @@ const Section = styled.section`
   justify-content: center;
   background-color: ${colors.backgroundCardYe};
   margin: 0 auto;
-
+  overflow: hidden;
   /* @media (max-width: 1300px) {
     padding: 60px 20px 120px;
     align-items: center;

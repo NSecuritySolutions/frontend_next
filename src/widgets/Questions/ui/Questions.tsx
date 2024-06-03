@@ -85,7 +85,7 @@ const Questions = () => {
   }
 
   return (
-    <Section>
+    <Section id="faq">
       <SectionWrapper>
         <SectionTitle>Часто задаваемые вопросы</SectionTitle>
         <ColumnWrapper>

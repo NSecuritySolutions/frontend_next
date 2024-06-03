@@ -15,14 +15,14 @@ const CardWithList: FC<TCardProps> = ({ title, logo, listItem, backgroundColor }
   return (
     <motion.div
       whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.7 }}
+      whileTap={{ scale: 0.9 }}
       style={{
         margin: '0',
         padding: '0',
         display: 'grid',
         background: 'transparent',
-        cursor: 'pointer',
       }}
+      transition={{ type: 'spring', stiffness: 500, damping: 40, duration: '0.3' }}
     >
       <Card $backgroundColor={backgroundColor}>
         <TitleContainer>
