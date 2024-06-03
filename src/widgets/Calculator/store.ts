@@ -1,96 +1,7 @@
 import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
-import { BASE_URL } from '@/shared/constants/url/url'
-import axios from 'axios'
-import { makeAutoObservable, action, computed, observable } from 'mobx'
 
-interface IProduct {
-  id: number
-  category: { id: number; title: string }
-  manufacturer: { id: number; title: string }
-  article: string
-  model: string
-  image: string
-  price: number
-}
-
-interface ICamera extends IProduct {
-  description: string
-  type: string
-  form_factor: string
-  accomodation: string
-  resolution: string
-  dark: string
-  temperature: string
-  power_supply: string
-  microphone: string
-  micro_sd: string
-  viewing_anlge: string
-  focus: string
-}
-
-interface IRegister extends IProduct {
-  description: string
-  max_resolution: string
-  quantity_cam: number
-  quantity_hdd: number
-  max_size_hdd: number
-  power_supply: string
-}
-
-interface IOption {
-  id: number
-  title: string
-  description: string
-  option_type: 'number' | 'checkbox' | 'radio'
-  name: string
-  choices?: string
-  product?: string
-  filters?: string
-  block: number
-}
-
-interface IBlock {
-  id: number
-  title: string
-  image: string
-  formula: IFormula
-  calculator: number
-  options: IOption[]
-}
-
-interface IFormula {
-  id: number
-  expression: string
-}
-
-interface IPriceList {
-  id: number
-  setup_inner_camera_easy: number
-  setup_inner_camera: number
-  setup_inner_camera_hard: number
-  cabel_price_for_inner_cameras_per_meter: number
-  setup_outer_camera_easy: number
-  setup_outer_camera: number
-  setup_outer_camera_hard: number
-  cabel_price_for_outer_cameras_per_meter: number
-  setup_ahd_registery: number
-  setup_ip_registery: number
-  price_multiplier_for_registery_setup: number
-  registery_4: number
-  registery_8: number
-  registery_16: number
-  registery_20: number
-  registery_24: number
-  registery_32: number
-  power_unit: number
-  is_current: boolean
-}
-
-interface ICalculatorData {
-  id: number
-  blocks: IBlock[]
-  price_list: IPriceList
-}
+import { makeAutoObservable, computed, observable } from 'mobx'
+import { IBlock, ICalculatorData, ICamera, IPriceList, IRegister } from './types'
 
 class CalculatorStore {
   data: IBlock[] = []
@@ -98,13 +9,15 @@ class CalculatorStore {
   prices: IPriceList | undefined = undefined
   products: (ICamera | IRegister)[] = []
   blocks: CalculatorBlockStore[] = []
-  isLoading = true
   error: null | unknown = null
 
   constructor() {
     makeAutoObservable(this, {
       blocks: observable,
       result: computed,
+      data: observable.ref,
+      prices: observable.ref,
+      products: observable.ref,
     })
   }
 
@@ -135,30 +48,17 @@ class CalculatorStore {
     this.blocks.splice(id, 1)
   }
 
-  fetchData() {
-    this.isLoading = true
-    axios.get(`${BASE_URL}/api/v1/product/`, { timeout: 10000 }).then(
-      action('fetchProducts', (response) => {
-        this.products = response.data
-      }),
-      action('fetchProductsError', (error) => {
-        this.error = error
-        this.isLoading = false
-      }),
-    )
-    axios.get(`${BASE_URL}/api/v1/calculator/`, { timeout: 10000 }).then(
-      action('fetchData', (response) => {
-        const fullData: ICalculatorData[] = response.data
-        this.data = fullData[0].blocks
-        this.prices = fullData[0].price_list
-        this.setBlocks()
-        this.isLoading = false
-      }),
-      action('fetchError', (error) => {
-        this.error = error
-        this.isLoading = false
-      }),
-    )
+  getData(products: (ICamera | IRegister)[], calculator: ICalculatorData[]) {
+    if (!products || !calculator) {
+      this.error = true
+      return
+    }
+    this.products = products
+    this.data = calculator[0].blocks
+    this.prices = calculator[0].price_list
+    if (this.data && this.prices) {
+      this.setBlocks()
+    }
   }
 }
 

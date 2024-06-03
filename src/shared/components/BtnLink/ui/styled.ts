@@ -20,6 +20,11 @@ const StyledBtnLink = styled.a<TStyledBtnLinkProps>`
   &:hover {
     background-color: ${colors.btnPrimaryHover};
   }
+
+  @media (max-width: 620px) {
+    font-size: ${(props) => `calc(${props.size} - 2px)`};
+    font-weight: 700;
+  }
 `
 
 const StyledAccentBtnLink = styled.a<TStyledBtnLinkProps>`
@@ -40,6 +45,11 @@ const StyledAccentBtnLink = styled.a<TStyledBtnLinkProps>`
 
   &:hover {
     background-color: ${colors.btnPrimaryHover};
+  }
+
+  @media (max-width: 620px) {
+    font-size: ${(props) => `calc(${props.size} - 2px)`};
+    font-weight: 700;
   }
 `
 
@@ -65,10 +75,10 @@ const StyledTransparentBtnLink = styled.a<TStyledBtnLinkProps>`
     background-color: ${colors.btnOutlineHover};
   }
 
-  // @media (max-width: 620px) {
-  //   font-size: ${(props) => `calc(${props.size} - 2px)`};
-  //   font-weight: 700;
-  // }
+  @media (max-width: 620px) {
+    font-size: ${(props) => `calc(${props.size} - 2px)`};
+    font-weight: 700;
+  }
 `
 
 export { StyledBtnLink, StyledAccentBtnLink, StyledTransparentBtnLink }

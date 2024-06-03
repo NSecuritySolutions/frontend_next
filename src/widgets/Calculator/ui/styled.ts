@@ -49,6 +49,7 @@ const TitleWrapper = styled.div`
 `
 
 const SectionTitle = styled.h3`
+  height: 28px;
   color: ${colors.darkPrimary};
   font-size: 24px;
   line-height: 30px;

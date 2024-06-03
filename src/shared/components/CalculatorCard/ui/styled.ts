@@ -166,6 +166,16 @@ const InputNumber = styled.input.attrs({ type: 'number', min: 0 })`
   }
 `
 
+const CloseButton = styled.button`
+  position: absolute;
+  top: 6px;
+  right: 11px;
+`
+
+const OptionsWrapper = styled.div`
+  width: 100%;
+`
+
 export {
   Card,
   CardImgWrapper,
@@ -177,4 +187,6 @@ export {
   OptionHeader,
   CheckBox,
   InputNumber,
+  CloseButton,
+  OptionsWrapper,
 }
