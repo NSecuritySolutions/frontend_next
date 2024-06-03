@@ -7,9 +7,10 @@ const Card = styled.div`
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 40px 50.5px;
-  // max-height: 320px;
   display: flex;
   flex-direction: column;
+  min-height: 320px;
+
   justify-content: space-between;
 
   gap: 12px;
@@ -19,6 +20,13 @@ const Card = styled.div`
 
   @media (max-width: 1300px) {
     padding: 20px;
+    // min-height: 0;
+    // max-height: 320px;
+  }
+
+  @media (max-width: 940px) {
+    min-height: 0;
+    max-height: 320px;
   }
 
   a {
@@ -61,6 +69,7 @@ const CardText = styled.li`
     position: absolute;
     left: -20px;
   }
+
   @media (max-width: 940px) {
     width: 80%;
   }
@@ -71,7 +80,7 @@ const CardText = styled.li`
 
 const CardImg = styled.div`
   position: absolute;
-  top: 141px;
+  top: 161px;
   right: 0px;
   width: 300px;
   height: 169px;
@@ -84,16 +93,26 @@ const CardImg = styled.div`
 
   @media (max-width: 1300px) {
     width: 220px;
-    height: 124px;
-    top: 145px;
-    right: 0px;
+    height: 200px;
+    top: 200px;
+    right: 6px;
+
+    img {
+      width: 220px;
+      height: 150px;
+    }
+  }
+  @media (max-width: 940px) {
+    width: 220px;
+    height: 220px;
+    top: 200px;
+    right: 6px;
 
     img {
       width: 220px;
       height: 124px;
     }
   }
-
   @media (max-width: 620px) {
     display: none;
   }
