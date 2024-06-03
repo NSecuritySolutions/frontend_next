@@ -238,9 +238,6 @@ const StageNumber = styled.div`
   padding: 10px;
   font-size: 18px;
   font-weight: 800;
-
-  @media (max-width: 940px) {
-  }
 `
 
 const StageLine = styled.div`

@@ -5,6 +5,16 @@ import styled from 'styled-components'
 const Section = styled.section`
   margin: 40px auto;
   background-color: ${colors.backgroundBase2};
+
+  @media (max-width: 940px) {
+    width: 580px;
+    display: grid;
+  }
+
+  @media (max-width: 620px) {
+    width: 360px;
+    display: grid;
+  }
 `
 
 const SectionWrapper = styled.div`
@@ -14,13 +24,13 @@ const SectionWrapper = styled.div`
   max-width: 1180px;
   width: 100%;
 
-  @media (max-width: 940px) {
-    padding-left: calc(100vw - 750px);
-  }
+  // @media (max-width: 940px) {
+  //   padding-left: calc(100vw - 750px);
+  // }
 
-  @media (max-width: 620px) {
-    padding-left: calc(100vw - 500px);
-  }
+  // @media (max-width: 620px) {
+  //   padding-left: calc(100vw - 500px);
+  // }
 `
 const SliderWrapper = styled.div`
   .regular.slider {
