@@ -1,6 +1,6 @@
 'use client'
 
-import { Example } from '@/shared/Example'
+import { Example } from '@/widgets/Example'
 import { workExamples } from '@/shared/constants/texts/examples'
 import styles from './page.module.css'
 
