@@ -191,12 +191,18 @@ const ExamplesImgWrapper = styled.div`
   width: 200px;
   height: 200px;
   position: relative;
-
+  overflow: hidden;
   img {
     border-radius: 12px;
     width: 200px;
     height: 200px;
     object-fit: cover;
+    scale: 1;
+    transition: transform 1s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   @media (max-width: 1180px) {

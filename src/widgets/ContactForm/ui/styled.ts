@@ -69,6 +69,15 @@ const FormImgWrapper = styled.div`
   height: 537px;
   position: relative;
 
+  img {
+    scale: 1;
+    transition: transform 1s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
   @media (max-width: 1300px) {
     width: 430px;
     height: 398px;

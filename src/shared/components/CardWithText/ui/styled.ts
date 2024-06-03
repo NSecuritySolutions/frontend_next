@@ -90,12 +90,6 @@ const CardImg = styled.div`
     img {
       width: 220px;
       height: 124px;
-      scale: 1;
-      transition: transform 1s;
-
-      &:hover {
-        transform: scale(1.2);
-      }
     }
   }
 
