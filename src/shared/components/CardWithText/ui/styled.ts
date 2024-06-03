@@ -76,7 +76,11 @@ const CardImg = styled.div`
   width: 300px;
   height: 169px;
   object-fit: cover;
+  transition: transform 1s;
 
+  &:hover {
+    transform: scale(1.2);
+  }
   @media (max-width: 1180px) {
     width: 220px;
     height: 124px;
@@ -86,6 +90,12 @@ const CardImg = styled.div`
     img {
       width: 220px;
       height: 124px;
+      scale: 1;
+      transition: transform 1s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 

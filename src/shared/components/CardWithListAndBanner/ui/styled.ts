@@ -8,6 +8,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
   display: flex;
   min-height: 260px;
   grid-area: bigCard;
+  overflow: hidden;
 
   @media (max-width: 880px) {
     min-width: 400px;
@@ -23,9 +24,12 @@ const CardImg = styled.div`
   max-width: 403px;
   max-height: 260px;
   width: 100%;
-  position: absolute;
-  right: 25px;
-  bottom: 0;
+
+  transition: transform 1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   @media (max-width: 1180px) {
     max-width: 341px;

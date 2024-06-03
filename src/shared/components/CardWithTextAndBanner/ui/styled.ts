@@ -139,6 +139,11 @@ const CardImg = styled.div`
   max-width: 540px;
   max-height: 305px;
   width: 100%;
+  transition: transform 1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   @media (max-width: 1180px) {
     max-width: 320px;

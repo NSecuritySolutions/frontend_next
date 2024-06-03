@@ -155,6 +155,13 @@ const BannerWrapper = styled.div`
   bottom: 0px;
   transform: translateY(14px) translateX(55px);
 
+  img {
+    transition: transform 1s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
   @media (max-width: 1300px) {
     width: 540px;
     height: 284px;
