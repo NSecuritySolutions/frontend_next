@@ -17,7 +17,7 @@ const Card = styled.div`
   width: 100%;
   overflow: hidden;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     padding: 20px;
   }
 
@@ -61,7 +61,7 @@ const CardText = styled.li`
     position: absolute;
     left: -20px;
   }
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     width: 80%;
   }
   @media (max-width: 620px) {
@@ -81,7 +81,8 @@ const CardImg = styled.div`
   &:hover {
     transform: scale(1.2);
   }
-  @media (max-width: 1180px) {
+
+  @media (max-width: 1300px) {
     width: 220px;
     height: 124px;
     top: 145px;

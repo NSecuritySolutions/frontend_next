@@ -11,7 +11,7 @@ const CardContainer = styled.article`
   font-weight: 400;
   font-size: 16px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 122px;
   }
 
@@ -52,7 +52,7 @@ const CardImg = styled.div`
     }
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     width: 122px;
     height: 122px;
 
@@ -76,7 +76,7 @@ const CardName = styled.div`
   font-size: 18px;
   font-weight: 800;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     text-wrap: wrap;
   }
 `

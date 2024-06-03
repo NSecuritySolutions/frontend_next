@@ -10,12 +10,12 @@ const Card = styled.div<{ $backgroundColor: string }>`
   grid-area: bigCard;
   overflow: hidden;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     min-width: 400px;
     min-height: 288px;
     width: 100%;
   }
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     min-height: 264px;
   }
 `
@@ -25,13 +25,7 @@ const CardImg = styled.div`
   max-height: 260px;
   width: 100%;
 
-  transition: transform 1s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 341px;
     width: 100%;
     max-height: 220px;
@@ -45,7 +39,7 @@ const CardImg = styled.div`
     }
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     display: none;
   }
 `
@@ -92,10 +86,10 @@ const ContentContainer = styled.div`
   max-width: 1080px;
   margin: 52px 0 40px 20px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 575px;
   }
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     margin: 27px 20px;
   }
 `

@@ -1,4 +1,6 @@
 import { FC } from 'react'
+import { motion } from 'framer-motion'
+
 import Image from 'next/image'
 import Slider from 'react-slick'
 
@@ -101,14 +103,26 @@ const Info: FC = () => {
       </MainCard>
       <CardWrapper>
         <Slider {...settings}>
-          {cardInfoWithLogoData.map((cardData) => (
-            <CardInfoWithIcon
-              key={cardData.id}
-              title={cardData.title}
-              logo={cardData.logo}
-              backgroundColor={cardData.backgroundColor}
-              text={cardData.text}
-            />
+          {cardInfoWithLogoData.map((cardData, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.7 }}
+              style={{
+                margin: '0',
+                padding: '0',
+                background: 'transparent',
+                cursor: 'pointer',
+              }}
+            >
+              <CardInfoWithIcon
+                key={cardData.id}
+                title={cardData.title}
+                logo={cardData.logo}
+                backgroundColor={cardData.backgroundColor}
+                text={cardData.text}
+              />
+            </motion.div>
           ))}
         </Slider>
       </CardWrapper>

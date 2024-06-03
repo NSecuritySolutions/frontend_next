@@ -7,7 +7,7 @@ const Section = styled.section`
   background-color: ${colors.backgroundBase2};
   padding: 40px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     padding: 60px 0;
     align-items: center;
     justify-content: center;
@@ -25,14 +25,14 @@ const SectionWrapper = styled.div`
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   background: ${colors.backgroundPrimary};
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     flex-direction: row;
     max-width: 880px;
     width: 100%;
     gap: 120px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     flex-direction: column;
     max-width: 580px;
     width: 100%;
@@ -64,14 +64,12 @@ const ColumnTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
-  // white-space: nowrap;
-  // text-overflow: ellipsis;
   margin-bottom: 20px;
 
   font-size: 24px;
   font-weight: 700;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
     align-self: center;
@@ -90,18 +88,15 @@ const ColumnWrapper = styled.div`
   column-gap: 20px;
   gap: 20px;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     padding: 40px;
     display: grid;
     grid-template-columns: none;
     grid-template-rows: 1fr;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     padding: 0;
-  }
-
-  @media (max-width: 504px) {
   }
 `
 
@@ -109,7 +104,7 @@ const Column = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     width: 100%;
   }
 
@@ -124,7 +119,7 @@ const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
@@ -147,7 +142,7 @@ const ColumnParagraph = styled.div`
 
   gap: 12px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
@@ -164,13 +159,12 @@ const ContactsWrapper = styled.div`
   justify-content: center;
   gap: 12px;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     gap: 19.5px;
   }
 
   @media (max-width: 620px) {
     flex-direction: column;
-    // justify-self: center;
     gap: 12px;
   }
 `

@@ -16,12 +16,12 @@ const Card = styled.div<{ $backgroundColor: string }>`
   max-height: 320px;
   overflow: hidden;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     gap: 40px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-height: 266px;
     padding: 20px 20px 20px 0;
     gap: 20px;
@@ -47,7 +47,7 @@ const TextWrapper = styled.div`
     margin-top: 8px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 260px;
     width: 100%;
 
@@ -91,10 +91,10 @@ const TextContainer = styled.ul`
   width: 100%;
   line-height: 1.2;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 540px;
   }
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
   }
 
   @media (max-width: 620px) {
@@ -114,12 +114,12 @@ const CardText = styled.li`
   font-weight: 400;
   list-style: none;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 540px;
     width: 100%;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 260px;
     width: 100%;
   }
@@ -145,7 +145,7 @@ const CardImg = styled.div`
     transform: scale(1.2);
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 320px;
     width: 100%;
     max-height: 227px;
@@ -157,7 +157,7 @@ const CardImg = styled.div`
     }
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     img {
       max-width: 400px;
       width: 100%;

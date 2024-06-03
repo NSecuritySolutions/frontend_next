@@ -14,12 +14,12 @@ const SectionWrapper = styled.div`
   max-width: 1180px;
   width: 100%;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     padding-left: calc(100vw - 750px);
   }
 
   @media (max-width: 620px) {
-    padding-left: calc(100vw - 480px);
+    padding-left: calc(100vw - 500px);
   }
 `
 const SliderWrapper = styled.div`
@@ -46,7 +46,7 @@ const SliderWrapper = styled.div`
       'bigCard bigCard';
     gap: 20px;
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       min-width: 0;
       max-width: 880px;
       width: 100%;
@@ -130,7 +130,7 @@ const SliderWrapper = styled.div`
     min-height: 1px;
     max-width: 380px;
 
-    @media (max-width: 880px) {
+    @media (max-width: 940px) {
       max-width: 380px;
       width: 100%;
     }
@@ -179,17 +179,11 @@ const Title = styled.h2`
   font-weight: 700;
   margin-bottom: 40px;
 
-  @media (max-width: 1180 px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
-    align-self: center;
-  }
-  @media (max-width: 880px) {
-    padding-left: clamp(16px, 5%, 100px);
-  }
-
-  @media (max-width: 620px) {
-    padding-left: clamp(16px, 5%, 100px);
+    align-self: start;
+    padding-left: 20px;
   }
 `
 
