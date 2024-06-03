@@ -111,7 +111,7 @@ const CardText = styled.li`
   line-height: 1.2;
 
   font-size: 16px;
-  fornt-weight: 400;
+  font-weight: 400;
   list-style: none;
 
   @media (max-width: 1180px) {
@@ -129,7 +129,7 @@ const CardText = styled.li`
     width: 100%;
     height: 100%;
     font-size: 14px;
-    fornt-weight: 400;
+    font-weight: 400;
   }
 `
 
@@ -144,7 +144,7 @@ const CardImg = styled.div`
     max-width: 320px;
     width: 100%;
     max-height: 227px;
-    
+
     img {
       max-width: 320px;
       width: 100%;
@@ -153,18 +153,16 @@ const CardImg = styled.div`
   }
 
   @media (max-width: 880px) {
- 
-
     img {
-     max-width: 400px;
-     width: 100%;
-     max-height: 230px;
-     object-fit: cover;
+      max-width: 400px;
+      width: 100%;
+      max-height: 230px;
+      object-fit: cover;
     }
   }
 
   @media (max-width: 620px) {
-    padding-top: 20px
+    padding-top: 20px;
     max-width: 328px;
     width: 100%;
     max-height: 197px;

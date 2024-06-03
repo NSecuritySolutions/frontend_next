@@ -8,7 +8,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const data = cardSolutionData.filter((solution) => solution.id?.toString() === params.id)[0]
 
   return (
-    <main className={styles.main} id="content">
+    <main className={styles.main} id="product">
       <Breadcrumbs title={data.title} />
       <Product data={data} />
     </main>

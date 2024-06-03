@@ -125,7 +125,7 @@ const NumbersRow = styled.div`
   }
   .slick-list.dragging {
     cursor: pointer;
-    cursor: hand;
+    cursor: grab;
   }
 
   .slick-slider .slick-track,
