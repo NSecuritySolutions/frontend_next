@@ -57,7 +57,7 @@ export const cardAdvantagesWithBannerData = [
   {
     id: 1,
     title: 'Быстрый доступ в мобильном приложении',
-    banner: banner,
+    banner: '/images/banner/png/ic-advantages-banner.png',
     logo: '/icons/speed.svg',
     backgroundColor: `${colors.backgroundCardBl}`,
     listItem: [

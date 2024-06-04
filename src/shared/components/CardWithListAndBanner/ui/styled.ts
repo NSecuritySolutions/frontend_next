@@ -10,6 +10,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
   min-height: 260px;
   grid-area: bigCard;
   overflow: hidden;
+  justify-content: space-between;
 
   @media (max-width: 940px) {
     min-width: 400px;
@@ -34,6 +35,7 @@ const CardImg = styled.div`
     bottom: 40px;
 
     img {
+      margin-top: 30px;
       max-width: 341px;
       width: 100%;
       object-fit: cover;
