@@ -161,7 +161,9 @@ const CardWrapper = styled.div`
   border-radius: 20px !important;
   padding: 20px;
   margin-top: 0px !important;
-
+  :hover {
+    cursor: pointer;
+  }
   @media (max-width: 1180px) {
     flex-direction: column;
     max-width: 430px;

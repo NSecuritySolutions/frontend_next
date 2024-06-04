@@ -66,6 +66,7 @@ const ExamplesContainer = styled.article`
 
 const ExamplesLink = styled.a`
   text-decoration: none;
+  cursor: pointer;
 `
 const ExamplesImgWrapper = styled.div`
   border-radius: 12px;

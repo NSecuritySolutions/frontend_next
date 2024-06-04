@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { motion } from 'framer-motion'
 
 import Image, { StaticImageData } from 'next/image'
 
@@ -32,58 +31,41 @@ const CardWithListAndBanner: FC<TCardProps> = ({
   logo,
 }) => {
   return (
-    <motion.div
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.9 }}
-      style={{
-        margin: '0',
-        padding: '0',
-        background: 'transparent',
-        gridArea: 'bigCard',
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 500,
-        damping: 40,
-        duration: '0.3',
-      }}
-    >
-      <Card $backgroundColor={backgroundColor}>
-        <ContentContainer>
-          <TitleContainer>
-            <div style={{ width: '40px', height: '40px' }}>
-              <Image
-                src={logo}
-                alt="Логотип"
-                width={20}
-                height={20}
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-              />
-            </div>
-            <CardTitle>{title}</CardTitle>
-          </TitleContainer>
-          <List>
-            {listItem.map((item, index) => (
-              <ListItem key={index}>
-                <Image src="/icons/list-item.svg" alt="Маркер списка" width={20} height={20} />
-                <ListItemText>{item}</ListItemText>
-              </ListItem>
-            ))}
-          </List>
-        </ContentContainer>
+    <Card $backgroundColor={backgroundColor}>
+      <ContentContainer>
+        <TitleContainer>
+          <div style={{ width: '40px', height: '40px' }}>
+            <Image
+              src={logo}
+              alt="Логотип"
+              width={20}
+              height={20}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          </div>
+          <CardTitle>{title}</CardTitle>
+        </TitleContainer>
+        <List>
+          {listItem.map((item, index) => (
+            <ListItem key={index}>
+              <Image src="/icons/list-item.svg" alt="Маркер списка" width={20} height={20} />
+              <ListItemText>{item}</ListItemText>
+            </ListItem>
+          ))}
+        </List>
+      </ContentContainer>
 
-        <CardImg>
-          <Image
-            src={banner}
-            alt="Баннер"
-            width={403}
-            height={260}
-            placeholder="blur"
-            blurDataURL={rgbDataURL(225, 231, 244)}
-          />
-        </CardImg>
-      </Card>
-    </motion.div>
+      <CardImg>
+        <Image
+          src={banner}
+          alt="Баннер"
+          width={403}
+          height={260}
+          placeholder="blur"
+          blurDataURL={rgbDataURL(225, 231, 244)}
+        />
+      </CardImg>
+    </Card>
   )
 }
 

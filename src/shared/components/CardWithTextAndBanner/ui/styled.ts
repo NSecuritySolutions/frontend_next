@@ -1,6 +1,24 @@
 import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const zoomIn = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+  `
+
+const zoomOut = keyframes`
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+  `
 
 const Card = styled.div<{ $backgroundColor: string }>`
   margin: 0 auto;
@@ -13,8 +31,10 @@ const Card = styled.div<{ $backgroundColor: string }>`
   flex-direction: row;
   gap: 20px;
   max-width: 1180px;
+  width: 100%;
   max-height: 320px;
   overflow: hidden;
+  pointer-events: auto;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -23,7 +43,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
 
   @media (max-width: 940px) {
     max-height: 266px;
-    padding: 20px 20px 20px 0;
+    padding: 20px 20px 0 20px;
     gap: 20px;
   }
 
@@ -31,7 +51,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
     max-width: 328px;
     max-height: 434px;
     flex-direction: column-reverse;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
   }
 `
 
@@ -50,9 +70,11 @@ const TextWrapper = styled.div`
   @media (max-width: 940px) {
     max-width: 260px;
     width: 100%;
+    justify-content: center;
 
     a {
-      margin-top: 20px;
+      align-self: start;
+      margin-bottom: 20px;
     }
     
   }
@@ -93,8 +115,6 @@ const TextContainer = styled.ul`
 
   @media (max-width: 1300px) {
     max-width: 540px;
-  }
-  @media (max-width: 940px) {
   }
 
   @media (max-width: 620px) {
@@ -139,10 +159,20 @@ const CardImg = styled.div`
   max-width: 540px;
   max-height: 305px;
   width: 100%;
-  transition: transform 1s;
 
-  &:hover {
-    transform: scale(1.2);
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .expanded {
+    animation: ${zoomIn} 0.5s forwards;
+  }
+
+  .card-image:not(.expanded) {
+    animation: ${zoomOut} 0.5s forwards;
   }
 
   @media (max-width: 1300px) {
@@ -167,10 +197,10 @@ const CardImg = styled.div`
   }
 
   @media (max-width: 620px) {
-    padding-top: 20px;
+    padding: 0;
     max-width: 328px;
     width: 100%;
-    max-height: 197px;
+    height: 212px;
 
     img {
       object-fit: cover;

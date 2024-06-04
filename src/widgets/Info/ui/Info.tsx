@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { motion } from 'framer-motion'
 
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Slider from 'react-slick'
 
@@ -28,6 +28,8 @@ import {
 import colors from '@/shared/constants/colors'
 
 const Info: FC = () => {
+  const router = useRouter()
+
   const settings = {
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick', arrows: false },
@@ -58,7 +60,11 @@ const Info: FC = () => {
 
   return (
     <Section id="banner">
-      <MainCard>
+      <MainCard
+        onClick={() => {
+          router.push('/#contact-form')
+        }}
+      >
         <HeaderWrapper>
           <TextBlock>
             <Title>
@@ -105,25 +111,13 @@ const Info: FC = () => {
       <CardWrapper>
         <Slider {...settings}>
           {cardInfoWithLogoData.map((cardData, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.9 }}
-              style={{
-                margin: '0',
-                padding: '0',
-                background: 'transparent',
-              }}
-              transition={{ type: 'spring', stiffness: 500, damping: 40, duration: '0.2' }}
-            >
-              <CardInfoWithIcon
-                key={cardData.id}
-                title={cardData.title}
-                logo={cardData.logo}
-                backgroundColor={cardData.backgroundColor}
-                text={cardData.text}
-              />
-            </motion.div>
+            <CardInfoWithIcon
+              key={cardData.id}
+              title={cardData.title}
+              logo={cardData.logo}
+              backgroundColor={cardData.backgroundColor}
+              text={cardData.text}
+            />
           ))}
         </Slider>
       </CardWrapper>

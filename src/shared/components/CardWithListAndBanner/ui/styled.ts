@@ -1,5 +1,6 @@
-import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
+
+import styled from 'styled-components'
 
 const Card = styled.div<{ $backgroundColor: string }>`
   position: relative;

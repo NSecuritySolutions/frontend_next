@@ -71,10 +71,10 @@ const FormImgWrapper = styled.div`
 
   img {
     scale: 1;
-    transition: transform 1s;
+    transition: transform 1s ease-in;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.03);
     }
   }
 

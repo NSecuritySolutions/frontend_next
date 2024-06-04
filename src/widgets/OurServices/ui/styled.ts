@@ -41,7 +41,7 @@ const CardsGridContainer = styled.div`
   & > div {
     @media (max-width: 940px) {
       div {
-        top: 110px;
+        top: 120px;
       }
     }
   }
@@ -49,7 +49,7 @@ const CardsGridContainer = styled.div`
   & > div:nth-child(3) {
     @media (max-width: 1300px) {
       div {
-        top: 180px;
+        top: 190px;
       }
     }
     @media (max-width: 940px) {
@@ -62,12 +62,13 @@ const CardsGridContainer = styled.div`
   & > div:nth-child(4) {
     @media (max-width: 1300px) {
       div {
-        top: 180px;
+        top: 190px;
       }
     }
+
     @media (max-width: 940px) {
       div {
-        top: 88px;
+        top: 120px;
       }
     }
   }
