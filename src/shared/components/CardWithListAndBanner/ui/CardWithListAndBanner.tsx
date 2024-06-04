@@ -17,7 +17,8 @@ import {
 
 type TCardProps = {
   title: string
-  banner: StaticImageData
+  banner: string
+  // banner: StaticImageData
   listItem: string[]
   backgroundColor: string
   logo: string
