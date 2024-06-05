@@ -17,7 +17,7 @@ const AdvantagesBlock: FC = () => {
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
       {
-        breakpoint: 880,
+        breakpoint: 940,
         settings: {
           focusOnSelect: true,
           speed: 200,
@@ -46,7 +46,7 @@ const AdvantagesBlock: FC = () => {
         <Title>Мы обеспечиваем</Title>
         <SliderWrapper>
           <Slider {...settings}>
-            {cardAdvantagesData.map((card) => (
+            {cardAdvantagesData.map((card, i) => (
               <CardWithList
                 key={card.id}
                 title={card.title}

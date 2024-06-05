@@ -11,11 +11,11 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
   }
@@ -39,20 +39,20 @@ const CardsGridContainer = styled.div`
   grid-gap: 20px;
 
   & > div {
-    @media (max-width: 880px) {
+    @media (max-width: 940px) {
       div {
-        top: 110px;
+        top: 120px;
       }
     }
   }
 
   & > div:nth-child(3) {
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       div {
-        top: 180px;
+        top: 190px;
       }
     }
-    @media (max-width: 880px) {
+    @media (max-width: 940px) {
       div {
         top: 150px;
       }
@@ -60,19 +60,20 @@ const CardsGridContainer = styled.div`
   }
 
   & > div:nth-child(4) {
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       div {
-        top: 180px;
+        top: 190px;
       }
     }
-    @media (max-width: 880px) {
+
+    @media (max-width: 940px) {
       div {
-        top: 88px;
+        top: 120px;
       }
     }
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     grid-template-columns: 1fr;
   }
 `

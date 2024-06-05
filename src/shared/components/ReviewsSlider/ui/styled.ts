@@ -82,9 +82,10 @@ const ReviewsLink = styled.a<{ $active?: boolean }>`
   font-size: 16px;
   color: ${colors.titleBlueColor};
   opacity: 1;
+
   &:hover {
     opacity: 0.5;
-    transform: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
   }
 `
 

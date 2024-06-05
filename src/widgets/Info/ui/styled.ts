@@ -40,6 +40,10 @@ const MainCard = styled.div`
   position: relative;
   overflow: hidden;
 
+  :hover {
+    cursor: pointer;
+  }
+
   @media (max-width: 1300px) {
     max-width: 880px;
   }

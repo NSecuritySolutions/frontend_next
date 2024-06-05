@@ -1,15 +1,34 @@
 import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const zoomIn = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+  `
+
+const zoomOut = keyframes`
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+  `
 
 const Card = styled.div`
   position: relative;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 40px 50.5px;
-  // max-height: 320px;
   display: flex;
   flex-direction: column;
+  min-height: 320px;
+
   justify-content: space-between;
 
   gap: 12px;
@@ -17,8 +36,16 @@ const Card = styled.div`
   width: 100%;
   overflow: hidden;
 
-  @media (max-width: 1180px) {
+  :hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 1300px) {
     padding: 20px;
+  }
+
+  @media (max-width: 940px) {
+    min-height: 241px;
   }
 
   a {
@@ -61,7 +88,8 @@ const CardText = styled.li`
     position: absolute;
     left: -20px;
   }
-  @media (max-width: 880px) {
+
+  @media (max-width: 940px) {
     width: 80%;
   }
   @media (max-width: 620px) {
@@ -71,17 +99,43 @@ const CardText = styled.li`
 
 const CardImg = styled.div`
   position: absolute;
-  top: 141px;
+  top: 161px;
   right: 0px;
   width: 300px;
   height: 169px;
   object-fit: cover;
 
-  @media (max-width: 1180px) {
+  .card-image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in;
+  }
+
+  .expanded {
+    animation: ${zoomIn} 0.5s forwards;
+  }
+
+  .card-image:not(.expanded) {
+    animation: ${zoomOut} 0.5s forwards;
+  }
+
+  @media (max-width: 1300px) {
+    width: 220px;
+    height: 131px;
+    top: 190px;
+    right: 6px;
+
+    img {
+      width: 220px;
+      height: 150px;
+    }
+  }
+
+  @media (max-width: 940px) {
     width: 220px;
     height: 124px;
-    top: 145px;
-    right: 0px;
+    top: 150px;
+    right: 6px;
 
     img {
       width: 220px;

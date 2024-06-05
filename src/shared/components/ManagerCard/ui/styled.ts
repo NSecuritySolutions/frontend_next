@@ -11,7 +11,7 @@ const CardContainer = styled.article`
   font-weight: 400;
   font-size: 16px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 122px;
   }
 
@@ -31,6 +31,7 @@ const TextWrapper = styled.div`
 `
 
 const CardImg = styled.div`
+  overflow: hidden;
   border-radius: 550px;
   width: 172px;
   height: 172px;
@@ -42,9 +43,16 @@ const CardImg = styled.div`
     width: 172px;
     height: 172px;
     object-fit: cover;
+
+    scale: 1;
+    transition: transform 1s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     width: 122px;
     height: 122px;
 
@@ -68,7 +76,7 @@ const CardName = styled.div`
   font-size: 18px;
   font-weight: 800;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     text-wrap: wrap;
   }
 `

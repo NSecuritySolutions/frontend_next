@@ -1,6 +1,24 @@
 import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const zoomIn = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+  `
+
+const zoomOut = keyframes`
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+  `
 
 const Card = styled.div<{ $backgroundColor: string }>`
   margin: 0 auto;
@@ -13,17 +31,19 @@ const Card = styled.div<{ $backgroundColor: string }>`
   flex-direction: row;
   gap: 20px;
   max-width: 1180px;
+  width: 100%;
   max-height: 320px;
   overflow: hidden;
+  pointer-events: auto;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     gap: 40px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-height: 266px;
-    padding: 20px 20px 20px 0;
+    padding: 20px 20px 0 20px;
     gap: 20px;
   }
 
@@ -31,7 +51,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
     max-width: 328px;
     max-height: 434px;
     flex-direction: column-reverse;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
   }
 `
 
@@ -47,12 +67,14 @@ const TextWrapper = styled.div`
     margin-top: 8px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 260px;
     width: 100%;
+    justify-content: center;
 
     a {
-      margin-top: 20px;
+      align-self: start;
+      margin-bottom: 20px;
     }
     
   }
@@ -91,10 +113,8 @@ const TextContainer = styled.ul`
   width: 100%;
   line-height: 1.2;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 540px;
-  }
-  @media (max-width: 880px) {
   }
 
   @media (max-width: 620px) {
@@ -111,15 +131,15 @@ const CardText = styled.li`
   line-height: 1.2;
 
   font-size: 16px;
-  fornt-weight: 400;
+  font-weight: 400;
   list-style: none;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 540px;
     width: 100%;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 260px;
     width: 100%;
   }
@@ -129,7 +149,7 @@ const CardText = styled.li`
     width: 100%;
     height: 100%;
     font-size: 14px;
-    fornt-weight: 400;
+    font-weight: 400;
   }
 `
 
@@ -140,11 +160,26 @@ const CardImg = styled.div`
   max-height: 305px;
   width: 100%;
 
-  @media (max-width: 1180px) {
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .expanded {
+    animation: ${zoomIn} 0.5s forwards;
+  }
+
+  .card-image:not(.expanded) {
+    animation: ${zoomOut} 0.5s forwards;
+  }
+
+  @media (max-width: 1300px) {
     max-width: 320px;
     width: 100%;
     max-height: 227px;
-    
+
     img {
       max-width: 320px;
       width: 100%;
@@ -152,22 +187,20 @@ const CardImg = styled.div`
     }
   }
 
-  @media (max-width: 880px) {
- 
-
+  @media (max-width: 940px) {
     img {
-     max-width: 400px;
-     width: 100%;
-     max-height: 230px;
-     object-fit: cover;
+      max-width: 400px;
+      width: 100%;
+      max-height: 230px;
+      object-fit: cover;
     }
   }
 
   @media (max-width: 620px) {
-    padding-top: 20px
+    padding: 0;
     max-width: 328px;
     width: 100%;
-    max-height: 197px;
+    height: 212px;
 
     img {
       object-fit: cover;

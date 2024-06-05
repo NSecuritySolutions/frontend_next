@@ -7,7 +7,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
   padding: 20px;
   min-height: 188px;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 380px;
     width: 100%;
     min-height: 288px;

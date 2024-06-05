@@ -43,8 +43,19 @@ const BlockTitle = styled.h3`
 `
 const BlockParagraph = styled.p``
 
-const BlockText = styled.p`
+const BlockText = styled.div`
   white-space: pre-wrap;
+
+  a {
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+  }
+  span {
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+  }
 `
 
 export { SectionWrapper, SectionTitle, BlockTitle, BlockParagraph, BlockWrapper, BlockText }

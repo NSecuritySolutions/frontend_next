@@ -17,9 +17,11 @@ const colors = {
   accentNegative: '#FD4D61',
   textNegative: '#E64255',
   scrollActive: '#D7D7D7',
-  btnOutlineHover: '#0dc0be',
+  btnOutlineHover: '#e1e7f4',
   btnOpacityColor: '#27272799',
   titleBlueColor: '#3682db',
 }
 
 export default colors
+
+//  accentInfo: '#e1e7f4',

@@ -1,4 +1,6 @@
 import { FC } from 'react'
+
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Slider from 'react-slick'
 
@@ -26,9 +28,11 @@ import {
 import colors from '@/shared/constants/colors'
 
 const Info: FC = () => {
+  const router = useRouter()
+
   const settings = {
     responsive: [
-      { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
+      { breakpoint: 999999999, settings: 'unslick' as 'unslick', arrows: false },
       {
         breakpoint: 940,
         settings: {
@@ -55,8 +59,12 @@ const Info: FC = () => {
   }
 
   return (
-    <Section>
-      <MainCard>
+    <Section id="banner">
+      <MainCard
+        onClick={() => {
+          router.push('/#contact-form')
+        }}
+      >
         <HeaderWrapper>
           <TextBlock>
             <Title>
@@ -92,6 +100,7 @@ const Info: FC = () => {
         </HistoryWrapper>
         <BannerWrapper>
           <Image
+            priority
             src={bannerImg}
             alt="Баннер"
             fill
@@ -101,7 +110,7 @@ const Info: FC = () => {
       </MainCard>
       <CardWrapper>
         <Slider {...settings}>
-          {cardInfoWithLogoData.map((cardData) => (
+          {cardInfoWithLogoData.map((cardData, i) => (
             <CardInfoWithIcon
               key={cardData.id}
               title={cardData.title}

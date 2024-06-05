@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { ReviewsSlider } from '@/shared/components/ReviewsSlider/index.ts'
-
+import Link from 'next/link'
 import {
   Section,
   SectionWrapper,
@@ -29,16 +29,16 @@ const ReviewsBlock = () => {
           <Column>
             <TextWrapper>
               <StyledParagraph> Еще больше отзывов о нас на Яндекс.Услуги</StyledParagraph>
-              <a href={YANDEX_URL}>
+              <Link href={YANDEX_URL}>
                 <ColumnImageWrapper>
                   <Image
-                    src="/yandex-link.png"
+                    src="/images/yandex/yandex-link.png"
                     alt="Логотип и переход на страницу отзывов магазина в Яндекс Маркет"
                     width={280}
                     height={74}
                   />
                 </ColumnImageWrapper>
-              </a>
+              </Link>
             </TextWrapper>
           </Column>
         </ColumnWrapper>

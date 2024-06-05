@@ -37,24 +37,48 @@ async function getData() {
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
     fetch(`${BASE_URL}/api/v1/calculator/`),
+    fetch(`${BASE_URL}/api/v1/our-services/`),
   ])
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, teamData, examplesData, questionsData, productData, calculatorData] =
-    await Promise.all(responses.map((response) => response.json()))
+  const [
+    solutionData,
+    teamData,
+    examplesData,
+    questionsData,
+    productData,
+    calculatorData,
+    servicesData,
+  ] = await Promise.all(responses.map((response) => response.json()))
 
-  return { solutionData, teamData, examplesData, questionsData, productData, calculatorData }
+  return {
+    solutionData,
+    teamData,
+    examplesData,
+    questionsData,
+    productData,
+    calculatorData,
+    servicesData,
+  }
 }
 
 export default async function Page() {
-  const { solutionData, teamData, examplesData, questionsData, productData, calculatorData } =
-    await getData()
+  const {
+    solutionData,
+    teamData,
+    examplesData,
+    questionsData,
+    productData,
+    calculatorData,
+    servicesData,
+  } = await getData()
 
   const cookieStore = cookies()
   const hasCookie = cookieStore.has('agreedGuest')
+
   return (
     <main className={styles.main} id="content">
       <Info />

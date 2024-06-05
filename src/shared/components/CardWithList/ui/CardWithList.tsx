@@ -1,4 +1,5 @@
 import { FC } from 'react'
+
 import Image, { StaticImageData } from 'next/image'
 
 import { Card, CardTitle, List, ListItem, ListItemText, TitleContainer } from './styled'

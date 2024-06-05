@@ -1,15 +1,7 @@
 import { TOurServices } from './types'
 
-import securityImg from '@/assets/images/services/webp/services-image-1.webp'
-import fireAlarmImg from '@/assets/images/services/webp/services-image-2.webp'
-
-import videoSurvImg from '@/assets/images/services/webp/services-image-3.webp'
-
-import intercomImg from '@/assets/images/services/webp/services-image-4.webp'
-
-import calculateImg from '@/assets/images/services/webp/services-image-5.webp'
-
 export const TEXT_LIMIT: number = 145
+
 export const TITLE_LIMIT: number = 23
 
 export const cardServices: TOurServices[] = [
@@ -19,7 +11,7 @@ export const cardServices: TOurServices[] = [
     text: [
       'Комплексные решения, онлайн-консультации в сети и по телефону, проектирование от сбора первичных требований и выезда на замер до установки и подключения',
     ],
-    img: securityImg,
+    img: '/images/services/png/services-images-res-1.png',
     link: '/#contact-form',
     btnName: 'Заказать',
   },
@@ -30,7 +22,7 @@ export const cardServices: TOurServices[] = [
       'Большой ассортимент IP и AHD камер, регистраторов и коммутаторов для решения любой задачи и возможностью подбора необходимых функций',
       'Просмотр в приложении на смартфоне и через веб-браузер',
     ],
-    img: fireAlarmImg,
+    img: '/images/services/png/services-images-res-2.png',
     link: '/video-surveillance',
     btnName: 'Подробнее',
   },
@@ -42,7 +34,7 @@ export const cardServices: TOurServices[] = [
       'Умное электронное оборудование, объединенное в систему ограничения доступа',
       'Автономные и сетевые СКУД',
     ],
-    img: videoSurvImg,
+    img: '/images/services/png/services-images-res-3.png',
     link: '/domofon',
     btnName: 'Подробнее',
   },
@@ -53,7 +45,7 @@ export const cardServices: TOurServices[] = [
       'Проводные и беспроводные системы охранно-пожарной сигнализации',
       'Имеем бессрочную лицензию МЧС на осуществление деятельности',
     ],
-    img: intercomImg,
+    img: '/images/services/png/services-images-res-4.png',
     link: '/security',
     btnName: 'Подробнее',
   },
@@ -66,7 +58,7 @@ export const cardServicesWithBannerData: TOurServices[] = [
     text: [
       'Рассчитайте стоимость вашего проекта прямо на\u00A0сайте и\u00A0закажите обратную связь для дальнейшего сотрудничества',
     ],
-    img: calculateImg,
+    img: '/images/services/png/services-images-res-5.png',
     link: '#calculator',
     btnName: 'Рассчитать стоимость',
   },

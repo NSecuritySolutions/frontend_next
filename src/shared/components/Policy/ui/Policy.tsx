@@ -1,11 +1,9 @@
 'use client'
-// import { useEffect } from 'react'
-// import dataFetch from '@/app/store/test.ts'
 
+import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
-
+import Loader from '../../Loader/Loader.tsx'
 import { policy } from '@/shared/constants/texts/policy.ts'
 import { IPolicyItem } from '@/shared/constants/texts/policy.ts'
 
@@ -22,12 +20,45 @@ import {
 
 const Policy = observer(() => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [updatedPolicy, setUpdatedPolicy] = useState<IPolicyItem[] | undefined>(undefined)
 
   const handleContainerClick = () => {
     setIsExpanded(!isExpanded)
   }
 
-  //@TODO - тест на работу с запросом от сервера
+  useEffect(() => {
+    const transformPolicyParagraphs = () => {
+      const updatedParagraphs = policy.paragraphs.map((item) => {
+        let updatedText = item.text
+
+        if (updatedText !== undefined) {
+          updatedText = updatedText.replace(
+            /https:\/\/opticontol\.ru\/policy\.html/g,
+            '<a href="https://opticontol.ru/policy.html" target="_blank">https://opticontol.ru/policy.html</a>',
+          )
+
+          updatedText = updatedText.replace(
+            /info@opticontrol\.ru/g,
+            '<a href="mailto:info@opticontrol.ru">info@opticontrol.ru</a>',
+          )
+          updatedText = updatedText.replace(/ОПТИКОНТРОЛЬ/gi, '<span>ОПТИКОНТРОЛЬ</span>')
+        }
+        return { ...item, text: updatedText }
+      })
+
+      setUpdatedPolicy(updatedParagraphs)
+    }
+
+    transformPolicyParagraphs()
+  }, [policy])
+
+  const createMarkup = (text: string) => ({ __html: text })
+
+  if (!updatedPolicy) {
+    return <Loader />
+  }
+
+  // @TODO - тест на работу с запросом от сервера
   // useEffect(() => {
   //   dataFetch.fetchData()
   // }, [])
@@ -42,19 +73,20 @@ const Policy = observer(() => {
 
   // const splitString = (string: string) => {
   //   string.split(/\r\n|\r|\n/g)
-  // }
 
   //@TODO -  useRef - сделать высоту контейнера c текстом универсальной.
 
   return (
-    <SectionWrapper $additional={isExpanded} $height={isExpanded ? '6150px' : '760px'} id="policy">
+    <SectionWrapper $additional={isExpanded} $height={isExpanded ? '10150px' : '660px'} id="policy">
       <SectionTitle>{policy.title}</SectionTitle>
       <div style={{ overflow: 'hidden', scrollbarWidth: 'none' }}>
-        {policy.paragraphs.map((item: IPolicyItem, i: number) => (
+        {updatedPolicy.map((item: IPolicyItem, i: number) => (
           <BlockWrapper key={i}>
             <BlockTitle>{item.title}</BlockTitle>
             <BlockParagraph>{item.paragraph}</BlockParagraph>
-            <BlockText>{item.text}</BlockText>
+            <BlockText
+              dangerouslySetInnerHTML={item && item.text ? createMarkup(item.text) : { __html: '' }}
+            ></BlockText>
           </BlockWrapper>
         ))}
       </div>

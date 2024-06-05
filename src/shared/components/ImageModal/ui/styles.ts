@@ -96,7 +96,7 @@ const Button = styled.button`
 
   &:hover {
     opacity: 0.7;
-    transform: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
   }
 
   @media (max-width: 1180px) {
@@ -125,7 +125,7 @@ const RevertButton = styled.button`
 
   &:hover {
     opacity: 0.7;
-    transform: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
   }
 
   @media (max-width: 1180px) {

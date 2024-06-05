@@ -8,7 +8,7 @@ const Section = styled.section`
   justify-content: center;
   background-color: ${colors.backgroundCardYe};
   margin: 0 auto;
-
+  overflow: hidden;
   /* @media (max-width: 1300px) {
     padding: 60px 20px 120px;
     align-items: center;
@@ -68,6 +68,15 @@ const FormImgWrapper = styled.div`
   width: 580px;
   height: 537px;
   position: relative;
+
+  img {
+    scale: 1;
+    transition: transform 1s ease-in;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
 
   @media (max-width: 1300px) {
     width: 430px;

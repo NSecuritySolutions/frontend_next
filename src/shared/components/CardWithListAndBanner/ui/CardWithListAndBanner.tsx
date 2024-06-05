@@ -17,7 +17,8 @@ import {
 
 type TCardProps = {
   title: string
-  banner: StaticImageData
+  banner: string
+  // banner: StaticImageData
   listItem: string[]
   backgroundColor: string
   logo: string
@@ -59,7 +60,7 @@ const CardWithListAndBanner: FC<TCardProps> = ({
         <Image
           src={banner}
           alt="Баннер"
-          width={430}
+          width={403}
           height={260}
           placeholder="blur"
           blurDataURL={rgbDataURL(225, 231, 244)}

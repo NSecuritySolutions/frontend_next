@@ -1,5 +1,9 @@
 import { FC } from 'react'
 
+import { useState } from 'react'
+
+import { useRouter } from 'next/navigation'
+
 import Image from 'next/image'
 
 import { BtnLink } from '@/shared/components/BtnLink'
@@ -13,8 +17,25 @@ import colors from '@/shared/constants/colors/index.ts'
 import { rgbDataURL } from '@/shared/constants/utils/utils'
 
 const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
+  const router = useRouter()
+
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
   return (
-    <Card>
+    <Card
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        router.push(link)
+      }}
+    >
       <CardTitle>{title}</CardTitle>
       <TextContainer>
         {text.map((item, index) => (
@@ -40,6 +61,7 @@ const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
           height={169}
           // blurDataURL="/blurData/blur2.png"
           blurDataURL={rgbDataURL(225, 231, 244)}
+          className={isHovered ? 'card-image expanded' : 'card-image'}
         />
       </CardImg>
     </Card>

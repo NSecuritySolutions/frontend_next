@@ -20,14 +20,16 @@ const SectionWrapper = styled.div`
     flex-direction: row;
     justify-content: center;
     gap: 20px;
+    wrap: nowrap;
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       margin: 0 auto;
       padding: 0;
       max-width: 880px;
       width: 100%;
       flex-direction: row;
       flex-wrap: wrap;
+      gap: 10px;
     }
   }
 
@@ -39,13 +41,13 @@ const SectionWrapper = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
     gap: 20px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 880px;
     padding-left: clamp(150px, 1%, 16px);
   }
@@ -60,14 +62,12 @@ const SectionTitle = styled.h2`
   color: ${colors.darkPrimary};
   display: flex;
   overflow: hidden;
-  // white-space: nowrap;
-  // text-overflow: ellipsis;
   max-width: 1180px;
   width: 100%;
   font-size: 24px;
   font-weight: 700;
 
-  @media (max-width: 1180 px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
     align-self: center;
@@ -82,24 +82,6 @@ const SectionTitle = styled.h2`
   @media (max-width: 620px) {
     padding-left: clamp(16px, 5%, 100px);
   }
-`
-const ColumnWrapper = styled.div`
-  // margin-top: 30px;
-  // width: 100%;
-  // padding: 20px 0;
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: center;
-  // gap: 20px;
-
-  // @media (max-width: 1180px) {
-  //   margin: 0 auto;
-  //   padding: 0;
-  //   max-width: 880px;
-  //   width: 100%;
-  //   flex-direction: row;
-  //   flex-wrap: wrap;
-  // }
 `
 
 const SliderWrapper = styled.div`
@@ -137,7 +119,7 @@ const SliderWrapper = styled.div`
   }
   .slick-list.dragging {
     cursor: pointer;
-    cursor: hand;
+    cursor: grab;
   }
 
   .slick-slider .slick-track,
@@ -222,7 +204,7 @@ const Column = styled.div`
   width: 100%;
   gap: 12px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 430px;
     width: 100%;
   }
@@ -256,21 +238,18 @@ const StageNumber = styled.div`
   padding: 10px;
   font-size: 18px;
   font-weight: 800;
-
-  @media (max-width: 940px) {
-  }
 `
 
 const StageLine = styled.div`
   border-color: rgba(16, 16, 16, 1);
   border-style: solid;
   border-width: 1px;
-  background-color: ${colors.darkPrimary};
+  // background-color: ${colors.darkPrimary};
   width: 175px;
   height: 0;
   margin: auto 0;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     width: 430px;
   }
   @media (max-width: 940px) {
@@ -315,7 +294,6 @@ const StageParagraph = styled.p`
 export {
   Section,
   SectionWrapper,
-  ColumnWrapper,
   Column,
   StageWrapper,
   StageNumber,

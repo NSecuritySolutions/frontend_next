@@ -55,6 +55,11 @@ const FooterSocialIconsContainer = styled.div`
 
 const FooterSocialIconLink = styled.a`
   cursor: pointer;
+  opacity: 1;
+  &:hover {
+    opacity: 0.7;
+    transform: opacity 2s ease-in;
+  }
 `
 
 const FooterContactsContainer = styled.div`
@@ -111,6 +116,11 @@ const FooterContactsContentWrapper = styled.div`
 const FooterContactLogo = styled.img`
   width: 24px;
   height: 24px;
+  opacity: 1;
+  &:hover {
+    opacity: 0.7;
+    transform: opacity 2s ease-in;
+  }
 `
 
 const FooterContactLink = styled.a`
@@ -119,6 +129,11 @@ const FooterContactLink = styled.a`
   line-height: 136%;
   font-weight: 700;
   max-width: 162px;
+  opacity: 1;
+  &:hover {
+    opacity: 0.7;
+    transform: opacity 2s ease-in;
+  }
 `
 
 const FooterBtnWrapper = styled.div`

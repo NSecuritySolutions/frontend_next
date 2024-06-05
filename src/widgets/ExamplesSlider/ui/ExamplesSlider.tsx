@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import Link from 'next/link'
 import Image from 'next/image'
 
 import Slider from 'react-slick'
@@ -108,75 +109,78 @@ const ExamplesSlider: React.FC = () => {
   }
   return (
     <section>
-      <div>
-        <ColumnTitle>Примеры наших работ</ColumnTitle>
+      <ColumnTitle>Примеры наших работ</ColumnTitle>
 
-        <SectionWrapper>
-          <SliderContainer className="slider-container" id="examples">
-            <Slider {...settings} afterChange={handleAfterChange} className="sliderMain">
-              {workExamples
-                .sort(
-                  (newDate: TWorkExamples, olderDate: TWorkExamples) =>
-                    new Date(olderDate.date as string).getTime() -
-                    new Date(newDate.date as string).getTime(),
-                )
-                .map((item: TWorkExamples, i) => (
-                  <CardWrapper key={item.id}>
-                    {item.cardImage ? (
-                      <ExamplesLink href={`/examples/${item.id}`}>
-                        <ExamplesImgWrapper>
-                          <Image
-                            blurDataURL={rgbDataURL(225, 231, 244)}
-                            src={item?.cardImage}
-                            alt={item.cardTitle}
-                            fill
-                            sizes="(max-width: 620px) 240px, (max-width: 880px) 390px, (max-width: 1180px) 390px, 200px"
-                          />
-                        </ExamplesImgWrapper>
-                      </ExamplesLink>
-                    ) : (
+      <SectionWrapper>
+        <SliderContainer className="slider-container" id="examples">
+          <Slider {...settings} afterChange={handleAfterChange} className="sliderMain">
+            {workExamples
+              .sort(
+                (newDate: TWorkExamples, olderDate: TWorkExamples) =>
+                  new Date(olderDate.date as string).getTime() -
+                  new Date(newDate.date as string).getTime(),
+              )
+              .map((item: TWorkExamples, i) => (
+                <CardWrapper
+                  key={item.id}
+                  onClick={() => {
+                    router.push(`/examples/${item.id}`)
+                  }}
+                >
+                  {item.cardImage ? (
+                    <ExamplesLink href={`/examples/${item.id}`}>
                       <ExamplesImgWrapper>
                         <Image
-                          src={(item.cardImage = blankImg)}
-                          fill
-                          alt={'Пустая картинка'}
-                          placeholder="blur"
                           blurDataURL={rgbDataURL(225, 231, 244)}
-                        ></Image>
+                          src={item?.cardImage}
+                          alt={item.cardTitle}
+                          fill
+                          sizes="(max-width: 620px) 240px, (max-width: 880px) 390px, (max-width: 1180px) 390px, 200px"
+                        />
                       </ExamplesImgWrapper>
-                    )}
-                    <ExamplesContainer key={i}>
-                      <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
+                    </ExamplesLink>
+                  ) : (
+                    <ExamplesImgWrapper>
+                      <Image
+                        src={(item.cardImage = blankImg)}
+                        fill
+                        alt={'Пустая картинка'}
+                        placeholder="blur"
+                        blurDataURL={rgbDataURL(225, 231, 244)}
+                      ></Image>
+                    </ExamplesImgWrapper>
+                  )}
+                  <ExamplesContainer key={i}>
+                    <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                      <InfoIconWrapper>
-                        {item.quantities.map((item, i) => (
-                          <InfoIcon key={i}>
-                            {`${new Intl.NumberFormat('ru-RU').format(item.number)} ${item.measure}`}
-                          </InfoIcon>
-                        ))}
-                      </InfoIconWrapper>
+                    <InfoIconWrapper>
+                      {item.quantities.map((item, i) => (
+                        <InfoIcon key={i}>
+                          {`${new Intl.NumberFormat('ru-RU').format(item.number)} ${item.measure}`}
+                        </InfoIcon>
+                      ))}
+                    </InfoIconWrapper>
 
-                      <ButtonWrapper>
-                        <BtnLink
-                          btnType="transparent"
-                          text={'Подробнее'}
-                          width="134px"
-                          height="44px"
-                          color={colors.darkPrimary}
-                          size="15px"
-                          link={`/examples/${item.id}`}
-                        ></BtnLink>
+                    <ButtonWrapper>
+                      <BtnLink
+                        btnType="transparent"
+                        text={'Подробнее'}
+                        width="134px"
+                        height="44px"
+                        color={colors.darkPrimary}
+                        size="15px"
+                        link={`/examples/${item.id}`}
+                      ></BtnLink>
 
-                        <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
-                      </ButtonWrapper>
-                    </ExamplesContainer>
-                  </CardWrapper>
-                ))}
-            </Slider>
-          </SliderContainer>
-        </SectionWrapper>
-        {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
-      </div>
+                      <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
+                    </ButtonWrapper>
+                  </ExamplesContainer>
+                </CardWrapper>
+              ))}
+          </Slider>
+        </SliderContainer>
+      </SectionWrapper>
+      {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
       <SecondButtonWrapper>
         <BtnLink
           size="15px"

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation'
+
 import { Section, SectionTitle, CardsGridContainer } from './styled'
 
 import { CardWithText } from '@/shared/components/CardWithText'

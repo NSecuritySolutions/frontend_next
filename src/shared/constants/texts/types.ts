@@ -96,7 +96,7 @@ export type TOurServices = {
   id: number
   title: string
   text: string[]
-  img: StaticImageData
+  img: string
   btnName: string
   link: string
 }

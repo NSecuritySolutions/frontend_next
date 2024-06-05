@@ -88,7 +88,7 @@ const ReadySolutionSection = () => {
   }
 
   return (
-    <Section>
+    <Section id="solutions">
       <SectionTitle>Готовые решения</SectionTitle>
       <TabsContainer>
         <Slider {...tabSettings}>

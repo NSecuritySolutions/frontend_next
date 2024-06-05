@@ -161,7 +161,9 @@ const CardWrapper = styled.div`
   border-radius: 20px !important;
   padding: 20px;
   margin-top: 0px !important;
-
+  :hover {
+    cursor: pointer;
+  }
   @media (max-width: 1180px) {
     flex-direction: column;
     max-width: 430px;
@@ -191,12 +193,18 @@ const ExamplesImgWrapper = styled.div`
   width: 200px;
   height: 200px;
   position: relative;
-
+  overflow: hidden;
   img {
     border-radius: 12px;
     width: 200px;
     height: 200px;
     object-fit: cover;
+    scale: 1;
+    transition: transform 1s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   @media (max-width: 1180px) {
