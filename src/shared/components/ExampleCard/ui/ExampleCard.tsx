@@ -12,8 +12,6 @@ import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 import colors from '@/shared/constants/colors'
 
-import blankImg from '@/assets/icons/examples/no-image.svg'
-
 import { TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 
 import {
@@ -30,6 +28,7 @@ import {
   ExamplesImgWrapper,
 } from './styled.ts'
 import Modal from '@/shared/components/Modal/ui/Modal'
+import { OurWorksBanner } from '../../OurWorksBanner/index.ts'
 
 const ExampleCard: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
@@ -60,9 +59,16 @@ const ExampleCard: React.FC = () => {
     }
   }
 
+  const bannerItem = workExamples.sort(
+    (newDate: TWorkExamples, olderDate: TWorkExamples) =>
+      new Date(olderDate.date as string).getTime() - new Date(newDate.date as string).getTime(),
+  )[0]
+
+  console.log(bannerItem, 'item')
+
   return (
     <>
-      <ColumnTitle>Примеры наших работ</ColumnTitle>
+      <OurWorksBanner item={bannerItem} />
 
       <SliderContainer className="slider-container" id="examples">
         {workExamples
@@ -103,7 +109,10 @@ const ExampleCard: React.FC = () => {
 
                 <InfoIconWrapper>
                   {item.quantities.map((item, i) => (
-                    <InfoIcon key={i}>{item.number}</InfoIcon>
+                    <InfoIcon key={i}>
+                      {item.number}
+                      {item.measure}
+                    </InfoIcon>
                   ))}
                 </InfoIconWrapper>
 

@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import Link from 'next/link'
 import Image from 'next/image'
 
 import Slider from 'react-slick'
@@ -41,20 +40,8 @@ import Modal from '@/shared/components/Modal/ui/Modal'
 
 const ExamplesSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [modalItem, setModalItem] = useState<TWorkExamples | undefined>()
 
   const router = useRouter()
-
-  const openModal = (item: TWorkExamples) => {
-    setIsOpen(true)
-    setModalItem(item)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-    router.push('/#examples')
-  }
 
   const handleAfterChange = (slideIndex: number) => {
     setCurrentSlide(slideIndex)
@@ -108,7 +95,7 @@ const ExamplesSlider: React.FC = () => {
     }
   }
   return (
-    <section>
+    <section id="examples">
       <ColumnTitle>Примеры наших работ</ColumnTitle>
 
       <SectionWrapper>
@@ -180,7 +167,6 @@ const ExamplesSlider: React.FC = () => {
           </Slider>
         </SliderContainer>
       </SectionWrapper>
-      {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
       <SecondButtonWrapper>
         <BtnLink
           size="15px"

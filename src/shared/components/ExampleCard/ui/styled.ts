@@ -33,7 +33,7 @@ const CardWrapper = styled.div`
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
   padding: 20px;
-  max-width: 516px;
+  max-width: 580px;
   width: 100%;
 
   // @media (max-width: 1280px) {
@@ -56,7 +56,6 @@ const ExamplesContainer = styled.article`
   width: 100%;
   min-height: 202px;
   background-color: ${colors.backgroundPrimary};
-  font-family: Manrope, sans-serif;
   justify-content: center;
 
   // @media (max-width: 916px) {

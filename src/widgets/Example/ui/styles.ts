@@ -26,13 +26,13 @@ const ModalContent = styled.div`
   display: flex;
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
     padding: 32px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
   }
@@ -212,7 +212,7 @@ const NumbersColumn = styled.div<{ $color?: string }>`
   border-radius: 8px;
   gap: 8px;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     flex-direction: column;
     min-width: 158px;
     width: 100%;
@@ -237,7 +237,7 @@ const InfoColumn = styled.div`
   max-width: 118px;
   width: 100%;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 134px;
     width: 100%;
   }

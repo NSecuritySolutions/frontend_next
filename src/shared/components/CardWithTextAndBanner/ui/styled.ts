@@ -34,7 +34,8 @@ const Card = styled.div<{ $backgroundColor: string }>`
   width: 100%;
   max-height: 320px;
   overflow: hidden;
-  pointer-events: auto;
+  cursor: pointer;
+  // pointer-events: auto;
 
   @media (max-width: 1300px) {
     max-width: 880px;
