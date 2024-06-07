@@ -8,15 +8,11 @@ const SliderContainer = styled.div`
   width: 100%;
   background-color: ${colors.backgroundBase2};
 
-  .slick-dots {
-    display: block;
-  }
-
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 580px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
 
     .slick-dots {
@@ -24,10 +20,17 @@ const SliderContainer = styled.div`
     }
   }
 
+  @media (max-width: 728px) {
+    .slick-arrow {
+      display: none !important;
+    }
+  }
+
   @media (max-width: 620px) {
     max-width: 328px;
   }
 `
+
 const ReviewsContainer = styled.article`
   display: flex !important;
   flex-direction: column;
@@ -71,7 +74,7 @@ const CustomDot = styled.div<{ $active?: boolean }>`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: ${(props) => (props.$active ? `${colors.btnPrimary}` : '#d7d7d7')};
 `
 
@@ -95,6 +98,52 @@ const TitleWrapper = styled.div`
   gap: 8px;
   align-items: center;
 `
+const IconWrapper = styled.div`
+  widt: 40px;
+  height: 40px;
+`
+
+const CustomPrevArrow = styled.div`
+  background-image: url('/icons/ic-next-button.svg');
+  color: black;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 48%;
+  left: -80px;
+  transform: translateY(-50%) rotate(180deg);
+  z-index: 1;
+
+  &:before {
+    display: none;
+  }
+
+  @media (max-width: 620px) {
+    display: none;
+  }
+`
+
+const CustomNextArrow = styled.div`
+  background-image: url('/icons/ic-next-button.svg');
+  color: black;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 48%;
+  right: -370px;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  &:before {
+    display: none;
+  }
+
+  @media (max-width: 940px) {
+    right: -70px;
+  }
+`
 
 export {
   ReviewsContainer,
@@ -105,4 +154,7 @@ export {
   CustomDot,
   ReviewsLink,
   TitleWrapper,
+  IconWrapper,
+  CustomNextArrow,
+  CustomPrevArrow,
 }

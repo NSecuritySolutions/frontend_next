@@ -22,13 +22,13 @@ const SectionWrapper = styled.div`
   padding-bottom: 40px;
   background: ${colors.backgroundBase2};
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     padding-top: 20px;
     padding-bottom: 20px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     flex-direction: column;
     border-radius: 0;
     max-width: 579px;
@@ -48,11 +48,11 @@ const ColumnTitle = styled.h2`
   font-size: 24px;
   font-weight: 700;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     margin-bottom: 0px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
   }
@@ -67,13 +67,14 @@ const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(1, 1fr 3fr);
+  gap: 10px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     padding: 20px 0 25px 0;
     display: grid;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     padding: 0;
     grid-template-columns: none;
     grid-template-rows: 1fr;
@@ -89,7 +90,7 @@ const Column = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     width: 100%;
     padding-top: 20px;
   }
@@ -116,15 +117,16 @@ const TextWrapper = styled.div`
   justify-content: center;
   gap: 20px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
     gap: 12px;
+    align-items: center;
   }
 
   @media (max-width: 620px) {
@@ -148,12 +150,12 @@ const ImageWrapper = styled.p`
   flex-direction: row;
   gap: 11.5px;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
   }
@@ -194,7 +196,7 @@ const ContactsWrapper = styled.div`
     gap: 130px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     gap: 19.5px;
   }
 
