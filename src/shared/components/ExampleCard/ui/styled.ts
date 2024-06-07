@@ -56,6 +56,13 @@ const SliderContainer = styled.section`
 
   .slick-track {
     display: flex;
+    @media (max-width: 940px) {
+      width: 580px !important;
+    }
+
+    @media (max-width: 940px) {
+      width: 328px !important;
+    }
   }
 
   @media (max-width: 1300px) {
