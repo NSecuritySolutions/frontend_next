@@ -36,8 +36,6 @@ import {
   SectionWrapper,
 } from './styled.ts'
 
-import Modal from '@/shared/components/Modal/ui/Modal'
-
 const ExamplesSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
 
@@ -111,11 +109,11 @@ const ExamplesSlider: React.FC = () => {
                 <CardWrapper
                   key={item.id}
                   onClick={() => {
-                    router.push(`/examples/${item.id}`)
+                    router.push(`/ourworks/${item.id}`)
                   }}
                 >
                   {item.cardImage ? (
-                    <ExamplesLink href={`/examples/${item.id}`}>
+                    <ExamplesLink href={`/ourworks/${item.id}`}>
                       <ExamplesImgWrapper>
                         <Image
                           blurDataURL={rgbDataURL(225, 231, 244)}
@@ -156,7 +154,7 @@ const ExamplesSlider: React.FC = () => {
                         height="44px"
                         color={colors.darkPrimary}
                         size="15px"
-                        link={`/examples/${item.id}`}
+                        link={`/ourworks/${item.id}`}
                       ></BtnLink>
 
                       <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>

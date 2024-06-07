@@ -39,7 +39,7 @@ const OurWorksBanner: React.FC<BannerProps> = ({ item }) => {
     >
       <ImageWrapper
         onClick={() => {
-          router.push(`/examples/${item.id}`)
+          router.push(`/ourworks/${item.id}`)
         }}
       >
         <InfoIconWrapper>

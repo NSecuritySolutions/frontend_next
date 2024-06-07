@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
+import blankImg from '@/assets/icons/examples/no-image.svg'
+
 import Image from 'next/image'
 
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
@@ -80,7 +82,7 @@ const ExampleCard: React.FC = () => {
           .map((item: TWorkExamples, i) => (
             <CardWrapper key={item.id}>
               {item.cardImage ? (
-                <ExamplesLink href={`/examples/${item.id}`}>
+                <ExamplesLink href={`/ourworks/${item.id}`}>
                   <ExamplesImgWrapper>
                     <Image
                       blurDataURL={rgbDataURL(225, 231, 244)}
@@ -124,7 +126,7 @@ const ExampleCard: React.FC = () => {
                     height="44px"
                     color={colors.darkPrimary}
                     size="15px"
-                    link={`/examples/${item.id}`}
+                    link={`/ourworks/${item.id}`}
                   ></BtnLink>
 
                   <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
