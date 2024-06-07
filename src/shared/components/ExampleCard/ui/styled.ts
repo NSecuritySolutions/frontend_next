@@ -1,6 +1,11 @@
 import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
+import { StyledBtnLink } from '../../BtnLink/ui/styled'
+
+const SStyledBtnLink = styled(StyledBtnLink)`
+  margin: 40px auto;
+`
 
 const StyledTitle = styled.h1`
   font-weight: 700;
@@ -26,26 +31,122 @@ const StyledTitle = styled.h1`
 `
 
 const SliderContainer = styled.section`
-  margin: 40px auto;
-  background-color: ${colors.backgroundBase2};
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  min-height: 644px;
-  max-width: 1180px;
-  width: 100%;
-  gap: 20px;
-  justify-content: space-between;
+  .regular.slider {
+    margin: 40px auto;
+    background-color: ${colors.backgroundBase2};
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 644px;
+    max-width: 1180px;
+    width: 100%;
+    gap: 20px;
+    justify-content: space-between;
+
+    @media (max-width: 1300px) {
+      max-width: 880px;
+      width: 100%;
+    }
+
+    @media (max-width: 940px) {
+      max-width: 580px;
+      width: 100%;
+    }
+  }
+
+  .slick-track {
+    display: flex;
+  }
 
   @media (max-width: 1300px) {
-    margin: 0 auto;
     max-width: 880px;
     width: 100%;
+    gap: 10px !important;
   }
 
   @media (max-width: 940px) {
-    max-width: 580px;
+    min-width: 880px;
     width: 100%;
+    min-height: 383px;
+    gap: 0px !important;
+  }
+
+  @media (max-width: 620px) {
+    min-width: 620px;
+    width: 100%;
+    min-height: 264px;
+  }
+
+  .slick-slider {
+  }
+
+  .slick-slide {
+    div {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+
+      @media (max-width: 1300px) {
+        justify-content: space-between;
+      }
+
+      @media (max-width: 940px) {
+        outline: none;
+        gap: 20px !important;
+      }
+
+      @media (max-width: 620px) {
+        outline: none;
+        gap: 15px !important;
+      }
+    }
+  }
+  .slick-list {
+    display: flex;
+    margin-bottom: 40px;
+
+    @media (max-width: 1300px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  .slick-initialized .slick-slide {
+    row-gap: 20px;
+    // max-width: 1180px;
+    margin-right: 20px;
+
+    article {
+      row-gap: 0px;
+    }
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 0px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      margin: 0 5px;
+      width: 10px;
+      height: 10px;
+
+      div {
+        width: 10px;
+        height: 10px;
+        background-color: #ccc;
+        border-radius: 50%;
+      }
+
+      &.slick-active div {
+        background-color: ${colors.btnPrimary};
+      }
+    }
   }
 `
 
@@ -254,4 +355,5 @@ export {
   InfoIconWrapper,
   ExamplesImgWrapper,
   StyledTitle,
+  SStyledBtnLink,
 }
