@@ -67,7 +67,6 @@ const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(1, 1fr 3fr);
-  gap: 10px;
 
   @media (max-width: 1300px) {
     padding: 20px 0 25px 0;
@@ -79,8 +78,7 @@ const ColumnWrapper = styled.div`
     grid-template-columns: none;
     grid-template-rows: 1fr;
   }
-
-  @media (max-width: 620px) {
+  s @media (max-width: 620px) {
     margin: 0;
     padding: 0 16px;
   }

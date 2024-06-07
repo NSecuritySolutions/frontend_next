@@ -20,14 +20,13 @@ const SliderContainer = styled.div`
     }
   }
 
-  @media (max-width: 728px) {
+  @media (max-width: 720px) {
     .slick-arrow {
       display: none !important;
     }
   }
-
   @media (max-width: 620px) {
-    max-width: 328px;
+    max-width: 360px;
   }
 `
 
