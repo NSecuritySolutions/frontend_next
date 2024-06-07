@@ -15,14 +15,18 @@ const BannerWrapper = styled.div<{ $img?: string }>`
   overflow-hidden;
   cursor: pointer;
 
-// @media (max-width: 1300px) {
-//   max-width: 880px;
-//   height: 528px;
-//}
+@media (max-width: 1300px) {
+  max-width: 880px;
+  height: 542px;
+}
 
-@media (max-width: 1180px) {
+@media (max-width: 940px) {
   max-width: 580px;
-  height: 328px;
+  height: 357px;
+}
+
+@media (max-width: 620px) {
+  display: none;
 
 }
 `
@@ -35,16 +39,15 @@ const ImageWrapper = styled.div`
   overflow-hidden;
   border-radius: 12px;
 
-  // @media (max-width: 1300px) {
-  //   max-width: 880px;
-  //   height: 528px;
+  @media (max-width: 1300px) {
+    max-width: 880px;
+    height: 542px;
 
-  // }
+  }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 940px) {
     max-width: 580px;
-    height: 328px;
-
+    height: 357px;
   }
    img {
     border-radius: 12px;

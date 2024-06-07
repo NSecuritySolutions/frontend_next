@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import { useRouter } from 'next/navigation'
 
 import blankImg from '@/assets/icons/examples/no-image.svg'
@@ -19,7 +17,6 @@ import { TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
 import {
   SliderContainer,
   CardWrapper,
-  ColumnTitle,
   ButtonWrapper,
   ExamplesContainer,
   ExamplesTitle,
@@ -28,30 +25,13 @@ import {
   InfoIcon,
   InfoIconWrapper,
   ExamplesImgWrapper,
+  StyledTitle,
 } from './styled.ts'
-import Modal from '@/shared/components/Modal/ui/Modal'
+
 import { OurWorksBanner } from '../../OurWorksBanner/index.ts'
 
 const ExampleCard: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [modalItem, setModalItem] = useState<TWorkExamples | undefined>()
-
   const router = useRouter()
-
-  const openModal = (item: TWorkExamples) => {
-    setIsOpen(true)
-    setModalItem(item)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-    router.push('/#examples')
-  }
-
-  const handleAfterChange = (slideIndex: number) => {
-    setCurrentSlide(slideIndex)
-  }
 
   function truncate(str: string, maxlength: number) {
     if (str.length > maxlength) {
@@ -71,7 +51,7 @@ const ExampleCard: React.FC = () => {
   return (
     <>
       <OurWorksBanner item={bannerItem} />
-
+      <StyledTitle>Примеры работ</StyledTitle>
       <SliderContainer className="slider-container" id="examples">
         {workExamples
           .sort(
@@ -88,8 +68,7 @@ const ExampleCard: React.FC = () => {
                       blurDataURL={rgbDataURL(225, 231, 244)}
                       src={item?.cardImage}
                       alt={item.cardTitle}
-                      width={200}
-                      height={200}
+                      fill
                       style={{ objectFit: 'cover', borderRadius: '12px' }}
                     />
                   </ExamplesImgWrapper>
@@ -98,8 +77,7 @@ const ExampleCard: React.FC = () => {
                 <ExamplesImgWrapper>
                   <Image
                     src={(item.cardImage = blankImg)}
-                    width={200}
-                    height={200}
+                    fill
                     alt={'Пустая картинка'}
                     placeholder="blur"
                     blurDataURL={rgbDataURL(225, 231, 244)}
@@ -135,8 +113,6 @@ const ExampleCard: React.FC = () => {
             </CardWrapper>
           ))}
       </SliderContainer>
-
-      {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
     </>
   )
 }
