@@ -44,6 +44,8 @@ const SliderContainer = styled.section`
     justify-content: space-between;
 
     @media (max-width: 1300px) {
+      margin: 0 auto 40px auto;
+
       max-width: 880px;
       width: 100%;
     }
