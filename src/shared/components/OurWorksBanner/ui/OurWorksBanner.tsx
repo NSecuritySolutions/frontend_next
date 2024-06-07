@@ -51,7 +51,7 @@ const OurWorksBanner: React.FC<BannerProps> = ({ item }) => {
         </InfoIconWrapper>
         <TextWrapper>
           <StyledTitle>{item.title}</StyledTitle>
-          <StyledParagraph>{truncate(item.text, 200)}</StyledParagraph>
+          <StyledParagraph>{truncate(item.text, 100)}</StyledParagraph>
         </TextWrapper>
         <Image src={item?.cardImage || ''} alt="" fill />
       </ImageWrapper>

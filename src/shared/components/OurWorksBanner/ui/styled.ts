@@ -13,7 +13,18 @@ const BannerWrapper = styled.div<{ $img?: string }>`
   height: 728px;
   border-radius: 12px;
   overflow-hidden;
-cursor: pointer;
+  cursor: pointer;
+
+// @media (max-width: 1300px) {
+//   max-width: 880px;
+//   height: 528px;
+//}
+
+@media (max-width: 1180px) {
+  max-width: 580px;
+  height: 328px;
+
+}
 `
 const ImageWrapper = styled.div`
   position: relative;
@@ -24,6 +35,17 @@ const ImageWrapper = styled.div`
   overflow-hidden;
   border-radius: 12px;
 
+  // @media (max-width: 1300px) {
+  //   max-width: 880px;
+  //   height: 528px;
+
+  // }
+
+  @media (max-width: 1180px) {
+    max-width: 580px;
+    height: 328px;
+
+  }
    img {
     border-radius: 12px;
     z-index: 0;
@@ -44,15 +66,8 @@ const InfoIconWrapper = styled.div`
   align-content: center;
   position: absolute;
   z-index: 2;
-  top: 50px;
-  left: 30px;
-
-  @media (max-width: 916px) {
-    display: flex !;
-    font-size: 10px;
-    justify-content: center;
-    align-items: center;
-  }
+  top: 40px;
+  left: 40px;
 `
 const InfoIcon = styled.div`
   border-radius: 8px;
@@ -74,14 +89,22 @@ const TextWrapper = styled.div`
   padding: 30px;
   position: absolute;
   border-radius: 12px;
-  bottom: 30px;
-  left: 30px;
+  bottom: 40px;
+  left: 40px;
+
+  @media (max-width: 1180px) {
+    max-width: 480px;
+  }
 `
 const StyledTitle = styled.h1`
   color: black;
   bottom: 70px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 36px;
+
+  @media (max-width: 1180px) {
+    font-size: 18px;
+  }
 `
 
 const StyledParagraph = styled.h1`
@@ -91,6 +114,10 @@ const StyledParagraph = styled.h1`
   font-weight: 400;
   font-size: 16px;
   color: black;
+
+  @media (max-width: 1180px) {
+    font-size: 14px;
+  }
 `
 
 export {
