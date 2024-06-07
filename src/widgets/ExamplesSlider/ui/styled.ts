@@ -12,12 +12,12 @@ const ColumnTitle = styled.h2`
   max-width: 1180px;
   width: 100%;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 580px;
     width: 100%;
   }
@@ -33,13 +33,13 @@ const SectionWrapper = styled.div`
   max-width: 1180px;
   width: 100%;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
     gap: 20px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 880px;
     padding-left: clamp(150px, 1%, 16px);
   }
@@ -62,13 +62,13 @@ const SliderContainer = styled.div`
     display: flex;
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
     gap: 10px !important;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     min-width: 880px;
     width: 100%;
     min-height: 383px;
@@ -89,11 +89,11 @@ const SliderContainer = styled.div`
       display: flex;
       gap: 20px;
 
-      @media (max-width: 1180px) {
+      @media (max-width: 1300px) {
         justify-content: space-between;
       }
 
-      @media (max-width: 880px) {
+      @media (max-width: 940px) {
         outline: none;
         gap: 20px !important;
       }
@@ -108,7 +108,7 @@ const SliderContainer = styled.div`
     display: flex;
     margin-bottom: 40px;
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       margin-bottom: 30px;
     }
   }
@@ -164,14 +164,14 @@ const CardWrapper = styled.div`
   :hover {
     cursor: pointer;
   }
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     flex-direction: column;
     max-width: 430px;
     width: 100%;
     gap: 20px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     min-width: 430px;
     width: 100%;
     min-height: 445px;
@@ -207,12 +207,12 @@ const ExamplesImgWrapper = styled.div`
     }
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     width: 390px;
     height: 180px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     width: 390px;
     height: 180px;
   }
@@ -235,17 +235,17 @@ const ExamplesContainer = styled.article`
   background-color: ${colors.backgroundPrimary};
   justify-content: space-between;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     max-width: 430px;
     min-height: 162px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     gap: 0 !important;
     min-height: 162px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 620px) {
     gap: 0 !important;
     min-height: 158px;
   }
@@ -258,7 +258,7 @@ const ExamplesTitle = styled.h3`
   font-size: 18px;
   text-align: start;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     max-width: 390px;
   }
   @media (max-width: 620px) {
@@ -277,12 +277,12 @@ const InfoIconWrapper = styled.div`
   justify-content: flex-start;
   align-content: center;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     margin: 0;
     justify-content: flex-start !important;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     margin: 0 !important;
   }
 `
@@ -294,7 +294,7 @@ const IconWrapper = styled.div`
   font-size: 16px;
   color: ${colors.darkPrimary};
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     flex-direction: row;
     align-items: flex-end;
     flex-wrap: wrap;
@@ -316,7 +316,7 @@ const InfoIcon = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     margin: 0 !important;
   }
 
@@ -337,16 +337,18 @@ const ButtonWrapper = styled.div`
   gap: 20px;
   white-space: nowrap;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1300px) {
     margin: 0;
   }
-  @media (max-width: 880px) {
+  @media (max-width: 940px) {
     margin: 0 !important;
   }
 `
 
 const SecondButtonWrapper = styled.div`
   margin-top: 20px;
+  margin-bottom: 40px;
+
   display: flex !important;
   column-gap: 0 !important;
   justify-content: center;

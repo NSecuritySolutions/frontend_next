@@ -71,6 +71,11 @@ const InfoIconWrapper = styled.div`
   z-index: 2;
   top: 40px;
   left: 40px;
+
+  @media (max-width: 940px) {
+    bottom: 20px;
+    left: 20px;
+  }
 `
 const InfoIcon = styled.div`
   border-radius: 8px;
@@ -84,7 +89,7 @@ const InfoIcon = styled.div`
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   max-width: 740px;
   width: 100%;
   z-index: 1;
@@ -95,8 +100,10 @@ const TextWrapper = styled.div`
   bottom: 40px;
   left: 40px;
 
-  @media (max-width: 1180px) {
-    max-width: 480px;
+  @media (max-width: 940px) {
+    max-width: 500px;
+    bottom: 20px;
+    left: 20px;
   }
 `
 const StyledTitle = styled.h1`
@@ -105,12 +112,12 @@ const StyledTitle = styled.h1`
   font-weight: 700;
   font-size: 36px;
 
-  @media (max-width: 1180px) {
-    font-size: 18px;
+  @media (max-width: 940px) {
+    font-size: 24px;
   }
 `
 
-const StyledParagraph = styled.h1`
+const StyledParagraph = styled.p`
   bottom: 20px;
   color: black;
 
@@ -118,9 +125,9 @@ const StyledParagraph = styled.h1`
   font-size: 16px;
   color: black;
 
-  @media (max-width: 1180px) {
-    font-size: 14px;
-  }
+  // @media (max-width: 1180px) {
+  //   font-size: 14px;
+  // }
 `
 
 export {

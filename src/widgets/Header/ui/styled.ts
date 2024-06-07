@@ -167,13 +167,15 @@ const HeaderNavBurger = styled.nav`
 const HeaderList = styled.ul`
   width: 1180px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 20px 0px;
+  gap: 40px;
 
   @media (max-width: 1300px) {
     width: 880px;
     justify-content: space-between;
     padding: 20px 16px;
+    gap: 0;
   }
 
   @media (max-width: 940px) {

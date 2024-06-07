@@ -46,7 +46,7 @@ const ExampleCard: React.FC = () => {
       new Date(olderDate.date as string).getTime() - new Date(newDate.date as string).getTime(),
   )[0]
 
-  console.log(bannerItem, 'item')
+  // console.log(bannerItem, 'item')
 
   return (
     <>

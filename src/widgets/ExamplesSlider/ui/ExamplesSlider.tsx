@@ -58,14 +58,14 @@ const ExamplesSlider: React.FC = () => {
 
     responsive: [
       {
-        breakpoint: 1180,
+        breakpoint: 1300,
         settings: {
           rows: 2,
           slidesPerRow: 2,
         },
       },
       {
-        breakpoint: 880,
+        breakpoint: 940,
         settings: {
           rows: 1,
           slidesToSow: 1,

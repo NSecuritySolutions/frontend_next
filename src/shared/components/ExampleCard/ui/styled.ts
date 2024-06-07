@@ -13,7 +13,7 @@ const StyledTitle = styled.h1`
     margin: 40px auto 20px auto;
   }
 
-  @media (max-width: 1300px) {
+  @media (max-width: 940px) {
     width: 580px;
     margin: 40px auto 20px auto;
   }
@@ -26,7 +26,7 @@ const StyledTitle = styled.h1`
 `
 
 const SliderContainer = styled.section`
-  margin: 0 auto;
+  margin: 40px auto;
   background-color: ${colors.backgroundBase2};
   display: flex;
   flex-direction: row;
@@ -38,6 +38,7 @@ const SliderContainer = styled.section`
   justify-content: space-between;
 
   @media (max-width: 1300px) {
+    margin: 0 auto;
     max-width: 880px;
     width: 100%;
   }

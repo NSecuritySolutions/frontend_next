@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 const Section = styled.section`
   background-color: ${colors.backgroundBase2};
-  padding: 20px;
 
   @media (max-width: 1300px) {
     padding: 0;
@@ -38,8 +37,8 @@ const SectionWrapper = styled.div`
   margin: 0 auto;
   max-width: 1180px;
   width: 100%;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 
   @media (max-width: 1300px) {
     max-width: 880px;

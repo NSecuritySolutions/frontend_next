@@ -12,9 +12,17 @@ const SliderContainer = styled.div`
     max-width: 580px;
   }
 
+  @media (max-width: 1040px) {
+    .slick-arrow {
+      display: none !important;
+    }
+  }
+
   @media (max-width: 940px) {
     max-width: 580px;
-
+    .slick-arrow {
+      display: block !important;
+    }
     .slick-dots {
       display: none;
     }
@@ -104,7 +112,7 @@ const IconWrapper = styled.div`
 
 const CustomPrevArrow = styled.div`
   background-image: url('/icons/ic-next-button.svg');
-  color: black;
+  background-size: contain;
   border-radius: 50%;
   width: 64px;
   height: 64px;
@@ -112,10 +120,18 @@ const CustomPrevArrow = styled.div`
   top: 48%;
   left: -80px;
   transform: translateY(-50%) rotate(180deg);
-  z-index: 1;
+  z-index: 3;
 
   &:before {
     display: none;
+  }
+
+  @media (max-width: 1370px) {
+    left: -70px;
+  }
+
+  @media (max-width: 940px) {
+    left: -80px;
   }
 
   @media (max-width: 620px) {
@@ -125,7 +141,7 @@ const CustomPrevArrow = styled.div`
 
 const CustomNextArrow = styled.div`
   background-image: url('/icons/ic-next-button.svg');
-  color: black;
+  background-size: contain;
   border-radius: 50%;
   width: 64px;
   height: 64px;
@@ -133,12 +149,15 @@ const CustomNextArrow = styled.div`
   top: 48%;
   right: -370px;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 3;
 
   &:before {
     display: none;
   }
 
+  @media (max-width: 1370px) {
+    right: -345px;
+  }
   @media (max-width: 940px) {
     right: -70px;
   }
