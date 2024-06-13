@@ -252,14 +252,14 @@ const SliderWrapper = styled.div`
     top: 40%;
     left: 10px;
     position: absolute;
-    z-index: 10;
+    z-index: 3;
   }
 
   .slick-next {
     top: 40%;
     left: 1070px;
     position: absolute;
-    z-index: 10;
+    z-index: 3;
 
     @media (max-width: 1300px) {
       left: 786px;

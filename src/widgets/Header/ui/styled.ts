@@ -115,8 +115,8 @@ const HeaderSocialIconLink = styled.a`
   align-items: center;
   border-radius: 50%;
   background-color: white;
-  width: 28px;
-  height: 28px;
+  width: 27px;
+  height: 27px;
 
   &:hover {
     background-color: black;
