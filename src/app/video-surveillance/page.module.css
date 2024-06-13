@@ -6,15 +6,15 @@
   align-items: center;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 940px) {
   .main {
-    margin-top: 233px;
+    margin-top: 133px;
   }
 }
 
 @media (max-width: 620px) {
   .main {
-    margin-top: 87px;
+    margin-top: 67px;
   }
 }
 
