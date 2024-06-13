@@ -216,17 +216,26 @@ const HeaderNavItem = styled.li`
 
 const HeaderNavLink = styled(Link)`
   position: relative;
-  border-bottom: 1px solid transparent;
+  //border-bottom: 1px solid transparent;
   transition: color 0.3s ease;
 
-  &:hover:not(.active) {
-    color: ${colors.darkPrimary};
-  }
+  // &:hover:not(.active) {
+  //   color: ${colors.darkPrimary};
+  // }
 
   &.active {
     color: ${colors.darkPrimary};
+  }
+
+  &.active:before {
     border-bottom: 1px solid ${colors.darkPrimary};
     cursor: default;
+    transform-origin: rigth;
+    width: 100%;
+
+    transition:
+      width 0.4s ease,
+      transform-origin 0.8s ease;
   }
 
   &:before {
@@ -238,7 +247,9 @@ const HeaderNavLink = styled(Link)`
     height: 1px;
     background-color: ${colors.darkPrimary};
     transform-origin: left;
-    transition: width 0.4s ease;
+    transition:
+      width 0.4s ease,
+      transform-origin 0.8s ease;
   }
 
   &:hover:before {
