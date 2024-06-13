@@ -14,7 +14,7 @@ const navColumnLists = [
     title: 'Каталог оборудования',
     items: [
       { text: 'Видеонаблюдение', navLink: '/video-surveillance' },
-      { text: 'Домофония/СКУД', navLink: '/domofon' },
+      { text: 'Домофония/СКУД', navLink: '/intercom' },
       {
         text: 'Охранно-пожарная сигнализация',
         navLink: '/security',
