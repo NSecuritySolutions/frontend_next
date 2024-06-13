@@ -20,6 +20,7 @@ import {
   BurgerMenu,
   HeaderNavBurger,
   ContactsBurger,
+  HeaderSocialIconLink,
 } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
@@ -83,20 +84,24 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
             </HeaderBurgerMenuWrapper>
             <HeaderTopItem>
               <HeaderContacts>
-                {/* @TODO не забыть подключить ссылки */}
+                {/* @TODO не забыть актуализировать ссылки */}
                 <PhoneMailWrapper>
                   <IconTextWrapper>
                     <Image src="/icons/header/phone.svg" width={24} height={24} alt="phone" />
-                    <HeaderText>+7 (913) 011-06-45</HeaderText>
+                    <HeaderText href="tel:+79130110645">+7 (913) 011-06-45</HeaderText>
                   </IconTextWrapper>
                   <IconTextWrapper>
                     <Image src="/icons/header/mail.svg" width={24} height={24} alt="mail" />
-                    <HeaderText>info@opticontrol.ru</HeaderText>
+                    <HeaderText href="mailto:info@opticontrol.ru">info@opticontrol.ru</HeaderText>
                   </IconTextWrapper>
                 </PhoneMailWrapper>
                 <SocialWrapper>
-                  <Image src="/icons/header/telegram.svg" width={32} height={32} alt="telegram" />
-                  <Image src="/icons/header/whatsapp.svg" width={32} height={32} alt="whatsapp" />
+                  <HeaderSocialIconLink href="#" target="_blank">
+                    <Image src="/icons/telegram.svg" width={32} height={32} alt="Telegram" />
+                  </HeaderSocialIconLink>
+                  <HeaderSocialIconLink href="#" target="_blank">
+                    <Image src="/icons/whatsapp.svg" width={32} height={32} alt="WhatsApp" />
+                  </HeaderSocialIconLink>
                 </SocialWrapper>
               </HeaderContacts>
             </HeaderTopItem>

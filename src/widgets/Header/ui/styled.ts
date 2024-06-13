@@ -69,7 +69,7 @@ const HeaderTopItem = styled.div`
   }
 `
 
-const HeaderText = styled.p`
+const HeaderText = styled.a`
   font-size: 16px;
   line-height: 21.86px;
   font-weight: 700;
@@ -108,6 +108,24 @@ const SocialWrapper = styled.div`
 
   @media (max-width: 620px) {
     justify-content: center;
+  }
+`
+const HeaderSocialIconLink = styled.a`
+  display: flex;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: white;
+
+  &:hover {
+    background-color: black;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover > img {
+    filter: brightness(0) saturate(100%) invert(90%) sepia(76%) saturate(2728%) hue-rotate(321deg)
+      brightness(103%) contrast(105%);
   }
 `
 
@@ -197,6 +215,7 @@ const HeaderNavItem = styled.li`
 `
 
 const HeaderNavLink = styled(Link)`
+  position: relative;
   border-bottom: 1px solid transparent;
   transition: color 0.3s ease;
 
@@ -208,6 +227,23 @@ const HeaderNavLink = styled(Link)`
     color: ${colors.darkPrimary};
     border-bottom: 1px solid ${colors.darkPrimary};
     cursor: default;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: ${colors.darkPrimary};
+    transform-origin: left;
+    transition: width 0.4s ease;
+  }
+
+  &:hover:before {
+    width: 100%;
+    transform-origin: right;
   }
 `
 
@@ -263,4 +299,5 @@ export {
   BurgerMenu,
   HeaderNavBurger,
   ContactsBurger,
+  HeaderSocialIconLink,
 }

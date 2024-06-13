@@ -54,11 +54,21 @@ const FooterSocialIconsContainer = styled.div`
 `
 
 const FooterSocialIconLink = styled.a`
-  cursor: pointer;
-  opacity: 1;
+  display: flex;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: white;
+
   &:hover {
-    opacity: 0.7;
-    transform: opacity 2s ease-in;
+    background-color: black;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover > img {
+    filter: brightness(0) saturate(100%) invert(90%) sepia(76%) saturate(2728%) hue-rotate(321deg)
+      brightness(103%) contrast(105%);
   }
 `
 
@@ -117,9 +127,11 @@ const FooterContactLogo = styled.img`
   width: 24px;
   height: 24px;
   opacity: 1;
+
   &:hover {
+    fill: yellow;
     opacity: 0.7;
-    transform: opacity 2s ease-in;
+    transform: all 2s ease-in;
   }
 `
 
