@@ -48,7 +48,6 @@ const ReviewsSlider = () => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          infinite: true,
           dots: true,
         },
       },

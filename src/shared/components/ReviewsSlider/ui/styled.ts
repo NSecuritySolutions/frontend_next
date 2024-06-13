@@ -8,21 +8,59 @@ const SliderContainer = styled.div`
   width: 100%;
   background-color: ${colors.backgroundBase2};
 
+  .slick-prev {
+    background-image: url('/icons/ic-next-button.svg');
+    background-size: contain;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 48%;
+    left: -80px;
+    transform: translateY(-50%) rotate(180deg);
+    z-index: 3;
+  }
+
+  .slick-next {
+    font-size: 0;
+    line-height: 0;
+
+    position: absolute;
+    top: 50%;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    transform: translate(0, -50%);
+
+    cursor: pointer;
+
+    color: black;
+    border: none;
+    outline: none;
+    background-image: url('/icons/ic-next-button.svg');
+    background-size: contain;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+  }
+
+  .slick-disabled {
+    visibility: hidden;
+  }
+
   @media (max-width: 1300px) {
     max-width: 580px;
   }
 
   @media (max-width: 1040px) {
-    .slick-arrow {
-      display: none !important;
-    }
   }
 
   @media (max-width: 940px) {
     max-width: 580px;
-    .slick-arrow {
-      display: block !important;
-    }
+
     .slick-dots {
       display: none;
     }
@@ -30,9 +68,10 @@ const SliderContainer = styled.div`
 
   @media (max-width: 720px) {
     .slick-arrow {
-      display: none !important;
+      visibility: hidden;
     }
   }
+
   @media (max-width: 620px) {
     max-width: 360px;
   }
@@ -48,7 +87,6 @@ const ReviewsContainer = styled.article`
   height: 289px;
   width: 100%;
   background-color: ${colors.backgroundPrimary};
-  font-family: Manrope, sans-serif;
 
   @media (max-width: 940px) {
     margin-top: 30px;
@@ -110,7 +148,7 @@ const IconWrapper = styled.div`
   height: 40px;
 `
 
-const CustomPrevArrow = styled.div`
+const CustomPrevArrow = styled.div<{ $active?: boolean }>`
   background-image: url('/icons/ic-next-button.svg');
   background-size: contain;
   border-radius: 50%;
@@ -139,7 +177,7 @@ const CustomPrevArrow = styled.div`
   }
 `
 
-const CustomNextArrow = styled.div`
+const CustomNextArrow = styled.div<{ $active?: boolean }>`
   background-image: url('/icons/ic-next-button.svg');
   background-size: contain;
   border-radius: 50%;
