@@ -142,6 +142,7 @@ const FooterContactLink = styled.a`
   font-weight: 700;
   max-width: 162px;
   opacity: 1;
+
   &:hover {
     opacity: 0.7;
     transform: opacity 2s ease-in;

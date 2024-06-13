@@ -4,6 +4,8 @@
   /* @TODO: подключила стили по умолчанию согласно макету */
 
   --font-mono: ui-monospace, 'Inter', 'Monserrat', 'Exo 2', 'Courier New', monospace;
+  font-family: 'Inter', 'Monserrat', 'Exo 2', 'Courier New', monospace;
+
   /* Сглаживание шрифтов */
   -webkit-font-smoothing: antialiased;
   -webkit-font-smoothing: subpixel-antialiased;

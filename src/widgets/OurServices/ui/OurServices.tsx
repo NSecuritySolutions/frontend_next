@@ -9,7 +9,7 @@ import colors from '@/shared/constants/colors'
 
 const OurServices = () => {
   return (
-    <Section>
+    <Section id="our-services">
       <SectionTitle>Наши услуги</SectionTitle>
       <CardsGridContainer>
         {cardServices.map((item, i) => (

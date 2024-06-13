@@ -38,10 +38,35 @@ const NavLinkStyled = styled(Link)`
   font-size: 16px;
   line-height: 136%;
   font-weight: 400;
-  transition: color 0.3s ease;
+  position: relative;
+  cursor: default;
 
-  &:hover {
-    color: ${colors.accentInfo};
+  &.active:before {
+    width: 100%;
+
+    transition:
+      width 0.4s ease,
+      transform-origin 0.8s ease;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: ${colors.darkPrimary};
+    transform-origin: left;
+
+    transition:
+      width 0.4s ease,
+      transform-origin 0.8s ease;
+  }
+
+  &:hover:before {
+    width: 100%;
+    transform-origin: right;
   }
 `
 

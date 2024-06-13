@@ -17,7 +17,7 @@ import { YANDEX_URL } from '@/shared/constants/url/url.ts'
 
 const ReviewsBlock = () => {
   return (
-    <Section>
+    <Section id="reviews">
       <SectionWrapper>
         <ColumnTitle>О нас говорят</ColumnTitle>
 

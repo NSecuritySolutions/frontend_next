@@ -41,7 +41,7 @@ const AdvantagesBlock: FC = () => {
     ],
   }
   return (
-    <Section>
+    <Section id="advantages">
       <SectionWrapper>
         <Title>Мы обеспечиваем</Title>
         <SliderWrapper>
