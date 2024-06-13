@@ -63,7 +63,7 @@ const FooterSocialIconLink = styled.a`
 
   &:hover {
     background-color: black;
-    transition: all 0.2s ease-in;
+    transition: all .s ease-in;
   }
 
   &:hover > img {

@@ -113,14 +113,14 @@ const SocialWrapper = styled.div`
 const HeaderSocialIconLink = styled.a`
   display: flex;
   align-items: center;
-  width: 28px;
-  height: 28px;
   border-radius: 50%;
   background-color: white;
+  width: 28px;
+  height: 28px;
 
   &:hover {
     background-color: black;
-    transition: all 0.2s ease-in;
+    transition: all .s ease-in;
   }
 
   &:hover > img {

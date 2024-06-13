@@ -156,9 +156,14 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
                   <HeaderText>info@opticontrol.ru</HeaderText>
                 </IconTextWrapper>
               </PhoneMailWrapper>
+
               <SocialWrapper>
-                <Image src="/icons/header/telegram.svg" width={32} height={32} alt="telegram" />
-                <Image src="/icons/header/whatsapp.svg" width={32} height={32} alt="whatsapp" />
+                <HeaderSocialIconLink href="#" target="_blank">
+                  <Image src="/icons/telegram.svg" width={32} height={32} alt="Telegram" />
+                </HeaderSocialIconLink>
+                <HeaderSocialIconLink href="#" target="_blank">
+                  <Image src="/icons/whatsapp.svg" width={32} height={32} alt="WhatsApp" />
+                </HeaderSocialIconLink>
               </SocialWrapper>
             </ContactsBurger>
           </BurgerMenu>
