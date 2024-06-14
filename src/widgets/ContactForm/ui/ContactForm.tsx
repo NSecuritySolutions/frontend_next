@@ -224,8 +224,6 @@ const ContactForm = () => {
                   Загрузить спецификацию <NoBr>(в формате xlx, pdf, word)</NoBr>
                 </UploadBtnText>
                 {fileError && <ErrorText style={{ bottom: -20 }}>{fileError}</ErrorText>}
-
-                {errors.file && <ErrorText>{errors.file?.message}</ErrorText>}
               </UploadBtn>
             )}
             <FormParagraph>
