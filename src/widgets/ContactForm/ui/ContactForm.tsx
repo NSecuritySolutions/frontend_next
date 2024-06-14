@@ -49,8 +49,11 @@ const SUPPORTED_FORMATS = [
 
 const schema = yup.object().shape({
   name: yup.string().required('Заполните поле'),
-  phone: yup.string().min(18, 'Не похоже на телефон').required('Заполните поле'),
-  email: yup.string().email('Не похоже на email').required('Заполните поле'),
+  phone: yup
+    .string()
+    .min(18, 'Введите номер телефона в правильном формате ')
+    .required('Заполните поле'),
+  email: yup.string().email('Введите email в правильном формате ').required('Заполните поле'),
   message: yup.string(),
   file: yup.mixed((file): file is File => file),
 })
