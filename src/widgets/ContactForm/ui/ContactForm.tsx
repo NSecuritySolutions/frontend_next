@@ -1,11 +1,18 @@
 import React, { useState, useRef, ChangeEventHandler } from 'react'
+
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { IMaskInput } from 'react-imask'
 
 import Image from 'next/image'
+import MaskedStyledInput from './mask'
+
+import { Button } from '@/shared/components/Button'
+import { Typography } from '@/shared/components/Typography'
+import { DocumentImage } from '@/shared/components/DocumentImage'
 
 import colors from '@/shared/constants/colors'
 import {
@@ -29,15 +36,18 @@ import {
   FileWrapper,
   NoBr,
 } from './styled'
-import { Button } from '@/shared/components/Button'
-import MaskedStyledInput from './mask'
-import { Typography } from '@/shared/components/Typography'
-import { DocumentImage } from '@/shared/components/DocumentImage'
-import { BtnLink } from '@/shared/components/BtnLink'
 
 const MAX_FILE_SIZE = 5
+const SUPPORTED_FORMATS = [
+  'image/jpg',
+  'image/jpeg',
+  'image/png',
+  'application/pdf',
+  'application/msword',
+  'application/xml',
+]
 
-const schema = yup.object({
+const schema = yup.object().shape({
   name: yup.string().required('Заполните поле'),
   phone: yup.string().min(18, 'Не похоже на телефон').required('Заполните поле'),
   email: yup.string().email('Не похоже на email').required('Заполните поле'),
@@ -49,6 +59,13 @@ type IFormInput = yup.InferType<typeof schema>
 
 const ContactForm = () => {
   const [fileError, setFileError] = useState<string | undefined>()
+
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const inputRef = useRef<typeof IMaskInput>(null)
+
+  const PhoneMask = '+{7} (000) 000-00-00'
+
   const {
     setValue,
     watch,
@@ -69,11 +86,6 @@ const ContactForm = () => {
     },
     resolver: yupResolver(schema),
   })
-
-  const [submitSuccess, setSubmitSuccess] = useState(false)
-
-  const PhoneMask = '+{7} (000) 000-00-00'
-  const inputRef = useRef<typeof IMaskInput>(null)
 
   const onFormSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
@@ -107,7 +119,7 @@ const ContactForm = () => {
         // перевели в байты
       } else if (file.size > MAX_FILE_SIZE * 1024 * 1024) {
         setFileError(
-          `Файл слишком большой, максимальный размер файла ${MAX_FILE_SIZE.toFixed(1)} Мбайт`,
+          `Файл слишком большой, максимальный размер файла ${MAX_FILE_SIZE.toFixed(0)} Мб`,
         )
         return
       }
@@ -209,6 +221,8 @@ const ContactForm = () => {
                   Загрузить спецификацию <NoBr>(в формате xlx, pdf, word)</NoBr>
                 </UploadBtnText>
                 {fileError && <ErrorText style={{ bottom: -20 }}>{fileError}</ErrorText>}
+
+                {errors.file && <ErrorText>{errors.file?.message}</ErrorText>}
               </UploadBtn>
             )}
             <FormParagraph>
@@ -222,12 +236,13 @@ const ContactForm = () => {
                 Правил политики конфиденциальности
               </Link>
             </FormParagraph>
-            <BtnLink
+            <Button
               width="130px"
               height="44px"
               color={colors.btnOpacityColor}
               text="Отправить"
-              size="15px"
+              type="submit"
+              disabled={errors ? false : true}
             />
           </Form>
         </FormColumn>
