@@ -11,7 +11,7 @@ const StyledBtnLink = styled.a<TStyledBtnLinkProps>`
   color: ${(props) => props.color || '#101010'};
   text-decoration: none;
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: ${(props) => props.size};
   font-weight: 800;
   cursor: pointer;
@@ -36,7 +36,7 @@ const StyledAccentBtnLink = styled.a<TStyledBtnLinkProps>`
   color: ${(props) => props.color || '#101010'};
   text-decoration: none;
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: ${(props) => props.size};
   font-weight: 800;
   cursor: pointer;

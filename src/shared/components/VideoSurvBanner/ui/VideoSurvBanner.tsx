@@ -33,6 +33,7 @@ const VideoSurvBanner: React.FC = () => {
           alt=""
           width={791}
           height={445}
+          priority
         />
       </ImageWrapper>
     </BannerWrapper>
