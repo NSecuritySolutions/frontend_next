@@ -20,7 +20,7 @@ const ManagerCard = () => {
           <TextWrapper>
             <CardName>{item.name}</CardName>
             <CardPosition>{item.position}</CardPosition>
-            <CardTel>{item.tel}</CardTel>
+            {/* <CardTel>{item.tel}</CardTel> */}
           </TextWrapper>
         </CardContainer>
       ))}

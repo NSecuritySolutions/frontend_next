@@ -28,17 +28,12 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 320px;
-
   justify-content: space-between;
-
   gap: 12px;
   max-width: 580px;
   width: 100%;
   overflow: hidden;
-
-  :hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 
   @media (max-width: 1300px) {
     padding: 20px;

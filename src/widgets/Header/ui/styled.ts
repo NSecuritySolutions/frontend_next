@@ -69,7 +69,7 @@ const HeaderTopItem = styled.div`
   }
 `
 
-const HeaderText = styled.p`
+const HeaderText = styled.a`
   font-size: 16px;
   line-height: 21.86px;
   font-weight: 700;
@@ -108,6 +108,24 @@ const SocialWrapper = styled.div`
 
   @media (max-width: 620px) {
     justify-content: center;
+  }
+`
+const HeaderSocialIconLink = styled.a`
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  background-color: white;
+  width: 27px;
+  height: 27px;
+
+  &:hover {
+    background-color: black;
+    transition: all .s ease-in;
+  }
+
+  &:hover > img {
+    filter: brightness(0) saturate(100%) invert(90%) sepia(76%) saturate(2728%) hue-rotate(321deg)
+      brightness(103%) contrast(105%);
   }
 `
 
@@ -167,13 +185,15 @@ const HeaderNavBurger = styled.nav`
 const HeaderList = styled.ul`
   width: 1180px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   padding: 20px 0px;
+  gap: 40px;
 
   @media (max-width: 1300px) {
     width: 880px;
     justify-content: space-between;
     padding: 20px 16px;
+    gap: 0;
   }
 
   @media (max-width: 940px) {
@@ -195,17 +215,46 @@ const HeaderNavItem = styled.li`
 `
 
 const HeaderNavLink = styled(Link)`
-  border-bottom: 1px solid transparent;
+  position: relative;
+  //border-bottom: 1px solid transparent;
   transition: color 0.3s ease;
 
-  &:hover:not(.active) {
-    color: ${colors.darkPrimary};
-  }
+  // &:hover:not(.active) {
+  //   color: ${colors.darkPrimary};
+  // }
 
   &.active {
     color: ${colors.darkPrimary};
+  }
+
+  &.active:before {
     border-bottom: 1px solid ${colors.darkPrimary};
     cursor: default;
+    transform-origin: rigth;
+    width: 100%;
+
+    transition:
+      width 0.4s ease,
+      transform-origin 0.8s ease;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: ${colors.darkPrimary};
+    transform-origin: left;
+    transition:
+      width 0.4s ease,
+      transform-origin 0.8s ease;
+  }
+
+  &:hover:before {
+    width: 100%;
+    transform-origin: right;
   }
 `
 
@@ -261,4 +310,5 @@ export {
   BurgerMenu,
   HeaderNavBurger,
   ContactsBurger,
+  HeaderSocialIconLink,
 }

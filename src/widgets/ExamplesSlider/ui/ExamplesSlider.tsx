@@ -3,12 +3,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import Link from 'next/link'
 import Image from 'next/image'
 
 import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 
 import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 
@@ -37,24 +34,10 @@ import {
   SectionWrapper,
 } from './styled.ts'
 
-import Modal from '@/shared/components/Modal/ui/Modal'
-
 const ExamplesSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [modalItem, setModalItem] = useState<TWorkExamples | undefined>()
 
   const router = useRouter()
-
-  const openModal = (item: TWorkExamples) => {
-    setIsOpen(true)
-    setModalItem(item)
-  }
-
-  const closeModal = () => {
-    setIsOpen(false)
-    router.push('/#examples')
-  }
 
   const handleAfterChange = (slideIndex: number) => {
     setCurrentSlide(slideIndex)
@@ -73,14 +56,14 @@ const ExamplesSlider: React.FC = () => {
 
     responsive: [
       {
-        breakpoint: 1180,
+        breakpoint: 1300,
         settings: {
           rows: 2,
           slidesPerRow: 2,
         },
       },
       {
-        breakpoint: 880,
+        breakpoint: 940,
         settings: {
           rows: 1,
           slidesToSow: 1,
@@ -108,7 +91,7 @@ const ExamplesSlider: React.FC = () => {
     }
   }
   return (
-    <section>
+    <section id="examples">
       <ColumnTitle>Примеры наших работ</ColumnTitle>
 
       <SectionWrapper>
@@ -124,11 +107,11 @@ const ExamplesSlider: React.FC = () => {
                 <CardWrapper
                   key={item.id}
                   onClick={() => {
-                    router.push(`/examples/${item.id}`)
+                    router.push(`/ourworks/${item.id}`)
                   }}
                 >
                   {item.cardImage ? (
-                    <ExamplesLink href={`/examples/${item.id}`}>
+                    <ExamplesLink href={`/ourworks/${item.id}`}>
                       <ExamplesImgWrapper>
                         <Image
                           blurDataURL={rgbDataURL(225, 231, 244)}
@@ -169,7 +152,7 @@ const ExamplesSlider: React.FC = () => {
                         height="44px"
                         color={colors.darkPrimary}
                         size="15px"
-                        link={`/examples/${item.id}`}
+                        link={`/ourworks/${item.id}`}
                       ></BtnLink>
 
                       <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
@@ -180,7 +163,6 @@ const ExamplesSlider: React.FC = () => {
           </Slider>
         </SliderContainer>
       </SectionWrapper>
-      {isOpen ? <Modal modalItem={modalItem} isOpen={isOpen} closeModal={closeModal} /> : ''}
       <SecondButtonWrapper>
         <BtnLink
           size="15px"

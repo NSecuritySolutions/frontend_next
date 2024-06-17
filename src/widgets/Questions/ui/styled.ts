@@ -13,9 +13,9 @@ const SectionWrapper = styled.div`
   margin: 0 auto;
   max-width: 1180px;
   width: 100%;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  gap: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  gap: 20px;
 
   @media (max-width: 1300px) {
     max-width: 880px;

@@ -4,13 +4,17 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
 
-  @media (max-width: 940px) {
+@media (max-width: 940px) {
+  .main {
     margin-top: 133px;
   }
+}
 
-  @media (max-width: 620px) {
-    margin-top: 87px;
+@media (max-width: 620px) {
+  .main {
+    margin-top: 67px;
   }
 }
 

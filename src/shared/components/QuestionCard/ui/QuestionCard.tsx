@@ -51,9 +51,9 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen,
       $open={open}
       ref={ref}
     >
-      <QuestionNumber $chosen={chosen !== null && chosen.question === question}>
+      {/* <QuestionNumber $chosen={chosen !== null && chosen.question === question}>
         {id}
-      </QuestionNumber>
+      </QuestionNumber> */}
       <TitleContainer ref={titleRef}>
         <CardText>{question}</CardText>
         <AnimatePresence initial={false} mode="popLayout">

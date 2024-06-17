@@ -1,5 +1,3 @@
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import styled from 'styled-components'
 import colors from '@/shared/constants/colors'
 
@@ -22,12 +20,12 @@ const SliderWrapper = styled.div`
     border-radius: 20px;
     cursor: zoom-in;
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       min-width: 816px;
       width: 100%;
       height: 445px;
     }
-    @media (max-width: 880px) {
+    @media (max-width: 940px) {
       min-width: 516px;
       width: 100%;
       height: 282px;
@@ -47,12 +45,12 @@ const SliderWrapper = styled.div`
       object-fit: fill;
       border-radius: 20px;
 
-      @media (max-width: 1180px) {
+      @media (max-width: 1300px) {
         min-width: 816px;
         width: 100%;
         height: 445px;
       }
-      @media (max-width: 880px) {
+      @media (max-width: 940px) {
         min-width: 516px;
         width: 100%;
         height: 282px;
@@ -82,7 +80,7 @@ const SliderWrapper = styled.div`
       gap: 0;
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 940px) {
       max-width: 516px;
       width: 100%;
       gap: 0;
@@ -101,13 +99,13 @@ const SliderWrapper = styled.div`
       background-color: ${colors.textSecondary};
       object-fit: fill;
 
-      @media (max-width: 1180px) {
+      @media (max-width: 1300px) {
         max-width: 189px;
         width: 100%;
         height: 141px;
       }
 
-      @media (max-width: 880px) {
+      @media (max-width: 940px) {
         max-width: 120px;
         width: 100%;
         height: 90px;
@@ -126,13 +124,13 @@ const SliderWrapper = styled.div`
       height: 195px;
       border-radius: 20px;
 
-      @media (max-width: 1180px) {
+      @media (max-width: 1300px) {
         max-width: 189px;
         width: 100%;
         height: 141px;
       }
 
-      @media (max-width: 880px) {
+      @media (max-width: 940px) {
         max-width: 120px;
         width: 100%;
         height: 90px;
@@ -254,20 +252,20 @@ const SliderWrapper = styled.div`
     top: 40%;
     left: 10px;
     position: absolute;
-    z-index: 10;
+    z-index: 3;
   }
 
   .slick-next {
     top: 40%;
     left: 1070px;
     position: absolute;
-    z-index: 10;
+    z-index: 3;
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1300px) {
       left: 786px;
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 940px) {
       left: 485px;
     }
 

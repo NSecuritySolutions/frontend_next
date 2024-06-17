@@ -35,7 +35,7 @@ export const cardServices: TOurServices[] = [
       'Автономные и сетевые СКУД',
     ],
     img: '/images/services/png/services-images-res-3.png',
-    link: '/domofon',
+    link: '/intercom',
     btnName: 'Подробнее',
   },
   {

@@ -3,8 +3,6 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 
@@ -19,6 +17,9 @@ import {
   CustomDot,
   ReviewsLink,
   TitleWrapper,
+  IconWrapper,
+  CustomNextArrow,
+  CustomPrevArrow,
 } from './styled.ts'
 
 const ReviewsSlider = () => {
@@ -30,27 +31,28 @@ const ReviewsSlider = () => {
   const settings = {
     className: 'reviews-slider',
     dots: true,
+    arrows: true,
     infinite: false,
     speed: 200,
     slidesToShow: 3,
     slidesToScroll: 3,
-    arrows: false,
     focusOnSelect: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
 
     appendDots: (dots: boolean) => <ul>{dots}</ul>,
 
     responsive: [
       {
-        breakpoint: 1180,
+        breakpoint: 1300,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          infinite: true,
           dots: true,
         },
       },
       {
-        breakpoint: 840,
+        breakpoint: 940,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -60,11 +62,12 @@ const ReviewsSlider = () => {
       {
         breakpoint: 620,
         settings: {
-          slidesToShow: 1.1,
+          slidesToShow: 1.2,
           slidesToScroll: 1,
         },
       },
     ],
+
     customPaging: function (i: number) {
       let activePage = 0
       if (typeof window !== 'undefined') {
@@ -94,7 +97,7 @@ const ReviewsSlider = () => {
         {projectReviews.map((item, i) => (
           <ReviewsContainer className="slick-slide" key={i}>
             <TitleWrapper>
-              <div style={{ width: '40px', height: '40px' }}>
+              <IconWrapper>
                 <Image
                   src={item.img}
                   alt={item.name}
@@ -103,7 +106,7 @@ const ReviewsSlider = () => {
                   placeholder="blur"
                   blurDataURL={rgbDataURL(225, 231, 244)}
                 />
-              </div>
+              </IconWrapper>
               <ReviewsTitle>{truncate(item.name, TITLE_LIMIT)} </ReviewsTitle>
             </TitleWrapper>
             <ReviewsParagraph>{truncate(item.product, TITLE_LIMIT)}</ReviewsParagraph>

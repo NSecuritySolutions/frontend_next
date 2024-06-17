@@ -8,15 +8,57 @@ const SliderContainer = styled.div`
   width: 100%;
   background-color: ${colors.backgroundBase2};
 
-  .slick-dots {
-    display: block;
+  .slick-prev {
+    background-image: url('/icons/ic-next-button.svg');
+    background-size: contain;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 48%;
+    left: -80px;
+    transform: translateY(-50%) rotate(180deg);
+    z-index: 3;
   }
 
-  @media (max-width: 1180px) {
+  .slick-next {
+    font-size: 0;
+    line-height: 0;
+
+    position: absolute;
+    top: 50%;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    transform: translate(0, -50%);
+
+    cursor: pointer;
+
+    color: black;
+    border: none;
+    outline: none;
+    background-image: url('/icons/ic-next-button.svg');
+    background-size: contain;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+  }
+
+  .slick-disabled {
+    visibility: hidden;
+  }
+
+  @media (max-width: 1300px) {
     max-width: 580px;
   }
 
-  @media (max-width: 880px) {
+  @media (max-width: 1040px) {
+  }
+
+  @media (max-width: 940px) {
     max-width: 580px;
 
     .slick-dots {
@@ -24,10 +66,17 @@ const SliderContainer = styled.div`
     }
   }
 
+  @media (max-width: 720px) {
+    .slick-arrow {
+      visibility: hidden;
+    }
+  }
+
   @media (max-width: 620px) {
-    max-width: 328px;
+    max-width: 360px;
   }
 `
+
 const ReviewsContainer = styled.article`
   display: flex !important;
   flex-direction: column;
@@ -38,7 +87,6 @@ const ReviewsContainer = styled.article`
   height: 289px;
   width: 100%;
   background-color: ${colors.backgroundPrimary};
-  font-family: Manrope, sans-serif;
 
   @media (max-width: 940px) {
     margin-top: 30px;
@@ -71,7 +119,7 @@ const CustomDot = styled.div<{ $active?: boolean }>`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: ${(props) => (props.$active ? `${colors.btnPrimary}` : '#d7d7d7')};
 `
 
@@ -95,6 +143,63 @@ const TitleWrapper = styled.div`
   gap: 8px;
   align-items: center;
 `
+const IconWrapper = styled.div`
+  widt: 40px;
+  height: 40px;
+`
+
+const CustomPrevArrow = styled.div<{ $active?: boolean }>`
+  background-image: url('/icons/ic-next-button.svg');
+  background-size: contain;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 48%;
+  left: -80px;
+  transform: translateY(-50%) rotate(180deg);
+  z-index: 3;
+
+  &:before {
+    display: none;
+  }
+
+  @media (max-width: 1370px) {
+    left: -70px;
+  }
+
+  @media (max-width: 940px) {
+    left: -80px;
+  }
+
+  @media (max-width: 620px) {
+    display: none;
+  }
+`
+
+const CustomNextArrow = styled.div<{ $active?: boolean }>`
+  background-image: url('/icons/ic-next-button.svg');
+  background-size: contain;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 48%;
+  right: -370px;
+  transform: translateY(-50%);
+  z-index: 3;
+
+  &:before {
+    display: none;
+  }
+
+  @media (max-width: 1370px) {
+    right: -345px;
+  }
+  @media (max-width: 940px) {
+    right: -70px;
+  }
+`
 
 export {
   ReviewsContainer,
@@ -105,4 +210,7 @@ export {
   CustomDot,
   ReviewsLink,
   TitleWrapper,
+  IconWrapper,
+  CustomNextArrow,
+  CustomPrevArrow,
 }
