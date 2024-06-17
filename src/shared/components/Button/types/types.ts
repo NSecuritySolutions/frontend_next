@@ -7,6 +7,7 @@ type TBtnProps = {
   text: string
   disabled: boolean
   onClick?: (e: FormEvent<Element>) => void
+  type?: string
 }
 
 type TStyledBtnProps = {
@@ -14,6 +15,7 @@ type TStyledBtnProps = {
   height: string
   color: string
   onClick?: (e: FormEvent<Element>) => void
+  type?: string
 }
 
 export type { TBtnProps, TStyledBtnProps }
