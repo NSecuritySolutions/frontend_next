@@ -61,39 +61,8 @@ const ExampleCard: React.FC = () => {
   )[0]
 
   // console.log(bannerItem, 'item')
-  const settings = {
-    className: 'reviews-slider',
-    dots: false,
-    arrows: false,
-    infinite: false,
-    speed: 200,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    focusOnSelect: true,
 
-    appendDots: (dots: boolean) => <ul>{dots}</ul>,
-
-    responsive: [
-      { breakpoint: 999999999, settings: 'unslick' as 'unslick', arrows: false },
-
-      {
-        breakpoint: 940,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 620,
-        settings: {
-          slidesToShow: 1.2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  }
-
+  // @TODO: дописать обрезку заголовков в зависимости от ширины
   function truncate(str: string, maxlength: number) {
     if (str.length > maxlength) {
       return str.substring(0, maxlength - 3) + '...'
@@ -107,68 +76,66 @@ const ExampleCard: React.FC = () => {
       <OurWorksBanner item={bannerItem} />
       <StyledTitle>Примеры работ</StyledTitle>
       <SliderContainer className="slider-container" id="examples">
-        <Slider {...settings} className="slider-example-card">
-          {workExamples
-            .sort(
-              (newDate: TWorkExamples, olderDate: TWorkExamples) =>
-                new Date(olderDate.date as string).getTime() -
-                new Date(newDate.date as string).getTime(),
-            )
-            .slice(0, isMobileView ? totalCards : visibleCards)
-            .map((item: TWorkExamples, i) => (
-              <CardWrapper key={item.id}>
-                {item.cardImage ? (
-                  <ExamplesLink href={`/ourworks/${item.id}`}>
-                    <ExamplesImgWrapper>
-                      <Image
-                        blurDataURL={rgbDataURL(225, 231, 244)}
-                        src={item?.cardImage}
-                        alt={item.cardTitle}
-                        fill
-                        style={{ objectFit: 'cover', borderRadius: '12px' }}
-                      />
-                    </ExamplesImgWrapper>
-                  </ExamplesLink>
-                ) : (
+        {workExamples
+          .sort(
+            (newDate: TWorkExamples, olderDate: TWorkExamples) =>
+              new Date(olderDate.date as string).getTime() -
+              new Date(newDate.date as string).getTime(),
+          )
+          .slice(0, isMobileView ? totalCards : visibleCards)
+          .map((item: TWorkExamples, i) => (
+            <CardWrapper key={item.id}>
+              {item.cardImage ? (
+                <ExamplesLink href={`/ourworks/${item.id}`}>
                   <ExamplesImgWrapper>
                     <Image
-                      src={(item.cardImage = blankImg)}
-                      fill
-                      alt={'Пустая картинка'}
-                      placeholder="blur"
                       blurDataURL={rgbDataURL(225, 231, 244)}
-                    ></Image>
+                      src={item?.cardImage}
+                      alt={item.cardTitle}
+                      fill
+                      style={{ objectFit: 'cover', borderRadius: '12px' }}
+                    />
                   </ExamplesImgWrapper>
-                )}
-                <ExamplesContainer className="slick-slide" key={i}>
-                  <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
+                </ExamplesLink>
+              ) : (
+                <ExamplesImgWrapper>
+                  <Image
+                    src={(item.cardImage = blankImg)}
+                    fill
+                    alt={'Пустая картинка'}
+                    placeholder="blur"
+                    blurDataURL={rgbDataURL(225, 231, 244)}
+                  ></Image>
+                </ExamplesImgWrapper>
+              )}
+              <ExamplesContainer className="slick-slide" key={i}>
+                <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
 
-                  <InfoIconWrapper>
-                    {item.quantities.map((item, i) => (
-                      <InfoIcon key={i}>
-                        {item.number}
-                        {item.measure}
-                      </InfoIcon>
-                    ))}
-                  </InfoIconWrapper>
+                <InfoIconWrapper>
+                  {item.quantities.map((item, i) => (
+                    <InfoIcon key={i}>
+                      {item.number}
+                      {item.measure}
+                    </InfoIcon>
+                  ))}
+                </InfoIconWrapper>
 
-                  <ButtonWrapper>
-                    <BtnLink
-                      btnType="transparent"
-                      text={'Подробнее'}
-                      width="134px"
-                      height="44px"
-                      color={colors.darkPrimary}
-                      size="15px"
-                      link={`/ourworks/${item.id}`}
-                    ></BtnLink>
+                <ButtonWrapper>
+                  <BtnLink
+                    btnType="transparent"
+                    text={'Подробнее'}
+                    width="134px"
+                    height="44px"
+                    color={colors.darkPrimary}
+                    size="15px"
+                    link={`/ourworks/${item.id}`}
+                  ></BtnLink>
 
-                    <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
-                  </ButtonWrapper>
-                </ExamplesContainer>
-              </CardWrapper>
-            ))}
-        </Slider>
+                  <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
+                </ButtonWrapper>
+              </ExamplesContainer>
+            </CardWrapper>
+          ))}
 
         {!isMobileView && visibleCards < totalCards && (
           <SStyledBtnLink

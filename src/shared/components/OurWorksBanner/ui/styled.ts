@@ -26,8 +26,8 @@ const BannerWrapper = styled.div<{ $img?: string }>`
 }
 
 @media (max-width: 620px) {
-  display: none;
-
+width: 328px;
+height: 202px;
 }
 `
 const ImageWrapper = styled.div`
@@ -73,8 +73,13 @@ const InfoIconWrapper = styled.div`
   left: 40px;
 
   @media (max-width: 940px) {
-    bottom: 20px;
+    top: 20px;
     left: 20px;
+  }
+
+  @media (max-width: 620px) {
+    top: 10px;
+    left: 8px;
   }
 `
 const InfoIcon = styled.div`
@@ -104,6 +109,14 @@ const TextWrapper = styled.div`
     max-width: 500px;
     bottom: 20px;
     left: 20px;
+    padding: 20px;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 304px;
+    bottom: 10px;
+    left: 8px;
+    padding: 10px;
   }
 `
 const StyledTitle = styled.h1`
@@ -115,6 +128,11 @@ const StyledTitle = styled.h1`
   @media (max-width: 940px) {
     font-size: 24px;
   }
+
+  @media (max-width: 620px) {
+    font-weight: 800;
+    font-size: 20px;
+  }
 `
 
 const StyledParagraph = styled.p`
@@ -125,9 +143,9 @@ const StyledParagraph = styled.p`
   font-size: 16px;
   color: black;
 
-  // @media (max-width: 1180px) {
-  //   font-size: 14px;
-  // }
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 export {
