@@ -53,10 +53,10 @@ const Footer = () => {
             <FooterSocialIconLinkTg
               href="#"
               target="_blank"
-              $default="/icons/Icons/State=Default.svg"
-              $hover="/icons/Icons/State=Hover.svg"
-              $focus="/icons/Icons/State=Active.svg"
-              $disabled="/icons/Icons/State=Disabled.svg"
+              $default="/icons/Icons/ic_TG_State=Default.svg"
+              $hover="/icons/Icons/ic_TG_State=Hover.svg"
+              $focus="/icons/Icons/ic_TG_State=Active.svg"
+              $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
             ></FooterSocialIconLinkTg>
             <FooterSocialIconLinkWa
               href="#"

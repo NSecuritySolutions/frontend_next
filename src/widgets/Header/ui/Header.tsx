@@ -100,10 +100,10 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
                   <HeaderSocialIconLinkTg
                     href="#"
                     target="_blank"
-                    $default="/icons/Icons/State=Default.svg"
-                    $hover="/icons/Icons/State=Hover.svg"
-                    $focus="/icons/Icons/State=Active.svg"
-                    $disabled="/icons/Icons/State=Disabled.svg"
+                    $default="/icons/Icons/ic_TG_State=Default.svg"
+                    $hover="/icons/Icons/ic_TG_State=Hover.svg"
+                    $focus="/icons/Icons/ic_TG_State=Active.svg"
+                    $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
                   ></HeaderSocialIconLinkTg>
                   <HeaderSocialIconLinkWa
                     href="#"
@@ -172,10 +172,10 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
                 <HeaderSocialIconLinkTg
                   href="#"
                   target="_blank"
-                  $default="/icons/Icons/State=Default.svg"
-                  $hover="/icons/Icons/State=Hover.svg"
-                  $focus="/icons/Icons/State=Active.svg"
-                  $disabled="/icons/Icons/State=Disabled.svg"
+                  $default="/icons/Icons/ic_TG_State=Default.svg"
+                  $hover="/icons/Icons/ic_TG_State=Hover.svg"
+                  $focus="/icons/Icons/ic_TG_State=Active.svg"
+                  $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
                 ></HeaderSocialIconLinkTg>
                 <HeaderSocialIconLinkWa
                   href="#"
