@@ -108,7 +108,7 @@ const ExampleCard: React.FC = () => {
                 <InfoIconWrapper>
                   {item.quantities.map((item, i) => (
                     <InfoIcon key={i}>
-                      {item.number}
+                      {`${new Intl.NumberFormat('ru-RU').format(item.number)}`}
                       {item.measure}
                     </InfoIcon>
                   ))}
@@ -134,12 +134,12 @@ const ExampleCard: React.FC = () => {
         {visibleCards < totalCards && (
           <StyledTransparentBtnLink
             size="15px"
-            width="277px"
-            height="44px"
+            width="176px"
+            height="56px"
             color={colors.darkPrimary}
             onClick={showMoreCards}
           >
-            Смотреть все примеры работ
+            Показать еще
           </StyledTransparentBtnLink>
         )}
       </SliderContainer>
