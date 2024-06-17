@@ -32,7 +32,6 @@ import {
 
 const ExampleCard: React.FC = () => {
   const [visibleCards, setVisibleCards] = useState(4)
-  const [isMobileView, setIsMobileView] = useState(false)
 
   const totalCards = workExamples.length
 
@@ -41,9 +40,7 @@ const ExampleCard: React.FC = () => {
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 940)
-    }
+    const handleResize = () => {}
 
     handleResize()
 
@@ -58,8 +55,6 @@ const ExampleCard: React.FC = () => {
     (newDate: TWorkExamples, olderDate: TWorkExamples) =>
       new Date(olderDate.date as string).getTime() - new Date(newDate.date as string).getTime(),
   )[0]
-
-  // console.log(bannerItem, 'item')
 
   // @TODO: дописать обрезку заголовков в зависимости от ширины
   function truncate(str: string, maxlength: number) {
@@ -81,7 +76,7 @@ const ExampleCard: React.FC = () => {
               new Date(olderDate.date as string).getTime() -
               new Date(newDate.date as string).getTime(),
           )
-          .slice(0, isMobileView ? totalCards : visibleCards)
+          .slice(0, visibleCards)
           .map((item: TWorkExamples, i) => (
             <CardWrapper key={item.id}>
               {item.cardImage ? (
@@ -136,7 +131,7 @@ const ExampleCard: React.FC = () => {
             </CardWrapper>
           ))}
 
-        {!isMobileView && visibleCards < totalCards && (
+        {visibleCards < totalCards && (
           <StyledTransparentBtnLink
             size="15px"
             width="277px"
