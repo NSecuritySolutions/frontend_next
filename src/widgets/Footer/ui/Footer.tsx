@@ -12,7 +12,8 @@ import {
   FooterContactsContainer,
   FooterDeveloperLink,
   FooterRightsText,
-  FooterSocialIconLink,
+  FooterSocialIconLinkTg,
+  FooterSocialIconLinkWa,
   FooterSocialIconsContainer,
   FooterTop,
   FooterWrapper,
@@ -49,12 +50,22 @@ const Footer = () => {
             ))}
           </FooterContactsContentWrapper>
           <FooterSocialIconsContainer>
-            <FooterSocialIconLink href="#" target="_blank">
-              <Image src="/icons/telegram.svg" width={32} height={32} alt="Telegram" />
-            </FooterSocialIconLink>
-            <FooterSocialIconLink href="#" target="_blank">
-              <Image src="/icons/whatsapp.svg" width={32} height={32} alt="WhatsApp" />
-            </FooterSocialIconLink>
+            <FooterSocialIconLinkTg
+              href="#"
+              target="_blank"
+              $default="/icons/Icons/State=Default.svg"
+              $hover="/icons/Icons/State=Hover.svg"
+              $focus="/icons/Icons/State=Active.svg"
+              $disabled="/icons/Icons/State=Disabled.svg"
+            ></FooterSocialIconLinkTg>
+            <FooterSocialIconLinkWa
+              href="#"
+              target="_blank"
+              $default="/icons/Icons/ic_WA_State=Default.svg"
+              $hover="/icons/Icons/ic_WA_State=Hover.svg"
+              $focus="/icons/Icons/ic_WA_State=Active.svg"
+              $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
+            ></FooterSocialIconLinkWa>
           </FooterSocialIconsContainer>
         </FooterContactsContainer>
       </FooterTop>
