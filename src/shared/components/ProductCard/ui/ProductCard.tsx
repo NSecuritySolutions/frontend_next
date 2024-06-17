@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
-
+import React, { FC, useEffect, useState } from 'react'
 import { BtnLink } from '../../BtnLink'
 
 import { truncateArr, truncateStr } from '../utils'
@@ -91,4 +90,4 @@ const ProductCard: FC<TCard> = ({ item }) => {
   )
 }
 
-export default ProductCard
+export default React.memo(ProductCard)

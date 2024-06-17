@@ -37,7 +37,6 @@ const SliderContainer = styled.section`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    min-height: 644px;
     max-width: 1180px;
     width: 100%;
     gap: 20px;
