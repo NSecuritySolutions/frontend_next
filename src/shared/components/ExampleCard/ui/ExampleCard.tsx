@@ -5,9 +5,9 @@ import blankImg from '@/assets/icons/examples/no-image.svg'
 
 import Image from 'next/image'
 
-import Slider from 'react-slick'
+import { BtnLink } from '../../BtnLink/index.ts'
+import { StyledTransparentBtnLink } from '../../BtnLink/ui/styled.ts'
 
-import { BtnLink } from '@/shared/components/BtnLink/index.ts'
 import { OurWorksBanner } from '../../OurWorksBanner/index.ts'
 
 import { TWorkExamples } from '@/shared/constants/texts/types.ts'
@@ -28,7 +28,6 @@ import {
   InfoIconWrapper,
   ExamplesImgWrapper,
   StyledTitle,
-  SStyledBtnLink,
 } from './styled.ts'
 
 const ExampleCard: React.FC = () => {
@@ -75,7 +74,7 @@ const ExampleCard: React.FC = () => {
     <>
       <OurWorksBanner item={bannerItem} />
       <StyledTitle>Примеры работ</StyledTitle>
-      <SliderContainer className="slider-container" id="examples">
+      <SliderContainer id="examples">
         {workExamples
           .sort(
             (newDate: TWorkExamples, olderDate: TWorkExamples) =>
@@ -138,7 +137,7 @@ const ExampleCard: React.FC = () => {
           ))}
 
         {!isMobileView && visibleCards < totalCards && (
-          <SStyledBtnLink
+          <StyledTransparentBtnLink
             size="15px"
             width="277px"
             height="44px"
@@ -146,7 +145,7 @@ const ExampleCard: React.FC = () => {
             onClick={showMoreCards}
           >
             Смотреть все примеры работ
-          </SStyledBtnLink>
+          </StyledTransparentBtnLink>
         )}
       </SliderContainer>
     </>

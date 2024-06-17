@@ -1,11 +1,6 @@
 import colors from '@/shared/constants/colors'
 
 import styled from 'styled-components'
-import { StyledBtnLink } from '../../BtnLink/ui/styled'
-
-const SStyledBtnLink = styled(StyledBtnLink)`
-  margin: 40px auto;
-`
 
 const StyledTitle = styled.h1`
   font-weight: 700;
@@ -31,35 +26,36 @@ const StyledTitle = styled.h1`
 `
 
 const SliderContainer = styled.section`
-    margin: 40px auto;
-    background-color: ${colors.backgroundBase2};
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 1180px;
-    width: 100%;
-    gap: 20px;
-    justify-content: space-between;
+  margin: 40px auto;
+  background-color: ${colors.backgroundBase2};
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 1180px;
+  width: 100%;
+  gap: 20px;
+  justify-content: space-between;
 
-    @media (max-width: 1300px) {
-      margin: 0 auto 40px auto;
-
-      max-width: 880px;
-      width: 100%;
-    }
-
-    @media (max-width: 940px) {
-      max-width: 580px;
-      width: 100%;
-    }
-
-     @media (max-width: 620px) {
-      max-width: 328px;
-      width: 100%;
-    }
+  > a:last-of-type {
+    margin: 0 auto;
   }
 
-  
+  @media (max-width: 1300px) {
+    margin: 0 auto 40px auto;
+
+    max-width: 880px;
+    width: 100%;
+  }
+
+  @media (max-width: 940px) {
+    max-width: 580px;
+    width: 100%;
+  }
+
+  @media (max-width: 620px) {
+    max-width: 328px;
+    width: 100%;
+  }
 `
 
 const CardWrapper = styled.div`
@@ -265,5 +261,4 @@ export {
   InfoIconWrapper,
   ExamplesImgWrapper,
   StyledTitle,
-  SStyledBtnLink,
 }
