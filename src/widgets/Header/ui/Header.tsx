@@ -20,7 +20,8 @@ import {
   BurgerMenu,
   HeaderNavBurger,
   ContactsBurger,
-  HeaderSocialIconLink,
+  HeaderSocialIconLinkTg,
+  HeaderSocialIconLinkWa,
 } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
@@ -96,12 +97,22 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
                   </IconTextWrapper>
                 </PhoneMailWrapper>
                 <SocialWrapper>
-                  <HeaderSocialIconLink href="#" target="_blank">
-                    <Image src="/icons/telegram.svg" width={32} height={32} alt="Telegram" />
-                  </HeaderSocialIconLink>
-                  <HeaderSocialIconLink href="#" target="_blank">
-                    <Image src="/icons/whatsapp.svg" width={32} height={32} alt="WhatsApp" />
-                  </HeaderSocialIconLink>
+                  <HeaderSocialIconLinkTg
+                    href="#"
+                    target="_blank"
+                    $default="/icons/Icons/ic_TG_State=Default.svg"
+                    $hover="/icons/Icons/ic_TG_State=Hover.svg"
+                    $focus="/icons/Icons/ic_TG_State=Active.svg"
+                    $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
+                  ></HeaderSocialIconLinkTg>
+                  <HeaderSocialIconLinkWa
+                    href="#"
+                    target="_blank"
+                    $default="/icons/Icons/ic_WA_State=Default.svg"
+                    $hover="/icons/Icons/ic_WA_State=Hover.svg"
+                    $focus="/icons/Icons/ic_WA_State=Active.svg"
+                    $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
+                  ></HeaderSocialIconLinkWa>
                 </SocialWrapper>
               </HeaderContacts>
             </HeaderTopItem>
@@ -158,12 +169,22 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
               </PhoneMailWrapper>
 
               <SocialWrapper>
-                <HeaderSocialIconLink href="#" target="_blank">
-                  <Image src="/icons/telegram.svg" width={32} height={32} alt="Telegram" />
-                </HeaderSocialIconLink>
-                <HeaderSocialIconLink href="#" target="_blank">
-                  <Image src="/icons/whatsapp.svg" width={32} height={32} alt="WhatsApp" />
-                </HeaderSocialIconLink>
+                <HeaderSocialIconLinkTg
+                  href="#"
+                  target="_blank"
+                  $default="/icons/Icons/ic_TG_State=Default.svg"
+                  $hover="/icons/Icons/ic_TG_State=Hover.svg"
+                  $focus="/icons/Icons/ic_TG_State=Active.svg"
+                  $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
+                ></HeaderSocialIconLinkTg>
+                <HeaderSocialIconLinkWa
+                  href="#"
+                  target="_blank"
+                  $default="/icons/Icons/ic_WA_State=Default.svg"
+                  $hover="/icons/Icons/ic_WA_State=Hover.svg"
+                  $focus="/icons/Icons/ic_WA_State=Active.svg"
+                  $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
+                ></HeaderSocialIconLinkWa>
               </SocialWrapper>
             </ContactsBurger>
           </BurgerMenu>

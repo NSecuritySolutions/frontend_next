@@ -53,22 +53,72 @@ const FooterSocialIconsContainer = styled.div`
   gap: 10px;
 `
 
-const FooterSocialIconLink = styled.a`
+const FooterSocialIconLinkTg = styled.a<{
+  $default?: string
+  $hover?: string
+  $focus?: string
+  $disabled?: string
+}>`
+  background-image: ${(props) => `url(${props.$default})`};
   display: flex;
   align-items: center;
-  width: 28px;
-  height: 28px;
   border-radius: 50%;
-  background-color: white;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
 
   &:hover {
-    background-color: black;
-    transition: all .s ease-in;
+    background-image: ${(props) => `url(${props.$hover})`};
+    transition: all 0.3s ease-in;
   }
 
-  &:hover > img {
-    filter: brightness(0) saturate(100%) invert(90%) sepia(76%) saturate(2728%) hue-rotate(321deg)
-      brightness(103%) contrast(105%);
+  &:focus {
+    background-image: ${(props) => `url(${props.$focus})`};
+    transition: all 0.3s ease-in;
+  }
+
+  &:active {
+    background-image: ${(props) => `url(${props.$focus})`};
+    transition: all 0.3s ease-in;
+  }
+
+  &:disabled {
+    background-image: ${(props) => `url(${props.$disabled})`};
+    transition: all 0.3s ease-in;
+  }
+`
+const FooterSocialIconLinkWa = styled.a<{
+  $default?: string
+  $hover?: string
+  $focus?: string
+  $disabled?: string
+}>`
+  background-image: ${(props) => `url(${props.$default})`};
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+
+  &:hover {
+    background-image: ${(props) => `url(${props.$hover})`};
+    transition: all 0.3s ease-in;
+  }
+
+  &:focus {
+    background-image: ${(props) => `url(${props.$focus})`};
+    transition: all 0.3s ease-in;
+  }
+
+  &:active {
+    background-image: ${(props) => `url(${props.$focus})`};
+    transition: all 0.3s ease-in;
+  }
+
+  &:disabled {
+    background-image: ${(props) => `url(${props.$disabled})`};
+    transition: all 0.3s ease-in;
   }
 `
 
@@ -280,7 +330,8 @@ export {
   FooterContactsContainer,
   FooterContactContainer,
   FooterSocialIconsContainer,
-  FooterSocialIconLink,
+  FooterSocialIconLinkTg,
+  FooterSocialIconLinkWa,
   FooterContactLogo,
   FooterContactLink,
   FooterBtnWrapper,

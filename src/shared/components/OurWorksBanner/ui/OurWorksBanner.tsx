@@ -45,7 +45,7 @@ const OurWorksBanner: React.FC<BannerProps> = ({ item }) => {
         <InfoIconWrapper>
           {item.quantities.map((item, i: number) => (
             <InfoIcon key={i}>
-              {item.number} {item.measure}
+              {`${new Intl.NumberFormat('ru-RU').format(item.number)}`} {item.measure}
             </InfoIcon>
           ))}
         </InfoIconWrapper>
