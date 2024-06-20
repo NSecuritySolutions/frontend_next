@@ -1,5 +1,6 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { StaticImageData } from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import {
   Card,
@@ -34,6 +35,8 @@ interface CardSolutionProps {
 }
 
 const CardSolution: FC<CardSolutionProps> = ({ data }) => {
+  const router = useRouter()
+
   const formattedPrice = Number(data.price).toLocaleString('ru-RU', {
     style: 'currency',
     currency: 'RUB',
@@ -41,7 +44,11 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
   })
 
   return (
-    <Card>
+    <Card
+      onClick={() => {
+        router.push(`/products/${data.id}`)
+      }}
+    >
       <SolutionCardTooltip title={data.title} text={data.toolTipText} key={data.title} />
       {/* <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {showTooltip && (
