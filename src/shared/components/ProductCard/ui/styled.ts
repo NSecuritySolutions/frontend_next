@@ -17,6 +17,8 @@ const CardContainer = styled.article`
   width: 380px;
   background: ${colors.backgroundPrimary};
   gap: 20px;
+  min-height: 611px;
+
   &:hover {
     cursor: pointer;
   }
@@ -27,6 +29,7 @@ const CardContainer = styled.article`
   @media (max-width: 620px) {
     padding: 16px;
     width: 156px;
+    min-height: 348px;
   }
 `
 
@@ -58,6 +61,8 @@ const ProductPrice = styled.p`
 const ProductTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
+  text-wrap: nowrap;
+
   @media (max-width: 1300px) {
     text-wrap: nowrap;
   }

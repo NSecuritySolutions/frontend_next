@@ -43,11 +43,14 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
     maximumFractionDigits: 0,
   })
 
+  // const handleCardClick = (e: React.MouseEvent) => {
+  //   e.stopPropagation()
+  //   router.push(`/products/${data.id}`)
+  // }
+
   return (
     <Card
-      onClick={() => {
-        router.push(`/products/${data.id}`)
-      }}
+    // onClick={handleCardClick}
     >
       <SolutionCardTooltip title={data.title} text={data.toolTipText} key={data.title} />
       {/* <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
