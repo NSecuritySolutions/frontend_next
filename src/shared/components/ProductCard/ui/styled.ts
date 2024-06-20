@@ -17,7 +17,9 @@ const CardContainer = styled.article`
   width: 380px;
   background: ${colors.backgroundPrimary};
   gap: 20px;
-
+  &:hover {
+    cursor: pointer;
+  }
   @media (max-width: 1300px) {
     width: 280px;
   }

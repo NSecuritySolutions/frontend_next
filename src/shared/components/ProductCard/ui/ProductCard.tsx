@@ -1,5 +1,9 @@
-import Link from 'next/link'
 import React, { FC, useEffect, useState } from 'react'
+
+import Link from 'next/link'
+
+import { useRouter } from 'next/navigation'
+
 import { BtnLink } from '../../BtnLink'
 
 import { truncateArr, truncateStr } from '../utils'
@@ -21,6 +25,8 @@ import {
 } from './styled'
 
 const ProductCard: FC<TCard> = ({ item }) => {
+  const router = useRouter()
+
   const [screenWidth, setScreenWidth] = useState(0)
 
   useEffect(() => {
@@ -48,7 +54,11 @@ const ProductCard: FC<TCard> = ({ item }) => {
 
   return (
     <CardWrapper>
-      <CardContainer>
+      <CardContainer
+        onClick={() => {
+          router.push(`/product/${item.id}`)
+        }}
+      >
         <Img src={item.image} alt="GoPro" width={260} height={261} />
         <TextWrapper>
           <ProductPrice>{formattedPrice}</ProductPrice>
@@ -70,7 +80,7 @@ const ProductCard: FC<TCard> = ({ item }) => {
             text="Заказать звонок"
             width="174px"
             height="44px"
-            link="/"
+            link="/#contact-form"
             size="15px"
             color={colors.darkPrimary}
             btnType="accent"
@@ -79,7 +89,7 @@ const ProductCard: FC<TCard> = ({ item }) => {
             text="В калькулятор"
             width="174px"
             height="44px"
-            link="/"
+            link="/#calculator"
             color={colors.darkPrimary}
             size="15px"
             btnType="transparent"
