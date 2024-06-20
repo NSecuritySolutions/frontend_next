@@ -56,7 +56,7 @@ const ProductCard: FC<TCard> = ({ item }) => {
     <CardWrapper>
       <CardContainer
         onClick={() => {
-          router.push(`/product/${item.id}`)
+          router.push(`/cameras/${item.id}`)
         }}
       >
         <Img src={item.image} alt="GoPro" width={260} height={261} />

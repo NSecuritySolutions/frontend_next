@@ -12,7 +12,7 @@ interface BreadcrumbsProps {
 
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ title }) => {
   const pathname = usePathname()
-  const excludePathnames = ['', 'products', 'examples', 'product']
+  const excludePathnames = ['', 'products', 'examples', 'cameras']
 
   if (!pathname) return <></>
 
