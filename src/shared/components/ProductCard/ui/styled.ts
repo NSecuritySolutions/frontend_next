@@ -15,19 +15,16 @@ const CardContainer = styled.article`
   border-radius: 20px;
   padding: 20px;
   width: 380px;
-  height: 611px;
   background: ${colors.backgroundPrimary};
   gap: 20px;
 
   @media (max-width: 1300px) {
     width: 280px;
-    height: 611px;
   }
 
   @media (max-width: 620px) {
     padding: 16px;
     width: 156px;
-    height: 348px;
   }
 `
 
