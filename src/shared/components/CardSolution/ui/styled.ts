@@ -92,12 +92,12 @@ const ImageWrapper = styled.div`
 
 const Img = styled(Image)`
   width: 208px;
-  height: 156px;
+  height: auto;
   object-fit: cover;
 
   @media (max-width: 1300px) {
     width: 131px;
-    height: 98px;
+    height: auto;
   }
 `
 
