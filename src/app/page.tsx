@@ -1,8 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-
 import { cookies } from 'next/headers'
-
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
@@ -78,7 +76,6 @@ export default async function Page() {
 
   const cookieStore = cookies()
   const hasCookie = cookieStore.has('agreedGuest')
-
   return (
     <main className={styles.main} id="content">
       <Info />

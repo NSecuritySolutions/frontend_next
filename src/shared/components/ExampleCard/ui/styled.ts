@@ -74,12 +74,12 @@ const CardWrapper = styled.div`
     flex-direction: column;
 
     width: 430px;
-    height: 406px;
+    // height: 406px;
   }
 
   @media (max-width: 940px) {
     width: 280px;
-    height: 406px;
+    // height: 406px;
   }
 
   @media (max-width: 620px) {
@@ -146,8 +146,7 @@ const ExamplesContainer = styled.article`
   }
 
   @media (max-width: 940px) {
-    gap: 0 !important;
-    min-height: 162px;
+    min-height: 166px;
   }
 
   @media (max-width: 620px) {
@@ -205,7 +204,6 @@ const IconWrapper = styled.div`
     align-items: flex-end;
     flex-wrap: wrap;
     width: 76px;
-    height: 76px;
     margin: 0 !important;
   }
 `

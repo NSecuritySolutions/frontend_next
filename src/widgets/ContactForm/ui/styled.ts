@@ -106,6 +106,15 @@ const FormHeader = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 620px) {
+    button {
+      width: 118px;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 185%;
+    }
+  }
 `
 
 const ColumnParagraph = styled.p`

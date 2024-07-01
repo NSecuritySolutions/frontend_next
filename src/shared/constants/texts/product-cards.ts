@@ -11,7 +11,7 @@ export const items: TItem[] = [
   {
     id: 1,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера уличная',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -32,7 +32,7 @@ export const items: TItem[] = [
   {
     id: 2,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера внутренняя',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -53,7 +53,7 @@ export const items: TItem[] = [
   {
     id: 3,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера внутренняя',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -74,7 +74,7 @@ export const items: TItem[] = [
   {
     id: 4,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера уличная',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -95,7 +95,7 @@ export const items: TItem[] = [
   {
     id: 5,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера внутренняя',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -116,7 +116,7 @@ export const items: TItem[] = [
   {
     id: 6,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера уличная',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -137,7 +137,7 @@ export const items: TItem[] = [
   {
     id: 7,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видеокамера внутренняя',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',
@@ -158,7 +158,7 @@ export const items: TItem[] = [
   {
     id: 8,
     price: 9890,
-    title: 'Купольная IP-видеокакамера',
+    title: 'Купольная IP-видемера уличная',
     description: 'DH-IPC-HDPW1431R1P-0360B-S4 Купольная IP-видеокамера Dahua',
     moreInfo: [
       'Тип: IP',

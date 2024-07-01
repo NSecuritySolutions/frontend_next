@@ -1,13 +1,13 @@
-import { useRouter } from 'next/navigation'
-
 import { Section, SectionTitle, CardsGridContainer } from './styled'
-
 import { CardWithText } from '@/shared/components/CardWithText'
 import { cardServices, cardServicesWithBannerData } from '@/shared/constants/texts/services'
 import { CardWithTextAndBanner } from '@/shared/components/CardWithTextAndBanner'
 import colors from '@/shared/constants/colors'
+import { useRouter } from 'next/navigation'
 
 const OurServices = () => {
+  const router = useRouter()
+  console.log(router, 'router')
   return (
     <Section id="our-services">
       <SectionTitle>Наши услуги</SectionTitle>

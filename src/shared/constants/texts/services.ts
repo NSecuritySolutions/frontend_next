@@ -59,7 +59,7 @@ export const cardServicesWithBannerData: TOurServices[] = [
       'Рассчитайте стоимость вашего проекта прямо на\u00A0сайте и\u00A0закажите обратную связь для дальнейшего сотрудничества',
     ],
     img: '/images/services/png/services-images-res-5.png',
-    link: '#calculator',
+    link: '/#calculator',
     btnName: 'Рассчитать стоимость',
   },
 ]
