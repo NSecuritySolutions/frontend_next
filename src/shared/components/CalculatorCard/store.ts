@@ -44,7 +44,6 @@ class CalculatorBlockStore {
   }
 
   get result() {
-    console.log(this.formula, typeof this.variables['setup_type'])
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
     const result =
