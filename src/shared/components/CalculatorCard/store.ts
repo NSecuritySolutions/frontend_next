@@ -14,6 +14,9 @@ math.import(
     if: function (condition: boolean, trueValue: number, falseValue: number) {
       return condition ? trueValue : falseValue
     },
+    str_equals: function (str1: string, str2: string) {
+      return str1 === str2
+    },
   },
   { override: true },
 )
@@ -41,6 +44,7 @@ class CalculatorBlockStore {
   }
 
   get result() {
+    console.log(this.formula, typeof this.variables['setup_type'])
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
     const result =
