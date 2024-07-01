@@ -14,6 +14,9 @@ math.import(
     if: function (condition: boolean, trueValue: number, falseValue: number) {
       return condition ? trueValue : falseValue
     },
+    str_equals: function (str1: string, str2: string) {
+      return str1 === str2
+    },
   },
   { override: true },
 )
