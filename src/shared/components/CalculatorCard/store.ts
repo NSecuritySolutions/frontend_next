@@ -1,4 +1,4 @@
-import { makeAutoObservable, computed, observable } from 'mobx'
+import { makeAutoObservable, computed, observable, action } from 'mobx'
 import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
@@ -40,6 +40,7 @@ class CalculatorBlockStore {
       variables: observable,
       filters: observable,
       result: computed,
+      setVariable: action,
     })
   }
 

@@ -83,6 +83,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
             )}
             {option.option_type === 'checkbox' && (
               <CheckBox
+                tabIndex={amount == 0 ? -1 : 0}
                 checked={store.getVariable(option.name) as boolean}
                 onChange={(e) => {
                   store.setVariable(option.name, e.target.checked)
@@ -91,6 +92,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
             )}
             {option.option_type === 'number' && (
               <InputNumber
+                tabIndex={amount == 0 ? -1 : 0}
                 value={store.getVariable(option.name) as number}
                 onChange={(e) => store.setVariable(option.name, e.target.value)}
               />
