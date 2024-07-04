@@ -22,6 +22,7 @@ import Image from 'next/image'
 import CalculatorBlockStore from '../store.ts'
 import { Typography } from '@/shared/components/Typography'
 import calculatorStore from '@/widgets/Calculator/store.ts'
+import { Toogle } from '../../Toogle/index.ts'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore
@@ -30,10 +31,10 @@ interface CalculatorCardProps {
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
   const data = store.data
-  const amount = parseInt(store.getVariable(data.title) as string) || 0
+  const amount = parseInt(store.getVariable('block_amount') as string) || 0
 
   const handleChange = (v: number) => {
-    store.setVariable(data.title, v.toString())
+    store.setVariable('block_amount', v.toString())
     if (amount !== 0 && v === 0) {
       store.resetVariables()
     }
@@ -51,7 +52,11 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
           <CardImgWrapper src={data.image} width={37} height={37} alt={data.title} />
           <Title>{data.title}</Title>
         </ImageTitle>
-        <AmountComponent amount={amount} onChange={handleChange} />
+        {store.quantity_selection ? (
+          <AmountComponent amount={amount} onChange={handleChange} />
+        ) : (
+          <Toogle amount={amount} onChange={handleChange} />
+        )}
         <Typography size={18} width="120px" $justifyContent="end">
           {store.result.toLocaleString('ru-RU', {
             style: 'currency',

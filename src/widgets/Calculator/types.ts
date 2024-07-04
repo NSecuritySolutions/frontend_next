@@ -51,6 +51,7 @@ interface IBlock {
   formula: IFormula
   calculator: number
   options: IOption[]
+  quantity_selection: boolean
 }
 
 interface IFormula {

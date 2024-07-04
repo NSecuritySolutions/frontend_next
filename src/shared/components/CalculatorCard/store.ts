@@ -28,10 +28,12 @@ class CalculatorBlockStore {
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
   filters: Record<string, TCondition[]> = {}
+  quantity_selection: boolean
 
   constructor(data: IBlock, price: IPriceList) {
     this.id = uuidv4()
     this.data = data
+    this.quantity_selection = data.quantity_selection
     this.formula = data.formula.expression
     this.variables = { ...price }
     this.setVariables()
@@ -48,8 +50,8 @@ class CalculatorBlockStore {
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
     const result =
-      (this.variables[this.data.title] && this.variables[this.data.title] != 0 ? mathResult : 0) +
-      filterResult * (this.variables[this.data.title] as number)
+      (this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0) +
+      filterResult * (this.variables.block_amount as number)
     return result || 0
   }
 
@@ -141,6 +143,7 @@ class CalculatorBlockStore {
         option.filters && this.filters[option.product].push(...this.parseFilters(option.filters))
         this.filters[option.product].push({ leftPart: option.name as keyof (ICamera | IRegister) })
       }
+      this.variables.block_amount = 0
     })
   }
 
