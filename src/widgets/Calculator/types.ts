@@ -36,7 +36,7 @@ interface IOption {
   id: number
   title: string
   description: string
-  option_type: 'number' | 'checkbox' | 'radio'
+  option_type: 'number' | 'checkbox' | 'radio' | 'counter'
   name: string
   choices?: string
   product?: string

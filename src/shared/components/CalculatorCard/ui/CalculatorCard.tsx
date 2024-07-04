@@ -40,6 +40,10 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
     }
   }
 
+  const firstArgFunc = (name: string) => (value: number) => {
+    store.setVariable(name, value.toString())
+  }
+
   return (
     <Card $center={amount === 0} $expanded={amount > 0} len={data.options.length}>
       {index > 3 && (
@@ -100,6 +104,13 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(({ store, index }) => {
                 tabIndex={amount == 0 ? -1 : 0}
                 value={store.getVariable(option.name) as number}
                 onChange={(e) => store.setVariable(option.name, e.target.value)}
+              />
+            )}
+            {option.option_type === 'counter' && (
+              <AmountComponent
+                amount={parseInt(store.getVariable(option.name) as string)}
+                onChange={firstArgFunc(option.name)}
+                small
               />
             )}
           </Option>

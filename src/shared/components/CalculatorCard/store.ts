@@ -133,6 +133,9 @@ class CalculatorBlockStore {
         case 'number':
           this.setVariable(option.name, 0)
           break
+        case 'counter':
+          this.setVariable(option.name, '0')
+          break
         default:
           throw new Error(`Unknown option type: ${option.option_type}`)
       }
