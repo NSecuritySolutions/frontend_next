@@ -4,43 +4,45 @@ import Image from 'next/image'
 
 import styled, { css } from 'styled-components'
 
-const Card = styled(motion.div).attrs({
-  layout: 'position',
-  initial: { scale: 0, y: -49 },
-  animate: { scale: 1, y: 0 },
-  exit: { scale: 0, y: -49 },
-  transition: { duration: 1, type: 'spring', damping: 15 },
-})<{
+interface CardProps {
   $center?: boolean
   $expanded: boolean
+  $deleted: boolean
   len: number
-}>`
+}
+
+const Card = styled(motion.div).attrs<CardProps>((props) => ({
+  layout: 'position',
+  initial: { scale: 0, y: -49 },
+  animate: {
+    scale: props.$deleted ? 0 : 1,
+    y: props.$deleted ? -49 : 0,
+  },
+  transition: { duration: 1, type: 'spring', damping: 15 },
+}))<CardProps>`
   position: relative;
   background-color: ${colors.backgroundPrimary};
   border-radius: 20px;
-  padding: ${(props) => (props.$expanded ? '12px' : '23px 12px')};
-  max-height: ${(props) => (props.$expanded ? `${89 + props.len * 36}px` : '89px')};
+  margin-block: ${(props) => (props.$deleted ? 0 : '10px')};
+  padding: ${(props) => (props.$deleted ? '0px 12px' : props.$expanded ? '12px' : '23px 12px')};
+  max-height: ${(props) =>
+    props.$deleted ? 0 : props.$expanded ? `${89 + props.len * 36}px` : '89px'};
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 430px;
-  grid-row: span 3;
+  grid-row: span ${(props) => (props.$deleted ? 0 : props.$expanded ? 3 + props.len : 3)};
   transition:
+    margin-block 1s,
     max-height 1s,
-    padding 1s;
+    ${(props) => (props.$deleted ? `grid-row 1s,` : undefined)} padding 1s;
 
   ${(props) =>
     props.$center &&
     css`
       align-items: center;
-    `}
-
-  ${(props) =>
-    props.$expanded &&
-    css`
-      grid-row: span ${3 + props.len};
-    `} //   @media (max-width: 620px) {
+    `}//   @media (max-width: 620px) {
   //   max-height: ${(props) => (props.$expanded ? `${60 + props.len * 28}px` : '60px')};
   //   padding: ${(props) => (props.$expanded ? '8px' : '12px 8px')};
   //   width: 328px;
