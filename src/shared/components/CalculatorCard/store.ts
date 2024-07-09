@@ -1,4 +1,4 @@
-import { makeAutoObservable, computed, observable } from 'mobx'
+import { makeAutoObservable, computed, observable, action } from 'mobx'
 import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
@@ -28,10 +28,12 @@ class CalculatorBlockStore {
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
   filters: Record<string, TCondition[]> = {}
+  quantity_selection: boolean
 
   constructor(data: IBlock, price: IPriceList) {
     this.id = uuidv4()
     this.data = data
+    this.quantity_selection = data.quantity_selection
     this.formula = data.formula.expression
     this.variables = { ...price }
     this.setVariables()
@@ -40,6 +42,7 @@ class CalculatorBlockStore {
       variables: observable,
       filters: observable,
       result: computed,
+      setVariable: action,
     })
   }
 
@@ -47,8 +50,8 @@ class CalculatorBlockStore {
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
     const result =
-      (this.variables[this.data.title] && this.variables[this.data.title] != 0 ? mathResult : 0) +
-      filterResult * (this.variables[this.data.title] as number)
+      (this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0) +
+      filterResult * (this.variables.block_amount as number)
     return result || 0
   }
 
@@ -130,6 +133,9 @@ class CalculatorBlockStore {
         case 'number':
           this.setVariable(option.name, 0)
           break
+        case 'counter':
+          this.setVariable(option.name, '0')
+          break
         default:
           throw new Error(`Unknown option type: ${option.option_type}`)
       }
@@ -140,6 +146,7 @@ class CalculatorBlockStore {
         option.filters && this.filters[option.product].push(...this.parseFilters(option.filters))
         this.filters[option.product].push({ leftPart: option.name as keyof (ICamera | IRegister) })
       }
+      this.variables.block_amount = 0
     })
   }
 

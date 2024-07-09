@@ -10,17 +10,17 @@ const CalculatorContainer = styled.div`
   display: flex;
   justify-content: center;
 
+  // в связи с анимацией отключаю на 940
+  @media (max-width: 940px) {
+    display: none;
+  }
+
   @media (max-width: 620px) {
     display: none;
   }
 `
 
-const Section = styled(motion.div).attrs({
-  layout: 'size',
-  transition: { type: 'linear' },
-})<{
-  height?: number
-}>`
+const Section = styled.div`
   background-color: ${colors.backgroundBase4};
   padding: 40px;
   width: 100%;
@@ -135,11 +135,13 @@ const Option = styled.li`
   }
 `
 
-const GridContainer = styled.div`
+const GridContainer = styled.div<{ $height: number }>`
   margin-top: 58px;
   display: grid;
-  gap: 20px;
+  column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
+  max-height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
+  transition: max-height 1s;
 
   @media (max-width: 940px) {
     display: flex;

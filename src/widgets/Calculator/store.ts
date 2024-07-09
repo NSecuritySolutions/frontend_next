@@ -5,7 +5,6 @@ import { IBlock, ICalculatorData, ICamera, IPriceList, IRegister } from './types
 
 class CalculatorStore {
   data: IBlock[] = []
-  // @TODO Не забыть переделать модель цен на бэке!!!!
   prices: IPriceList | undefined = undefined
   products: (ICamera | IRegister)[] = []
   blocks: CalculatorBlockStore[] = []

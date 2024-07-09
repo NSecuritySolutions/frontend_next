@@ -26,10 +26,18 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
   observer(({ products, calculator }) => {
     const [showDropdown, setShowDropdown] = useState(false)
     const addButtonRef = useRef<HTMLButtonElement>(null)
+    const [gridSize, setGridSize] = useState(0)
+    const [safeForExpand, setSafeForExpand] = useState(true)
+    const grid = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
       calculatorStore.getData(products, calculator)
     }, [products, calculator])
+
+    useEffect(() => {
+      const size = Math.round(calculatorStore.blocks.length / 2)
+      setGridSize(size * 89 + size * 20)
+    }, [])
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -57,9 +65,53 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       }
     }, [showDropdown])
 
+    const gridResize = (value: number, expanded: boolean) => {
+      if (!safeForExpand) return
+      const size = value * 36
+      if (expanded) setGridSize((prev) => prev + size)
+      setSafeForExpand(false)
+      setTimeout(() => {
+        setGridSize(0)
+        setTimeout(() => {
+          setGridSize(grid.current!.offsetHeight)
+          setSafeForExpand(true)
+        }, 50)
+      }, 1000)
+    }
+
+    const gridBlockResize = (add: boolean, size?: number, id?: string) => {
+      if (!safeForExpand) return
+      if (add) {
+        setGridSize((prev) => prev + 20 + 89)
+        setSafeForExpand(false)
+        setTimeout(() => {
+          setGridSize(0)
+          setTimeout(() => {
+            setGridSize(grid.current!.offsetHeight)
+            setSafeForExpand(true)
+          }, 50)
+        }, 1000)
+      } else {
+        setGridSize(grid.current!.offsetHeight)
+      }
+    }
+
     const handleSelect = (value: number) => {
+      if (!safeForExpand) return
       calculatorStore.setNewBlock(value)
       setShowDropdown(false)
+      gridBlockResize(true)
+    }
+
+    const handleReset = () => {
+      if (!safeForExpand) return
+      const size = Math.round(calculatorStore.blocks.length / 2)
+      setGridSize(size * 89 + size * 20)
+      setSafeForExpand(false)
+      calculatorStore.setBlocks()
+      setTimeout(() => {
+        setSafeForExpand(true)
+      }, 1000)
     }
 
     if (calculatorStore.error) {
@@ -75,28 +127,43 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
             <AnimatePresence>
               {showDropdown && (
                 <Select>
-                  {calculatorStore.data.map((block) => (
-                    <Option key={block.id} onClick={() => handleSelect(block.id)}>
-                      <Typography size={16} $weight={700} width="100%">
-                        {block.title}
-                      </Typography>
-                    </Option>
-                  ))}
+                  {calculatorStore.data
+                    .filter((block) => block.quantity_selection == true)
+                    .map((block) => (
+                      <Option
+                        key={block.id}
+                        onClick={() => safeForExpand && handleSelect(block.id)}
+                      >
+                        <Typography size={16} $weight={700} width="100%">
+                          {block.title}
+                        </Typography>
+                      </Option>
+                    ))}
                 </Select>
               )}
             </AnimatePresence>
           </AddBlockButton>
         </TitleWrapper>
-        <Section id="calculator">
-          <GridContainer>
-            <LayoutGroup>
-              {calculatorStore.blocks.map((block, index) => (
-                <CalculatorCard store={block} key={block.id} index={index} />
-              ))}
-            </LayoutGroup>
-          </GridContainer>
+        <Section>
+          <LayoutGroup>
+            <GridContainer ref={grid} $height={gridSize}>
+              <AnimatePresence mode="sync">
+                {calculatorStore.blocks.map((block, index) => (
+                  <CalculatorCard
+                    store={block}
+                    key={block.id}
+                    index={index}
+                    resize={gridResize}
+                    deleteBlock={gridBlockResize}
+                    safe={safeForExpand}
+                    setSafe={setSafeForExpand}
+                  />
+                ))}
+              </AnimatePresence>
+            </GridContainer>
+          </LayoutGroup>
           <FooterWrapper>
-            <ImageButton onClick={() => calculatorStore.setBlocks()}>
+            <ImageButton onClick={handleReset}>
               <ImgWrap>
                 <Image
                   src="/icons/calculator/cross.svg"
