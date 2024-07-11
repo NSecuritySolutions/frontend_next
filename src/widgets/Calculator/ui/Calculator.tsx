@@ -106,7 +106,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
 
     const handleReset = () => {
       if (!safeForExpand) return
-      const size = Math.round(calculatorStore.blocks.length / 2)
+      const size = Math.round(calculatorStore.data.length / 2)
       setGridSize(size * 89 + size * 20)
       setSafeForExpand(false)
       setHeight(grid.current!.offsetHeight)
