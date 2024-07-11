@@ -27,6 +27,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     const [showDropdown, setShowDropdown] = useState(false)
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
+    const [height, setHeight] = useState(0)
     const [safeForExpand, setSafeForExpand] = useState(true)
     const grid = useRef<HTMLDivElement>(null)
 
@@ -79,7 +80,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       }, 1000)
     }
 
-    const gridBlockResize = (add: boolean, size?: number, id?: string) => {
+    const gridBlockResize = (add: boolean) => {
       if (!safeForExpand) return
       if (add) {
         setGridSize((prev) => prev + 20 + 89)
@@ -105,11 +106,16 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
 
     const handleReset = () => {
       if (!safeForExpand) return
-      const size = Math.round(calculatorStore.blocks.length / 2)
+      const size = Math.round(calculatorStore.data.length / 2)
       setGridSize(size * 89 + size * 20)
       setSafeForExpand(false)
+      setHeight(grid.current!.offsetHeight)
       calculatorStore.setBlocks()
       setTimeout(() => {
+        setHeight(size * 89 + size * 20)
+      })
+      setTimeout(() => {
+        setHeight(0)
         setSafeForExpand(true)
       }, 1000)
     }
@@ -146,7 +152,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
         </TitleWrapper>
         <Section>
           <LayoutGroup>
-            <GridContainer ref={grid} $height={gridSize}>
+            <GridContainer ref={grid} $maxHeight={gridSize} $height={height}>
               <AnimatePresence mode="sync">
                 {calculatorStore.blocks.map((block, index) => (
                   <CalculatorCard

@@ -3,7 +3,16 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
-import { IBlock, ICamera, IPriceList, IRegister } from '@/widgets/Calculator/types'
+import {
+  IBlock,
+  ICamera,
+  IPriceList,
+  IRegister,
+  IHDD,
+  IFACP,
+  ISensor,
+  IPACSProduct,
+} from '@/widgets/Calculator/types'
 import { TCondition } from './types'
 
 const config = {}
@@ -81,7 +90,10 @@ class CalculatorBlockStore {
     return filteredProducts
   }
 
-  applyConditions(item: ICamera | IRegister, conditions: TCondition[]) {
+  applyConditions(
+    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
+    conditions: TCondition[],
+  ) {
     // Логика для применения условий
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
@@ -99,13 +111,13 @@ class CalculatorBlockStore {
         case '!=':
           return item[leftPart] != rightPart!
         case '>':
-          return item[leftPart] > rightPart!
+          return item[leftPart]! > rightPart!
         case '<':
-          return item[leftPart] < rightPart!
+          return item[leftPart]! < rightPart!
         case '>=':
-          return item[leftPart] >= rightPart!
+          return item[leftPart]! >= rightPart!
         case '<=':
-          return item[leftPart] <= rightPart!
+          return item[leftPart]! <= rightPart!
         default:
           return true
       }
@@ -144,7 +156,16 @@ class CalculatorBlockStore {
       if (option.product) {
         this.filters[option.product] = []
         option.filters && this.filters[option.product].push(...this.parseFilters(option.filters))
-        this.filters[option.product].push({ leftPart: option.name as keyof (ICamera | IRegister) })
+        this.filters[option.product].push({
+          leftPart: option.name as keyof (
+            | ICamera
+            | IRegister
+            | IHDD
+            | IFACP
+            | ISensor
+            | IPACSProduct
+          ),
+        })
       }
       this.variables.block_amount = 0
     })
@@ -177,7 +198,14 @@ class CalculatorBlockStore {
     const operatorIndex = match.index
 
     // Разделение строки на левую часть, оператор и правую часть
-    const leftPart = condition.slice(0, operatorIndex).trim() as keyof (ICamera | IRegister)
+    const leftPart = condition.slice(0, operatorIndex).trim() as keyof (
+      | ICamera
+      | IRegister
+      | IHDD
+      | IFACP
+      | ISensor
+      | IPACSProduct
+    )
     const operator = match[0]
     const rightPart = condition.slice(operatorIndex! + operator.length).trim()
 

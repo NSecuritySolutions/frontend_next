@@ -3,15 +3,20 @@ import { Label, Radio, LabelText, Select, Option, SelectMenu, Arrow, SelectItem 
 import { observer } from 'mobx-react-lite'
 import CalculatorBlockStore from '../../CalculatorCard/store'
 import { createPortal } from 'react-dom'
-import Image from 'next/image'
+import { IOption } from '@/widgets/Calculator/types'
 
 interface RadioGroupProps {
-  options: string[]
-  name: string
+  option: IOption
   store: CalculatorBlockStore
+  onChange: (option: IOption, func: (...args: any[]) => void) => void
 }
 
-const RadioGroup: React.FC<RadioGroupProps> = observer(({ options, name, store }) => {
+const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChange }) => {
+  const options = option
+    .choices!.split(';')
+    .map((part) => part.trim())
+    .filter((part) => part !== '')
+  const name = option.name
   const [isOpen, setIsOpen] = useState(false)
   const [isDropdown, setIsDropdown] = useState(false)
   const value = store.getVariable(name)
@@ -56,9 +61,11 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ options, name, store }
     }
   }, [isOpen])
 
-  if (isDropdown && value == 'unknown') {
-    store.setVariable(name, options[0])
-  }
+  useEffect(() => {
+    if (isDropdown && value == 'unknown') {
+      store.setVariable(name, options[0])
+    }
+  }, [isDropdown, value])
 
   return (
     <div
@@ -85,13 +92,13 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ options, name, store }
                 }
                 $left={select.current!.getBoundingClientRect().left + window.scrollX}
               >
-                {options.map((option) => (
+                {options.map((item) => (
                   <Option
-                    className={option == value ? 'checked' : ''}
-                    key={option}
-                    onClick={() => store.setVariable(name, option)}
+                    className={item == value ? 'checked' : ''}
+                    key={item}
+                    onClick={() => onChange(option, () => store.setVariable(name, item))}
                   >
-                    {option}
+                    {item}
                   </Option>
                 ))}
               </SelectMenu>,
@@ -99,17 +106,19 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ options, name, store }
             )}
         </Select>
       ) : (
-        options.map((option) => (
-          <Label key={option}>
+        options.map((item) => (
+          <Label key={item}>
             <Radio
               name={name}
-              value={option}
-              checked={value === option}
+              value={item}
+              checked={value === item}
               onChange={(e) =>
-                store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value)
+                onChange(option, () =>
+                  store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
+                )
               }
             />
-            <LabelText>{option}</LabelText>
+            <LabelText>{item}</LabelText>
           </Label>
         ))
       )}

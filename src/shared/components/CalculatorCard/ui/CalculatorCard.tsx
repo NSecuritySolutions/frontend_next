@@ -15,7 +15,7 @@ import {
 import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '@/shared/components/AmountComponent'
 import { RadioGroup } from '@/shared/components/RadioGroup'
-import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
 import { Tooltip } from '@/shared/components/Tooltip/index.ts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -23,12 +23,15 @@ import CalculatorBlockStore from '../store.ts'
 import { Typography } from '@/shared/components/Typography'
 import calculatorStore from '@/widgets/Calculator/store.ts'
 import { Toogle } from '../../Toogle/index.ts'
+import { IOption } from '@/widgets/Calculator/types.ts'
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { CalculatorOption } from '../../CalculatorOption/index.ts'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore
   index: number
   resize: (value: number, expanded: boolean) => void
-  deleteBlock: (add: boolean, size?: number, id?: string) => void
+  deleteBlock: (add: boolean) => void
   safe: boolean
   setSafe: Dispatch<SetStateAction<boolean>>
 }
@@ -38,15 +41,60 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const data = store.data
     const amount = parseInt(store.getVariable('block_amount') as string) || 0
     const [deleted, setDeleted] = useState(false)
+    const [presentCount, setPresentCount] = useState(data.options.length)
+    const [height, setHeight] = useState(0)
+    const card = useRef<HTMLDivElement>(null)
+
+    const handleIsPresent = useCallback(
+      (option: IOption) => {
+        if (option.depends_on == undefined) return true
+        if (option.depends_on) {
+          const depends = data.options.find((item) => item.id == option.depends_on)
+          if (depends && store.getVariable(depends.name).toString() == option.depends_on_value)
+            return true
+        }
+        return false
+      },
+      [store.variables],
+    )
+
+    const presentDataOptions = data.options.filter(handleIsPresent)
+
+    useEffect(() => {
+      if (safe && card.current) {
+        if (amount == 0) {
+          setPresentCount(presentDataOptions.length)
+        } else if (presentDataOptions.length < presentCount) {
+          setSafe(false)
+          setHeight(card.current.offsetHeight)
+          setTimeout(() => {
+            resize(presentCount - presentDataOptions.length, false)
+            setHeight((prev) => prev - (presentCount - presentDataOptions.length) * 36)
+            setTimeout(() => {
+              setHeight(0)
+              setSafe(true)
+            }, 1000)
+            setPresentCount(presentDataOptions.length)
+          }, 1000)
+        } else if (presentDataOptions.length > presentCount) {
+          setSafe(false)
+          resize(presentDataOptions.length - presentCount, true)
+          setTimeout(() => {
+            setSafe(true)
+          }, 1000)
+          setPresentCount(presentDataOptions.length)
+        }
+      }
+    }, [safe, presentDataOptions.length, presentCount, amount])
 
     const handleChange = (v: number) => {
       if (!safe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
       store.setVariable('block_amount', v.toString())
       if (amount !== 0 && v === 0) {
         store.resetVariables()
-        resize(data.options.length, false)
+        resize(presentCount, false)
       } else if (amount === 0 && v === 1) {
-        resize(data.options.length, true)
+        resize(presentCount, true)
       }
     }
 
@@ -55,22 +103,28 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       setDeleted(true)
       setSafe(false)
       setTimeout(() => {
-        deleteBlock(false, amount > 0 ? data.options.length : undefined, store.id)
+        deleteBlock(false)
         calculatorStore.removeBlock(index)
         setSafe(true)
       }, 1000)
     }
 
-    const firstArgFunc = (name: string) => (value: number) => {
-      store.setVariable(name, value.toString())
+    const handleChangeOption = (option: IOption, func: (...args: any[]) => void) => {
+      if (option.dependencies) {
+        if (safe) {
+          func()
+        }
+      } else func()
     }
 
     return (
       <Card
+        ref={card}
         $center={amount === 0}
         $expanded={amount > 0}
-        len={data.options.length}
+        $len={presentCount}
         $deleted={deleted}
+        $height={height}
       >
         {index > 3 && (
           <CloseButton onClick={handleDelete}>
@@ -98,49 +152,17 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
         </CardHeader>
         <Divider $show={amount > 0} />
         <OptionsWrapper>
-          {data.options.map((option, index) => (
-            <Option key={index}>
-              <OptionHeader>
-                <Typography size={13} width="100%" color={colors.textSecondary}>
-                  {option.title}
-                </Typography>
-                <Tooltip text={option.description} />
-              </OptionHeader>
-              {option.option_type === 'radio' && (
-                <RadioGroup
-                  options={option
-                    .choices!.split(';')
-                    .map((part) => part.trim())
-                    .filter((part) => part !== '')}
-                  name={option.name}
-                  store={store}
-                />
-              )}
-              {option.option_type === 'checkbox' && (
-                <CheckBox
-                  tabIndex={amount == 0 ? -1 : 0}
-                  checked={store.getVariable(option.name) as boolean}
-                  onChange={(e) => {
-                    store.setVariable(option.name, e.target.checked)
-                  }}
-                />
-              )}
-              {option.option_type === 'number' && (
-                <InputNumber
-                  tabIndex={amount == 0 ? -1 : 0}
-                  value={store.getVariable(option.name) as number}
-                  onChange={(e) => store.setVariable(option.name, e.target.value)}
-                />
-              )}
-              {option.option_type === 'counter' && (
-                <AmountComponent
-                  amount={parseInt(store.getVariable(option.name) as string)}
-                  onChange={firstArgFunc(option.name)}
-                  small
-                />
-              )}
-            </Option>
-          ))}
+          <AnimatePresence mode="sync">
+            {presentDataOptions.map((option) => (
+              <CalculatorOption
+                key={option.id}
+                option={option}
+                store={store}
+                onChange={handleChangeOption}
+                amount={amount}
+              />
+            ))}
+          </AnimatePresence>
         </OptionsWrapper>
       </Card>
     )

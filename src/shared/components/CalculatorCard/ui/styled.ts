@@ -8,7 +8,8 @@ interface CardProps {
   $center?: boolean
   $expanded: boolean
   $deleted: boolean
-  len: number
+  $height: number
+  $len: number
 }
 
 const Card = styled(motion.div).attrs<CardProps>((props) => ({
@@ -26,15 +27,17 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
   margin-block: ${(props) => (props.$deleted ? 0 : '10px')};
   padding: ${(props) => (props.$deleted ? '0px 12px' : props.$expanded ? '12px' : '23px 12px')};
   max-height: ${(props) =>
-    props.$deleted ? 0 : props.$expanded ? `${89 + props.len * 36}px` : '89px'};
+    props.$deleted ? 0 : props.$expanded ? `${89 + props.$len * 36}px` : '89px'};
+  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 430px;
-  grid-row: span ${(props) => (props.$deleted ? 0 : props.$expanded ? 3 + props.len : 3)};
+  grid-row: span ${(props) => (props.$deleted ? 0 : props.$expanded ? 3 + props.$len : 3)};
   transition:
     margin-block 1s,
+    height 1s linear,
     max-height 1s,
     ${(props) => (props.$deleted ? `grid-row 1s,` : undefined)} padding 1s;
 
@@ -43,7 +46,7 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
     css`
       align-items: center;
     `}//   @media (max-width: 620px) {
-  //   max-height: ${(props) => (props.$expanded ? `${60 + props.len * 28}px` : '60px')};
+  //   max-height: ${(props) => (props.$expanded ? `${60 + props.$len * 28}px` : '60px')};
   //   padding: ${(props) => (props.$expanded ? '8px' : '12px 8px')};
   //   width: 328px;
   //   gap: 8px;
@@ -105,7 +108,13 @@ const Divider = styled.div<{ $show: boolean }>`
   transition: opacity 0.5s;
 `
 
-const Option = styled.div`
+const Option = styled(motion.div).attrs({
+  layout: 'position',
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0, transition: { duration: 1 } },
+  transition: { duration: 0.8 },
+})`
   height: 36px;
   display: flex;
   align-items: center;

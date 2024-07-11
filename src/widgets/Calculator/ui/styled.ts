@@ -135,13 +135,16 @@ const Option = styled.li`
   }
 `
 
-const GridContainer = styled.div<{ $height: number }>`
+const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
   margin-top: 58px;
   display: grid;
   column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
-  max-height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
-  transition: max-height 1s;
+  max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'auto')};
+  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
+  transition:
+    max-height 1s,
+    height 1s;
 
   @media (max-width: 940px) {
     display: flex;

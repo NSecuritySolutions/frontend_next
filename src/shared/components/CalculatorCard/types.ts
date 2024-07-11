@@ -1,7 +1,7 @@
-import { ICamera, IRegister } from '@/widgets/Calculator/types'
+import { ICamera, IRegister, IHDD, IFACP, ISensor, IPACSProduct } from '@/widgets/Calculator/types'
 
 type TCondition = {
-  leftPart: keyof (ICamera | IRegister)
+  leftPart: keyof (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)
   operator?: string
   rightPart?: string
 }

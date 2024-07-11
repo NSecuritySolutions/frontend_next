@@ -5,7 +5,7 @@ import { Typography } from '@/shared/components/Typography'
 
 interface AmountComponentProps {
   amount: number
-  onChange: (v: number) => void
+  onChange: (value: number) => void
   small?: boolean
 }
 
