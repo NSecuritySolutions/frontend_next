@@ -47,7 +47,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     )
 
     useEffect(() => {
-      const animation = animate(price, calculatorStore.result, { duration: 2 })
+      const animation = animate(price, calculatorStore.result, { duration: 1 })
       return animation.stop
     }, [calculatorStore.result])
 

@@ -52,7 +52,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     )
 
     useEffect(() => {
-      const animation = animate(price, store.result, { duration: 2 })
+      const animation = animate(price, store.result, { duration: 1 })
       return animation.stop
     }, [store.result])
 
