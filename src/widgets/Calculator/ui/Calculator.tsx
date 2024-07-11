@@ -10,12 +10,14 @@ import {
   Option,
   TitleWrapper,
   GridContainer,
+  PriceContainer,
+  Price,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors/index.ts'
 
-import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { animate, AnimatePresence, LayoutGroup, useMotionValue, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
@@ -30,6 +32,24 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     const [height, setHeight] = useState(0)
     const [safeForExpand, setSafeForExpand] = useState(true)
     const grid = useRef<HTMLDivElement>(null)
+
+    const price = useMotionValue(calculatorStore.result)
+    const formattedPrice = useTransform(
+      price,
+      (price) =>
+        '~' +
+        price.toLocaleString('ru-RU', {
+          style: 'currency',
+          currency: 'RUB',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
+    )
+
+    useEffect(() => {
+      const animation = animate(price, calculatorStore.result, { duration: 2 })
+      return animation.stop
+    }, [calculatorStore.result])
 
     useEffect(() => {
       calculatorStore.getData(products, calculator)
@@ -183,9 +203,12 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                 Сбросить настройки
               </Typography>
             </ImageButton>
-            <Typography size={18} style={{ marginTop: 5 }}>
-              Итого система «под ключ»: ~{calculatorStore.result}
-            </Typography>
+            <PriceContainer>
+              <Typography size={18} style={{ marginTop: 5 }}>
+                Итого система «под ключ»:
+              </Typography>
+              <Price>{formattedPrice}</Price>
+            </PriceContainer>
           </FooterWrapper>
         </Section>
       </CalculatorContainer>

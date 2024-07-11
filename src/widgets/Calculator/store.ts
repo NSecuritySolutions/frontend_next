@@ -34,13 +34,7 @@ class CalculatorStore {
     const sum = this.blocks.reduce((sum, block) => {
       return sum + block.result
     }, 0)
-    const formatedSum = sum.toLocaleString('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })
-    return formatedSum
+    return sum
   }
 
   setBlocks() {

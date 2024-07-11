@@ -5,26 +5,19 @@ import {
   ImageTitle,
   Title,
   Divider,
-  Option,
-  OptionHeader,
-  CheckBox,
-  InputNumber,
   CloseButton,
   OptionsWrapper,
+  Price,
 } from './styled'
-import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '@/shared/components/AmountComponent'
-import { RadioGroup } from '@/shared/components/RadioGroup'
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
-import { Tooltip } from '@/shared/components/Tooltip/index.ts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import CalculatorBlockStore from '../store.ts'
-import { Typography } from '@/shared/components/Typography'
 import calculatorStore from '@/widgets/Calculator/store.ts'
 import { Toogle } from '../../Toogle/index.ts'
 import { IOption } from '@/widgets/Calculator/types.ts'
-import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { animate, AnimatePresence, useMotionValue, useTransform, motion } from 'framer-motion'
 import { CalculatorOption } from '../../CalculatorOption/index.ts'
 
 interface CalculatorCardProps {
@@ -44,6 +37,24 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const [presentCount, setPresentCount] = useState(data.options.length)
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
+
+    const price = useMotionValue(store.result)
+    const formattedPrice = useTransform(
+      price,
+      (price) =>
+        '~' +
+        price.toLocaleString('ru-RU', {
+          style: 'currency',
+          currency: 'RUB',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
+    )
+
+    useEffect(() => {
+      const animation = animate(price, store.result, { duration: 2 })
+      return animation.stop
+    }, [store.result])
 
     const handleIsPresent = useCallback(
       (option: IOption) => {
@@ -141,14 +152,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           ) : (
             <Toogle amount={amount} onChange={handleChange} />
           )}
-          <Typography size={18} width="120px" $justifyContent="end">
-            {store.result.toLocaleString('ru-RU', {
-              style: 'currency',
-              currency: 'RUB',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </Typography>
+          <Price>{formattedPrice}</Price>
         </CardHeader>
         <Divider $show={amount > 0} />
         <OptionsWrapper>
@@ -160,6 +164,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
                 store={store}
                 onChange={handleChangeOption}
                 amount={amount}
+                bold={option.dependencies}
               />
             ))}
           </AnimatePresence>

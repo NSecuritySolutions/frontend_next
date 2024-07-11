@@ -156,6 +156,18 @@ const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
   // }
 `
 
+const PriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  min-width: 430px;
+`
+
+const Price = styled(motion.div)`
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 5px;
+`
+
 export {
   CalculatorContainer,
   Section,
@@ -168,4 +180,6 @@ export {
   Option,
   TitleWrapper,
   GridContainer,
+  PriceContainer,
+  Price,
 }
