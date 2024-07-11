@@ -1,12 +1,22 @@
 import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
 
 import { makeAutoObservable, computed, observable } from 'mobx'
-import { IBlock, ICalculatorData, ICamera, IPriceList, IRegister } from './types'
+import {
+  IBlock,
+  ICalculatorData,
+  ICamera,
+  IPriceList,
+  IRegister,
+  IHDD,
+  IFACP,
+  ISensor,
+  IPACSProduct,
+} from './types'
 
 class CalculatorStore {
   data: IBlock[] = []
   prices: IPriceList | undefined = undefined
-  products: (ICamera | IRegister)[] = []
+  products: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[] = []
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
 
@@ -47,7 +57,10 @@ class CalculatorStore {
     this.blocks.splice(id, 1)
   }
 
-  getData(products: (ICamera | IRegister)[], calculator: ICalculatorData[]) {
+  getData(
+    products: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[],
+    calculator: ICalculatorData[],
+  ) {
     if (!products || !calculator) {
       this.error = true
       return
