@@ -199,7 +199,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                   style={{ objectFit: 'cover' }}
                 />
               </ImgWrap>
-              <Typography size={16} color={colors.textSecondary}>
+              <Typography size={16} color={colors.accentNegative}>
                 Сбросить настройки
               </Typography>
             </ImageButton>
