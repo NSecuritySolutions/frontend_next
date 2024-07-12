@@ -6,12 +6,12 @@ import calculatorStore from '@/widgets/Calculator/store'
 import {
   IBlock,
   ICamera,
-  IPriceList,
   IRegister,
   IHDD,
   IFACP,
   ISensor,
   IPACSProduct,
+  IPriceVariables,
 } from '@/widgets/Calculator/types'
 import { TCondition } from './types'
 
@@ -39,7 +39,7 @@ class CalculatorBlockStore {
   filters: Record<string, TCondition[]> = {}
   quantity_selection: boolean
 
-  constructor(data: IBlock, price: IPriceList) {
+  constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
     this.data = data
     this.quantity_selection = data.quantity_selection

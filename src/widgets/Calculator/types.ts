@@ -78,7 +78,29 @@ interface IFormula {
   expression: string
 }
 
+interface IPrice {
+  id: number
+  price_list_category: number
+  name: string
+  variable_name: string
+  price: number
+  is_show: boolean
+}
+
+interface IPriceListCategory {
+  id: number
+  name: string
+  price_list: number
+  prices: IPrice[]
+}
+
 interface IPriceList {
+  id: number
+  date: string
+  categories: IPriceListCategory[]
+}
+
+interface IPriceVariables {
   [key: string]: number
 }
 
@@ -99,4 +121,5 @@ export type {
   IHDD,
   ISensor,
   IPACSProduct,
+  IPriceVariables,
 }
