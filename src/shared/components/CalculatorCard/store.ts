@@ -12,6 +12,7 @@ import {
   ISensor,
   IPACSProduct,
   IPriceVariables,
+  IOption,
 } from '@/widgets/Calculator/types'
 import { TCondition } from './types'
 
@@ -33,6 +34,9 @@ math.import(
 class CalculatorBlockStore {
   id: string
   data: IBlock
+  presentOptions: IOption[] = []
+  disabled: number = 0
+  appeared: number = 0
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
@@ -47,12 +51,50 @@ class CalculatorBlockStore {
     this.variables = { ...price }
     this.setVariables()
     this.initialVariables = { ...this.variables }
+    this.setPresent()
     makeAutoObservable(this, {
       variables: observable,
+      presentOptions: observable,
+      disabled: observable,
+      appeared: observable,
       filters: observable,
       result: computed,
       setVariable: action,
+      setPresent: action,
     })
+  }
+
+  compareArrays = (prevArr: IOption[], currentArr: IOption[]): void => {
+    this.disabled = 0
+    this.appeared = 0
+    for (let i = 0; i < prevArr.length; i++) {
+      if (!currentArr.find((option) => option.id == prevArr[i].id)) {
+        this.disabled++
+      }
+    }
+    for (let i = 0; i < currentArr.length; i++) {
+      if (!prevArr.find((option) => option.id == currentArr[i].id)) {
+        this.appeared++
+      }
+    }
+  }
+
+  handleIsPresent = (option: IOption) => {
+    if (option.depends_on == undefined) return true
+    if (option.depends_on) {
+      const depends = this.data.options.find((item) => item.id == option.depends_on)
+      if (
+        depends &&
+        this.handleIsPresent(depends) &&
+        this.getVariable(depends.name).toString() == option.depends_on_value
+      )
+        return true
+    }
+    return false
+  }
+
+  setPresent() {
+    this.presentOptions = this.data.options.filter(this.handleIsPresent)
   }
 
   get result() {
@@ -126,6 +168,9 @@ class CalculatorBlockStore {
 
   setVariable(name: string, value: string | number | boolean) {
     this.variables[name] = value
+    const prevArr = [...this.presentOptions]
+    this.setPresent()
+    this.compareArrays(prevArr, this.presentOptions)
   }
 
   getVariable(name: string) {

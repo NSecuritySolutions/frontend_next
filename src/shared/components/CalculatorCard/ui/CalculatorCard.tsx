@@ -31,10 +31,10 @@ interface CalculatorCardProps {
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
   ({ store, index, resize, deleteBlock, safe, setSafe }) => {
-    const data = store.data
+    const { data, presentOptions } = store
     const amount = parseInt(store.getVariable('block_amount') as string) || 0
     const [deleted, setDeleted] = useState(false)
-    const [presentCount, setPresentCount] = useState(data.options.length)
+    const [presentCount, setPresentCount] = useState(presentOptions.length)
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
 
@@ -56,47 +56,48 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       return animation.stop
     }, [store.result])
 
-    const handleIsPresent = useCallback(
-      (option: IOption) => {
-        if (option.depends_on == undefined) return true
-        if (option.depends_on) {
-          const depends = data.options.find((item) => item.id == option.depends_on)
-          if (depends && store.getVariable(depends.name).toString() == option.depends_on_value)
-            return true
-        }
-        return false
-      },
-      [store.variables],
-    )
-
-    const presentDataOptions = data.options.filter(handleIsPresent)
-
     useEffect(() => {
       if (safe && card.current) {
         if (amount == 0) {
-          setPresentCount(presentDataOptions.length)
-        } else if (presentDataOptions.length < presentCount) {
+          setPresentCount(presentOptions.length)
+        } else if (store.disabled && store.appeared) {
           setSafe(false)
-          setHeight(card.current.offsetHeight)
+          resize(store.appeared, true)
+          setPresentCount(presentCount + store.appeared)
           setTimeout(() => {
-            resize(presentCount - presentDataOptions.length, false)
-            setHeight((prev) => prev - (presentCount - presentDataOptions.length) * 36)
+            setHeight(card.current!.offsetHeight)
+            resize(store.appeared - store.disabled, false)
+            setTimeout(() => {
+              setHeight((prev) => prev + (store.appeared - store.disabled) * 36)
+            })
             setTimeout(() => {
               setHeight(0)
               setSafe(true)
             }, 1000)
-            setPresentCount(presentDataOptions.length)
+            setPresentCount(presentOptions.length)
           }, 1000)
-        } else if (presentDataOptions.length > presentCount) {
+        } else if (store.disabled) {
           setSafe(false)
-          resize(presentDataOptions.length - presentCount, true)
+          setHeight(card.current.offsetHeight)
+          setTimeout(() => {
+            resize(store.disabled, false)
+            setHeight((prev) => prev - store.disabled * 36)
+            setTimeout(() => {
+              setHeight(0)
+              setSafe(true)
+            }, 1000)
+            setPresentCount(presentOptions.length)
+          }, 1000)
+        } else if (store.appeared) {
+          setSafe(false)
+          resize(store.appeared, true)
           setTimeout(() => {
             setSafe(true)
           }, 1000)
-          setPresentCount(presentDataOptions.length)
+          setPresentCount(presentOptions.length)
         }
       }
-    }, [safe, presentDataOptions.length, presentCount, amount])
+    }, [presentOptions, presentCount, amount])
 
     const handleChange = (v: number) => {
       if (!safe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
@@ -157,7 +158,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
         <Divider $show={amount > 0} />
         <OptionsWrapper>
           <AnimatePresence mode="sync">
-            {presentDataOptions.map((option) => (
+            {presentOptions.map((option) => (
               <CalculatorOption
                 key={option.id}
                 option={option}
