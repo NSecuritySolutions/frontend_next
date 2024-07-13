@@ -12,6 +12,7 @@ import {
   GridContainer,
   PriceContainer,
   Price,
+  GridWrapper,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
@@ -26,11 +27,12 @@ import { ICalculatorData, ICamera, IRegister } from '../types'
 
 const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICalculatorData[] }> =
   observer(({ products, calculator }) => {
+    const { animationSafe, setAnimationSafe } = calculatorStore
     const [showDropdown, setShowDropdown] = useState(false)
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
     const [height, setHeight] = useState(0)
-    const [safeForExpand, setSafeForExpand] = useState(true)
+    // const [safeForExpand, setSafeForExpand] = useState(true)
     const grid = useRef<HTMLDivElement>(null)
 
     const price = useMotionValue(calculatorStore.result)
@@ -87,48 +89,57 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     }, [showDropdown])
 
     const gridResize = (value: number, expanded: boolean) => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       const size = value * 36
       if (expanded) setGridSize((prev) => prev + size)
-      setSafeForExpand(false)
+      setAnimationSafe(false)
       setTimeout(() => {
         setGridSize(0)
         setTimeout(() => {
           setGridSize(grid.current!.offsetHeight)
-          setSafeForExpand(true)
+          setAnimationSafe(true)
         }, 50)
       }, 1000)
     }
 
     const gridBlockResize = (add: boolean) => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       if (add) {
         setGridSize((prev) => prev + 20 + 89)
-        setSafeForExpand(false)
+        setAnimationSafe(false)
         setTimeout(() => {
           setGridSize(0)
           setTimeout(() => {
             setGridSize(grid.current!.offsetHeight)
-            setSafeForExpand(true)
+            setAnimationSafe(true)
           }, 50)
         }, 1000)
       } else {
+        setAnimationSafe(false)
+        setHeight(grid.current!.getBoundingClientRect().height)
         setGridSize(grid.current!.offsetHeight)
+        setTimeout(() => {
+          setHeight(grid.current!.getBoundingClientRect().height)
+          setTimeout(() => {
+            setHeight(0)
+            setAnimationSafe(true)
+          }, 1000)
+        }, 1000)
       }
     }
 
     const handleSelect = (value: number) => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       calculatorStore.setNewBlock(value)
       setShowDropdown(false)
       gridBlockResize(true)
     }
 
     const handleReset = () => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       const size = Math.round(calculatorStore.data.length / 2)
       setGridSize(size * 89 + size * 20)
-      setSafeForExpand(false)
+      setAnimationSafe(false)
       setHeight(grid.current!.offsetHeight)
       calculatorStore.setBlocks()
       setTimeout(() => {
@@ -136,7 +147,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       })
       setTimeout(() => {
         setHeight(0)
-        setSafeForExpand(true)
+        setAnimationSafe(true)
       }, 1000)
     }
 
@@ -158,7 +169,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                     .map((block) => (
                       <Option
                         key={block.id}
-                        onClick={() => safeForExpand && handleSelect(block.id)}
+                        onClick={() => animationSafe && handleSelect(block.id)}
                       >
                         <Typography size={16} $weight={700} width="100%">
                           {block.title}
@@ -172,21 +183,21 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
         </TitleWrapper>
         <Section>
           <LayoutGroup>
-            <GridContainer ref={grid} $maxHeight={gridSize} $height={height}>
-              <AnimatePresence mode="sync">
-                {calculatorStore.blocks.map((block, index) => (
-                  <CalculatorCard
-                    store={block}
-                    key={block.id}
-                    index={index}
-                    resize={gridResize}
-                    deleteBlock={gridBlockResize}
-                    safe={safeForExpand}
-                    setSafe={setSafeForExpand}
-                  />
-                ))}
-              </AnimatePresence>
-            </GridContainer>
+            <GridWrapper $height={height}>
+              <GridContainer ref={grid} $maxHeight={gridSize} $height={0}>
+                <AnimatePresence mode="sync">
+                  {calculatorStore.blocks.map((block, index) => (
+                    <CalculatorCard
+                      store={block}
+                      key={block.id}
+                      index={index}
+                      resize={gridResize}
+                      deleteBlock={gridBlockResize}
+                    />
+                  ))}
+                </AnimatePresence>
+              </GridContainer>
+            </GridWrapper>
           </LayoutGroup>
           <FooterWrapper>
             <ImageButton onClick={handleReset}>

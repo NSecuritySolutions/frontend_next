@@ -1,6 +1,6 @@
 import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
 
-import { makeAutoObservable, computed, observable } from 'mobx'
+import { makeAutoObservable, computed, observable, action } from 'mobx'
 import {
   IBlock,
   ICalculatorData,
@@ -21,15 +21,21 @@ class CalculatorStore {
   products: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[] = []
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
-
+  animationSafe: boolean = true
   constructor() {
     makeAutoObservable(this, {
       blocks: observable,
+      animationSafe: observable,
       result: computed,
+      setAnimationSafe: action,
       data: observable.ref,
       prices: observable.ref,
       products: observable.ref,
     })
+  }
+
+  setAnimationSafe = (value: boolean) => {
+    this.animationSafe = value
   }
 
   get result() {

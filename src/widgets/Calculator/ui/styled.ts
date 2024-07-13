@@ -135,8 +135,13 @@ const Option = styled.li`
   }
 `
 
-const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
+const GridWrapper = styled.div<{ $height: number }>`
+  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   margin-top: 58px;
+  transition: height 1s;
+`
+
+const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
   display: grid;
   column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
@@ -182,4 +187,5 @@ export {
   GridContainer,
   PriceContainer,
   Price,
+  GridWrapper,
 }
