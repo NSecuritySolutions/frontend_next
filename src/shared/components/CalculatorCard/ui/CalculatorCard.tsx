@@ -60,7 +60,6 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
         if (amount == 0) {
           setPresentCount(presentOptions.length)
         } else if (store.disabled && store.appeared) {
-          console.log('here')
           setAnimationSafe(false)
           resize(store.appeared, true)
           setPresentCount(presentCount + store.appeared)
@@ -77,7 +76,6 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
             setPresentCount(presentOptions.length)
           }, 1000)
         } else if (store.disabled) {
-          console.log('here')
           setAnimationSafe(false)
           setHeight(card.current.offsetHeight)
           setTimeout(() => {
@@ -90,7 +88,6 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
             setPresentCount(presentOptions.length)
           }, 1000)
         } else if (store.appeared) {
-          console.log('here')
           setAnimationSafe(false)
           resize(store.appeared, true)
           setTimeout(() => {

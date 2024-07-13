@@ -141,12 +141,11 @@ const GridWrapper = styled.div<{ $height: number }>`
   transition: height 1s;
 `
 
-const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
+const GridContainer = styled.div<{ $maxHeight: number }>`
   display: grid;
   column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
   max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'auto')};
-  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   transition:
     max-height 1s,
     height 1s;

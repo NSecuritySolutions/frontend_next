@@ -184,7 +184,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
         <Section>
           <LayoutGroup>
             <GridWrapper $height={height}>
-              <GridContainer ref={grid} $maxHeight={gridSize} $height={0}>
+              <GridContainer ref={grid} $maxHeight={gridSize}>
                 <AnimatePresence mode="sync">
                   {calculatorStore.blocks.map((block, index) => (
                     <CalculatorCard
