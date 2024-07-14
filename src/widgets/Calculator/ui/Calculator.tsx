@@ -10,12 +10,15 @@ import {
   Option,
   TitleWrapper,
   GridContainer,
+  PriceContainer,
+  Price,
+  GridWrapper,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors/index.ts'
 
-import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { animate, AnimatePresence, LayoutGroup, useMotionValue, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
@@ -24,12 +27,31 @@ import { ICalculatorData, ICamera, IRegister } from '../types'
 
 const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICalculatorData[] }> =
   observer(({ products, calculator }) => {
+    const { animationSafe, setAnimationSafe } = calculatorStore
     const [showDropdown, setShowDropdown] = useState(false)
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
     const [height, setHeight] = useState(0)
-    const [safeForExpand, setSafeForExpand] = useState(true)
+    // const [safeForExpand, setSafeForExpand] = useState(true)
     const grid = useRef<HTMLDivElement>(null)
+
+    const price = useMotionValue(calculatorStore.result)
+    const formattedPrice = useTransform(
+      price,
+      (price) =>
+        '~' +
+        price.toLocaleString('ru-RU', {
+          style: 'currency',
+          currency: 'RUB',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
+    )
+
+    useEffect(() => {
+      const animation = animate(price, calculatorStore.result, { duration: 1 })
+      return animation.stop
+    }, [calculatorStore.result])
 
     useEffect(() => {
       calculatorStore.getData(products, calculator)
@@ -67,48 +89,57 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     }, [showDropdown])
 
     const gridResize = (value: number, expanded: boolean) => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       const size = value * 36
       if (expanded) setGridSize((prev) => prev + size)
-      setSafeForExpand(false)
+      setAnimationSafe(false)
       setTimeout(() => {
         setGridSize(0)
         setTimeout(() => {
           setGridSize(grid.current!.offsetHeight)
-          setSafeForExpand(true)
+          setAnimationSafe(true)
         }, 50)
       }, 1000)
     }
 
     const gridBlockResize = (add: boolean) => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       if (add) {
         setGridSize((prev) => prev + 20 + 89)
-        setSafeForExpand(false)
+        setAnimationSafe(false)
         setTimeout(() => {
           setGridSize(0)
           setTimeout(() => {
             setGridSize(grid.current!.offsetHeight)
-            setSafeForExpand(true)
+            setAnimationSafe(true)
           }, 50)
         }, 1000)
       } else {
+        setAnimationSafe(false)
+        setHeight(grid.current!.getBoundingClientRect().height)
         setGridSize(grid.current!.offsetHeight)
+        setTimeout(() => {
+          setHeight(grid.current!.getBoundingClientRect().height)
+          setTimeout(() => {
+            setHeight(0)
+            setAnimationSafe(true)
+          }, 1000)
+        }, 1000)
       }
     }
 
     const handleSelect = (value: number) => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       calculatorStore.setNewBlock(value)
       setShowDropdown(false)
       gridBlockResize(true)
     }
 
     const handleReset = () => {
-      if (!safeForExpand) return
+      if (!animationSafe) return
       const size = Math.round(calculatorStore.data.length / 2)
       setGridSize(size * 89 + size * 20)
-      setSafeForExpand(false)
+      setAnimationSafe(false)
       setHeight(grid.current!.offsetHeight)
       calculatorStore.setBlocks()
       setTimeout(() => {
@@ -116,7 +147,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       })
       setTimeout(() => {
         setHeight(0)
-        setSafeForExpand(true)
+        setAnimationSafe(true)
       }, 1000)
     }
 
@@ -138,7 +169,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                     .map((block) => (
                       <Option
                         key={block.id}
-                        onClick={() => safeForExpand && handleSelect(block.id)}
+                        onClick={() => animationSafe && handleSelect(block.id)}
                       >
                         <Typography size={16} $weight={700} width="100%">
                           {block.title}
@@ -152,21 +183,21 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
         </TitleWrapper>
         <Section>
           <LayoutGroup>
-            <GridContainer ref={grid} $maxHeight={gridSize} $height={height}>
-              <AnimatePresence mode="sync">
-                {calculatorStore.blocks.map((block, index) => (
-                  <CalculatorCard
-                    store={block}
-                    key={block.id}
-                    index={index}
-                    resize={gridResize}
-                    deleteBlock={gridBlockResize}
-                    safe={safeForExpand}
-                    setSafe={setSafeForExpand}
-                  />
-                ))}
-              </AnimatePresence>
-            </GridContainer>
+            <GridWrapper $height={height}>
+              <GridContainer ref={grid} $maxHeight={gridSize}>
+                <AnimatePresence mode="sync">
+                  {calculatorStore.blocks.map((block, index) => (
+                    <CalculatorCard
+                      store={block}
+                      key={block.id}
+                      index={index}
+                      resize={gridResize}
+                      deleteBlock={gridBlockResize}
+                    />
+                  ))}
+                </AnimatePresence>
+              </GridContainer>
+            </GridWrapper>
           </LayoutGroup>
           <FooterWrapper>
             <ImageButton onClick={handleReset}>
@@ -179,13 +210,16 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                   style={{ objectFit: 'cover' }}
                 />
               </ImgWrap>
-              <Typography size={16} color={colors.textSecondary}>
+              <Typography size={16} color={colors.accentNegative}>
                 Сбросить настройки
               </Typography>
             </ImageButton>
-            <Typography size={18} style={{ marginTop: 5 }}>
-              Итого система «под ключ»: ~{calculatorStore.result}
-            </Typography>
+            <PriceContainer>
+              <Typography size={18} style={{ marginTop: 5 }}>
+                Итого система «под ключ»:
+              </Typography>
+              <Price>{formattedPrice}</Price>
+            </PriceContainer>
           </FooterWrapper>
         </Section>
       </CalculatorContainer>

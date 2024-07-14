@@ -5,26 +5,19 @@ import {
   ImageTitle,
   Title,
   Divider,
-  Option,
-  OptionHeader,
-  CheckBox,
-  InputNumber,
   CloseButton,
   OptionsWrapper,
+  Price,
 } from './styled'
-import colors from '@/shared/constants/colors/index'
 import { AmountComponent } from '@/shared/components/AmountComponent'
-import { RadioGroup } from '@/shared/components/RadioGroup'
-import { Dispatch, FC, SetStateAction, useCallback, useEffect, useRef, useState } from 'react'
-import { Tooltip } from '@/shared/components/Tooltip/index.ts'
+import { FC, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import CalculatorBlockStore from '../store.ts'
-import { Typography } from '@/shared/components/Typography'
 import calculatorStore from '@/widgets/Calculator/store.ts'
 import { Toogle } from '../../Toogle/index.ts'
 import { IOption } from '@/widgets/Calculator/types.ts'
-import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { animate, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 import { CalculatorOption } from '../../CalculatorOption/index.ts'
 
 interface CalculatorCardProps {
@@ -32,63 +25,81 @@ interface CalculatorCardProps {
   index: number
   resize: (value: number, expanded: boolean) => void
   deleteBlock: (add: boolean) => void
-  safe: boolean
-  setSafe: Dispatch<SetStateAction<boolean>>
 }
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
-  ({ store, index, resize, deleteBlock, safe, setSafe }) => {
-    const data = store.data
+  ({ store, index, resize, deleteBlock }) => {
+    const { data, presentOptions } = store
+    const { animationSafe, setAnimationSafe } = calculatorStore
     const amount = parseInt(store.getVariable('block_amount') as string) || 0
     const [deleted, setDeleted] = useState(false)
-    const [presentCount, setPresentCount] = useState(data.options.length)
+    const [presentCount, setPresentCount] = useState(presentOptions.length)
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
 
-    const handleIsPresent = useCallback(
-      (option: IOption) => {
-        if (option.depends_on == undefined) return true
-        if (option.depends_on) {
-          const depends = data.options.find((item) => item.id == option.depends_on)
-          if (depends && store.getVariable(depends.name).toString() == option.depends_on_value)
-            return true
-        }
-        return false
-      },
-      [store.variables],
+    const price = useMotionValue(store.result)
+    const formattedPrice = useTransform(
+      price,
+      (price) =>
+        '~' +
+        price.toLocaleString('ru-RU', {
+          style: 'currency',
+          currency: 'RUB',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
     )
 
-    const presentDataOptions = data.options.filter(handleIsPresent)
+    useEffect(() => {
+      const animation = animate(price, store.result, { duration: 1 })
+      return animation.stop
+    }, [store.result])
 
     useEffect(() => {
-      if (safe && card.current) {
+      if (animationSafe && card.current) {
         if (amount == 0) {
-          setPresentCount(presentDataOptions.length)
-        } else if (presentDataOptions.length < presentCount) {
-          setSafe(false)
-          setHeight(card.current.offsetHeight)
+          setPresentCount(presentOptions.length)
+        } else if (store.disabled && store.appeared) {
+          setAnimationSafe(false)
+          resize(store.appeared, true)
+          setPresentCount(presentCount + store.appeared)
           setTimeout(() => {
-            resize(presentCount - presentDataOptions.length, false)
-            setHeight((prev) => prev - (presentCount - presentDataOptions.length) * 36)
+            setHeight(card.current!.offsetHeight)
+            resize(store.appeared - store.disabled, false)
+            setTimeout(() => {
+              setHeight((prev) => prev + (store.appeared - store.disabled) * 36)
+            })
             setTimeout(() => {
               setHeight(0)
-              setSafe(true)
+              setAnimationSafe(true)
             }, 1000)
-            setPresentCount(presentDataOptions.length)
+            setPresentCount(presentOptions.length)
           }, 1000)
-        } else if (presentDataOptions.length > presentCount) {
-          setSafe(false)
-          resize(presentDataOptions.length - presentCount, true)
+        } else if (store.disabled) {
+          setAnimationSafe(false)
+          setHeight(card.current.offsetHeight)
           setTimeout(() => {
-            setSafe(true)
+            resize(store.disabled, false)
+            setHeight((prev) => prev - store.disabled * 36)
+            setTimeout(() => {
+              setHeight(0)
+              setAnimationSafe(true)
+            }, 1000)
+            setPresentCount(presentOptions.length)
           }, 1000)
-          setPresentCount(presentDataOptions.length)
+        } else if (store.appeared) {
+          setAnimationSafe(false)
+          resize(store.appeared, true)
+          setTimeout(() => {
+            setAnimationSafe(true)
+          }, 1000)
+          setPresentCount(presentOptions.length)
         }
       }
-    }, [safe, presentDataOptions.length, presentCount, amount])
+    }, [presentOptions, presentCount, amount])
 
     const handleChange = (v: number) => {
-      if (!safe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
+      if (!animationSafe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
       store.setVariable('block_amount', v.toString())
       if (amount !== 0 && v === 0) {
         store.resetVariables()
@@ -99,19 +110,19 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     }
 
     const handleDelete = () => {
-      if (!safe) return
-      setDeleted(true)
-      setSafe(false)
-      setTimeout(() => {
-        deleteBlock(false)
-        calculatorStore.removeBlock(index)
-        setSafe(true)
-      }, 1000)
+      if (animationSafe) {
+        setDeleted(true)
+        setAnimationSafe(false)
+        setTimeout(() => {
+          deleteBlock(false)
+          calculatorStore.removeBlock(index)
+        }, 1000)
+      }
     }
 
     const handleChangeOption = (option: IOption, func: (...args: any[]) => void) => {
       if (option.dependencies) {
-        if (safe) {
+        if (animationSafe) {
           func()
         }
       } else func()
@@ -141,25 +152,19 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           ) : (
             <Toogle amount={amount} onChange={handleChange} />
           )}
-          <Typography size={18} width="120px" $justifyContent="end">
-            {store.result.toLocaleString('ru-RU', {
-              style: 'currency',
-              currency: 'RUB',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </Typography>
+          <Price>{formattedPrice}</Price>
         </CardHeader>
         <Divider $show={amount > 0} />
         <OptionsWrapper>
           <AnimatePresence mode="sync">
-            {presentDataOptions.map((option) => (
+            {presentOptions.map((option) => (
               <CalculatorOption
                 key={option.id}
                 option={option}
                 store={store}
                 onChange={handleChangeOption}
                 amount={amount}
+                bold={option.dependencies}
               />
             ))}
           </AnimatePresence>

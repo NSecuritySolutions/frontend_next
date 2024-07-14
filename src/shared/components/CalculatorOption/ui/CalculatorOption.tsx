@@ -14,10 +14,11 @@ interface CalculatorOptionProps {
   store: CalculatorBlockStore
   onChange: (option: IOption, func: (...args: any[]) => void) => void
   amount: number
+  bold?: boolean
 }
 
 const CalculatorOption: FC<CalculatorOptionProps> = observer(
-  ({ option, store, onChange, amount }) => {
+  ({ option, store, onChange, amount, bold }) => {
     const firstArgFunc = (name: string) => (value: number) => {
       store.setVariable(name, value.toString())
     }
@@ -25,7 +26,12 @@ const CalculatorOption: FC<CalculatorOptionProps> = observer(
     return (
       <Option>
         <OptionHeader>
-          <Typography size={13} width="100%" color={colors.textSecondary}>
+          <Typography
+            size={13}
+            $weight={bold ? 700 : 400}
+            width="100%"
+            color={colors.textSecondary}
+          >
             {option.title}
           </Typography>
           <Tooltip text={option.description} />

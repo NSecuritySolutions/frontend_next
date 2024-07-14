@@ -135,13 +135,17 @@ const Option = styled.li`
   }
 `
 
-const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
+const GridWrapper = styled.div<{ $height: number }>`
+  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   margin-top: 58px;
+  transition: height 1s;
+`
+
+const GridContainer = styled.div<{ $maxHeight: number }>`
   display: grid;
   column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
   max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'auto')};
-  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   transition:
     max-height 1s,
     height 1s;
@@ -156,6 +160,18 @@ const GridContainer = styled.div<{ $maxHeight: number; $height: number }>`
   // }
 `
 
+const PriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  min-width: 430px;
+`
+
+const Price = styled(motion.div)`
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 5px;
+`
+
 export {
   CalculatorContainer,
   Section,
@@ -168,4 +184,7 @@ export {
   Option,
   TitleWrapper,
   GridContainer,
+  PriceContainer,
+  Price,
+  GridWrapper,
 }

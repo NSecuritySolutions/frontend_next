@@ -36,7 +36,7 @@ async function getData() {
     fetch(`${BASE_URL}/api/v1/our-works/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
-    fetch(`${BASE_URL}/api/v1/calculator/`),
+    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
     fetch(`${BASE_URL}/api/v1/our-services/`),
   ])
 
