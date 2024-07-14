@@ -14,7 +14,7 @@ import {
   IPriceVariables,
   IOption,
 } from '@/widgets/Calculator/types'
-import { TCondition } from './types'
+import { ICondition, IConditionCategory } from './types'
 
 const config = {}
 const math = create(all, config)
@@ -40,7 +40,7 @@ class CalculatorBlockStore {
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
-  filters: Record<string, TCondition[]> = {}
+  filters: Record<string, IConditionCategory> = {}
   quantity_selection: boolean
 
   constructor(data: IBlock, price: IPriceVariables) {
@@ -127,43 +127,73 @@ class CalculatorBlockStore {
     const products = calculatorStore.products.filter((item) => item?.category?.title === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
     const filteredProducts = products.filter((item) =>
-      this.applyConditions(item, this.filters[category]),
+      // this.applyInitialFilters(item, this.filters[category].initial) &&
+      this.applyFilters(item, this.filters[category]),
     )
     return filteredProducts
   }
 
-  applyConditions(
+  applyInitialFilters(
     item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    conditions: TCondition[],
+    conditions: ICondition[],
   ) {
-    // Логика для применения условий
+    if (conditions.length == 0) return true
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
       if (!condition.operator) {
+        if (this.filters[item.category.title][condition.leftPart]) return true
         return (
           item[condition.leftPart] == this.variables[condition.leftPart] ||
-          this.variables[condition.leftPart] == 'unknown'
+          this.variables[condition.leftPart] == 'unknown' ||
+          this.variables[condition.leftPart] == false
         )
       }
       // Это для неотслеживаемых условий (начальные фильтры, которые были заданы ны бэке)
-      const { leftPart, operator, rightPart } = condition
-      switch (operator) {
-        case '==':
-          return item[leftPart] == rightPart!
-        case '!=':
-          return item[leftPart] != rightPart!
-        case '>':
-          return item[leftPart]! > rightPart!
-        case '<':
-          return item[leftPart]! < rightPart!
-        case '>=':
-          return item[leftPart]! >= rightPart!
-        case '<=':
-          return item[leftPart]! <= rightPart!
-        default:
-          return true
-      }
+      return this.applyCondition(item, condition)
     })
+  }
+
+  applyFilters(
+    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
+    conditionCategory: IConditionCategory,
+  ) {
+    const initial = this.applyInitialFilters(item, conditionCategory.initial)
+    const restFilters = Object.keys(conditionCategory).filter((option) => option != 'initial')
+    if (restFilters.length == 0) return initial
+    const rest = restFilters.every((option) => {
+      return conditionCategory[option].every((condition) => {
+        if (this.variables[option] == 'unknown' || this.variables[option] == false) {
+          return true
+        }
+        if (condition.optionValue == this.variables[option].toString()) {
+          return this.applyCondition(item, condition)
+        } else return true
+      })
+    })
+    return rest && initial
+  }
+
+  applyCondition(
+    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
+    condition: ICondition,
+  ) {
+    const { leftPart, operator, rightPart } = condition
+    switch (operator) {
+      case '==':
+        return item[leftPart] == rightPart!
+      case '!=':
+        return item[leftPart] != rightPart!
+      case '>':
+        return item[leftPart]! > rightPart!
+      case '<':
+        return item[leftPart]! < rightPart!
+      case '>=':
+        return item[leftPart]! >= rightPart!
+      case '<=':
+        return item[leftPart]! <= rightPart!
+      default:
+        return true
+    }
   }
 
   setVariable(name: string, value: string | number | boolean) {
@@ -199,9 +229,9 @@ class CalculatorBlockStore {
 
       // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
       if (option.product) {
-        this.filters[option.product] = []
-        option.filters && this.filters[option.product].push(...this.parseFilters(option.filters))
-        this.filters[option.product].push({
+        if (!this.filters[option.product]) this.filters[option.product] = { initial: [] }
+        if (option.filters) this.parseFilters(option.filters, option.name, option.product)
+        this.filters[option.product]['initial' as keyof IConditionCategory].push({
           leftPart: option.name as keyof (
             | ICamera
             | IRegister
@@ -220,14 +250,30 @@ class CalculatorBlockStore {
     this.variables = { ...this.initialVariables }
   }
 
-  parseFilters = (str: string) => {
+  parseFilters = (str: string, optionName: string, optionProduct: string) => {
     // С бэка приходит строка из фильтров, нам нужно разбить на фильтры
-    const filters = str
-      .split(',')
-      .map((part) => part.trim())
-      .filter((part) => part !== '')
-      .map((condition) => this.splitCondition(condition))
-    return filters
+    str.split('\n').map((categoryPart) => {
+      const category = categoryPart.trim().split(/:(.*)/)[0]
+      // console.log(categoryPart.split(/:(.*)/))
+      categoryPart
+        .trim()
+        .split(/:(.*)/)[1]
+        .split(';')
+        .map((part) => part.trim())
+        .filter((part) => part !== '')
+        .map((condition) => {
+          if (category == 'initial')
+            this.filters[optionProduct].initial.push({ ...this.splitCondition(condition) })
+          else {
+            if (!this.filters[optionProduct][optionName])
+              this.filters[optionProduct][optionName] = []
+            this.filters[optionProduct][optionName].push({
+              optionValue: category,
+              ...this.splitCondition(condition),
+            })
+          }
+        })
+    })
   }
 
   splitCondition = (condition: string) => {
@@ -236,6 +282,7 @@ class CalculatorBlockStore {
     const match = condition.match(regex)
 
     if (!match) {
+      console.log(`Invalid condition string: ${condition}`)
       throw new Error('Invalid condition string')
     }
 

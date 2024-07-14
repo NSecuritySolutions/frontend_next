@@ -1,9 +1,15 @@
 import { ICamera, IRegister, IHDD, IFACP, ISensor, IPACSProduct } from '@/widgets/Calculator/types'
 
-type TCondition = {
+interface ICondition {
   leftPart: keyof (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)
   operator?: string
   rightPart?: string
+  optionValue?: string
 }
 
-export type { TCondition }
+interface IConditionCategory {
+  initial: ICondition[]
+  [key: string]: ICondition[]
+}
+
+export type { ICondition, IConditionCategory }

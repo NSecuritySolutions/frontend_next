@@ -118,7 +118,7 @@ const OptionsWrapper = styled.div`
   width: 100%;
 `
 
-const Price = styled(motion.div)`
+const Price = styled.div`
   display: flex;
   font-size: 18px;
   font-weight: 700;

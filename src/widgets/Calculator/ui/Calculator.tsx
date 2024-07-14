@@ -27,7 +27,7 @@ import { ICalculatorData, ICamera, IRegister } from '../types'
 
 const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICalculatorData[] }> =
   observer(({ products, calculator }) => {
-    const { animationSafe, setAnimationSafe } = calculatorStore
+    const { animationSafe, setAnimationSafe, result } = calculatorStore
     const [showDropdown, setShowDropdown] = useState(false)
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
@@ -35,23 +35,33 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     // const [safeForExpand, setSafeForExpand] = useState(true)
     const grid = useRef<HTMLDivElement>(null)
 
-    const price = useMotionValue(calculatorStore.result)
-    const formattedPrice = useTransform(
-      price,
-      (price) =>
-        '~' +
-        price.toLocaleString('ru-RU', {
-          style: 'currency',
-          currency: 'RUB',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }),
-    )
+    const formattedResult =
+      '~' +
+      result.toLocaleString('ru-RU', {
+        style: 'currency',
+        currency: 'RUB',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
 
-    useEffect(() => {
-      const animation = animate(price, calculatorStore.result, { duration: 1 })
-      return animation.stop
-    }, [calculatorStore.result])
+    // Когда-то была анимация циферок :(
+    // const price = useMotionValue(calculatorStore.result)
+    // const formattedPrice = useTransform(
+    //   price,
+    //   (price) =>
+    //     '~' +
+    //     price.toLocaleString('ru-RU', {
+    //       style: 'currency',
+    //       currency: 'RUB',
+    //       minimumFractionDigits: 2,
+    //       maximumFractionDigits: 2,
+    //     }),
+    // )
+
+    // useEffect(() => {
+    //   const animation = animate(price, calculatorStore.result, { duration: 1 })
+    //   return animation.stop
+    // }, [calculatorStore.result])
 
     useEffect(() => {
       calculatorStore.getData(products, calculator)
@@ -218,7 +228,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
               <Typography size={18} style={{ marginTop: 5 }}>
                 Итого система «под ключ»:
               </Typography>
-              <Price>{formattedPrice}</Price>
+              <Price>{formattedResult}</Price>
             </PriceContainer>
           </FooterWrapper>
         </Section>

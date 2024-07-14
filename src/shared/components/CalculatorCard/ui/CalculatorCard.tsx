@@ -29,7 +29,7 @@ interface CalculatorCardProps {
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
   ({ store, index, resize, deleteBlock }) => {
-    const { data, presentOptions } = store
+    const { data, presentOptions, result } = store
     const { animationSafe, setAnimationSafe } = calculatorStore
     const amount = parseInt(store.getVariable('block_amount') as string) || 0
     const [deleted, setDeleted] = useState(false)
@@ -37,23 +37,33 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
 
-    const price = useMotionValue(store.result)
-    const formattedPrice = useTransform(
-      price,
-      (price) =>
-        '~' +
-        price.toLocaleString('ru-RU', {
-          style: 'currency',
-          currency: 'RUB',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }),
-    )
+    // Когда-то была анимация циферок :(
+    // const price = useMotionValue(store.result)
+    // const formattedPrice = useTransform(
+    //   price,
+    //   (price) =>
+    //     '~' +
+    //     price.toLocaleString('ru-RU', {
+    //       style: 'currency',
+    //       currency: 'RUB',
+    //       minimumFractionDigits: 2,
+    //       maximumFractionDigits: 2,
+    //     }),
+    // )
 
-    useEffect(() => {
-      const animation = animate(price, store.result, { duration: 1 })
-      return animation.stop
-    }, [store.result])
+    // useEffect(() => {
+    //   const animation = animate(price, store.result, { duration: 1 })
+    //   return animation.stop
+    // }, [store.result])
+
+    const formattedResult =
+      '~' +
+      result.toLocaleString('ru-RU', {
+        style: 'currency',
+        currency: 'RUB',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
 
     useEffect(() => {
       if (animationSafe && card.current) {
@@ -152,7 +162,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           ) : (
             <Toogle amount={amount} onChange={handleChange} />
           )}
-          <Price>{formattedPrice}</Price>
+          <Price>{formattedResult}</Price>
         </CardHeader>
         <Divider $show={amount > 0} />
         <OptionsWrapper>

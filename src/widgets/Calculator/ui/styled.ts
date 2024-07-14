@@ -166,7 +166,7 @@ const PriceContainer = styled.div`
   min-width: 430px;
 `
 
-const Price = styled(motion.div)`
+const Price = styled.div`
   font-size: 18px;
   font-weight: 700;
   margin-top: 5px;
