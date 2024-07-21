@@ -42,6 +42,7 @@ class CalculatorBlockStore {
   variables: Record<string, string | number | boolean> = {}
   filters: Record<string, IConditionCategory> = {}
   quantity_selection: boolean
+  products: Record<string, (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]> = {}
 
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
@@ -58,6 +59,7 @@ class CalculatorBlockStore {
       disabled: observable,
       appeared: observable,
       filters: observable,
+      products: observable,
       result: computed,
       setVariable: action,
       setPresent: action,
@@ -100,16 +102,25 @@ class CalculatorBlockStore {
   get result() {
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
+    const resultWithoutProducts =
+      this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
     const result =
-      (this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0) +
+      resultWithoutProducts *
+        ((this.filters && filterResult) || Object.keys(this.filters).length == 0 ? 1 : 0) +
       filterResult * (this.variables.block_amount as number)
     return result || 0
   }
 
   filter() {
     // Фильтруем по категориям, заодно выбираем самую минимальную цену
+    const categoriesWithProducts = Object.keys(this.products).filter(
+      (category) => this.products[category].length > 0,
+    )
     const minPriceData = Object.keys(this.filters).map((category) => {
-      const filteredData = this.filterProduct(category)
+      let filteredData: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]
+      if (categoriesWithProducts.find((item) => item == category))
+        filteredData = this.products[category]
+      else filteredData = this.filterProduct(category)
       return filteredData.reduce((min, current) => {
         return current.price < min.price ? current : min
       }, filteredData[0])
@@ -201,6 +212,14 @@ class CalculatorBlockStore {
     const prevArr = [...this.presentOptions]
     this.setPresent()
     this.compareArrays(prevArr, this.presentOptions)
+    this.checkOptionProduct(name)
+  }
+
+  checkOptionProduct(name: string) {
+    const option = this.data.options.filter((option) => option.name == name)[0]
+    if (option?.product && this.products[option.product].length > 0) {
+      this.products[option.product] = []
+    }
   }
 
   getVariable(name: string) {
@@ -212,16 +231,16 @@ class CalculatorBlockStore {
     this.data.options.forEach((option) => {
       switch (option.option_type) {
         case 'checkbox':
-          this.setVariable(option.name, false)
+          this.variables[option.name] = false
           break
         case 'radio':
-          this.setVariable(option.name, 'unknown')
+          this.variables[option.name] = 'unknown'
           break
         case 'number':
-          this.setVariable(option.name, 0)
+          this.variables[option.name] = 0
           break
         case 'counter':
-          this.setVariable(option.name, '0')
+          this.variables[option.name] = '0'
           break
         default:
           throw new Error(`Unknown option type: ${option.option_type}`)
@@ -229,7 +248,10 @@ class CalculatorBlockStore {
 
       // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
       if (option.product) {
-        if (!this.filters[option.product]) this.filters[option.product] = { initial: [] }
+        if (!this.filters[option.product]) {
+          this.filters[option.product] = { initial: [] }
+          this.products[option.product] = []
+        }
         if (option.filters) this.parseFilters(option.filters, option.name, option.product)
         this.filters[option.product]['initial' as keyof IConditionCategory].push({
           leftPart: option.name as keyof (

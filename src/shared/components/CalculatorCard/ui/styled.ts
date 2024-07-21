@@ -19,7 +19,7 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
     scale: props.$deleted ? 0 : 1,
     y: props.$deleted ? -49 : 0,
   },
-  transition: { duration: 1, type: 'spring', damping: 15 },
+  transition: { duration: 0.5, type: 'just' },
 }))<CardProps>`
   position: relative;
   background-color: ${colors.backgroundPrimary};
