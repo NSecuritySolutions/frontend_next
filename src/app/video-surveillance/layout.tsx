@@ -10,6 +10,7 @@ import VideoPage from './page'
 import { BASE_URL } from '@/shared/constants/url/url'
 import { VideoPageMetaData } from '@/shared/constants/texts/metadata'
 import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
+import StyledComponentsRegistry from '../styling/registry'
 const manrope = Manrope({
   subsets: ['cyrillic'],
   weight: ['400', '600', '700', '800'],
@@ -51,5 +52,5 @@ export default function VideoPageLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <>{children}</>
+  return <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
 }

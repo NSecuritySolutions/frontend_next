@@ -276,7 +276,6 @@ class CalculatorBlockStore {
     // С бэка приходит строка из фильтров, нам нужно разбить на фильтры
     str.split('\n').map((categoryPart) => {
       const category = categoryPart.trim().split(/:(.*)/)[0]
-      // console.log(categoryPart.split(/:(.*)/))
       categoryPart
         .trim()
         .split(/:(.*)/)[1]
