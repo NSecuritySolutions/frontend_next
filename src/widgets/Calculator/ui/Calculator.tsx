@@ -98,16 +98,16 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       }
     }, [showDropdown])
 
-    const gridResize = (value: number, expanded: boolean) => {
+    const gridResize = (value: number, expanded: boolean, setSafe: boolean = true) => {
       if (!animationSafe) return
       const size = value * 36
       if (expanded) setGridSize((prev) => prev + size)
-      setAnimationSafe(false)
+      if (setSafe) setAnimationSafe(false)
       setTimeout(() => {
         setGridSize(0)
         setTimeout(() => {
           setGridSize(grid.current!.offsetHeight)
-          setAnimationSafe(true)
+          if (setSafe) setAnimationSafe(true)
         }, 50)
       }, 1000)
     }

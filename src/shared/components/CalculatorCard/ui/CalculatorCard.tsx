@@ -23,7 +23,7 @@ import { CalculatorOption } from '../../CalculatorOption/index.ts'
 interface CalculatorCardProps {
   store: CalculatorBlockStore
   index: number
-  resize: (value: number, expanded: boolean) => void
+  resize: (value: number, expanded: boolean, setSafe?: boolean) => void
   deleteBlock: (add: boolean) => void
 }
 
@@ -71,11 +71,11 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setPresentCount(presentOptions.length)
         } else if (store.disabled && store.appeared) {
           setAnimationSafe(false)
-          resize(store.appeared, true)
+          resize(store.appeared, true, false)
           setPresentCount(presentCount + store.appeared)
           setTimeout(() => {
             setHeight(card.current!.offsetHeight)
-            resize(store.appeared - store.disabled, false)
+            resize(store.appeared - store.disabled, false, false)
             setTimeout(() => {
               setHeight((prev) => prev + (store.appeared - store.disabled) * 36)
             })
@@ -89,7 +89,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setAnimationSafe(false)
           setHeight(card.current.offsetHeight)
           setTimeout(() => {
-            resize(store.disabled, false)
+            resize(store.disabled, false, false)
             setHeight((prev) => prev - store.disabled * 36)
             setTimeout(() => {
               setHeight(0)
@@ -99,7 +99,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           }, 1000)
         } else if (store.appeared) {
           setAnimationSafe(false)
-          resize(store.appeared, true)
+          resize(store.appeared, true, false)
           setTimeout(() => {
             setAnimationSafe(true)
           }, 1000)
