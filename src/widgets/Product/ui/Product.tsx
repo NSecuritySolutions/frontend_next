@@ -82,17 +82,28 @@ const Product: FC<ProductProps> = ({ data }) => {
               <SectionTitle>Харакетристики</SectionTitle>
             )}
             <UnorderedList>
-              {isCardSolution
-                ? (data as TCardSolutionProps).listItem.map((item) => (
-                    <li key={item}>
-                      <Text>{item}</Text>
-                    </li>
-                  ))
-                : (data as TItem).moreInfo.map((item) => (
-                    <li key={item}>
-                      <Text>{item}</Text>
-                    </li>
-                  ))}
+              {isCardSolution ? (
+                (data as TCardSolutionProps).listItem.map((item) => (
+                  <li key={item}>
+                    <Text>{item}</Text>
+                  </li>
+                ))
+              ) : (
+                <>
+                  <li>Тип:{data.type}</li>
+                  <li>Форм-фактор:{data.form_factor}</li>
+                  <li>Производитель: {data.manufacturer.title}</li>
+                  <li>Размещение:{data.accomodation} </li>
+                  <li>Разрешение:{data.resolution}</li>
+                  <li>Фокус:{data.focus}</li>
+                  <li>Угол обзора:{data.viewing_angle}</li>
+                  <li>ИК-съемка в темноте: {data.dark}</li>
+                  <li>Микрофон/динамик: {data.microphone ? 'да' : 'нет'}</li>
+                  <li>Поддержка MicroSD: {data.micro_sd ? 'да' : 'нет'}</li>
+                  <li>Питание, вольт: {data.power_supply}</li>
+                  <li>Рабочая температура: {data.temperature}</li>
+                </>
+              )}
             </UnorderedList>
           </BlockWrapper>
           <BlockWrapper>

@@ -5,10 +5,15 @@ import { items } from '@/shared/constants/texts/product-cards.ts'
 
 import { Section, SectionWrapper, SectionTitle } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
+import { ICamera } from '@/widgets/Calculator/types'
 
-const ProductCards: FC = () => {
+interface ProductCardsProps {
+  data: ICamera[]
+}
+
+const ProductCards: FC<ProductCardsProps> = ({ data }) => {
   const [visibleItems, setVisibleItems] = useState(6)
-
+  console.log(data, 'data')
   const showMoreItems = () => {
     setVisibleItems((prev) => prev + 6)
   }
@@ -16,7 +21,11 @@ const ProductCards: FC = () => {
     <Section id="product-cards">
       <SectionTitle>Наш ассортимент товаров</SectionTitle>
       <SectionWrapper>
-        {items.slice(0, visibleItems).map((item: any, i: number) => (
+        {/* {items.slice(0, visibleItems).map((item: any, i: number) => (
+          <ProductCard key={i} item={item} />
+        ))} */}
+
+        {data.slice(0, visibleItems).map((item: any, i: number) => (
           <ProductCard key={i} item={item} />
         ))}
       </SectionWrapper>

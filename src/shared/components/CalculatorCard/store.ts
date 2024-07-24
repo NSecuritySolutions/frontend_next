@@ -1,10 +1,20 @@
-import { makeAutoObservable, computed, observable } from 'mobx'
+import { makeAutoObservable, computed, observable, action } from 'mobx'
 import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
-import { IBlock, ICamera, IPriceList, IRegister } from '@/widgets/Calculator/types'
-import { TCondition } from './types'
+import {
+  IBlock,
+  ICamera,
+  IRegister,
+  IHDD,
+  IFACP,
+  ISensor,
+  IPACSProduct,
+  IPriceVariables,
+  IOption,
+} from '@/widgets/Calculator/types'
+import { ICondition, IConditionCategory } from './types'
 
 const config = {}
 const math = create(all, config)
@@ -24,38 +34,93 @@ math.import(
 class CalculatorBlockStore {
   id: string
   data: IBlock
+  presentOptions: IOption[] = []
+  disabled: number = 0
+  appeared: number = 0
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
-  filters: Record<string, TCondition[]> = {}
+  filters: Record<string, IConditionCategory> = {}
+  quantity_selection: boolean
+  products: Record<string, (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]> = {}
 
-  constructor(data: IBlock, price: IPriceList) {
+  constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
     this.data = data
+    this.quantity_selection = data.quantity_selection
     this.formula = data.formula.expression
     this.variables = { ...price }
     this.setVariables()
     this.initialVariables = { ...this.variables }
+    this.setPresent()
     makeAutoObservable(this, {
       variables: observable,
+      presentOptions: observable,
+      disabled: observable,
+      appeared: observable,
       filters: observable,
+      products: observable,
       result: computed,
+      setVariable: action,
+      setPresent: action,
     })
+  }
+
+  compareArrays = (prevArr: IOption[], currentArr: IOption[]): void => {
+    this.disabled = 0
+    this.appeared = 0
+    for (let i = 0; i < prevArr.length; i++) {
+      if (!currentArr.find((option) => option.id == prevArr[i].id)) {
+        this.disabled++
+      }
+    }
+    for (let i = 0; i < currentArr.length; i++) {
+      if (!prevArr.find((option) => option.id == currentArr[i].id)) {
+        this.appeared++
+      }
+    }
+  }
+
+  handleIsPresent = (option: IOption) => {
+    if (option.depends_on == undefined) return true
+    if (option.depends_on) {
+      const depends = this.data.options.find((item) => item.id == option.depends_on)
+      if (
+        depends &&
+        this.handleIsPresent(depends) &&
+        this.getVariable(depends.name).toString() == option.depends_on_value
+      )
+        return true
+    }
+    return false
+  }
+
+  setPresent() {
+    this.presentOptions = this.data.options.filter(this.handleIsPresent)
   }
 
   get result() {
     const mathResult = math.evaluate(this.formula, this.variables)
     const filterResult = this.filter()
+    const resultWithoutProducts =
+      this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
     const result =
-      (this.variables[this.data.title] && this.variables[this.data.title] != 0 ? mathResult : 0) +
-      filterResult * (this.variables[this.data.title] as number)
+      resultWithoutProducts *
+        ((this.filters && filterResult) || Object.keys(this.filters).length == 0 ? 1 : 0) +
+      filterResult * (this.variables.block_amount as number)
     return result || 0
   }
 
   filter() {
     // Фильтруем по категориям, заодно выбираем самую минимальную цену
+    const categoriesWithProducts = Object.keys(this.products).filter(
+      (category) => this.products[category].length > 0,
+    )
     const minPriceData = Object.keys(this.filters).map((category) => {
-      const filteredData = this.filterProduct(category)
+      let filteredData: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]
+      if (categoriesWithProducts.find((item) => item == category))
+        filteredData = this.products[category]
+      else filteredData = this.filterProduct(category)
       return filteredData.reduce((min, current) => {
         return current.price < min.price ? current : min
       }, filteredData[0])
@@ -73,44 +138,101 @@ class CalculatorBlockStore {
     const products = calculatorStore.products.filter((item) => item?.category?.title === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
     const filteredProducts = products.filter((item) =>
-      this.applyConditions(item, this.filters[category]),
+      this.applyFilters(item, this.filters[category]),
     )
     return filteredProducts
   }
 
-  applyConditions(item: ICamera | IRegister, conditions: TCondition[]) {
-    // Логика для применения условий
+  applyInitialFilters(
+    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
+    conditions: ICondition[],
+  ) {
+    if (conditions.length == 0) return true
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
       if (!condition.operator) {
+        if (this.filters[item.category.title][condition.leftPart]) return true
         return (
           item[condition.leftPart] == this.variables[condition.leftPart] ||
-          this.variables[condition.leftPart] == 'unknown'
+          this.variables[condition.leftPart] == 'unknown' ||
+          this.variables[condition.leftPart] == false
         )
       }
       // Это для неотслеживаемых условий (начальные фильтры, которые были заданы ны бэке)
-      const { leftPart, operator, rightPart } = condition
-      switch (operator) {
-        case '==':
-          return item[leftPart] == rightPart!
-        case '!=':
-          return item[leftPart] != rightPart!
-        case '>':
-          return item[leftPart] > rightPart!
-        case '<':
-          return item[leftPart] < rightPart!
-        case '>=':
-          return item[leftPart] >= rightPart!
-        case '<=':
-          return item[leftPart] <= rightPart!
-        default:
-          return true
-      }
+      return this.applyCondition(item, condition)
     })
+  }
+
+  applyFilters(
+    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
+    conditionCategory: IConditionCategory,
+  ) {
+    const initial = this.applyInitialFilters(item, conditionCategory.initial)
+    const restFilters = Object.keys(conditionCategory).filter((option) => option != 'initial')
+    if (restFilters.length == 0) return initial
+    const rest = restFilters.every((option) => {
+      return conditionCategory[option].every((condition) => {
+        if (this.variables[option] == 'unknown' || this.variables[option] == false) {
+          return true
+        }
+        if (condition.optionValue == this.variables[option].toString()) {
+          return this.applyCondition(item, condition)
+        } else return true
+      })
+    })
+    return rest && initial
+  }
+
+  typeChange(value1: string | number | boolean | undefined, value2: string) {
+    if (typeof value1 != typeof value2) {
+      if (typeof value1 == 'number') return parseInt(value2)
+      else if (typeof value1 == 'boolean')
+        return value2 == 'true' ? true : value2 == 'false' ? false : 'unknown'
+    }
+    return value2
+  }
+
+  applyCondition(
+    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
+    condition: ICondition,
+  ) {
+    const { leftPart, operator, rightPart } = condition
+    const finalRightPart = this.typeChange(
+      item[leftPart] as string | number | boolean | undefined,
+      rightPart as string,
+    )
+    if (!item[leftPart]) return false
+    switch (operator) {
+      case '==':
+        return item[leftPart] == finalRightPart
+      case '!=':
+        return item[leftPart] != finalRightPart
+      case '>':
+        return item[leftPart]! > finalRightPart!
+      case '<':
+        return item[leftPart]! < finalRightPart!
+      case '>=':
+        return item[leftPart]! >= finalRightPart!
+      case '<=':
+        return item[leftPart]! <= finalRightPart!
+      default:
+        return true
+    }
   }
 
   setVariable(name: string, value: string | number | boolean) {
     this.variables[name] = value
+    const prevArr = [...this.presentOptions]
+    this.setPresent()
+    this.compareArrays(prevArr, this.presentOptions)
+    this.checkOptionProduct(name)
+  }
+
+  checkOptionProduct(name: string) {
+    const option = this.data.options.filter((option) => option.name == name)[0]
+    if (option?.product && this.products[option.product].length > 0) {
+      this.products[option.product] = []
+    }
   }
 
   getVariable(name: string) {
@@ -122,13 +244,16 @@ class CalculatorBlockStore {
     this.data.options.forEach((option) => {
       switch (option.option_type) {
         case 'checkbox':
-          this.setVariable(option.name, false)
+          this.variables[option.name] = false
           break
         case 'radio':
-          this.setVariable(option.name, 'unknown')
+          this.variables[option.name] = 'unknown'
           break
         case 'number':
-          this.setVariable(option.name, 0)
+          this.variables[option.name] = 0
+          break
+        case 'counter':
+          this.variables[option.name] = '0'
           break
         default:
           throw new Error(`Unknown option type: ${option.option_type}`)
@@ -136,10 +261,23 @@ class CalculatorBlockStore {
 
       // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
       if (option.product) {
-        this.filters[option.product] = []
-        option.filters && this.filters[option.product].push(...this.parseFilters(option.filters))
-        this.filters[option.product].push({ leftPart: option.name as keyof (ICamera | IRegister) })
+        if (!this.filters[option.product]) {
+          this.filters[option.product] = { initial: [] }
+          this.products[option.product] = []
+        }
+        if (option.filters) this.parseFilters(option.filters, option.name, option.product)
+        this.filters[option.product]['initial' as keyof IConditionCategory].push({
+          leftPart: option.name as keyof (
+            | ICamera
+            | IRegister
+            | IHDD
+            | IFACP
+            | ISensor
+            | IPACSProduct
+          ),
+        })
       }
+      this.variables.block_amount = 0
     })
   }
 
@@ -147,14 +285,29 @@ class CalculatorBlockStore {
     this.variables = { ...this.initialVariables }
   }
 
-  parseFilters = (str: string) => {
+  parseFilters = (str: string, optionName: string, optionProduct: string) => {
     // С бэка приходит строка из фильтров, нам нужно разбить на фильтры
-    const filters = str
-      .split(',')
-      .map((part) => part.trim())
-      .filter((part) => part !== '')
-      .map((condition) => this.splitCondition(condition))
-    return filters
+    str.split('\n').map((categoryPart) => {
+      const category = categoryPart.trim().split(/:(.*)/)[0]
+      categoryPart
+        .trim()
+        .split(/:(.*)/)[1]
+        .split(';')
+        .map((part) => part.trim())
+        .filter((part) => part !== '')
+        .map((condition) => {
+          if (category == 'initial')
+            this.filters[optionProduct].initial.push({ ...this.splitCondition(condition) })
+          else {
+            if (!this.filters[optionProduct][optionName])
+              this.filters[optionProduct][optionName] = []
+            this.filters[optionProduct][optionName].push({
+              optionValue: category,
+              ...this.splitCondition(condition),
+            })
+          }
+        })
+    })
   }
 
   splitCondition = (condition: string) => {
@@ -163,6 +316,7 @@ class CalculatorBlockStore {
     const match = condition.match(regex)
 
     if (!match) {
+      console.log(`Invalid condition string: ${condition}`)
       throw new Error('Invalid condition string')
     }
 
@@ -170,7 +324,14 @@ class CalculatorBlockStore {
     const operatorIndex = match.index
 
     // Разделение строки на левую часть, оператор и правую часть
-    const leftPart = condition.slice(0, operatorIndex).trim() as keyof (ICamera | IRegister)
+    const leftPart = condition.slice(0, operatorIndex).trim() as keyof (
+      | ICamera
+      | IRegister
+      | IHDD
+      | IFACP
+      | ISensor
+      | IPACSProduct
+    )
     const operator = match[0]
     const rightPart = condition.slice(operatorIndex! + operator.length).trim()
 

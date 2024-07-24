@@ -23,8 +23,9 @@ import {
   ButtonWrapper,
   TextWrapper,
 } from './styled'
+import { ICamera } from '@/widgets/Calculator/types'
 
-const ProductCard: FC<TCard> = ({ item }) => {
+const ProductCard: FC<ICamera> = ({ item }) => {
   const router = useRouter()
 
   const [screenWidth, setScreenWidth] = useState(0)
@@ -44,14 +45,14 @@ const ProductCard: FC<TCard> = ({ item }) => {
     }
   }, [])
 
-  const newArray = truncateArr(item.moreInfo, screenWidth)
+  // const newArray = truncateArr(item.moreInfo, screenWidth)
 
   const formattedPrice = Number(item.price).toLocaleString('ru-RU', {
     style: 'currency',
     currency: 'RUB',
     maximumFractionDigits: 0,
   })
-
+  console.log(item)
   return (
     <CardWrapper>
       <CardContainer
@@ -59,15 +60,29 @@ const ProductCard: FC<TCard> = ({ item }) => {
           router.push(`/cameras/${item.id}`)
         }}
       >
-        <Img src={item.image} alt="GoPro" width={260} height={261} />
+        <Img src={item.image} alt={item.model} width={260} height={261} />
         <TextWrapper>
           <ProductPrice>{formattedPrice}</ProductPrice>
-          <ProductTitle>{truncateStr(item.title, screenWidth)}</ProductTitle>
+          <ProductTitle>
+            {truncateStr(item.model ? item.model : item.title, screenWidth)}
+          </ProductTitle>
           <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
           <ProductAbout>
-            {newArray.map((list: string, i: number) => (
+            {/* {newArray.map((list: string, i: number) => (
               <li key={i}>{list}</li>
-            ))}
+            ))} */}
+            <li>Тип:{item.type}</li>
+            <li>Форм-фактор:{item.form_factor}</li>
+            <li>Производитель: {item.manufacturer.title}</li>
+            <li>Размещение:{item.accomodation} </li>
+            <li>Разрешение:{item.resolution}</li>
+            <li>Фокус:{item.focus}</li>
+            <li>Угол обзора:{item.viewing_angle}</li>
+            <li>ИК-съемка в темноте: {item.dark}</li>
+            {/* <li>Микрофон/динамик: {item.microphone_details}</li>
+            <li>Поддержка MicroSD: {item.micro_sd_details}</li>
+            <li>Питание, вольт: {item.power_supply}</li>
+            <li>Рабочая температура: {item.temperature}</li> */}
           </ProductAbout>
           <Link href={`/products/${item.id}`}>
             <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>

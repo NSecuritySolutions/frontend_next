@@ -5,16 +5,22 @@ import { Typography } from '@/shared/components/Typography'
 
 interface AmountComponentProps {
   amount: number
-  onChange: (v: number) => void
+  onChange: (value: number) => void
+  small?: boolean
 }
 
-const AmountComponent: React.FC<AmountComponentProps> = ({ amount, onChange }) => {
+const AmountComponent: React.FC<AmountComponentProps> = ({ amount, onChange, small }) => {
   return (
     <Amount>
       <ChangeAmount onClick={() => amount > 0 && onChange(amount - 1)}>
         <Image src="/icons/calculator/minus.svg" height={2} width={7} alt="Decrement" />
       </ChangeAmount>
-      <Typography width="30px" size={24} $justifyContent="center">
+      <Typography
+        width={small ? '20px' : '30px'}
+        $weight={small ? 800 : 700}
+        size={small ? 15 : 24}
+        $justifyContent="center"
+      >
         {amount}
       </Typography>
       <ChangeAmount onClick={() => onChange(amount + 1)}>

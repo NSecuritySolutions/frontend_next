@@ -15,7 +15,7 @@ import { ContactForm } from '../widgets/ContactForm'
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
 import styles from './page.module.css'
-import { BASE_URL } from '@/shared/constants/url/url'
+import { getMainPageData } from './api'
 
 const Calculator = dynamic(
   () => import('@/widgets/Calculator').then((module) => module.Calculator),
@@ -27,42 +27,6 @@ const Calculator = dynamic(
 
 export const revalidate = 60
 
-async function getData() {
-  const responses = await Promise.all([
-    fetch(`${BASE_URL}/api/v1/ready-solutions/`),
-    fetch(`${BASE_URL}/api/v1/our-team/`),
-    fetch(`${BASE_URL}/api/v1/our-works/`),
-    fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/`),
-    fetch(`${BASE_URL}/api/v1/calculator/`),
-    fetch(`${BASE_URL}/api/v1/our-services/`),
-  ])
-
-  if (responses.some((response) => !response.ok)) {
-    throw new Error('Failed to fetch data')
-  }
-
-  const [
-    solutionData,
-    teamData,
-    examplesData,
-    questionsData,
-    productData,
-    calculatorData,
-    servicesData,
-  ] = await Promise.all(responses.map((response) => response.json()))
-
-  return {
-    solutionData,
-    teamData,
-    examplesData,
-    questionsData,
-    productData,
-    calculatorData,
-    servicesData,
-  }
-}
-
 export default async function Page() {
   const {
     solutionData,
@@ -72,7 +36,7 @@ export default async function Page() {
     productData,
     calculatorData,
     servicesData,
-  } = await getData()
+  } = await getMainPageData()
 
   const cookieStore = cookies()
   const hasCookie = cookieStore.has('agreedGuest')

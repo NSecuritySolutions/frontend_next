@@ -10,28 +10,30 @@ const CalculatorContainer = styled.div`
   display: flex;
   justify-content: center;
 
+  // в связи с анимацией отключаю на 940
+  @media (max-width: 940px) {
+    display: none;
+  }
+
   @media (max-width: 620px) {
     display: none;
   }
 `
 
-const Section = styled(motion.div).attrs({
-  layout: 'size',
-  transition: { type: 'linear' },
-})<{
-  height?: number
-}>`
+const Section = styled.div`
   background-color: ${colors.backgroundBase4};
   padding: 40px;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  // margin-top: 58px;
+  // align-items: center;
 `
 
 const TitleWrapper = styled.div`
-  width: 880px;
+  width: 1180px;
   margin-top: 40px;
   position: absolute;
   display: flex;
@@ -56,25 +58,30 @@ const SectionTitle = styled.h3`
   font-weight: 700;
 `
 
-const ImgWrap = styled.div`
-  padding: 9px;
-  flex-shrink: 0;
-`
-
 const ImageButton = styled.button`
   background-color: transparent;
   border: none;
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
-  margin-top: 12px;
+  padding-top: 4px;
+`
+
+const BodyWrapper = styled.div`
+  width: 1180px;
+  margin-top: 58px;
+  display: flex;
+  gap: 20px;
 `
 
 const FooterWrapper = styled.div`
-  width: 880px;
+  margin-top: 10px;
+  width: 280px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+  // align-items: center;
+  // justify-content: space-between;
 
   @media (max-width: 940px) {
     flex-direction: column;
@@ -135,11 +142,19 @@ const Option = styled.li`
   }
 `
 
-const GridContainer = styled.div`
-  margin-top: 58px;
+const GridWrapper = styled.div<{ $height: number }>`
+  height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
+  transition: height 1s;
+`
+
+const GridContainer = styled.div<{ $maxHeight: number }>`
   display: grid;
-  gap: 20px;
+  column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
+  max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'auto')};
+  transition:
+    max-height 1s,
+    height 1s;
 
   @media (max-width: 940px) {
     display: flex;
@@ -151,11 +166,48 @@ const GridContainer = styled.div`
   // }
 `
 
+const PriceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  width: 280px;
+  gap: 12px;
+`
+
+const Price = styled.div`
+  font-size: 24px;
+  font-weight: 700;
+`
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const Button = styled.a<{ $weight?: number }>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${colors.backgroundBase3};
+  border-radius: 12px;
+  background-color: ${colors.backgroundPrimary};
+  white-space: nowrap;
+  width: 280px;
+  height: 44px;
+  opacity: 1;
+  gap: 8px;
+
+  &:hover {
+    background-color: ${colors.btnOutlineHover};
+  }
+`
+
 export {
   CalculatorContainer,
   Section,
   SectionTitle,
-  ImgWrap,
   ImageButton,
   FooterWrapper,
   AddBlockButton,
@@ -163,4 +215,10 @@ export {
   Option,
   TitleWrapper,
   GridContainer,
+  PriceContainer,
+  Price,
+  GridWrapper,
+  BodyWrapper,
+  ButtonsWrapper,
+  Button,
 }

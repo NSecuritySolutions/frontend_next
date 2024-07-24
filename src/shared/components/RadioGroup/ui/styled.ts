@@ -1,6 +1,7 @@
 import colors from '@/shared/constants/colors'
+import Image from 'next/image'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Radio = styled.input.attrs({ type: 'checkbox' })`
   display: none;
@@ -26,4 +27,69 @@ const LabelText = styled.p`
   }
 `
 
-export { Radio, Label, LabelText }
+const Select = styled.div`
+  display: flex;
+  padding-inline: 8px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 32px;
+  width: 120px;
+  border: 1px solid ${colors.backgroundBase3};
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 24px;
+  cursor: pointer;
+
+  &.focus {
+    border-color: ${colors.btnPrimary};
+  }
+`
+
+const SelectItem = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84px;
+`
+
+const Arrow = styled(Image).attrs({
+  height: 16,
+  width: 16,
+})<{ $open: boolean }>`
+  transition: transform 0.3s;
+
+  ${(props) =>
+    props.$open &&
+    css`
+      transform: rotate(180deg);
+    `}
+`
+
+const SelectMenu = styled.ul<{ $top: number; $left: number }>`
+  position: absolute;
+  top: ${(props) => props.$top}px;
+  left: ${(props) => props.$left}px;
+  width: 120px;
+  border: 1px solid ${colors.backgroundBase3};
+  background-color: ${colors.backgroundPrimary};
+  overflow: ellipsys;
+  z-index: 99;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 24px;
+  cursor: pointer;
+`
+
+const Option = styled.ol`
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 3px 8px;
+
+  &.checked {
+    background-color: ${colors.btnPrimary};
+  }
+`
+
+export { Radio, Label, LabelText, Select, SelectItem, Arrow, SelectMenu, Option }
