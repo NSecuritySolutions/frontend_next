@@ -201,19 +201,20 @@ class CalculatorBlockStore {
       item[leftPart] as string | number | boolean | undefined,
       rightPart as string,
     )
+    if (!item[leftPart]) return false
     switch (operator) {
       case '==':
         return item[leftPart] == finalRightPart
       case '!=':
         return item[leftPart] != finalRightPart
       case '>':
-        return item[leftPart] ? item[leftPart] > finalRightPart : false
+        return item[leftPart]! > finalRightPart!
       case '<':
-        return item[leftPart] ? item[leftPart] < finalRightPart : false
+        return item[leftPart]! < finalRightPart!
       case '>=':
-        return item[leftPart] ? item[leftPart] >= finalRightPart : false
+        return item[leftPart]! >= finalRightPart!
       case '<=':
-        return item[leftPart] ? item[leftPart] <= finalRightPart : false
+        return item[leftPart]! <= finalRightPart!
       default:
         return true
     }
