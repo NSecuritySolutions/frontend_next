@@ -1,7 +1,58 @@
-import { BASE_URL } from '@/shared/constants/url/url'
 import type { MetadataRoute } from 'next'
 
+import { BASE_URL } from '@/shared/constants/url/url'
+
+import { items } from '@/shared/constants/texts/product-cards'
+
+import { cardSolutionData } from '@/shared/constants/texts/cards-solution'
+
+import { cardSolutionData2 } from '@/shared/constants/texts/cards-solution'
+
+import { cardSolutionData3 } from '@/shared/constants/texts/cards-solution'
+
+//@TODO - подтягивать данные из стора?
+
+type CardSolution = {
+  url: string
+  lastModified?: string | Date | undefined
+  changeFrequency?:
+    | 'daily'
+    | 'yearly'
+    | 'always'
+    | 'hourly'
+    | 'weekly'
+    | 'monthly'
+    | 'never'
+    | undefined
+  priority?: number | undefined
+  alternates?: { [key: string]: string } | undefined
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
+  const cameras: CardSolution[] = items.map(({ id }) => ({
+    url: `${BASE_URL}/cameras/${id}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+  }))
+
+  const solutions: CardSolution[] = cardSolutionData.map(({ id }) => ({
+    url: `${BASE_URL}/products/${id}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+  }))
+
+  const solutions2: CardSolution[] = cardSolutionData2.map(({ id }) => ({
+    url: `${BASE_URL}/products/${id}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+  }))
+
+  const solutions3: CardSolution[] = cardSolutionData3.map(({ id }) => ({
+    url: `${BASE_URL}/products/${id}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+  }))
+
   return [
     {
       url: `${BASE_URL}`,
@@ -45,5 +96,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.5,
     },
+    ...cameras,
+    ...solutions,
+    ...solutions2,
+    ...solutions3,
   ]
 }

@@ -21,10 +21,5 @@ const StyledBtnLink = styled.button<TStyledBtnProps>`
   &:hover {
     background-color: ${(props) => (props.disabled ? colors.btnPrimary : colors.btnPrimaryHover)};
   }
-
-  // Это что такое?
-  @media (max-width: 880px) {
-    width: 280px;
-  }
 `
 export { StyledBtnLink }

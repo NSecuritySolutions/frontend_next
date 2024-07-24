@@ -16,7 +16,7 @@ const ProductButtonGroup: FC<ProductButtonGroupProps> = ({ link }) => {
         text="Заказать звонок"
         width="235px"
         height="44px"
-        link=""
+        link="/#contact-form"
         color={colors.darkPrimary}
         size="15px"
       />
@@ -25,7 +25,7 @@ const ProductButtonGroup: FC<ProductButtonGroupProps> = ({ link }) => {
         text="В калькулятор"
         width="235px"
         height="44px"
-        link=""
+        link="/#calculator"
         color={colors.darkPrimary}
         size="15px"
       />
