@@ -138,7 +138,6 @@ class CalculatorBlockStore {
     const products = calculatorStore.products.filter((item) => item?.category?.title === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
     const filteredProducts = products.filter((item) =>
-      // this.applyInitialFilters(item, this.filters[category].initial) &&
       this.applyFilters(item, this.filters[category]),
     )
     return filteredProducts
@@ -184,24 +183,37 @@ class CalculatorBlockStore {
     return rest && initial
   }
 
+  typeChange(value1: string | number | boolean | undefined, value2: string) {
+    if (typeof value1 != typeof value2) {
+      if (typeof value1 == 'number') return parseInt(value2)
+      else if (typeof value1 == 'boolean')
+        return value2 == 'true' ? true : value2 == 'false' ? false : 'unknown'
+    }
+    return value2
+  }
+
   applyCondition(
     item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
     condition: ICondition,
   ) {
     const { leftPart, operator, rightPart } = condition
+    const finalRightPart = this.typeChange(
+      item[leftPart] as string | number | boolean | undefined,
+      rightPart as string,
+    )
     switch (operator) {
       case '==':
-        return item[leftPart] == rightPart!
+        return item[leftPart] == finalRightPart
       case '!=':
-        return item[leftPart] != rightPart!
+        return item[leftPart] != finalRightPart
       case '>':
-        return item[leftPart]! > rightPart!
+        return item[leftPart] ? item[leftPart] > finalRightPart : false
       case '<':
-        return item[leftPart]! < rightPart!
+        return item[leftPart] ? item[leftPart] < finalRightPart : false
       case '>=':
-        return item[leftPart]! >= rightPart!
+        return item[leftPart] ? item[leftPart] >= finalRightPart : false
       case '<=':
-        return item[leftPart]! <= rightPart!
+        return item[leftPart] ? item[leftPart] <= finalRightPart : false
       default:
         return true
     }
