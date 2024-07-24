@@ -2,7 +2,6 @@ import {
   CalculatorContainer,
   Section,
   SectionTitle,
-  ImgWrap,
   ImageButton,
   FooterWrapper,
   AddBlockButton,
@@ -13,10 +12,14 @@ import {
   PriceContainer,
   Price,
   GridWrapper,
+  BodyWrapper,
+  ButtonsWrapper,
+  Button,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors/index.ts'
+import { BtnLink } from '@/shared/components/BtnLink'
 
 import { animate, AnimatePresence, LayoutGroup, useMotionValue, useTransform } from 'framer-motion'
 import Image from 'next/image'
@@ -190,47 +193,67 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
               )}
             </AnimatePresence>
           </AddBlockButton>
+          <ImageButton onClick={handleReset}>
+            <Image
+              src="/icons/calculator/cross.svg"
+              width={24}
+              height={24}
+              alt="Reset"
+              style={{ objectFit: 'cover' }}
+            />
+            <Typography size={16} color={colors.accentNegative}>
+              Сбросить настройки
+            </Typography>
+          </ImageButton>
         </TitleWrapper>
         <Section>
-          <LayoutGroup>
-            <GridWrapper $height={height}>
-              <GridContainer ref={grid} $maxHeight={gridSize}>
-                <AnimatePresence mode="sync">
-                  {calculatorStore.blocks.map((block, index) => (
-                    <CalculatorCard
-                      store={block}
-                      key={block.id}
-                      index={index}
-                      resize={gridResize}
-                      deleteBlock={gridBlockResize}
-                    />
-                  ))}
-                </AnimatePresence>
-              </GridContainer>
-            </GridWrapper>
-          </LayoutGroup>
-          <FooterWrapper>
-            <ImageButton onClick={handleReset}>
-              <ImgWrap>
-                <Image
-                  src="/icons/calculator/cross.svg"
-                  width={22}
-                  height={22}
-                  alt="Reset"
-                  style={{ objectFit: 'cover' }}
+          <BodyWrapper>
+            <LayoutGroup>
+              <GridWrapper $height={height}>
+                <GridContainer ref={grid} $maxHeight={gridSize}>
+                  <AnimatePresence mode="sync">
+                    {calculatorStore.blocks.map((block, index) => (
+                      <CalculatorCard
+                        store={block}
+                        key={block.id}
+                        index={index}
+                        resize={gridResize}
+                        deleteBlock={gridBlockResize}
+                      />
+                    ))}
+                  </AnimatePresence>
+                </GridContainer>
+              </GridWrapper>
+            </LayoutGroup>
+            <FooterWrapper>
+              <PriceContainer>
+                <Typography size={16}>Итого система «под ключ»:</Typography>
+                <Price>{formattedResult}</Price>
+              </PriceContainer>
+              <ButtonsWrapper>
+                <BtnLink
+                  btnType="accent"
+                  text="Оформить заявку"
+                  width="280px"
+                  height="44px"
+                  link=""
+                  color={colors.darkPrimary}
+                  size="15px"
                 />
-              </ImgWrap>
-              <Typography size={16} color={colors.accentNegative}>
-                Сбросить настройки
-              </Typography>
-            </ImageButton>
-            <PriceContainer>
-              <Typography size={18} style={{ marginTop: 5 }}>
-                Итого система «под ключ»:
-              </Typography>
-              <Price>{formattedResult}</Price>
-            </PriceContainer>
-          </FooterWrapper>
+                <Button>
+                  <Image
+                    src="/icons/calculator/download.svg"
+                    height={24}
+                    width={24}
+                    alt="Downdload"
+                  />
+                  <Typography size={16} $weight={400}>
+                    Скачать прайс
+                  </Typography>
+                </Button>
+              </ButtonsWrapper>
+            </FooterWrapper>
+          </BodyWrapper>
         </Section>
       </CalculatorContainer>
     )
