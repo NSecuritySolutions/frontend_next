@@ -25,13 +25,15 @@ const Section = styled.div`
   padding: 40px;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  // margin-top: 58px;
+  // align-items: center;
 `
 
 const TitleWrapper = styled.div`
-  width: 880px;
+  width: 1180px;
   margin-top: 40px;
   position: absolute;
   display: flex;
@@ -56,25 +58,30 @@ const SectionTitle = styled.h3`
   font-weight: 700;
 `
 
-const ImgWrap = styled.div`
-  padding: 9px;
-  flex-shrink: 0;
-`
-
 const ImageButton = styled.button`
   background-color: transparent;
   border: none;
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
-  margin-top: 12px;
+  padding-top: 4px;
+`
+
+const BodyWrapper = styled.div`
+  width: 1180px;
+  margin-top: 58px;
+  display: flex;
+  gap: 20px;
 `
 
 const FooterWrapper = styled.div`
-  width: 880px;
+  margin-top: 10px;
+  width: 280px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+  // align-items: center;
+  // justify-content: space-between;
 
   @media (max-width: 940px) {
     flex-direction: column;
@@ -137,7 +144,6 @@ const Option = styled.li`
 
 const GridWrapper = styled.div<{ $height: number }>`
   height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
-  margin-top: 58px;
   transition: height 1s;
 `
 
@@ -162,21 +168,46 @@ const GridContainer = styled.div<{ $maxHeight: number }>`
 
 const PriceContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  min-width: 430px;
+  flex-direction: column;
+  // justify-content: space-between;
+  width: 280px;
+  gap: 12px;
 `
 
 const Price = styled.div`
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
-  margin-top: 5px;
+`
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const Button = styled.a<{ $weight?: number }>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${colors.backgroundBase3};
+  border-radius: 12px;
+  background-color: ${colors.backgroundPrimary};
+  white-space: nowrap;
+  width: 280px;
+  height: 44px;
+  opacity: 1;
+  gap: 8px;
+
+  &:hover {
+    background-color: ${colors.btnOutlineHover};
+  }
 `
 
 export {
   CalculatorContainer,
   Section,
   SectionTitle,
-  ImgWrap,
   ImageButton,
   FooterWrapper,
   AddBlockButton,
@@ -187,4 +218,7 @@ export {
   PriceContainer,
   Price,
   GridWrapper,
+  BodyWrapper,
+  ButtonsWrapper,
+  Button,
 }
