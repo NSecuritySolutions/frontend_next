@@ -81,6 +81,14 @@ class CalculatorStore {
       this.setBlocks()
     }
   }
+
+  setProduct(product: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct) {
+    this.blocks.map((block) => {
+      if (Object.keys(block.products).find((item) => item == product.category.title)) {
+        block.products[product.category.title].push(product)
+      }
+    })
+  }
 }
 
 const calculatorStore = new CalculatorStore()

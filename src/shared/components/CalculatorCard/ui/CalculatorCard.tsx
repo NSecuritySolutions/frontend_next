@@ -23,13 +23,13 @@ import { CalculatorOption } from '../../CalculatorOption/index.ts'
 interface CalculatorCardProps {
   store: CalculatorBlockStore
   index: number
-  resize: (value: number, expanded: boolean) => void
+  resize: (value: number, expanded: boolean, setSafe?: boolean) => void
   deleteBlock: (add: boolean) => void
 }
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
   ({ store, index, resize, deleteBlock }) => {
-    const { data, presentOptions } = store
+    const { data, presentOptions, result } = store
     const { animationSafe, setAnimationSafe } = calculatorStore
     const amount = parseInt(store.getVariable('block_amount') as string) || 0
     const [deleted, setDeleted] = useState(false)
@@ -37,23 +37,33 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
 
-    const price = useMotionValue(store.result)
-    const formattedPrice = useTransform(
-      price,
-      (price) =>
-        '~' +
-        price.toLocaleString('ru-RU', {
-          style: 'currency',
-          currency: 'RUB',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }),
-    )
+    // Когда-то была анимация циферок :(
+    // const price = useMotionValue(store.result)
+    // const formattedPrice = useTransform(
+    //   price,
+    //   (price) =>
+    //     '~' +
+    //     price.toLocaleString('ru-RU', {
+    //       style: 'currency',
+    //       currency: 'RUB',
+    //       minimumFractionDigits: 2,
+    //       maximumFractionDigits: 2,
+    //     }),
+    // )
 
-    useEffect(() => {
-      const animation = animate(price, store.result, { duration: 1 })
-      return animation.stop
-    }, [store.result])
+    // useEffect(() => {
+    //   const animation = animate(price, store.result, { duration: 1 })
+    //   return animation.stop
+    // }, [store.result])
+
+    const formattedResult =
+      '~' +
+      result.toLocaleString('ru-RU', {
+        style: 'currency',
+        currency: 'RUB',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
 
     useEffect(() => {
       if (animationSafe && card.current) {
@@ -61,11 +71,11 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setPresentCount(presentOptions.length)
         } else if (store.disabled && store.appeared) {
           setAnimationSafe(false)
-          resize(store.appeared, true)
+          resize(store.appeared, true, false)
           setPresentCount(presentCount + store.appeared)
           setTimeout(() => {
             setHeight(card.current!.offsetHeight)
-            resize(store.appeared - store.disabled, false)
+            resize(store.appeared - store.disabled, false, false)
             setTimeout(() => {
               setHeight((prev) => prev + (store.appeared - store.disabled) * 36)
             })
@@ -79,7 +89,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setAnimationSafe(false)
           setHeight(card.current.offsetHeight)
           setTimeout(() => {
-            resize(store.disabled, false)
+            resize(store.disabled, false, false)
             setHeight((prev) => prev - store.disabled * 36)
             setTimeout(() => {
               setHeight(0)
@@ -89,7 +99,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           }, 1000)
         } else if (store.appeared) {
           setAnimationSafe(false)
-          resize(store.appeared, true)
+          resize(store.appeared, true, false)
           setTimeout(() => {
             setAnimationSafe(true)
           }, 1000)
@@ -152,7 +162,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           ) : (
             <Toogle amount={amount} onChange={handleChange} />
           )}
-          <Price>{formattedPrice}</Price>
+          <Price>{formattedResult}</Price>
         </CardHeader>
         <Divider $show={amount > 0} />
         <OptionsWrapper>

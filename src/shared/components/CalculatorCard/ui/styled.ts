@@ -19,7 +19,7 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
     scale: props.$deleted ? 0 : 1,
     y: props.$deleted ? -49 : 0,
   },
-  transition: { duration: 1, type: 'spring', damping: 15 },
+  transition: { duration: 0.5, type: 'just' },
 }))<CardProps>`
   position: relative;
   background-color: ${colors.backgroundPrimary};
@@ -118,7 +118,7 @@ const OptionsWrapper = styled.div`
   width: 100%;
 `
 
-const Price = styled(motion.div)`
+const Price = styled.div`
   display: flex;
   font-size: 18px;
   font-weight: 700;
