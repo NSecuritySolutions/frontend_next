@@ -119,6 +119,7 @@ const ReadySolutionSection = () => {
             <CardSolution data={solution} key={solution.id} />
           ))}
         </Slider>
+        <p id="calculator-start" style={{ display: 'none' }}></p>
       </CardsContainer>
     </Section>
   )

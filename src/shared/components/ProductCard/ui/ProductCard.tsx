@@ -80,19 +80,27 @@ const ProductCard: FC<TCard> = ({ item }) => {
             text="Заказать звонок"
             width="174px"
             height="44px"
-            link="/#contact-form"
+            // link="/#contact-form"
             size="15px"
             color={colors.darkPrimary}
             btnType="accent"
+            onClick={(e) => {
+              e.stopPropagation()
+              router.push(`/#contact-form`)
+            }}
           />
           <BtnLink
             text="В калькулятор"
             width="174px"
             height="44px"
-            link="/#calculator"
+            // link="/#calculator"
             color={colors.darkPrimary}
             size="15px"
             btnType="transparent"
+            onClick={(e) => {
+              e.stopPropagation()
+              router.push(`/#calculator-start`)
+            }}
           />
         </ButtonWrapper>
       </CardContainer>

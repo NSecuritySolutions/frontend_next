@@ -6,7 +6,7 @@ type TBtnLinkProps = {
   link?: string
   size: string
   btnType?: 'accent' | 'transparent'
-  onClick?: () => void
+  onClick?: (e: Event) => void
 }
 
 type TStyledBtnLinkProps = {
@@ -15,6 +15,7 @@ type TStyledBtnLinkProps = {
   color: string
   href?: string
   size: string
+  onClick?: (e: Event) => void
 }
 
 export type { TBtnLinkProps, TStyledBtnLinkProps }
