@@ -3,7 +3,7 @@ import Slider from 'react-slick'
 import { AnimatePresence, useAnimate } from 'framer-motion'
 
 import { QuestionTopic } from '@/shared/components/QuestionTopic'
-import { TQuestionType, TTabs } from '@/shared/constants/texts/types'
+import { TQuestionType, TTabs, TTopicProps } from '@/shared/constants/texts/types'
 // import { tabs } from '@/shared/constants/texts/questions'
 import { QuestionCard } from '@/shared/components/QuestionCard'
 import { AnswerCard } from '@/shared/components/AnswerCard'
@@ -17,25 +17,27 @@ import {
   ColumnWrapper,
 } from './styled'
 
-interface IQuestion {
+export interface IQuestion {
   id: number
   question: string
   answer: string[]
 }
 
-interface IQuestionCategory {
+export interface IQuestionCategory {
   id: number
   name: string
   icon: string
   questions: IQuestion[]
+  // onClick: (item: IQuestionCategory) => void
+  // chosen: IQuestionCategory | null
 }
 
-interface QuestionsProps {
+export interface QuestionsProps {
   questions: IQuestionCategory[]
 }
 
 const Questions: React.FC<QuestionsProps> = ({ questions }) => {
-  const [currentTab, setCurrentTab] = React.useState<TTabs | null>(null)
+  const [currentTab, setCurrentTab] = React.useState<IQuestionCategory | null>(null)
 
   const [safe, setSafe] = useState(true)
 
@@ -82,15 +84,15 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   }, [])
 
   useEffect(() => {
-    if (sortedQuestions[0] !== null && sortedQuestions[0].items) {
+    if (sortedQuestions[0] !== null && sortedQuestions[0].questions) {
       setCurrentTab(sortedQuestions[0])
-      setCurrentQuestion(sortedQuestions[0].items[0])
+      setCurrentQuestion(sortedQuestions[0].questions[0])
     }
   }, [])
 
-  function onTopickClick(item: TTabs) {
+  function onTopickClick(item: IQuestionCategory) {
     if (width <= 940) {
-      if (item.text != currentTab?.text && safe) {
+      if (item.name != currentTab?.name && safe) {
         clearTimeout(timer)
         setSafe(false)
         timer = setTimeout(() => {
@@ -101,11 +103,11 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
           animate(scope.current, { height: 'auto' }, { duration: 0.5 })
         }, 600)
         setCurrentTab(item)
-        setCurrentQuestion(item.items[0])
+        setCurrentQuestion(item.questions[0])
       }
     } else {
       setCurrentTab(item)
-      setCurrentQuestion(item.items[0])
+      setCurrentQuestion(item.questions[0])
     }
   }
 
@@ -120,22 +122,12 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
         <ColumnWrapper>
           <TopicsColumn>
             <Slider {...settings}>
-              {/* {tabs.map((item, index) => (
-                <QuestionTopic
-                  text={item.text}
-                  icon={item.icon}
-                  items={item.items}
-                  key={index}
-                  onClick={onTopickClick}
-                  chosen={currentTab}
-                />
-              ))} */}
-
               {sortedQuestions.map((item: IQuestionCategory, index: number) => (
                 <QuestionTopic
-                  text={item.name}
+                  id={item.id}
+                  name={item.name}
                   icon={item.icon}
-                  items={item.questions}
+                  questions={item.questions}
                   key={index}
                   onClick={onTopickClick}
                   chosen={currentTab}
@@ -145,15 +137,15 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
           </TopicsColumn>
           <AnimatePresence mode="wait">
             <QuestionsColumn
-              key={currentTab?.text}
+              key={currentTab?.name}
               ref={scope}
               initial={width <= 940 ? { height: 0 } : undefined}
               exit={width <= 940 ? { height: '0px' } : undefined}
               transition={{ duration: 0.3 }}
             >
               {currentTab !== null &&
-                currentTab.items &&
-                currentTab.items.map((item) => (
+                currentTab.questions &&
+                currentTab.questions.map((item) => (
                   <QuestionCard
                     question={item.question}
                     answer={item.answer}

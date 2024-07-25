@@ -1,21 +1,20 @@
 import { TTopicProps } from '@/shared/constants/texts/types.ts'
-
 import { CardContainer, CardImg, CardName } from './styled.ts'
 
-const QuestionTopic = ({ text, icon, items, onClick, chosen }: TTopicProps) => {
+const QuestionTopic = ({ id, name, icon, questions, onClick, chosen }: TTopicProps) => {
   function handleClick() {
-    onClick({ icon: icon, text: text, items: items })
+    onClick({ id: id, icon: icon, name: name, questions: questions })
   }
 
   return (
     <>
-      <CardContainer onClick={handleClick} $chosen={chosen !== null && chosen.text === text}>
+      <CardContainer onClick={handleClick} $chosen={chosen !== null && chosen.name === name}>
         <CardImg
           $imgUrl={icon}
           alt="Иконка группы вопросов"
-          $chosen={chosen !== null && chosen.text === text}
+          $chosen={chosen !== null && chosen.name === name}
         />
-        <CardName>{text}</CardName>
+        <CardName>{name}</CardName>
       </CardContainer>
     </>
   )
