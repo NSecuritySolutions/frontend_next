@@ -5,14 +5,15 @@ import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
 import {
   IBlock,
+  IPriceVariables,
+  IOption,
+  TProduct,
   ICamera,
   IRegister,
   IHDD,
-  IFACP,
   ISensor,
   IPACSProduct,
-  IPriceVariables,
-  IOption,
+  IFACP,
 } from '@/widgets/Calculator/types'
 import { ICondition, IConditionCategory } from './types'
 
@@ -31,6 +32,14 @@ math.import(
   { override: true },
 )
 
+type Keys =
+  | keyof ICamera
+  | keyof IRegister
+  | keyof IHDD
+  | keyof ISensor
+  | keyof IPACSProduct
+  | keyof IFACP
+
 class CalculatorBlockStore {
   id: string
   data: IBlock
@@ -42,7 +51,7 @@ class CalculatorBlockStore {
   variables: Record<string, string | number | boolean> = {}
   filters: Record<string, IConditionCategory> = {}
   quantity_selection: boolean
-  products: Record<string, (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]> = {}
+  products: Record<string, TProduct[]> = {}
 
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
@@ -117,7 +126,7 @@ class CalculatorBlockStore {
       (category) => this.products[category].length > 0,
     )
     const minPriceData = Object.keys(this.filters).map((category) => {
-      let filteredData: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]
+      let filteredData: TProduct[]
       if (categoriesWithProducts.find((item) => item == category))
         filteredData = this.products[category]
       else filteredData = this.filterProduct(category)
@@ -143,10 +152,7 @@ class CalculatorBlockStore {
     return filteredProducts
   }
 
-  applyInitialFilters(
-    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    conditions: ICondition[],
-  ) {
+  applyInitialFilters(item: TProduct, conditions: ICondition[]) {
     if (conditions.length == 0) return true
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
@@ -163,10 +169,7 @@ class CalculatorBlockStore {
     })
   }
 
-  applyFilters(
-    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    conditionCategory: IConditionCategory,
-  ) {
+  applyFilters(item: TProduct, conditionCategory: IConditionCategory) {
     const initial = this.applyInitialFilters(item, conditionCategory.initial)
     const restFilters = Object.keys(conditionCategory).filter((option) => option != 'initial')
     if (restFilters.length == 0) return initial
@@ -192,10 +195,7 @@ class CalculatorBlockStore {
     return value2
   }
 
-  applyCondition(
-    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    condition: ICondition,
-  ) {
+  applyCondition(item: TProduct, condition: ICondition) {
     const { leftPart, operator, rightPart } = condition
     const finalRightPart = this.typeChange(
       item[leftPart] as string | number | boolean | undefined,
@@ -267,14 +267,7 @@ class CalculatorBlockStore {
         }
         if (option.filters) this.parseFilters(option.filters, option.name, option.product)
         this.filters[option.product]['initial' as keyof IConditionCategory].push({
-          leftPart: option.name as keyof (
-            | ICamera
-            | IRegister
-            | IHDD
-            | IFACP
-            | ISensor
-            | IPACSProduct
-          ),
+          leftPart: option.name as keyof TProduct,
         })
       }
       this.variables.block_amount = 0
@@ -324,14 +317,7 @@ class CalculatorBlockStore {
     const operatorIndex = match.index
 
     // Разделение строки на левую часть, оператор и правую часть
-    const leftPart = condition.slice(0, operatorIndex).trim() as keyof (
-      | ICamera
-      | IRegister
-      | IHDD
-      | IFACP
-      | ISensor
-      | IPACSProduct
-    )
+    const leftPart = condition.slice(0, operatorIndex).trim() as keyof TProduct
     const operator = match[0]
     const rightPart = condition.slice(operatorIndex! + operator.length).trim()
 
@@ -339,6 +325,50 @@ class CalculatorBlockStore {
       leftPart,
       operator,
       rightPart,
+    }
+  }
+
+  changeTypeForOption(option: IOption, value: string) {
+    switch (option.option_type) {
+      case 'number':
+        return parseInt(value)
+      case 'checkbox':
+        if (value == 'true') return true
+        if (value == 'false') return false
+      default:
+        return value
+    }
+  }
+
+  reverseCondition<K extends keyof TProduct>(product: TProduct) {
+    const filtersKeys = Object.keys(this.filters[product.category.title]).filter(
+      (key) => key != 'initial',
+    ) as K[]
+    filtersKeys.map((key) => {
+      const conditions = this.filters[product.category.title][key]
+      const optionValues = [...new Set(conditions.map((condition) => condition.optionValue))]
+      optionValues.map((value) => {
+        const optionValueConditions = conditions.filter(
+          (condition) => condition.optionValue == value,
+        )
+        if (optionValueConditions.every((condition) => this.applyCondition(product, condition))) {
+          const changedValue = this.changeTypeForOption(
+            this.data.options.find((option) => option.name == key)!,
+            value!,
+          )
+          this.setVariable(key, changedValue)
+        }
+      })
+    })
+  }
+
+  setProduct(product: TProduct) {
+    if (Object.keys(this.products).find((item) => item == product.category.title)) {
+      if (this.applyInitialFilters(product, this.filters[product.category.title].initial)) {
+        // this.products[product.category.title].push(product)
+        this.products[product.category.title] = [product]
+        this.reverseCondition(product)
+      }
     }
   }
 }

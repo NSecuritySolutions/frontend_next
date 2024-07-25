@@ -110,6 +110,8 @@ interface ICalculatorData {
   price_list: IPriceList
 }
 
+type TProduct = ICamera | IRegister | IFACP | IHDD | ISensor | IPACSProduct
+
 export type {
   ICamera,
   IRegister,
@@ -122,4 +124,5 @@ export type {
   ISensor,
   IPACSProduct,
   IPriceVariables,
+  TProduct,
 }
