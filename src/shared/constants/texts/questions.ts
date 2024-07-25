@@ -3,8 +3,8 @@ import { TTabs } from './types'
 export const tabs: Array<TTabs> = [
   {
     icon: '/images/questions/webp/general-icon.webp',
-    text: 'Общие вопросы',
-    items: [
+    name: 'Общие вопросы',
+    questions: [
       {
         id: 1,
         question: 'Как проходит работа?',
@@ -44,8 +44,8 @@ export const tabs: Array<TTabs> = [
   },
   {
     icon: '/images/questions/webp/camera-icon.webp',
-    text: 'Вопросы по видеонаблюдению',
-    items: [
+    name: 'Вопросы по видеонаблюдению',
+    questions: [
       {
         id: 1,
         question: 'Как выбрать подходящую камеру для моих потребностей?',
@@ -92,8 +92,8 @@ export const tabs: Array<TTabs> = [
   },
   {
     icon: '/images/questions/webp/controller-icon.webp',
-    text: 'Вопросы по домофонии',
-    items: [
+    name: 'Вопросы по домофонии',
+    questions: [
       {
         id: 1,
         question: 'Устанавливаете ли вы беспроводные домофоны?',
@@ -138,8 +138,8 @@ export const tabs: Array<TTabs> = [
   },
   {
     icon: '/images/questions/webp/fingerprint-icon.webp',
-    text: 'Вопросы по биометрии и СКУД',
-    items: [
+    name: 'Вопросы по биометрии и СКУД',
+    questions: [
       {
         id: 1,
         question: 'Сколько времени займет монтаж системы на одну дверь?',
@@ -186,8 +186,8 @@ export const tabs: Array<TTabs> = [
   },
   {
     icon: '/images/questions/webp/alarm-icon.webp',
-    text: 'Вопросы по охранно-пожарной сигнализации',
-    items: [
+    name: 'Вопросы по охранно-пожарной сигнализации',
+    questions: [
       {
         id: 1,
         question: 'Сколько времени занимает установка шлагбаума или турникета?',
