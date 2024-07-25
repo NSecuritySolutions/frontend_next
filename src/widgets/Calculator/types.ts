@@ -21,6 +21,8 @@ interface ICamera extends IProduct {
   micro_sd: string
   viewing_angle: string
   focus: string
+  microphone_details: string
+  micro_sd_details: string
 }
 
 interface IRegister extends IProduct {

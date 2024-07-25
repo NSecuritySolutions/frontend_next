@@ -22,6 +22,8 @@ import {
 } from './styled'
 
 const Product: FC<ProductProps> = ({ data }) => {
+  console.log(data, 'data')
+
   if (!data) return Loader()
 
   const isCardSolution = (data as TCardSolutionProps).toolTipText !== undefined
@@ -88,9 +90,14 @@ const Product: FC<ProductProps> = ({ data }) => {
                       <li>Разрешение: {data.resolution}</li>
                       <li>Фокус: {data.focus}</li>
                       <li>Угол обзора: {data.viewing_angle}</li>
-                      <li>ИК-съемка в темноте: {data.dark ? 'да' : 'нет'}</li>
-                      <li>Микрофон/динамик: {data.microphone ? 'да' : 'нет'}</li>
-                      <li>Поддержка MicroSD: {data.micro_sd ? 'да' : 'нет'}</li>
+                      <li>ИК-съемка в темноте: {data.dark ? `да, ${data.dark}` : 'нет'}</li>
+                      <li>
+                        Микрофон/динамик:{' '}
+                        {data.microphone ? `да, ${data.microphone_details}` : 'нет'}
+                      </li>
+                      <li>
+                        Поддержка MicroSD: {data.micro_sd ? `да, ${data.micro_sd_details}` : 'нет'}
+                      </li>
                       <li>Питание, вольт: {data.power_supply}</li>
                       <li>Рабочая температура: {data.temperature}</li>
                     </>

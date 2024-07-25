@@ -41,18 +41,64 @@ export async function getVideoPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
   ])
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, questionsData, productData] = await Promise.all(
+  const [solutionData, questionsData, productData, calculatorData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
   return {
     solutionData,
+    questionsData,
+    productData,
+    calculatorData,
+  }
+}
+
+export async function getDomofonPageData() {
+  const responses = await Promise.all([
+    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
+    fetch(`${BASE_URL}/api/v1/questions/`),
+    fetch(`${BASE_URL}/api/v1/products/`),
+  ])
+
+  if (responses.some((response) => !response.ok)) {
+    throw new Error('Failed to fetch data')
+  }
+
+  const [calculatorData, questionsData, productData] = await Promise.all(
+    responses.map((response) => response.json()),
+  )
+
+  return {
+    calculatorData,
+    questionsData,
+    productData,
+  }
+}
+
+export async function getSecurityPageData() {
+  const responses = await Promise.all([
+    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
+    fetch(`${BASE_URL}/api/v1/questions/`),
+    fetch(`${BASE_URL}/api/v1/products/`),
+  ])
+
+  if (responses.some((response) => !response.ok)) {
+    throw new Error('Failed to fetch data')
+  }
+
+  const [calculatorData, questionsData, productData] = await Promise.all(
+    responses.map((response) => response.json()),
+  )
+
+  return {
+    calculatorData,
     questionsData,
     productData,
   }

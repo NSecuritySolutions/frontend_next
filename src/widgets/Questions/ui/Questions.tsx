@@ -3,11 +3,10 @@ import Slider from 'react-slick'
 import { AnimatePresence, useAnimate } from 'framer-motion'
 
 import { QuestionTopic } from '@/shared/components/QuestionTopic'
-import { TQuestionType, TTabs, TTopicProps } from '@/shared/constants/texts/types'
-// import { tabs } from '@/shared/constants/texts/questions'
+import { TQuestionType } from '@/shared/constants/texts/types'
 import { QuestionCard } from '@/shared/components/QuestionCard'
 import { AnswerCard } from '@/shared/components/AnswerCard'
-
+import { IQuestion, IQuestionCategory, QuestionsProps } from '../types'
 import {
   Section,
   SectionWrapper,
@@ -16,25 +15,6 @@ import {
   QuestionsColumn,
   ColumnWrapper,
 } from './styled'
-
-export interface IQuestion {
-  id: number
-  question: string
-  answer: string[]
-}
-
-export interface IQuestionCategory {
-  id: number
-  name: string
-  icon: string
-  questions: IQuestion[]
-  // onClick: (item: IQuestionCategory) => void
-  // chosen: IQuestionCategory | null
-}
-
-export interface QuestionsProps {
-  questions: IQuestionCategory[]
-}
 
 const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   const [currentTab, setCurrentTab] = React.useState<IQuestionCategory | null>(null)
@@ -46,12 +26,12 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   const [scope, animate] = useAnimate()
   const [width, setWidth] = useState(0)
 
-  const sortUsersId = (array: IQuestionCategory[]) => {
+  const sortFaqQuestions = (array: IQuestionCategory[]) => {
     const result = array.sort((a, b) => (a.id > b.id ? 1 : -1))
 
     return result
   }
-  const sortedQuestions = sortUsersId(questions)
+  const sortedQuestions = sortFaqQuestions(questions)
 
   let timer: NodeJS.Timeout
 
@@ -160,7 +140,6 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
           </AnimatePresence>
           {currentQuestion && currentQuestion.answer && (
             <AnswerCard
-              // key={currentQuestion.answer}
               id={currentQuestion.id}
               question={currentQuestion.question}
               answer={currentQuestion.answer}
