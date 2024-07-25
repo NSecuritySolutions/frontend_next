@@ -44,7 +44,7 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   const [scope, animate] = useAnimate()
   const [width, setWidth] = useState(0)
 
-  const sortUsersId = (array) => {
+  const sortUsersId = (array: IQuestionCategory[]) => {
     const result = array.sort((a, b) => (a.id > b.id ? 1 : -1))
 
     return result
