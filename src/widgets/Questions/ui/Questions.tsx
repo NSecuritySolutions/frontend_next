@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import Slider from 'react-slick'
+import { AnimatePresence, useAnimate } from 'framer-motion'
+
+import { QuestionTopic } from '@/shared/components/QuestionTopic'
+import { TQuestionType, TTabs } from '@/shared/constants/texts/types'
+// import { tabs } from '@/shared/constants/texts/questions'
+import { QuestionCard } from '@/shared/components/QuestionCard'
+import { AnswerCard } from '@/shared/components/AnswerCard'
 
 import {
   Section,
@@ -8,20 +16,41 @@ import {
   QuestionsColumn,
   ColumnWrapper,
 } from './styled'
-import { QuestionTopic } from '@/shared/components/QuestionTopic'
-import { TQuestionType, TTabs } from '@/shared/constants/texts/types'
-import { tabs } from '@/shared/constants/texts/questions'
-import { QuestionCard } from '@/shared/components/QuestionCard'
-import { AnswerCard } from '@/shared/components/AnswerCard'
-import Slider from 'react-slick'
-import { AnimatePresence, useAnimate } from 'framer-motion'
 
-const Questions = () => {
+interface IQuestion {
+  id: number
+  question: string
+  answer: string[]
+}
+
+interface IQuestionCategory {
+  id: number
+  name: string
+  icon: string
+  questions: IQuestion[]
+}
+
+interface QuestionsProps {
+  questions: IQuestionCategory[]
+}
+
+const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   const [currentTab, setCurrentTab] = React.useState<TTabs | null>(null)
+
   const [safe, setSafe] = useState(true)
+
   const [currentQuestion, setCurrentQuestion] = React.useState<TQuestionType | null>(null)
+
   const [scope, animate] = useAnimate()
   const [width, setWidth] = useState(0)
+
+  const sortUsersId = (array) => {
+    const result = array.sort((a, b) => (a.id > b.id ? 1 : -1))
+
+    return result
+  }
+  const sortedQuestions = sortUsersId(questions)
+
   let timer: NodeJS.Timeout
 
   const settings = {
@@ -53,9 +82,9 @@ const Questions = () => {
   }, [])
 
   useEffect(() => {
-    if (tabs[0] !== null && tabs[0].items) {
-      setCurrentTab(tabs[0])
-      setCurrentQuestion(tabs[0].items[0])
+    if (sortedQuestions[0] !== null && sortedQuestions[0].items) {
+      setCurrentTab(sortedQuestions[0])
+      setCurrentQuestion(sortedQuestions[0].items[0])
     }
   }, [])
 
@@ -91,11 +120,22 @@ const Questions = () => {
         <ColumnWrapper>
           <TopicsColumn>
             <Slider {...settings}>
-              {tabs.map((item, index) => (
+              {/* {tabs.map((item, index) => (
                 <QuestionTopic
                   text={item.text}
                   icon={item.icon}
                   items={item.items}
+                  key={index}
+                  onClick={onTopickClick}
+                  chosen={currentTab}
+                />
+              ))} */}
+
+              {sortedQuestions.map((item: IQuestionCategory, index: number) => (
+                <QuestionTopic
+                  text={item.name}
+                  icon={item.icon}
+                  items={item.questions}
                   key={index}
                   onClick={onTopickClick}
                   chosen={currentTab}
@@ -128,7 +168,7 @@ const Questions = () => {
           </AnimatePresence>
           {currentQuestion && currentQuestion.answer && (
             <AnswerCard
-              key={currentQuestion.answer}
+              // key={currentQuestion.answer}
               id={currentQuestion.id}
               question={currentQuestion.question}
               answer={currentQuestion.answer}

@@ -11,6 +11,7 @@ import { items } from '@/shared/constants/texts/product-cards'
 import styles from './page.module.css'
 
 import { getVideoPageData } from '@/app/api'
+
 import { ICamera } from '@/widgets/Calculator/types'
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -26,7 +27,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <main className={styles.main} id="product-item">
       <Breadcrumbs title={data.title} />
-
       <Product data={data} />
     </main>
   )

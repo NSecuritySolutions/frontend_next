@@ -1,6 +1,8 @@
 import React from 'react'
+
 import dynamic from 'next/dynamic'
 import { cookies } from 'next/headers'
+
 import { Info } from '@/widgets/Info'
 import { OurServices } from '@/widgets/OurServices'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
@@ -12,10 +14,13 @@ import { ReviewsBlock } from '@/widgets/ReviewsBlock'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
 import { ContactForm } from '../widgets/ContactForm'
+
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
-import styles from './page.module.css'
+
 import { getMainPageData } from './api'
+
+import styles from './page.module.css'
 
 const Calculator = dynamic(
   () => import('@/widgets/Calculator').then((module) => module.Calculator),
@@ -40,6 +45,7 @@ export default async function Page() {
 
   const cookieStore = cookies()
   const hasCookie = cookieStore.has('agreedGuest')
+
   return (
     <main className={styles.main} id="content">
       <Info />
@@ -49,7 +55,7 @@ export default async function Page() {
       <AdvantagesBlock />
       <ProjectStage />
       <OurTeam />
-      <Questions />
+      <Questions questions={questionsData} />
       <ReviewsBlock />
       <ExamplesSlider />
       <OurClients />

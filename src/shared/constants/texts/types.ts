@@ -53,7 +53,7 @@ export type TWorkExamples = {
 export type TQuestionType = {
   id: number
   question: string
-  answer: string
+  answer: string[]
 }
 
 export type TTabs = {
@@ -77,7 +77,7 @@ export type TTopicProps = {
 export type TAnswerProps = {
   id: number
   question: string
-  answer: string
+  answer: string[]
   onClick: (item: TQuestionType) => void
   chosen: TQuestionType | null
   width: number

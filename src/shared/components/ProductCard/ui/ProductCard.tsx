@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation'
 
 import { BtnLink } from '../../BtnLink'
 
-import { truncateArr, truncateStr } from '../utils'
+import { truncateArr, truncateStr, truncateLine } from '../utils'
 
-import { TCard } from '../types'
+import { ProductCardProps } from '../types'
 
 import colors from '@/shared/constants/colors'
 import {
@@ -23,9 +23,8 @@ import {
   ButtonWrapper,
   TextWrapper,
 } from './styled'
-import { ICamera } from '@/widgets/Calculator/types'
 
-const ProductCard: FC<ICamera> = ({ item }) => {
+const ProductCard: FC<ProductCardProps> = ({ item }) => {
   const router = useRouter()
 
   const [screenWidth, setScreenWidth] = useState(0)
@@ -52,7 +51,7 @@ const ProductCard: FC<ICamera> = ({ item }) => {
     currency: 'RUB',
     maximumFractionDigits: 0,
   })
-  console.log(item)
+
   return (
     <CardWrapper>
       <CardContainer
@@ -63,26 +62,17 @@ const ProductCard: FC<ICamera> = ({ item }) => {
         <Img src={item.image} alt={item.model} width={260} height={261} />
         <TextWrapper>
           <ProductPrice>{formattedPrice}</ProductPrice>
-          <ProductTitle>
-            {truncateStr(item.model ? item.model : item.title, screenWidth)}
-          </ProductTitle>
+          <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>
           <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
           <ProductAbout>
-            {/* {newArray.map((list: string, i: number) => (
-              <li key={i}>{list}</li>
-            ))} */}
-            <li>Тип:{item.type}</li>
-            <li>Форм-фактор:{item.form_factor}</li>
+            <li>Тип: {item.type}</li>
+            <li>Форм-фактор: {truncateLine(item.form_factor, screenWidth)}</li>
             <li>Производитель: {item.manufacturer.title}</li>
-            <li>Размещение:{item.accomodation} </li>
-            <li>Разрешение:{item.resolution}</li>
-            <li>Фокус:{item.focus}</li>
-            <li>Угол обзора:{item.viewing_angle}</li>
-            <li>ИК-съемка в темноте: {item.dark}</li>
-            {/* <li>Микрофон/динамик: {item.microphone_details}</li>
-            <li>Поддержка MicroSD: {item.micro_sd_details}</li>
-            <li>Питание, вольт: {item.power_supply}</li>
-            <li>Рабочая температура: {item.temperature}</li> */}
+            <li>Размещение: {item.accommodation} </li>
+            <li>Разрешение: {truncateLine(item.resolution, screenWidth)}</li>
+            <li>Фокус: {item.focus}</li>
+            <li>Угол обзора: {item.viewing_angle}</li>
+            <li>ИК-съемка в темноте: {truncateLine(item.dark, screenWidth)}</li>
           </ProductAbout>
           <Link href={`/products/${item.id}`}>
             <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
@@ -95,26 +85,26 @@ const ProductCard: FC<ICamera> = ({ item }) => {
             text="Заказать звонок"
             width="174px"
             height="44px"
-            // link="/#contact-form"
+            link="/video-surveillance#contact-form"
             size="15px"
             color={colors.darkPrimary}
             btnType="accent"
             onClick={(e) => {
               e.stopPropagation()
-              router.push(`/#contact-form`)
+              router.push(`/video-surveillance#contact-form`)
             }}
           />
           <BtnLink
             text="В калькулятор"
             width="174px"
             height="44px"
-            // link="/#calculator"
+            link="/video-surveillance#calculator"
             color={colors.darkPrimary}
             size="15px"
             btnType="transparent"
             onClick={(e) => {
               e.stopPropagation()
-              router.push(`/#calculator-start`)
+              router.push(`/video-surveillance#calculator`)
             }}
           />
         </ButtonWrapper>

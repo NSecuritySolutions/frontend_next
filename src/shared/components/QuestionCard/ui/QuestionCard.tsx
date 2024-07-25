@@ -1,3 +1,8 @@
+import { FC, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+
+import { AnimatePresence, useAnimate } from 'framer-motion'
+
 import { TAnswerProps } from '@/shared/constants/texts/types.ts'
 
 import {
@@ -8,9 +13,6 @@ import {
   TitleContainer,
   ArrowWrapper,
 } from './styled.ts'
-import { FC, useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
-import { AnimatePresence, useAnimate } from 'framer-motion'
 
 const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen, width }) => {
   const [open, setOpen] = useState(false)

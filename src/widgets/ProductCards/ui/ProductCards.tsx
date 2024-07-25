@@ -13,10 +13,11 @@ interface ProductCardsProps {
 
 const ProductCards: FC<ProductCardsProps> = ({ data }) => {
   const [visibleItems, setVisibleItems] = useState(6)
-  console.log(data, 'data')
+
   const showMoreItems = () => {
     setVisibleItems((prev) => prev + 6)
   }
+
   return (
     <Section id="product-cards">
       <SectionTitle>Наш ассортимент товаров</SectionTitle>
@@ -25,11 +26,11 @@ const ProductCards: FC<ProductCardsProps> = ({ data }) => {
           <ProductCard key={i} item={item} />
         ))} */}
 
-        {data.slice(0, visibleItems).map((item: any, i: number) => (
-          <ProductCard key={i} item={item} />
+        {data.slice(0, visibleItems).map((item: ICamera, i: number) => (
+          <ProductCard key={i} item={item as ICamera} />
         ))}
       </SectionWrapper>
-      {visibleItems < items.length && (
+      {visibleItems < data.length && (
         <BtnLink
           btnType="transparent"
           text="Показать еще"

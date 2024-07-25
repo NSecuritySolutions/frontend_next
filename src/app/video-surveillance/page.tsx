@@ -4,14 +4,16 @@ import { ContactForm } from '@/widgets/ContactForm'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
 import { Questions } from '@/widgets/Questions'
 import { ProductCards } from '@/widgets/ProductCards'
-
+import { Calculator } from '@/widgets/Calculator'
 import { OurWorksBanner } from '@/shared/components/VideoSurvBanner'
 
 import styles from './page.module.css'
-import { getVideoPageData } from '../api'
+import { getVideoPageData, getMainPageData } from '../api'
 
 export default async function VideoPage() {
   const { solutionData, questionsData, productData } = await getVideoPageData()
+
+  const { calculatorData } = await getMainPageData()
 
   // useEffect(() => {
   //   const targetCardID = localStorage.getItem('id')
@@ -30,7 +32,8 @@ export default async function VideoPage() {
       <OurWorksBanner />
       <ReadySolutionSection />
       <ProductCards data={productData} />
-      <Questions />
+      <Questions questions={questionsData} />
+      <Calculator products={productData} calculator={calculatorData} />
       <ContactForm />
     </main>
   )
