@@ -368,10 +368,28 @@ class CalculatorBlockStore {
       }
     }
     const priceOptions = this.data.options.filter((option) => {
+      console.log(product.prices_in_price_lists)
       const productPrices = product.prices_in_price_lists.filter((price) => option.price == price)
       if (productPrices.length > 0) return true
     })
-    if (priceOptions.length > 0) priceOptions.map((option) => this.setVariable(option.name, value))
+    if (priceOptions.length > 0)
+      priceOptions.map((option) => {
+        switch (option.option_type) {
+          case 'checkbox':
+            this.setVariable(option.name, value)
+            break
+          case 'counter':
+            this.setVariable(option.name, value.toString())
+            break
+          case 'number':
+            this.setVariable(option.name, value)
+            break
+          default:
+            const error = new Error('Invalid option_type')
+            calculatorStore.error = error
+            console.error(error)
+        }
+      })
   }
 }
 
