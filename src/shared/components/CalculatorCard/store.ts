@@ -3,18 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
-import {
-  IBlock,
-  IPriceVariables,
-  IOption,
-  TProduct,
-  ICamera,
-  IRegister,
-  IHDD,
-  ISensor,
-  IPACSProduct,
-  IFACP,
-} from '@/widgets/Calculator/types'
+import { IBlock, IPriceVariables, IOption, TProduct } from '@/widgets/Calculator/types'
 import { ICondition, IConditionCategory } from './types'
 
 const config = {}
@@ -32,16 +21,9 @@ math.import(
   { override: true },
 )
 
-type Keys =
-  | keyof ICamera
-  | keyof IRegister
-  | keyof IHDD
-  | keyof ISensor
-  | keyof IPACSProduct
-  | keyof IFACP
-
 class CalculatorBlockStore {
   id: string
+  prev_block_amount: number
   data: IBlock
   presentOptions: IOption[] = []
   disabled: number = 0
@@ -56,6 +38,7 @@ class CalculatorBlockStore {
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
     this.data = data
+    this.prev_block_amount = 0
     this.quantity_selection = data.quantity_selection
     this.formula = data.formula.expression
     this.variables = { ...price }
@@ -69,6 +52,7 @@ class CalculatorBlockStore {
       appeared: observable,
       filters: observable,
       products: observable,
+      prev_block_amount: observable,
       result: computed,
       setVariable: action,
       setPresent: action,
@@ -109,7 +93,15 @@ class CalculatorBlockStore {
   }
 
   get result() {
-    const mathResult = math.evaluate(this.formula, this.variables)
+    let mathResult
+    try {
+      mathResult = math.evaluate(this.formula, this.variables)
+    } catch (error) {
+      console.error(error)
+      calculatorStore.error = error
+      return 0
+    }
+
     const filterResult = this.filter()
     const resultWithoutProducts =
       this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
@@ -221,6 +213,9 @@ class CalculatorBlockStore {
   }
 
   setVariable(name: string, value: string | number | boolean) {
+    if (name == 'block_amount') {
+      this.prev_block_amount = parseInt(this.variables[name] as string)
+    }
     this.variables[name] = value
     const prevArr = [...this.presentOptions]
     this.setPresent()
@@ -241,6 +236,7 @@ class CalculatorBlockStore {
 
   setVariables = () => {
     // Формируем общий словарь для переменных
+    this.variables.block_amount = '0'
     this.data.options.forEach((option) => {
       switch (option.option_type) {
         case 'checkbox':
@@ -362,14 +358,20 @@ class CalculatorBlockStore {
     })
   }
 
-  setProduct(product: TProduct) {
+  setProduct(product: TProduct, value: number) {
     if (Object.keys(this.products).find((item) => item == product.category.title)) {
       if (this.applyInitialFilters(product, this.filters[product.category.title].initial)) {
         // this.products[product.category.title].push(product)
         this.products[product.category.title] = [product]
         this.reverseCondition(product)
+        this.setVariable('block_amount', value)
       }
     }
+    const priceOptions = this.data.options.filter((option) => {
+      const productPrices = product.prices_in_price_lists.filter((price) => option.price == price)
+      if (productPrices.length > 0) return true
+    })
+    if (priceOptions.length > 0) priceOptions.map((option) => this.setVariable(option.name, value))
   }
 }
 

@@ -68,9 +68,9 @@ class CalculatorStore {
     }
   }
 
-  setProduct(product: TProduct) {
+  setProduct(product: TProduct, amount: number) {
     this.blocks.map((block) => {
-      block.setProduct(product)
+      block.setProduct(product, amount)
     })
   }
 }

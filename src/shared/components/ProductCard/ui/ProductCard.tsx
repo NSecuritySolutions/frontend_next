@@ -106,7 +106,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
             onClick={(e) => {
               e.stopPropagation()
               router.push(`/video-surveillance#calculator`)
-              calculatorStore.setProduct(item)
+              calculatorStore.setProduct(item, 1)
             }}
           />
         </ButtonWrapper>

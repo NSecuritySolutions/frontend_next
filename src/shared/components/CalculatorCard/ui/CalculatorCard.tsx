@@ -29,7 +29,7 @@ interface CalculatorCardProps {
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
   ({ store, index, resize, deleteBlock }) => {
-    const { data, presentOptions, result } = store
+    const { data, presentOptions, result, prev_block_amount } = store
     const { animationSafe, setAnimationSafe } = calculatorStore
     const amount = parseInt(store.getVariable('block_amount') as string) || 0
     const [deleted, setDeleted] = useState(false)
@@ -108,15 +108,24 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       }
     }, [presentOptions, presentCount, amount])
 
+    useEffect(() => {
+      if (prev_block_amount !== 0 && amount === 0) {
+        store.resetVariables()
+        resize(presentCount, false)
+      } else if (prev_block_amount === 0 && amount !== 0) {
+        resize(presentCount, true)
+      }
+    }, [amount])
+
     const handleChange = (v: number) => {
       if (!animationSafe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
       store.setVariable('block_amount', v.toString())
-      if (amount !== 0 && v === 0) {
-        store.resetVariables()
-        resize(presentCount, false)
-      } else if (amount === 0 && v === 1) {
-        resize(presentCount, true)
-      }
+      // if (amount !== 0 && v === 0) {
+      //   store.resetVariables()
+      //   resize(presentCount, false)
+      // } else if (amount === 0 && v === 1) {
+      //   resize(presentCount, true)
+      // }
     }
 
     const handleDelete = () => {

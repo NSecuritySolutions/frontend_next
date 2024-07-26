@@ -7,6 +7,7 @@ interface IProduct {
   image: string
   description: string
   price: number
+  prices_in_price_lists: IPrice[]
 }
 
 interface ICamera extends IProduct {
@@ -60,6 +61,7 @@ interface IOption {
   depends_on: number
   depends_on_value: string | number | boolean
   dependencies: boolean
+  price: IPrice
 }
 
 interface IBlock {
@@ -85,6 +87,7 @@ interface IPrice {
   variable_name: string
   price: number
   is_show: boolean
+  product: TProduct
 }
 
 interface IPriceListCategory {

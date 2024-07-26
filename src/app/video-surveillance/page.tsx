@@ -10,6 +10,8 @@ import { OurWorksBanner } from '@/shared/components/VideoSurvBanner'
 import styles from './page.module.css'
 import { getVideoPageData, getMainPageData } from '../api'
 
+export const revalidate = 60
+
 export default async function VideoPage() {
   const { solutionData, questionsData, productData } = await getVideoPageData()
 
