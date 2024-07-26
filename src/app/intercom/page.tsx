@@ -1,12 +1,28 @@
 import { ContactForm } from '@/widgets/ContactForm'
+import { Questions } from '@/widgets/Questions'
+import { Calculator } from '@/widgets/Calculator'
+
+import { PageBanner } from '@/shared/components/PageBanner'
+
+import { getDomofonPageData } from '../api'
+
 import styles from './page.module.css'
 
-export default function DomofonPage() {
+export default async function DomofonPage() {
+  const { calculatorData, questionsData, productData } = await getDomofonPageData()
+
   return (
     <main className={styles.main}>
-      <section style={{ margin: '164px 0' }} id="intercom">
-        <h1>Домофония, страница в разработке</h1>
-      </section>
+      <PageBanner
+        id="intercom-banner"
+        title="Контроль доступа и обеспечение безопасности
+        с домофонией и СКУД"
+        text="Удобные в управлении домофоны и системы контроля доступа (СКУД) выского качества
+        обеспечивают полную безопасность вашего дома или офиса"
+        src="/images/banner/png/video-surveillance-banner.png"
+      />
+      <Questions questions={questionsData} />
+      <Calculator products={productData} calculator={calculatorData} />
       <ContactForm />
     </main>
   )

@@ -1,3 +1,4 @@
+import { IQuestion, IQuestionCategory } from '@/widgets/Questions/types'
 import { StaticImageData } from 'next/image'
 
 export type TProjectMilestones = {
@@ -53,13 +54,13 @@ export type TWorkExamples = {
 export type TQuestionType = {
   id: number
   question: string
-  answer: string
+  answer: string[]
 }
 
 export type TTabs = {
   icon: string
-  text: string
-  items: Array<TQuestionType>
+  name: string
+  questions: IQuestion[]
 }
 
 export type TAnswer = {
@@ -67,17 +68,18 @@ export type TAnswer = {
 }
 
 export type TTopicProps = {
+  id: number
   icon: string
-  text: string
-  items: Array<TQuestionType>
-  onClick: (item: TTabs) => void
-  chosen: TTabs | null
+  name: string
+  questions: IQuestion[]
+  onClick: (item: IQuestionCategory) => void
+  chosen: IQuestionCategory | null
 }
 
 export type TAnswerProps = {
   id: number
   question: string
-  answer: string
+  answer: string[]
   onClick: (item: TQuestionType) => void
   chosen: TQuestionType | null
   width: number

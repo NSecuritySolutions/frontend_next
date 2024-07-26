@@ -12,15 +12,17 @@ interface IProduct {
 interface ICamera extends IProduct {
   type: string
   form_factor: string
-  accomodation: string
+  accommodation: string
   resolution: string
   dark: string
   temperature: string
   power_supply: string
   microphone: string
   micro_sd: string
-  viewing_anlge: string
+  viewing_angle: string
   focus: string
+  microphone_details: string
+  micro_sd_details: string
 }
 
 interface IRegister extends IProduct {

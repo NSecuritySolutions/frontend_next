@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import Slider from 'react-slick'
+import { AnimatePresence, useAnimate } from 'framer-motion'
 
+import { QuestionTopic } from '@/shared/components/QuestionTopic'
+import { TQuestionType } from '@/shared/constants/texts/types'
+import { QuestionCard } from '@/shared/components/QuestionCard'
+import { AnswerCard } from '@/shared/components/AnswerCard'
+import { IQuestion, IQuestionCategory, QuestionsProps } from '../types'
 import {
   Section,
   SectionWrapper,
@@ -8,20 +15,24 @@ import {
   QuestionsColumn,
   ColumnWrapper,
 } from './styled'
-import { QuestionTopic } from '@/shared/components/QuestionTopic'
-import { TQuestionType, TTabs } from '@/shared/constants/texts/types'
-import { tabs } from '@/shared/constants/texts/questions'
-import { QuestionCard } from '@/shared/components/QuestionCard'
-import { AnswerCard } from '@/shared/components/AnswerCard'
-import Slider from 'react-slick'
-import { AnimatePresence, useAnimate } from 'framer-motion'
 
-const Questions = () => {
-  const [currentTab, setCurrentTab] = React.useState<TTabs | null>(null)
+const Questions: React.FC<QuestionsProps> = ({ questions }) => {
+  const [currentTab, setCurrentTab] = React.useState<IQuestionCategory | null>(null)
+
   const [safe, setSafe] = useState(true)
+
   const [currentQuestion, setCurrentQuestion] = React.useState<TQuestionType | null>(null)
+
   const [scope, animate] = useAnimate()
   const [width, setWidth] = useState(0)
+
+  const sortFaqQuestions = (array: IQuestionCategory[]) => {
+    const result = array.sort((a, b) => (a.id > b.id ? 1 : -1))
+
+    return result
+  }
+  const sortedQuestions = sortFaqQuestions(questions)
+
   let timer: NodeJS.Timeout
 
   const settings = {
@@ -53,15 +64,15 @@ const Questions = () => {
   }, [])
 
   useEffect(() => {
-    if (tabs[0] !== null && tabs[0].items) {
-      setCurrentTab(tabs[0])
-      setCurrentQuestion(tabs[0].items[0])
+    if (sortedQuestions[0] !== null && sortedQuestions[0].questions) {
+      setCurrentTab(sortedQuestions[0])
+      setCurrentQuestion(sortedQuestions[0].questions[0])
     }
   }, [])
 
-  function onTopickClick(item: TTabs) {
+  function onTopickClick(item: IQuestionCategory) {
     if (width <= 940) {
-      if (item.text != currentTab?.text && safe) {
+      if (item.name != currentTab?.name && safe) {
         clearTimeout(timer)
         setSafe(false)
         timer = setTimeout(() => {
@@ -72,11 +83,11 @@ const Questions = () => {
           animate(scope.current, { height: 'auto' }, { duration: 0.5 })
         }, 600)
         setCurrentTab(item)
-        setCurrentQuestion(item.items[0])
+        setCurrentQuestion(item.questions[0])
       }
     } else {
       setCurrentTab(item)
-      setCurrentQuestion(item.items[0])
+      setCurrentQuestion(item.questions[0])
     }
   }
 
@@ -91,11 +102,12 @@ const Questions = () => {
         <ColumnWrapper>
           <TopicsColumn>
             <Slider {...settings}>
-              {tabs.map((item, index) => (
+              {sortedQuestions.map((item: IQuestionCategory, index: number) => (
                 <QuestionTopic
-                  text={item.text}
+                  id={item.id}
+                  name={item.name}
                   icon={item.icon}
-                  items={item.items}
+                  questions={item.questions}
                   key={index}
                   onClick={onTopickClick}
                   chosen={currentTab}
@@ -105,15 +117,15 @@ const Questions = () => {
           </TopicsColumn>
           <AnimatePresence mode="wait">
             <QuestionsColumn
-              key={currentTab?.text}
+              key={currentTab?.name}
               ref={scope}
               initial={width <= 940 ? { height: 0 } : undefined}
               exit={width <= 940 ? { height: '0px' } : undefined}
               transition={{ duration: 0.3 }}
             >
               {currentTab !== null &&
-                currentTab.items &&
-                currentTab.items.map((item) => (
+                currentTab.questions &&
+                currentTab.questions.map((item) => (
                   <QuestionCard
                     question={item.question}
                     answer={item.answer}
@@ -128,7 +140,6 @@ const Questions = () => {
           </AnimatePresence>
           {currentQuestion && currentQuestion.answer && (
             <AnswerCard
-              key={currentQuestion.answer}
               id={currentQuestion.id}
               question={currentQuestion.question}
               answer={currentQuestion.answer}

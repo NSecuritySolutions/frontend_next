@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation'
 
 import { BtnLink } from '../../BtnLink'
 
-import { truncateArr, truncateStr } from '../utils'
+import { truncateArr, truncateStr, truncateLine } from '../utils'
 
-import { TCard } from '../types'
+import { ProductCardProps } from '../types'
 
 import colors from '@/shared/constants/colors'
 import {
@@ -24,7 +24,7 @@ import {
   TextWrapper,
 } from './styled'
 
-const ProductCard: FC<TCard> = ({ item }) => {
+const ProductCard: FC<ProductCardProps> = ({ item }) => {
   const router = useRouter()
 
   const [screenWidth, setScreenWidth] = useState(0)
@@ -44,7 +44,7 @@ const ProductCard: FC<TCard> = ({ item }) => {
     }
   }, [])
 
-  const newArray = truncateArr(item.moreInfo, screenWidth)
+  // const newArray = truncateArr(item.moreInfo, screenWidth)
 
   const formattedPrice = Number(item.price).toLocaleString('ru-RU', {
     style: 'currency',
@@ -59,15 +59,20 @@ const ProductCard: FC<TCard> = ({ item }) => {
           router.push(`/cameras/${item.id}`)
         }}
       >
-        <Img src={item.image} alt="GoPro" width={260} height={261} />
+        <Img src={item.image} alt={item.model} width={260} height={261} />
         <TextWrapper>
           <ProductPrice>{formattedPrice}</ProductPrice>
-          <ProductTitle>{truncateStr(item.title, screenWidth)}</ProductTitle>
+          <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>
           <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
           <ProductAbout>
-            {newArray.map((list: string, i: number) => (
-              <li key={i}>{list}</li>
-            ))}
+            <li>Тип: {item.type}</li>
+            <li>Форм-фактор: {truncateLine(item.form_factor, screenWidth)}</li>
+            <li>Производитель: {item.manufacturer.title}</li>
+            <li>Размещение: {item.accommodation} </li>
+            <li>Разрешение: {truncateLine(item.resolution, screenWidth)}</li>
+            <li>Фокус: {item.focus}</li>
+            <li>Угол обзора: {item.viewing_angle}</li>
+            <li>ИК-съемка в темноте: {truncateLine(item.dark, screenWidth)}</li>
           </ProductAbout>
           <Link href={`/products/${item.id}`}>
             <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
@@ -80,19 +85,27 @@ const ProductCard: FC<TCard> = ({ item }) => {
             text="Заказать звонок"
             width="174px"
             height="44px"
-            link="/#contact-form"
+            link="/video-surveillance#contact-form"
             size="15px"
             color={colors.darkPrimary}
             btnType="accent"
+            onClick={(e) => {
+              e.stopPropagation()
+              router.push(`/video-surveillance#contact-form`)
+            }}
           />
           <BtnLink
             text="В калькулятор"
             width="174px"
             height="44px"
-            link="/#calculator"
+            link="/video-surveillance#calculator"
             color={colors.darkPrimary}
             size="15px"
             btnType="transparent"
+            onClick={(e) => {
+              e.stopPropagation()
+              router.push(`/video-surveillance#calculator`)
+            }}
           />
         </ButtonWrapper>
       </CardContainer>

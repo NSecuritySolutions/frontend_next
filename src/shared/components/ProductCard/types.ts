@@ -1,3 +1,5 @@
+import { ICamera } from '@/widgets/Calculator/types'
+
 export type TCard = {
   item: {
     id: number
@@ -7,4 +9,8 @@ export type TCard = {
     image: string
     price: number
   }
+}
+
+export interface ProductCardProps {
+  item: ICamera
 }

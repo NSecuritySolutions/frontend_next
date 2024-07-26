@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { useRouter } from 'next/navigation'
+
 import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
 import { Wrapper } from './styled'
@@ -9,6 +11,8 @@ interface ProductButtonGroupProps {
 }
 
 const ProductButtonGroup: FC<ProductButtonGroupProps> = ({ link }) => {
+  const router = useRouter()
+
   return (
     <Wrapper>
       <BtnLink
@@ -25,7 +29,7 @@ const ProductButtonGroup: FC<ProductButtonGroupProps> = ({ link }) => {
         text="В калькулятор"
         width="235px"
         height="44px"
-        link="/#calculator"
+        link="/#calculator-start"
         color={colors.darkPrimary}
         size="15px"
       />

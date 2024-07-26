@@ -49,7 +49,7 @@ const CardName = styled.h2`
   overflow-wrap: break-word;
   max-width: 190px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
 
   @media (max-width: 1300px) {
     display: none;

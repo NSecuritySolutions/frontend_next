@@ -35,7 +35,7 @@ interface CardSolutionProps {
 }
 
 const CardSolution: FC<CardSolutionProps> = ({ data }) => {
-  const router = useRouter()
+  // const router = useRouter()
 
   const formattedPrice = Number(data.price).toLocaleString('ru-RU', {
     style: 'currency',

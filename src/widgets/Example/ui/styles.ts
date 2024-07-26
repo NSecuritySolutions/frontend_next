@@ -39,7 +39,7 @@ const ModalContent = styled.div`
 
   @media (max-width: 620px) {
     margin: 0 auto;
-    min-width: 328px;
+    // min-width: 328px;
     width: 100%;
     padding: 16px;
   }

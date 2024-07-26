@@ -1,8 +1,10 @@
 import { FC } from 'react'
 import { Typography } from '@/shared/components/Typography'
-import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 import Loader from '@/shared/components/Loader/Loader'
+import { ProductProps } from '../types'
+import { ICamera } from '@/widgets/Calculator/types'
+import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 
 import {
   Card,
@@ -19,33 +21,22 @@ import {
   Text,
 } from './styled'
 
-interface ProductProps {
-  data: TCardSolutionProps | TItem
-}
-
-export type TItem = {
-  id: number
-  price: number
-  title: string
-  description: string
-  moreInfo: string[]
-  image: string
-}
-
 const Product: FC<ProductProps> = ({ data }) => {
+  console.log(data, 'data')
+
   if (!data) return Loader()
 
   const isCardSolution = (data as TCardSolutionProps).toolTipText !== undefined
 
   return (
     <Card>
-      <Title>{isCardSolution ? (data as TCardSolutionProps).title : (data as TItem).title}</Title>
+      <Title>{isCardSolution ? (data as TCardSolutionProps).title : (data as ICamera).model}</Title>
       <ContentWrapper>
         <ImageColumnWrapper>
           <ImageWrapper>
             <Img
-              src={isCardSolution ? (data as TCardSolutionProps).img : (data as TItem).image}
-              alt={isCardSolution ? (data as TCardSolutionProps).title : (data as TItem).title}
+              src={isCardSolution ? (data as TCardSolutionProps).img : (data as ICamera).image}
+              alt={isCardSolution ? (data as TCardSolutionProps).title : (data as ICamera).model}
               width={196}
               height={96}
             />
@@ -60,7 +51,7 @@ const Product: FC<ProductProps> = ({ data }) => {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })
-                  : (data as TItem).price.toLocaleString('ru-RU', {
+                  : (data as ICamera).price.toLocaleString('ru-RU', {
                       style: 'currency',
                       currency: 'RUB',
                       minimumFractionDigits: 2,
@@ -69,7 +60,7 @@ const Product: FC<ProductProps> = ({ data }) => {
               </Title>
               {isCardSolution && <Typography size={13}>Выезд инженера - Бесплатно!</Typography>}
             </div>
-            {!isCardSolution && <Text>{(data as TItem).description.slice(0, 20) + '...'}</Text>}
+            {!isCardSolution && <Text>{(data as ICamera).description.slice(0, 20) + '...'}</Text>}
 
             <ProductButtonGroup link="" />
           </PriceColumnWrapper>
@@ -82,17 +73,37 @@ const Product: FC<ProductProps> = ({ data }) => {
               <SectionTitle>Харакетристики</SectionTitle>
             )}
             <UnorderedList>
-              {isCardSolution
-                ? (data as TCardSolutionProps).listItem.map((item) => (
-                    <li key={item}>
-                      <Text>{item}</Text>
-                    </li>
-                  ))
-                : (data as TItem).moreInfo.map((item) => (
-                    <li key={item}>
-                      <Text>{item}</Text>
-                    </li>
-                  ))}
+              {isCardSolution ? (
+                (data as TCardSolutionProps).listItem.map((item) => (
+                  <li key={item}>
+                    <Text>{item}</Text>
+                  </li>
+                ))
+              ) : (
+                <>
+                  {'viewing_angle' in data && (
+                    <>
+                      <li>Тип: {data.type}</li>
+                      <li>Форм-фактор: {data.form_factor}</li>
+                      <li>Производитель: {data.manufacturer.title}</li>
+                      <li>Размещение: {data.accommodation}</li>
+                      <li>Разрешение: {data.resolution}</li>
+                      <li>Фокус: {data.focus}</li>
+                      <li>Угол обзора: {data.viewing_angle}</li>
+                      <li>ИК-съемка в темноте: {data.dark ? `да, ${data.dark}` : 'нет'}</li>
+                      <li>
+                        Микрофон/динамик:{' '}
+                        {data.microphone ? `да, ${data.microphone_details}` : 'нет'}
+                      </li>
+                      <li>
+                        Поддержка MicroSD: {data.micro_sd ? `да, ${data.micro_sd_details}` : 'нет'}
+                      </li>
+                      <li>Питание, вольт: {data.power_supply}</li>
+                      <li>Рабочая температура: {data.temperature}</li>
+                    </>
+                  )}
+                </>
+              )}
             </UnorderedList>
           </BlockWrapper>
           <BlockWrapper>

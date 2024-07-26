@@ -17,13 +17,15 @@ const CardContainer = styled.article`
   width: 380px;
   background: ${colors.backgroundPrimary};
   gap: 20px;
-  min-height: 611px;
+  // min-height: 627px;
 
   &:hover {
     cursor: pointer;
   }
+
   @media (max-width: 1300px) {
     width: 280px;
+    min-height: 672px;
   }
 
   @media (max-width: 620px) {

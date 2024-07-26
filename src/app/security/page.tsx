@@ -1,13 +1,28 @@
 import { ContactForm } from '@/widgets/ContactForm'
+import { Questions } from '@/widgets/Questions'
+import { Calculator } from '@/widgets/Calculator'
+
+import { PageBanner } from '@/shared/components/PageBanner'
+
+import { getSecurityPageData } from '../api'
+
 import styles from './page.module.css'
 
-export default function SecurityPage() {
+export default async function SecurityPage() {
+  const { calculatorData, questionsData, productData } = await getSecurityPageData()
+
   return (
     <main className={styles.main}>
-      <section style={{ margin: '164px 0' }} id="security">
-        <h1>Охранно-пожарная, страница в разработке</h1>
-      </section>
-      <ContactForm></ContactForm>
+      <PageBanner
+        id="security-banner"
+        title="Комплексная защита с охранно-пожарными 
+        сигнализациями для вашего дома и бизнеса"
+        text="Надежные охранно-пожарные сигнализации для защиты Вашего имущества от взломов и пожаров"
+        src="/images/banner/png/video-surveillance-banner.png"
+      />
+      <Questions questions={questionsData} />
+      <Calculator products={productData} calculator={calculatorData} />
+      <ContactForm />
     </main>
   )
 }

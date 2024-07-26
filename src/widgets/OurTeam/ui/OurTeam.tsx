@@ -19,7 +19,6 @@ import {
 import { teamText } from '@/shared/constants/texts/our-team.ts'
 
 const OurTeam = () => {
-  //console.log(data[0].description, data[0].employees)
   return (
     <Section id="our-team">
       <SectionWrapper>

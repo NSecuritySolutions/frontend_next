@@ -25,7 +25,7 @@ const CardContainer = styled.article`
   background: ${colors.backgroundPrimary};
   padding: 46px 40px;
   align-items: flex-start;
-  gap: 20px;
+  // gap: 20px;
   overflow-y: auto;
 
   overflow-x: hidden;
@@ -63,6 +63,7 @@ const QuestionText = styled.h3`
   text-wrap: wrap;
   font-size: 18px;
   font-weight: 700;
+  margin-bottom: 20px;
 `
 
 const AnswerText = styled.p`
