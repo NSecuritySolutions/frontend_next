@@ -368,7 +368,6 @@ class CalculatorBlockStore {
       }
     }
     const priceOptions = this.data.options.filter((option) => {
-      console.log(product.prices_in_price_lists)
       const productPrices = product.prices_in_price_lists.filter((price) => option.price == price)
       if (productPrices.length > 0) return true
     })
