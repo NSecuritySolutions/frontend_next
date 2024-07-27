@@ -69,9 +69,10 @@ class CalculatorStore {
   }
 
   setProduct(product: TProduct, amount: number | string) {
-    this.blocks.map((block) => {
-      block.setProduct(product, amount)
-    })
+    if (this.animationSafe)
+      this.blocks.map((block) => {
+        block.setProduct(product, amount)
+      })
   }
 }
 
