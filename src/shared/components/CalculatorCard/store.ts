@@ -59,7 +59,9 @@ class CalculatorBlockStore {
     })
   }
 
-  compareArrays = (prevArr: IOption[], currentArr: IOption[]): void => {
+  // Нужно для плавной анимации
+  // Начало блока
+  private compareArrays = (prevArr: IOption[], currentArr: IOption[]): void => {
     this.disabled = 0
     this.appeared = 0
     for (let i = 0; i < prevArr.length; i++) {
@@ -74,7 +76,7 @@ class CalculatorBlockStore {
     }
   }
 
-  handleIsPresent = (option: IOption) => {
+  private handleIsPresent = (option: IOption) => {
     if (option.depends_on == undefined) return true
     if (option.depends_on) {
       const depends = this.data.options.find((item) => item.id == option.depends_on)
@@ -91,7 +93,10 @@ class CalculatorBlockStore {
   setPresent() {
     this.presentOptions = this.data.options.filter(this.handleIsPresent)
   }
+  // Конец блока
 
+  // Итоговый расчет
+  // Начало блока
   get result() {
     let mathResult
     try {
@@ -112,7 +117,7 @@ class CalculatorBlockStore {
     return result || 0
   }
 
-  filter() {
+  private filter() {
     // Фильтруем по категориям, заодно выбираем самую минимальную цену
     const categoriesWithProducts = Object.keys(this.products).filter(
       (category) => this.products[category].length > 0,
@@ -134,7 +139,7 @@ class CalculatorBlockStore {
     return sum
   }
 
-  filterProduct(category: string) {
+  private filterProduct(category: string) {
     // Отфильтровываем по категории
     const products = calculatorStore.products.filter((item) => item?.category?.title === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
@@ -144,7 +149,7 @@ class CalculatorBlockStore {
     return filteredProducts
   }
 
-  applyInitialFilters(item: TProduct, conditions: ICondition[]) {
+  private applyInitialFilters(item: TProduct, conditions: ICondition[]) {
     if (conditions.length == 0) return true
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
@@ -161,7 +166,7 @@ class CalculatorBlockStore {
     })
   }
 
-  applyFilters(item: TProduct, conditionCategory: IConditionCategory) {
+  private applyFilters(item: TProduct, conditionCategory: IConditionCategory) {
     const initial = this.applyInitialFilters(item, conditionCategory.initial)
     const restFilters = Object.keys(conditionCategory).filter((option) => option != 'initial')
     if (restFilters.length == 0) return initial
@@ -178,7 +183,7 @@ class CalculatorBlockStore {
     return rest && initial
   }
 
-  typeChange(value1: string | number | boolean | undefined, value2: string) {
+  private typeChange(value1: string | number | boolean | undefined, value2: string) {
     if (typeof value1 != typeof value2) {
       if (typeof value1 == 'number') return parseInt(value2)
       else if (typeof value1 == 'boolean')
@@ -187,7 +192,7 @@ class CalculatorBlockStore {
     return value2
   }
 
-  applyCondition(item: TProduct, condition: ICondition) {
+  private applyCondition(item: TProduct, condition: ICondition) {
     const { leftPart, operator, rightPart } = condition
     const finalRightPart = this.typeChange(
       item[leftPart] as string | number | boolean | undefined,
@@ -211,6 +216,16 @@ class CalculatorBlockStore {
         return true
     }
   }
+  // Конец блока
+
+  // Работа с переменными
+  // Начало блока
+  private checkOptionProduct(name: string) {
+    const option = this.data.options.filter((option) => option.name == name)[0]
+    if (option?.product && this.products[option.product].length > 0) {
+      this.products[option.product] = []
+    }
+  }
 
   setVariable(name: string, value: string | number | boolean) {
     if (name == 'block_amount') {
@@ -223,18 +238,18 @@ class CalculatorBlockStore {
     this.checkOptionProduct(name)
   }
 
-  checkOptionProduct(name: string) {
-    const option = this.data.options.filter((option) => option.name == name)[0]
-    if (option?.product && this.products[option.product].length > 0) {
-      this.products[option.product] = []
-    }
-  }
-
   getVariable(name: string) {
     return this.variables[name] || ''
   }
 
-  setVariables = () => {
+  resetVariables = () => {
+    this.variables = { ...this.initialVariables }
+  }
+  // Конец блока
+
+  // Функции для инициализации store
+  // Начало блока
+  private setVariables = () => {
     // Формируем общий словарь для переменных
     this.variables.block_amount = '0'
     this.data.options.forEach((option) => {
@@ -270,11 +285,7 @@ class CalculatorBlockStore {
     })
   }
 
-  resetVariables = () => {
-    this.variables = { ...this.initialVariables }
-  }
-
-  parseFilters = (str: string, optionName: string, optionProduct: string) => {
+  private parseFilters = (str: string, optionName: string, optionProduct: string) => {
     // С бэка приходит строка из фильтров, нам нужно разбить на фильтры
     str.split('\n').map((categoryPart) => {
       const category = categoryPart.trim().split(/:(.*)/)[0]
@@ -299,14 +310,16 @@ class CalculatorBlockStore {
     })
   }
 
-  splitCondition = (condition: string) => {
+  private splitCondition = (condition: string) => {
     // Регулярное выражение для поиска оператора и разделения строки
     const regex = /(==|!=|>=|<=|>|<)/
     const match = condition.match(regex)
 
     if (!match) {
-      console.log(`Invalid condition string: ${condition}`)
-      throw new Error('Invalid condition string')
+      const error = new Error(`Invalid condition string ${condition}`)
+      console.error(error)
+      calculatorStore.error = error
+      throw error
     }
 
     // Получение индекса оператора
@@ -323,8 +336,11 @@ class CalculatorBlockStore {
       rightPart,
     }
   }
+  // Конец блока
 
-  changeTypeForOption(option: IOption, value: string) {
+  // Реализация добавления товаров в калькулятор
+  // Начало блока
+  private changeTypeForOption(option: IOption, value: string) {
     switch (option.option_type) {
       case 'number':
         return parseInt(value)
@@ -336,7 +352,7 @@ class CalculatorBlockStore {
     }
   }
 
-  reverseCondition<K extends keyof TProduct>(product: TProduct) {
+  private reverseCondition<K extends keyof TProduct>(product: TProduct) {
     const filtersKeys = Object.keys(this.filters[product.category.title]).filter(
       (key) => key != 'initial',
     ) as K[]
@@ -358,38 +374,54 @@ class CalculatorBlockStore {
     })
   }
 
-  setProduct(product: TProduct, value: number) {
+  private setProductByFilters(product: TProduct, value: number | string) {
     if (Object.keys(this.products).find((item) => item == product.category.title)) {
       if (this.applyInitialFilters(product, this.filters[product.category.title].initial)) {
         // this.products[product.category.title].push(product)
         this.products[product.category.title] = [product]
         this.reverseCondition(product)
-        this.setVariable('block_amount', value)
+        this.setVariable('block_amount', typeof value == 'number' ? value : 0)
       }
     }
+  }
+
+  private setVariableByOptionType(type: string, name: string, value: number | string) {
+    switch (type) {
+      case 'checkbox':
+        this.setVariable(name, value)
+        break
+      case 'counter':
+        this.setVariable(name, value.toString())
+        break
+      case 'number':
+        this.setVariable(name, parseInt(value as string))
+        break
+      case 'radio':
+        this.setVariable(name, value.toString())
+        break
+      default:
+        const error = new Error('Invalid option_type')
+        calculatorStore.error = error
+        console.error(error)
+    }
+  }
+
+  private setOptions(product: TProduct, value: number | string) {
     const priceOptions = this.data.options.filter((option) => {
       const productPrices = product.prices_in_price_lists.filter((price) => option.price == price)
       if (productPrices.length > 0) return true
     })
     if (priceOptions.length > 0)
       priceOptions.map((option) => {
-        switch (option.option_type) {
-          case 'checkbox':
-            this.setVariable(option.name, value)
-            break
-          case 'counter':
-            this.setVariable(option.name, value.toString())
-            break
-          case 'number':
-            this.setVariable(option.name, value)
-            break
-          default:
-            const error = new Error('Invalid option_type')
-            calculatorStore.error = error
-            console.error(error)
-        }
+        this.setVariableByOptionType(option.option_type, option.name, value)
       })
   }
+
+  setProduct(product: TProduct, value: number | string) {
+    this.setProductByFilters(product, value)
+    this.setOptions(product, value)
+  }
+  // Конец блока
 }
 
 export default CalculatorBlockStore

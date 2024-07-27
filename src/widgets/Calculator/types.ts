@@ -43,9 +43,7 @@ interface ISensor extends IProduct {
   temperature: string
 }
 
-interface IPACSProduct extends IProduct {}
-
-interface IHDD extends IProduct {}
+interface IOtherProduct extends IProduct {}
 
 interface IOption {
   id: number
@@ -58,10 +56,10 @@ interface IOption {
   product?: string
   filters?: string
   block: number
-  depends_on: number
-  depends_on_value: string | number | boolean
+  depends_on?: number
+  depends_on_value?: string
   dependencies: boolean
-  price: IPrice
+  price?: IPrice
 }
 
 interface IBlock {
@@ -77,16 +75,17 @@ interface IBlock {
 
 interface IFormula {
   id: number
+  name: string
   expression: string
 }
 
 interface IPrice {
   id: number
-  price_list_category: number
   name: string
   variable_name: string
   price: number
   is_show: boolean
+  price_list_category: number
   product: TProduct
 }
 
@@ -111,9 +110,10 @@ interface ICalculatorData {
   id: number
   blocks: IBlock[]
   price_list: IPriceList
+  active: boolean
 }
 
-type TProduct = ICamera | IRegister | IFACP | IHDD | ISensor | IPACSProduct
+type TProduct = ICamera | IRegister | IFACP | ISensor | IOtherProduct
 
 export type {
   ICamera,
@@ -122,10 +122,8 @@ export type {
   IBlock,
   IPriceList,
   ICalculatorData,
-  IFACP,
-  IHDD,
   ISensor,
-  IPACSProduct,
+  IOtherProduct,
   IPriceVariables,
   TProduct,
 }
