@@ -43,6 +43,10 @@ interface ISensor extends IProduct {
   temperature: string
 }
 
+interface IHDD extends IProduct {
+  capacity: number
+}
+
 interface IOtherProduct extends IProduct {}
 
 interface IOption {
@@ -60,6 +64,8 @@ interface IOption {
   depends_on_value?: string
   dependencies: boolean
   price?: IPrice
+  block_amount_undependent: boolean
+  amount_depend?: string
 }
 
 interface IBlock {
@@ -113,7 +119,7 @@ interface ICalculatorData {
   active: boolean
 }
 
-type TProduct = ICamera | IRegister | IFACP | ISensor | IOtherProduct
+type TProduct = ICamera | IRegister | IFACP | ISensor | IOtherProduct | IHDD
 
 export type {
   ICamera,
@@ -126,4 +132,5 @@ export type {
   IOtherProduct,
   IPriceVariables,
   TProduct,
+  IHDD,
 }

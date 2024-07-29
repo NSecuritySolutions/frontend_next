@@ -35,6 +35,7 @@ export const revalidate = 60
 export default async function Page() {
   const {
     solutionData,
+    solutionTags,
     teamData,
     examplesData,
     questionsData,
@@ -50,7 +51,7 @@ export default async function Page() {
     <main className={styles.main} id="content">
       <Info />
       <OurServices />
-      <ReadySolutionSection />
+      <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <Calculator products={productData} calculator={calculatorData} />
       <AdvantagesBlock />
       <ProjectStage />

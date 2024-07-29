@@ -31,9 +31,11 @@ class CalculatorBlockStore {
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
-  filters: Record<string, IConditionCategory> = {}
   quantity_selection: boolean
+  // Ключи это названия категорий
+  filters: Record<string, IConditionCategory> = {}
   products: Record<string, TProduct[]> = {}
+  productAmountDependencies: Record<string, string | undefined> = {}
 
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
@@ -51,7 +53,6 @@ class CalculatorBlockStore {
       disabled: observable,
       appeared: observable,
       filters: observable,
-      products: observable,
       prev_block_amount: observable,
       result: computed,
       setVariable: action,
@@ -107,13 +108,39 @@ class CalculatorBlockStore {
       return 0
     }
 
-    const filterResult = this.filter()
+    const filteredProducts = this.filter()
     const resultWithoutProducts =
       this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
-    const result =
+    const blockFilteredProducts = filteredProducts.filter(
+      (product) =>
+        Object.keys(this.productAmountDependencies).find(
+          (item) => product?.category.title == item,
+        ) == undefined,
+    )
+    const otherFilteredProducts = filteredProducts.filter(
+      (product) => !blockFilteredProducts.includes(product),
+    )
+    const blockFilteredProductsResult = blockFilteredProducts.reduce((sum, current) => {
+      if (!current) return sum
+      return sum + current.price
+    }, 0)
+    const blockResult =
       resultWithoutProducts *
-        ((this.filters && filterResult) || Object.keys(this.filters).length == 0 ? 1 : 0) +
-      filterResult * (this.variables.block_amount as number)
+        ((this.filters && blockFilteredProductsResult) || Object.keys(this.filters).length == 0
+          ? 1
+          : 0) +
+      blockFilteredProductsResult * (this.variables.block_amount as number)
+    const otherFilteredProductsResult = otherFilteredProducts.reduce((sum, current) => {
+      if (!current) return sum
+      return (
+        sum +
+        current.price *
+          (this.productAmountDependencies[current.category.title]
+            ? (this.variables[this.productAmountDependencies[current.category.title]!] as number)
+            : 1)
+      )
+    }, 0)
+    const result = blockResult + (blockResult ? otherFilteredProductsResult : 0)
     return result || 0
   }
 
@@ -131,12 +158,7 @@ class CalculatorBlockStore {
         return current.price < min.price ? current : min
       }, filteredData[0])
     })
-    // Складываем цены товаров (в каждой категории 1 товар с минимальной ценой на основе фильтров)
-    const sum = minPriceData.reduce((sum, current) => {
-      if (!current) return sum
-      return sum + current.price
-    }, 0)
-    return sum
+    return minPriceData
   }
 
   private filterProduct(category: string) {
@@ -228,9 +250,6 @@ class CalculatorBlockStore {
   }
 
   setVariable(name: string, value: string | number | boolean) {
-    if (name == 'block_amount') {
-      this.prev_block_amount = parseInt(this.variables[name] as string)
-    }
     this.variables[name] = value
     const prevArr = [...this.presentOptions]
     this.setPresent()
@@ -272,6 +291,8 @@ class CalculatorBlockStore {
 
       // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
       if (option.product) {
+        if (option.block_amount_undependent)
+          this.productAmountDependencies[option.product] = option.amount_depend
         if (!this.filters[option.product]) {
           this.filters[option.product] = { initial: [] }
           this.products[option.product] = []
@@ -380,24 +401,42 @@ class CalculatorBlockStore {
         // this.products[product.category.title].push(product)
         this.products[product.category.title] = [product]
         this.reverseCondition(product)
-        this.setVariable('block_amount', typeof value == 'number' ? value : 0)
+        if (
+          Object.keys(this.productAmountDependencies).find((item) => item == product.category.title)
+        ) {
+          if (this.productAmountDependencies[product.category.title])
+            this.setProductVariable(
+              this.productAmountDependencies[product.category.title]!,
+              typeof value == 'number' ? value : 0,
+            )
+        } else this.setProductVariable('block_amount', typeof value == 'number' ? value : 0)
       }
     }
+  }
+
+  private setProductVariable(name: string, value: string | number | boolean) {
+    if (name == 'block_amount') {
+      this.prev_block_amount = parseInt(this.variables[name] as string)
+    }
+    this.variables[name] = value
+    const prevArr = [...this.presentOptions]
+    this.setPresent()
+    this.compareArrays(prevArr, this.presentOptions)
   }
 
   private setVariableByOptionType(type: string, name: string, value: number | string) {
     switch (type) {
       case 'checkbox':
-        this.setVariable(name, value)
+        this.setProductVariable(name, value)
         break
       case 'counter':
-        this.setVariable(name, value.toString())
+        this.setProductVariable(name, value.toString())
         break
       case 'number':
-        this.setVariable(name, parseInt(value as string))
+        this.setProductVariable(name, parseInt(value as string))
         break
       case 'radio':
-        this.setVariable(name, value.toString())
+        this.setProductVariable(name, value.toString())
         break
       default:
         const error = new Error('Invalid option_type')
@@ -408,7 +447,9 @@ class CalculatorBlockStore {
 
   private setOptions(product: TProduct, value: number | string) {
     const priceOptions = this.data.options.filter((option) => {
-      const productPrices = product.prices_in_price_lists.filter((price) => option.price == price)
+      const productPrices = product.prices_in_price_lists.filter(
+        (price) => option.price?.id == price.id,
+      )
       if (productPrices.length > 0) return true
     })
     if (priceOptions.length > 0)

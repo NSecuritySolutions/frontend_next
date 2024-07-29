@@ -13,7 +13,7 @@ import { getVideoPageData, getMainPageData } from '../api'
 export const revalidate = 60
 
 export default async function VideoPage() {
-  const { solutionData, questionsData, productData } = await getVideoPageData()
+  const { solutionData, solutionTags, questionsData, productData } = await getVideoPageData()
 
   const { calculatorData } = await getMainPageData()
 
@@ -32,7 +32,7 @@ export default async function VideoPage() {
   return (
     <main className={styles.main}>
       <OurWorksBanner />
-      <ReadySolutionSection />
+      <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <ProductCards data={productData} />
       <Questions questions={questionsData} />
       <Calculator products={productData} calculator={calculatorData} />

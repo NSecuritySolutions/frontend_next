@@ -214,6 +214,40 @@ const DescriptionWrapper = styled.div`
   gap: 12px;
 `
 
+const ButtonGroupWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const Button = styled.a<{ $weight?: number; $transparent?: boolean }>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: ${(props) => (props.$transparent ? `1px solid ${colors.darkPrimary}` : 'none')};
+  border-radius: 12px;
+  background-color: ${(props) =>
+    props.$transparent ? colors.backgroundPrimary : colors.btnPrimary};
+  white-space: nowrap;
+  width: 235px;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 800;
+  opacity: 1;
+  gap: 8px;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$transparent ? colors.btnOutlineHover : colors.btnPrimaryHover};
+  }
+
+  @media (max-width: 620px) {
+    font-size: 13px;
+    font-weight: 700;
+  }
+`
+
 export {
   Card,
   InfoBtn,
@@ -231,4 +265,6 @@ export {
   TooltipContainer,
   ToolTipParagraph,
   DescriptionWrapper,
+  ButtonGroupWrapper,
+  Button,
 }
