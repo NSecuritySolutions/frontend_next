@@ -2,21 +2,27 @@ import { ContactForm } from '@/widgets/ContactForm'
 import { Questions } from '@/widgets/Questions'
 import { Calculator } from '@/widgets/Calculator'
 
-import { getVideoPageData, getMainPageData } from '../api'
+import { PageBanner } from '@/shared/components/PageBanner'
+
+import { getSecurityPageData } from '../api'
 
 import styles from './page.module.css'
 
 export default async function SecurityPage() {
-  const { productData } = await getVideoPageData()
-  const { calculatorData, questionsData } = await getMainPageData()
+  const { calculatorData, questionsData, productData } = await getSecurityPageData()
+
   return (
     <main className={styles.main}>
-      <section style={{ margin: '164px 0' }} id="security">
-        <h1>Охранно-пожарная, страница в разработке</h1>
-      </section>
+      <PageBanner
+        id="security-banner"
+        title="Комплексная защита с охранно-пожарными 
+        сигнализациями для вашего дома и бизнеса"
+        text="Надежные охранно-пожарные сигнализации для защиты Вашего имущества от взломов и пожаров"
+        src="/images/banner/png/video-surveillance-banner.png"
+      />
       <Questions questions={questionsData} />
       <Calculator products={productData} calculator={calculatorData} />
-      <ContactForm></ContactForm>
+      <ContactForm />
     </main>
   )
 }
