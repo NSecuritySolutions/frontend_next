@@ -1,4 +1,4 @@
-import { IQuestion, IQuestionCategory } from '@/widgets/Questions/ui/Questions'
+import { IQuestion, IQuestionCategory } from '@/widgets/Questions/types'
 import { StaticImageData } from 'next/image'
 
 export type TProjectMilestones = {

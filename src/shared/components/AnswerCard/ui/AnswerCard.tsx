@@ -7,10 +7,10 @@ const AnswerCard = (item: TQuestionType) => {
     <CardWrapper>
       <CardContainer>
         <QuestionText>{item.question}</QuestionText>
-        {Array.isArray(item?.answer) &&
+        {Array.isArray(item.answer) &&
           item.answer.length > 1 &&
           item.answer.map((string, index: number) => <p key={index}>{string}</p>)}
-        {Array.isArray(item?.answer) && item.answer.length === 1 && (
+        {Array.isArray(item.answer) && item.answer.length === 1 && (
           <AnswerText>{item.answer[0]}</AnswerText>
         )}
         {typeof item?.answer === 'string' && <AnswerText>{item.answer}</AnswerText>}
