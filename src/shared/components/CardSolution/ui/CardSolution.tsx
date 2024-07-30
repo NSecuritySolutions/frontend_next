@@ -84,7 +84,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
           onClick={(e) => {
             e.stopPropagation()
             router.push('/#calculator')
-            data.equipment.map((item) => calculatorStore.setProduct(item.product, item.amount))
+            calculatorStore.setProduct(data.equipment)
           }}
         >
           В калькулятор

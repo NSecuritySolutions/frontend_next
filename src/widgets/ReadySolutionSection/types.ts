@@ -23,4 +23,4 @@ interface ISolution {
   equipment: IEquipment[]
 }
 
-export type { ISolution, ITag }
+export type { ISolution, ITag, IEquipment }

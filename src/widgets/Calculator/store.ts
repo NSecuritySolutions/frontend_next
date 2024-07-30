@@ -2,6 +2,7 @@ import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
 
 import { makeAutoObservable, computed, observable, action } from 'mobx'
 import { IBlock, ICalculatorData, IPriceList, IPriceVariables, TProduct } from './types'
+import { IEquipment } from '../ReadySolutionSection/types'
 
 class CalculatorStore {
   data: IBlock[] = []
@@ -68,10 +69,10 @@ class CalculatorStore {
     }
   }
 
-  setProduct(product: TProduct, amount: number | string) {
+  setProduct(products: IEquipment[]) {
     if (this.animationSafe)
       this.blocks.map((block) => {
-        block.setProduct(product, amount)
+        block.setProducts(products)
       })
   }
 }

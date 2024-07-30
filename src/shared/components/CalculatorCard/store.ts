@@ -5,6 +5,7 @@ import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
 import { IBlock, IPriceVariables, IOption, TProduct } from '@/widgets/Calculator/types'
 import { ICondition, IConditionCategory } from './types'
+import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 
 const config = {}
 const math = create(all, config)
@@ -458,9 +459,31 @@ class CalculatorBlockStore {
       })
   }
 
-  setProduct(product: TProduct, value: number | string) {
-    this.setProductByFilters(product, value)
-    this.setOptions(product, value)
+  private resetProductOptions(category: string) {
+    this.data.options
+      .filter((option) => option.product == category)
+      .map((option) => (this.variables[option.name] = this.initialVariables[option.name]))
+  }
+
+  setProducts(products: IEquipment[]) {
+    const forCurrentBlock = products.reduce((result, current) => {
+      if (Object.keys(this.products).find((item) => item == current.product.category.title))
+        return (
+          result &&
+          this.applyInitialFilters(
+            current.product,
+            this.filters[current.product.category.title].initial,
+          )
+        )
+      else return result
+    }, true)
+    if (forCurrentBlock) {
+      products.map((product) => {
+        this.resetProductOptions(product.product.category.title)
+        this.setProductByFilters(product.product, product.amount)
+        this.setOptions(product.product, product.amount)
+      })
+    }
   }
   // Конец блока
 }
