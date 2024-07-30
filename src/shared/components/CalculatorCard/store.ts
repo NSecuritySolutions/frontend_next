@@ -465,8 +465,8 @@ class CalculatorBlockStore {
       .map((option) => (this.variables[option.name] = this.initialVariables[option.name]))
   }
 
-  setProducts(products: IEquipment[]) {
-    const forCurrentBlock = products.reduce((result, current) => {
+  private checkProductsForCurrentBlock(products: IEquipment[]) {
+    const result = products.reduce((result, current) => {
       if (Object.keys(this.products).find((item) => item == current.product.category.title))
         return (
           result &&
@@ -477,7 +477,12 @@ class CalculatorBlockStore {
         )
       else return result
     }, true)
-    if (forCurrentBlock) {
+    return result
+  }
+
+  setProducts(products: IEquipment[]) {
+    const currentBlock = this.checkProductsForCurrentBlock(products)
+    if (currentBlock) {
       products.map((product) => {
         this.resetProductOptions(product.product.category.title)
         this.setProductByFilters(product.product, product.amount)
