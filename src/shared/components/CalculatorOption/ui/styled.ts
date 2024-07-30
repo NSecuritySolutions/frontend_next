@@ -52,7 +52,7 @@ const CheckBox = styled.input.attrs({ type: 'checkbox' })`
   }
 `
 
-const InputNumber = styled.input.attrs({ type: 'number', min: 0 })`
+const InputNumber = styled.input.attrs({ type: 'number', min: 1 })`
   width: 60px;
   border-radius: 8px;
   padding: 4px 8px;

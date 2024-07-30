@@ -68,6 +68,8 @@ interface IOption {
   price?: IPrice
   block_amount_undependent: boolean
   amount_depend?: string
+  variability_with_block_amount: boolean
+  initial_value: number
 }
 
 interface IBlock {

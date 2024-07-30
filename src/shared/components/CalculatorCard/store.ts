@@ -32,7 +32,9 @@ class CalculatorBlockStore {
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
+  variabilityVariables: Record<string, number> = {}
   quantity_selection: boolean
+
   // Ключи это названия категорий
   filters: Record<string, IConditionCategory> = {}
   products: Record<string, TProduct[]> = {}
@@ -251,6 +253,19 @@ class CalculatorBlockStore {
   }
 
   setVariable(name: string, value: string | number | boolean) {
+    if (name == 'block_amount') {
+      Object.keys(this.variabilityVariables).map((name) => {
+        const blockAmount = this.variables.block_amount
+        const prevValue = this.variables[name]
+        if (blockAmount) {
+          const increment = Math.floor((prevValue as number) / (blockAmount as number)) || 1
+          if (blockAmount < value) this.variables[name] = (prevValue as number) + increment
+          else this.variables[name] = Math.max(0, (prevValue as number) - increment)
+        } else {
+          this.variables[name] = this.variabilityVariables[name]
+        }
+      })
+    }
     this.variables[name] = value
     const prevArr = [...this.presentOptions]
     this.setPresent()
@@ -259,7 +274,7 @@ class CalculatorBlockStore {
   }
 
   getVariable(name: string) {
-    return this.variables[name] || ''
+    return this.variables[name]
   }
 
   resetVariables = () => {
@@ -269,29 +284,36 @@ class CalculatorBlockStore {
 
   // Функции для инициализации store
   // Начало блока
+  private setInitialVariable(option: IOption) {
+    switch (option.option_type) {
+      case 'checkbox':
+        this.variables[option.name] = false
+        break
+      case 'radio':
+        this.variables[option.name] = 'unknown'
+        break
+      case 'counter':
+      case 'number':
+        this.variables[option.name] = 0
+        break
+      default:
+        const error = new Error(`Unknown option type: ${option.option_type}`)
+        console.error(error)
+        calculatorStore.error = error
+    }
+  }
+
   private setVariables = () => {
     // Формируем общий словарь для переменных
-    this.variables.block_amount = '0'
+    this.variables.block_amount = 0
     this.data.options.forEach((option) => {
-      switch (option.option_type) {
-        case 'checkbox':
-          this.variables[option.name] = false
-          break
-        case 'radio':
-          this.variables[option.name] = 'unknown'
-          break
-        case 'number':
-          this.variables[option.name] = 0
-          break
-        case 'counter':
-          this.variables[option.name] = '0'
-          break
-        default:
-          throw new Error(`Unknown option type: ${option.option_type}`)
-      }
+      this.setInitialVariable(option)
 
-      // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
+      if (option.variability_with_block_amount) {
+        this.variabilityVariables[option.name] = option.initial_value || 1
+      }
       if (option.product) {
+        // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
         if (option.block_amount_undependent)
           this.productAmountDependencies[option.product] = option.amount_depend
         if (!this.filters[option.product]) {
@@ -303,7 +325,6 @@ class CalculatorBlockStore {
           leftPart: option.name as keyof TProduct,
         })
       }
-      this.variables.block_amount = 0
     })
   }
 
@@ -364,6 +385,7 @@ class CalculatorBlockStore {
   // Начало блока
   private changeTypeForOption(option: IOption, value: string) {
     switch (option.option_type) {
+      case 'counter':
       case 'number':
         return parseInt(value)
       case 'checkbox':
@@ -396,7 +418,7 @@ class CalculatorBlockStore {
     })
   }
 
-  private setProductByFilters(product: TProduct, value: number | string) {
+  private setProductByFilters(product: TProduct, value: number) {
     if (Object.keys(this.products).find((item) => item == product.category.title)) {
       if (this.applyInitialFilters(product, this.filters[product.category.title].initial)) {
         // this.products[product.category.title].push(product)
@@ -431,8 +453,6 @@ class CalculatorBlockStore {
         this.setProductVariable(name, value)
         break
       case 'counter':
-        this.setProductVariable(name, value.toString())
-        break
       case 'number':
         this.setProductVariable(name, parseInt(value as string))
         break
