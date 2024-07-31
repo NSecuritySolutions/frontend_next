@@ -1,4 +1,5 @@
 import colors from '@/shared/constants/colors'
+import { Canvas } from '@react-three/fiber'
 
 import styled from 'styled-components'
 
@@ -39,7 +40,7 @@ const MainCard = styled.div`
   background: ${colors.backgroundPrimary};
   position: relative;
   overflow: hidden;
-  cursor: pointer;
+  // cursor: pointer;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -205,6 +206,22 @@ const CardWrapper = styled.div`
   }
 `
 
+const StyledCanvas = styled(Canvas)`
+  left: 110px;
+  bottom: 97px;
+
+  @media (max-width: 1300px) {
+    left: 86px;
+    bottom: 75px;
+  }
+
+  @media (max-width: 940px) {
+    // left: 45px;
+    // bottom: 45px;
+    display: none;
+  }
+`
+
 export {
   Section,
   MainCard,
@@ -219,4 +236,5 @@ export {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
+  StyledCanvas,
 }

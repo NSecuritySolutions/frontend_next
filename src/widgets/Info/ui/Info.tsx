@@ -1,5 +1,6 @@
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 
+import { Canvas } from '@react-three/fiber'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Slider from 'react-slick'
@@ -24,11 +25,14 @@ import {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
+  StyledCanvas,
 } from './styled'
 import colors from '@/shared/constants/colors'
+import { CameraBannerObj } from '@/shared/components/CameraBanner'
 
 const Info: FC = () => {
   const router = useRouter()
+  const bannerRef = useRef<HTMLDivElement>(null)
 
   const settings = {
     responsive: [
@@ -61,9 +65,10 @@ const Info: FC = () => {
   return (
     <Section id="banner">
       <MainCard
-        onClick={() => {
-          router.push('/#contact-form')
-        }}
+        ref={bannerRef}
+        // onClick={() => {
+        //   router.push('/#contact-form')
+        // }}
       >
         <HeaderWrapper>
           <TextBlock>
@@ -104,8 +109,25 @@ const Info: FC = () => {
             src={bannerImg}
             alt="Баннер"
             fill
-            sizes="(max-width: 620px) 283px, (max-width: 940px) 283px, (max-width: 1300px) 540px, 702px"
+            sizes="(max-width: 940px) 283px, (max-width: 1300px) 540px, 702px"
           />
+          <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
+            <spotLight
+              intensity={5000}
+              position={[20, 10, 30]}
+              penumbra={1}
+              shadow-mapSize={[1024, 1024]}
+              castShadow
+            />
+            <CameraBannerObj
+              sceneProps={{
+                rotation: [0, Math.PI, 0],
+                position: [0, 0.5, 0],
+                scale: 0.35,
+              }}
+              area={bannerRef}
+            />
+          </StyledCanvas>
         </BannerWrapper>
       </MainCard>
       <CardWrapper>
