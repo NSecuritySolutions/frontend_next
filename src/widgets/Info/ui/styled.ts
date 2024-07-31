@@ -207,17 +207,24 @@ const CardWrapper = styled.div`
 `
 
 const StyledCanvas = styled(Canvas)`
-  left: 110px;
-  bottom: 97px;
+  left: 111px;
+  bottom: 96px;
 
   @media (max-width: 1300px) {
     left: 86px;
-    bottom: 75px;
+    bottom: 74px;
   }
 
   @media (max-width: 940px) {
-    // left: 45px;
-    // bottom: 45px;
+    left: 45px;
+    bottom: 43px;
+  }
+
+  @media (max-width: 620px) {
+    bottom: 42px;
+  }
+
+  @media (max-device-width: 940px) {
     display: none;
   }
 `

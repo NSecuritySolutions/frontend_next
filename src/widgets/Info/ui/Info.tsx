@@ -1,11 +1,7 @@
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
-import { Canvas } from '@react-three/fiber'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Slider from 'react-slick'
-
-import bannerImg from '@/assets/images/banner/png/banner-img.png'
 
 import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-text'
 import { BtnLink } from '@/shared/components/BtnLink'
@@ -31,8 +27,32 @@ import colors from '@/shared/constants/colors'
 import { CameraBannerObj } from '@/shared/components/CameraBanner'
 
 const Info: FC = () => {
-  const router = useRouter()
   const bannerRef = useRef<HTMLDivElement>(null)
+  const [cameraReady, setCameraReady] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    let hasTouchScreen = false
+    if ('maxTouchPoints' in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0
+    } else {
+      const mQ = window.matchMedia! && matchMedia('(pointer:coarse)')
+      if (mQ && mQ.media === '(pointer:coarse)') {
+        hasTouchScreen = !!mQ.matches
+      } else if ('orientation' in window) {
+        hasTouchScreen = true // deprecated, but good fallback
+      } else {
+        // Only as a last resort, fall back to user agent sniffing
+        var UA = (navigator as Navigator).userAgent
+        hasTouchScreen =
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+      }
+    }
+    if (hasTouchScreen) {
+      setIsMobile(true)
+    }
+  }, [])
 
   const settings = {
     responsive: [
@@ -106,28 +126,35 @@ const Info: FC = () => {
         <BannerWrapper>
           <Image
             priority
-            src={bannerImg}
+            src={
+              cameraReady
+                ? '/images/banner/png/banner-image2-cameraless.png'
+                : '/images/banner/png/banner-image2.png'
+            }
             alt="Баннер"
             fill
-            sizes="(max-width: 940px) 283px, (max-width: 1300px) 540px, 702px"
+            sizes="(@media max-width: 940px) 50wv, (@media max-width: 1300px) 77wv, 100vw"
           />
-          <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
-            <spotLight
-              intensity={5000}
-              position={[20, 10, 30]}
-              penumbra={1}
-              shadow-mapSize={[1024, 1024]}
-              castShadow
-            />
-            <CameraBannerObj
-              sceneProps={{
-                rotation: [0, Math.PI, 0],
-                position: [0, 0.5, 0],
-                scale: 0.35,
-              }}
-              area={bannerRef}
-            />
-          </StyledCanvas>
+          {!isMobile && (
+            <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
+              <spotLight
+                intensity={5000}
+                position={[20, 10, 30]}
+                penumbra={1}
+                shadow-mapSize={[1024, 1024]}
+                castShadow
+              />
+              <CameraBannerObj
+                sceneProps={{
+                  rotation: [0, Math.PI, 0],
+                  position: [0, 0.5, 0],
+                  scale: 0.35,
+                }}
+                setReady={setCameraReady}
+                area={bannerRef}
+              />
+            </StyledCanvas>
+          )}
         </BannerWrapper>
       </MainCard>
       <CardWrapper>
