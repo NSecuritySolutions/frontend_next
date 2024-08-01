@@ -208,20 +208,21 @@ const CardWrapper = styled.div`
 
 const StyledCanvas = styled(Canvas)`
   left: 111px;
-  bottom: 96px;
+  bottom: 101px;
 
   @media (max-width: 1300px) {
     left: 86px;
-    bottom: 74px;
+    bottom: 78px;
   }
 
   @media (max-width: 940px) {
     left: 45px;
-    bottom: 43px;
+    bottom: 45px;
   }
 
   @media (max-width: 620px) {
-    bottom: 42px;
+    left: 44.5px;
+    bottom: 44px;
   }
 
   @media (max-device-width: 940px) {

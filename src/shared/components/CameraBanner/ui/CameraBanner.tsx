@@ -12,7 +12,7 @@ interface CameraBannerObjProps {
 
 const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady }) => {
   const ref = useRef<Group>(null)
-  const { scene } = useGLTF('/banner-camera-v4.glb')
+  const { scene } = useGLTF('/banner-camera-v6.glb')
   const standRef = useRef<Bone | null>(null)
   const corpusRef = useRef<Bone | null>(null)
   const { camera, gl, size, scene: threeScene } = useThree()
@@ -21,8 +21,8 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
   const currentWidth = useRef(area.current?.clientWidth || window.innerWidth)
   const mouseOver = useRef(false)
 
-  const corpusMinAngle = Math.PI / 4
-  const corpusMaxAngle = (3 * Math.PI) / 4
+  const corpusMinAngle = -Math.PI / 4
+  const corpusMaxAngle = Math.PI / 4
 
   useEffect(() => {
     if (threeScene && camera) {
@@ -119,10 +119,7 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
 
           const angleY = Math.atan2(dir.y, Math.abs(dir.z))
 
-          const clampedAngleY = Math.max(
-            corpusMinAngle,
-            Math.min(corpusMaxAngle, angleY + Math.PI / 2),
-          )
+          const clampedAngleY = Math.max(corpusMinAngle, Math.min(corpusMaxAngle, angleY))
 
           const resultQuaternion = new Quaternion().setFromAxisAngle(
             new Vector3(1, 0, 0),
@@ -134,15 +131,12 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
       }
     } else {
       if (standRef.current) {
-        const resultQuaternion = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), 0 + 0.05)
+        const resultQuaternion = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), -0.05)
 
         standRef.current.quaternion.slerp(resultQuaternion, 0.05)
       }
       if (corpusRef.current) {
-        const resultQuaternion = new Quaternion().setFromAxisAngle(
-          new Vector3(1, 0, 0),
-          Math.PI / 2 + 0.1,
-        )
+        const resultQuaternion = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), 0)
 
         corpusRef.current.quaternion.slerp(resultQuaternion, 0.05)
       }
