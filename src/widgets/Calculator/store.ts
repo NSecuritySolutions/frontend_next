@@ -1,24 +1,14 @@
 import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
 
 import { makeAutoObservable, computed, observable, action } from 'mobx'
-import {
-  IBlock,
-  ICalculatorData,
-  ICamera,
-  IPriceList,
-  IRegister,
-  IHDD,
-  IFACP,
-  ISensor,
-  IPACSProduct,
-  IPriceVariables,
-} from './types'
+import { IBlock, ICalculatorData, IPriceList, IPriceVariables, TProduct } from './types'
+import { IEquipment } from '../ReadySolutionSection/types'
 
 class CalculatorStore {
   data: IBlock[] = []
   priceList: IPriceList | undefined = undefined
   prices: IPriceVariables = {}
-  products: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[] = []
+  products: TProduct[] = []
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
   animationSafe: boolean = true
@@ -65,10 +55,7 @@ class CalculatorStore {
     )
   }
 
-  getData(
-    products: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[],
-    calculator: ICalculatorData[],
-  ) {
+  getData(products: TProduct[], calculator: ICalculatorData[]) {
     if (!products || !calculator) {
       this.error = true
       return
@@ -82,12 +69,11 @@ class CalculatorStore {
     }
   }
 
-  setProduct(product: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct) {
-    this.blocks.map((block) => {
-      if (Object.keys(block.products).find((item) => item == product.category.title)) {
-        block.products[product.category.title].push(product)
-      }
-    })
+  setProduct(products: IEquipment[]) {
+    if (this.animationSafe)
+      this.blocks.map((block) => {
+        block.setProducts(products)
+      })
   }
 }
 

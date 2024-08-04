@@ -3,6 +3,7 @@ import { BASE_URL } from '@/shared/constants/url/url'
 export async function getMainPageData() {
   const responses = await Promise.all([
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
+    fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/our-team/`),
     fetch(`${BASE_URL}/api/v1/our-works/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
@@ -17,6 +18,7 @@ export async function getMainPageData() {
 
   const [
     solutionData,
+    solutionTags,
     teamData,
     examplesData,
     questionsData,
@@ -27,6 +29,7 @@ export async function getMainPageData() {
 
   return {
     solutionData,
+    solutionTags,
     teamData,
     examplesData,
     questionsData,
@@ -39,6 +42,7 @@ export async function getMainPageData() {
 export async function getVideoPageData() {
   const responses = await Promise.all([
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
+    fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
     fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
@@ -48,12 +52,13 @@ export async function getVideoPageData() {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, questionsData, productData, calculatorData] = await Promise.all(
+  const [solutionData, solutionTags, questionsData, productData, calculatorData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
   return {
     solutionData,
+    solutionTags,
     questionsData,
     productData,
     calculatorData,

@@ -1,18 +1,24 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { CardsContainer, Section, SectionTitle, TabButton, TabsContainer } from './styled'
-import {
-  cardSolutionData,
-  cardSolutionData2,
-  cardSolutionData3,
-} from '@/shared/constants/texts/cards-solution'
 import { CardSolution } from '@/shared/components/CardSolution'
-import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 import Slider from 'react-slick'
+import { ISolution, ITag } from '../types'
 
-const ReadySolutionSection = () => {
-  const [activeTab, setActiveTab] = useState('VideoSurveillance')
+interface ReadySolutionSectionProps {
+  data: { solutions: ISolution[]; tags: ITag[] }
+}
+
+const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions, tags } }) => {
+  const [activeTab, setActiveTab] = useState(tags[0].title)
+  const [activeTabData, setActiveTabData] = useState(
+    solutions.filter(
+      (solution) => solution.tags.find((tag) => tag.title === tags[0].title) != undefined,
+    ),
+  )
+
   const handleTabChange = (tab: string) => {
     setActiveTab(tab)
+    setActiveTabData(solutions.filter((solution) => solution.tags.find((tag) => tag.title === tab)))
   }
 
   const tabSettings = {
@@ -71,45 +77,36 @@ const ReadySolutionSection = () => {
     ],
   }
 
-  let activeTabData: TCardSolutionProps[] = []
+  // let activeTabData: TCardSolutionProps[] = []
 
-  switch (activeTab) {
-    case 'VideoSurveillance':
-      activeTabData = cardSolutionData
-      break
-    case 'Intercom':
-      activeTabData = cardSolutionData2
-      break
-    case 'SecurityFireAlarms':
-      activeTabData = cardSolutionData3
-      break
-    default:
-      break
-  }
+  // switch (activeTab) {
+  //   case 'VideoSurveillance':
+  //     activeTabData = cardSolutionData
+  //     break
+  //   case 'Intercom':
+  //     activeTabData = cardSolutionData2
+  //     break
+  //   case 'SecurityFireAlarms':
+  //     activeTabData = cardSolutionData3
+  //     break
+  //   default:
+  //     break
+  // }
 
   return (
     <Section id="solutions">
       <SectionTitle>Готовые решения</SectionTitle>
       <TabsContainer>
         <Slider {...tabSettings}>
-          <TabButton
-            onClick={() => handleTabChange('VideoSurveillance')}
-            $activetab={activeTab === 'VideoSurveillance'}
-          >
-            Видеонаблюдение
-          </TabButton>
-          <TabButton
-            onClick={() => handleTabChange('Intercom')}
-            $activetab={activeTab === 'Intercom'}
-          >
-            Домофония/СКУД
-          </TabButton>
-          <TabButton
-            onClick={() => handleTabChange('SecurityFireAlarms')}
-            $activetab={activeTab === 'SecurityFireAlarms'}
-          >
-            Охранно-пожарные сигнализации
-          </TabButton>
+          {tags.map((tag) => (
+            <TabButton
+              key={tag.id}
+              onClick={() => handleTabChange(tag.title)}
+              $activetab={activeTab === tag.title}
+            >
+              {tag.title}
+            </TabButton>
+          ))}
         </Slider>
       </TabsContainer>
 

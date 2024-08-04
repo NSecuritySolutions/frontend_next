@@ -1,8 +1,16 @@
 import cameraImg1 from '@/assets/images/solutions/image1.png'
 import cameraImg2 from '@/assets/images/solutions/image2.png'
 import cameraImg3 from '@/assets/images/solutions/image3.png'
+import { StaticImageData } from 'next/image'
 
-import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
+export type TCardSolutionProps = {
+  id?: number
+  title: string
+  img: StaticImageData
+  listItem: string[]
+  price: number
+  toolTipText: string[]
+}
 
 export const cardSolutionData: TCardSolutionProps[] = [
   {

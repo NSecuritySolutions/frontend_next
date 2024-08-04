@@ -1,5 +1,5 @@
 import { ICamera } from '@/widgets/Calculator/types'
-import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
+import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution.ts'
 
 export interface ProductProps {
   data: TCardSolutionProps | ICamera

@@ -4,7 +4,6 @@ import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 import Loader from '@/shared/components/Loader/Loader'
 import { ProductProps } from '../types'
 import { ICamera } from '@/widgets/Calculator/types'
-import { TCardSolutionProps } from '@/shared/components/CardSolution/ui/CardSolution'
 
 import {
   Card,
@@ -20,6 +19,7 @@ import {
   SectionTitle,
   Text,
 } from './styled'
+import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution'
 
 const Product: FC<ProductProps> = ({ data }) => {
   console.log(data, 'data')

@@ -3,18 +3,9 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
 import calculatorStore from '@/widgets/Calculator/store'
-import {
-  IBlock,
-  ICamera,
-  IRegister,
-  IHDD,
-  IFACP,
-  ISensor,
-  IPACSProduct,
-  IPriceVariables,
-  IOption,
-} from '@/widgets/Calculator/types'
+import { IBlock, IPriceVariables, IOption, TProduct } from '@/widgets/Calculator/types'
 import { ICondition, IConditionCategory } from './types'
+import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 
 const config = {}
 const math = create(all, config)
@@ -33,6 +24,7 @@ math.import(
 
 class CalculatorBlockStore {
   id: string
+  prev_block_amount: number
   data: IBlock
   presentOptions: IOption[] = []
   disabled: number = 0
@@ -40,13 +32,18 @@ class CalculatorBlockStore {
   formula: string = ''
   initialVariables: Record<string, string | number | boolean> = {}
   variables: Record<string, string | number | boolean> = {}
-  filters: Record<string, IConditionCategory> = {}
+  variabilityVariables: Record<string, number> = {}
   quantity_selection: boolean
-  products: Record<string, (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]> = {}
+
+  // Ключи это названия категорий
+  filters: Record<string, IConditionCategory> = {}
+  products: Record<string, TProduct[]> = {}
+  productAmountDependencies: Record<string, string | undefined> = {}
 
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
     this.data = data
+    this.prev_block_amount = 0
     this.quantity_selection = data.quantity_selection
     this.formula = data.formula.expression
     this.variables = { ...price }
@@ -59,14 +56,16 @@ class CalculatorBlockStore {
       disabled: observable,
       appeared: observable,
       filters: observable,
-      products: observable,
+      prev_block_amount: observable,
       result: computed,
       setVariable: action,
       setPresent: action,
     })
   }
 
-  compareArrays = (prevArr: IOption[], currentArr: IOption[]): void => {
+  // Нужно для плавной анимации
+  // Начало блока
+  private compareArrays = (prevArr: IOption[], currentArr: IOption[]): void => {
     this.disabled = 0
     this.appeared = 0
     for (let i = 0; i < prevArr.length; i++) {
@@ -81,7 +80,7 @@ class CalculatorBlockStore {
     }
   }
 
-  handleIsPresent = (option: IOption) => {
+  private handleIsPresent = (option: IOption) => {
     if (option.depends_on == undefined) return true
     if (option.depends_on) {
       const depends = this.data.options.find((item) => item.id == option.depends_on)
@@ -98,26 +97,63 @@ class CalculatorBlockStore {
   setPresent() {
     this.presentOptions = this.data.options.filter(this.handleIsPresent)
   }
+  // Конец блока
 
+  // Итоговый расчет
+  // Начало блока
   get result() {
-    const mathResult = math.evaluate(this.formula, this.variables)
-    const filterResult = this.filter()
+    let mathResult
+    try {
+      mathResult = math.evaluate(this.formula, this.variables)
+    } catch (error) {
+      console.error(error)
+      calculatorStore.error = error
+      return 0
+    }
+
+    const filteredProducts = this.filter()
     const resultWithoutProducts =
       this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
-    const result =
+    const blockFilteredProducts = filteredProducts.filter(
+      (product) =>
+        Object.keys(this.productAmountDependencies).find(
+          (item) => product?.category.title == item,
+        ) == undefined,
+    )
+    const otherFilteredProducts = filteredProducts.filter(
+      (product) => !blockFilteredProducts.includes(product),
+    )
+    const blockFilteredProductsResult = blockFilteredProducts.reduce((sum, current) => {
+      if (!current) return sum
+      return sum + current.price
+    }, 0)
+    const blockResult =
       resultWithoutProducts *
-        ((this.filters && filterResult) || Object.keys(this.filters).length == 0 ? 1 : 0) +
-      filterResult * (this.variables.block_amount as number)
+        ((this.filters && blockFilteredProductsResult) || Object.keys(this.filters).length == 0
+          ? 1
+          : 0) +
+      blockFilteredProductsResult * (this.variables.block_amount as number)
+    const otherFilteredProductsResult = otherFilteredProducts.reduce((sum, current) => {
+      if (!current) return sum
+      return (
+        sum +
+        current.price *
+          (this.productAmountDependencies[current.category.title]
+            ? (this.variables[this.productAmountDependencies[current.category.title]!] as number)
+            : 1)
+      )
+    }, 0)
+    const result = blockResult + (blockResult ? otherFilteredProductsResult : 0)
     return result || 0
   }
 
-  filter() {
+  private filter() {
     // Фильтруем по категориям, заодно выбираем самую минимальную цену
     const categoriesWithProducts = Object.keys(this.products).filter(
       (category) => this.products[category].length > 0,
     )
     const minPriceData = Object.keys(this.filters).map((category) => {
-      let filteredData: (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)[]
+      let filteredData: TProduct[]
       if (categoriesWithProducts.find((item) => item == category))
         filteredData = this.products[category]
       else filteredData = this.filterProduct(category)
@@ -125,15 +161,10 @@ class CalculatorBlockStore {
         return current.price < min.price ? current : min
       }, filteredData[0])
     })
-    // Складываем цены товаров (в каждой категории 1 товар с минимальной ценой на основе фильтров)
-    const sum = minPriceData.reduce((sum, current) => {
-      if (!current) return sum
-      return sum + current.price
-    }, 0)
-    return sum
+    return minPriceData
   }
 
-  filterProduct(category: string) {
+  private filterProduct(category: string) {
     // Отфильтровываем по категории
     const products = calculatorStore.products.filter((item) => item?.category?.title === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
@@ -143,10 +174,7 @@ class CalculatorBlockStore {
     return filteredProducts
   }
 
-  applyInitialFilters(
-    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    conditions: ICondition[],
-  ) {
+  private applyInitialFilters(item: TProduct, conditions: ICondition[]) {
     if (conditions.length == 0) return true
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
@@ -163,10 +191,7 @@ class CalculatorBlockStore {
     })
   }
 
-  applyFilters(
-    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    conditionCategory: IConditionCategory,
-  ) {
+  private applyFilters(item: TProduct, conditionCategory: IConditionCategory) {
     const initial = this.applyInitialFilters(item, conditionCategory.initial)
     const restFilters = Object.keys(conditionCategory).filter((option) => option != 'initial')
     if (restFilters.length == 0) return initial
@@ -183,7 +208,7 @@ class CalculatorBlockStore {
     return rest && initial
   }
 
-  typeChange(value1: string | number | boolean | undefined, value2: string) {
+  private typeChange(value1: string | number | boolean | undefined, value2: string) {
     if (typeof value1 != typeof value2) {
       if (typeof value1 == 'number') return parseInt(value2)
       else if (typeof value1 == 'boolean')
@@ -192,10 +217,7 @@ class CalculatorBlockStore {
     return value2
   }
 
-  applyCondition(
-    item: ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct,
-    condition: ICondition,
-  ) {
+  private applyCondition(item: TProduct, condition: ICondition) {
     const { leftPart, operator, rightPart } = condition
     const finalRightPart = this.typeChange(
       item[leftPart] as string | number | boolean | undefined,
@@ -219,8 +241,31 @@ class CalculatorBlockStore {
         return true
     }
   }
+  // Конец блока
+
+  // Работа с переменными
+  // Начало блока
+  private checkOptionProduct(name: string) {
+    const option = this.data.options.filter((option) => option.name == name)[0]
+    if (option?.product && this.products[option.product].length > 0) {
+      this.products[option.product] = []
+    }
+  }
 
   setVariable(name: string, value: string | number | boolean) {
+    if (name == 'block_amount') {
+      Object.keys(this.variabilityVariables).map((name) => {
+        const blockAmount = this.variables.block_amount
+        const prevValue = this.variables[name]
+        if (blockAmount) {
+          const increment = Math.floor((prevValue as number) / (blockAmount as number)) || 1
+          if (blockAmount < value) this.variables[name] = (prevValue as number) + increment
+          else this.variables[name] = Math.max(0, (prevValue as number) - increment)
+        } else {
+          this.variables[name] = this.variabilityVariables[name]
+        }
+      })
+    }
     this.variables[name] = value
     const prevArr = [...this.presentOptions]
     this.setPresent()
@@ -228,64 +273,62 @@ class CalculatorBlockStore {
     this.checkOptionProduct(name)
   }
 
-  checkOptionProduct(name: string) {
-    const option = this.data.options.filter((option) => option.name == name)[0]
-    if (option?.product && this.products[option.product].length > 0) {
-      this.products[option.product] = []
+  getVariable(name: string) {
+    return this.variables[name]
+  }
+
+  resetVariables = () => {
+    this.variables = { ...this.initialVariables }
+  }
+  // Конец блока
+
+  // Функции для инициализации store
+  // Начало блока
+  private setInitialVariable(option: IOption) {
+    switch (option.option_type) {
+      case 'checkbox':
+        this.variables[option.name] = false
+        break
+      case 'radio':
+        this.variables[option.name] = 'unknown'
+        break
+      case 'counter':
+      case 'number':
+        this.variables[option.name] = 0
+        break
+      default:
+        const error = new Error(`Unknown option type: ${option.option_type}`)
+        console.error(error)
+        calculatorStore.error = error
     }
   }
 
-  getVariable(name: string) {
-    return this.variables[name] || ''
-  }
-
-  setVariables = () => {
+  private setVariables = () => {
     // Формируем общий словарь для переменных
+    this.variables.block_amount = 0
     this.data.options.forEach((option) => {
-      switch (option.option_type) {
-        case 'checkbox':
-          this.variables[option.name] = false
-          break
-        case 'radio':
-          this.variables[option.name] = 'unknown'
-          break
-        case 'number':
-          this.variables[option.name] = 0
-          break
-        case 'counter':
-          this.variables[option.name] = '0'
-          break
-        default:
-          throw new Error(`Unknown option type: ${option.option_type}`)
-      }
+      this.setInitialVariable(option)
 
-      // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
+      if (option.variability_with_block_amount) {
+        this.variabilityVariables[option.name] = option.initial_value || 1
+      }
       if (option.product) {
+        // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
+        if (option.block_amount_undependent)
+          this.productAmountDependencies[option.product] = option.amount_depend
         if (!this.filters[option.product]) {
           this.filters[option.product] = { initial: [] }
           this.products[option.product] = []
         }
         if (option.filters) this.parseFilters(option.filters, option.name, option.product)
         this.filters[option.product]['initial' as keyof IConditionCategory].push({
-          leftPart: option.name as keyof (
-            | ICamera
-            | IRegister
-            | IHDD
-            | IFACP
-            | ISensor
-            | IPACSProduct
-          ),
+          leftPart: option.name as keyof TProduct,
         })
       }
-      this.variables.block_amount = 0
     })
   }
 
-  resetVariables = () => {
-    this.variables = { ...this.initialVariables }
-  }
-
-  parseFilters = (str: string, optionName: string, optionProduct: string) => {
+  private parseFilters = (str: string, optionName: string, optionProduct: string) => {
     // С бэка приходит строка из фильтров, нам нужно разбить на фильтры
     str.split('\n').map((categoryPart) => {
       const category = categoryPart.trim().split(/:(.*)/)[0]
@@ -310,28 +353,23 @@ class CalculatorBlockStore {
     })
   }
 
-  splitCondition = (condition: string) => {
+  private splitCondition = (condition: string) => {
     // Регулярное выражение для поиска оператора и разделения строки
     const regex = /(==|!=|>=|<=|>|<)/
     const match = condition.match(regex)
 
     if (!match) {
-      console.log(`Invalid condition string: ${condition}`)
-      throw new Error('Invalid condition string')
+      const error = new Error(`Invalid condition string ${condition}`)
+      console.error(error)
+      calculatorStore.error = error
+      throw error
     }
 
     // Получение индекса оператора
     const operatorIndex = match.index
 
     // Разделение строки на левую часть, оператор и правую часть
-    const leftPart = condition.slice(0, operatorIndex).trim() as keyof (
-      | ICamera
-      | IRegister
-      | IHDD
-      | IFACP
-      | ISensor
-      | IPACSProduct
-    )
+    const leftPart = condition.slice(0, operatorIndex).trim() as keyof TProduct
     const operator = match[0]
     const rightPart = condition.slice(operatorIndex! + operator.length).trim()
 
@@ -341,6 +379,138 @@ class CalculatorBlockStore {
       rightPart,
     }
   }
+  // Конец блока
+
+  // Реализация добавления товаров в калькулятор
+  // Начало блока
+  private changeTypeForOption(option: IOption, value: string) {
+    switch (option.option_type) {
+      case 'counter':
+      case 'number':
+        return parseInt(value)
+      case 'checkbox':
+        if (value == 'true') return true
+        if (value == 'false') return false
+      default:
+        return value
+    }
+  }
+
+  private reverseCondition<K extends keyof TProduct>(product: TProduct) {
+    const filtersKeys = Object.keys(this.filters[product.category.title]).filter(
+      (key) => key != 'initial',
+    ) as K[]
+    filtersKeys.map((key) => {
+      const conditions = this.filters[product.category.title][key]
+      const optionValues = [...new Set(conditions.map((condition) => condition.optionValue))]
+      optionValues.map((value) => {
+        const optionValueConditions = conditions.filter(
+          (condition) => condition.optionValue == value,
+        )
+        if (optionValueConditions.every((condition) => this.applyCondition(product, condition))) {
+          const changedValue = this.changeTypeForOption(
+            this.data.options.find((option) => option.name == key)!,
+            value!,
+          )
+          this.setVariable(key, changedValue)
+        }
+      })
+    })
+  }
+
+  private setProductByFilters(product: TProduct, value: number) {
+    if (Object.keys(this.products).find((item) => item == product.category.title)) {
+      if (this.applyInitialFilters(product, this.filters[product.category.title].initial)) {
+        // this.products[product.category.title].push(product)
+        this.products[product.category.title] = [product]
+        this.reverseCondition(product)
+        if (
+          Object.keys(this.productAmountDependencies).find((item) => item == product.category.title)
+        ) {
+          if (this.productAmountDependencies[product.category.title])
+            this.setProductVariable(
+              this.productAmountDependencies[product.category.title]!,
+              typeof value == 'number' ? value : 0,
+            )
+        } else this.setProductVariable('block_amount', typeof value == 'number' ? value : 0)
+      }
+    }
+  }
+
+  private setProductVariable(name: string, value: string | number | boolean) {
+    if (name == 'block_amount') {
+      this.prev_block_amount = parseInt(this.variables[name] as string)
+    }
+    this.variables[name] = value
+    const prevArr = [...this.presentOptions]
+    this.setPresent()
+    this.compareArrays(prevArr, this.presentOptions)
+  }
+
+  private setVariableByOptionType(type: string, name: string, value: number | string) {
+    switch (type) {
+      case 'checkbox':
+        this.setProductVariable(name, value)
+        break
+      case 'counter':
+      case 'number':
+        this.setProductVariable(name, parseInt(value as string))
+        break
+      case 'radio':
+        this.setProductVariable(name, value.toString())
+        break
+      default:
+        const error = new Error('Invalid option_type')
+        calculatorStore.error = error
+        console.error(error)
+    }
+  }
+
+  private setOptions(product: TProduct, value: number | string) {
+    const priceOptions = this.data.options.filter((option) => {
+      const productPrices = product.prices_in_price_lists.filter(
+        (price) => option.price?.id == price.id,
+      )
+      if (productPrices.length > 0) return true
+    })
+    if (priceOptions.length > 0)
+      priceOptions.map((option) => {
+        this.setVariableByOptionType(option.option_type, option.name, value)
+      })
+  }
+
+  private resetProductOptions(category: string) {
+    this.data.options
+      .filter((option) => option.product == category)
+      .map((option) => (this.variables[option.name] = this.initialVariables[option.name]))
+  }
+
+  private checkProductsForCurrentBlock(products: IEquipment[]) {
+    const result = products.reduce((result, current) => {
+      if (Object.keys(this.products).find((item) => item == current.product.category.title))
+        return (
+          result &&
+          this.applyInitialFilters(
+            current.product,
+            this.filters[current.product.category.title].initial,
+          )
+        )
+      else return result
+    }, true)
+    return result
+  }
+
+  setProducts(products: IEquipment[]) {
+    const currentBlock = this.checkProductsForCurrentBlock(products)
+    if (currentBlock) {
+      products.map((product) => {
+        this.resetProductOptions(product.product.category.title)
+        this.setProductByFilters(product.product, product.amount)
+        this.setOptions(product.product, product.amount)
+      })
+    }
+  }
+  // Конец блока
 }
 
 export default CalculatorBlockStore

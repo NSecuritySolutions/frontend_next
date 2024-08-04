@@ -12,8 +12,10 @@ import { getVideoPageData } from '../api'
 
 import styles from './page.module.css'
 
+export const revalidate = 60
+
 export default async function VideoPage() {
-  const { solutionData, questionsData, productData, calculatorData } = await getVideoPageData()
+  const { solutionData, solutionTags, questionsData, productData, calculatorData } = await getVideoPageData()
 
   // useEffect(() => {
   //   const targetCardID = localStorage.getItem('id')
@@ -36,7 +38,7 @@ export default async function VideoPage() {
           время ночной съемки или непогоды"
         src="/images/banner/png/video-surveillance-banner.png"
       />
-      <ReadySolutionSection />
+      <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <ProductCards data={productData} />
       <Questions questions={questionsData} />
       <Calculator products={productData} calculator={calculatorData} />

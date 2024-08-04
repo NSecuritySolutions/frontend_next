@@ -23,6 +23,7 @@ import {
   ButtonWrapper,
   TextWrapper,
 } from './styled'
+import calculatorStore from '@/widgets/Calculator/store'
 
 const ProductCard: FC<ProductCardProps> = ({ item }) => {
   const router = useRouter()
@@ -105,6 +106,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
             onClick={(e) => {
               e.stopPropagation()
               router.push(`/video-surveillance#calculator`)
+              calculatorStore.setProduct([{ id: -1, solution: -1, product: item, amount: 1 }]) // надо исправец
             }}
           />
         </ButtonWrapper>

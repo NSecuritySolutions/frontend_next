@@ -20,7 +20,7 @@ interface CalculatorOptionProps {
 const CalculatorOption: FC<CalculatorOptionProps> = observer(
   ({ option, store, onChange, amount, bold }) => {
     const firstArgFunc = (name: string) => (value: number) => {
-      store.setVariable(name, value.toString())
+      store.setVariable(name, value)
     }
 
     return (
@@ -51,14 +51,19 @@ const CalculatorOption: FC<CalculatorOptionProps> = observer(
         {option.option_type === 'number' && (
           <InputNumber
             tabIndex={amount == 0 ? -1 : 0}
-            value={store.getVariable(option.name) as number}
+            value={(store.getVariable(option.name) as number) || ''}
             // onChange={(e) => onChange(option, () => store.setVariable(option.name, e.target.value))} // плохая идея
-            onChange={(e) => store.setVariable(option.name, e.target.value)}
+            onChange={(e) =>
+              store.setVariable(
+                option.name,
+                parseInt(e.target.value) > 0 ? parseInt(e.target.value) : 0,
+              )
+            }
           />
         )}
         {option.option_type === 'counter' && (
           <AmountComponent
-            amount={parseInt(store.getVariable(option.name) as string)}
+            amount={store.getVariable(option.name) as number}
             // onChange={(value: number) => onChange(option, () => firstArgFunc(option.name)(value))}
             onChange={firstArgFunc(option.name)}
             small

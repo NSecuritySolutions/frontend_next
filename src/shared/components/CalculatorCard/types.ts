@@ -1,7 +1,7 @@
-import { ICamera, IRegister, IHDD, IFACP, ISensor, IPACSProduct } from '@/widgets/Calculator/types'
+import { TProduct } from '@/widgets/Calculator/types'
 
 interface ICondition {
-  leftPart: keyof (ICamera | IRegister | IHDD | IFACP | ISensor | IPACSProduct)
+  leftPart: keyof TProduct
   operator?: string
   rightPart?: string
   optionValue?: string

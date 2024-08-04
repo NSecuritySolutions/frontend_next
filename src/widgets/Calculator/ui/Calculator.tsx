@@ -109,7 +109,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       setTimeout(() => {
         setGridSize(0)
         setTimeout(() => {
-          setGridSize(grid.current!.offsetHeight)
+          if (grid.current) setGridSize(grid.current!.offsetHeight)
           if (setSafe) setAnimationSafe(true)
         }, 50)
       }, 1000)
