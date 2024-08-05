@@ -33,7 +33,6 @@ import {
   StyledCanvas,
 } from './styled'
 import colors from '@/shared/constants/colors'
-// import { CameraBannerObj } from '@/shared/components/CameraBanner'
 
 const Info: FC = () => {
   const bannerRef = useRef<HTMLDivElement>(null)
@@ -137,8 +136,8 @@ const Info: FC = () => {
             priority
             src={
               cameraReady
-                ? '/images/banner/png/banner-image2-cameraless.png'
-                : '/images/banner/png/banner-image2.png'
+                ? '/images/banner/png/banner-image3-cameraless.png'
+                : '/images/banner/png/banner-image3.png'
             }
             alt="Баннер"
             fill
@@ -147,7 +146,7 @@ const Info: FC = () => {
           {!isMobile && (
             <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
               <spotLight
-                intensity={5000}
+                intensity={9000}
                 position={[20, 10, 30]}
                 penumbra={1}
                 shadow-mapSize={[1024, 1024]}
