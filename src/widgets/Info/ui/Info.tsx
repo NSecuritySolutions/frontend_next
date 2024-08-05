@@ -7,6 +7,15 @@ import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-te
 import { BtnLink } from '@/shared/components/BtnLink'
 import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
 
+import dynamic from 'next/dynamic'
+
+const CameraBannerObj = dynamic(
+  () => import('@/shared/components/CameraBanner').then((module) => module.CameraBannerObj),
+  {
+    ssr: false,
+  },
+)
+
 import {
   HeaderWrapper,
   InfoBtnWrapper,
@@ -24,7 +33,7 @@ import {
   StyledCanvas,
 } from './styled'
 import colors from '@/shared/constants/colors'
-import { CameraBannerObj } from '@/shared/components/CameraBanner'
+// import { CameraBannerObj } from '@/shared/components/CameraBanner'
 
 const Info: FC = () => {
   const bannerRef = useRef<HTMLDivElement>(null)
