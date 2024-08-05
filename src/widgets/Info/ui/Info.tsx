@@ -1,14 +1,20 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Slider from 'react-slick'
-
-import bannerImg from '@/assets/images/banner/png/banner-img.png'
 
 import { cardInfoWithLogoData } from '@/shared/constants/texts/card-with-logo-text'
 import { BtnLink } from '@/shared/components/BtnLink'
 import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
+
+import dynamic from 'next/dynamic'
+
+const CameraBannerObj = dynamic(
+  () => import('@/shared/components/CameraBanner').then((module) => module.CameraBannerObj),
+  {
+    ssr: false,
+  },
+)
 
 import {
   HeaderWrapper,
@@ -24,11 +30,37 @@ import {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
+  StyledCanvas,
 } from './styled'
 import colors from '@/shared/constants/colors'
 
 const Info: FC = () => {
-  const router = useRouter()
+  const bannerRef = useRef<HTMLDivElement>(null)
+  const [cameraReady, setCameraReady] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    let hasTouchScreen = false
+    if ('maxTouchPoints' in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0
+    } else {
+      const mQ = window.matchMedia! && matchMedia('(pointer:coarse)')
+      if (mQ && mQ.media === '(pointer:coarse)') {
+        hasTouchScreen = !!mQ.matches
+      } else if ('orientation' in window) {
+        hasTouchScreen = true // deprecated, but good fallback
+      } else {
+        // Only as a last resort, fall back to user agent sniffing
+        var UA = (navigator as Navigator).userAgent
+        hasTouchScreen =
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+      }
+    }
+    if (hasTouchScreen) {
+      setIsMobile(true)
+    }
+  }, [])
 
   const settings = {
     responsive: [
@@ -61,9 +93,10 @@ const Info: FC = () => {
   return (
     <Section id="banner">
       <MainCard
-        onClick={() => {
-          router.push('/#contact-form')
-        }}
+        ref={bannerRef}
+        // onClick={() => {
+        //   router.push('/#contact-form')
+        // }}
       >
         <HeaderWrapper>
           <TextBlock>
@@ -101,11 +134,35 @@ const Info: FC = () => {
         <BannerWrapper>
           <Image
             priority
-            src={bannerImg}
+            src={
+              cameraReady
+                ? '/images/banner/png/banner-image3-cameraless.png'
+                : '/images/banner/png/banner-image3.png'
+            }
             alt="Баннер"
             fill
-            sizes="(max-width: 620px) 283px, (max-width: 940px) 283px, (max-width: 1300px) 540px, 702px"
+            sizes="(@media max-width: 940px) 50wv, (@media max-width: 1300px) 77wv, 100vw"
           />
+          {!isMobile && (
+            <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
+              <spotLight
+                intensity={9000}
+                position={[20, 10, 30]}
+                penumbra={1}
+                shadow-mapSize={[1024, 1024]}
+                castShadow
+              />
+              <CameraBannerObj
+                sceneProps={{
+                  rotation: [0, Math.PI, 0],
+                  position: [0, 0.5, 0],
+                  scale: 0.35,
+                }}
+                setReady={setCameraReady}
+                area={bannerRef}
+              />
+            </StyledCanvas>
+          )}
         </BannerWrapper>
       </MainCard>
       <CardWrapper>
