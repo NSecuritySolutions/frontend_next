@@ -254,6 +254,7 @@ class CalculatorBlockStore {
 
   setVariable(name: string, value: string | number | boolean) {
     if (name == 'block_amount') {
+      this.prev_block_amount = this.variables.block_amount as number
       Object.keys(this.variabilityVariables).map((name) => {
         const blockAmount = this.variables.block_amount
         const prevValue = this.variables[name]

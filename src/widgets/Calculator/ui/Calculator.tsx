@@ -35,7 +35,6 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
     const [height, setHeight] = useState(0)
-    // const [safeForExpand, setSafeForExpand] = useState(true)
     const grid = useRef<HTMLDivElement>(null)
 
     const formattedResult =
@@ -46,25 +45,6 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       })
-
-    // Когда-то была анимация циферок :(
-    // const price = useMotionValue(calculatorStore.result)
-    // const formattedPrice = useTransform(
-    //   price,
-    //   (price) =>
-    //     '~' +
-    //     price.toLocaleString('ru-RU', {
-    //       style: 'currency',
-    //       currency: 'RUB',
-    //       minimumFractionDigits: 2,
-    //       maximumFractionDigits: 2,
-    //     }),
-    // )
-
-    // useEffect(() => {
-    //   const animation = animate(price, calculatorStore.result, { duration: 1 })
-    //   return animation.stop
-    // }, [calculatorStore.result])
 
     useEffect(() => {
       calculatorStore.getData(products, calculator)
