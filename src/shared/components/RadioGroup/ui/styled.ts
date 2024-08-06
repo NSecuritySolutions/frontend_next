@@ -13,9 +13,8 @@ const Label = styled.label`
 `
 
 const LabelText = styled.p`
-  padding: 4px 8px;
-  border: 1px solid ${colors.backgroundBase3};
-  border-radius: 8px;
+  padding: 0px 8px;
+  border-radius: 6px;
   user-select: none;
   font-size: 13px;
   font-weight: 700;
@@ -44,6 +43,11 @@ const Select = styled.div`
 
   &.focus {
     border-color: ${colors.btnPrimary};
+  }
+
+  @media (max-width: 620px) {
+    width: auto;
+    max-width: 110px;
   }
 `
 
@@ -92,4 +96,27 @@ const Option = styled.ol`
   }
 `
 
-export { Radio, Label, LabelText, Select, SelectItem, Arrow, SelectMenu, Option }
+const RadioWrapper = styled.div`
+  display: flex;
+  padding: 3px;
+  border: 1px solid ${colors.backgroundBase3};
+  border-radius: 8px;
+`
+
+const RadioContainer = styled.div.attrs({ role: 'radiogroup' })`
+  display: flex;
+  align-items: center;
+`
+
+export {
+  RadioContainer,
+  Radio,
+  Label,
+  LabelText,
+  Select,
+  SelectItem,
+  Arrow,
+  SelectMenu,
+  Option,
+  RadioWrapper,
+}

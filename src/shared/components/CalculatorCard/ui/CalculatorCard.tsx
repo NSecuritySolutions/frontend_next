@@ -25,10 +25,13 @@ interface CalculatorCardProps {
   index: number
   resize: (value: number, expanded: boolean, setSafe?: boolean) => void
   deleteBlock: (add: boolean) => void
+  isMobile: boolean
+  id: string | undefined
+  handleMobileClick: (id: string) => void
 }
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
-  ({ store, index, resize, deleteBlock }) => {
+  ({ store, index, resize, deleteBlock, isMobile, id, handleMobileClick }) => {
     const { data, presentOptions, result, prev_block_amount } = store
     const { animationSafe, setAnimationSafe } = calculatorStore
     const amount = (store.getVariable('block_amount') as number) || 0
@@ -56,14 +59,12 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     //   return animation.stop
     // }, [store.result])
 
-    const formattedResult =
-      '~' +
-      result.toLocaleString('ru-RU', {
-        style: 'currency',
-        currency: 'RUB',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })
+    const formattedResult = result.toLocaleString('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    })
 
     useEffect(() => {
       if (animationSafe && card.current) {
@@ -77,7 +78,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
             setHeight(card.current!.offsetHeight)
             resize(store.appeared - store.disabled, false, false)
             setTimeout(() => {
-              setHeight((prev) => prev + (store.appeared - store.disabled) * 36)
+              setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
             })
             setTimeout(() => {
               setHeight(0)
@@ -154,10 +155,11 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       <Card
         ref={card}
         $center={amount === 0}
-        $expanded={amount > 0}
+        $expanded={(!isMobile && amount > 0) || (isMobile && amount > 0 && id === store.id)}
         $len={presentCount}
         $deleted={deleted}
         $height={height}
+        onClick={() => handleMobileClick(store.id)}
       >
         {index > 3 && (
           <CloseButton onClick={handleDelete}>

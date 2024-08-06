@@ -22,4 +22,17 @@ const ChangeAmount = styled.button`
   cursor: pointer;
 `
 
-export { Amount, ChangeAmount }
+const Number = styled.p<{ $small?: boolean }>`
+  display: flex;
+  justify-content: center;
+  font-size: ${(props) => (props.$small ? '15px' : '24px')};
+  font-weight: ${(props) => (props.$small ? 800 : 700)};
+  width: ${(props) => (props.$small ? '20px' : '30px')};
+
+  @media (max-width: 620px) {
+    font-size: ${(props) => (props.$small ? '16px' : '20px')};
+    font-weight: ${(props) => (props.$small ? 700 : 800)};
+  }
+`
+
+export { Amount, ChangeAmount, Number }

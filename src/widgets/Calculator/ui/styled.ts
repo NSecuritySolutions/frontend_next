@@ -9,15 +9,6 @@ const CalculatorContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-
-  // в связи с анимацией отключаю на 940
-  @media (max-width: 940px) {
-    display: none;
-  }
-
-  @media (max-width: 620px) {
-    display: none;
-  }
 `
 
 const Section = styled.div`
@@ -28,8 +19,6 @@ const Section = styled.div`
   flex-direction: row;
   gap: 20px;
   justify-content: center;
-  // margin-top: 58px;
-  // align-items: center;
 `
 
 const TitleWrapper = styled.div`
@@ -41,21 +30,32 @@ const TitleWrapper = styled.div`
   align-items: center;
   z-index: 2;
 
-  @media (max-width: 940px) {
-    width: 430px;
+  @media (max-width: 1300px) {
+    width: 880px;
   }
 
-  // @media (max-width: 620px) {
-  //   width: 328px;
-  // }
+  @media (max-width: 940px) {
+    width: 580px;
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    margin-top: 32px;
+    // justify-content: space-between;
+  }
 `
 
 const SectionTitle = styled.h3`
   height: 28px;
   color: ${colors.darkPrimary};
   font-size: 24px;
-  line-height: 30px;
+  line-height: 1.33;
   font-weight: 700;
+
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
+  }
 `
 
 const ImageButton = styled.button`
@@ -65,6 +65,11 @@ const ImageButton = styled.button`
   gap: 4px;
   align-items: center;
   padding-top: 4px;
+
+  @media (max-width: 620px) {
+    width: 50%;
+    justify-content: end;
+  }
 `
 
 const BodyWrapper = styled.div`
@@ -72,6 +77,20 @@ const BodyWrapper = styled.div`
   margin-top: 58px;
   display: flex;
   gap: 20px;
+
+  @media (max-width: 1300px) {
+    width: 880px;
+    flex-direction: column;
+  }
+
+  @media (max-width: 940px) {
+    width: 580px;
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    margin-top: 32px;
+  }
 `
 
 const FooterWrapper = styled.div`
@@ -80,26 +99,23 @@ const FooterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  // align-items: center;
-  // justify-content: space-between;
+
+  @media (max-width: 1300px) {
+    margin-top: 0;
+    width: 880px;
+    justify-content: space-between;
+  }
 
   @media (max-width: 940px) {
     flex-direction: column;
     align-items: start;
-    width: 430px;
-
-    & > button {
-      order: 2;
-    }
-
-    & > p {
-      order: 1;
-    }
+    width: 580px;
   }
 
-  // @media (max-width: 620px) {
-  //   width: 328px;
-  // }
+  @media (max-width: 620px) {
+    width: 328px;
+    gap: 16px;
+  }
 `
 
 const AddBlockButton = styled.button`
@@ -145,13 +161,17 @@ const Option = styled.li`
 const GridWrapper = styled.div<{ $height: number }>`
   height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   transition: height 1s;
+
+  @media (max-width: 940px) {
+    height: auto;
+  }
 `
 
 const GridContainer = styled.div<{ $maxHeight: number }>`
   display: grid;
   column-gap: 20px;
   grid-template-columns: repeat(2, 1fr);
-  max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'auto')};
+  max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'none')};
   transition:
     max-height 1s,
     height 1s;
@@ -159,19 +179,27 @@ const GridContainer = styled.div<{ $maxHeight: number }>`
   @media (max-width: 940px) {
     display: flex;
     flex-direction: column;
+    max-height: none;
   }
-
-  // @media (max-width: 620px) {
-  //   width: 328px;
-  // }
 `
 
 const PriceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
   width: 280px;
   gap: 12px;
+
+  @media (max-width: 1300px) {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+  }
 `
 
 const Price = styled.div`
@@ -183,6 +211,14 @@ const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  @media (max-width: 1300px) {
+    flex-direction: row;
+  }
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+  }
 `
 
 const Button = styled.a<{ $weight?: number }>`

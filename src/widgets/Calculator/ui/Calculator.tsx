@@ -35,6 +35,9 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
     const [height, setHeight] = useState(0)
+    const [isGrid, setIsGrid] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+    const [currentMobileCard, setCurrentMobileCard] = useState<string | undefined>()
     const grid = useRef<HTMLDivElement>(null)
 
     const formattedResult =
@@ -51,8 +54,31 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     }, [products, calculator])
 
     useEffect(() => {
-      const size = Math.round(calculatorStore.blocks.length / 2)
-      setGridSize(size * 89 + size * 20)
+      const resize = () => {
+        if (window.innerWidth >= 940 && !isGrid) {
+          setGridSize(99999)
+          setAnimationSafe(false)
+          setTimeout(() => {
+            setGridSize(0)
+            setTimeout(() => {
+              setGridSize(grid.current!.offsetHeight)
+              setAnimationSafe(true)
+            }, 50)
+          }, 1000)
+          setIsGrid(true)
+        } else if (window.innerWidth < 940) {
+          setIsGrid(false)
+          if (window.innerWidth < 620) {
+            setIsMobile(true)
+          } else {
+            setIsMobile(false)
+          }
+        }
+      }
+
+      window.addEventListener('resize', resize)
+      resize()
+      return () => window.removeEventListener('resize', resize)
     }, [])
 
     useEffect(() => {
@@ -83,7 +109,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
 
     const gridResize = (value: number, expanded: boolean, setSafe: boolean = true) => {
       if (!animationSafe) return
-      const size = value * 36
+      const size = value * 40
       if (expanded) setGridSize((prev) => prev + size)
       if (setSafe) setAnimationSafe(false)
       setTimeout(() => {
@@ -144,6 +170,10 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
       }, 1000)
     }
 
+    const handleMobileClick = (id: string) => {
+      setCurrentMobileCard(id)
+    }
+
     if (calculatorStore.error) {
       return <Typography>Извините, калькулятор сломався...</Typography>
     }
@@ -182,7 +212,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
               style={{ objectFit: 'cover' }}
             />
             <Typography size={16} color={colors.accentNegative}>
-              Сбросить настройки
+              {isMobile ? 'Очистить' : 'Сбросить настройки'}
             </Typography>
           </ImageButton>
         </TitleWrapper>
@@ -199,6 +229,9 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                         index={index}
                         resize={gridResize}
                         deleteBlock={gridBlockResize}
+                        isMobile={isMobile}
+                        id={currentMobileCard}
+                        handleMobileClick={handleMobileClick}
                       />
                     ))}
                   </AnimatePresence>

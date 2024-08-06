@@ -291,7 +291,7 @@ class CalculatorBlockStore {
         this.variables[option.name] = false
         break
       case 'radio':
-        this.variables[option.name] = 'unknown'
+        this.variables[option.name] = option.choices!.split(';').map((part) => part.trim())[0]
         break
       case 'counter':
       case 'number':
