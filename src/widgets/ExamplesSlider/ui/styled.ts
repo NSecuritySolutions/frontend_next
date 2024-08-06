@@ -40,13 +40,11 @@ const SectionWrapper = styled.div`
   }
 
   @media (max-width: 940px) {
-    max-width: 880px;
-    padding-left: clamp(150px, 1%, 16px);
+    max-width: 580px;
   }
 
   @media (max-width: 620px) {
-    max-width: 580px;
-    padding-left: clamp(16px, 20%, 150px);
+    max-width: 328px;
   }
 `
 
@@ -54,76 +52,62 @@ const SliderContainer = styled.div`
   background-color: ${colors.backgroundBase2};
   display: flex;
   flex-direction: column;
-  max-width: 1180px;
-  width: 100%;
-  row-gap: 20px !important;
+  transform: translateX(-20px);
 
   .slick-track {
     display: flex;
+    gap: 20px;
   }
 
-  @media (max-width: 1300px) {
-    max-width: 880px;
-    width: 100%;
-    gap: 10px !important;
-  }
 
   @media (max-width: 940px) {
-    min-width: 880px;
-    width: 100%;
-    min-height: 383px;
-    gap: 0px !important;
-  }
-
-  @media (max-width: 620px) {
-    min-width: 620px;
-    width: 100%;
-    min-height: 264px;
+    transform: none;
   }
 
   .slick-slider {
+    width: 100%;
+    overflow: visible;
   }
+
   .slick-slide {
-    div {
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .slick-slide > div:first-child {
       margin-top: 20px;
+      max-width: 580px;
       display: flex;
       gap: 20px;
 
       @media (max-width: 1300px) {
-        justify-content: space-between;
+        max-width: 430px;
       }
 
       @media (max-width: 940px) {
+        max-width: 380px;
         outline: none;
-        gap: 20px !important;
-      }
-
-      @media (max-width: 620px) {
-        outline: none;
-        gap: 15px !important;
       }
     }
   }
   .slick-list {
+    width: 1200px;
     display: flex;
     margin-bottom: 40px;
 
     @media (max-width: 1300px) {
+      width: 900px;
       margin-bottom: 30px;
     }
-  }
 
-  .slick-initialized .slick-slide {
-    row-gap: 20px;
-    // max-width: 1180px;
-    margin-right: 20px;
-
-    article {
-      row-gap: 0px;
+    @media (max-width: 940px) {
+      width: 600px;
     }
   }
 
   .slick-dots {
+    left: 20px;
     position: absolute;
     bottom: 0px;
     display: block;
@@ -154,7 +138,9 @@ const SliderContainer = styled.div`
 `
 
 const CardWrapper = styled.div`
+  min-width: 580px;
   display: flex !important;
+  height: 100%;
   flex-direction: row;
   gap: 20px !important;
   background-color: ${colors.backgroundPrimary};
@@ -164,22 +150,20 @@ const CardWrapper = styled.div`
   :hover {
     cursor: pointer;
   }
+
   @media (max-width: 1300px) {
     flex-direction: column;
-    max-width: 430px;
-    width: 100%;
-    gap: 20px;
+    min-width: 430px;
+    min-height: 472px;
   }
 
   @media (max-width: 940px) {
-    min-width: 430px;
-    width: 100%;
+    min-width: 380px;
     min-height: 445px;
   }
 
   @media (max-width: 620px) {
     min-width: 280px;
-    width: 100%;
     min-height: 377px;
   }
 `
@@ -213,7 +197,7 @@ const ExamplesImgWrapper = styled.div`
   }
 
   @media (max-width: 940px) {
-    width: 390px;
+    width: 340px;
     height: 180px;
   }
   @media (max-width: 620px) {

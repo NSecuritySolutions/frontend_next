@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
@@ -44,31 +44,30 @@ const ExamplesSlider: React.FC = () => {
   }
 
   const settings = {
-    className: 'reviews-slider',
-    dots: true,
     infinite: false,
-    speed: 200,
     arrows: false,
-    rows: 2,
-    slidesPerRow: 2,
-
+    speed: 300,
     appendDots: (dots: boolean) => <ul>{dots}</ul>,
 
     responsive: [
       {
-        breakpoint: 1300,
+        breakpoint: 999999999,
         settings: {
+          dots: true,
           rows: 2,
-          slidesPerRow: 2,
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
       {
         breakpoint: 940,
         settings: {
           rows: 1,
-          slidesToSow: 1,
+          slidesToShow: 1,
           slidesToScroll: 1,
+          variableWidth: true,
           dots: false,
+          infinity: false,
           focusOnSelect: true,
           arrows: false,
         },

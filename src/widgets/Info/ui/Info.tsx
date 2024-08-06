@@ -167,7 +167,7 @@ const Info: FC = () => {
       </MainCard>
       <CardWrapper>
         <Slider {...settings}>
-          {cardInfoWithLogoData.map((cardData, i) => (
+          {cardInfoWithLogoData.map((cardData) => (
             <CardInfoWithIcon
               key={cardData.id}
               title={cardData.title}
