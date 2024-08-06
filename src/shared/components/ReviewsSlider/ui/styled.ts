@@ -2,6 +2,7 @@ import colors from '@/shared/constants/colors'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import styled from 'styled-components'
+import Slider from 'react-slick'
 
 const SliderContainer = styled.div`
   max-width: 900px;
@@ -19,32 +20,46 @@ const SliderContainer = styled.div`
     left: -80px;
     transform: translateY(-50%) rotate(180deg);
     z-index: 3;
+
+    &:before {
+      display: none;
+    }
+
+    @media (max-width: 1370px) {
+      left: -70px;
+    }
+
+    @media (max-width: 940px) {
+      left: -80px;
+    }
+
+    @media (max-width: 620px) {
+      display: none;
+    }
   }
 
   .slick-next {
-    font-size: 0;
-    line-height: 0;
-
-    position: absolute;
-    top: 50%;
-
-    display: block;
-
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    transform: translate(0, -50%);
-
-    cursor: pointer;
-
-    color: black;
-    border: none;
-    outline: none;
     background-image: url('/icons/ic-next-button.svg');
     background-size: contain;
     border-radius: 50%;
     width: 64px;
     height: 64px;
+    position: absolute;
+    top: 48%;
+    right: -370px;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    &:before {
+      display: none;
+    }
+
+    @media (max-width: 1370px) {
+      right: -345px;
+    }
+    @media (max-width: 940px) {
+      right: -70px;
+    }
   }
 
   .slick-disabled {
@@ -148,59 +163,6 @@ const IconWrapper = styled.div`
   height: 40px;
 `
 
-const CustomPrevArrow = styled.div<{ $active?: boolean }>`
-  background-image: url('/icons/ic-next-button.svg');
-  background-size: contain;
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  position: absolute;
-  top: 48%;
-  left: -80px;
-  transform: translateY(-50%) rotate(180deg);
-  z-index: 3;
-
-  &:before {
-    display: none;
-  }
-
-  @media (max-width: 1370px) {
-    left: -70px;
-  }
-
-  @media (max-width: 940px) {
-    left: -80px;
-  }
-
-  @media (max-width: 620px) {
-    display: none;
-  }
-`
-
-const CustomNextArrow = styled.div<{ $active?: boolean }>`
-  background-image: url('/icons/ic-next-button.svg');
-  background-size: contain;
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  position: absolute;
-  top: 48%;
-  right: -370px;
-  transform: translateY(-50%);
-  z-index: 3;
-
-  &:before {
-    display: none;
-  }
-
-  @media (max-width: 1370px) {
-    right: -345px;
-  }
-  @media (max-width: 940px) {
-    right: -70px;
-  }
-`
-
 export {
   ReviewsContainer,
   SliderContainer,
@@ -211,6 +173,4 @@ export {
   ReviewsLink,
   TitleWrapper,
   IconWrapper,
-  CustomNextArrow,
-  CustomPrevArrow,
 }
