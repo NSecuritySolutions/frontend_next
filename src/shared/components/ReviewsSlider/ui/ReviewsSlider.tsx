@@ -18,8 +18,6 @@ import {
   ReviewsLink,
   TitleWrapper,
   IconWrapper,
-  CustomNextArrow,
-  CustomPrevArrow,
 } from './styled.ts'
 
 const ReviewsSlider = () => {
@@ -33,12 +31,10 @@ const ReviewsSlider = () => {
     dots: true,
     arrows: true,
     infinite: false,
-    speed: 200,
+    speed: 300,
     slidesToShow: 3,
     slidesToScroll: 3,
     focusOnSelect: true,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
 
     appendDots: (dots: boolean) => <ul>{dots}</ul>,
 
@@ -73,7 +69,7 @@ const ReviewsSlider = () => {
       if (typeof window !== 'undefined') {
         if (window.innerWidth >= 1300) {
           activePage = Math.ceil(currentSlide / 3)
-        } else if (window.innerWidth >= 619) {
+        } else if (window.innerWidth >= 620) {
           activePage = Math.ceil(currentSlide / 2)
         } else {
           activePage = currentSlide

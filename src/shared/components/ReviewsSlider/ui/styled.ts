@@ -1,6 +1,4 @@
 import colors from '@/shared/constants/colors'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import styled from 'styled-components'
 
 const SliderContainer = styled.div`
@@ -8,7 +6,7 @@ const SliderContainer = styled.div`
   width: 100%;
   background-color: ${colors.backgroundBase2};
 
-  .slick-prev {
+  .reviews-slider .slick-prev {
     background-image: url('/icons/ic-next-button.svg');
     background-size: contain;
     border-radius: 50%;
@@ -19,35 +17,55 @@ const SliderContainer = styled.div`
     left: -80px;
     transform: translateY(-50%) rotate(180deg);
     z-index: 3;
+
+    &:before {
+      display: none;
+    }
+
+    @media (max-width: 1370px) {
+      left: -70px;
+    }
+
+    @media (max-width: 940px) {
+      left: -80px;
+    }
+
+    @media (max-width: 620px) {
+      display: none;
+    }
   }
 
-  .slick-next {
-    font-size: 0;
-    line-height: 0;
-
-    position: absolute;
-    top: 50%;
-
-    display: block;
-
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    transform: translate(0, -50%);
-
-    cursor: pointer;
-
-    color: black;
-    border: none;
-    outline: none;
+  .reviews-slider .slick-next {
     background-image: url('/icons/ic-next-button.svg');
     background-size: contain;
     border-radius: 50%;
     width: 64px;
     height: 64px;
+    position: absolute;
+    top: 48%;
+    right: -370px;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    &:before {
+      display: none;
+    }
+
+    @media (max-width: 1370px) {
+      right: -345px;
+    }
+    @media (max-width: 940px) {
+      right: -70px;
+    }
   }
 
-  .slick-disabled {
+  .reviews-slider .slick-list {
+    @media (max-width: 620px) {
+      overflow: visible;
+    }
+  }
+
+  .reviews-slider .slick-disabled {
     visibility: hidden;
   }
 
@@ -61,13 +79,13 @@ const SliderContainer = styled.div`
   @media (max-width: 940px) {
     max-width: 580px;
 
-    .slick-dots {
+    .reviews-slider .slick-dots {
       display: none;
     }
   }
 
   @media (max-width: 720px) {
-    .slick-arrow {
+    .reviews-slider .slick-arrow {
       visibility: hidden;
     }
   }
@@ -148,59 +166,6 @@ const IconWrapper = styled.div`
   height: 40px;
 `
 
-const CustomPrevArrow = styled.div<{ $active?: boolean }>`
-  background-image: url('/icons/ic-next-button.svg');
-  background-size: contain;
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  position: absolute;
-  top: 48%;
-  left: -80px;
-  transform: translateY(-50%) rotate(180deg);
-  z-index: 3;
-
-  &:before {
-    display: none;
-  }
-
-  @media (max-width: 1370px) {
-    left: -70px;
-  }
-
-  @media (max-width: 940px) {
-    left: -80px;
-  }
-
-  @media (max-width: 620px) {
-    display: none;
-  }
-`
-
-const CustomNextArrow = styled.div<{ $active?: boolean }>`
-  background-image: url('/icons/ic-next-button.svg');
-  background-size: contain;
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  position: absolute;
-  top: 48%;
-  right: -370px;
-  transform: translateY(-50%);
-  z-index: 3;
-
-  &:before {
-    display: none;
-  }
-
-  @media (max-width: 1370px) {
-    right: -345px;
-  }
-  @media (max-width: 940px) {
-    right: -70px;
-  }
-`
-
 export {
   ReviewsContainer,
   SliderContainer,
@@ -211,6 +176,4 @@ export {
   ReviewsLink,
   TitleWrapper,
   IconWrapper,
-  CustomNextArrow,
-  CustomPrevArrow,
 }

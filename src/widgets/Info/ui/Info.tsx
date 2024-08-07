@@ -63,6 +63,7 @@ const Info: FC = () => {
   }, [])
 
   const settings = {
+    className: 'info-slider',
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick', arrows: false },
       {
@@ -167,7 +168,7 @@ const Info: FC = () => {
       </MainCard>
       <CardWrapper>
         <Slider {...settings}>
-          {cardInfoWithLogoData.map((cardData, i) => (
+          {cardInfoWithLogoData.map((cardData) => (
             <CardInfoWithIcon
               key={cardData.id}
               title={cardData.title}

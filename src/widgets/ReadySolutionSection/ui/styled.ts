@@ -37,12 +37,12 @@ const SectionTitle = styled.h3`
 `
 
 const TabsContainer = styled.div`
-  .slider.regular {
+  .ready-solutions-tabs-slider.slider.regular {
     display: flex;
     gap: 16px;
   }
 
-  .slick-track {
+  .ready-solutions-tabs-slider .slick-track {
     display: flex;
     gap: 16px;
 
@@ -51,21 +51,12 @@ const TabsContainer = styled.div`
     }
   }
 
-  .slick-slider {
-    overflow: visible;
-    width: 100%;
-  }
-
-  .slick-list {
+  .ready-solutions-tabs-slider .slick-list {
     overflow: visible;
   }
 `
 
-type TTabButtonProps = {
-  $activetab: boolean
-}
-
-const TabButton = styled.div<TTabButtonProps>`
+const TabButton = styled.div<{ $activetab: boolean }>`
   background-color: ${(props) => (props.$activetab ? colors.btnPrimary : colors.backgroundPrimary)};
   color: ${(props) => (props.$activetab ? colors.darkPrimary : colors.darkPrimaryOpacity)};
   border: none;
@@ -95,21 +86,17 @@ const TabButton = styled.div<TTabButtonProps>`
 `
 
 const CardsContainer = styled.div`
-  .slider.regular {
+  .ready-solutions-slider.slider.regular {
     display: flex;
     gap: 20px;
   }
 
-  .slick-track {
+  .ready-solutions-slider .slick-track {
     display: flex;
     gap: 20px;
   }
 
-  .slick-slider {
-    overflow: visible;
-  }
-
-  .slick-list {
+  .ready-solutions-slider .slick-list {
     overflow: visible;
   }
 `

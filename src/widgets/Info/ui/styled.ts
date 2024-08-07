@@ -178,7 +178,7 @@ const BannerWrapper = styled.div`
 `
 
 const CardWrapper = styled.div`
-  .regular.slider {
+  .info-slider.regular.slider {
     max-width: 1180px;
     width: 100%;
     margin: 0 auto;
@@ -191,17 +191,12 @@ const CardWrapper = styled.div`
     }
   }
 
-  .slick-track {
+  .info-slider .slick-track {
     display: flex;
     gap: 20px;
   }
 
-  .slick-slider {
-    width: 100%;
-    overflow: visible;
-  }
-
-  .slick-list {
+  .info-slider .slick-list {
     overflow: visible;
   }
 `

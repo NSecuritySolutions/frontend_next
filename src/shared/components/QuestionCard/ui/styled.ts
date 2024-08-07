@@ -11,13 +11,12 @@ const CardContainer = styled(motion.article).attrs({
   background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 280px;
   max-height: 90px;
   min-height: 90px;
   padding: 5px 20px;
   border-radius: 20px;
   color: ${colors.darkPrimary};
-  box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   font-weight: 400;
   font-size: 15px;
   gap: 20px;
@@ -30,7 +29,12 @@ const CardContainer = styled(motion.article).attrs({
     opacity: 0.5;
   }
 
+  @media (max-width: 1300px) {
+    width: 320px;
+  }
+
   @media (max-width: 940px) {
+    width: 100%;
     background: #ffffff;
     flex-direction: column;
     padding: 20px;

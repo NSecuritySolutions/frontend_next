@@ -76,15 +76,6 @@ export type TTopicProps = {
   chosen: IQuestionCategory | null
 }
 
-export type TAnswerProps = {
-  id: number
-  question: string
-  answer: string[]
-  onClick: (item: TQuestionType) => void
-  chosen: TQuestionType | null
-  width: number
-}
-
 export type TProjectReviews = {
   id: number
   name: string
