@@ -154,7 +154,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     }
 
     const handleReset = () => {
-      if (!animationSafe) return
+      if (!animationSafe || !calculatorStore.clearable) return
       const size = Math.round(calculatorStore.data.length / 2)
       setGridSize(size * 89 + size * 20)
       setAnimationSafe(false)
