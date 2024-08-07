@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import {
   Card,
@@ -28,7 +28,17 @@ interface CardSolutionProps {
 }
 
 const CardSolution: FC<CardSolutionProps> = ({ data }) => {
-  const router = useRouter()
+  const pathname = usePathname()
+
+  let calc
+  let form
+  if (['/', '/video-surveillance', '/intercom', '/security'].includes(pathname)) {
+    calc = '#calculator'
+    form = '#contact-form'
+  } else {
+    form = '/#contact-form'
+    calc = '/#calculator'
+  }
 
   const formattedPrice = Number(data.price).toLocaleString('ru-RU', {
     style: 'currency',
@@ -78,17 +88,21 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
         <PriceText>{formattedPrice}</PriceText>
       </PriceWrapper>
       <ButtonGroupWrapper>
-        <Button>Заказать звонок</Button>
-        <Button
-          $transparent
-          onClick={(e) => {
-            e.stopPropagation()
-            router.push('/#calculator')
-            calculatorStore.setProduct(data.equipment)
-          }}
-        >
-          В калькулятор
-        </Button>
+        <Link href={form} passHref legacyBehavior>
+          <Button>Заказать звонок</Button>
+        </Link>
+        <Link href={calc} passHref legacyBehavior>
+          <Button
+            $transparent
+            onClick={(e) => {
+              // e.stopPropagation()
+              // router.push('/#calculator')
+              calculatorStore.setProduct(data.equipment)
+            }}
+          >
+            В калькулятор
+          </Button>
+        </Link>
       </ButtonGroupWrapper>
     </Card>
   )

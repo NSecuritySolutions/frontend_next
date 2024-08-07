@@ -41,7 +41,7 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
       } else {
         setIsDropdown(false)
         setTimeout(() => {
-          setIsDropdown(radiogroup.current!.offsetWidth > 168)
+          if (radiogroup.current) setIsDropdown(radiogroup.current.offsetWidth > 168)
         })
       }
     }
@@ -49,7 +49,7 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [radiogroup.current])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
