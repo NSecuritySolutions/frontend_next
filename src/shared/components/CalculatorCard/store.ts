@@ -57,10 +57,16 @@ class CalculatorBlockStore {
       appeared: observable,
       filters: observable,
       prev_block_amount: observable,
+      changed: computed,
       result: computed,
       setVariable: action,
       setPresent: action,
     })
+  }
+
+  get changed() {
+    if (JSON.stringify(this.variables) != JSON.stringify(this.initialVariables)) return true
+    return false
   }
 
   // Нужно для плавной анимации

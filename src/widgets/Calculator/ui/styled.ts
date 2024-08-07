@@ -58,20 +58,6 @@ const SectionTitle = styled.h3`
   }
 `
 
-const ImageButton = styled.button`
-  background-color: transparent;
-  border: none;
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  padding-top: 4px;
-
-  @media (max-width: 620px) {
-    width: 50%;
-    justify-content: end;
-  }
-`
-
 const BodyWrapper = styled.div`
   width: 1180px;
   margin-top: 58px;
@@ -202,6 +188,13 @@ const PriceContainer = styled.div`
   }
 `
 
+const PriceHeader = styled.div`
+  padding-top: 3px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`
+
 const Price = styled.div`
   font-size: 24px;
   font-weight: 700;
@@ -221,22 +214,31 @@ const ButtonsWrapper = styled.div`
   }
 `
 
-const Button = styled.a<{ $weight?: number }>`
+const Button = styled.a<{ $primary?: boolean }>`
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid ${colors.backgroundBase3};
   border-radius: 12px;
-  background-color: ${colors.backgroundPrimary};
+  background-color: ${(props) => (props.$primary ? colors.btnPrimary : colors.backgroundPrimary)};
   white-space: nowrap;
+  font-size: 15px;
+  font-weight: 800;
   width: 280px;
   height: 44px;
   opacity: 1;
   gap: 8px;
 
   &:hover {
-    background-color: ${colors.btnOutlineHover};
+    background-color: ${(props) =>
+      props.$primary ? colors.btnPrimaryHover : colors.btnOutlineHover};
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    font-size: 13px;
+    font-weight: 700;
   }
 `
 
@@ -244,7 +246,6 @@ export {
   CalculatorContainer,
   Section,
   SectionTitle,
-  ImageButton,
   FooterWrapper,
   AddBlockButton,
   Select,
@@ -252,6 +253,7 @@ export {
   TitleWrapper,
   GridContainer,
   PriceContainer,
+  PriceHeader,
   Price,
   GridWrapper,
   BodyWrapper,

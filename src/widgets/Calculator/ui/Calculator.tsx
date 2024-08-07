@@ -2,7 +2,6 @@ import {
   CalculatorContainer,
   Section,
   SectionTitle,
-  ImageButton,
   FooterWrapper,
   AddBlockButton,
   Select,
@@ -10,6 +9,7 @@ import {
   TitleWrapper,
   GridContainer,
   PriceContainer,
+  PriceHeader,
   Price,
   GridWrapper,
   BodyWrapper,
@@ -18,15 +18,15 @@ import {
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
-import colors from '@/shared/constants/colors/index.ts'
-import { BtnLink } from '@/shared/components/BtnLink'
 
-import { animate, AnimatePresence, LayoutGroup, useMotionValue, useTransform } from 'framer-motion'
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
 import { observer } from 'mobx-react-lite'
 import { ICalculatorData, ICamera, IRegister } from '../types'
+import { Tooltip } from '@/shared/components/Tooltip'
+import { CalculatorClearButton } from '@/shared/components/CalculatorClearButton'
 
 const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICalculatorData[] }> =
   observer(({ products, calculator }) => {
@@ -41,12 +41,11 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     const grid = useRef<HTMLDivElement>(null)
 
     const formattedResult =
-      '~' +
+      (!result ? '' : '~') +
       result.toLocaleString('ru-RU', {
         style: 'currency',
         currency: 'RUB',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+        maximumFractionDigits: 0,
       })
 
     useEffect(() => {
@@ -203,18 +202,11 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
               )}
             </AnimatePresence>
           </AddBlockButton>
-          <ImageButton onClick={handleReset}>
-            <Image
-              src="/icons/calculator/cross.svg"
-              width={24}
-              height={24}
-              alt="Reset"
-              style={{ objectFit: 'cover' }}
-            />
-            <Typography size={16} color={colors.accentNegative}>
-              {isMobile ? 'Очистить' : 'Сбросить настройки'}
-            </Typography>
-          </ImageButton>
+          <CalculatorClearButton
+            handleReset={handleReset}
+            isMobile={isMobile}
+            active={calculatorStore.clearable}
+          />
         </TitleWrapper>
         <Section>
           <BodyWrapper>
@@ -240,19 +232,14 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
             </LayoutGroup>
             <FooterWrapper>
               <PriceContainer>
-                <Typography size={16}>Итого система «под ключ»:</Typography>
+                <PriceHeader>
+                  <Typography size={16}>Итого система «под ключ»:</Typography>
+                  <Tooltip text={'Уточняйте точную цену у манагеров'} />
+                </PriceHeader>
                 <Price>{formattedResult}</Price>
               </PriceContainer>
               <ButtonsWrapper>
-                <BtnLink
-                  btnType="accent"
-                  text="Оформить заявку"
-                  width="280px"
-                  height="44px"
-                  link=""
-                  color={colors.darkPrimary}
-                  size="15px"
-                />
+                <Button $primary>Оформить заявку</Button>
                 <Button>
                   <Image
                     src="/icons/calculator/download.svg"
@@ -260,9 +247,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                     width={24}
                     alt="Downdload"
                   />
-                  <Typography size={16} $weight={400}>
-                    Скачать прайс
-                  </Typography>
+                  Скачать прайс
                 </Button>
               </ButtonsWrapper>
             </FooterWrapper>

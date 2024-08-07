@@ -17,7 +17,7 @@ import CalculatorBlockStore from '../store.ts'
 import calculatorStore from '@/widgets/Calculator/store.ts'
 import { Toogle } from '../../Toogle/index.ts'
 import { IOption } from '@/widgets/Calculator/types.ts'
-import { animate, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { CalculatorOption } from '../../CalculatorOption/index.ts'
 
 interface CalculatorCardProps {
@@ -39,25 +39,6 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const [presentCount, setPresentCount] = useState(presentOptions.length)
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
-
-    // Когда-то была анимация циферок :(
-    // const price = useMotionValue(store.result)
-    // const formattedPrice = useTransform(
-    //   price,
-    //   (price) =>
-    //     '~' +
-    //     price.toLocaleString('ru-RU', {
-    //       style: 'currency',
-    //       currency: 'RUB',
-    //       minimumFractionDigits: 2,
-    //       maximumFractionDigits: 2,
-    //     }),
-    // )
-
-    // useEffect(() => {
-    //   const animation = animate(price, store.result, { duration: 1 })
-    //   return animation.stop
-    // }, [store.result])
 
     const formattedResult = result.toLocaleString('ru-RU', {
       style: 'currency',
@@ -124,12 +105,6 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       if (amount !== 0 && v === 0) {
         store.resetVariables()
       }
-      // if (amount !== 0 && v === 0) {
-      //   store.resetVariables()
-      //   resize(presentCount, false)
-      // } else if (amount === 0 && v === 1) {
-      //   resize(presentCount, true)
-      // }
     }
 
     const handleDelete = () => {

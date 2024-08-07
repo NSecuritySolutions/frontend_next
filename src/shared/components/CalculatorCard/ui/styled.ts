@@ -101,6 +101,8 @@ const Title = styled.p`
   font-weight: 800;
   color: ${colors.darkPrimary};
   line-height: 1.33;
+  max-height: 43px;
+  overflow: hidden;
 
   @media (max-width: 620px) {
     font-size: 16px;
