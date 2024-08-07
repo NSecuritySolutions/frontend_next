@@ -16,6 +16,7 @@ class CalculatorStore {
     makeAutoObservable(this, {
       blocks: observable,
       animationSafe: observable,
+      clearable: computed,
       result: computed,
       setAnimationSafe: action,
       data: observable.ref,
@@ -26,6 +27,12 @@ class CalculatorStore {
 
   setAnimationSafe = (value: boolean) => {
     this.animationSafe = value
+  }
+
+  get clearable() {
+    if (this.blocks.length !== this.data.length) return true
+    if (this.blocks.find((block) => block.changed)) return true
+    return false
   }
 
   get result() {

@@ -57,10 +57,16 @@ class CalculatorBlockStore {
       appeared: observable,
       filters: observable,
       prev_block_amount: observable,
+      changed: computed,
       result: computed,
       setVariable: action,
       setPresent: action,
     })
+  }
+
+  get changed() {
+    if (JSON.stringify(this.variables) != JSON.stringify(this.initialVariables)) return true
+    return false
   }
 
   // Нужно для плавной анимации
@@ -254,6 +260,7 @@ class CalculatorBlockStore {
 
   setVariable(name: string, value: string | number | boolean) {
     if (name == 'block_amount') {
+      this.prev_block_amount = this.variables.block_amount as number
       Object.keys(this.variabilityVariables).map((name) => {
         const blockAmount = this.variables.block_amount
         const prevValue = this.variables[name]
@@ -290,7 +297,7 @@ class CalculatorBlockStore {
         this.variables[option.name] = false
         break
       case 'radio':
-        this.variables[option.name] = 'unknown'
+        this.variables[option.name] = option.choices!.split(';').map((part) => part.trim())[0]
         break
       case 'counter':
       case 'number':

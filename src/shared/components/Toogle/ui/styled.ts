@@ -7,7 +7,7 @@ const ToogleBorder = styled.div`
   border: 1px solid;
   border-color: ${colors.textSecondary};
   border-radius: 20px;
-  width: 40px;
+  min-width: 40px;
   height: 24px;
   align-items: center;
   padding-inline: 4px;

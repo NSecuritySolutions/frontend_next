@@ -27,7 +27,7 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
   margin-block: ${(props) => (props.$deleted ? 0 : '10px')};
   padding: ${(props) => (props.$deleted ? '0px 12px' : props.$expanded ? '12px' : '23px 12px')};
   max-height: ${(props) =>
-    props.$deleted ? 0 : props.$expanded ? `${89 + props.$len * 36}px` : '89px'};
+    props.$deleted ? 0 : props.$expanded ? `${89 + props.$len * 40}px` : '89px'};
   height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   overflow: hidden;
   display: flex;
@@ -45,12 +45,19 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
     props.$center &&
     css`
       align-items: center;
-    `}//   @media (max-width: 620px) {
-  //   max-height: ${(props) => (props.$expanded ? `${60 + props.$len * 28}px` : '60px')};
-  //   padding: ${(props) => (props.$expanded ? '8px' : '12px 8px')};
-  //   width: 328px;
-  //   gap: 8px;
-  // }
+    `}
+
+  @media (max-width: 940px) {
+    width: 580px;
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    padding: ${(props) => (props.$deleted ? '0px 12px' : props.$expanded ? '12px' : '12px 12px')};
+    max-height: ${(props) =>
+      props.$deleted ? 0 : props.$expanded ? `${85 + props.$len * 40}px` : '68px'};
+    margin-block: ${(props) => (props.$deleted ? 0 : '4px')};
+  }
 `
 
 const CardImgWrapper = styled(Image)`
@@ -61,16 +68,15 @@ const CardImgWrapper = styled(Image)`
   padding: 5px;
   object-fit: cover;
 
-  // @media (max-width: 620px) {
-  //   width: 35px;
-  //   height: 35px;
-  // }
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 const CardHeader = styled.div`
   display: flex;
   width: 100%;
-  height: 44px;
+  min-height: 46px;
   justify-content: space-between;
   align-items: center;
 
@@ -83,22 +89,24 @@ const ImageTitle = styled.div`
   gap: 8px;
   display: flex;
   align-items: center;
-  width: 188px;
+  width: 205px;
 
   @media (max-width: 620px) {
-    width: 328px;
+    width: 100px;
   }
 `
 
 const Title = styled.p`
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
   color: ${colors.darkPrimary};
   line-height: 1.33;
+  max-height: 43px;
+  overflow: hidden;
 
-  // @media (max-width: 620px) {
-  //   font-size: 14px;
-  // }
+  @media (max-width: 620px) {
+    font-size: 16px;
+  }
 `
 
 const Divider = styled.div<{ $show: boolean }>`
@@ -120,10 +128,16 @@ const OptionsWrapper = styled.div`
 
 const Price = styled.div`
   display: flex;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
-  width: 120px;
+  width: 207px;
   justify-content: end;
+
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
+    width: 100px;
+  }
 `
 
 export {

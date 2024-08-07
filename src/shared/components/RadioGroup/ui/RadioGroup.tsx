@@ -1,5 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Label, Radio, LabelText, Select, Option, SelectMenu, Arrow, SelectItem } from './styled'
+import {
+  Label,
+  Radio,
+  LabelText,
+  Select,
+  Option,
+  SelectMenu,
+  Arrow,
+  SelectItem,
+  RadioWrapper,
+  RadioContainer,
+} from './styled'
 import { observer } from 'mobx-react-lite'
 import CalculatorBlockStore from '../../CalculatorCard/store'
 import { createPortal } from 'react-dom'
@@ -25,13 +36,18 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
 
   useEffect(() => {
     const handleResize = () => {
-      if (radiogroup.current) {
-        setIsDropdown(radiogroup.current.offsetWidth > 180)
+      if (window.innerWidth < 620) {
+        setIsDropdown(true)
+      } else {
+        setIsDropdown(false)
+        setTimeout(() => {
+          setIsDropdown(radiogroup.current!.offsetWidth > 168)
+        })
       }
     }
 
-    handleResize()
     window.addEventListener('resize', handleResize)
+    handleResize()
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -68,11 +84,7 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
   }, [isDropdown, value])
 
   return (
-    <div
-      ref={radiogroup}
-      role="radiogroup"
-      style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
-    >
+    <RadioContainer ref={radiogroup}>
       {isDropdown ? (
         <Select
           className={isOpen ? 'focus' : ''}
@@ -106,23 +118,25 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
             )}
         </Select>
       ) : (
-        options.map((item) => (
-          <Label key={item}>
-            <Radio
-              name={name}
-              value={item}
-              checked={value === item}
-              onChange={(e) =>
-                onChange(option, () =>
-                  store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
-                )
-              }
-            />
-            <LabelText>{item}</LabelText>
-          </Label>
-        ))
+        <RadioWrapper>
+          {options.map((item) => (
+            <Label key={item}>
+              <Radio
+                name={name}
+                value={item}
+                checked={value === item}
+                onChange={(e) =>
+                  onChange(option, () =>
+                    store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
+                  )
+                }
+              />
+              <LabelText>{item}</LabelText>
+            </Label>
+          ))}
+        </RadioWrapper>
       )}
-    </div>
+    </RadioContainer>
   )
 })
 

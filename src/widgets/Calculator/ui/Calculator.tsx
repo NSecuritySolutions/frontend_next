@@ -2,7 +2,6 @@ import {
   CalculatorContainer,
   Section,
   SectionTitle,
-  ImageButton,
   FooterWrapper,
   AddBlockButton,
   Select,
@@ -10,6 +9,7 @@ import {
   TitleWrapper,
   GridContainer,
   PriceContainer,
+  PriceHeader,
   Price,
   GridWrapper,
   BodyWrapper,
@@ -18,15 +18,15 @@ import {
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
-import colors from '@/shared/constants/colors/index.ts'
-import { BtnLink } from '@/shared/components/BtnLink'
 
-import { animate, AnimatePresence, LayoutGroup, useMotionValue, useTransform } from 'framer-motion'
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import calculatorStore from '../store'
 import { observer } from 'mobx-react-lite'
 import { ICalculatorData, ICamera, IRegister } from '../types'
+import { Tooltip } from '@/shared/components/Tooltip'
+import { CalculatorClearButton } from '@/shared/components/CalculatorClearButton'
 
 const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICalculatorData[] }> =
   observer(({ products, calculator }) => {
@@ -35,44 +35,49 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     const addButtonRef = useRef<HTMLButtonElement>(null)
     const [gridSize, setGridSize] = useState(0)
     const [height, setHeight] = useState(0)
-    // const [safeForExpand, setSafeForExpand] = useState(true)
+    const [isGrid, setIsGrid] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+    const [currentMobileCard, setCurrentMobileCard] = useState<string | undefined>()
     const grid = useRef<HTMLDivElement>(null)
 
     const formattedResult =
-      '~' +
+      (!result ? '' : '~') +
       result.toLocaleString('ru-RU', {
         style: 'currency',
         currency: 'RUB',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+        maximumFractionDigits: 0,
       })
-
-    // Когда-то была анимация циферок :(
-    // const price = useMotionValue(calculatorStore.result)
-    // const formattedPrice = useTransform(
-    //   price,
-    //   (price) =>
-    //     '~' +
-    //     price.toLocaleString('ru-RU', {
-    //       style: 'currency',
-    //       currency: 'RUB',
-    //       minimumFractionDigits: 2,
-    //       maximumFractionDigits: 2,
-    //     }),
-    // )
-
-    // useEffect(() => {
-    //   const animation = animate(price, calculatorStore.result, { duration: 1 })
-    //   return animation.stop
-    // }, [calculatorStore.result])
 
     useEffect(() => {
       calculatorStore.getData(products, calculator)
     }, [products, calculator])
 
     useEffect(() => {
-      const size = Math.round(calculatorStore.blocks.length / 2)
-      setGridSize(size * 89 + size * 20)
+      const resize = () => {
+        if (window.innerWidth >= 940 && !isGrid) {
+          setGridSize(99999)
+          setAnimationSafe(false)
+          setTimeout(() => {
+            setGridSize(0)
+            setTimeout(() => {
+              setGridSize(grid.current!.offsetHeight)
+              setAnimationSafe(true)
+            }, 50)
+          }, 1000)
+          setIsGrid(true)
+        } else if (window.innerWidth < 940) {
+          setIsGrid(false)
+          if (window.innerWidth < 620) {
+            setIsMobile(true)
+          } else {
+            setIsMobile(false)
+          }
+        }
+      }
+
+      window.addEventListener('resize', resize)
+      resize()
+      return () => window.removeEventListener('resize', resize)
     }, [])
 
     useEffect(() => {
@@ -103,7 +108,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
 
     const gridResize = (value: number, expanded: boolean, setSafe: boolean = true) => {
       if (!animationSafe) return
-      const size = value * 36
+      const size = value * 40
       if (expanded) setGridSize((prev) => prev + size)
       if (setSafe) setAnimationSafe(false)
       setTimeout(() => {
@@ -149,7 +154,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
     }
 
     const handleReset = () => {
-      if (!animationSafe) return
+      if (!animationSafe || !calculatorStore.clearable) return
       const size = Math.round(calculatorStore.data.length / 2)
       setGridSize(size * 89 + size * 20)
       setAnimationSafe(false)
@@ -162,6 +167,10 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
         setHeight(0)
         setAnimationSafe(true)
       }, 1000)
+    }
+
+    const handleMobileClick = (id: string) => {
+      setCurrentMobileCard(id)
     }
 
     if (calculatorStore.error) {
@@ -193,18 +202,11 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
               )}
             </AnimatePresence>
           </AddBlockButton>
-          <ImageButton onClick={handleReset}>
-            <Image
-              src="/icons/calculator/cross.svg"
-              width={24}
-              height={24}
-              alt="Reset"
-              style={{ objectFit: 'cover' }}
-            />
-            <Typography size={16} color={colors.accentNegative}>
-              Сбросить настройки
-            </Typography>
-          </ImageButton>
+          <CalculatorClearButton
+            handleReset={handleReset}
+            isMobile={isMobile}
+            active={calculatorStore.clearable}
+          />
         </TitleWrapper>
         <Section>
           <BodyWrapper>
@@ -219,6 +221,9 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                         index={index}
                         resize={gridResize}
                         deleteBlock={gridBlockResize}
+                        isMobile={isMobile}
+                        id={currentMobileCard}
+                        handleMobileClick={handleMobileClick}
                       />
                     ))}
                   </AnimatePresence>
@@ -227,19 +232,14 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
             </LayoutGroup>
             <FooterWrapper>
               <PriceContainer>
-                <Typography size={16}>Итого система «под ключ»:</Typography>
+                <PriceHeader>
+                  <Typography size={16}>Итого система «под ключ»:</Typography>
+                  <Tooltip text={'Уточняйте точную цену у манагеров'} />
+                </PriceHeader>
                 <Price>{formattedResult}</Price>
               </PriceContainer>
               <ButtonsWrapper>
-                <BtnLink
-                  btnType="accent"
-                  text="Оформить заявку"
-                  width="280px"
-                  height="44px"
-                  link=""
-                  color={colors.darkPrimary}
-                  size="15px"
-                />
+                <Button $primary>Оформить заявку</Button>
                 <Button>
                   <Image
                     src="/icons/calculator/download.svg"
@@ -247,9 +247,7 @@ const Calculator: React.FC<{ products: (ICamera | IRegister)[]; calculator: ICal
                     width={24}
                     alt="Downdload"
                   />
-                  <Typography size={16} $weight={400}>
-                    Скачать прайс
-                  </Typography>
+                  Скачать прайс
                 </Button>
               </ButtonsWrapper>
             </FooterWrapper>

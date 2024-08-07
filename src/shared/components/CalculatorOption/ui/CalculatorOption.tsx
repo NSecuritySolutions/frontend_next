@@ -1,7 +1,5 @@
-import { FC } from 'react'
-import { Option, OptionHeader, CheckBox, InputNumber } from './styled'
-import { Typography } from '@/shared/components/Typography'
-import colors from '@/shared/constants/colors/index'
+import { FC, useRef } from 'react'
+import { Option, OptionHeader, CheckBox, InputNumber, Title } from './styled'
 import { IOption } from '@/widgets/Calculator/types'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { RadioGroup } from '@/shared/components/RadioGroup'
@@ -19,6 +17,8 @@ interface CalculatorOptionProps {
 
 const CalculatorOption: FC<CalculatorOptionProps> = observer(
   ({ option, store, onChange, amount, bold }) => {
+    const titleRef = useRef<HTMLParagraphElement>(null)
+
     const firstArgFunc = (name: string) => (value: number) => {
       store.setVariable(name, value)
     }
@@ -26,14 +26,9 @@ const CalculatorOption: FC<CalculatorOptionProps> = observer(
     return (
       <Option>
         <OptionHeader>
-          <Typography
-            size={13}
-            $weight={bold ? 700 : 400}
-            width="100%"
-            color={colors.textSecondary}
-          >
+          <Title ref={titleRef} $bold={bold}>
             {option.title}
-          </Typography>
+          </Title>
           <Tooltip text={option.description} />
         </OptionHeader>
         {option.option_type === 'radio' && (

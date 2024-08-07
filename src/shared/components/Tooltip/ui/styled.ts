@@ -5,9 +5,8 @@ import styled from 'styled-components'
 const TooltipImage = styled.div<{ alt?: string }>`
   border-radius: 50%;
   background: url('/icons/calculator/tooltip.svg') no-repeat center;
-  background-color: ${colors.backgroundBase3};
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 `
 

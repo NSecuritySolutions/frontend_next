@@ -10,21 +10,39 @@ const Option = styled(motion.div).attrs({
   exit: { opacity: 0, x: -400, transition: { duration: 1 } },
   transition: { duration: 0.8 },
 })`
-  height: 36px;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 
-  // @media (max-width: 620px) {
-  //   height: 26px;
-  // }
+  @media (max-width: 620px) {
+    justify-content: space-between;
+  }
 `
 
 const OptionHeader = styled.div`
   display: flex;
-  width: 198px;
+  width: 230px;
   gap: 8px;
   align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 620px) {
+    width: 180px;
+  }
+`
+
+const Title = styled.p<{ $bold?: boolean }>`
+  font-size: 14px;
+  font-weight: ${(props) => (props.$bold ? 700 : 400)};
+  color: ${colors.textSecondary};
+  float: left;
+  max-height: 40px;
+  overflow: hidden;
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
 `
 
 const CheckBox = styled.input.attrs({ type: 'checkbox' })`
@@ -70,6 +88,10 @@ const InputNumber = styled.input.attrs({ type: 'number', min: 1 })`
     -webkit-appearance: none;
     margin: 0;
   }
+
+  @media (max-width: 620px) {
+    width: 90px;
+  }
 `
 
-export { Option, OptionHeader, CheckBox, InputNumber }
+export { Option, OptionHeader, Title, CheckBox, InputNumber }
