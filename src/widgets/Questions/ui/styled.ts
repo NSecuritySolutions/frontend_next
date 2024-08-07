@@ -80,7 +80,7 @@ const ColumnWrapper = styled.div`
 `
 
 const TopicsColumn = styled.div`
-  .regular.slider {
+  .questions-slider.regular.slider {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -102,12 +102,12 @@ const TopicsColumn = styled.div`
       padding: 0 30px;
     }
   }
-  .slick-slider {
+  .questions-slider.slick-slider {
     width: 328px;
     overflow: visible;
   }
 
-  .slick-list {
+  .questions-slider .slick-list {
     overflow: visible;
   }
 `

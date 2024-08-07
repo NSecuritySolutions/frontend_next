@@ -22,6 +22,7 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions
   }
 
   const tabSettings = {
+    className: 'ready-solutions-tabs-slider',
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
       {
@@ -50,6 +51,7 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions
   }
 
   const cardSettings = {
+    className: 'ready-solutions-slider',
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
       {

@@ -44,6 +44,7 @@ const ExamplesSlider: React.FC = () => {
   }
 
   const settings = {
+    className: 'examples-slider',
     infinite: false,
     arrows: false,
     speed: 300,
@@ -95,7 +96,7 @@ const ExamplesSlider: React.FC = () => {
 
       <SectionWrapper>
         <SliderContainer className="slider-container" id="examples">
-          <Slider {...settings} afterChange={handleAfterChange} className="sliderMain">
+          <Slider {...settings} afterChange={handleAfterChange}>
             {workExamples
               .sort(
                 (newDate: TWorkExamples, olderDate: TWorkExamples) =>

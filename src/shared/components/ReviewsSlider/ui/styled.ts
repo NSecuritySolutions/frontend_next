@@ -1,15 +1,12 @@
 import colors from '@/shared/constants/colors'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import styled from 'styled-components'
-import Slider from 'react-slick'
 
 const SliderContainer = styled.div`
   max-width: 900px;
   width: 100%;
   background-color: ${colors.backgroundBase2};
 
-  .slick-prev {
+  .reviews-slider .slick-prev {
     background-image: url('/icons/ic-next-button.svg');
     background-size: contain;
     border-radius: 50%;
@@ -38,7 +35,7 @@ const SliderContainer = styled.div`
     }
   }
 
-  .slick-next {
+  .reviews-slider .slick-next {
     background-image: url('/icons/ic-next-button.svg');
     background-size: contain;
     border-radius: 50%;
@@ -62,7 +59,13 @@ const SliderContainer = styled.div`
     }
   }
 
-  .slick-disabled {
+  .reviews-slider .slick-list {
+    @media (max-width: 620px) {
+      overflow: visible;
+    }
+  }
+
+  .reviews-slider .slick-disabled {
     visibility: hidden;
   }
 
@@ -76,13 +79,13 @@ const SliderContainer = styled.div`
   @media (max-width: 940px) {
     max-width: 580px;
 
-    .slick-dots {
+    .reviews-slider .slick-dots {
       display: none;
     }
   }
 
   @media (max-width: 720px) {
-    .slick-arrow {
+    .reviews-slider .slick-arrow {
       visibility: hidden;
     }
   }

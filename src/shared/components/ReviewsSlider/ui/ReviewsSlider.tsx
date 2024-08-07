@@ -31,7 +31,7 @@ const ReviewsSlider = () => {
     dots: true,
     arrows: true,
     infinite: false,
-    speed: 200,
+    speed: 300,
     slidesToShow: 3,
     slidesToScroll: 3,
     focusOnSelect: true,

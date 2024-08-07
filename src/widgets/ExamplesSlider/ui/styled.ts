@@ -54,7 +54,7 @@ const SliderContainer = styled.div`
   flex-direction: column;
   transform: translateX(-20px);
 
-  .slick-track {
+  .examples-slider .slick-track {
     display: flex;
     gap: 20px;
   }
@@ -64,18 +64,13 @@ const SliderContainer = styled.div`
     transform: none;
   }
 
-  .slick-slider {
-    width: 100%;
-    overflow: visible;
-  }
-
-  .slick-slide {
+  .examples-slider .slick-slide {
     display:flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  .slick-slide > div:first-child {
+  .examples-slider .slick-slide > div:first-child {
       margin-top: 20px;
       max-width: 580px;
       display: flex;
@@ -89,11 +84,14 @@ const SliderContainer = styled.div`
         max-width: 380px;
         outline: none;
       }
+
+      @media (max-width: 620px) {
+        max-width: 280px;
+      }
     }
   }
-  .slick-list {
+  .examples-slider .slick-list {
     width: 1200px;
-    display: flex;
     margin-bottom: 40px;
 
     @media (max-width: 1300px) {
@@ -103,10 +101,11 @@ const SliderContainer = styled.div`
 
     @media (max-width: 940px) {
       width: 600px;
+      overflow: visible;
     }
   }
 
-  .slick-dots {
+  .examples-slider .slick-dots {
     left: 20px;
     position: absolute;
     bottom: 0px;
@@ -138,7 +137,7 @@ const SliderContainer = styled.div`
 `
 
 const CardWrapper = styled.div`
-  min-width: 580px;
+  max-width: 580px;
   display: flex !important;
   height: 100%;
   flex-direction: row;
@@ -153,17 +152,17 @@ const CardWrapper = styled.div`
 
   @media (max-width: 1300px) {
     flex-direction: column;
-    min-width: 430px;
+    max-width: 430px;
     min-height: 472px;
   }
 
   @media (max-width: 940px) {
-    min-width: 380px;
+    max-width: 380px;
     min-height: 445px;
   }
 
   @media (max-width: 620px) {
-    min-width: 280px;
+    max-width: 280px;
     min-height: 377px;
   }
 `

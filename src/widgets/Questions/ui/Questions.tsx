@@ -36,6 +36,7 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   let timer: NodeJS.Timeout
 
   const settings = {
+    className: 'questions-slider',
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
       {
