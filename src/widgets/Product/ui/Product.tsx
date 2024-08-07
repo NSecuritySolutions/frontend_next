@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import { Typography } from '@/shared/components/Typography'
-import { ProductButtonGroup } from '@/shared/components/ProductButtonGroup'
 import Loader from '@/shared/components/Loader/Loader'
 import { ProductProps } from '../types'
 import { ICamera } from '@/widgets/Calculator/types'
@@ -18,12 +17,13 @@ import {
   Title,
   SectionTitle,
   Text,
+  ButtonsWrapper,
+  Button,
 } from './styled'
 import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution'
+import Link from 'next/link'
 
 const Product: FC<ProductProps> = ({ data }) => {
-  console.log(data, 'data')
-
   if (!data) return Loader()
 
   const isCardSolution = (data as TCardSolutionProps).toolTipText !== undefined
@@ -62,7 +62,14 @@ const Product: FC<ProductProps> = ({ data }) => {
             </div>
             {!isCardSolution && <Text>{(data as ICamera).description.slice(0, 20) + '...'}</Text>}
 
-            <ProductButtonGroup link="" />
+            <ButtonsWrapper>
+              <Link href={'/#contact-form'} passHref legacyBehavior>
+                <Button $primary>Заказать звонок</Button>
+              </Link>
+              <Link href={'/#calculator'} passHref legacyBehavior>
+                <Button>В калькулятор</Button>
+              </Link>
+            </ButtonsWrapper>
           </PriceColumnWrapper>
         </ImageColumnWrapper>
         <ColumnWrapper>

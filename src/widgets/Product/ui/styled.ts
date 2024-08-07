@@ -148,6 +148,39 @@ const Text = styled.p`
   }
 `
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const Button = styled.a<{ $primary?: boolean }>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: ${(props) => (props.$primary ? 'none' : `1px solid ${colors.darkPrimary}`)};
+  border-radius: 12px;
+  background-color: ${(props) => (props.$primary ? colors.btnPrimary : colors.backgroundPrimary)};
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 800;
+  width: 280px;
+  height: 44px;
+  gap: 8px;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$primary ? colors.btnPrimaryHover : colors.btnOutlineHover};
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+`
+
 export {
   Card,
   ImageWrapper,
@@ -161,4 +194,6 @@ export {
   Title,
   SectionTitle,
   Text,
+  ButtonsWrapper,
+  Button,
 }
