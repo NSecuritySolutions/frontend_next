@@ -3,39 +3,46 @@ import Image from 'next/image'
 
 import { AnimatePresence, useAnimate } from 'framer-motion'
 
-import { TAnswerProps } from '@/shared/constants/texts/types.ts'
+import { CardContainer, CardText, CardAnswer, TitleContainer, ArrowWrapper } from './styled.ts'
+import { TQuestionType } from '@/shared/constants/texts/types.ts'
 
-import {
-  CardContainer,
-  QuestionNumber,
-  CardText,
-  CardAnswer,
-  TitleContainer,
-  ArrowWrapper,
-} from './styled.ts'
+type TAnswerProps = {
+  id: number
+  question: string
+  answer: string[]
+  onClick: (item: TQuestionType) => void
+  chosen: TQuestionType | null
+  isMobile: boolean
+}
 
-const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen, width }) => {
+const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen, isMobile }) => {
   const [open, setOpen] = useState(false)
   const [initialHeight, setInitialHeight] = useState(0)
   const [ref, animate] = useAnimate()
   const titleRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (width <= 940) {
+    if (isMobile) {
       animate(ref.current, { height: initialHeight })
     } else {
       animate(ref.current, { height: '90px' })
     }
-  }, [width, initialHeight, animate, ref])
+  }, [isMobile, initialHeight, animate, ref])
 
   useEffect(() => {
-    if (titleRef.current && width) {
-      setInitialHeight(titleRef.current.offsetHeight + 40)
+    const handleResize = () => {
+      if (titleRef.current && isMobile) {
+        setInitialHeight(titleRef.current.offsetHeight + 40)
+      }
     }
-  }, [titleRef, width])
+
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [titleRef, isMobile])
 
   function handleClick() {
-    if (width <= 940) {
+    if (isMobile) {
       setOpen(!open)
       if (open) {
         animate(ref.current, { height: initialHeight }, { duration: 0.3 })

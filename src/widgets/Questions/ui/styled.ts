@@ -12,7 +12,7 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   margin: 0 auto;
   max-width: 1180px;
-  width: 100%;
+  width: 1180px;
   padding-top: 40px;
   padding-bottom: 40px;
   gap: 20px;
@@ -60,11 +60,12 @@ const SectionTitle = styled.h2`
 const ColumnWrapper = styled.div`
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 280px 280px 583px;
-  gap: 20px;
+  width: 100%;
+  grid-template-columns: 280px 300px 583px;
+  gap: 10px;
 
   @media (max-width: 1300px) {
-    grid-template-columns: 90px 320px 430px;
+    grid-template-columns: 90px 340px 430px;
   }
 
   @media (max-width: 940px) {
@@ -72,6 +73,7 @@ const ColumnWrapper = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 580px;
+    gap: 20px;
   }
 
   @media (max-width: 620px) {
@@ -117,31 +119,34 @@ const QuestionsColumn = styled(motion.div).attrs({
 })<{ $height?: string }>`
   display: flex;
   flex-direction: column;
+  padding: 0px 10px;
   gap: 16px;
   max-height: 514px;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-color: ${colors.scrollActive} ${colors.backgroundBase2};
+  // scrollbar-width: thin;
+  // scrollbar-color: ${colors.scrollActive} ${colors.backgroundBase2};
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
 
   &::-webkit-scrollbar {
     width: 6px;
     background-color: ${colors.backgroundBase2};
-    border-radius: 30px;
+    border-radius: 6px;
     margin-left: 10px;
     padding-left: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: ${colors.scrollActive};
-    width: 6px;
-    border-radius: 30px;
+    border-radius: 6px;
   }
 
   @media (max-width: 940px) {
+    padding: 0px;
     gap: 12px;
     overflow-y: hidden;
     width: 580px;
-    height: 0px;
     max-height: none;
   }
 
@@ -162,7 +167,7 @@ const TextWrapper = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     justify-content: center;
     align-self: start;
     font-size: 16px;
@@ -183,7 +188,7 @@ const ContactsWrapper = styled.div`
     gap: 19.5px;
   }
 
-  @media (max-width: 619px) {
+  @media (max-width: 620px) {
     flex-direction: column;
     justify-self: center;
   }

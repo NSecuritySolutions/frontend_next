@@ -7,14 +7,14 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   flex-direction: row;
   width: 100%;
   height: 90px;
-  padding: 12px 20px;
-  border-radius: 20px;
+  border-radius: 8px;
   color: ${colors.darkPrimary};
   box-shadow: 2px 2px 25px 0 rgba(16, 16, 16, 0.05);
   font-weight: 400;
   font-size: 16px;
   gap: 20px;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: opacity 0.7s;
 
@@ -25,7 +25,6 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   @media (max-width: 940px) {
     width: 70px;
     height: 70px;
-    padding: 12px;
     border-radius: 8px;
   }
 `

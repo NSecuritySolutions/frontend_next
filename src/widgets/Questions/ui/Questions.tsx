@@ -6,7 +6,7 @@ import { QuestionTopic } from '@/shared/components/QuestionTopic'
 import { TQuestionType } from '@/shared/constants/texts/types'
 import { QuestionCard } from '@/shared/components/QuestionCard'
 import { AnswerCard } from '@/shared/components/AnswerCard'
-import { IQuestion, IQuestionCategory, QuestionsProps } from '../types'
+import { IQuestionCategory, QuestionsProps } from '../types'
 import {
   Section,
   SectionWrapper,
@@ -17,14 +17,15 @@ import {
 } from './styled'
 
 const Questions: React.FC<QuestionsProps> = ({ questions }) => {
-  const [currentTab, setCurrentTab] = React.useState<IQuestionCategory | null>(null)
+  const [currentTab, setCurrentTab] = React.useState<IQuestionCategory>(questions[0])
 
   const [safe, setSafe] = useState(true)
 
   const [currentQuestion, setCurrentQuestion] = React.useState<TQuestionType | null>(null)
 
   const [scope, animate] = useAnimate()
-  const [width, setWidth] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const [is620, setIs620] = useState(false)
 
   const sortFaqQuestions = (array: IQuestionCategory[]) => {
     const result = array.sort((a, b) => (a.id > b.id ? 1 : -1))
@@ -53,8 +54,33 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   }
 
   useEffect(() => {
+    if (isMobile) {
+      clearTimeout(timer)
+      setSafe(false)
+      timer = setTimeout(() => {
+        setSafe(true)
+      }, 600)
+      animate(scope.current, { height: '0px' }, { duration: 0.3 })
+      setTimeout(() => {
+        animate(scope.current, { height: 'auto' }, { duration: 0.5 })
+      }, 600)
+    }
+  }, [isMobile])
+
+  useEffect(() => {
     const handleResize = () => {
-      setWidth(window.innerWidth)
+      // if (!isMobile && window.innerWidth <= 940) {
+      //   clearTimeout(timer)
+      //   setSafe(false)
+      //   timer = setTimeout(() => {
+      //     setSafe(true)
+      //   }, 600)
+      //   animate(scope.current, { height: '0px' }, { duration: 0.3 })
+      //   setTimeout(() => {
+      //     animate(scope.current, { height: 'auto' }, { duration: 0.5 })
+      //   }, 600)
+      // }
+      setIsMobile(window.innerWidth <= 940)
     }
 
     window.addEventListener('resize', handleResize)
@@ -72,7 +98,7 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   }, [])
 
   function onTopickClick(item: IQuestionCategory) {
-    if (width <= 940) {
+    if (isMobile) {
       if (item.name != currentTab?.name && safe) {
         clearTimeout(timer)
         setSafe(false)
@@ -118,14 +144,14 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
           </TopicsColumn>
           <AnimatePresence mode="wait">
             <QuestionsColumn
-              key={currentTab?.name}
+              key={currentTab.name}
               ref={scope}
-              initial={width <= 940 ? { height: 0 } : undefined}
-              exit={width <= 940 ? { height: '0px' } : undefined}
+              initial={isMobile ? { height: 0 } : undefined}
+              // animate={isMobile ? { height: 'auto' } : undefined}
+              exit={isMobile ? { height: '0px' } : undefined}
               transition={{ duration: 0.3 }}
             >
-              {currentTab !== null &&
-                currentTab.questions &&
+              {currentTab.questions &&
                 currentTab.questions.map((item) => (
                   <QuestionCard
                     question={item.question}
@@ -134,7 +160,7 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
                     key={item.question}
                     onClick={onQuestionClick}
                     chosen={currentQuestion}
-                    width={width}
+                    isMobile={isMobile}
                   />
                 ))}
             </QuestionsColumn>
