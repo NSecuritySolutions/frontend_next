@@ -50,7 +50,7 @@ const Policy = observer(() => {
     }
 
     transformPolicyParagraphs()
-  }, [policy])
+  }, [])
 
   const createMarkup = (text: string) => ({ __html: text })
 

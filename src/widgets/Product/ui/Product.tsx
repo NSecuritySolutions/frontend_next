@@ -22,6 +22,7 @@ import {
 } from './styled'
 import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution'
 import Link from 'next/link'
+import calculatorStore from '@/app/store/calculatorStore'
 
 const Product: FC<ProductProps> = ({ data }) => {
   if (!data) return Loader()
@@ -67,7 +68,13 @@ const Product: FC<ProductProps> = ({ data }) => {
                 <Button $primary>Заказать звонок</Button>
               </Link>
               <Link href={'/#calculator'} passHref legacyBehavior>
-                <Button>В калькулятор</Button>
+                <Button
+                // onClick={() =>
+                // calculatorStore.setProduct(data)
+                // }
+                >
+                  В калькулятор
+                </Button>
               </Link>
             </ButtonsWrapper>
           </PriceColumnWrapper>

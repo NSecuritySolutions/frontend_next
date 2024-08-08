@@ -40,7 +40,6 @@ export default async function Page() {
     examplesData,
     questionsData,
     productData,
-    calculatorData,
     servicesData,
   } = await getMainPageData()
 
@@ -52,7 +51,7 @@ export default async function Page() {
       <Info />
       <OurServices />
       <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
-      <Calculator products={productData} calculator={calculatorData} />
+      <Calculator />
       <AdvantagesBlock />
       <ProjectStage />
       <OurTeam />

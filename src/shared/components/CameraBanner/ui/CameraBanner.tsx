@@ -28,7 +28,7 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
     if (threeScene && camera) {
       setReady(true)
     }
-  }, [threeScene, camera])
+  }, [threeScene, camera, setReady])
 
   useEffect(() => {
     if (scene) {
@@ -81,7 +81,7 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
         }
       }
     }
-  }, [camera, gl, size, area.current])
+  }, [camera, gl, size, area])
 
   useFrame(() => {
     if (mouseOver.current) {

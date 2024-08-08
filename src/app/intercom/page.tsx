@@ -9,7 +9,7 @@ import { getDomofonPageData } from '../api'
 import styles from './page.module.css'
 
 export default async function DomofonPage() {
-  const { calculatorData, questionsData, productData } = await getDomofonPageData()
+  const { questionsData, productData } = await getDomofonPageData()
 
   return (
     <main className={styles.main}>
@@ -22,7 +22,7 @@ export default async function DomofonPage() {
         src="/images/banner/png/video-surveillance-banner.png"
       />
       <Questions questions={questionsData} />
-      <Calculator products={productData} calculator={calculatorData} />
+      <Calculator />
       <ContactForm />
     </main>
   )

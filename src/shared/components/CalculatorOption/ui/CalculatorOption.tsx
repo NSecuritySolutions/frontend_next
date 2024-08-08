@@ -4,8 +4,8 @@ import { IOption } from '@/widgets/Calculator/types'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { RadioGroup } from '@/shared/components/RadioGroup'
 import { AmountComponent } from '@/shared/components/AmountComponent'
-import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
 import { observer } from 'mobx-react-lite'
+import CalculatorBlockStore from '@/app/store/calculatorBlockStore'
 
 interface CalculatorOptionProps {
   option: IOption

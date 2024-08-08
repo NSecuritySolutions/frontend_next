@@ -16,6 +16,8 @@ import StyledComponentsRegistry from '@/app/styling/registry'
 
 import styles from './page.module.css'
 import { BASE_URL } from '@/shared/constants/url/url'
+import { StoreProvider } from './store/calculatorStoreProvider'
+import { getCalculatorData } from './api'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -80,17 +82,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const { productData, calculatorData } = await getCalculatorData()
+
   return (
     <html lang="ru">
       <body className={manrope.className} id="content">
         <StyledComponentsRegistry>
           <Header navLinks={headerNavLinks} />
-          {children}
+          <StoreProvider products={productData} calculator={calculatorData}>
+            {children}
+          </StoreProvider>
           <Footer />
         </StyledComponentsRegistry>
       </body>

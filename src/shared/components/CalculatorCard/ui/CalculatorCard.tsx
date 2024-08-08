@@ -13,8 +13,8 @@ import { AmountComponent } from '@/shared/components/AmountComponent'
 import { FC, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
-import CalculatorBlockStore from '../store.ts'
-import calculatorStore from '@/widgets/Calculator/store.ts'
+import CalculatorBlockStore from '../../../../app/store/calculatorBlockStore.ts'
+import calculatorStore from '@/app/store/calculatorStore.ts'
 import { Toogle } from '../../Toogle/index.ts'
 import { IOption } from '@/widgets/Calculator/types.ts'
 import { AnimatePresence } from 'framer-motion'
@@ -56,16 +56,18 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           resize(store.appeared, true, false)
           setPresentCount(presentCount + store.appeared)
           setTimeout(() => {
-            setHeight(card.current!.offsetHeight)
-            resize(store.appeared - store.disabled, false, false)
-            setTimeout(() => {
-              setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
-            })
-            setTimeout(() => {
-              setHeight(0)
-              setAnimationSafe(true)
-            }, 1000)
-            setPresentCount(presentOptions.length)
+            if (card.current) {
+              setHeight(card.current.offsetHeight)
+              resize(store.appeared - store.disabled, false, false)
+              setTimeout(() => {
+                setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
+              })
+              setTimeout(() => {
+                setHeight(0)
+                setAnimationSafe(true)
+              }, 1000)
+              setPresentCount(presentOptions.length)
+            }
           }, 1000)
         } else if (store.disabled) {
           setAnimationSafe(false)
@@ -88,7 +90,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setPresentCount(presentOptions.length)
         }
       }
-    }, [presentOptions, presentCount, amount])
+    }, [presentOptions, presentCount, amount, setAnimationSafe, store.appeared, store.disabled])
 
     useEffect(() => {
       if (prev_block_amount !== 0 && amount === 0) {
@@ -97,7 +99,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       } else if (prev_block_amount === 0 && amount !== 0) {
         resize(presentCount, true)
       }
-    }, [amount])
+    }, [amount, presentCount, prev_block_amount, store])
 
     const handleChange = (v: number) => {
       if (!animationSafe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return

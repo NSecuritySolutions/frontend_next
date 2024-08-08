@@ -23,7 +23,7 @@ import {
   ButtonWrapper,
   TextWrapper,
 } from './styled'
-import calculatorStore from '@/widgets/Calculator/store'
+import calculatorStore from '@/app/store/calculatorStore'
 
 const ProductCard: FC<ProductCardProps> = ({ item }) => {
   const router = useRouter()
@@ -86,27 +86,27 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
             text="Заказать звонок"
             width="174px"
             height="44px"
-            link="/video-surveillance#contact-form"
+            link="#contact-form"
             size="15px"
             color={colors.darkPrimary}
             btnType="accent"
             onClick={(e) => {
               e.stopPropagation()
-              router.push(`/video-surveillance#contact-form`)
+              router.push(`#contact-form`)
             }}
           />
           <BtnLink
             text="В калькулятор"
             width="174px"
             height="44px"
-            link="/video-surveillance#calculator"
+            link="#calculator"
             color={colors.darkPrimary}
             size="15px"
             btnType="transparent"
             onClick={(e) => {
               e.stopPropagation()
-              router.push(`/video-surveillance#calculator`)
-              calculatorStore.setProduct([{ id: -1, solution: -1, product: item, amount: 1 }]) // надо исправец
+              router.push(`#calculator`)
+              calculatorStore.setProduct(item)
             }}
           />
         </ButtonWrapper>

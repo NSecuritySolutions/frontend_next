@@ -1,10 +1,16 @@
-import CalculatorBlockStore from '@/shared/components/CalculatorCard/store'
+import CalculatorBlockStore from './calculatorBlockStore'
 
 import { makeAutoObservable, computed, observable, action } from 'mobx'
-import { IBlock, ICalculatorData, IPriceList, IPriceVariables, TProduct } from './types'
-import { IEquipment } from '../ReadySolutionSection/types'
+import {
+  IBlock,
+  ICalculatorData,
+  IPriceList,
+  IPriceVariables,
+  TProduct,
+} from '@/widgets/Calculator/types'
+import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 
-class CalculatorStore {
+export class CalculatorStore {
   data: IBlock[] = []
   priceList: IPriceList | undefined = undefined
   prices: IPriceVariables = {}
@@ -76,11 +82,20 @@ class CalculatorStore {
     }
   }
 
-  setProduct(products: IEquipment[]) {
-    if (this.animationSafe)
+  setProduct(product: TProduct) {
+    if (this.animationSafe) {
+      this.blocks.map((block) => {
+        block.setProducts([{ id: 0, solution: 0, product: product, amount: 1 }])
+      })
+    }
+  }
+
+  setProducts(products: IEquipment[]) {
+    if (this.animationSafe) {
       this.blocks.map((block) => {
         block.setProducts(products)
       })
+    }
   }
 }
 

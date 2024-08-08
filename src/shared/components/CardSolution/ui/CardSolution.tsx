@@ -21,7 +21,7 @@ import colors from '@/shared/constants/colors'
 import Link from 'next/link'
 import { SolutionCardTooltip } from '@/shared/components/SolutionCardTooltip'
 import { ISolution } from '@/widgets/ReadySolutionSection/types'
-import calculatorStore from '@/widgets/Calculator/store'
+import calculatorStore from '@/app/store/calculatorStore'
 
 interface CardSolutionProps {
   data: ISolution
@@ -97,7 +97,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
             onClick={(e) => {
               // e.stopPropagation()
               // router.push('/#calculator')
-              calculatorStore.setProduct(data.equipment)
+              calculatorStore.setProducts(data.equipment)
             }}
           >
             В калькулятор

@@ -2,9 +2,9 @@ import { makeAutoObservable, computed, observable, action } from 'mobx'
 import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
-import calculatorStore from '@/widgets/Calculator/store'
+import calculatorStore from '@/app/store/calculatorStore'
 import { IBlock, IPriceVariables, IOption, TProduct } from '@/widgets/Calculator/types'
-import { ICondition, IConditionCategory } from './types'
+import { ICondition, IConditionCategory } from '../../shared/components/CalculatorCard/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 
 const config = {}
@@ -29,9 +29,9 @@ class CalculatorBlockStore {
   presentOptions: IOption[] = []
   disabled: number = 0
   appeared: number = 0
-  formula: string = ''
-  initialVariables: Record<string, string | number | boolean> = {}
-  variables: Record<string, string | number | boolean> = {}
+  formula: string
+  initialVariables: Record<string, string | number | boolean>
+  variables: Record<string, string | number | boolean>
   variabilityVariables: Record<string, number> = {}
   quantity_selection: boolean
 

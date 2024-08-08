@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Slider from 'react-slick'
 import { AnimatePresence, useAnimate } from 'framer-motion'
 
@@ -25,7 +25,6 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
 
   const [scope, animate] = useAnimate()
   const [isMobile, setIsMobile] = useState(false)
-  const [is620, setIs620] = useState(false)
 
   const sortFaqQuestions = (array: IQuestionCategory[]) => {
     const result = array.sort((a, b) => (a.id > b.id ? 1 : -1))
@@ -34,7 +33,7 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
   }
   const sortedQuestions = sortFaqQuestions(questions)
 
-  let timer: NodeJS.Timeout
+  const timer = useRef<NodeJS.Timeout | undefined>(undefined)
 
   const settings = {
     className: 'questions-slider',
@@ -55,9 +54,9 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
 
   useEffect(() => {
     if (isMobile) {
-      clearTimeout(timer)
+      clearTimeout(timer.current)
       setSafe(false)
-      timer = setTimeout(() => {
+      timer.current = setTimeout(() => {
         setSafe(true)
       }, 600)
       animate(scope.current, { height: '0px' }, { duration: 0.3 })
@@ -65,21 +64,10 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
         animate(scope.current, { height: 'auto' }, { duration: 0.5 })
       }, 600)
     }
-  }, [isMobile])
+  }, [isMobile, animate, scope])
 
   useEffect(() => {
     const handleResize = () => {
-      // if (!isMobile && window.innerWidth <= 940) {
-      //   clearTimeout(timer)
-      //   setSafe(false)
-      //   timer = setTimeout(() => {
-      //     setSafe(true)
-      //   }, 600)
-      //   animate(scope.current, { height: '0px' }, { duration: 0.3 })
-      //   setTimeout(() => {
-      //     animate(scope.current, { height: 'auto' }, { duration: 0.5 })
-      //   }, 600)
-      // }
       setIsMobile(window.innerWidth <= 940)
     }
 
@@ -95,14 +83,14 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
       setCurrentTab(sortedQuestions[0])
       setCurrentQuestion(sortedQuestions[0].questions[0])
     }
-  }, [])
+  }, [sortedQuestions])
 
   function onTopickClick(item: IQuestionCategory) {
     if (isMobile) {
       if (item.name != currentTab?.name && safe) {
-        clearTimeout(timer)
+        clearTimeout(timer.current)
         setSafe(false)
-        timer = setTimeout(() => {
+        timer.current = setTimeout(() => {
           setSafe(true)
         }, 600)
         animate(scope.current, { height: '0px' }, { duration: 0.3 })
