@@ -12,7 +12,7 @@ export const StoreProvider: React.FC<{
   children: ReactNode
 }> = ({ products, calculator, children }) => {
   const store = calculatorStore
-  store.getData(products, calculator)
+  if (!store.data.length) store.getData(products, calculator)
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 

@@ -21,7 +21,7 @@ import { Typography } from '@/shared/components/Typography'
 
 import { AnimatePresence, LayoutGroup } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { CalculatorClearButton } from '@/shared/components/CalculatorClearButton'
@@ -37,6 +37,15 @@ const Calculator: React.FC = observer(() => {
   const [isMobile, setIsMobile] = useState(false)
   const [currentMobileCard, setCurrentMobileCard] = useState<string | undefined>()
   const grid = useRef<HTMLDivElement>(null)
+  const timers = useRef<NodeJS.Timeout[]>([])
+
+  const clearTimers = useCallback(() => {
+    timers.current.forEach(clearTimeout)
+  }, [])
+
+  useEffect(() => {
+    return clearTimers
+  }, [clearTimers])
 
   const formattedResult =
     (!store.result ? '' : '~') +
@@ -51,15 +60,19 @@ const Calculator: React.FC = observer(() => {
       if (window.innerWidth >= 940 && !isGrid) {
         setGridSize(99999)
         store.setAnimationSafe(false)
-        setTimeout(() => {
-          setGridSize(0)
+        timers.current.push(
           setTimeout(() => {
-            if (grid.current) {
-              setGridSize(grid.current.offsetHeight)
-              store.setAnimationSafe(true)
-            }
-          }, 50)
-        }, 1000)
+            setGridSize(0)
+            timers.current.push(
+              setTimeout(() => {
+                if (grid.current) {
+                  setGridSize(grid.current.offsetHeight)
+                  store.setAnimationSafe(true)
+                }
+              }, 50),
+            )
+          }, 1000),
+        )
         setIsGrid(true)
       } else if (window.innerWidth < 940) {
         setIsGrid(false)
@@ -107,13 +120,17 @@ const Calculator: React.FC = observer(() => {
     const size = value * 40
     if (expanded) setGridSize((prev) => prev + size)
     if (setSafe) store.setAnimationSafe(false)
-    setTimeout(() => {
-      setGridSize(0)
+    timers.current.push(
       setTimeout(() => {
-        if (grid.current) setGridSize(grid.current!.offsetHeight)
-        if (setSafe) store.setAnimationSafe(true)
-      }, 50)
-    }, 1000)
+        setGridSize(0)
+        timers.current.push(
+          setTimeout(() => {
+            if (grid.current) setGridSize(grid.current!.offsetHeight)
+            if (setSafe) store.setAnimationSafe(true)
+          }, 50),
+        )
+      }, 1000),
+    )
   }
 
   const gridBlockResize = (add: boolean) => {
@@ -121,24 +138,32 @@ const Calculator: React.FC = observer(() => {
     if (add) {
       setGridSize((prev) => prev + 20 + 89)
       store.setAnimationSafe(false)
-      setTimeout(() => {
-        setGridSize(0)
+      timers.current.push(
         setTimeout(() => {
-          setGridSize(grid.current!.offsetHeight)
-          store.setAnimationSafe(true)
-        }, 50)
-      }, 1000)
+          setGridSize(0)
+          timers.current.push(
+            setTimeout(() => {
+              setGridSize(grid.current!.offsetHeight)
+              store.setAnimationSafe(true)
+            }, 50),
+          )
+        }, 1000),
+      )
     } else {
       store.setAnimationSafe(false)
       setHeight(grid.current!.getBoundingClientRect().height)
       setGridSize(grid.current!.offsetHeight)
-      setTimeout(() => {
-        setHeight(grid.current!.getBoundingClientRect().height)
+      timers.current.push(
         setTimeout(() => {
-          setHeight(0)
-          store.setAnimationSafe(true)
-        }, 1000)
-      }, 1000)
+          setHeight(grid.current!.getBoundingClientRect().height)
+          timers.current.push(
+            setTimeout(() => {
+              setHeight(0)
+              store.setAnimationSafe(true)
+            }, 1000),
+          )
+        }, 1000),
+      )
     }
   }
 
@@ -156,13 +181,17 @@ const Calculator: React.FC = observer(() => {
     store.setAnimationSafe(false)
     setHeight(grid.current!.offsetHeight)
     store.setBlocks()
-    setTimeout(() => {
-      setHeight(size * 89 + size * 20)
-    })
-    setTimeout(() => {
-      setHeight(0)
-      store.setAnimationSafe(true)
-    }, 1000)
+    timers.current.push(
+      setTimeout(() => {
+        setHeight(size * 89 + size * 20)
+      }),
+    )
+    timers.current.push(
+      setTimeout(() => {
+        setHeight(0)
+        store.setAnimationSafe(true)
+      }, 1000),
+    )
   }
 
   const handleMobileClick = (id: string) => {

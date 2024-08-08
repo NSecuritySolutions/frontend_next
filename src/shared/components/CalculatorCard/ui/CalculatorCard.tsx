@@ -10,7 +10,7 @@ import {
   Price,
 } from './styled'
 import { AmountComponent } from '@/shared/components/AmountComponent'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import CalculatorBlockStore from '../../../../app/store/calculatorBlockStore.ts'
@@ -39,6 +39,15 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const [presentCount, setPresentCount] = useState(presentOptions.length)
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
+    const timers = useRef<NodeJS.Timeout[]>([])
+
+    const clearTimers = useCallback(() => {
+      timers.current.forEach(clearTimeout)
+    }, [])
+
+    useEffect(() => {
+      return clearTimers
+    }, [clearTimers])
 
     const formattedResult = result.toLocaleString('ru-RU', {
       style: 'currency',
@@ -55,38 +64,50 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setAnimationSafe(false)
           resize(store.appeared, true, false)
           setPresentCount(presentCount + store.appeared)
-          setTimeout(() => {
-            if (card.current) {
-              setHeight(card.current.offsetHeight)
-              resize(store.appeared - store.disabled, false, false)
-              setTimeout(() => {
-                setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
-              })
-              setTimeout(() => {
-                setHeight(0)
-                setAnimationSafe(true)
-              }, 1000)
-              setPresentCount(presentOptions.length)
-            }
-          }, 1000)
+          timers.current.push(
+            setTimeout(() => {
+              if (card.current) {
+                setHeight(card.current.offsetHeight)
+                resize(store.appeared - store.disabled, false, false)
+                timers.current.push(
+                  setTimeout(() => {
+                    setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
+                  }),
+                )
+                timers.current.push(
+                  setTimeout(() => {
+                    setHeight(0)
+                    setAnimationSafe(true)
+                  }, 1000),
+                )
+                setPresentCount(presentOptions.length)
+              }
+            }, 1000),
+          )
         } else if (store.disabled) {
           setAnimationSafe(false)
           setHeight(card.current.offsetHeight)
-          setTimeout(() => {
-            resize(store.disabled, false, false)
-            setHeight((prev) => prev - store.disabled * 36)
+          timers.current.push(
             setTimeout(() => {
-              setHeight(0)
-              setAnimationSafe(true)
-            }, 1000)
-            setPresentCount(presentOptions.length)
-          }, 1000)
+              resize(store.disabled, false, false)
+              setHeight((prev) => prev - store.disabled * 36)
+              timers.current.push(
+                setTimeout(() => {
+                  setHeight(0)
+                  setAnimationSafe(true)
+                }, 1000),
+              )
+              setPresentCount(presentOptions.length)
+            }, 1000),
+          )
         } else if (store.appeared) {
           setAnimationSafe(false)
           resize(store.appeared, true, false)
-          setTimeout(() => {
-            setAnimationSafe(true)
-          }, 1000)
+          timers.current.push(
+            setTimeout(() => {
+              setAnimationSafe(true)
+            }, 1000),
+          )
           setPresentCount(presentOptions.length)
         }
       }
@@ -113,10 +134,12 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       if (animationSafe) {
         setDeleted(true)
         setAnimationSafe(false)
-        setTimeout(() => {
-          deleteBlock(false)
-          calculatorStore.removeBlock(index)
-        }, 1000)
+        timers.current.push(
+          setTimeout(() => {
+            deleteBlock(false)
+            calculatorStore.removeBlock(index)
+          }, 1000),
+        )
       }
     }
 
