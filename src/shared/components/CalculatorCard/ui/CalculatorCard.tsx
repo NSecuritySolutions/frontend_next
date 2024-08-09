@@ -13,12 +13,12 @@ import { AmountComponent } from '@/shared/components/AmountComponent'
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
-import CalculatorBlockStore from '../../../../app/store/calculatorBlockStore.ts'
+import CalculatorBlockStore from '@/app/store/calculatorBlockStore.ts'
 import calculatorStore from '@/app/store/calculatorStore.ts'
-import { Toogle } from '../../Toogle/index.ts'
+import { Toogle } from '@/shared/components/Toogle/index.ts'
 import { IOption } from '@/widgets/Calculator/types.ts'
 import { AnimatePresence } from 'framer-motion'
-import { CalculatorOption } from '../../CalculatorOption/index.ts'
+import { CalculatorOption } from '@/shared/components/CalculatorOption/index.ts'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore

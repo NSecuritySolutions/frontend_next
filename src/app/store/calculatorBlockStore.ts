@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { create, all } from 'mathjs'
 import calculatorStore from '@/app/store/calculatorStore'
 import { IBlock, IPriceVariables, IOption, TProduct } from '@/widgets/Calculator/types'
-import { ICondition, IConditionCategory } from '../../shared/components/CalculatorCard/types'
+import { ICondition, IConditionCategory } from '@/shared/components/CalculatorCard/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 
 const config = {}

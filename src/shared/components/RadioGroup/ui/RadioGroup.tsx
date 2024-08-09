@@ -12,7 +12,7 @@ import {
   RadioContainer,
 } from './styled'
 import { observer } from 'mobx-react-lite'
-import CalculatorBlockStore from '../../../../app/store/calculatorBlockStore'
+import CalculatorBlockStore from '@/app/store/calculatorBlockStore'
 import { createPortal } from 'react-dom'
 import { IOption } from '@/widgets/Calculator/types'
 

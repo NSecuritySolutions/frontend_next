@@ -9,8 +9,8 @@ import { CardInfoWithIcon } from '@/shared/components/CardInfoWithIcon'
 
 import dynamic from 'next/dynamic'
 
-const CameraBannerObj = dynamic(
-  () => import('@/shared/components/CameraBanner').then((module) => module.CameraBannerObj),
+const BannerCanvas = dynamic(
+  () => import('@/shared/components/BannerCanvas').then((module) => module.BannerCanvas),
   {
     ssr: false,
   },
@@ -30,9 +30,9 @@ import {
   AchievementsText,
   BannerWrapper,
   CardWrapper,
-  StyledCanvas,
 } from './styled'
 import colors from '@/shared/constants/colors'
+// import { BannerCanvas } from '@/shared/components/BannerCanvas'
 
 const Info: FC = () => {
   const bannerRef = useRef<HTMLDivElement>(null)
@@ -144,26 +144,7 @@ const Info: FC = () => {
             fill
             sizes="(@media max-width: 940px) 50wv, (@media max-width: 1300px) 77wv, 100vw"
           />
-          {!isMobile && (
-            <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
-              <spotLight
-                intensity={9000}
-                position={[20, 10, 30]}
-                penumbra={1}
-                shadow-mapSize={[1024, 1024]}
-                castShadow
-              />
-              <CameraBannerObj
-                sceneProps={{
-                  rotation: [0, Math.PI, 0],
-                  position: [0, 0.5, 0],
-                  scale: 0.35,
-                }}
-                setReady={setCameraReady}
-                area={bannerRef}
-              />
-            </StyledCanvas>
-          )}
+          {!isMobile && <BannerCanvas setReady={setCameraReady} area={bannerRef} />}
         </BannerWrapper>
       </MainCard>
       <CardWrapper>

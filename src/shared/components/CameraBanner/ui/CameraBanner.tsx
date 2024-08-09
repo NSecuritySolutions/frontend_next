@@ -17,7 +17,6 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
   const corpusRef = useRef<Bone | null>(null)
   const { camera, gl, size, scene: threeScene } = useThree()
   const mouse = useRef(new Vector2())
-  // const currentWidth = useRef(window.innerHeight)
   const currentWidth = useRef(area.current?.clientWidth || window.innerWidth)
   const mouseOver = useRef(false)
 
