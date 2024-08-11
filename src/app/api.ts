@@ -61,7 +61,7 @@ export async function getVideoPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/products/?category=Наружная%20камера&category=Внутренняя%20камера`),
   ])
 
   if (responses.some((response) => !response.ok)) {
