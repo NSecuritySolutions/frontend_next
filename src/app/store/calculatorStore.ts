@@ -85,15 +85,19 @@ export class CalculatorStore {
   setProduct(product: TProduct) {
     if (this.animationSafe) {
       this.blocks.map((block) => {
-        block.setProducts([{ id: 0, solution: 0, product: product, amount: 1 }])
+        block.setProduct(product, 1)
       })
     }
   }
 
   setProducts(products: IEquipment[]) {
     if (this.animationSafe) {
-      this.blocks.map((block) => {
-        block.setProducts(products)
+      products.forEach((product) => {
+        this.blocks
+          .filter((block) => block.backend_id == product.calculator_block)
+          .map((block) => {
+            block.setProduct(product.product, product.amount)
+          })
       })
     }
   }

@@ -23,6 +23,7 @@ math.import(
 )
 
 class CalculatorBlockStore {
+  backend_id: number
   id: string
   prev_block_amount: number
   data: IBlock
@@ -42,6 +43,7 @@ class CalculatorBlockStore {
 
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
+    this.backend_id = data.id
     this.data = data
     this.prev_block_amount = 0
     this.quantity_selection = data.quantity_selection
@@ -515,6 +517,14 @@ class CalculatorBlockStore {
         this.setProductByFilters(product.product, product.amount)
         this.setOptions(product.product, product.amount)
       })
+    }
+  }
+
+  setProduct(product: TProduct, amount: number) {
+    if (Object.keys(this.products).find((item) => item == product.category.title)) {
+      this.resetProductOptions(product.category.title)
+      this.setProductByFilters(product, amount)
+      this.setOptions(product, amount)
     }
   }
   // Конец блока

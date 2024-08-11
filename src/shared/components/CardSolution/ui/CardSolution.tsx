@@ -74,10 +74,10 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
         <ListTitle>Состав комплекта</ListTitle>
         <CharacteristicsList>
           {data.equipment.map((item, index) => (
-            <ListItem key={index}>{item.product.model}</ListItem>
+            <ListItem key={index}>{item.text}</ListItem>
           ))}
         </CharacteristicsList>
-        <Link href={`/products/${data.id}`}>
+        <Link href={`/sets/${data.id}`}>
           <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
             Подробнее...
           </LinkChild>
@@ -94,9 +94,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
         <Link href={calc} passHref legacyBehavior>
           <Button
             $transparent
-            onClick={(e) => {
-              // e.stopPropagation()
-              // router.push('/#calculator')
+            onClick={() => {
               calculatorStore.setProducts(data.equipment)
             }}
           >

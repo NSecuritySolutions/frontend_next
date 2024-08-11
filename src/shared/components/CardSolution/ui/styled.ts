@@ -14,6 +14,7 @@ const Card = styled.div`
   align-items: center;
   gap: 24px;
   width: 380px;
+  height: 761px;
 
   position: relative;
 
@@ -23,12 +24,14 @@ const Card = styled.div`
 
   @media (max-width: 1300px) {
     width: 280px;
+    height: 598px;
     padding: 20px;
     gap: 20px;
   }
 
   @media (max-width: 620px) {
     width: 242px;
+    height: 544px;
     gap: 12px;
   }
 `
@@ -212,6 +215,7 @@ const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 `
 
 const ButtonGroupWrapper = styled.div`
@@ -225,7 +229,7 @@ const Button = styled.a<{ $weight?: number; $transparent?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: ${(props) => (props.$transparent ? `1px solid ${colors.darkPrimary}` : 'none')};
+  border: ${(props) => (props.$transparent ? `1px solid ${colors.darkPrimary}52` : 'none')};
   border-radius: 12px;
   background-color: ${(props) =>
     props.$transparent ? colors.backgroundPrimary : colors.btnPrimary};
@@ -245,6 +249,7 @@ const Button = styled.a<{ $weight?: number; $transparent?: boolean }>`
   @media (max-width: 620px) {
     font-size: 13px;
     font-weight: 700;
+    width: 202px;
   }
 `
 

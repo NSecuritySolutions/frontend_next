@@ -119,3 +119,21 @@ export async function getSecurityPageData() {
     productData,
   }
 }
+
+export async function getProductById(id: string) {
+  const response = await fetch(`${BASE_URL}/api/v1/products/${id}/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const productData = await response.json()
+  return productData
+}
+
+export async function getSolutionById(id: string) {
+  const response = await fetch(`${BASE_URL}/api/v1/ready-solutions/${id}/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const productData = await response.json()
+  return productData
+}

@@ -1,4 +1,3 @@
-import { Typography } from '@/shared/components/Typography'
 import colors from '@/shared/constants/colors'
 import Image from 'next/image'
 import styled from 'styled-components'
@@ -140,10 +139,12 @@ const SectionTitle = styled.p`
   }
 `
 
-const Text = styled.p`
+const Text = styled.p<{ $link?: boolean }>`
   font-size: 16px;
   font-weight: 400;
   word-break: break-word;
+  color: ${(props) => (props.$link ? colors.titleBlueColor : 'none')};
+  // width: 100px;
 
   @media (max-width: 620px) {
     font-size: 14px;

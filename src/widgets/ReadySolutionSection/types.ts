@@ -1,4 +1,4 @@
-import { TProduct } from '../Calculator/types'
+import { IBlock, TProduct } from '../Calculator/types'
 
 interface ITag {
   id: number
@@ -8,8 +8,11 @@ interface ITag {
 interface IEquipment {
   id: number
   solution: number
-  amount: number
+  text: string
+  is_link: boolean
   product: TProduct
+  calculator_block: number
+  amount: number
 }
 
 interface ISolution {

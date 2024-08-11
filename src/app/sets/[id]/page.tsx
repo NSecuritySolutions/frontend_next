@@ -1,15 +1,15 @@
-import { Product } from '@/widgets/Product'
 import { Breadcrumbs } from '@/shared/components/Breadcrumbs'
 import styles from './page.module.css'
-import { getProductById } from '@/app/api'
+import { getSolutionById } from '@/app/api'
+import { Solution } from '@/widgets/Solution'
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const data = await getProductById(params.id)
+  const data = await getSolutionById(params.id)
 
   return (
     <main className={styles.main} id="product">
-      <Breadcrumbs title={data.model} />
-      <Product data={data} />
+      <Breadcrumbs title={data.title} />
+      <Solution data={data} />
     </main>
   )
 }

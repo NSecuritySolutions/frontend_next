@@ -57,7 +57,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
     <CardWrapper>
       <CardContainer
         onClick={() => {
-          router.push(`/cameras/${item.id}`)
+          router.push(`/products/${item.id}`)
         }}
       >
         <Img src={item.image} alt={item.model} width={260} height={261} />
