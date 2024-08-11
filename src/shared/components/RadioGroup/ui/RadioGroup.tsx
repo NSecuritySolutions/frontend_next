@@ -127,7 +127,8 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
                 checked={value === item}
                 onChange={(e) =>
                   onChange(option, () =>
-                    store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
+                    // store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
+                    store.setVariable(name, e.target.value),
                   )
                 }
               />
