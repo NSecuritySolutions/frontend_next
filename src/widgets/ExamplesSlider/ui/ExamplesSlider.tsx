@@ -54,6 +54,7 @@ const ExamplesSlider: React.FC = () => {
       {
         breakpoint: 999999999,
         settings: {
+          infinite: false,
           dots: true,
           rows: 2,
           slidesToShow: 2,

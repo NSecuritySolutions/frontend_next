@@ -30,21 +30,19 @@ const ColumnTitle = styled.h2`
 const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1180px;
-  width: 100%;
+  width: 1180px;
 
   @media (max-width: 1300px) {
-    max-width: 880px;
-    width: 100%;
+    width: 880px;
     gap: 20px;
   }
 
   @media (max-width: 940px) {
-    max-width: 580px;
+    width: 580px;
   }
 
   @media (max-width: 620px) {
-    max-width: 328px;
+    width: 328px;
   }
 `
 
@@ -72,21 +70,21 @@ const SliderContainer = styled.div`
 
   .examples-slider .slick-slide > div:first-child {
       margin-top: 20px;
-      max-width: 580px;
+      width: 580px;
       display: flex;
       gap: 20px;
 
       @media (max-width: 1300px) {
-        max-width: 430px;
+        width: 430px;
       }
 
       @media (max-width: 940px) {
-        max-width: 380px;
+        width: 380px;
         outline: none;
       }
 
       @media (max-width: 620px) {
-        max-width: 280px;
+        width: 280px;
       }
     }
   }
@@ -137,7 +135,7 @@ const SliderContainer = styled.div`
 `
 
 const CardWrapper = styled.div`
-  max-width: 580px;
+  width: 580px;
   display: flex !important;
   height: 100%;
   flex-direction: row;
@@ -152,17 +150,17 @@ const CardWrapper = styled.div`
 
   @media (max-width: 1300px) {
     flex-direction: column;
-    max-width: 430px;
+    width: 430px;
     min-height: 472px;
   }
 
   @media (max-width: 940px) {
-    max-width: 380px;
+    width: 380px;
     min-height: 445px;
   }
 
   @media (max-width: 620px) {
-    max-width: 280px;
+    width: 280px;
     min-height: 377px;
   }
 `
