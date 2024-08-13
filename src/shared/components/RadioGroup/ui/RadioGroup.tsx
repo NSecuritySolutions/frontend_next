@@ -12,7 +12,7 @@ import {
   RadioContainer,
 } from './styled'
 import { observer } from 'mobx-react-lite'
-import CalculatorBlockStore from '../../CalculatorCard/store'
+import CalculatorBlockStore from '@/app/store/calculatorBlockStore'
 import { createPortal } from 'react-dom'
 import { IOption } from '@/widgets/Calculator/types'
 
@@ -49,7 +49,7 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [radiogroup.current])
+  }, [radiogroup])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -75,13 +75,13 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
     return () => {
       window.removeEventListener('click', handleClickOutside)
     }
-  }, [isOpen])
+  }, [isOpen, name, options, store])
 
   useEffect(() => {
     if (isDropdown && value == 'unknown') {
       store.setVariable(name, options[0])
     }
-  }, [isDropdown, value])
+  }, [isDropdown, value, name, options, store])
 
   return (
     <RadioContainer ref={radiogroup}>
@@ -127,7 +127,8 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
                 checked={value === item}
                 onChange={(e) =>
                   onChange(option, () =>
-                    store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
+                    // store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),
+                    store.setVariable(name, e.target.value),
                   )
                 }
               />

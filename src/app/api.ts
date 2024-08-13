@@ -8,7 +8,6 @@ export async function getMainPageData() {
     fetch(`${BASE_URL}/api/v1/our-works/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
-    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
     fetch(`${BASE_URL}/api/v1/our-services/`),
   ])
 
@@ -23,7 +22,6 @@ export async function getMainPageData() {
     examplesData,
     questionsData,
     productData,
-    calculatorData,
     servicesData,
   ] = await Promise.all(responses.map((response) => response.json()))
 
@@ -34,8 +32,27 @@ export async function getMainPageData() {
     examplesData,
     questionsData,
     productData,
-    calculatorData,
     servicesData,
+  }
+}
+
+export async function getCalculatorData() {
+  const responses = await Promise.all([
+    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
+  ])
+
+  if (responses.some((response) => !response.ok)) {
+    throw new Error('Failed to fetch data')
+  }
+
+  const [productData, calculatorData] = await Promise.all(
+    responses.map((response) => response.json()),
+  )
+
+  return {
+    productData,
+    calculatorData,
   }
 }
 
@@ -45,14 +62,13 @@ export async function getVideoPageData() {
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
-    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
   ])
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, solutionTags, questionsData, productData, calculatorData] = await Promise.all(
+  const [solutionData, solutionTags, questionsData, productData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
@@ -61,13 +77,11 @@ export async function getVideoPageData() {
     solutionTags,
     questionsData,
     productData,
-    calculatorData,
   }
 }
 
 export async function getDomofonPageData() {
   const responses = await Promise.all([
-    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
   ])
@@ -76,12 +90,11 @@ export async function getDomofonPageData() {
     throw new Error('Failed to fetch data')
   }
 
-  const [calculatorData, questionsData, productData] = await Promise.all(
+  const [questionsData, productData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
   return {
-    calculatorData,
     questionsData,
     productData,
   }
@@ -89,7 +102,6 @@ export async function getDomofonPageData() {
 
 export async function getSecurityPageData() {
   const responses = await Promise.all([
-    fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
   ])
@@ -98,13 +110,30 @@ export async function getSecurityPageData() {
     throw new Error('Failed to fetch data')
   }
 
-  const [calculatorData, questionsData, productData] = await Promise.all(
+  const [questionsData, productData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
   return {
-    calculatorData,
     questionsData,
     productData,
   }
+}
+
+export async function getProductById(id: string) {
+  const response = await fetch(`${BASE_URL}/api/v1/products/${id}/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const productData = await response.json()
+  return productData
+}
+
+export async function getSolutionById(id: string) {
+  const response = await fetch(`${BASE_URL}/api/v1/ready-solutions/${id}/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const productData = await response.json()
+  return productData
 }

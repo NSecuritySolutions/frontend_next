@@ -6,7 +6,6 @@ const CardContainer = styled(motion.article).attrs({
   layout: 'size',
 })<{
   $chosen?: boolean
-  $open?: boolean
 }>`
   background: ${(props) => (props.$chosen ? `${colors.backgroundCardBl}` : '#FFFFFF')};
   display: flex;

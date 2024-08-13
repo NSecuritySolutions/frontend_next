@@ -10,15 +10,15 @@ import {
   Price,
 } from './styled'
 import { AmountComponent } from '@/shared/components/AmountComponent'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
-import CalculatorBlockStore from '../store.ts'
-import calculatorStore from '@/widgets/Calculator/store.ts'
-import { Toogle } from '../../Toogle/index.ts'
+import CalculatorBlockStore from '@/app/store/calculatorBlockStore.ts'
+import calculatorStore from '@/app/store/calculatorStore.ts'
+import { Toogle } from '@/shared/components/Toogle/index.ts'
 import { IOption } from '@/widgets/Calculator/types.ts'
 import { AnimatePresence } from 'framer-motion'
-import { CalculatorOption } from '../../CalculatorOption/index.ts'
+import { CalculatorOption } from '@/shared/components/CalculatorOption/index.ts'
 
 interface CalculatorCardProps {
   store: CalculatorBlockStore
@@ -39,6 +39,15 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     const [presentCount, setPresentCount] = useState(presentOptions.length)
     const [height, setHeight] = useState(0)
     const card = useRef<HTMLDivElement>(null)
+    const timers = useRef<NodeJS.Timeout[]>([])
+
+    const clearTimers = useCallback(() => {
+      timers.current.forEach(clearTimeout)
+    }, [])
+
+    useEffect(() => {
+      return clearTimers
+    }, [clearTimers])
 
     const formattedResult = result.toLocaleString('ru-RU', {
       style: 'currency',
@@ -55,40 +64,54 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setAnimationSafe(false)
           resize(store.appeared, true, false)
           setPresentCount(presentCount + store.appeared)
-          setTimeout(() => {
-            setHeight(card.current!.offsetHeight)
-            resize(store.appeared - store.disabled, false, false)
+          timers.current.push(
             setTimeout(() => {
-              setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
-            })
-            setTimeout(() => {
-              setHeight(0)
-              setAnimationSafe(true)
-            }, 1000)
-            setPresentCount(presentOptions.length)
-          }, 1000)
+              if (card.current) {
+                setHeight(card.current.offsetHeight)
+                resize(store.appeared - store.disabled, false, false)
+                timers.current.push(
+                  setTimeout(() => {
+                    setHeight((prev) => prev + (store.appeared - store.disabled) * 40)
+                  }),
+                )
+                timers.current.push(
+                  setTimeout(() => {
+                    setHeight(0)
+                    setAnimationSafe(true)
+                  }, 1000),
+                )
+                setPresentCount(presentOptions.length)
+              }
+            }, 1000),
+          )
         } else if (store.disabled) {
           setAnimationSafe(false)
           setHeight(card.current.offsetHeight)
-          setTimeout(() => {
-            resize(store.disabled, false, false)
-            setHeight((prev) => prev - store.disabled * 36)
+          timers.current.push(
             setTimeout(() => {
-              setHeight(0)
-              setAnimationSafe(true)
-            }, 1000)
-            setPresentCount(presentOptions.length)
-          }, 1000)
+              resize(store.disabled, false, false)
+              setHeight((prev) => prev - store.disabled * 36)
+              timers.current.push(
+                setTimeout(() => {
+                  setHeight(0)
+                  setAnimationSafe(true)
+                }, 1000),
+              )
+              setPresentCount(presentOptions.length)
+            }, 1000),
+          )
         } else if (store.appeared) {
           setAnimationSafe(false)
           resize(store.appeared, true, false)
-          setTimeout(() => {
-            setAnimationSafe(true)
-          }, 1000)
+          timers.current.push(
+            setTimeout(() => {
+              setAnimationSafe(true)
+            }, 1000),
+          )
           setPresentCount(presentOptions.length)
         }
       }
-    }, [presentOptions, presentCount, amount])
+    }, [presentOptions, presentCount, amount, setAnimationSafe, store.appeared, store.disabled])
 
     useEffect(() => {
       if (prev_block_amount !== 0 && amount === 0) {
@@ -97,7 +120,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       } else if (prev_block_amount === 0 && amount !== 0) {
         resize(presentCount, true)
       }
-    }, [amount])
+    }, [amount, presentCount, prev_block_amount, store])
 
     const handleChange = (v: number) => {
       if (!animationSafe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
@@ -111,10 +134,12 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       if (animationSafe) {
         setDeleted(true)
         setAnimationSafe(false)
-        setTimeout(() => {
-          deleteBlock(false)
-          calculatorStore.removeBlock(index)
-        }, 1000)
+        timers.current.push(
+          setTimeout(() => {
+            deleteBlock(false)
+            calculatorStore.removeBlock(index)
+          }, 1000),
+        )
       }
     }
 

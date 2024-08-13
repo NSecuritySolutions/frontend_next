@@ -33,13 +33,15 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen,
     const handleResize = () => {
       if (titleRef.current && isMobile) {
         setInitialHeight(titleRef.current.offsetHeight + 40)
+        setOpen(false)
+        animate(ref.current, { height: initialHeight })
       }
     }
 
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [titleRef, isMobile])
+  }, [titleRef, isMobile, initialHeight])
 
   function handleClick() {
     if (isMobile) {
@@ -57,7 +59,6 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen,
     <CardContainer
       onClick={handleClick}
       $chosen={chosen !== null && chosen.question === question}
-      $open={open}
       ref={ref}
     >
       {/* <QuestionNumber $chosen={chosen !== null && chosen.question === question}>

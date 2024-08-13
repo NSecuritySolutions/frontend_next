@@ -1,8 +1,7 @@
-import { ICamera } from '@/widgets/Calculator/types'
-import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution.ts'
+import { TProduct } from '@/widgets/Calculator/types'
 
 export interface ProductProps {
-  data: TCardSolutionProps | ICamera
+  data: TProduct
 }
 
 export type TItem = {

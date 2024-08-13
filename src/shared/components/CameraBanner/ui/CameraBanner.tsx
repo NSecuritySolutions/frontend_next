@@ -17,7 +17,6 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
   const corpusRef = useRef<Bone | null>(null)
   const { camera, gl, size, scene: threeScene } = useThree()
   const mouse = useRef(new Vector2())
-  // const currentWidth = useRef(window.innerHeight)
   const currentWidth = useRef(area.current?.clientWidth || window.innerWidth)
   const mouseOver = useRef(false)
 
@@ -28,7 +27,7 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
     if (threeScene && camera) {
       setReady(true)
     }
-  }, [threeScene, camera])
+  }, [threeScene, camera, setReady])
 
   useEffect(() => {
     if (scene) {
@@ -81,7 +80,7 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
         }
       }
     }
-  }, [camera, gl, size, area.current])
+  }, [camera, gl, size, area])
 
   useFrame(() => {
     if (mouseOver.current) {

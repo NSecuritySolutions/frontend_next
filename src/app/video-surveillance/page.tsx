@@ -1,4 +1,3 @@
-// 'use client'
 // import { useEffect } from 'react'
 
 import { ContactForm } from '@/widgets/ContactForm'
@@ -15,7 +14,7 @@ import styles from './page.module.css'
 export const revalidate = 60
 
 export default async function VideoPage() {
-  const { solutionData, solutionTags, questionsData, productData, calculatorData } = await getVideoPageData()
+  const { solutionData, solutionTags, questionsData, productData } = await getVideoPageData()
 
   // useEffect(() => {
   //   const targetCardID = localStorage.getItem('id')
@@ -41,7 +40,7 @@ export default async function VideoPage() {
       <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <ProductCards data={productData} />
       <Questions questions={questionsData} />
-      <Calculator products={productData} calculator={calculatorData} />
+      <Calculator />
       <ContactForm />
     </main>
   )

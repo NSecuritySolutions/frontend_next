@@ -1,5 +1,12 @@
 import { FC, useState } from 'react'
-import { CardsContainer, Section, SectionTitle, TabButton, TabsContainer } from './styled'
+import {
+  CardsContainer,
+  Section,
+  SectionTitle,
+  TabButton,
+  TabsContainer,
+  CustomDot,
+} from './styled'
 import { CardSolution } from '@/shared/components/CardSolution'
 import Slider from 'react-slick'
 import { ISolution, ITag } from '../types'
@@ -52,8 +59,19 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions
 
   const cardSettings = {
     className: 'ready-solutions-slider',
+    speed: 300,
     responsive: [
-      { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
+      {
+        breakpoint: 999999999,
+        settings: {
+          infinite: false,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          variableWidth: true,
+          arrows: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 940,
         settings: {
@@ -77,23 +95,10 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions
         },
       },
     ],
+    customPaging() {
+      return <CustomDot />
+    },
   }
-
-  // let activeTabData: TCardSolutionProps[] = []
-
-  // switch (activeTab) {
-  //   case 'VideoSurveillance':
-  //     activeTabData = cardSolutionData
-  //     break
-  //   case 'Intercom':
-  //     activeTabData = cardSolutionData2
-  //     break
-  //   case 'SecurityFireAlarms':
-  //     activeTabData = cardSolutionData3
-  //     break
-  //   default:
-  //     break
-  // }
 
   return (
     <Section id="solutions">

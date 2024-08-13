@@ -9,7 +9,7 @@ import { getSecurityPageData } from '../api'
 import styles from './page.module.css'
 
 export default async function SecurityPage() {
-  const { calculatorData, questionsData, productData } = await getSecurityPageData()
+  const { questionsData, productData } = await getSecurityPageData()
 
   return (
     <main className={styles.main}>
@@ -21,7 +21,7 @@ export default async function SecurityPage() {
         src="/images/banner/png/video-surveillance-banner.png"
       />
       <Questions questions={questionsData} />
-      <Calculator products={productData} calculator={calculatorData} />
+      <Calculator />
       <ContactForm />
     </main>
   )
