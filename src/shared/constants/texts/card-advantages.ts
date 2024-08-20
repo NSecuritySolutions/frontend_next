@@ -11,7 +11,7 @@ export const cardAdvantagesData = [
     id: 1,
     title: 'Надежность',
     logo: efficiencyLogo,
-    backgroundColor: `${colors.backgroundBase3}`,
+    backgroundColor: `${colors.backgroundPrimary}`,
     listItem: [
       'Применение проверенных технологий',
       'Гарантированная работоспособность системы',
