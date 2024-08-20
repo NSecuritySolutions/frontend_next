@@ -143,8 +143,7 @@ export type TInputProps = {
 }
 
 const focusStyles = (props: { $error: string }) => `
-  outline: none;
-  border: 1px solid ${props.$error === 'true' ? colors.textNegative : colors.btnPrimary};
+  outline: 1px solid ${props.$error === 'true' ? colors.textNegative : colors.btnPrimary};
 `
 
 const Input = styled.input<TInputProps>`
@@ -157,6 +156,7 @@ const Input = styled.input<TInputProps>`
   margin-bottom: 32px;
   font-size: 16px;
   font-weight: 400;
+  font-family: var(--font-manrope);
   color: ${(props) =>
     props.$error === 'true' ? `${colors.textNegative}` : `${colors.darkPrimary}`};
 
@@ -178,12 +178,12 @@ const TextInput = styled.textarea`
   margin-bottom: 20px;
   font-size: 16px;
   font-weight: 400;
+  font-family: var(--font-manrope);
 
   &:active,
   &:focus,
   &:focus-visible {
-    outline: none;
-    border: 1px solid ${colors.btnPrimary};
+    outline: 1px solid ${colors.btnPrimary};
   }
 `
 

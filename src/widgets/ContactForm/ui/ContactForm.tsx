@@ -187,7 +187,7 @@ const ContactForm = () => {
               {errors.email && <ErrorText>{errors.email?.message}</ErrorText>}
             </InputWrapper>
             <InputWrapper>
-              <TextInput {...register('message')} placeholder="Комментарий" maxLength={1000} />
+              <TextInput {...register('message')} placeholder="Комментарий" maxLength={2000} />
             </InputWrapper>
 
             {watch('file')?.name ? (
