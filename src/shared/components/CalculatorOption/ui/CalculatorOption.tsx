@@ -38,6 +38,9 @@ const CalculatorOption: FC<CalculatorOptionProps> = observer(
           <CheckBox
             tabIndex={amount == 0 ? -1 : 0}
             checked={store.getVariable(option.name) as boolean}
+            disabled={
+              !store.getVariable(option.name) && store.isOptionValueDisabled(option.name, true)
+            }
             onChange={(e) => {
               onChange(option, () => store.setVariable(option.name, e.target.checked))
             }}

@@ -61,9 +61,53 @@ class CalculatorBlockStore {
       prev_block_amount: observable,
       changed: computed,
       result: computed,
+      isOptionValueDisabled: action,
       setVariable: action,
       setPresent: action,
     })
+  }
+
+  isOptionValueDisabled(name: string, value: string | number | boolean) {
+    const optionData = this.data.options.find((option) => option.name === name)
+    if (optionData?.product) {
+      return this.checkOptionValueFilter(optionData.product, name, value).length === 0
+    }
+    return false
+  }
+
+  private checkOptionValueFilter(category: string, name: string, value: string | number | boolean) {
+    const products = calculatorStore.products.filter((item) => item?.category?.title === category)
+    // Применяем дополнительные фильтры на основе выбора + начальных условий
+    const filteredProducts = products.filter((item) =>
+      this.applyFiltersForCheck(item, this.filters[category], name, value),
+    )
+    return filteredProducts
+  }
+
+  private applyFiltersForCheck(
+    item: TProduct,
+    conditionCategory: IConditionCategory,
+    name: string,
+    value: string | number | boolean,
+  ) {
+    const initial = this.applyInitialFilters(item, conditionCategory.initial)
+    const restFilters = Object.keys(conditionCategory).filter((option) => option != 'initial')
+    if (restFilters.length == 0) return initial
+    const rest = restFilters.every((option) => {
+      return conditionCategory[option].every((condition) => {
+        if (this.variables[option] == 'unknown') {
+          return true
+        }
+        if (condition.leftPart == name) {
+          if (condition.optionValue == value.toString()) return this.applyCondition(item, condition)
+          else return true
+        }
+        if (condition.optionValue == this.variables[option].toString()) {
+          return this.applyCondition(item, condition)
+        } else return true
+      })
+    })
+    return rest && initial
   }
 
   get changed() {

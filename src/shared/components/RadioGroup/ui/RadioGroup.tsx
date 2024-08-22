@@ -102,13 +102,24 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
                   select.current!.offsetHeight +
                   3
                 }
-                $left={select.current!.getBoundingClientRect().left + window.scrollX}
+                $left={select.current!.getBoundingClientRect().left}
+                $width={select.current!.clientWidth}
               >
                 {options.map((item) => (
                   <Option
-                    className={item == value ? 'checked' : ''}
+                    className={
+                      item == value
+                        ? 'checked'
+                        : store.isOptionValueDisabled(option.name, item)
+                          ? 'disabled'
+                          : ''
+                    }
                     key={item}
-                    onClick={() => onChange(option, () => store.setVariable(name, item))}
+                    onClick={() => {
+                      if (!store.isOptionValueDisabled(option.name, item)) {
+                        onChange(option, () => store.setVariable(name, item))
+                      }
+                    }}
                   >
                     {item}
                   </Option>
@@ -125,6 +136,7 @@ const RadioGroup: React.FC<RadioGroupProps> = observer(({ option, store, onChang
                 name={name}
                 value={item}
                 checked={value === item}
+                disabled={store.isOptionValueDisabled(option.name, item)}
                 onChange={(e) =>
                   onChange(option, () =>
                     // store.setVariable(name, e.target.value === value ? 'unknown' : e.target.value),

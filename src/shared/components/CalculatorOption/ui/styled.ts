@@ -68,6 +68,12 @@ const CheckBox = styled.input.attrs({ type: 'checkbox' })`
     transition: all 0.5s;
     position: relative;
   }
+
+  &:disabled {
+    background-color: ${colors.backgroundBase3};
+    border-color: ${colors.scrollActive};
+    cursor: not-allowed;
+  }
 `
 
 const InputNumber = styled.input.attrs({ type: 'number', min: 1 })`
