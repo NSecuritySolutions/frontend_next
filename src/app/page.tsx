@@ -21,6 +21,7 @@ import { CookiesNotice } from '@/shared/components/CookiesNotice'
 import { getMainPageData } from './api'
 
 import styles from './page.module.css'
+import { FormModal } from '@/shared/components/FormModal'
 
 const Calculator = dynamic(
   () => import('@/widgets/Calculator').then((module) => module.Calculator),
@@ -62,6 +63,7 @@ export default async function Page() {
       <ContactForm />
       <ScrollButton />
       {!hasCookie && <CookiesNotice />}
+      <FormModal data={solutionData} />
     </main>
   )
 }
