@@ -38,6 +38,7 @@ import {
 } from './styled'
 
 const MAX_FILE_SIZE = 5
+const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
 const SUPPORTED_FORMATS = [
   'image/jpg',
   'image/jpeg',
@@ -112,11 +113,7 @@ const ContactForm = () => {
     if (e.target.files) {
       const file = e.target.files[0]
       const splittedFileName = file.name.split('.')
-      if (
-        !['doc', 'docx', 'xls', 'xlsx', 'pdf'].includes(
-          splittedFileName[splittedFileName.length - 1],
-        )
-      ) {
+      if (!FILE_SUPPORTED_FORMATS.includes(splittedFileName[splittedFileName.length - 1])) {
         setFileError('Неподдерживаемый формат файла')
         return
         // перевели в байты

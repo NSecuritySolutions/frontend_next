@@ -193,11 +193,12 @@ const CharacteristicsList = styled.ol`
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   padding-left: 20px;
-  height: 110px;
-  overflow: hidden;
+  height: 100%;
+  overflow-x: hidden;
   line-height: 1.36;
   font-size: 16px;
   font-weight: 400;
+  scrollbar-width: thin;
 
   @media (max-width: 620px) {
     font-size: 14px;
@@ -246,6 +247,80 @@ const UploadBtnText = styled.span`
   }
 `
 
+const InfoTitle = styled.p`
+  font-size: 18px;
+  font-weight: 800;
+`
+
+const InfoContent = styled.div<{ $height?: number }>`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: ${(props) => (props.$height ? `${props.$height}px` : '100%')};
+`
+
+const ContentTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ContentTitleText = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 300px;
+`
+
+const ContentTitlePrice = styled.p`
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.33;
+`
+
+const Divider = styled.div`
+  border: 1px solid ${colors.backgroundCardBl};
+`
+
+const CalcContentList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 195px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+`
+
+const CalcContentListItem = styled.li`
+  display: grid;
+  grid-template-columns: 260px 120px 120px;
+  height: 40px;
+  align-items: center;
+`
+
+const CalcContentListItemTitle = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`
+
+const CalcContentListItemPrice = styled.p`
+  font-size: 16px;
+  font-weight: 700;
+  justify-self: end;
+`
+
+const CalcButton = styled.button`
+  justify-self: end;
+  height: 32px;
+  border: 1px solid ${colors.darkPrimary}52;
+  border-radius: 8px;
+  font-family: var(--mont);
+  font-size: 13px;
+  font-weight: 700;
+`
+
 export {
   Overlay,
   Container,
@@ -269,4 +344,15 @@ export {
   NoBr,
   UploadBtn,
   UploadBtnText,
+  InfoTitle,
+  InfoContent,
+  ContentTitle,
+  ContentTitleText,
+  ContentTitlePrice,
+  Divider,
+  CalcContentList,
+  CalcContentListItem,
+  CalcContentListItemTitle,
+  CalcContentListItemPrice,
+  CalcButton,
 }

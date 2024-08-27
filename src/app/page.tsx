@@ -63,7 +63,7 @@ export default async function Page() {
       <ContactForm />
       <ScrollButton />
       {!hasCookie && <CookiesNotice />}
-      <FormModal data={solutionData} />
+      <FormModal />
     </main>
   )
 }

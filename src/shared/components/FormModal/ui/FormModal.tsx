@@ -22,6 +22,17 @@ import {
   UploadBtn,
   UploadBtnText,
   NoBr,
+  InfoTitle,
+  InfoContent,
+  ContentTitle,
+  ContentTitleText,
+  ContentTitlePrice,
+  Divider,
+  CalcContentList,
+  CalcContentListItem,
+  CalcContentListItemTitle,
+  CalcContentListItemPrice,
+  CalcButton,
 } from './styled'
 
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -40,8 +51,7 @@ import calculatorStore from '@/app/store/calculatorStore'
 type IFormInput = yup.InferType<typeof schema>
 
 interface FormModalProps {
-  data: ISolution // | Calculator
-  solution?: boolean
+  data?: ISolution
   calculator?: boolean
 }
 
@@ -58,11 +68,13 @@ const schema = yup.object().shape({
 
 const MAX_FILE_SIZE = 5
 const PhoneMask = '+{7} (000) 000-00-00'
+const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
 
-const FormModal: FC<FormModalProps> = ({ solution, calculator, data }) => {
+const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
   const [fileError, setFileError] = useState<string | undefined>()
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const inputRef = useRef<typeof IMaskInput>(null)
+
   calculator = true
 
   const {
@@ -108,11 +120,7 @@ const FormModal: FC<FormModalProps> = ({ solution, calculator, data }) => {
     if (e.target.files) {
       const file = e.target.files[0]
       const splittedFileName = file.name.split('.')
-      if (
-        !['doc', 'docx', 'xls', 'xlsx', 'pdf'].includes(
-          splittedFileName[splittedFileName.length - 1],
-        )
-      ) {
+      if (!FILE_SUPPORTED_FORMATS.includes(splittedFileName[splittedFileName.length - 1])) {
         setFileError('Неподдерживаемый формат файла')
         return
         // перевели в байты
@@ -128,7 +136,7 @@ const FormModal: FC<FormModalProps> = ({ solution, calculator, data }) => {
   }
 
   let file = <></>
-  if (!solution && !calculator) {
+  if (!data && !calculator) {
     if (watch('file')?.name) {
       file = (
         <FileWrapper>
@@ -218,65 +226,49 @@ const FormModal: FC<FormModalProps> = ({ solution, calculator, data }) => {
                 />
                 {errors.email && <ErrorText>{errors.email?.message}</ErrorText>}
               </InputWrapper>
-              {(solution || calculator) && (
+              {(data || calculator) && (
                 <TextInput {...register('message')} placeholder="Комментарий" maxLength={2000} />
               )}
             </InputsWrapper>
-            {solution && (
+            {data && (
               <InfoWrapper>
-                <p style={{ fontSize: 18, fontWeight: 800 }}>Выбрано готовое решение:</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 20, width: 300 }}>
-                      <Image src={data.image} width={65} height={50} alt="picture" />
-                      {data.title}
-                    </div>
-                    <p style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.33 }}>10000 P</p>
-                  </div>
-                  <div style={{ border: '1px solid #E1E7F4' }}></div>
+                <InfoTitle>Выбрано готовое решение:</InfoTitle>
+                <InfoContent>
+                  <ContentTitle>
+                    <ContentTitleText>
+                      <Image src={data!.image} width={65} height={50} alt="picture" />
+                      {data!.title}
+                    </ContentTitleText>
+                    <ContentTitlePrice>10000 P</ContentTitlePrice>
+                  </ContentTitle>
+                  <Divider />
                   <CharacteristicsList>
-                    {data.equipment.map((equip) => (
+                    {data!.equipment.map((equip) => (
                       <li key={equip.id}>{equip.text}</li>
                     ))}
                   </CharacteristicsList>
-                </div>
+                </InfoContent>
               </InfoWrapper>
             )}
             {calculator && (
               <InfoWrapper>
-                <p style={{ fontSize: 18, fontWeight: 800 }}>Выбрано по калькулятору:</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height: 240 }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 20, width: 300 }}>
-                      Готовая система под ключ
-                    </div>
-                    <p style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.33 }}>10000 P</p>
-                  </div>
-                  <div style={{ border: '1px solid #E1E7F4' }}></div>
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <InfoTitle>Выбрано по калькулятору:</InfoTitle>
+                <InfoContent $height={245}>
+                  <ContentTitle>
+                    <ContentTitleText>Готовая система под ключ</ContentTitleText>
+                    <ContentTitlePrice>
+                      {calculatorStore.result.toLocaleString('ru-RU', {
+                        style: 'currency',
+                        currency: 'RUB',
+                        maximumFractionDigits: 0,
+                      })}
+                    </ContentTitlePrice>
+                  </ContentTitle>
+                  <Divider />
+                  <CalcContentList>
                     {calculatorStore.blocks.map((block) => (
-                      <li
-                        style={{
-                          display: 'grid',
-                          gridTemplateColumns: '260px 120px 120px',
-                          height: 40,
-                          alignItems: 'center',
-                        }}
-                        key={block.id}
-                      >
-                        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <CalcContentListItem key={block.id}>
+                        <CalcContentListItemTitle>
                           <Image
                             src={block.data.image}
                             width={40}
@@ -284,35 +276,27 @@ const FormModal: FC<FormModalProps> = ({ solution, calculator, data }) => {
                             alt={block.data.title}
                           />
                           {block.data.title}
-                        </div>
-                        <p>{`${block.getVariable('block_amount')} x ${(block.result / (block.getVariable('block_amount') as number) || 0).toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 })}`}</p>
-                        <p style={{ fontSize: 16, fontWeight: 700, justifySelf: 'end' }}>
+                        </CalcContentListItemTitle>
+                        {block.data.quantity_selection ? (
+                          <p>{`${block.getVariable('block_amount')} x ${(block.result / (block.getVariable('block_amount') as number) || 0).toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 })}`}</p>
+                        ) : (
+                          <p />
+                        )}
+                        <CalcContentListItemPrice>
                           {block.result.toLocaleString('ru-RU', {
                             style: 'currency',
                             currency: 'RUB',
                             maximumFractionDigits: 0,
                           })}
-                        </p>
-                      </li>
+                        </CalcContentListItemPrice>
+                      </CalcContentListItem>
                     ))}
-                  </ul>
-                </div>
-                <button
-                  style={{
-                    justifySelf: 'end',
-                    height: 32,
-                    border: '1px solid #10101052',
-                    borderRadius: 8,
-                    fontFamily: 'var(--mont)',
-                    fontSize: 13,
-                    fontWeight: 700,
-                  }}
-                >
-                  Изменить характеристики
-                </button>
+                  </CalcContentList>
+                </InfoContent>
+                <CalcButton>Изменить характеристики</CalcButton>
               </InfoWrapper>
             )}
-            {!solution && !calculator && (
+            {!data && !calculator && (
               <TextInput
                 {...register('message')}
                 placeholder="Комментарий"
