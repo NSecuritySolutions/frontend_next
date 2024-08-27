@@ -398,6 +398,22 @@ const CalcContentListItem = styled.li`
   min-height: 40px;
   align-items: center;
 
+  @media (max-width: 1300px) {
+    grid-template-columns: 2.2fr 1fr;
+
+    & > p:nth-child(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 940px) {
+    grid-template-columns: 2.2fr 1fr 1fr;
+
+    & > p:nth-child(2) {
+      display: block;
+    }
+  }
+
   @media (max-width: 620px) {
     grid-template-columns: 2.2fr 1fr;
 
@@ -411,6 +427,18 @@ const CalcContentListItemTitle = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+
+  @media (max-width: 1300px) {
+    & > img {
+      display: none;
+    }
+  }
+
+  @media (max-width: 940px) {
+    & > img {
+      display: block;
+    }
+  }
 
   @media (max-width: 620px) {
     font-size: 14px;

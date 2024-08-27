@@ -43,18 +43,13 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import MaskedStyledInput from '@/widgets/ContactForm/ui/mask'
 import Image from 'next/image'
-import { ISolution } from '@/widgets/ReadySolutionSection/types'
 import { DocumentImage } from '../../DocumentImage'
 import { Typography } from '../../Typography'
 import calculatorStore from '@/app/store/calculatorStore'
+import { useFormStore } from '@/app/store/formModalStoreProvider'
+import { observer } from 'mobx-react-lite'
 
 type IFormInput = yup.InferType<typeof schema>
-
-interface FormModalProps {
-  data?: ISolution
-  calculator?: boolean
-  close: () => void
-}
 
 const schema = yup.object().shape({
   name: yup.string().required('Заполните поле'),
@@ -71,12 +66,12 @@ const MAX_FILE_SIZE = 5
 const PhoneMask = '+{7} (000) 000-00-00'
 const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
 
-const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
+const FormModal: FC = observer(() => {
   const [fileError, setFileError] = useState<string | undefined>()
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const inputRef = useRef<typeof IMaskInput>(null)
-
-  calculator = true
+  const modal = useFormStore()
+  const { calculator, data } = modal
 
   const {
     setValue,
@@ -98,6 +93,8 @@ const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
     },
     resolver: yupResolver(schema),
   })
+
+  if (!modal.isOpen) return null
 
   const onFormSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
@@ -183,7 +180,7 @@ const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
   return (
     <Overlay>
       <Container>
-        <CloseButton>
+        <CloseButton onClick={() => modal.close()}>
           <ImgWrapper>
             <Image src="/icons/closeBtn.svg" width={22} height={22} alt="close" />
           </ImgWrapper>
@@ -328,6 +325,6 @@ const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
       </Container>
     </Overlay>
   )
-}
+})
 
 export default FormModal
