@@ -13,6 +13,12 @@ const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
+
+  @media (max-width: 940px) {
+    overflow-y: auto;
+    align-items: start;
+    padding-block: 40px;
+  }
 `
 
 const Container = styled.div`
@@ -34,6 +40,20 @@ const Container = styled.div`
       transform: translateY(0);
     }
   }
+
+  @media (max-width: 1300px) {
+    width: 880px;
+  }
+
+  @media (max-width: 940px) {
+    width: 580px;
+  }
+
+  @media (max-width: 620px) {
+    width: 328px;
+    padding: 16px;
+    gap: 20px;
+  }
 `
 
 const CloseButton = styled.button`
@@ -53,12 +73,21 @@ const ImgWrapper = styled.div`
 const Title = styled.p`
   font-size: 24px;
   font-weight: 700;
+
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
+  }
 `
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  @media (max-width: 940px) {
+    gap: 20px;
+  }
 `
 
 const Content = styled.div`
@@ -66,12 +95,22 @@ const Content = styled.div`
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
   width: 100%;
+
+  @media (max-width: 940px) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `
 
 const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 620px) {
+    gap: 4px;
+  }
 `
 
 const InputWrapper = styled.div`
@@ -115,6 +154,11 @@ const Input = styled.input<TInputProps>`
   &:focus-visible {
     ${(props) => focusStyles(props)}
   }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
 `
 const TextInput = styled.textarea<{ $autoHeight?: boolean }>`
   color: ${colors.darkPrimary};
@@ -135,6 +179,11 @@ const TextInput = styled.textarea<{ $autoHeight?: boolean }>`
   &:focus-visible {
     outline: 1px solid ${colors.btnPrimary};
   }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+    margin-bottom: ${(props) => (props.$autoHeight ? '28px' : 0)};
+  }
 `
 
 const ErrorText = styled.span`
@@ -151,6 +200,16 @@ const FormParagraph = styled.p`
   font-weight: 400;
   font-size: 16px;
   line-height: 1.33;
+
+  @media (max-width: 940px) {
+    & > br {
+      display: none;
+    }
+  }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
 `
 
 const Button = styled.button`
@@ -173,6 +232,13 @@ const Button = styled.button`
   &:hover {
     background-color: ${(props) => (props.disabled ? colors.btnPrimary : colors.btnPrimaryHover)};
   }
+
+  @media (max-width: 620px) {
+    font-size: 13px;
+    font-weight: 700;
+    flex-position: 1;
+    order: 2;
+  }
 `
 
 const StyledLink = styled(Link)`
@@ -184,6 +250,12 @@ const Footer = styled.div`
   align-items: center;
   gap: 32px;
   width: 100%;
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    gap: 12px;
+    align-items: start;
+  }
 `
 
 const CharacteristicsList = styled.ol`
@@ -198,12 +270,16 @@ const CharacteristicsList = styled.ol`
   line-height: 1.36;
   font-size: 16px;
   font-weight: 400;
+  color: ${colors.textSecondary};
   scrollbar-width: thin;
 
   @media (max-width: 620px) {
     font-size: 14px;
-    height: 115px;
     -webkit-line-clamp: 6;
+  }
+
+  & > li::marker {
+    font-size: 10px;
   }
 `
 
@@ -257,25 +333,45 @@ const InfoContent = styled.div<{ $height?: number }>`
   flex-direction: column;
   gap: 8px;
   height: ${(props) => (props.$height ? `${props.$height}px` : '100%')};
+
+  @media (max-width: 940px) {
+    height: auto;
+  }
 `
 
 const ContentTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
 `
 
 const ContentTitleText = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 300px;
+  max-width: 300px;
+  font-size: 15px;
+  font-weight: 800;
+
+  @media (max-width: 620px) {
+    font-size: 13px;
+    font-weight: 700;
+    flex-direction: column;
+    gap: 0px;
+  }
 `
 
 const ContentTitlePrice = styled.p`
   font-size: 24px;
   font-weight: 700;
   line-height: 1.33;
+  min-width: max-content;
+
+  @media (max-width: 620px) {
+    font-size: 20px;
+    font-weight: 800;
+  }
 `
 
 const Divider = styled.div`
@@ -290,19 +386,39 @@ const CalcContentList = styled.ul`
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-gutter: stable;
+
+  @media (max-width: 940px) {
+    height: auto;
+  }
 `
 
 const CalcContentListItem = styled.li`
   display: grid;
-  grid-template-columns: 260px 120px 120px;
-  height: 40px;
+  grid-template-columns: 2.2fr 1fr 1fr;
+  min-height: 40px;
   align-items: center;
+
+  @media (max-width: 620px) {
+    grid-template-columns: 2.2fr 1fr;
+
+    & > p:nth-child(2) {
+      display: none;
+    }
+  }
 `
 
 const CalcContentListItemTitle = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+
+    & > img {
+      display: none;
+    }
+  }
 `
 
 const CalcContentListItemPrice = styled.p`

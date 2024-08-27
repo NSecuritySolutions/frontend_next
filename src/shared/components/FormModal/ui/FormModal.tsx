@@ -53,6 +53,7 @@ type IFormInput = yup.InferType<typeof schema>
 interface FormModalProps {
   data?: ISolution
   calculator?: boolean
+  close: () => void
 }
 
 const schema = yup.object().shape({
@@ -187,7 +188,7 @@ const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
             <Image src="/icons/closeBtn.svg" width={22} height={22} alt="close" />
           </ImgWrapper>
         </CloseButton>
-        <Title>Заказать звонок</Title>
+        <Title>Оставить заявку</Title>
         <Form onSubmit={handleSubmit(onFormSubmit)}>
           <Content>
             <InputsWrapper>
@@ -278,7 +279,9 @@ const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
                           {block.data.title}
                         </CalcContentListItemTitle>
                         {block.data.quantity_selection ? (
-                          <p>{`${block.getVariable('block_amount')} x ${(block.result / (block.getVariable('block_amount') as number) || 0).toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 })}`}</p>
+                          <p
+                            style={{ textAlign: 'center' }}
+                          >{`${block.getVariable('block_amount')} x ${(block.result / (block.getVariable('block_amount') as number) || 0).toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 })}`}</p>
                         ) : (
                           <p />
                         )}
@@ -311,8 +314,7 @@ const FormModal: FC<FormModalProps> = ({ calculator, data }) => {
               Отправить
             </Button>
             <FormParagraph>
-              Нажимая oтправить, вы принимаете условия
-              <br />
+              Нажимая oтправить, вы принимаете условия <br />
               <StyledLink
                 href="%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf"
                 target="_blank"
