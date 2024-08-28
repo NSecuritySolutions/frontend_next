@@ -24,6 +24,12 @@ const LabelText = styled.p`
   ${Radio}:checked + && {
     background-color: ${colors.btnPrimary};
   }
+
+  ${Radio}:disabled + && {
+    background-color: ${colors.backgroundBase3};
+    color: ${colors.scrollActive};
+    cursor: not-allowed;
+  }
 `
 
 const Select = styled.div`
@@ -70,14 +76,14 @@ const Arrow = styled(Image).attrs({
     `}
 `
 
-const SelectMenu = styled.ul<{ $top: number; $left: number }>`
+const SelectMenu = styled.ul<{ $top: number; $left: number; $width: number }>`
   position: absolute;
   top: ${(props) => props.$top}px;
   left: ${(props) => props.$left}px;
-  width: 120px;
+  width: ${(props) => props.$width}px;
   border: 1px solid ${colors.backgroundBase3};
   background-color: ${colors.backgroundPrimary};
-  overflow: ellipsys;
+
   z-index: 99;
   font-size: 13px;
   font-weight: 700;
@@ -86,13 +92,19 @@ const SelectMenu = styled.ul<{ $top: number; $left: number }>`
 `
 
 const Option = styled.ol`
-  display: flex;
-  align-items: center;
-  min-height: 32px;
+  width: 100%;
+  height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   padding: 3px 8px;
 
   &.checked {
     background-color: ${colors.btnPrimary};
+  }
+
+  &.disabled {
+    background-color: ${colors.backgroundBase3};
   }
 `
 
