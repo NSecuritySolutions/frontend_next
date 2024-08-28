@@ -145,7 +145,7 @@ const CardWrapper = styled.div`
   padding: 20px;
   margin-top: 0px !important;
   :hover {
-    cursor: pointer;
+    // cursor: pointer;
   }
 
   @media (max-width: 1300px) {

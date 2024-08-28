@@ -107,9 +107,9 @@ const ExamplesSlider: React.FC = () => {
               .map((item: TWorkExamples, i) => (
                 <CardWrapper
                   key={item.id}
-                  onClick={() => {
-                    router.push(`/ourworks/${item.id}`)
-                  }}
+                  // onClick={() => {
+                  //   router.push(`/ourworks/${item.id}`)
+                  // }}
                 >
                   {item.cardImage ? (
                     <ExamplesLink href={`/ourworks/${item.id}`}>
