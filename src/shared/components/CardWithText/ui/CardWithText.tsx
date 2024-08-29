@@ -36,13 +36,14 @@ const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
         router.push(link)
       }}
     >
-      <CardTitle>{title}</CardTitle>
-      <TextContainer>
-        {text.map((item, index) => (
-          <CardText key={index}>{item}</CardText>
-        ))}
-      </TextContainer>
-
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <CardTitle>{title}</CardTitle>
+        <TextContainer>
+          {text.map((item, index) => (
+            <CardText key={index}>{item}</CardText>
+          ))}
+        </TextContainer>
+      </div>
       <BtnLink
         btnType="transparent"
         text={btnName}
@@ -60,8 +61,9 @@ const CardWithText: FC<TCardProps> = ({ title, img, text, btnName, link }) => {
           width={300}
           height={169}
           // blurDataURL="/blurData/blur2.png"
+          style={{ float: 'right' }}
           blurDataURL={rgbDataURL(225, 231, 244)}
-          className={isHovered ? 'card-image expanded' : 'card-image'}
+          // className={isHovered ? 'card-image expanded' : 'card-image'}
         />
       </CardImg>
     </Card>

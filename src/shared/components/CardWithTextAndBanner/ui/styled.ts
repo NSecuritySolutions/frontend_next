@@ -1,24 +1,6 @@
 import colors from '@/shared/constants/colors'
 
-import styled, { keyframes } from 'styled-components'
-
-const zoomIn = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.05);
-  }
-  `
-
-const zoomOut = keyframes`
-  from {
-    transform: scale(1.05);
-  }
-  to {
-    transform: scale(1);
-  }
-  `
+import styled from 'styled-components'
 
 const Card = styled.div<{ $backgroundColor: string }>`
   margin: 0 auto;
@@ -35,7 +17,6 @@ const Card = styled.div<{ $backgroundColor: string }>`
   max-height: 320px;
   overflow: hidden;
   cursor: pointer;
-  // pointer-events: auto;
 
   @media (max-width: 1300px) {
     max-width: 880px;
@@ -161,40 +142,21 @@ const CardImg = styled.div`
   max-height: 305px;
   width: 100%;
 
-  .card-image {
+  & > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: scale 0.5s ease;
   }
 
-  .expanded {
-    animation: ${zoomIn} 0.5s forwards;
-  }
-
-  .card-image:not(.expanded) {
-    animation: ${zoomOut} 0.5s forwards;
+  & > img:hover {
+    scale: 1.1;
   }
 
   @media (max-width: 1300px) {
     max-width: 320px;
     width: 100%;
     max-height: 227px;
-
-    img {
-      max-width: 320px;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
-  @media (max-width: 940px) {
-    img {
-      max-width: 400px;
-      width: 100%;
-      max-height: 230px;
-      object-fit: cover;
-    }
   }
 
   @media (max-width: 620px) {
@@ -202,10 +164,6 @@ const CardImg = styled.div`
     max-width: 328px;
     width: 100%;
     height: 212px;
-
-    img {
-      object-fit: cover;
-    }
   }
 `
 
