@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { Typography } from '@/shared/components/Typography'
-import colors from '@/shared/constants/colors'
 import { useEffect, useRef, useState } from 'react'
 import { FloatDiv } from './styled'
 import { AnimatePresence } from 'framer-motion'
@@ -24,7 +23,6 @@ const ScrollButton = () => {
         const mainRect = mainElement.getBoundingClientRect()
 
         setIsFixed(mainRect.bottom >= window.innerHeight)
-
       }
     }
 
@@ -48,24 +46,11 @@ const ScrollButton = () => {
         <FloatDiv
           ref={ref}
           onClick={() => handleOnClick()}
-          position={isFixed ? 'fixed' : 'absolute'}
-          bottom={30}
-          right={40}
-          initial={{ bottom: '-80px' }}
-          animate={{ bottom: 30 }}
-          exit={{ bottom: '-80px' }}
+          $position={isFixed ? 'fixed' : 'absolute'}
+          $bottom={30}
+          $right={40}
         >
-          <Image
-            src="/icons/arrow-up.svg"
-            alt="Вернуться в начало"
-            width={40}
-            height={40}
-            style={{
-              borderRadius: '50%',
-              backgroundColor: colors.backgroundPrimary,
-              padding: 7,
-            }}
-          />
+          <Image src="/icons/arrow-up.svg" alt="Вернуться в начало" width={40} height={40} />
           <Typography size={13}>наверх</Typography>
         </FloatDiv>
       )}
