@@ -8,9 +8,8 @@ interface CalculatorData {
 interface CalculatorBlockData {
   name: string
   amount: number
-  choices: { name: string; value: string }[]
-  minPriceProducts: TProduct[]
-  products: { [category: string]: TProduct[] }
+  options: { name: string; value: string }[]
+  products_category: { name: string; products: TProduct[] }[]
   price: number
 }
 

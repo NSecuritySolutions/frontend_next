@@ -128,16 +128,16 @@ const InfoWrapper = styled.div`
 `
 
 export type TInputProps = {
-  $error: string
+  $error?: boolean
 }
 
-const focusStyles = (props: { $error: string }) => `
-  outline: 1px solid ${props.$error === 'true' ? colors.textNegative : colors.btnPrimary};
+const focusStyles = (props: { $error?: boolean }) => `
+  outline: 1px solid ${props.$error ? colors.textNegative : colors.btnPrimary};
 `
 
 const Input = styled.input<TInputProps>`
   background: ${colors.backgroundPrimary};
-  border: ${(props) => (props.$error === 'true' ? `1px solid ${colors.textNegative}` : 'none')};
+  border: none;
   border-radius: 12px;
   width: 100%;
   height: 42px;
@@ -146,8 +146,8 @@ const Input = styled.input<TInputProps>`
   font-size: 16px;
   font-weight: 400;
   font-family: var(--font-manrope);
-  color: ${(props) =>
-    props.$error === 'true' ? `${colors.textNegative}` : `${colors.darkPrimary}`};
+  color: ${(props) => (props.$error ? colors.textNegative : colors.darkPrimary)};
+  outline: ${(props) => (props.$error ? `1px solid ${colors.textNegative}` : 'none')};
 
   &:active,
   &:focus,
@@ -231,6 +231,11 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${(props) => (props.disabled ? colors.btnPrimary : colors.btnPrimaryHover)};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
   }
 
   @media (max-width: 620px) {
@@ -463,6 +468,10 @@ const CalcButton = styled.button`
   font-family: var(--mont);
   font-size: 13px;
   font-weight: 700;
+
+  &:hover {
+    background-color: ${colors.backgroundCardBl};
+  }
 `
 
 export {

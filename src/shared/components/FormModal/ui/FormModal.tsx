@@ -48,6 +48,12 @@ import { Typography } from '../../Typography'
 import calculatorStore from '@/app/store/calculatorStore'
 import { useFormStore } from '@/app/store/formModalStoreProvider'
 import { observer } from 'mobx-react-lite'
+import {
+  createApplicationWithCalc,
+  createApplicationWithFile,
+  createApplicationWithSolution,
+} from '@/app/actions'
+import { useRouter } from 'next/navigation'
 
 type IFormInput = yup.InferType<typeof schema>
 
@@ -58,7 +64,7 @@ const schema = yup.object().shape({
     .min(18, 'Введите номер телефона в правильном формате ')
     .required('Заполните поле'),
   email: yup.string().email('Введите email в правильном формате ').required('Заполните поле'),
-  message: yup.string(),
+  comment: yup.string(),
   file: yup.mixed((file): file is File => file),
 })
 
@@ -68,10 +74,10 @@ const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
 
 const FormModal: FC = observer(() => {
   const [fileError, setFileError] = useState<string | undefined>()
-  const [submitSuccess, setSubmitSuccess] = useState(false)
   const inputRef = useRef<typeof IMaskInput>(null)
   const modal = useFormStore()
   const { calculator, data } = modal
+  const router = useRouter()
 
   const {
     setValue,
@@ -80,7 +86,7 @@ const FormModal: FC = observer(() => {
     handleSubmit,
     reset,
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting, touchedFields, isSubmitted },
   } = useForm<IFormInput>({
     mode: 'onChange',
     shouldFocusError: false,
@@ -88,7 +94,7 @@ const FormModal: FC = observer(() => {
       name: '',
       phone: '',
       email: '',
-      message: undefined,
+      comment: undefined,
       file: undefined,
     },
     resolver: yupResolver(schema),
@@ -96,22 +102,30 @@ const FormModal: FC = observer(() => {
 
   if (!modal.isOpen) return null
 
-  const onFormSubmit: SubmitHandler<IFormInput> = async (data) => {
-    try {
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          console.log('Данные формы', data)
-          resolve()
-        }, 1000)
-      })
-      setSubmitSuccess(true)
-      setTimeout(() => {
-        setSubmitSuccess(false)
-      }, 300)
-      reset()
-    } catch (error) {
-      console.error('Ошибка:', error)
+  const onFormSubmit: SubmitHandler<IFormInput> = async (validatedData) => {
+    const formData = new FormData()
+    let requestStatus
+
+    formData.append('name', validatedData.name)
+    formData.append('phone', validatedData.phone)
+    formData.append('email', validatedData.email)
+    if (validatedData.comment) {
+      formData.append('comment', validatedData.comment)
     }
+
+    if (calculator) {
+      formData.append('calculator', JSON.stringify(calculatorStore.createFormData()))
+      requestStatus = await createApplicationWithCalc(formData)
+    } else if (data) {
+      formData.append('solution', data.id.toString())
+      requestStatus = await createApplicationWithSolution(formData)
+    } else {
+      if (validatedData.file) {
+        formData.append('file', validatedData.file as File)
+      }
+      requestStatus = await createApplicationWithFile(formData)
+    }
+    if (requestStatus === 201) reset()
   }
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -195,9 +209,9 @@ const FormModal: FC = observer(() => {
                   type="text"
                   placeholder="* Имя"
                   maxLength={20}
-                  $error={errors.name ? 'true' : 'false'}
+                  $error={errors.name && isSubmitted}
                 />
-                {errors.name && <ErrorText>{errors.name?.message}</ErrorText>}
+                {errors.name && isSubmitted && <ErrorText>{errors.name?.message}</ErrorText>}
               </InputWrapper>
               <InputWrapper>
                 <Controller
@@ -208,24 +222,24 @@ const FormModal: FC = observer(() => {
                       {...field}
                       mask={PhoneMask}
                       inputRef={inputRef}
-                      $error={errors.phone ? 'true' : 'false'}
+                      $error={errors.phone && isSubmitted ? 'true' : 'false'} // исправить!
                       placeholder="* Телефон"
                     />
                   )}
                 />
-                {errors.phone && <ErrorText>{errors.phone?.message}</ErrorText>}
+                {errors.phone && isSubmitted && <ErrorText>{errors.phone?.message}</ErrorText>}
               </InputWrapper>
               <InputWrapper>
                 <Input
                   {...register('email')}
                   type="email"
                   placeholder="* E-mail"
-                  $error={errors.email ? 'true' : 'false'}
+                  $error={errors.email && isSubmitted}
                 />
-                {errors.email && <ErrorText>{errors.email?.message}</ErrorText>}
+                {errors.email && isSubmitted && <ErrorText>{errors.email?.message}</ErrorText>}
               </InputWrapper>
               {(data || calculator) && (
-                <TextInput {...register('message')} placeholder="Комментарий" maxLength={2000} />
+                <TextInput {...register('comment')} placeholder="Комментарий" maxLength={2000} />
               )}
             </InputsWrapper>
             {data && (
@@ -237,7 +251,13 @@ const FormModal: FC = observer(() => {
                       <Image src={data!.image} width={65} height={50} alt="picture" />
                       {data!.title}
                     </ContentTitleText>
-                    <ContentTitlePrice>10000 P</ContentTitlePrice>
+                    <ContentTitlePrice>
+                      {data.price?.toLocaleString('ru-RU', {
+                        style: 'currency',
+                        currency: 'RUB',
+                        maximumFractionDigits: 0,
+                      })}
+                    </ContentTitlePrice>
                   </ContentTitle>
                   <Divider />
                   <CharacteristicsList>
@@ -293,12 +313,19 @@ const FormModal: FC = observer(() => {
                     ))}
                   </CalcContentList>
                 </InfoContent>
-                <CalcButton>Изменить характеристики</CalcButton>
+                <CalcButton
+                  onClick={() => {
+                    modal.close()
+                    router.push('#calculator')
+                  }}
+                >
+                  Изменить характеристики
+                </CalcButton>
               </InfoWrapper>
             )}
             {!data && !calculator && (
               <TextInput
-                {...register('message')}
+                {...register('comment')}
                 placeholder="Комментарий"
                 maxLength={2000}
                 $autoHeight
@@ -307,8 +334,8 @@ const FormModal: FC = observer(() => {
             {file}
           </Content>
           <Footer>
-            <Button type="submit" disabled={errors ? false : true}>
-              Отправить
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Отправляем...' : 'Отправить'}
             </Button>
             <FormParagraph>
               Нажимая oтправить, вы принимаете условия <br />

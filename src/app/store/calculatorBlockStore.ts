@@ -157,12 +157,15 @@ class CalculatorBlockStore {
   }
 
   private filterByMinPrice() {
-    const filteredProducts: { [category: string]: TProduct[] } = this.filter()
-    const minPriceData = Object.keys(filteredProducts).map((x) => {
-      return filteredProducts[x].reduce((min, current) => {
-        return current.price < min.price ? current : min
-      }, filteredProducts[x][0])
-    })
+    const filteredProducts: { name: string; products: TProduct[] }[] = this.filter()
+    const minPriceData: TProduct[] = []
+    filteredProducts.forEach((category) =>
+      minPriceData.push(
+        category.products.reduce((min, current) => {
+          return current.price < min.price ? current : min
+        }, category.products[0]),
+      ),
+    )
     return minPriceData
   }
 
@@ -171,13 +174,13 @@ class CalculatorBlockStore {
     const categoriesWithProducts = Object.keys(this.products).filter(
       (category) => this.products[category].length > 0,
     )
-    const data: { [category: string]: TProduct[] } = {}
+    const data: { name: string; products: TProduct[] }[] = []
     Object.keys(this.filters).map((category) => {
       let filteredData: TProduct[]
       if (categoriesWithProducts.find((item) => item == category))
         filteredData = this.products[category]
       else filteredData = this.filterProduct(category)
-      data[category] = filteredData
+      data.push({ name: category, products: filteredData })
     })
     return data
   }
@@ -543,12 +546,11 @@ class CalculatorBlockStore {
     const data: CalculatorBlockData = {
       name: this.data.title,
       amount: parseInt(this.variables.block_amount as string),
-      choices: this.data.options.map((option) => ({
+      options: this.data.options.map((option) => ({
         name: option.title,
         value: this.variables[option.name].toString(),
       })),
-      products: this.filter(),
-      minPriceProducts: this.filterByMinPrice(),
+      products_category: this.filter(),
       price: this.result,
     }
     return data
