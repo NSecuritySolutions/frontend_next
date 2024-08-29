@@ -14,7 +14,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
   justify-content: space-between;
 
   @media (max-width: 940px) {
-    width: 380px;
+    display: block;
     height: 288px;
     width: 100%;
   }
@@ -103,6 +103,7 @@ const ContentContainer = styled.div`
     max-width: 575px;
   }
   @media (max-width: 940px) {
+    max-width: none;
     margin: 0;
   }
 `
