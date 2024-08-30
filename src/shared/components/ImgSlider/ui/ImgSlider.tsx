@@ -10,6 +10,7 @@ import { IArrowProps, TSliderProps } from './types.ts'
 import ImageModal from '../../ImageModal/ui/ImageModal.tsx'
 import TImageModalProps from '../../ImageModal/types/types.ts'
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
+import { ExampleImage } from '@/widgets/ExamplesSlider/types.ts'
 
 function SampleNextArrow(props: IArrowProps) {
   const { className = '', style = {}, onClick } = props
@@ -32,7 +33,7 @@ function SamplePrevArrow(props: IArrowProps) {
 
 const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [selectedImage, setSelectedImage] = useState<TImageModalProps['image']>()
+  const [selectedImage, setSelectedImage] = useState<string>()
 
   const settings = {
     customPaging: function (i: number) {
@@ -84,8 +85,8 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
                 width={1100}
                 height={600}
                 onClick={() => {
+                  setSelectedImage(item.image)
                   setShowModal(true)
-                  setSelectedImage(item)
                 }}
               />
             </div>

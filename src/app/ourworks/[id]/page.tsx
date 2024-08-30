@@ -1,7 +1,4 @@
-'use client'
-
 import { Example } from '@/widgets/Example'
-import { workExamples } from '@/shared/constants/texts/examples'
 import styles from './page.module.css'
 import { getExampleById } from '@/app/api'
 

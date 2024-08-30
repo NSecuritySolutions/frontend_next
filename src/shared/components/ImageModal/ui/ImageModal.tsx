@@ -86,7 +86,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
           />
         ) : (
           <Image
-            src={image?.src}
+            src={image}
             alt={`Пример готового проекта`}
             fill
             placeholder="blur"

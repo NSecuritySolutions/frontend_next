@@ -93,38 +93,37 @@ const ExamplesLink = styled.a`
 `
 
 const ExamplesImgWrapper = styled.div`
+  display: flex;
   border-radius: 12px;
   background-color: ${colors.backgroundPrimary};
   width: 200px;
-  height: 200px;
+  min-height: 200px;
   position: relative;
   overflow: hidden;
-  img {
+
+  & > img {
     border-radius: 12px;
-    width: 200px;
-    height: 200px;
     object-fit: cover;
-    scale: 1;
-    transition: transform 1s;
+    transition: scale 1s;
 
     &:hover {
-      transform: scale(1.2);
+      scale: 1.2;
     }
   }
 
   @media (max-width: 1300px) {
     width: 390px;
-    height: 180px;
+    min-height: 180px;
   }
 
   @media (max-width: 940px) {
     width: 240px;
-    height: 180px;
+    min-height: 180px;
   }
 
   @media (max-width: 620px) {
     width: 288px;
-    height: 111px;
+    min-height: 111px;
   }
 `
 const ExamplesContainer = styled.article`
@@ -219,6 +218,7 @@ const InfoIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-wrap: nowrap;
 
   @media (max-width: 940px) {
     margin: 0 !important;

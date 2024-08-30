@@ -20,7 +20,7 @@ import {
 } from './styled.ts'
 
 const OurWorksBanner: React.FC<BannerProps> = ({ item }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  // const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
 
   function truncate(str: string, maxlength: number) {
@@ -33,9 +33,9 @@ const OurWorksBanner: React.FC<BannerProps> = ({ item }) => {
 
   return (
     <BannerWrapper
-      onClick={() => {
-        setIsOpen(true)
-      }}
+    // onClick={() => {
+    //   setIsOpen(true)
+    // }}
     >
       <ImageWrapper
         onClick={() => {
@@ -43,17 +43,21 @@ const OurWorksBanner: React.FC<BannerProps> = ({ item }) => {
         }}
       >
         <InfoIconWrapper>
-          {item.quantities.map((item, i: number) => (
-            <InfoIcon key={i}>
-              {`${new Intl.NumberFormat('ru-RU').format(item.number)}`} {item.measure}
-            </InfoIcon>
-          ))}
+          <InfoIcon>{item.time} дн.</InfoIcon>
+          <InfoIcon>
+            {item.budget.toLocaleString('ru-RU', {
+              style: 'currency',
+              currency: 'RUB',
+              maximumFractionDigits: 0,
+            })}
+          </InfoIcon>
+          <InfoIcon>{item.area + ' м\u00B2'}</InfoIcon>
         </InfoIconWrapper>
         <TextWrapper>
           <StyledTitle>{item.title}</StyledTitle>
-          <StyledParagraph>{truncate(item.text, 100)}</StyledParagraph>
+          <StyledParagraph>{truncate(item.description[0], 100)}</StyledParagraph>
         </TextWrapper>
-        <Image src={item?.cardImage || ''} alt="" fill />
+        <Image src={item.images.find((image) => image.is_main)?.image || ''} alt="" fill />
       </ImageWrapper>
     </BannerWrapper>
   )

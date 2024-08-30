@@ -14,7 +14,7 @@ import {
   ModalContent,
   TitleWrapper,
   Title,
-  Date,
+  DateWrapper,
   Quantity,
   Paragraph,
   ContentWrapper,
@@ -71,7 +71,7 @@ const Example: FC<ExampleProps> = ({ data }) => {
         <ContentWrapper>
           <TitleWrapper>
             <Title>{data.title}</Title>
-            <Date>{data.add_date}</Date>
+            <DateWrapper>{new Date(data.add_date).toLocaleDateString('ru-RU')}</DateWrapper>
             <NumbersRow>
               <Slider {...settings}>
                 {measures.map((item, i: number) => (

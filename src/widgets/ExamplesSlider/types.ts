@@ -16,4 +16,4 @@ interface Example {
   product: string[]
 }
 
-export type { Example }
+export type { Example, ExampleImage }

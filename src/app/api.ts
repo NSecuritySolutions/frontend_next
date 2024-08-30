@@ -120,6 +120,15 @@ export async function getSecurityPageData() {
   }
 }
 
+export async function getOurWorksPageData() {
+  const response = await fetch(`${BASE_URL}/api/v1/our-works/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const data = await response.json()
+  return data
+}
+
 export async function getProductById(id: string) {
   const response = await fetch(`${BASE_URL}/api/v1/products/${id}/`)
   if (!response.ok) {
