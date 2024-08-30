@@ -16,9 +16,10 @@ import {
   StyledList,
 } from './styled.ts'
 
-import { teamText } from '@/shared/constants/texts/our-team.ts'
+import { Info } from '../types.ts'
+import { FC } from 'react'
 
-const OurTeam = () => {
+const OurTeam: FC<{ data: Info }> = ({ data }) => {
   return (
     <Section id="our-team">
       <SectionWrapper>
@@ -28,7 +29,7 @@ const OurTeam = () => {
               <ColumnTitle>Наша команда</ColumnTitle>
               <ColumnParagraph>
                 <StyledList>
-                  {teamText.map((item, index) => (
+                  {data.description.map((item, index) => (
                     <ListItem key={index}>
                       <Image src="/icons/list-item.svg" alt="List Marker" width={20} height={20} />
                       <ListItemText>{item}</ListItemText>
@@ -39,7 +40,7 @@ const OurTeam = () => {
             </TextWrapper>
           </Column>
           <ContactsWrapper>
-            <ManagerCard></ManagerCard>
+            <ManagerCard data={data.employees}></ManagerCard>
           </ContactsWrapper>
         </ColumnWrapper>
       </SectionWrapper>
