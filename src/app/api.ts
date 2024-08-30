@@ -125,8 +125,8 @@ export async function getProductById(id: string) {
   if (!response.ok) {
     throw new Error('Failed to fetch data')
   }
-  const productData = await response.json()
-  return productData
+  const data = await response.json()
+  return data
 }
 
 export async function getSolutionById(id: string) {
@@ -134,6 +134,15 @@ export async function getSolutionById(id: string) {
   if (!response.ok) {
     throw new Error('Failed to fetch data')
   }
-  const productData = await response.json()
-  return productData
+  const data = await response.json()
+  return data
+}
+
+export async function getExampleById(id: string) {
+  const response = await fetch(`${BASE_URL}/api/v1/our-works/${id}/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  const data = await response.json()
+  return data
 }

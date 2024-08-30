@@ -1,4 +1,5 @@
 import { TWorkExamples } from '@/shared/constants/texts/types'
+import { Example } from '@/widgets/ExamplesSlider/types'
 
 export interface IArrowProps {
   className?: string
@@ -7,5 +8,5 @@ export interface IArrowProps {
 }
 
 export type TSliderProps = {
-  modalItem: TWorkExamples | undefined
+  modalItem: Example | undefined
 }

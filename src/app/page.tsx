@@ -57,7 +57,7 @@ export default async function Page() {
       <OurTeam />
       <Questions questions={questionsData} />
       <ReviewsBlock />
-      <ExamplesSlider />
+      <ExamplesSlider data={examplesData} />
       <OurClients />
       <ContactForm />
       <ScrollButton />

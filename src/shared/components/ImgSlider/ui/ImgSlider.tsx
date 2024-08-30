@@ -41,9 +41,9 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
           {modalItem && (
             <Image
               key={i}
-              src={modalItem.img[i]}
+              src={modalItem.images[i].image}
               alt={`Миниатюра фото - ${modalItem.title}`}
-              width={260}
+              fill
               placeholder="blur"
               blurDataURL={rgbDataURL(225, 231, 244)}
             />
@@ -69,17 +69,17 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
         <ImageModal
           image={selectedImage}
           closeModal={() => setShowModal(false)}
-          images={modalItem?.img}
+          images={modalItem?.images}
         />
       )}
       <SliderWrapper>
         <Slider {...settings}>
-          {modalItem?.img.map((item: any, i: number) => (
+          {modalItem?.images.map((item: any, i: number) => (
             <div key={i} className="image-container">
               <Image
                 placeholder="blur"
                 blurDataURL={rgbDataURL(225, 231, 244)}
-                src={item}
+                src={item.image}
                 alt={modalItem.title}
                 width={1100}
                 height={600}
