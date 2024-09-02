@@ -6,6 +6,7 @@ const Card = styled.div<{ $backgroundColor: string }>`
   position: relative;
   background-color: ${(props) => props.$backgroundColor || colors.backgroundBase3};
   border-radius: 20px;
+  padding: 20px;
   display: flex;
   min-height: 260px;
   grid-area: bigCard;
@@ -13,12 +14,15 @@ const Card = styled.div<{ $backgroundColor: string }>`
   justify-content: space-between;
 
   @media (max-width: 940px) {
-    min-width: 400px;
-    min-height: 288px;
+    display: block;
+    height: 288px;
     width: 100%;
   }
-  @media (max-width: 940px) {
-    min-height: 264px;
+
+  @media (max-width: 620px) {
+    height: 188px;
+    width: 293px;
+    padding: 12px;
   }
 `
 const CardImg = styled.div`
@@ -51,7 +55,6 @@ const TitleContainer = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
-  margin-bottom: 23px;
 `
 
 const CardTitle = styled.h3`
@@ -59,7 +62,12 @@ const CardTitle = styled.h3`
   font-size: 18px;
   line-height: 136%;
 
+  @media (max-width: 940px) {
+    width: 293px;
+  }
+
   @media (max-width: 620px) {
+    width: 221px;
     font-weight: 700;
     font-size: 16px;
   }
@@ -86,14 +94,17 @@ const ListItemText = styled.span`
 `
 
 const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   max-width: 1080px;
-  margin: 52px 0 40px 20px;
+  gap: 20px;
 
   @media (max-width: 1300px) {
     max-width: 575px;
   }
   @media (max-width: 940px) {
-    margin: 27px 20px;
+    max-width: none;
+    margin: 0;
   }
 `
 

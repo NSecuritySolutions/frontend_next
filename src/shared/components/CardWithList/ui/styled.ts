@@ -5,17 +5,22 @@ const Card = styled.div<{ $backgroundColor: string }>`
   background-color: ${(props) => props.$backgroundColor || colors.backgroundBase3};
   border-radius: 20px;
   padding: 20px;
-  min-height: 188px;
+  height: 188px;
+
+  @media (max-width: 1300px) {
+    height: 248px;
+  }
 
   @media (max-width: 940px) {
-    max-width: 380px;
+    width: 380px;
     width: 100%;
-    min-height: 288px;
+    height: 288px;
   }
 
   @media (max-width: 620px) {
-    max-width: 293px;
-    min-height: 264px;
+    width: 293px;
+    height: 264px;
+    padding: 12px;
   }
 `
 

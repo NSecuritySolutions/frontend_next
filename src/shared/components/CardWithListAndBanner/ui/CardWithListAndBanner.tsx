@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
 
@@ -18,7 +18,6 @@ import {
 type TCardProps = {
   title: string
   banner: string
-  // banner: StaticImageData
   listItem: string[]
   backgroundColor: string
   logo: string
