@@ -60,7 +60,7 @@ const CardWithTextAndBanner: FC<TCardProps> = ({
           height={305}
           placeholder="blur"
           blurDataURL={rgbDataURL(225, 231, 244)}
-          className={isHovered ? 'card-image expanded' : 'card-image'}
+          // className={isHovered ? 'card-image expanded' : 'card-image'}
         />
       </CardImg>
       <TextWrapper>

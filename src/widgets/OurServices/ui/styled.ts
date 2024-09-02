@@ -11,16 +11,20 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
+
   @media (max-width: 1300px) {
     max-width: 880px;
     width: 100%;
   }
+
   @media (max-width: 940px) {
     max-width: 580px;
+    padding: 32px 0;
     width: 100%;
   }
 
   @media (max-width: 620px) {
+    padding: 16px 0;
     max-width: 328px;
     width: 100%;
   }
@@ -38,43 +42,12 @@ const CardsGridContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 
-  & > div {
-    @media (max-width: 940px) {
-      div {
-        top: 120px;
-      }
-    }
-  }
-
-  & > div:nth-child(3) {
-    @media (max-width: 1300px) {
-      div {
-        top: 190px;
-      }
-    }
-    @media (max-width: 940px) {
-      div {
-        top: 150px;
-      }
-    }
-  }
-
-  & > div:nth-child(4) {
-    @media (max-width: 1300px) {
-      div {
-        top: 190px;
-      }
-    }
-
-    @media (max-width: 940px) {
-      div {
-        top: 120px;
-      }
-    }
-  }
-
   @media (max-width: 940px) {
     grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 620px) {
+    gap: 16px;
   }
 `
 
