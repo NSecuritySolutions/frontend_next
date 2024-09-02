@@ -165,6 +165,10 @@ const Input = styled.input<TInputProps>`
   &:focus-visible {
     ${(props) => focusStyles(props)}
   }
+
+  @media (max-width: 620px) {
+    font-size: 14px;
+  }
 `
 const TextInput = styled.textarea`
   color: ${colors.darkPrimary};

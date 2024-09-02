@@ -1,12 +1,12 @@
 'use client'
 
-import React, { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode, FC } from 'react'
 import calculatorStore, { CalculatorStore } from '@/app/store/calculatorStore'
 import { ICalculatorData, TProduct } from '@/widgets/Calculator/types'
 
 const StoreContext = createContext<CalculatorStore | null>(null)
 
-export const StoreProvider: React.FC<{
+export const StoreProvider: FC<{
   products: TProduct[]
   calculator: ICalculatorData[]
   children: ReactNode

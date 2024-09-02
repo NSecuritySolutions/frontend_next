@@ -9,6 +9,7 @@ import {
   TProduct,
 } from '@/widgets/Calculator/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
+import { CalculatorData } from '@/shared/components/FormModal/types'
 
 export class CalculatorStore {
   data: IBlock[] = []
@@ -100,6 +101,14 @@ export class CalculatorStore {
           })
       })
     }
+  }
+
+  createFormData() {
+    const data: CalculatorData = {
+      price: this.result,
+      blocks: this.blocks.map((block) => block.createFormData()),
+    }
+    return data
   }
 }
 

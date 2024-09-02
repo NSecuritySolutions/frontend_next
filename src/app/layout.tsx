@@ -18,6 +18,8 @@ import styles from './page.module.css'
 import { BASE_URL } from '@/shared/constants/url/url'
 import { StoreProvider } from './store/calculatorStoreProvider'
 import { getCalculatorData } from './api'
+import { FormStoreProvider } from './store/formModalStoreProvider'
+import { FormModal } from '@/shared/components/FormModal'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -95,7 +97,10 @@ export default async function RootLayout({
         <StyledComponentsRegistry>
           <Header navLinks={headerNavLinks} />
           <StoreProvider products={productData} calculator={calculatorData}>
-            {children}
+            <FormStoreProvider>
+              {children}
+              <FormModal />
+            </FormStoreProvider>
           </StoreProvider>
           <Footer />
         </StyledComponentsRegistry>

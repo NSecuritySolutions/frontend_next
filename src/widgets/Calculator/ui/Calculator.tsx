@@ -26,6 +26,7 @@ import { observer } from 'mobx-react-lite'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { CalculatorClearButton } from '@/shared/components/CalculatorClearButton'
 import { useStore } from '@/app/store/calculatorStoreProvider'
+import { useFormStore } from '@/app/store/formModalStoreProvider'
 
 const Calculator: React.FC = observer(() => {
   const store = useStore()
@@ -38,6 +39,7 @@ const Calculator: React.FC = observer(() => {
   const [currentMobileCard, setCurrentMobileCard] = useState<string | undefined>()
   const grid = useRef<HTMLDivElement>(null)
   const timers = useRef<NodeJS.Timeout[]>([])
+  const modal = useFormStore()
 
   const clearTimers = useCallback(() => {
     timers.current.forEach(clearTimeout)
@@ -264,7 +266,9 @@ const Calculator: React.FC = observer(() => {
               <Price>{formattedResult}</Price>
             </PriceContainer>
             <ButtonsWrapper>
-              <Button $primary>Оформить заявку</Button>
+              <Button $primary onClick={() => modal.openCalc()}>
+                Оформить заявку
+              </Button>
               <Button>
                 <Image
                   src="/icons/calculator/download.svg"

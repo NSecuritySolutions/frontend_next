@@ -6,6 +6,7 @@ import calculatorStore from '@/app/store/calculatorStore'
 import { IBlock, IPriceVariables, IOption, TProduct } from '@/widgets/Calculator/types'
 import { ICondition, IConditionCategory } from '@/shared/components/CalculatorCard/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
+import { CalculatorBlockData } from '@/shared/components/FormModal/types'
 
 const config = {}
 const math = create(all, config)
@@ -163,7 +164,7 @@ class CalculatorBlockStore {
       return 0
     }
 
-    const filteredProducts = this.filter()
+    const filteredProducts = this.filterByMinPrice()
     const resultWithoutProducts =
       this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
     const blockFilteredProducts = filteredProducts.filter(
@@ -199,21 +200,33 @@ class CalculatorBlockStore {
     return result || 0
   }
 
+  private filterByMinPrice() {
+    const filteredProducts: { name: string; products: TProduct[] }[] = this.filter()
+    const minPriceData: TProduct[] = []
+    filteredProducts.forEach((category) =>
+      minPriceData.push(
+        category.products.reduce((min, current) => {
+          return current.price < min.price ? current : min
+        }, category.products[0]),
+      ),
+    )
+    return minPriceData
+  }
+
   private filter() {
     // Фильтруем по категориям, заодно выбираем самую минимальную цену
     const categoriesWithProducts = Object.keys(this.products).filter(
       (category) => this.products[category].length > 0,
     )
-    const minPriceData = Object.keys(this.filters).map((category) => {
+    const data: { name: string; products: TProduct[] }[] = []
+    Object.keys(this.filters).map((category) => {
       let filteredData: TProduct[]
       if (categoriesWithProducts.find((item) => item == category))
         filteredData = this.products[category]
       else filteredData = this.filterProduct(category)
-      return filteredData.reduce((min, current) => {
-        return current.price < min.price ? current : min
-      }, filteredData[0])
+      data.push({ name: category, products: filteredData })
     })
-    return minPriceData
+    return data
   }
 
   private filterProduct(category: string) {
@@ -572,6 +585,20 @@ class CalculatorBlockStore {
     }
   }
   // Конец блока
+
+  createFormData() {
+    const data: CalculatorBlockData = {
+      name: this.data.title,
+      amount: parseInt(this.variables.block_amount as string),
+      options: this.data.options.map((option) => ({
+        name: option.title,
+        value: this.variables[option.name].toString(),
+      })),
+      products_category: this.filter(),
+      price: this.result,
+    }
+    return data
+  }
 }
 
 export default CalculatorBlockStore

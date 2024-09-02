@@ -11,9 +11,10 @@ const StyledBtnLink = styled.button<TStyledBtnProps>`
   color: ${(props) => (props.disabled ? colors.btnOpacityColor : colors.darkPrimary)};
   text-decoration: none;
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: 15px;
   font-weight: 800;
+  font-family: var(--mont);
   cursor: pointer;
   width: ${(props) => props.width || 'auto'};
   height: ${(props) => props.height || 'auto'};

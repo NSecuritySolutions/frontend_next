@@ -22,12 +22,14 @@ import Link from 'next/link'
 import { SolutionCardTooltip } from '@/shared/components/SolutionCardTooltip'
 import { ISolution } from '@/widgets/ReadySolutionSection/types'
 import calculatorStore from '@/app/store/calculatorStore'
+import { useFormStore } from '@/app/store/formModalStoreProvider'
 
 interface CardSolutionProps {
   data: ISolution
 }
 
 const CardSolution: FC<CardSolutionProps> = ({ data }) => {
+  const modal = useFormStore()
   const pathname = usePathname()
 
   let calc
@@ -88,9 +90,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
         <PriceText>{formattedPrice}</PriceText>
       </PriceWrapper>
       <ButtonGroupWrapper>
-        <Link href={form} passHref legacyBehavior>
-          <Button>Заказать звонок</Button>
-        </Link>
+        <Button onClick={() => modal.openSolution(data)}>Заказать звонок</Button>
         <Link href={calc} passHref legacyBehavior>
           <Button
             $transparent
