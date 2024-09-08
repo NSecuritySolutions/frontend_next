@@ -14,12 +14,17 @@ const CardContainer = styled.article<{ $chosen?: boolean }>`
   font-size: 16px;
   gap: 20px;
   align-items: center;
-  justify-content: center;
+  padding: 21px;
   cursor: pointer;
   transition: opacity 0.7s;
 
   &:hover {
     opacity: 0.5;
+  }
+
+  @media (max-width: 1300px) {
+    justify-content: center;
+    padding: 0;
   }
 
   @media (max-width: 940px) {
