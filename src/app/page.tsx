@@ -54,8 +54,8 @@ export default async function Page() {
       <Calculator />
       <AdvantagesBlock />
       <ProjectStage />
-      <OurTeam />
-      <Questions questions={questionsData} />
+      <OurTeam data={teamData[0]} />
+      <Questions data={questionsData} />
       <ReviewsBlock />
       <ExamplesSlider />
       <OurClients />

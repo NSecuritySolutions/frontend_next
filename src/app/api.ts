@@ -4,7 +4,7 @@ export async function getMainPageData() {
   const responses = await Promise.all([
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
-    fetch(`${BASE_URL}/api/v1/our-team/`),
+    fetch(`${BASE_URL}/api/v1/our-team/?active=true`),
     fetch(`${BASE_URL}/api/v1/our-works/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),

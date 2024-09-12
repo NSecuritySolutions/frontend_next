@@ -16,8 +16,8 @@ import {
   ColumnWrapper,
 } from './styled'
 
-const Questions: React.FC<QuestionsProps> = ({ questions }) => {
-  const [currentTab, setCurrentTab] = React.useState<IQuestionCategory>(questions[0])
+const Questions: React.FC<QuestionsProps> = ({ data }) => {
+  const [currentTab, setCurrentTab] = React.useState<IQuestionCategory>(data[0])
 
   const [safe, setSafe] = useState(true)
 
@@ -31,7 +31,7 @@ const Questions: React.FC<QuestionsProps> = ({ questions }) => {
 
     return result
   }
-  const sortedQuestions = sortFaqQuestions(questions)
+  const sortedQuestions = sortFaqQuestions(data)
 
   const timer = useRef<NodeJS.Timeout | undefined>(undefined)
 

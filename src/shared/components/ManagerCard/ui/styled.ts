@@ -10,6 +10,7 @@ const CardContainer = styled.article`
   color: ${colors.darkPrimary};
   font-weight: 400;
   font-size: 16px;
+  gap: 8px;
 
   @media (max-width: 1300px) {
     max-width: 122px;
@@ -17,17 +18,15 @@ const CardContainer = styled.article`
 
   @media (max-width: 620px) {
     flex-direction: row;
-    gap: 8px;
     max-width: 308px;
   }
 `
 
 const TextWrapper = styled.div`
-  @media (max-width: 620px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
 `
 
 const CardImg = styled.div`
@@ -40,26 +39,21 @@ const CardImg = styled.div`
 
   img {
     border-radius: 500px;
-    width: 172px;
-    height: 172px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 
     scale: 1;
-    transition: transform 1s;
+    transition: scale 1s;
 
     &:hover {
-      transform: scale(1.2);
+      scale: 1.2;
     }
   }
 
   @media (max-width: 1300px) {
     width: 122px;
     height: 122px;
-
-    img {
-      width: 122px;
-      height: 122px;
-    }
   }
 `
 
@@ -68,7 +62,6 @@ const CardName = styled.div`
   flex-direction: row;
   align-self: center;
   max-width: 172px;
-  margin-top: 6px;
   width: 100%;
   justify-content: center;
   text-wrap: nowrap;
@@ -79,17 +72,23 @@ const CardName = styled.div`
   @media (max-width: 1300px) {
     text-wrap: wrap;
   }
+
+  @media (max-width: 620px) {
+    text-align: start;
+  }
 `
 
 const CardPosition = styled.div`
   display: flex;
-  flex-direction: row;
   max-width: 172px;
   width: 100%;
-  font-family: Manrope, sans-serif;
   justify-content: center;
-  margin-top: 6px;
   text-align: center;
+
+  @media (max-width: 620px) {
+    justify-content: start;
+    text-align: start;
+  }
 `
 
 const CardTel = styled.div`

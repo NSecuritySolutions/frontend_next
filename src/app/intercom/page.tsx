@@ -21,7 +21,7 @@ export default async function DomofonPage() {
         обеспечивают полную безопасность вашего дома или офиса"
         src="/images/banner/png/video-surveillance-banner.png"
       />
-      <Questions questions={questionsData} />
+      <Questions data={questionsData} />
       <Calculator />
       <ContactForm />
     </main>

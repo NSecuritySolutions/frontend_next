@@ -39,7 +39,7 @@ export default async function VideoPage() {
       />
       <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <ProductCards data={productData} />
-      <Questions questions={questionsData} />
+      <Questions data={questionsData} />
       <Calculator />
       <ContactForm />
     </main>

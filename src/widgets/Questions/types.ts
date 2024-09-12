@@ -12,5 +12,5 @@ export interface IQuestionCategory {
 }
 
 export interface QuestionsProps {
-  questions: IQuestionCategory[]
+  data: IQuestionCategory[]
 }
