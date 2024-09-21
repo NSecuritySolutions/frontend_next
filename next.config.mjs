@@ -21,7 +21,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: process.env.BASE_URL,
+        hostname: process.env.BASE_URL || 'backend',
         port: '',
         pathname: '/media/**',
       },
