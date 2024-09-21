@@ -21,13 +21,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'nssolution.sytes.net',
+        hostname: process.env.BASE_URL || 'backend',
         port: '',
         pathname: '/media/**',
       },
       {
         protocol: 'http',
-        hostname: 'nssolution.sytes.net',
+        hostname: process.env.BASE_URL || 'backend',
         port: '',
         pathname: '/media/**',
       },
