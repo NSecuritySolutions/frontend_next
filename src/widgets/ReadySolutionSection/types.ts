@@ -1,4 +1,4 @@
-import { IBlock, TProduct } from '../Calculator/types'
+import { TProduct } from '../Calculator/types'
 
 interface ITag {
   id: number

@@ -82,6 +82,8 @@ export async function getVideoPageData() {
 
 export async function getDomofonPageData() {
   const responses = await Promise.all([
+    fetch(`${BASE_URL}/api/v1/ready-solutions/`),
+    fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
   ])
@@ -90,11 +92,13 @@ export async function getDomofonPageData() {
     throw new Error('Failed to fetch data')
   }
 
-  const [questionsData, productData] = await Promise.all(
+  const [solutionData, solutionTags, questionsData, productData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
   return {
+    solutionData,
+    solutionTags,
     questionsData,
     productData,
   }
@@ -102,6 +106,8 @@ export async function getDomofonPageData() {
 
 export async function getSecurityPageData() {
   const responses = await Promise.all([
+    fetch(`${BASE_URL}/api/v1/ready-solutions/`),
+    fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
     fetch(`${BASE_URL}/api/v1/products/`),
   ])
@@ -110,11 +116,13 @@ export async function getSecurityPageData() {
     throw new Error('Failed to fetch data')
   }
 
-  const [questionsData, productData] = await Promise.all(
+  const [solutionData, solutionTags, questionsData, productData] = await Promise.all(
     responses.map((response) => response.json()),
   )
 
   return {
+    solutionData,
+    solutionTags,
     questionsData,
     productData,
   }

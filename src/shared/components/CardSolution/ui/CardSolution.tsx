@@ -48,26 +48,11 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
     maximumFractionDigits: 0,
   })
 
-  // const handleCardClick = (e: React.MouseEvent) => {
-  //   e.stopPropagation()
-  //   router.push(`/products/${data.id}`)
-  // }
+  // console.log('Data', data)
 
   return (
-    <Card
-    // onClick={handleCardClick}
-    >
-      <SolutionCardTooltip title={data.title} text={data.description} key={data.title} />
-      {/* <InfoBtn onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        {showTooltip && (
-          <TooltipContainer>
-            <CardTitle>{data.title}</CardTitle>
-            {data.toolTipText.map((paragraph, index) => (
-              <ToolTipParagraph key={index}>{paragraph}</ToolTipParagraph>
-            ))}
-          </TooltipContainer>
-        )}
-      </InfoBtn> */}
+    <Card>
+      <SolutionCardTooltip title={data.title} text={data.tooltip_text} key={data.title} />
       <ImageWrapper>
         <Img src={data.image} quality={100} alt={data.title} width={208} height={156} />
       </ImageWrapper>
