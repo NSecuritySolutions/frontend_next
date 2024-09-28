@@ -3,11 +3,14 @@ import { Questions } from '@/widgets/Questions'
 import { Calculator } from '@/widgets/Calculator'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
 import { PageBanner } from '@/shared/components/PageBanner'
+import { ProductCards } from '@/widgets/ProductCards'
 import { ISolution } from '@/widgets/ReadySolutionSection/types'
 
 import { getDomofonPageData } from '../api'
 
 import styles from './page.module.css'
+
+export const revalidate = 60
 
 export default async function DomofonPage() {
   const { solutionData, solutionTags, questionsData, productData } = await getDomofonPageData()
@@ -30,6 +33,7 @@ export default async function DomofonPage() {
         data={{ solutions: filteredSolutions, tags: solutionTags }}
         withTabs={false}
       />
+      <ProductCards data={productData} />
       <Calculator />
       <Questions data={questionsData} />
       <ContactForm />

@@ -2,13 +2,15 @@ import { ContactForm } from '@/widgets/ContactForm'
 import { Questions } from '@/widgets/Questions'
 import { Calculator } from '@/widgets/Calculator'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
-import { ISolution } from '@/widgets/ReadySolutionSection/types'
-
 import { PageBanner } from '@/shared/components/PageBanner'
+import { ProductCards } from '@/widgets/ProductCards'
+import { ISolution } from '@/widgets/ReadySolutionSection/types'
 
 import { getSecurityPageData } from '../api'
 
 import styles from './page.module.css'
+
+export const revalidate = 60
 
 export default async function SecurityPage() {
   const { solutionData, solutionTags, questionsData, productData } = await getSecurityPageData()
@@ -30,6 +32,7 @@ export default async function SecurityPage() {
         data={{ solutions: filteredSolutions, tags: solutionTags }}
         withTabs={false}
       />
+      <ProductCards data={productData} />
       <Calculator />
       <Questions data={questionsData} />
       <ContactForm />

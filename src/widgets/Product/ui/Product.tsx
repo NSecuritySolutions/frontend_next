@@ -27,6 +27,9 @@ import calculatorStore from '@/app/store/calculatorStore'
 const Product: FC<ProductProps> = ({ data }) => {
   if (!data) return Loader()
 
+  // console.log(data)
+  // TODO: переделать на бэке чтобы карточки были универсальные по характеристикам
+
   return (
     <Card>
       <Title>{data.model}</Title>

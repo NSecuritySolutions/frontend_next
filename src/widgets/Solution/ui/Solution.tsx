@@ -29,8 +29,6 @@ import { SolutionProps } from '../types'
 const Solution: FC<SolutionProps> = ({ data }) => {
   if (!data) return Loader()
 
-  console.log('Data', data)
-
   return (
     <Card>
       <Title>{data.title}</Title>
