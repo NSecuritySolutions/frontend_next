@@ -46,9 +46,6 @@ export default async function Page() {
   const cookieStore = cookies()
   const hasCookie = cookieStore.has('agreedGuest')
 
-  // console.log('solutionData', solutionData)
-  // console.log('solutionTags', solutionTags)
-
   return (
     <main className={styles.main} id="content">
       <Info />

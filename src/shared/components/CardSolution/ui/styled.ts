@@ -18,10 +18,6 @@ const Card = styled.div`
 
   position: relative;
 
-  &:hover {
-    cursor: pointer;
-  }
-
   @media (max-width: 1300px) {
     width: 280px;
     height: 598px;

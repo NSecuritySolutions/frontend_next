@@ -5,7 +5,7 @@ import { Tooltip, Title, Paragraph } from './styled'
 
 interface NewTooltipProps {
   title: string
-  text: string[]
+  text: string
 }
 
 const SolutionCardTooltip: FC<NewTooltipProps> = ({ title, text }) => {
@@ -70,9 +70,10 @@ const SolutionCardTooltip: FC<NewTooltipProps> = ({ title, text }) => {
             // $left={anchorRef.current!.getBoundingClientRect().left}
           >
             <Title>{title}</Title>
-            {text.map((paragraph) => (
+            {/* {text.map((paragraph) => (
               <Paragraph key={paragraph}>{paragraph}</Paragraph>
-            ))}
+            ))} */}
+            <Paragraph>{text}</Paragraph>
           </Tooltip>,
           document.getElementById('content')!,
         )}

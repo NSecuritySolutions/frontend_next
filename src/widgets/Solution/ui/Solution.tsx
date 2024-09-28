@@ -3,6 +3,7 @@ import { Typography } from '@/shared/components/Typography'
 import Loader from '@/shared/components/Loader/Loader'
 // import { ProductProps } from '../types'
 import { ICamera } from '@/widgets/Calculator/types'
+import { v4 as uuidv4 } from 'uuid'
 
 import {
   Card,
@@ -27,6 +28,8 @@ import { SolutionProps } from '../types'
 
 const Solution: FC<SolutionProps> = ({ data }) => {
   if (!data) return Loader()
+
+  console.log('Data', data)
 
   return (
     <Card>
@@ -83,9 +86,9 @@ const Solution: FC<SolutionProps> = ({ data }) => {
           </BlockWrapper>
           <BlockWrapper>
             <SectionTitle>Описание:</SectionTitle>
-            {/* {data.description.map((item) => ( */}
-            <Text>{data.tooltip_text}</Text>
-            {/* ))} */}
+            {data.description.map((item, index) => (
+              <Text key={index}>{item}</Text>
+            ))}
           </BlockWrapper>
         </ColumnWrapper>
       </ContentWrapper>

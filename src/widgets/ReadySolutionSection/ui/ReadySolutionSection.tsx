@@ -104,6 +104,9 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({
     },
   }
 
+  // console.log('solutionData', solutions)
+  // console.log('solutionTags', tags)
+
   return (
     <Section id="solutions">
       <SectionTitle>Готовые решения</SectionTitle>
@@ -125,9 +128,9 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({
 
       <CardsContainer>
         <Slider {...cardSettings}>
-          {activeTabData.map((solution) => (
-            <CardSolution data={solution} key={solution.id} />
-          ))}
+          {withTabs
+            ? activeTabData.map((solution) => <CardSolution data={solution} key={solution.id} />)
+            : solutions.map((solution) => <CardSolution data={solution} key={solution.id} />)}
         </Slider>
         <p id="calculator-start" style={{ display: 'none' }}></p>
       </CardsContainer>
