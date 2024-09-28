@@ -13,9 +13,13 @@ import { ISolution, ITag } from '../types'
 
 interface ReadySolutionSectionProps {
   data: { solutions: ISolution[]; tags: ITag[] }
+  withTabs?: boolean
 }
 
-const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions, tags } }) => {
+const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({
+  data: { solutions, tags },
+  withTabs = true,
+}) => {
   const [activeTab, setActiveTab] = useState(tags[0].title)
   const [activeTabData, setActiveTabData] = useState(
     solutions.filter(
@@ -103,19 +107,21 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({ data: { solutions
   return (
     <Section id="solutions">
       <SectionTitle>Готовые решения</SectionTitle>
-      <TabsContainer>
-        <Slider {...tabSettings}>
-          {tags.map((tag) => (
-            <TabButton
-              key={tag.id}
-              onClick={() => handleTabChange(tag.title)}
-              $activetab={activeTab === tag.title}
-            >
-              {tag.title}
-            </TabButton>
-          ))}
-        </Slider>
-      </TabsContainer>
+      {withTabs && (
+        <TabsContainer>
+          <Slider {...tabSettings}>
+            {tags.map((tag) => (
+              <TabButton
+                key={tag.id}
+                onClick={() => handleTabChange(tag.title)}
+                $activetab={activeTab === tag.title}
+              >
+                {tag.title}
+              </TabButton>
+            ))}
+          </Slider>
+        </TabsContainer>
+      )}
 
       <CardsContainer>
         <Slider {...cardSettings}>

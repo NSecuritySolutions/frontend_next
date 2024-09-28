@@ -1,11 +1,10 @@
-// import { useEffect } from 'react'
-
 import { ContactForm } from '@/widgets/ContactForm'
 import { ReadySolutionSection } from '@/widgets/ReadySolutionSection'
 import { Questions } from '@/widgets/Questions'
 import { ProductCards } from '@/widgets/ProductCards'
 import { Calculator } from '@/widgets/Calculator'
 import { PageBanner } from '@/shared/components/PageBanner'
+import { ISolution } from '@/widgets/ReadySolutionSection/types'
 
 import { getVideoPageData } from '../api'
 
@@ -15,6 +14,10 @@ export const revalidate = 60
 
 export default async function VideoPage() {
   const { solutionData, solutionTags, questionsData, productData } = await getVideoPageData()
+
+  const filteredSolutions = solutionData.filter((solution: ISolution) =>
+    solution.tags.some((tag) => tag.title === 'Видеонаблюдение'),
+  )
 
   // useEffect(() => {
   //   const targetCardID = localStorage.getItem('id')
@@ -37,7 +40,10 @@ export default async function VideoPage() {
           время ночной съемки или непогоды"
         src="/images/banner/png/banner-video-sourveillance.png"
       />
-      <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
+      <ReadySolutionSection
+        data={{ solutions: filteredSolutions, tags: solutionTags }}
+        withTabs={false}
+      />
       <ProductCards data={productData} />
       <Calculator />
       <Questions data={questionsData} />
