@@ -18,10 +18,10 @@ export default async function SecurityPage() {
         title="Комплексная защита с охранно-пожарными 
         сигнализациями для вашего дома и бизнеса"
         text="Надежные охранно-пожарные сигнализации для защиты Вашего имущества от взломов и пожаров"
-        src="/images/banner/png/video-surveillance-banner.png"
+        src="/images/banner/png/banner-security.png"
       />
-      <Questions data={questionsData} />
       <Calculator />
+      <Questions data={questionsData} />
       <ContactForm />
     </main>
   )

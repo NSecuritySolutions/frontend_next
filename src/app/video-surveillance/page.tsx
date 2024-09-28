@@ -35,12 +35,12 @@ export default async function VideoPage() {
         title="Широкий ассортимент камер и готовых решений видеонаблюдения для дома и бизнеса"
         text="Наши камеры имеют широкий угол обзора и обеспечивают отличное качество изображения даже во
           время ночной съемки или непогоды"
-        src="/images/banner/png/video-surveillance-banner.png"
+        src="/images/banner/png/banner-video-sourveillance.png"
       />
       <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <ProductCards data={productData} />
-      <Questions data={questionsData} />
       <Calculator />
+      <Questions data={questionsData} />
       <ContactForm />
     </main>
   )

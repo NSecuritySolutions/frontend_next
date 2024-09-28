@@ -73,12 +73,24 @@ const BannerParagraph = styled.p`
 `
 const ImageWrapper = styled.div`
   width: 791px;
-  heigth: 445px;
+  height: 445px;
   width: 100%;
   margin-top: 32px;
   display: flex;
   justify-content: center;
   object-fit: contain;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180.06deg, rgba(246, 246, 246, 0) 69.59%, #f6f6f6 95.33%);
+    pointer-events: none;
+  }
 
   img {
     @media (max-width: 620px) {

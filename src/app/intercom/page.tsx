@@ -19,10 +19,10 @@ export default async function DomofonPage() {
         с домофонией и СКУД"
         text="Удобные в управлении домофоны и системы контроля доступа (СКУД) выского качества
         обеспечивают полную безопасность вашего дома или офиса"
-        src="/images/banner/png/video-surveillance-banner.png"
+        src="/images/banner/png/banner-intercom.png"
       />
-      <Questions data={questionsData} />
       <Calculator />
+      <Questions data={questionsData} />
       <ContactForm />
     </main>
   )
