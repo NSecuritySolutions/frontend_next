@@ -8,6 +8,7 @@ interface IProduct {
   description: string
   price: number
   prices_in_price_lists: IPrice[]
+  polymorphic_ctype: number
 }
 
 interface ICamera extends IProduct {
@@ -59,7 +60,7 @@ interface IOption {
   option_type: 'number' | 'checkbox' | 'radio' | 'counter'
   name: string
   choices?: string
-  product?: string
+  product?: number
   filters?: string
   block: number
   depends_on?: number

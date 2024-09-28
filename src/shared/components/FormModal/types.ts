@@ -9,7 +9,7 @@ interface CalculatorBlockData {
   name: string
   amount: number
   options: { name: string; value: string }[]
-  products_category: { name: string; products: TProduct[] }[]
+  products_category: { categoryId: number; products: TProduct[] }[]
   price: number
 }
 
