@@ -82,7 +82,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
           </Link>
         </TextWrapper>
         <ButtonWrapper>
-          <BtnLink
+          {/* <BtnLink
             text="Заказать звонок"
             width="174px"
             height="44px"
@@ -94,7 +94,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
               e.stopPropagation()
               router.push(`#contact-form`)
             }}
-          />
+          /> */}
           <BtnLink
             text="В калькулятор"
             width="174px"

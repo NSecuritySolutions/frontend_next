@@ -48,8 +48,6 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
     maximumFractionDigits: 0,
   })
 
-  // console.log('Data', data)
-
   return (
     <Card>
       <SolutionCardTooltip title={data.title} text={data.tooltip_text} key={data.title} />

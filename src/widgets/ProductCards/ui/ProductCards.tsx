@@ -26,9 +26,10 @@ const ProductCards: FC<ProductCardsProps> = ({ data }) => {
           <ProductCard key={i} item={item} />
         ))} */}
 
-        {data.slice(0, visibleItems).map((item: ICamera, i: number) => (
-          <ProductCard key={i} item={item as ICamera} />
-        ))}
+        {data &&
+          data
+            .slice(0, visibleItems)
+            .map((item: ICamera, i: number) => <ProductCard key={i} item={item as ICamera} />)}
       </SectionWrapper>
       {visibleItems < data.length && (
         <BtnLink

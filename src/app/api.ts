@@ -85,8 +85,9 @@ export async function getDomofonPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
   ])
+  // TODO сделать нужную категорию
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
@@ -109,7 +110,8 @@ export async function getSecurityPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    // TODO сделать нужную категорию
   ])
 
   if (responses.some((response) => !response.ok)) {
