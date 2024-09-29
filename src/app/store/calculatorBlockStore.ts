@@ -32,15 +32,15 @@ class CalculatorBlockStore {
   disabled: number = 0
   appeared: number = 0
   formula: string
-  initialVariables: Record<string, string | number | boolean>
-  variables: Record<string, string | number | boolean>
-  variabilityVariables: Record<string, number> = {}
+  initialVariables: Map<string, string | number | boolean>
+  variables: Map<string, string | number | boolean>
+  variabilityVariables: Map<string, number> = new Map()
   quantity_selection: boolean
 
-  // Ключи это названия категорий
-  filters: Record<string, IConditionCategory> = {}
-  products: Record<string, TProduct[]> = {}
-  productAmountDependencies: Record<string, string | undefined> = {}
+  // Ключи это id категорий
+  filters: Map<number, IConditionCategory> = new Map()
+  products: Map<number, TProduct[]> = new Map()
+  productAmountDependencies: Map<number, string | undefined> = new Map()
 
   constructor(data: IBlock, price: IPriceVariables) {
     this.id = uuidv4()
@@ -49,9 +49,9 @@ class CalculatorBlockStore {
     this.prev_block_amount = 0
     this.quantity_selection = data.quantity_selection
     this.formula = data.formula.expression
-    this.variables = { ...price }
+    this.variables = new Map(Object.entries(price))
     this.setVariables()
-    this.initialVariables = { ...this.variables }
+    this.initialVariables = new Map(this.variables)
     this.setPresent()
     makeAutoObservable(this, {
       variables: observable,
@@ -76,11 +76,11 @@ class CalculatorBlockStore {
     return false
   }
 
-  private checkOptionValueFilter(category: string, name: string, value: string | number | boolean) {
-    const products = calculatorStore.products.filter((item) => item?.category?.title === category)
+  private checkOptionValueFilter(category: number, name: string, value: string | number | boolean) {
+    const products = calculatorStore.products.filter((item) => item?.polymorphic_ctype === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
     const filteredProducts = products.filter((item) =>
-      this.applyFiltersForCheck(item, this.filters[category], name, value),
+      this.applyFiltersForCheck(item, this.filters.get(category)!, name, value),
     )
     return filteredProducts
   }
@@ -96,14 +96,14 @@ class CalculatorBlockStore {
     if (restFilters.length == 0) return initial
     const rest = restFilters.every((option) => {
       return conditionCategory[option].every((condition) => {
-        if (this.variables[option] == 'unknown') {
+        if (this.variables.get(option) == 'unknown') {
           return true
         }
         if (condition.leftPart == name) {
           if (condition.optionValue == value.toString()) return this.applyCondition(item, condition)
           else return true
         }
-        if (condition.optionValue == this.variables[option].toString()) {
+        if (condition.optionValue == this.variables.get(option)!.toString()) {
           return this.applyCondition(item, condition)
         } else return true
       })
@@ -140,7 +140,7 @@ class CalculatorBlockStore {
       if (
         depends &&
         this.handleIsPresent(depends) &&
-        this.getVariable(depends.name).toString() == option.depends_on_value
+        this.getVariable(depends.name)!.toString() == option.depends_on_value
       )
         return true
     }
@@ -166,12 +166,9 @@ class CalculatorBlockStore {
 
     const filteredProducts = this.filterByMinPrice()
     const resultWithoutProducts =
-      this.variables.block_amount && this.variables.block_amount != 0 ? mathResult : 0
+      this.variables.has('block_amount') && this.variables.get('block_amount') != 0 ? mathResult : 0
     const blockFilteredProducts = filteredProducts.filter(
-      (product) =>
-        Object.keys(this.productAmountDependencies).find(
-          (item) => product?.category.title == item,
-        ) == undefined,
+      (product) => this.productAmountDependencies.get(product?.polymorphic_ctype) == undefined,
     )
     const otherFilteredProducts = filteredProducts.filter(
       (product) => !blockFilteredProducts.includes(product),
@@ -182,17 +179,20 @@ class CalculatorBlockStore {
     }, 0)
     const blockResult =
       resultWithoutProducts *
-        ((this.filters && blockFilteredProductsResult) || Object.keys(this.filters).length == 0
+        ((this.filters && blockFilteredProductsResult) ||
+        Array.from(this.filters.keys()).length == 0
           ? 1
           : 0) +
-      blockFilteredProductsResult * (this.variables.block_amount as number)
+      blockFilteredProductsResult * (this.variables.get('block_amount') as number)
     const otherFilteredProductsResult = otherFilteredProducts.reduce((sum, current) => {
       if (!current) return sum
       return (
         sum +
         current.price *
-          (this.productAmountDependencies[current.category.title]
-            ? (this.variables[this.productAmountDependencies[current.category.title]!] as number)
+          (this.productAmountDependencies.get(current.polymorphic_ctype)
+            ? (this.variables.get(
+                this.productAmountDependencies.get(current.polymorphic_ctype)!,
+              ) as number)
             : 1)
       )
     }, 0)
@@ -201,7 +201,7 @@ class CalculatorBlockStore {
   }
 
   private filterByMinPrice() {
-    const filteredProducts: { name: string; products: TProduct[] }[] = this.filter()
+    const filteredProducts: { categoryId: number; products: TProduct[] }[] = this.filter()
     const minPriceData: TProduct[] = []
     filteredProducts.forEach((category) =>
       minPriceData.push(
@@ -214,27 +214,21 @@ class CalculatorBlockStore {
   }
 
   private filter() {
-    // Фильтруем по категориям, заодно выбираем самую минимальную цену
-    const categoriesWithProducts = Object.keys(this.products).filter(
-      (category) => this.products[category].length > 0,
-    )
-    const data: { name: string; products: TProduct[] }[] = []
-    Object.keys(this.filters).map((category) => {
-      let filteredData: TProduct[]
-      if (categoriesWithProducts.find((item) => item == category))
-        filteredData = this.products[category]
-      else filteredData = this.filterProduct(category)
-      data.push({ name: category, products: filteredData })
+    const data: { categoryId: number; products: TProduct[] }[] = []
+    this.filters.forEach((_, k) => {
+      if (this.products.has(k) && this.products.get(k)!.length > 0) {
+        data.push({ categoryId: k, products: this.products.get(k)! })
+      } else data.push({ categoryId: k, products: this.filterProduct(k) })
     })
     return data
   }
 
-  private filterProduct(category: string) {
+  private filterProduct(category: number) {
     // Отфильтровываем по категории
-    const products = calculatorStore.products.filter((item) => item?.category?.title === category)
+    const products = calculatorStore.products.filter((item) => item?.polymorphic_ctype === category)
     // Применяем дополнительные фильтры на основе выбора + начальных условий
     const filteredProducts = products.filter((item) =>
-      this.applyFilters(item, this.filters[category]),
+      this.applyFilters(item, this.filters.get(category)!),
     )
     return filteredProducts
   }
@@ -244,11 +238,11 @@ class CalculatorBlockStore {
     return conditions.every((condition) => {
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
       if (!condition.operator) {
-        if (this.filters[item.category.title][condition.leftPart]) return true
+        if (this.filters.get(item.polymorphic_ctype)![condition.leftPart]) return true
         return (
-          item[condition.leftPart] == this.variables[condition.leftPart] ||
-          this.variables[condition.leftPart] == 'unknown' ||
-          this.variables[condition.leftPart] == false
+          item[condition.leftPart] == this.variables.get(condition.leftPart) ||
+          this.variables.get(condition.leftPart) == 'unknown' ||
+          this.variables.get(condition.leftPart) == false
         )
       }
       // Это для неотслеживаемых условий (начальные фильтры, которые были заданы ны бэке)
@@ -262,10 +256,10 @@ class CalculatorBlockStore {
     if (restFilters.length == 0) return initial
     const rest = restFilters.every((option) => {
       return conditionCategory[option].every((condition) => {
-        if (this.variables[option] == 'unknown' || this.variables[option] == false) {
+        if (this.variables.get(option) == 'unknown' || this.variables.get(option) == false) {
           return true
         }
-        if (condition.optionValue == this.variables[option].toString()) {
+        if (condition.optionValue == this.variables.get(option)!.toString()) {
           return this.applyCondition(item, condition)
         } else return true
       })
@@ -311,40 +305,41 @@ class CalculatorBlockStore {
   // Работа с переменными
   // Начало блока
   private checkOptionProduct(name: string) {
+    // сбрасываем товар, если произошли изменения в блоке
     const option = this.data.options.filter((option) => option.name == name)[0]
-    if (option?.product && this.products[option.product].length > 0) {
-      this.products[option.product] = []
+    if (option?.product && this.products.get(option.product)!.length > 0) {
+      this.products.set(option.product, [])
     }
   }
 
-  setVariable(name: string, value: string | number | boolean) {
+  setVariable(name: string, value: string | number | boolean, setProduct?: boolean) {
     if (name == 'block_amount') {
-      this.prev_block_amount = this.variables.block_amount as number
-      Object.keys(this.variabilityVariables).map((name) => {
-        const blockAmount = this.variables.block_amount
-        const prevValue = this.variables[name]
+      this.prev_block_amount = this.variables.get('block_amount') as number
+      Array.from(this.variabilityVariables.keys()).map((name) => {
+        const blockAmount = this.variables.get('block_amount')
+        const prevValue = this.variables.get(name)
         if (blockAmount) {
           const increment = Math.floor((prevValue as number) / (blockAmount as number)) || 1
-          if (blockAmount < value) this.variables[name] = (prevValue as number) + increment
-          else this.variables[name] = Math.max(0, (prevValue as number) - increment)
+          if (blockAmount < value) this.variables.set(name, (prevValue as number) + increment)
+          else this.variables.set(name, Math.max(0, (prevValue as number) - increment))
         } else {
-          this.variables[name] = this.variabilityVariables[name]
+          this.variables.set(name, this.variabilityVariables.get(name)!)
         }
       })
     }
-    this.variables[name] = value
+    this.variables.set(name, value)
     const prevArr = [...this.presentOptions]
     this.setPresent()
     this.compareArrays(prevArr, this.presentOptions)
-    this.checkOptionProduct(name)
+    if (!setProduct) this.checkOptionProduct(name)
   }
 
   getVariable(name: string) {
-    return this.variables[name]
+    return this.variables.get(name)
   }
 
   resetVariables = () => {
-    this.variables = { ...this.initialVariables }
+    this.variables = new Map(this.initialVariables)
   }
   // Конец блока
 
@@ -353,14 +348,14 @@ class CalculatorBlockStore {
   private setInitialVariable(option: IOption) {
     switch (option.option_type) {
       case 'checkbox':
-        this.variables[option.name] = false
+        this.variables.set(option.name, false)
         break
       case 'radio':
-        this.variables[option.name] = option.choices!.split(';').map((part) => part.trim())[0]
+        this.variables.set(option.name, option.choices!.split(';').map((part) => part.trim())[0])
         break
       case 'counter':
       case 'number':
-        this.variables[option.name] = 0
+        this.variables.set(option.name, 0)
         break
       default:
         const error = new Error(`Unknown option type: ${option.option_type}`)
@@ -371,30 +366,30 @@ class CalculatorBlockStore {
 
   private setVariables = () => {
     // Формируем общий словарь для переменных
-    this.variables.block_amount = 0
+    this.variables.set('block_amount', 0)
     this.data.options.forEach((option) => {
       this.setInitialVariable(option)
 
       if (option.variability_with_block_amount) {
-        this.variabilityVariables[option.name] = option.initial_value || 1
+        this.variabilityVariables.set(option.name, option.initial_value || 1)
       }
       if (option.product) {
         // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
         if (option.block_amount_undependent)
-          this.productAmountDependencies[option.product] = option.amount_depend
-        if (!this.filters[option.product]) {
-          this.filters[option.product] = { initial: [] }
-          this.products[option.product] = []
+          this.productAmountDependencies.set(option.product, option.amount_depend)
+        if (!this.filters.get(option.product)) {
+          this.filters.set(option.product, { initial: [] })
+          this.products.set(option.product, [])
         }
         if (option.filters) this.parseFilters(option.filters, option.name, option.product)
-        this.filters[option.product]['initial' as keyof IConditionCategory].push({
+        this.filters.get(option.product)!['initial' as keyof IConditionCategory].push({
           leftPart: option.name as keyof TProduct,
         })
       }
     })
   }
 
-  private parseFilters = (str: string, optionName: string, optionProduct: string) => {
+  private parseFilters = (str: string, optionName: string, optionProduct: number) => {
     // С бэка приходит строка из фильтров, нам нужно разбить на фильтры
     str.split('\n').map((categoryPart) => {
       const category = categoryPart.trim().split(/:(.*)/)[0]
@@ -406,11 +401,11 @@ class CalculatorBlockStore {
         .filter((part) => part !== '')
         .map((condition) => {
           if (category == 'initial')
-            this.filters[optionProduct].initial.push({ ...this.splitCondition(condition) })
+            this.filters.get(optionProduct)!.initial.push({ ...this.splitCondition(condition) })
           else {
-            if (!this.filters[optionProduct][optionName])
-              this.filters[optionProduct][optionName] = []
-            this.filters[optionProduct][optionName].push({
+            if (!this.filters.get(optionProduct)![optionName])
+              this.filters.get(optionProduct)![optionName] = []
+            this.filters.get(optionProduct)![optionName].push({
               optionValue: category,
               ...this.splitCondition(condition),
             })
@@ -463,11 +458,11 @@ class CalculatorBlockStore {
   }
 
   private reverseCondition<K extends keyof TProduct>(product: TProduct) {
-    const filtersKeys = Object.keys(this.filters[product.category.title]).filter(
+    const filtersKeys = Object.keys(this.filters.get(product.polymorphic_ctype)!).filter(
       (key) => key != 'initial',
     ) as K[]
     filtersKeys.map((key) => {
-      const conditions = this.filters[product.category.title][key]
+      const conditions = this.filters.get(product.polymorphic_ctype)![key]
       const optionValues = [...new Set(conditions.map((condition) => condition.optionValue))]
       optionValues.map((value) => {
         const optionValueConditions = conditions.filter(
@@ -478,24 +473,21 @@ class CalculatorBlockStore {
             this.data.options.find((option) => option.name == key)!,
             value!,
           )
-          this.setVariable(key, changedValue)
+          this.setVariable(key, changedValue, true)
         }
       })
     })
   }
 
   private setProductByFilters(product: TProduct, value: number) {
-    if (Object.keys(this.products).find((item) => item == product.category.title)) {
-      if (this.applyInitialFilters(product, this.filters[product.category.title].initial)) {
-        // this.products[product.category.title].push(product)
-        this.products[product.category.title] = [product]
+    if (this.products.has(product.polymorphic_ctype)) {
+      if (this.applyInitialFilters(product, this.filters.get(product.polymorphic_ctype)!.initial)) {
+        this.products.set(product.polymorphic_ctype, [product])
         this.reverseCondition(product)
-        if (
-          Object.keys(this.productAmountDependencies).find((item) => item == product.category.title)
-        ) {
-          if (this.productAmountDependencies[product.category.title])
+        if (this.productAmountDependencies.has(product.polymorphic_ctype)) {
+          if (this.productAmountDependencies.has(product.polymorphic_ctype))
             this.setProductVariable(
-              this.productAmountDependencies[product.category.title]!,
+              this.productAmountDependencies.get(product.polymorphic_ctype)!,
               typeof value == 'number' ? value : 0,
             )
         } else this.setProductVariable('block_amount', typeof value == 'number' ? value : 0)
@@ -505,9 +497,9 @@ class CalculatorBlockStore {
 
   private setProductVariable(name: string, value: string | number | boolean) {
     if (name == 'block_amount') {
-      this.prev_block_amount = parseInt(this.variables[name] as string)
+      this.prev_block_amount = parseInt(this.variables.get(name) as string)
     }
-    this.variables[name] = value
+    this.variables.set(name, value)
     const prevArr = [...this.presentOptions]
     this.setPresent()
     this.compareArrays(prevArr, this.presentOptions)
@@ -545,20 +537,20 @@ class CalculatorBlockStore {
       })
   }
 
-  private resetProductOptions(category: string) {
+  private resetProductOptions(category: number) {
     this.data.options
       .filter((option) => option.product == category)
-      .map((option) => (this.variables[option.name] = this.initialVariables[option.name]))
+      .map((option) => this.variables.set(option.name, this.initialVariables.get(option.name)!))
   }
 
   private checkProductsForCurrentBlock(products: IEquipment[]) {
     const result = products.reduce((result, current) => {
-      if (Object.keys(this.products).find((item) => item == current.product.category.title))
+      if (this.products.has(current.product.polymorphic_ctype))
         return (
           result &&
           this.applyInitialFilters(
             current.product,
-            this.filters[current.product.category.title].initial,
+            this.filters.get(current.product.polymorphic_ctype)!.initial,
           )
         )
       else return result
@@ -570,7 +562,7 @@ class CalculatorBlockStore {
     const currentBlock = this.checkProductsForCurrentBlock(products)
     if (currentBlock) {
       products.map((product) => {
-        this.resetProductOptions(product.product.category.title)
+        this.resetProductOptions(product.product.polymorphic_ctype)
         this.setProductByFilters(product.product, product.amount)
         this.setOptions(product.product, product.amount)
       })
@@ -578,8 +570,8 @@ class CalculatorBlockStore {
   }
 
   setProduct(product: TProduct, amount: number) {
-    if (Object.keys(this.products).find((item) => item == product.category.title)) {
-      this.resetProductOptions(product.category.title)
+    if (this.products.has(product.polymorphic_ctype)) {
+      this.resetProductOptions(product.polymorphic_ctype)
       this.setProductByFilters(product, amount)
       this.setOptions(product, amount)
     }
@@ -589,10 +581,10 @@ class CalculatorBlockStore {
   createFormData() {
     const data: CalculatorBlockData = {
       name: this.data.title,
-      amount: parseInt(this.variables.block_amount as string),
+      amount: parseInt(this.variables.get('block_amount') as string),
       options: this.data.options.map((option) => ({
         name: option.title,
-        value: this.variables[option.name].toString(),
+        value: this.variables.get(option.name)!.toString(),
       })),
       products_category: this.filter(),
       price: this.result,
