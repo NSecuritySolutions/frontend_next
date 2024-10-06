@@ -15,6 +15,8 @@ import {
   BodyWrapper,
   ButtonsWrapper,
   Button,
+  InfoGridContainer,
+  InfoGrid,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
@@ -27,6 +29,7 @@ import { Tooltip } from '@/shared/components/Tooltip'
 import { CalculatorClearButton } from '@/shared/components/CalculatorClearButton'
 import { useStore } from '@/app/store/calculatorStoreProvider'
 import { useFormStore } from '@/app/store/formModalStoreProvider'
+import { createPortal } from 'react-dom'
 
 const Calculator: React.FC = observer(() => {
   const store = useStore()
@@ -117,23 +120,43 @@ const Calculator: React.FC = observer(() => {
     }
   }, [showDropdown])
 
-  const gridResize = (value: number, expanded: boolean, setSafe: boolean = true) => {
-    if (!store.animationSafe) return
-    const size = value * 40
-    if (expanded) setGridSize((prev) => prev + size)
-    if (setSafe) store.setAnimationSafe(false)
-    timers.current.push(
-      setTimeout(() => {
-        setGridSize(0)
-        timers.current.push(
-          setTimeout(() => {
-            if (grid.current) setGridSize(grid.current!.offsetHeight)
-            if (setSafe) store.setAnimationSafe(true)
-          }, 50),
-        )
-      }, 1000),
-    )
-  }
+  useEffect(() => {
+    const handleClickEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        store.handleCancelSelectBlocks()
+      }
+    }
+
+    if (store.pending_products.length > 0) {
+      window.addEventListener('keydown', handleClickEscape)
+    }
+
+    return () => {
+      if (store.pending_products.length > 0)
+        window.removeEventListener('keydown', handleClickEscape)
+    }
+  }, [store])
+
+  const gridResize = useCallback(
+    (value: number, expanded: boolean, setSafe: boolean = true) => {
+      if (!store.animationSafe) return
+      const size = value * 40
+      if (expanded) setGridSize((prev) => prev + size)
+      if (setSafe) store.setAnimationSafe(false)
+      timers.current.push(
+        setTimeout(() => {
+          setGridSize(0)
+          timers.current.push(
+            setTimeout(() => {
+              if (grid.current) setGridSize(grid.current!.offsetHeight)
+              if (setSafe) store.setAnimationSafe(true)
+            }, 50),
+          )
+        }, 1000),
+      )
+    },
+    [store],
+  )
 
   const gridBlockResize = (add: boolean) => {
     if (!store.animationSafe) return
@@ -197,7 +220,11 @@ const Calculator: React.FC = observer(() => {
   }
 
   const handleMobileClick = (id: string) => {
-    setCurrentMobileCard(id)
+    if (store.pending_products) {
+      store.handleBlockClick(id)
+    } else {
+      setCurrentMobileCard(id)
+    }
   }
 
   if (store.error) {
@@ -239,6 +266,13 @@ const Calculator: React.FC = observer(() => {
         <BodyWrapper>
           <LayoutGroup>
             <GridWrapper $height={height}>
+              {store.pending_products.length > 0 && (
+                <InfoGridContainer $top={-35}>
+                  <InfoGrid>
+                    Ого! Мы можем добавить товар в несколько блоков! Пожалуйста, выберите нужные
+                  </InfoGrid>
+                </InfoGridContainer>
+              )}
               <GridContainer ref={grid} $maxHeight={gridSize}>
                 <AnimatePresence mode="sync">
                   {store.blocks.map((block, index) => (
@@ -248,6 +282,8 @@ const Calculator: React.FC = observer(() => {
                       index={index}
                       resize={gridResize}
                       deleteBlock={gridBlockResize}
+                      overlay={store.suitable_blocks.includes(block.id)}
+                      active={store.selected_blocks.includes(block.id)}
                       isMobile={isMobile}
                       id={currentMobileCard}
                       handleMobileClick={handleMobileClick}
@@ -255,6 +291,12 @@ const Calculator: React.FC = observer(() => {
                   ))}
                 </AnimatePresence>
               </GridContainer>
+              {store.pending_products.length > 0 && (
+                <InfoGridContainer $bottom={-45}>
+                  <Button onClick={() => store.handleConfirmSelectBlocks()}>Добавить</Button>
+                  <Button onClick={() => store.handleCancelSelectBlocks()}>Отменить</Button>
+                </InfoGridContainer>
+              )}
             </GridWrapper>
           </LayoutGroup>
           <FooterWrapper>
@@ -282,6 +324,21 @@ const Calculator: React.FC = observer(() => {
           </FooterWrapper>
         </BodyWrapper>
       </Section>
+      {store.pending_products.length &&
+        createPortal(
+          <div
+            style={{
+              backgroundColor: '#80808080',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              position: 'fixed',
+              zIndex: 9,
+            }}
+          ></div>,
+          document.querySelector('body')!,
+        )}
     </CalculatorContainer>
   )
 })

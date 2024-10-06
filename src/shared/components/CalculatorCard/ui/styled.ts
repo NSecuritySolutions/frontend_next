@@ -10,6 +10,8 @@ interface CardProps {
   $deleted: boolean
   $height: number
   $len: number
+  $overlay: boolean
+  $active: boolean
 }
 
 const Card = styled(motion.div).attrs<CardProps>((props) => ({
@@ -45,6 +47,22 @@ const Card = styled(motion.div).attrs<CardProps>((props) => ({
     props.$center &&
     css`
       align-items: center;
+    `}
+
+  ${(props) =>
+    props.$overlay &&
+    css`
+      z-index: 10;
+      outline: ${props.$active ? '4px solid #17d114' : 'none'};
+      cursor: pointer;
+
+      &:hover {
+        outline: 4px solid #17d114;
+      }
+
+      & * {
+        pointer-events: none;
+      }
     `}
 
   @media (max-width: 940px) {

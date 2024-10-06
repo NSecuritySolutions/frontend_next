@@ -1,6 +1,6 @@
 import colors from '@/shared/constants/colors'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { motion } from 'framer-motion'
 
@@ -147,10 +147,43 @@ const Option = styled.li`
 const GridWrapper = styled.div<{ $height: number }>`
   height: ${(props) => (props.$height ? `${props.$height}px` : 'auto')};
   transition: height 1s;
+  position: relative;
 
   @media (max-width: 940px) {
     height: auto;
   }
+`
+
+const InfoGridContainer = styled.div<{ $top?: number; $bottom?: number }>`
+  display: flex;
+  position: absolute;
+  z-index: 10;
+  justify-content: center;
+  width: 100%;
+  font-size: 18px;
+  gap: 8px;
+
+  ${(props) =>
+    props.$top &&
+    css`
+      top: ${props.$top}px;
+    `}
+
+  ${(props) =>
+    props.$bottom &&
+    css`
+      bottom: ${props.$bottom}px;
+    `}
+
+  @media (max-width: 620px) {
+    font-size: 16px;
+  }
+`
+
+const InfoGrid = styled.div`
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 4px;
 `
 
 const GridContainer = styled.div<{ $maxHeight: number }>`
@@ -256,6 +289,8 @@ export {
   PriceHeader,
   Price,
   GridWrapper,
+  InfoGridContainer,
+  InfoGrid,
   BodyWrapper,
   ButtonsWrapper,
   Button,
