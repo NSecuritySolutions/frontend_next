@@ -275,6 +275,16 @@ const Button = styled.a<{ $primary?: boolean }>`
   }
 `
 
+const ModalOverlay = styled.div`
+  background-color: ${colors.darkPrimaryOpacity}; //#80808080
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 9;
+`
+
 export {
   CalculatorContainer,
   Section,
@@ -294,4 +304,5 @@ export {
   BodyWrapper,
   ButtonsWrapper,
   Button,
+  ModalOverlay,
 }

@@ -26,8 +26,8 @@ export class CalculatorStore {
     makeAutoObservable(this, {
       blocks: observable,
       animationSafe: observable,
-      // pending_products: observable,
-      // suitable_blocks: observable,
+      pending_products: observable,
+      suitable_blocks: observable,
       clearable: computed,
       result: computed,
       setAnimationSafe: action,

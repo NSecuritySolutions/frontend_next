@@ -17,6 +17,7 @@ import {
   Button,
   InfoGridContainer,
   InfoGrid,
+  ModalOverlay,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
@@ -220,7 +221,7 @@ const Calculator: React.FC = observer(() => {
   }
 
   const handleMobileClick = (id: string) => {
-    if (store.pending_products) {
+    if (store.pending_products.length > 0) {
       store.handleBlockClick(id)
     } else {
       setCurrentMobileCard(id)
@@ -324,21 +325,8 @@ const Calculator: React.FC = observer(() => {
           </FooterWrapper>
         </BodyWrapper>
       </Section>
-      {store.pending_products.length &&
-        createPortal(
-          <div
-            style={{
-              backgroundColor: '#80808080',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              position: 'fixed',
-              zIndex: 9,
-            }}
-          ></div>,
-          document.querySelector('body')!,
-        )}
+      {store.pending_products.length > 0 &&
+        createPortal(<ModalOverlay />, document.querySelector('body')!)}
     </CalculatorContainer>
   )
 })
