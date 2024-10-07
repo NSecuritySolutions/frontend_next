@@ -28,10 +28,12 @@ interface CalculatorCardProps {
   isMobile: boolean
   id: string | undefined
   handleMobileClick: (id: string) => void
+  overlay: boolean
+  active: boolean
 }
 
 const CalculatorCard: FC<CalculatorCardProps> = observer(
-  ({ store, index, resize, deleteBlock, isMobile, id, handleMobileClick }) => {
+  ({ store, index, resize, deleteBlock, isMobile, id, handleMobileClick, overlay, active }) => {
     const { data, presentOptions, result, prev_block_amount } = store
     const { animationSafe, setAnimationSafe } = calculatorStore
     const amount = (store.getVariable('block_amount') as number) || 0
@@ -111,7 +113,16 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setPresentCount(presentOptions.length)
         }
       }
-    }, [presentOptions, presentCount, amount, setAnimationSafe, store.appeared, store.disabled])
+    }, [
+      presentOptions,
+      presentCount,
+      amount,
+      setAnimationSafe,
+      store.appeared,
+      store.disabled,
+      animationSafe,
+      resize,
+    ])
 
     useEffect(() => {
       if (prev_block_amount !== 0 && amount === 0) {
@@ -120,7 +131,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       } else if (prev_block_amount === 0 && amount !== 0) {
         resize(presentCount, true)
       }
-    }, [amount, presentCount, prev_block_amount, store])
+    }, [amount, presentCount, prev_block_amount, resize, store])
 
     const handleChange = (v: number) => {
       if (!animationSafe && ((amount === 0 && v === 1) || (amount === 1 && v === 0))) return
@@ -138,6 +149,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
           setTimeout(() => {
             deleteBlock(false)
             calculatorStore.removeBlock(index)
+            setAnimationSafe(true)
           }, 1000),
         )
       }
@@ -160,6 +172,8 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
         $deleted={deleted}
         $height={height}
         onClick={() => handleMobileClick(store.id)}
+        $overlay={overlay}
+        $active={active}
       >
         {index > 3 && (
           <CloseButton onClick={handleDelete}>

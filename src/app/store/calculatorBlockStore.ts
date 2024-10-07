@@ -359,34 +359,38 @@ class CalculatorBlockStore {
         break
       default:
         const error = new Error(`Unknown option type: ${option.option_type}`)
-        console.error(error)
-        calculatorStore.error = error
+        throw error
     }
   }
 
   private setVariables = () => {
     // Формируем общий словарь для переменных
     this.variables.set('block_amount', 0)
-    this.data.options.forEach((option) => {
-      this.setInitialVariable(option)
+    try {
+      this.data.options.forEach((option) => {
+        this.setInitialVariable(option)
 
-      if (option.variability_with_block_amount) {
-        this.variabilityVariables.set(option.name, option.initial_value || 1)
-      }
-      if (option.product) {
-        // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
-        if (option.block_amount_undependent)
-          this.productAmountDependencies.set(option.product, option.amount_depend)
-        if (!this.filters.get(option.product)) {
-          this.filters.set(option.product, { initial: [] })
-          this.products.set(option.product, [])
+        if (option.variability_with_block_amount) {
+          this.variabilityVariables.set(option.name, option.initial_value || 1)
         }
-        if (option.filters) this.parseFilters(option.filters, option.name, option.product)
-        this.filters.get(option.product)!['initial' as keyof IConditionCategory].push({
-          leftPart: option.name as keyof TProduct,
-        })
-      }
-    })
+        if (option.product) {
+          // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
+          if (option.block_amount_undependent)
+            this.productAmountDependencies.set(option.product, option.amount_depend)
+          if (!this.filters.get(option.product)) {
+            this.filters.set(option.product, { initial: [] })
+            this.products.set(option.product, [])
+          }
+          if (option.filters) this.parseFilters(option.filters, option.name, option.product)
+          this.filters.get(option.product)!['initial' as keyof IConditionCategory].push({
+            leftPart: option.name as keyof TProduct,
+          })
+        }
+      })
+    } catch (error) {
+      console.error(error)
+      calculatorStore.error = error
+    }
   }
 
   private parseFilters = (str: string, optionName: string, optionProduct: number) => {
@@ -421,8 +425,6 @@ class CalculatorBlockStore {
 
     if (!match) {
       const error = new Error(`Invalid condition string ${condition}`)
-      console.error(error)
-      calculatorStore.error = error
       throw error
     }
 
@@ -543,7 +545,7 @@ class CalculatorBlockStore {
       .map((option) => this.variables.set(option.name, this.initialVariables.get(option.name)!))
   }
 
-  private checkProductsForCurrentBlock(products: IEquipment[]) {
+  checkProductsForCurrentBlock(products: IEquipment[]) {
     const result = products.reduce((result, current) => {
       if (this.products.has(current.product.polymorphic_ctype))
         return (
@@ -553,9 +555,15 @@ class CalculatorBlockStore {
             this.filters.get(current.product.polymorphic_ctype)!.initial,
           )
         )
-      else return result
+      else return false
     }, true)
     return result
+  }
+
+  checkProductForCurrentBlock(product: TProduct) {
+    if (this.products.has(product.polymorphic_ctype))
+      return this.applyInitialFilters(product, this.filters.get(product.polymorphic_ctype)!.initial)
+    else return false
   }
 
   setProducts(products: IEquipment[]) {

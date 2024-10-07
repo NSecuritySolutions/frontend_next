@@ -19,10 +19,15 @@ export class CalculatorStore {
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
   animationSafe: boolean = true
+  pending_products: { product: TProduct; amount: number }[] = []
+  suitable_blocks: string[] = []
+  selected_blocks: string[] = []
   constructor() {
     makeAutoObservable(this, {
       blocks: observable,
       animationSafe: observable,
+      pending_products: observable,
+      suitable_blocks: observable,
       clearable: computed,
       result: computed,
       setAnimationSafe: action,
@@ -83,12 +88,47 @@ export class CalculatorStore {
     }
   }
 
+  handleBlockClick(blockId: string) {
+    const index = this.selected_blocks.findIndex((block) => block === blockId)
+    if (index >= 0) this.selected_blocks.splice(index)
+    else this.selected_blocks.push(blockId)
+  }
+
+  handleCancelSelectBlocks() {
+    this.pending_products = []
+    this.suitable_blocks = []
+    this.selected_blocks = []
+  }
+
+  handleConfirmSelectBlocks() {
+    this.pending_products.forEach((product) =>
+      this.setBlockProduct(product.product, product.amount, this.selected_blocks),
+    )
+    this.handleCancelSelectBlocks()
+  }
+
   setProduct(product: TProduct) {
     if (this.animationSafe) {
-      this.blocks.map((block) => {
-        block.setProduct(product, 1)
+      const suitable_blocks: string[] = []
+      this.blocks.forEach((block) => {
+        if (block.checkProductForCurrentBlock(product)) suitable_blocks.push(block.id)
       })
+      if (suitable_blocks.length > 1) {
+        console.log('here')
+        this.pending_products.push({ product: product, amount: 1 })
+        this.suitable_blocks = suitable_blocks
+      } else {
+        this.blocks.forEach((block) => {
+          if (suitable_blocks.includes(block.id)) block.setProduct(product, 1)
+        })
+      }
     }
+  }
+
+  setBlockProduct(product: TProduct, amount: number, blockIds: string[]) {
+    this.blocks.forEach((block) => {
+      if (blockIds.includes(block.id)) block.setProduct(product, amount)
+    })
   }
 
   setProducts(products: IEquipment[]) {
