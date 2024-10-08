@@ -33,8 +33,9 @@ import {
   ExamplesImgWrapper,
   SectionWrapper,
 } from './styled.ts'
+import { Example } from '../types.ts'
 
-const ExamplesSlider: React.FC = () => {
+const ExamplesSlider: React.FC<{ data: Example[] }> = ({ data }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
 
   const router = useRouter()
@@ -98,26 +99,26 @@ const ExamplesSlider: React.FC = () => {
       <SectionWrapper>
         <SliderContainer className="slider-container" id="examples">
           <Slider {...settings} afterChange={handleAfterChange}>
-            {workExamples
+            {data
               .sort(
-                (newDate: TWorkExamples, olderDate: TWorkExamples) =>
-                  new Date(olderDate.date as string).getTime() -
-                  new Date(newDate.date as string).getTime(),
+                (newDate, olderDate) =>
+                  new Date(olderDate.add_date as string).getTime() -
+                  new Date(newDate.add_date as string).getTime(),
               )
-              .map((item: TWorkExamples, i) => (
+              .map((item, i) => (
                 <CardWrapper
                   key={item.id}
                   // onClick={() => {
                   //   router.push(`/ourworks/${item.id}`)
                   // }}
                 >
-                  {item.cardImage ? (
+                  {item.images.length && item.images.find((image) => image.is_main) ? (
                     <ExamplesLink href={`/ourworks/${item.id}`}>
                       <ExamplesImgWrapper>
                         <Image
                           blurDataURL={rgbDataURL(225, 231, 244)}
-                          src={item?.cardImage}
-                          alt={item.cardTitle}
+                          src={item.images.find((image) => image.is_main)!.image}
+                          alt={item.title}
                           fill
                           sizes="(max-width: 620px) 240px, (max-width: 880px) 390px, (max-width: 1180px) 390px, 200px"
                         />
@@ -126,7 +127,7 @@ const ExamplesSlider: React.FC = () => {
                   ) : (
                     <ExamplesImgWrapper>
                       <Image
-                        src={(item.cardImage = blankImg)}
+                        src={blankImg}
                         fill
                         alt={'Пустая картинка'}
                         placeholder="blur"
@@ -135,14 +136,23 @@ const ExamplesSlider: React.FC = () => {
                     </ExamplesImgWrapper>
                   )}
                   <ExamplesContainer key={i}>
-                    <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
+                    <ExamplesTitle>{truncate(item.title, TITLE_LIMIT)}</ExamplesTitle>
 
                     <InfoIconWrapper>
-                      {item.quantities.map((item, i) => (
+                      {/* {item.description.map((item, i) => (
                         <InfoIcon key={i}>
                           {`${new Intl.NumberFormat('ru-RU').format(item.number)} ${item.measure}`}
                         </InfoIcon>
-                      ))}
+                      ))} */}
+                      <InfoIcon>{item.time} дн.</InfoIcon>
+                      <InfoIcon>
+                        {item.budget.toLocaleString('ru-RU', {
+                          style: 'currency',
+                          currency: 'RUB',
+                          maximumFractionDigits: 0,
+                        })}
+                      </InfoIcon>
+                      <InfoIcon>{item.area + ' м\u00B2'}</InfoIcon>
                     </InfoIconWrapper>
 
                     <ButtonWrapper>
@@ -156,7 +166,11 @@ const ExamplesSlider: React.FC = () => {
                         link={`/ourworks/${item.id}`}
                       ></BtnLink>
 
-                      <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
+                      <IconWrapper>
+                        {item.add_date
+                          ? new Date(item.add_date).toLocaleDateString('ru-RU')
+                          : '----'}
+                      </IconWrapper>
                     </ButtonWrapper>
                   </ExamplesContainer>
                 </CardWrapper>

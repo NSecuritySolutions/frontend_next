@@ -14,7 +14,7 @@ import {
   ModalContent,
   TitleWrapper,
   Title,
-  Date,
+  DateWrapper,
   Quantity,
   Paragraph,
   ContentWrapper,
@@ -30,12 +30,19 @@ import {
   SectionWrapper,
   ImageWpapper,
 } from './styles.ts'
+import { Example as ExampleType } from '@/widgets/ExamplesSlider/types.ts'
 
 interface ExampleProps {
-  data: TWorkExamples
+  data: ExampleType
 }
 
 const Example: FC<ExampleProps> = ({ data }) => {
+  const measures = [
+    { data: `${data.time} дн.`, description: 'Рабочих дней', color: '#f7f2e4' },
+    { data: `${data.budget} \u20BD`, description: 'Бюджет', color: '#def6f7' },
+    { data: `${data.area} м\u00B2`, description: 'Оборудовано', color: '#e1e7f4' },
+  ]
+
   const settings = {
     responsive: [
       { breakpoint: 999999999, settings: 'unslick' as 'unslick' },
@@ -59,19 +66,18 @@ const Example: FC<ExampleProps> = ({ data }) => {
 
   return (
     <SectionWrapper>
-      <Breadcrumbs title={data.cardTitle} />
+      <Breadcrumbs title={data.title} />
       <ModalContent>
         <ContentWrapper>
           <TitleWrapper>
-            <Title>{data?.title}</Title>
-            <Date>{data?.date}</Date>
+            <Title>{data.title}</Title>
+            <DateWrapper>{new Date(data.add_date).toLocaleDateString('ru-RU')}</DateWrapper>
             <NumbersRow>
               <Slider {...settings}>
-                {data?.quantities.map((item, i: number) => (
+                {measures.map((item, i: number) => (
                   <NumbersColumn key={i} $color={item.color}>
                     <ImageColumn>
                       <Image
-                        key={i}
                         src={`/icons/ourworks/ourworks-${i + 1}.svg`}
                         alt="Иконка"
                         width={35}
@@ -79,10 +85,7 @@ const Example: FC<ExampleProps> = ({ data }) => {
                       />
                     </ImageColumn>
                     <InfoColumn>
-                      <Quantity>
-                        {`${new Intl.NumberFormat('ru-RU').format(item.number)}
-                        ${item.measure}`}
-                      </Quantity>
+                      <Quantity>{item.data}</Quantity>
                       <Paragraph>{item.description}</Paragraph>
                     </InfoColumn>
                   </NumbersColumn>
@@ -90,24 +93,24 @@ const Example: FC<ExampleProps> = ({ data }) => {
               </Slider>
             </NumbersRow>
 
-            <ImageWpapper>
-              <ImgSlider modalItem={data} />
-            </ImageWpapper>
+            {data.images.length > 0 && (
+              <ImageWpapper>
+                <ImgSlider modalItem={data} />
+              </ImageWpapper>
+            )}
             <SubTitle>Используемое оборудование</SubTitle>
 
             <EquipmentList>
-              {data?.equipment.map((item, i: number) => (
+              {data.product.map((item, i: number) => (
                 <EquipmentListItem key={i}>{item}</EquipmentListItem>
               ))}
             </EquipmentList>
 
             <TextWrapper>
               <SubTitle>Описание</SubTitle>
-              <TextParagraph
-                dangerouslySetInnerHTML={
-                  data && data.text ? createMarkup(data.text) : { __html: '' }
-                }
-              />
+              {data.description.map((paragraph, i) => (
+                <TextParagraph key={i} dangerouslySetInnerHTML={createMarkup(paragraph)} />
+              ))}
             </TextWrapper>
           </TitleWrapper>
         </ContentWrapper>

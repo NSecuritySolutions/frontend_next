@@ -57,7 +57,7 @@ export default async function Page() {
       <OurTeam data={teamData[0]} />
       <Questions data={questionsData} />
       <ReviewsBlock />
-      <ExamplesSlider />
+      <ExamplesSlider data={examplesData} />
       <OurClients />
       <ContactForm />
       <ScrollButton />

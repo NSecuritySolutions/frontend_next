@@ -78,7 +78,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
         </RevertButton>
         {isClicked && images && images[selectedImageIndex] ? (
           <Image
-            src={images[selectedImageIndex]}
+            src={images[selectedImageIndex].image}
             alt={`Пример готового проекта`}
             fill
             placeholder="blur"
@@ -86,7 +86,7 @@ const ImageModal: React.FC<TImageModalProps> = ({ image, closeModal, images }) =
           />
         ) : (
           <Image
-            src={image?.src}
+            src={image}
             alt={`Пример готового проекта`}
             fill
             placeholder="blur"

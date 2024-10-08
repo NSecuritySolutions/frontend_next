@@ -10,6 +10,7 @@ import { IArrowProps, TSliderProps } from './types.ts'
 import ImageModal from '../../ImageModal/ui/ImageModal.tsx'
 import TImageModalProps from '../../ImageModal/types/types.ts'
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
+import { ExampleImage } from '@/widgets/ExamplesSlider/types.ts'
 
 function SampleNextArrow(props: IArrowProps) {
   const { className = '', style = {}, onClick } = props
@@ -32,7 +33,7 @@ function SamplePrevArrow(props: IArrowProps) {
 
 const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [selectedImage, setSelectedImage] = useState<TImageModalProps['image']>()
+  const [selectedImage, setSelectedImage] = useState<string>()
 
   const settings = {
     customPaging: function (i: number) {
@@ -41,9 +42,9 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
           {modalItem && (
             <Image
               key={i}
-              src={modalItem.img[i]}
+              src={modalItem.images[i].image}
               alt={`Миниатюра фото - ${modalItem.title}`}
-              width={260}
+              fill
               placeholder="blur"
               blurDataURL={rgbDataURL(225, 231, 244)}
             />
@@ -69,23 +70,23 @@ const ImgSlider: React.FC<TSliderProps> = ({ modalItem }) => {
         <ImageModal
           image={selectedImage}
           closeModal={() => setShowModal(false)}
-          images={modalItem?.img}
+          images={modalItem?.images}
         />
       )}
       <SliderWrapper>
         <Slider {...settings}>
-          {modalItem?.img.map((item: any, i: number) => (
+          {modalItem?.images.map((item: any, i: number) => (
             <div key={i} className="image-container">
               <Image
                 placeholder="blur"
                 blurDataURL={rgbDataURL(225, 231, 244)}
-                src={item}
+                src={item.image}
                 alt={modalItem.title}
                 width={1100}
                 height={600}
                 onClick={() => {
+                  setSelectedImage(item.image)
                   setShowModal(true)
-                  setSelectedImage(item)
                 }}
               />
             </div>

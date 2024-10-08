@@ -71,7 +71,7 @@ const Title = styled.div`
   }
 `
 
-const Date = styled.div`
+const DateWrapper = styled.div`
   display: flex;
   flex-direction: row;
   font-size: 14px;
@@ -352,7 +352,7 @@ export {
   ModalContent,
   TitleWrapper,
   Title,
-  Date,
+  DateWrapper,
   Quantity,
   Paragraph,
   ContentWrapper,

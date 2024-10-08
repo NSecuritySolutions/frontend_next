@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FC } from 'react'
 
 import blankImg from '@/assets/icons/examples/no-image.svg'
 
@@ -10,9 +10,8 @@ import { StyledTransparentBtnLink } from '../../BtnLink/ui/styled.ts'
 
 import { OurWorksBanner } from '../../OurWorksBanner/index.ts'
 
-import { TWorkExamples } from '@/shared/constants/texts/types.ts'
 import { rgbDataURL } from '@/shared/constants/utils/utils.ts'
-import { TITLE_LIMIT, workExamples } from '@/shared/constants/texts/examples.ts'
+import { TITLE_LIMIT } from '@/shared/constants/texts/examples.ts'
 
 import colors from '@/shared/constants/colors'
 
@@ -29,11 +28,18 @@ import {
   ExamplesImgWrapper,
   StyledTitle,
 } from './styled.ts'
+import { Example } from '@/widgets/ExamplesSlider/types.ts'
 
-const ExampleCard: React.FC = () => {
+const ExampleCard: FC<{ data: Example[] }> = ({ data }) => {
   const [visibleCards, setVisibleCards] = useState(4)
 
-  const totalCards = workExamples.length
+  const totalCards = data.length
+
+  const sortedData = data.sort(
+    (newDate, olderDate) =>
+      new Date(olderDate.add_date as string).getTime() -
+      new Date(newDate.add_date as string).getTime(),
+  )
 
   const showMoreCards = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 4)
@@ -51,10 +57,7 @@ const ExampleCard: React.FC = () => {
     }
   }, [])
 
-  const bannerItem = workExamples.sort(
-    (newDate: TWorkExamples, olderDate: TWorkExamples) =>
-      new Date(olderDate.date as string).getTime() - new Date(newDate.date as string).getTime(),
-  )[0]
+  const bannerItem = sortedData[0]
 
   // @TODO: дописать обрезку заголовков в зависимости от ширины
   function truncate(str: string, maxlength: number) {
@@ -70,66 +73,63 @@ const ExampleCard: React.FC = () => {
       <OurWorksBanner item={bannerItem} />
       <StyledTitle>Примеры работ</StyledTitle>
       <SliderContainer id="examples">
-        {workExamples
-          .sort(
-            (newDate: TWorkExamples, olderDate: TWorkExamples) =>
-              new Date(olderDate.date as string).getTime() -
-              new Date(newDate.date as string).getTime(),
-          )
-          .slice(0, visibleCards)
-          .map((item: TWorkExamples, i) => (
-            <CardWrapper key={item.id}>
-              {item.cardImage ? (
-                <ExamplesLink href={`/ourworks/${item.id}`}>
-                  <ExamplesImgWrapper>
-                    <Image
-                      blurDataURL={rgbDataURL(225, 231, 244)}
-                      src={item?.cardImage}
-                      alt={item.cardTitle}
-                      fill
-                      style={{ objectFit: 'cover', borderRadius: '12px' }}
-                    />
-                  </ExamplesImgWrapper>
-                </ExamplesLink>
-              ) : (
+        {sortedData.slice(0, visibleCards).map((item, i) => (
+          <CardWrapper key={item.id}>
+            {item.images.length ? (
+              <ExamplesLink href={`/ourworks/${item.id}`}>
                 <ExamplesImgWrapper>
                   <Image
-                    src={(item.cardImage = blankImg)}
-                    fill
-                    alt={'Пустая картинка'}
-                    placeholder="blur"
                     blurDataURL={rgbDataURL(225, 231, 244)}
-                  ></Image>
+                    src={item.images.find((image) => image.is_main)!.image}
+                    alt={item.title}
+                    fill
+                  />
                 </ExamplesImgWrapper>
-              )}
-              <ExamplesContainer className="slick-slide" key={i}>
-                <ExamplesTitle>{truncate(item.cardTitle, TITLE_LIMIT)}</ExamplesTitle>
+              </ExamplesLink>
+            ) : (
+              <ExamplesImgWrapper>
+                <Image
+                  src={blankImg}
+                  fill
+                  alt={'Пустая картинка'}
+                  placeholder="blur"
+                  blurDataURL={rgbDataURL(225, 231, 244)}
+                ></Image>
+              </ExamplesImgWrapper>
+            )}
+            <ExamplesContainer className="slick-slide" key={i}>
+              <ExamplesTitle>{truncate(item.title, TITLE_LIMIT)}</ExamplesTitle>
 
-                <InfoIconWrapper>
-                  {item.quantities.map((item, i) => (
-                    <InfoIcon key={i}>
-                      {`${new Intl.NumberFormat('ru-RU').format(item.number)}`}
-                      {item.measure}
-                    </InfoIcon>
-                  ))}
-                </InfoIconWrapper>
+              <InfoIconWrapper>
+                <InfoIcon>{item.time} дн.</InfoIcon>
+                <InfoIcon>
+                  {item.budget.toLocaleString('ru-RU', {
+                    style: 'currency',
+                    currency: 'RUB',
+                    maximumFractionDigits: 0,
+                  })}
+                </InfoIcon>
+                <InfoIcon>{item.area + ' м\u00B2'}</InfoIcon>
+              </InfoIconWrapper>
 
-                <ButtonWrapper>
-                  <BtnLink
-                    btnType="transparent"
-                    text={'Подробнее'}
-                    width="134px"
-                    height="44px"
-                    color={colors.darkPrimary}
-                    size="15px"
-                    link={`/ourworks/${item.id}`}
-                  ></BtnLink>
+              <ButtonWrapper>
+                <BtnLink
+                  btnType="transparent"
+                  text={'Подробнее'}
+                  width="134px"
+                  height="44px"
+                  color={colors.darkPrimary}
+                  size="15px"
+                  link={`/ourworks/${item.id}`}
+                ></BtnLink>
 
-                  <IconWrapper>{item.date ? item.date : '----'}</IconWrapper>
-                </ButtonWrapper>
-              </ExamplesContainer>
-            </CardWrapper>
-          ))}
+                <IconWrapper>
+                  {item.add_date ? new Date(item.add_date).toLocaleDateString('ru-RU') : '----'}
+                </IconWrapper>
+              </ButtonWrapper>
+            </ExamplesContainer>
+          </CardWrapper>
+        ))}
 
         {visibleCards < totalCards && (
           <StyledTransparentBtnLink
