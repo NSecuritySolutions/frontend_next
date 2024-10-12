@@ -108,9 +108,10 @@ const ExamplesSlider: React.FC<{ data: Example[] }> = ({ data }) => {
               .map((item, i) => (
                 <CardWrapper
                   key={item.id}
-                  // onClick={() => {
-                  //   router.push(`/ourworks/${item.id}`)
-                  // }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    router.push(`/ourworks/${item.id}`)
+                  }}
                 >
                   {item.images.length && item.images.find((image) => image.is_main) ? (
                     <ExamplesLink href={`/ourworks/${item.id}`}>

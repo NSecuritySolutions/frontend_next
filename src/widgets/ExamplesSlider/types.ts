@@ -1,7 +1,17 @@
+import { Stringifier } from 'styled-components/dist/types'
+import { TProduct } from '../Calculator/types'
+
 interface ExampleImage {
   id: number
   image: string
   is_main: boolean
+}
+
+interface IOurWorkProduct {
+  text: string
+  is_link: boolean
+  amount: number
+  product: TProduct
 }
 
 interface Example {
@@ -13,7 +23,7 @@ interface Example {
   images: ExampleImage[]
   time: number
   description: string[]
-  product: string[]
+  products: IOurWorkProduct[]
 }
 
 export type { Example, ExampleImage }

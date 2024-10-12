@@ -101,8 +101,8 @@ const Example: FC<ExampleProps> = ({ data }) => {
             <SubTitle>Используемое оборудование</SubTitle>
 
             <EquipmentList>
-              {data.product.map((item, i: number) => (
-                <EquipmentListItem key={i}>{item}</EquipmentListItem>
+              {data.products.map((item, i: number) => (
+                <EquipmentListItem key={i}>{item.text}</EquipmentListItem>
               ))}
             </EquipmentList>
 

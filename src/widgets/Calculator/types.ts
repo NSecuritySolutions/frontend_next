@@ -1,3 +1,8 @@
+interface IProp {
+  name: string
+  value: string | number | boolean
+}
+
 interface IProduct {
   id: number
   category: { id: number; title: string }
@@ -9,6 +14,7 @@ interface IProduct {
   price: number
   prices_in_price_lists: IPrice[]
   polymorphic_ctype: number
+  properties: IProp[]
 }
 
 interface ICamera extends IProduct {

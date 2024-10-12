@@ -2,6 +2,12 @@ const LIMIT = 40
 const LENGTH8 = 8
 const LENGTH5 = 5
 
+export function propToStr(prop: string | number | boolean) {
+  if (prop.toString() == 'true') return 'да'
+  if (prop.toString() == 'false') return 'нет'
+  return prop.toString()
+}
+
 export function truncateStr(str: string, screenWidth: number): string {
   if (screenWidth >= 1300) {
     return str.slice(0, 33 - 3) + '...'
