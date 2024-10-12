@@ -159,48 +159,54 @@ const Calculator: React.FC = observer(() => {
     [store],
   )
 
-  const gridBlockResize = (add: boolean) => {
-    if (!store.animationSafe) return
-    if (add) {
-      setGridSize((prev) => prev + 20 + 89)
-      store.setAnimationSafe(false)
-      timers.current.push(
-        setTimeout(() => {
-          setGridSize(0)
-          timers.current.push(
-            setTimeout(() => {
-              setGridSize(grid.current!.offsetHeight)
-              store.setAnimationSafe(true)
-            }, 50),
-          )
-        }, 1000),
-      )
-    } else {
-      store.setAnimationSafe(false)
-      setHeight(grid.current!.getBoundingClientRect().height)
-      setGridSize(grid.current!.offsetHeight)
-      timers.current.push(
-        setTimeout(() => {
-          setHeight(grid.current!.getBoundingClientRect().height)
-          timers.current.push(
-            setTimeout(() => {
-              setHeight(0)
-              store.setAnimationSafe(true)
-            }, 1000),
-          )
-        }, 1000),
-      )
-    }
-  }
+  const gridBlockResize = useCallback(
+    (add: boolean) => {
+      if (!store.animationSafe) return
+      if (add) {
+        setGridSize((prev) => prev + 20 + 89)
+        store.setAnimationSafe(false)
+        timers.current.push(
+          setTimeout(() => {
+            setGridSize(0)
+            timers.current.push(
+              setTimeout(() => {
+                setGridSize(grid.current!.offsetHeight)
+                store.setAnimationSafe(true)
+              }, 50),
+            )
+          }, 1000),
+        )
+      } else {
+        store.setAnimationSafe(false)
+        setHeight(grid.current!.getBoundingClientRect().height)
+        setGridSize(grid.current!.offsetHeight)
+        timers.current.push(
+          setTimeout(() => {
+            setHeight(grid.current!.getBoundingClientRect().height)
+            timers.current.push(
+              setTimeout(() => {
+                setHeight(0)
+                store.setAnimationSafe(true)
+              }, 1000),
+            )
+          }, 1000),
+        )
+      }
+    },
+    [store],
+  )
 
-  const handleSelect = (value: number) => {
-    if (!store.animationSafe) return
-    store.setNewBlock(value)
-    setShowDropdown(false)
-    gridBlockResize(true)
-  }
+  const handleSelect = useCallback(
+    (value: number) => {
+      if (!store.animationSafe) return
+      store.setNewBlock(value)
+      setShowDropdown(false)
+      gridBlockResize(true)
+    },
+    [store, gridBlockResize],
+  )
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     if (!store.animationSafe || !store.clearable) return
     const size = Math.round(store.data.length / 2)
     setGridSize(size * 89 + size * 20)
@@ -218,15 +224,18 @@ const Calculator: React.FC = observer(() => {
         store.setAnimationSafe(true)
       }, 1000),
     )
-  }
+  }, [store])
 
-  const handleMobileClick = (id: string) => {
-    if (store.pending_products.length > 0) {
-      store.handleBlockClick(id)
-    } else {
-      setCurrentMobileCard(id)
-    }
-  }
+  const handleMobileClick = useCallback(
+    (id: string) => {
+      if (store.pending_products.length > 0) {
+        store.handleBlockClick(id)
+      } else {
+        setCurrentMobileCard(id)
+      }
+    },
+    [store],
+  )
 
   if (store.error) {
     return <Typography>Извините, калькулятор сломався...</Typography>

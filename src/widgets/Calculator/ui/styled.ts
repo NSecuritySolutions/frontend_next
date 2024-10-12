@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { motion } from 'framer-motion'
 
-const CalculatorContainer = styled.div`
+const CalculatorContainer = styled.section`
   width: 100%;
   position: relative;
   display: flex;

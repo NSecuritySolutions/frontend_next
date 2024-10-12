@@ -67,17 +67,17 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
     const handleMouseEnter = () => (mouseOver.current = true)
     const handleMouseLeave = () => (mouseOver.current = false)
 
-    if (area.current) {
-      area.current.addEventListener('mousemove', handleMouseMove)
-      area.current.addEventListener('mouseenter', handleMouseEnter)
-      area.current.addEventListener('mouseleave', handleMouseLeave)
+    const currentArea = area.current
+
+    if (currentArea) {
+      currentArea.addEventListener('mousemove', handleMouseMove)
+      currentArea.addEventListener('mouseenter', handleMouseEnter)
+      currentArea.addEventListener('mouseleave', handleMouseLeave)
 
       return () => {
-        if (area.current) {
-          area.current.removeEventListener('mousemove', handleMouseMove)
-          area.current.removeEventListener('mouseenter', handleMouseEnter)
-          area.current.removeEventListener('mouseleave', handleMouseLeave)
-        }
+        currentArea.removeEventListener('mousemove', handleMouseMove)
+        currentArea.removeEventListener('mouseenter', handleMouseEnter)
+        currentArea.removeEventListener('mouseleave', handleMouseLeave)
       }
     }
   }, [camera, gl, size, area])

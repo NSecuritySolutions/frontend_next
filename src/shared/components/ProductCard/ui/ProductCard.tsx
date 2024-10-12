@@ -67,11 +67,15 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
           <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>
           <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
           <ProductAbout>
-            {item.properties.slice(0, 5).map((prop, index) => (
-              <li key={index}>
-                {prop.name}: {propToStr(prop.value)}
-              </li>
-            ))}
+            {item.properties
+              .filter((prop) => (prop.value || prop.value === false) && prop.name !== 'Артикул')
+              .slice(0, 5)
+              .map((prop, index) => (
+                <li key={index}>
+                  <span style={{ fontWeight: 600 }}>{prop.name}: </span>
+                  {propToStr(prop.value)}
+                </li>
+              ))}
           </ProductAbout>
           <Link href={`/products/${item.id}`}>
             <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
@@ -103,8 +107,10 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
             btnType="transparent"
             onClick={(e) => {
               e.stopPropagation()
-              router.push(`#calculator`)
               calculatorStore.setProduct(item)
+              const calc = document.getElementById('calculator')
+              if (calc) calc.scrollIntoView({ behavior: 'smooth' })
+              else router.push('/#calculator')
             }}
           />
         </ButtonWrapper>

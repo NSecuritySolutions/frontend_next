@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const url = process.env.BASE_URL.split('//')[1]
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -21,14 +22,14 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: process.env.BASE_URL.split('//')[1] || 'backend',
+        hostname: url || 'backend',
         port: '',
         pathname: '/media/**',
       },
       {
         protocol: 'http',
-        hostname: process.env.BASE_URL.split('//')[1] || 'backend',
-        port: process.env.BASE_URL ? '' : '8000',
+        hostname: url || 'backend',
+        port: url ? '' : '8000',
         pathname: '/media/**',
       },
     ],
