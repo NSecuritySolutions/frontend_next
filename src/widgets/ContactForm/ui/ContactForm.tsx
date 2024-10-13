@@ -36,6 +36,7 @@ import {
   FileWrapper,
   NoBr,
 } from './styled'
+import { createApplicationWithFile } from '@/app/actions'
 
 const MAX_FILE_SIZE = 5
 const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
@@ -55,7 +56,7 @@ const schema = yup.object().shape({
     .min(18, 'Введите номер телефона в правильном формате ')
     .required('Заполните поле'),
   email: yup.string().email('Введите email в правильном формате ').required('Заполните поле'),
-  message: yup.string(),
+  comment: yup.string(),
   file: yup.mixed((file): file is File => file),
 })
 
@@ -85,28 +86,30 @@ const ContactForm = () => {
       name: '',
       phone: '',
       email: '',
-      message: undefined,
+      comment: undefined,
       file: undefined,
     },
     resolver: yupResolver(schema),
   })
 
   const onFormSubmit: SubmitHandler<IFormInput> = async (data) => {
-    try {
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          console.log('Данные формы', data)
-          resolve()
-        }, 1000)
-      })
-      setSubmitSuccess(true)
-      setTimeout(() => {
-        setSubmitSuccess(false)
-      }, 300)
-      reset()
-    } catch (error) {
-      console.error('Ошибка:', error)
+    const formData = new FormData()
+    let response
+
+    formData.set('name', data.name)
+    formData.set('phone', data.phone)
+    formData.set('email', data.email)
+    if (data.comment) {
+      formData.set('comment', data.comment)
     }
+    if (data.file) {
+      formData.set('file', data.file as File)
+    }
+    response = await createApplicationWithFile(formData)
+
+    if (response.status === 201) {
+      reset() // TODO сделать самозакрывающуюся модалку
+    } else console.log(response)
   }
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -184,7 +187,7 @@ const ContactForm = () => {
               {errors.email && <ErrorText>{errors.email?.message}</ErrorText>}
             </InputWrapper>
             <InputWrapper>
-              <TextInput {...register('message')} placeholder="Комментарий" maxLength={2000} />
+              <TextInput {...register('comment')} placeholder="Комментарий" maxLength={2000} />
             </InputWrapper>
 
             {watch('file')?.name ? (

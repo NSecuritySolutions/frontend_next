@@ -201,7 +201,7 @@ class CalculatorBlockStore {
   }
 
   private filterByMinPrice() {
-    const filteredProducts: { categoryId: number; products: TProduct[] }[] = this.filter()
+    const filteredProducts: { category_id: number; products: TProduct[] }[] = this.filter()
     const minPriceData: TProduct[] = []
     filteredProducts.forEach((category) =>
       minPriceData.push(
@@ -214,11 +214,11 @@ class CalculatorBlockStore {
   }
 
   private filter() {
-    const data: { categoryId: number; products: TProduct[] }[] = []
+    const data: { category_id: number; products: TProduct[] }[] = []
     this.filters.forEach((_, k) => {
       if (this.products.has(k) && this.products.get(k)!.length > 0) {
-        data.push({ categoryId: k, products: this.products.get(k)! })
-      } else data.push({ categoryId: k, products: this.filterProduct(k) })
+        data.push({ category_id: k, products: this.products.get(k)! })
+      } else data.push({ category_id: k, products: this.filterProduct(k) })
     })
     return data
   }
