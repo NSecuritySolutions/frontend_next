@@ -1,11 +1,11 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import { ProductCard } from '@/shared/components/ProductCard'
 import { items } from '@/shared/constants/texts/product-cards.ts'
 
 import { Section, SectionWrapper, SectionTitle } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
-import { ICamera } from '@/widgets/Calculator/types'
+import { ICamera, TProduct } from '@/widgets/Calculator/types'
 
 interface ProductCardsProps {
   data: ICamera[]
@@ -18,10 +18,20 @@ const ProductCards: FC<ProductCardsProps> = ({ data }) => {
     setVisibleItems((prev) => prev + 6)
   }
 
+  const ref = useRef<HTMLDivElement>(null)
+  const [maxHeight, setMaxHeight] = useState(0)
+
+  useEffect(() => {
+    if (ref.current) {
+      // Обновляем maxHeight на высоту содержимого
+      setMaxHeight(ref.current.scrollHeight)
+    }
+  }, [visibleItems])
+
   return (
     <Section id="product-cards">
       <SectionTitle>Наш ассортимент товаров</SectionTitle>
-      <SectionWrapper>
+      <SectionWrapper ref={ref} $maxHeight={maxHeight}>
         {/* {items.slice(0, visibleItems).map((item: any, i: number) => (
           <ProductCard key={i} item={item} />
         ))} */}
@@ -29,7 +39,7 @@ const ProductCards: FC<ProductCardsProps> = ({ data }) => {
         {data &&
           data
             .slice(0, visibleItems)
-            .map((item: ICamera, i: number) => <ProductCard key={i} item={item as ICamera} />)}
+            .map((item: TProduct, i: number) => <ProductCard key={i} item={item} />)}
       </SectionWrapper>
       {visibleItems < data.length && (
         <BtnLink

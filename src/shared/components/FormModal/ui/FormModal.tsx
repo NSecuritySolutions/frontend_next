@@ -104,28 +104,30 @@ const FormModal: FC = observer(() => {
 
   const onFormSubmit: SubmitHandler<IFormInput> = async (validatedData) => {
     const formData = new FormData()
-    let requestStatus
+    let response
 
-    formData.append('name', validatedData.name)
-    formData.append('phone', validatedData.phone)
-    formData.append('email', validatedData.email)
+    formData.set('name', validatedData.name)
+    formData.set('phone', validatedData.phone)
+    formData.set('email', validatedData.email)
     if (validatedData.comment) {
-      formData.append('comment', validatedData.comment)
+      formData.set('comment', validatedData.comment)
     }
 
     if (calculator) {
-      formData.append('calculator', JSON.stringify(calculatorStore.createFormData()))
-      requestStatus = await createApplicationWithCalc(formData)
+      formData.set('calculator_data', JSON.stringify(calculatorStore.createFormData()))
+      response = await createApplicationWithCalc(formData)
     } else if (data) {
-      formData.append('solution', data.id.toString())
-      requestStatus = await createApplicationWithSolution(formData)
+      formData.set('solution', data.id.toString())
+      response = await createApplicationWithSolution(formData)
     } else {
       if (validatedData.file) {
-        formData.append('file', validatedData.file as File)
+        formData.set('file', validatedData.file as File)
       }
-      requestStatus = await createApplicationWithFile(formData)
+      response = await createApplicationWithFile(formData)
     }
-    if (requestStatus === 201) reset()
+    if (response.status === 201) {
+      reset() // TODO сделать самозакрывающуюся модалку
+    } else console.log(response)
   }
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -316,7 +318,9 @@ const FormModal: FC = observer(() => {
                 <CalcButton
                   onClick={() => {
                     modal.close()
-                    router.push('#calculator')
+                    const calc = document.getElementById('calculator')
+                    if (calc) calc.scrollIntoView({ behavior: 'smooth' })
+                    else router.push('/#calculator')
                   }}
                 >
                   Изменить характеристики

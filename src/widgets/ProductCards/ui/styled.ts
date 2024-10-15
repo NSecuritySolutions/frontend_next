@@ -1,6 +1,7 @@
 import colors from '@/shared/constants/colors'
+import { motion } from 'framer-motion'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Section = styled.section`
   margin: 40px auto;
@@ -27,12 +28,20 @@ const Section = styled.section`
     width: 328px;
   }
 `
-const SectionWrapper = styled.div`
+const SectionWrapper = styled.div<{ $maxHeight?: number }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
+  // max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'none')};
   margin-bottom: 32px;
+  transition: max-height 1s;
+
+  ${(props) =>
+    props.$maxHeight &&
+    css`
+      max-height: ${props.$maxHeight}px;
+    `}
 
   @media (max-width: 940px) {
     grid-template-columns: repeat(2, 1fr);

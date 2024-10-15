@@ -20,15 +20,15 @@ import {
   ButtonsWrapper,
   Button,
 } from './styled'
-import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution'
 import Link from 'next/link'
 import calculatorStore from '@/app/store/calculatorStore'
+import { propToStr } from '@/shared/components/ProductCard/utils'
+import { useRouter } from 'next/navigation'
 
 const Product: FC<ProductProps> = ({ data }) => {
-  if (!data) return Loader()
+  const router = useRouter()
 
-  // console.log(data)
-  // TODO: переделать на бэке чтобы карточки были универсальные по характеристикам
+  if (!data) return Loader()
 
   return (
     <Card>
@@ -51,7 +51,16 @@ const Product: FC<ProductProps> = ({ data }) => {
 
             <ButtonsWrapper>
               <Link href={'/#calculator'} passHref legacyBehavior>
-                <Button onClick={() => calculatorStore.setProduct(data)}>В калькулятор</Button>
+                <Button
+                  onClick={() => {
+                    calculatorStore.setProduct(data)
+                    const calc = document.getElementById('calculator')
+                    if (calc) calc.scrollIntoView({ behavior: 'smooth' })
+                    else router.push('/#calculator')
+                  }}
+                >
+                  В калькулятор
+                </Button>
               </Link>
             </ButtonsWrapper>
           </PriceColumnWrapper>
@@ -60,28 +69,16 @@ const Product: FC<ProductProps> = ({ data }) => {
           <BlockWrapper>
             <SectionTitle>Харакетристики</SectionTitle>
             <UnorderedList>
-              <>
-                {'viewing_angle' in data && (
-                  <>
-                    <li>Тип: {data.type}</li>
-                    <li>Форм-фактор: {data.form_factor}</li>
-                    <li>Производитель: {data.manufacturer.title}</li>
-                    <li>Размещение: {data.accommodation}</li>
-                    <li>Разрешение: {data.resolution}</li>
-                    <li>Фокус: {data.focus}</li>
-                    <li>Угол обзора: {data.viewing_angle}</li>
-                    <li>ИК-съемка в темноте: {data.dark ? `да, ${data.dark}` : 'нет'}</li>
-                    <li>
-                      Микрофон/динамик: {data.microphone ? `да, ${data.microphone_details}` : 'нет'}
+              {data.properties.map((prop, index) => {
+                if (prop.value || prop.value === false) {
+                  return (
+                    <li key={index}>
+                      <span style={{ fontWeight: 600 }}>{prop.name}: </span>
+                      {propToStr(prop.value)}
                     </li>
-                    <li>
-                      Поддержка MicroSD: {data.micro_sd ? `да, ${data.micro_sd_details}` : 'нет'}
-                    </li>
-                    <li>Питание, вольт: {data.power_supply}</li>
-                    <li>Рабочая температура: {data.temperature}</li>
-                  </>
-                )}
-              </>
+                  )
+                }
+              })}
             </UnorderedList>
           </BlockWrapper>
         </ColumnWrapper>

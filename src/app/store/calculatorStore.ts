@@ -114,7 +114,6 @@ export class CalculatorStore {
         if (block.checkProductForCurrentBlock(product)) suitable_blocks.push(block.id)
       })
       if (suitable_blocks.length > 1) {
-        console.log('here')
         this.pending_products.push({ product: product, amount: 1 })
         this.suitable_blocks = suitable_blocks
       } else {

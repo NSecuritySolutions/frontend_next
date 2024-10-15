@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import {
   Card,
@@ -30,17 +30,7 @@ interface CardSolutionProps {
 
 const CardSolution: FC<CardSolutionProps> = ({ data }) => {
   const modal = useFormStore()
-  const pathname = usePathname()
-
-  let calc
-  let form
-  if (['/', '/video-surveillance', '/intercom', '/security'].includes(pathname)) {
-    calc = '#calculator'
-    form = '#contact-form'
-  } else {
-    form = '/#contact-form'
-    calc = '/#calculator'
-  }
+  const router = useRouter()
 
   const formattedPrice = Number(data.price).toLocaleString('ru-RU', {
     style: 'currency',
@@ -74,16 +64,19 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
       </PriceWrapper>
       <ButtonGroupWrapper>
         <Button onClick={() => modal.openSolution(data)}>Заказать звонок</Button>
-        <Link href={calc} passHref legacyBehavior>
-          <Button
-            $transparent
-            onClick={() => {
-              calculatorStore.setProducts(data.equipment)
-            }}
-          >
-            В калькулятор
-          </Button>
-        </Link>
+        {/* <Link href={calc} shallow passHref scroll={false}> */}
+        <Button
+          $transparent
+          onClick={() => {
+            calculatorStore.setProducts(data.equipment)
+            const calc = document.getElementById('calculator')
+            if (calc) calc.scrollIntoView({ behavior: 'smooth' })
+            else router.push('/#calculator')
+          }}
+        >
+          В калькулятор
+        </Button>
+        {/* </Link> */}
       </ButtonGroupWrapper>
     </Card>
   )

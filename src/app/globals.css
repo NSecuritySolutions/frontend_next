@@ -115,3 +115,15 @@ body.modal-open {
 main {
   position: relative;
 }
+
+section {
+  scroll-margin-top: 163px;
+
+  @media (max-width: 940px) {
+    scroll-margin-top: 133px;
+  }
+
+  @media (max-width: 620px) {
+    scroll-margin-top: 87px;
+  }
+}

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import { BtnLink } from '../../BtnLink'
 
-import { truncateArr, truncateStr, truncateLine } from '../utils'
+import { truncateArr, truncateStr, truncateLine, propToStr } from '../utils'
 
 import { ProductCardProps } from '../types'
 
@@ -56,7 +56,8 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
   return (
     <CardWrapper>
       <CardContainer
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation()
           router.push(`/products/${item.id}`)
         }}
       >
@@ -66,14 +67,15 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
           <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>
           <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
           <ProductAbout>
-            <li>Тип: {item.type}</li>
-            <li>Форм-фактор: {truncateLine(item.form_factor, screenWidth)}</li>
-            <li>Производитель: {item.manufacturer.title}</li>
-            <li>Размещение: {item.accommodation} </li>
-            <li>Разрешение: {truncateLine(item.resolution, screenWidth)}</li>
-            <li>Фокус: {item.focus}</li>
-            <li>Угол обзора: {item.viewing_angle}</li>
-            <li>ИК-съемка в темноте: {truncateLine(item.dark, screenWidth)}</li>
+            {item.properties
+              .filter((prop) => (prop.value || prop.value === false) && prop.name !== 'Артикул')
+              .slice(0, 5)
+              .map((prop, index) => (
+                <li key={index}>
+                  <span style={{ fontWeight: 600 }}>{prop.name}: </span>
+                  {propToStr(prop.value)}
+                </li>
+              ))}
           </ProductAbout>
           <Link href={`/products/${item.id}`}>
             <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
@@ -105,8 +107,10 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
             btnType="transparent"
             onClick={(e) => {
               e.stopPropagation()
-              router.push(`#calculator`)
               calculatorStore.setProduct(item)
+              const calc = document.getElementById('calculator')
+              if (calc) calc.scrollIntoView({ behavior: 'smooth' })
+              else router.push('/#calculator')
             }}
           />
         </ButtonWrapper>

@@ -93,12 +93,7 @@ const Info: FC = () => {
 
   return (
     <Section id="banner">
-      <MainCard
-        ref={bannerRef}
-        // onClick={() => {
-        //   router.push('/#contact-form')
-        // }}
-      >
+      <MainCard ref={bannerRef}>
         <HeaderWrapper>
           <TextBlock>
             <Title>

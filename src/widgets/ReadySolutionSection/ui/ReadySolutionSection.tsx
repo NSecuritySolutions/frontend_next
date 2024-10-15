@@ -104,9 +104,6 @@ const ReadySolutionSection: FC<ReadySolutionSectionProps> = ({
     },
   }
 
-  // console.log('solutionData', solutions)
-  // console.log('solutionTags', tags)
-
   return (
     <Section id="solutions">
       <SectionTitle>Готовые решения</SectionTitle>
