@@ -8,7 +8,7 @@ import colors from '@/shared/constants/colors'
 export const cardInfoWithLogoData = [
   {
     id: 1,
-    title: 'Онлайн- управление',
+    title: 'Онлайн управление',
     logo: mobileIcon,
     backgroundColor: `${colors.backgroundBase4}`,
     text: 'Удаленный контроль объекта из любой точки мира, где есть интернет',

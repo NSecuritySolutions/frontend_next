@@ -50,7 +50,7 @@ const ProjectStage = () => {
   return (
     <Section id="project-stages">
       <SectionWrapper>
-        <SectionTitle>Этапы работ</SectionTitle>
+        <SectionTitle>Этапы работы</SectionTitle>
 
         <SliderWrapper>
           <Slider {...settings}>

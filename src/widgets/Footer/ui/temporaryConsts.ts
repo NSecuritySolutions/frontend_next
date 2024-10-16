@@ -26,7 +26,7 @@ const navColumnLists = [
     items: [
       { text: 'Наши услуги', navLink: '/#our-services' },
       { text: 'Преимущества', navLink: '/#advantages' },
-      { text: 'Этапы работ', navLink: '/#project-stages' },
+      { text: 'Этапы работы', navLink: '/#project-stages' },
       { text: 'Наша команда', navLink: '/#our-team' },
       { text: 'Часто задаваемые вопросы', navLink: '/#faq' },
       { text: 'Отзывы', navLink: '/#reviews' },

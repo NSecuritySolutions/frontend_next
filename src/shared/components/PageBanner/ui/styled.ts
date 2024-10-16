@@ -48,7 +48,7 @@ const TitleWrapper = styled.div`
   }
 `
 const BannerTitle = styled.h1`
-  max-width: 880px;
+  max-width: 1100px;
   width: 100%;
   font-weight: 700;
   font-size: 36px;

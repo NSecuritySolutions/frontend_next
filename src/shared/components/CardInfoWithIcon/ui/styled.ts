@@ -37,6 +37,7 @@ const CardTitle = styled.h3`
   font-weight: 800;
   font-size: 18px;
   line-height: 136%;
+  max-width: 130px;
 `
 
 const CardText = styled.p`

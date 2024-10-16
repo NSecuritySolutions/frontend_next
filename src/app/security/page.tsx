@@ -23,8 +23,8 @@ export default async function SecurityPage() {
     <main className={styles.main}>
       <PageBanner
         id="security-banner"
-        title="Комплексная защита с охранно-пожарными 
-        сигнализациями для вашего дома и бизнеса"
+        title="Комплексная защита с охранно-пожарными сигнализациями
+        для вашего дома и бизнеса"
         text="Надежные охранно-пожарные сигнализации для защиты Вашего имущества от взломов и пожаров"
         src="/images/banner/png/banner-security.png"
       />
