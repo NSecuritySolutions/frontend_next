@@ -13,7 +13,7 @@ import { Questions } from '@/widgets/Questions'
 import { ReviewsBlock } from '@/widgets/ReviewsBlock'
 import { ExamplesSlider } from '@/widgets/ExamplesSlider'
 import { OurClients } from '@/widgets/OurClients'
-import { ContactForm } from '../widgets/ContactForm'
+import { ContactForm } from '@/widgets/ContactForm'
 
 import { ScrollButton } from '@/shared/components/ScrollButton'
 import { CookiesNotice } from '@/shared/components/CookiesNotice'
@@ -49,7 +49,7 @@ export default async function Page() {
   return (
     <main className={styles.main} id="content">
       <Info />
-      <OurServices />
+      <OurServices /> {/*Хардкод, но в админке есть */}
       <ReadySolutionSection data={{ solutions: solutionData, tags: solutionTags }} />
       <Calculator />
       <AdvantagesBlock />
