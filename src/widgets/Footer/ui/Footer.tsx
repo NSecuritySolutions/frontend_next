@@ -24,9 +24,8 @@ import {
 import colors from '@/shared/constants/colors'
 
 const Footer = () => {
-  // Обработчик клика с правильной типизацией для события и элемента
   const handleAnchorClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const target = event.target as HTMLElement // Используем HTMLElement как базовый тип для всех возможных элементов
+    const target = event.target as HTMLElement
     if (
       target.tagName === 'A' &&
       target instanceof HTMLAnchorElement &&
