@@ -2,6 +2,8 @@ import Image from 'next/image'
 
 import { IBannerProps } from './types.ts'
 
+import { StyledBtnLink } from '@/shared/components/BtnLink/ui/styled.ts'
+
 import {
   BannerWrapper,
   TitleWrapper,
@@ -9,7 +11,6 @@ import {
   BannerParagraph,
   ImageWrapper,
 } from './styled.ts'
-import { StyledBtnLink } from '../../BtnLink/ui/styled.ts'
 
 const PageBanner: React.FC<IBannerProps> = ({ id, text, title, src }) => {
   return (
