@@ -42,6 +42,7 @@ const StyledAccentBtnLink = styled.a<TStyledBtnLinkProps>`
   cursor: pointer;
   width: ${(props) => props.width || 'auto'};
   height: ${(props) => props.height || 'auto'};
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: ${colors.btnPrimaryHover};
@@ -70,6 +71,7 @@ const StyledTransparentBtnLink = styled.a<TStyledBtnLinkProps>`
   font-size: ${(props) => props.size};
   font-weight: 800;
   line-height: 1.33;
+  transition: background-color 0.3s ease;
 
   &:hover {
     background-color: ${colors.btnOutlineHover};

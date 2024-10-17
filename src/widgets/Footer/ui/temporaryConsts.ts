@@ -4,10 +4,10 @@ const navColumnLists = [
   {
     title: 'Возможности',
     items: [
-      { text: 'Оставить заявку', navLink: '/home#request' },
+      { text: 'Оставить заявку', navLink: '/#contact-form' },
       { text: 'Готовые решения', navLink: '/#solutions' },
       { text: 'Калькулятор', navLink: '/#calculator' },
-      { text: 'Загрузить спецификацию', navLink: '/home#specification' },
+      { text: 'Загрузить спецификацию', navLink: '/#contact-form' },
     ],
   },
   {

@@ -39,7 +39,7 @@ const NavLinkStyled = styled(Link)`
   line-height: 136%;
   font-weight: 400;
   position: relative;
-  cursor: default;
+  //cursor: default;
 
   &.active:before {
     width: 100%;

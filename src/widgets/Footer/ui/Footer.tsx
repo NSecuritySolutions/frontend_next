@@ -1,8 +1,8 @@
 'use client'
-
-import Image from 'next/image'
 import { navColumnLists, contacts } from './temporaryConsts'
 
+import { BtnLink } from '@/shared/components/BtnLink'
+import { NavColumn } from '@/shared/components/NavColumn'
 import {
   FooterBottom,
   FooterBottomContainer,
@@ -21,13 +21,27 @@ import {
   FooterContactsContentWrapper,
   NoBr,
 } from './styled'
-import { BtnLink } from '@/shared/components/BtnLink'
 import colors from '@/shared/constants/colors'
-import { NavColumn } from '@/shared/components/NavColumn'
 
 const Footer = () => {
+  const handleAnchorClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement
+    if (
+      target.tagName === 'A' &&
+      target instanceof HTMLAnchorElement &&
+      target.href.includes('#')
+    ) {
+      event.preventDefault()
+      const hash = target.href.split('#')[1]
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }
+
   return (
-    <FooterWrapper>
+    <FooterWrapper onClick={handleAnchorClick}>
       <FooterTop>
         <NavColumn lists={navColumnLists} />
         <FooterContactsContainer>
