@@ -36,6 +36,19 @@ export async function getMainPageData() {
   }
 }
 
+export async function getLayoutData() {
+  try {
+    const response = await fetch(`${BASE_URL}/api/v1/info/?active=true`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch data')
+    }
+    const companyInfoData = await response.json()
+    return { companyInfoData }
+  } catch (error) {
+    throw new Error('An error occurred while fetching company info: ')
+  }
+}
+
 export async function getCalculatorData() {
   const responses = await Promise.all([
     fetch(`${BASE_URL}/api/v1/products/`),

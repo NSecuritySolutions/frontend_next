@@ -1,5 +1,7 @@
 'use client'
-import { navColumnLists, contacts } from './temporaryConsts'
+import type { FC } from 'react'
+import { navColumnLists } from './temporaryConsts'
+import { useRouter } from 'next/navigation'
 
 import { BtnLink } from '@/shared/components/BtnLink'
 import { NavColumn } from '@/shared/components/NavColumn'
@@ -22,8 +24,16 @@ import {
   NoBr,
 } from './styled'
 import colors from '@/shared/constants/colors'
+import { ICompanyData } from '@/shared/constants/types/dataTypes'
+import { formatPhoneNumber } from '@/shared/constants/utils/utils'
 
-const Footer = () => {
+type TFooterProps = {
+  data: ICompanyData[]
+}
+
+const Footer: FC<TFooterProps> = ({ data }) => {
+  const router = useRouter()
+
   const handleAnchorClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement
     if (
@@ -36,6 +46,8 @@ const Footer = () => {
       const element = document.getElementById(hash)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        router.push(`/#${hash}`)
       }
     }
   }
@@ -55,32 +67,42 @@ const Footer = () => {
               link="#contact-form"
             />
           </FooterBtnWrapper>
-          <FooterContactsContentWrapper>
-            {contacts.map((contact, index) => (
-              <FooterContactContainer key={index}>
-                <FooterContactLogo src={contact.icon} alt={`Контакты - ${contact.text}`} />
-                <FooterContactLink href={contact.link}>{contact.text}</FooterContactLink>
+          {data && (
+            <FooterContactsContentWrapper>
+              <FooterContactContainer>
+                <FooterContactLogo src="/icons/header/phone.svg" alt="Телефон" />
+                <FooterContactLink href={`tel:${data[0].phone}`}>
+                  {formatPhoneNumber(data[0].phone)}
+                </FooterContactLink>
               </FooterContactContainer>
-            ))}
-          </FooterContactsContentWrapper>
-          <FooterSocialIconsContainer>
-            <FooterSocialIconLinkTg
-              href="#"
-              target="_blank"
-              $default="/icons/Icons/ic_TG_State=Default.svg"
-              $hover="/icons/Icons/ic_TG_State=Hover.svg"
-              $focus="/icons/Icons/ic_TG_State=Active.svg"
-              $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
-            ></FooterSocialIconLinkTg>
-            <FooterSocialIconLinkWa
-              href="#"
-              target="_blank"
-              $default="/icons/Icons/ic_WA_State=Default.svg"
-              $hover="/icons/Icons/ic_WA_State=Hover.svg"
-              $focus="/icons/Icons/ic_WA_State=Active.svg"
-              $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
-            ></FooterSocialIconLinkWa>
-          </FooterSocialIconsContainer>
+              <FooterContactContainer>
+                <FooterContactLogo src="/icons/header/mail.svg" alt="e-mail" />
+                <FooterContactLink href={`mailto:${data[0].email}`}>
+                  {data[0].email}
+                </FooterContactLink>
+              </FooterContactContainer>
+            </FooterContactsContentWrapper>
+          )}
+          {data && (
+            <FooterSocialIconsContainer>
+              <FooterSocialIconLinkTg
+                href={data[0].telegram}
+                target="_blank"
+                $default="/icons/Icons/ic_TG_State=Default.svg"
+                $hover="/icons/Icons/ic_TG_State=Hover.svg"
+                $focus="/icons/Icons/ic_TG_State=Active.svg"
+                $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
+              ></FooterSocialIconLinkTg>
+              <FooterSocialIconLinkWa
+                href={data[0].whatsapp}
+                target="_blank"
+                $default="/icons/Icons/ic_WA_State=Default.svg"
+                $hover="/icons/Icons/ic_WA_State=Hover.svg"
+                $focus="/icons/Icons/ic_WA_State=Active.svg"
+                $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
+              ></FooterSocialIconLinkWa>
+            </FooterSocialIconsContainer>
+          )}
         </FooterContactsContainer>
       </FooterTop>
       <FooterBottom>

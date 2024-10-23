@@ -30,12 +30,15 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { urlNames } from '@/shared/constants/texts/url-names'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ICompanyData } from '@/shared/constants/types/dataTypes'
+import { formatPhoneNumber } from '@/shared/constants/utils/utils'
 
 type THeaderProps = {
   navLinks: { label: string; to: string }[]
+  data: ICompanyData[]
 }
 
-const Header: FC<THeaderProps> = ({ navLinks }) => {
+const Header: FC<THeaderProps> = ({ navLinks, data }) => {
   const [safeForClick, setSafeForClick] = useState(true)
   const pathname = usePathname()
   const pathnames = pathname.split('/')
@@ -85,35 +88,40 @@ const Header: FC<THeaderProps> = ({ navLinks }) => {
             </HeaderBurgerMenuWrapper>
             <HeaderTopItem>
               <HeaderContacts>
-                {/* @TODO не забыть актуализировать ссылки */}
-                <PhoneMailWrapper>
-                  <IconTextWrapper>
-                    <Image src="/icons/header/phone.svg" width={24} height={24} alt="phone" />
-                    <HeaderText href="tel:+79130110645">+7 (913) 011-06-45</HeaderText>
-                  </IconTextWrapper>
-                  <IconTextWrapper>
-                    <Image src="/icons/header/mail.svg" width={24} height={24} alt="mail" />
-                    <HeaderText href="mailto:info@opticontrol.ru">info@opticontrol.ru</HeaderText>
-                  </IconTextWrapper>
-                </PhoneMailWrapper>
-                <SocialWrapper>
-                  <HeaderSocialIconLinkTg
-                    href="#"
-                    target="_blank"
-                    $default="/icons/Icons/ic_TG_State=Default.svg"
-                    $hover="/icons/Icons/ic_TG_State=Hover.svg"
-                    $focus="/icons/Icons/ic_TG_State=Active.svg"
-                    $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
-                  ></HeaderSocialIconLinkTg>
-                  <HeaderSocialIconLinkWa
-                    href="#"
-                    target="_blank"
-                    $default="/icons/Icons/ic_WA_State=Default.svg"
-                    $hover="/icons/Icons/ic_WA_State=Hover.svg"
-                    $focus="/icons/Icons/ic_WA_State=Active.svg"
-                    $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
-                  ></HeaderSocialIconLinkWa>
-                </SocialWrapper>
+                {data && (
+                  <PhoneMailWrapper>
+                    <IconTextWrapper>
+                      <Image src="/icons/header/phone.svg" width={24} height={24} alt="phone" />
+                      <HeaderText href={`tel:${data[0].phone}`}>
+                        {formatPhoneNumber(data[0].phone)}
+                      </HeaderText>
+                    </IconTextWrapper>
+                    <IconTextWrapper>
+                      <Image src="/icons/header/mail.svg" width={24} height={24} alt="mail" />
+                      <HeaderText href={`mailto:${data[0].email}`}>{data[0].email}</HeaderText>
+                    </IconTextWrapper>
+                  </PhoneMailWrapper>
+                )}
+                {data && (
+                  <SocialWrapper>
+                    <HeaderSocialIconLinkTg
+                      href={data[0].telegram}
+                      target="_blank"
+                      $default="/icons/Icons/ic_TG_State=Default.svg"
+                      $hover="/icons/Icons/ic_TG_State=Hover.svg"
+                      $focus="/icons/Icons/ic_TG_State=Active.svg"
+                      $disabled="/icons/Icons/ic_TG_State=Disabled.svg"
+                    ></HeaderSocialIconLinkTg>
+                    <HeaderSocialIconLinkWa
+                      href={data[0].whatsapp}
+                      target="_blank"
+                      $default="/icons/Icons/ic_WA_State=Default.svg"
+                      $hover="/icons/Icons/ic_WA_State=Hover.svg"
+                      $focus="/icons/Icons/ic_WA_State=Active.svg"
+                      $disabled="/icons/Icons/ic_WA_State=Disabled.svg"
+                    ></HeaderSocialIconLinkWa>
+                  </SocialWrapper>
+                )}
               </HeaderContacts>
             </HeaderTopItem>
             <HeaderTopItem>

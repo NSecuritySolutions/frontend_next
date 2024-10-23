@@ -16,7 +16,7 @@ import { BASE_URL } from '@/shared/constants/url/url'
 import StyledComponentsRegistry from '@/app/styling/registry'
 
 import { StoreProvider } from './store/calculatorStoreProvider'
-import { getCalculatorData } from './api'
+import { getCalculatorData, getLayoutData } from './api'
 import { FormStoreProvider } from './store/formModalStoreProvider'
 
 const manrope = Manrope({
@@ -88,19 +88,20 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const { productData, calculatorData } = await getCalculatorData()
+  const { companyInfoData } = await getLayoutData()
 
   return (
     <html lang="ru">
       <body className={manrope.className} id="content">
         <StyledComponentsRegistry>
-          <Header navLinks={headerNavLinks} />
+          <Header navLinks={headerNavLinks} data={companyInfoData} />
           <StoreProvider products={productData} calculator={calculatorData}>
             <FormStoreProvider>
               {children}
               <FormModal />
             </FormStoreProvider>
           </StoreProvider>
-          <Footer />
+          <Footer data={companyInfoData} />
         </StyledComponentsRegistry>
       </body>
     </html>

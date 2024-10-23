@@ -1,10 +1,8 @@
-//TODO настроить якоря когда будут все блоки сверстаны
-
-const navColumnLists = [
+export const navColumnLists = [
   {
     title: 'Возможности',
     items: [
-      { text: 'Оставить заявку', navLink: '/#contact-form' },
+      { text: 'Оставить заявку', navLink: `/#contact-form` },
       { text: 'Готовые решения', navLink: '/#solutions' },
       { text: 'Калькулятор', navLink: '/#calculator' },
       { text: 'Загрузить спецификацию', navLink: '/#contact-form' },
@@ -35,23 +33,3 @@ const navColumnLists = [
     ],
   },
 ]
-
-const contacts = [
-  {
-    icon: '/icons/footer/phone.svg',
-    text: '+7 (913) 011-06-45',
-    link: 'tel:+79130110645',
-  },
-  // {
-  //   icon: '/icons/footer/home.svg',
-  //   text: 'Новосибирск, ул. Сухарная д. 96',
-  //   link: '',
-  // },
-  {
-    icon: '/icons/footer/mail.svg',
-    text: 'info@opticontrol.ru',
-    link: 'mailto:info@opticontrol.ru',
-  },
-]
-
-export { navColumnLists, contacts }
