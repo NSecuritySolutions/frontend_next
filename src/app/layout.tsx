@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-
 import { Manrope } from 'next/font/google'
 
 import '@/app/globals.css'
@@ -11,15 +10,14 @@ import { Header } from '@/widgets/Header'
 import { headerNavLinks } from '@/shared/constants/texts/header-nav-items'
 import { RootPageMetaData } from '@/shared/constants/texts/metadata'
 import { OpenGraphMetaData } from '@/shared/constants/texts/metadata'
+import { FormModal } from '@/shared/components/FormModal'
+import { BASE_URL } from '@/shared/constants/url/url'
 
 import StyledComponentsRegistry from '@/app/styling/registry'
 
-import styles from './page.module.css'
-import { BASE_URL } from '@/shared/constants/url/url'
 import { StoreProvider } from './store/calculatorStoreProvider'
-import { getCalculatorData } from './api'
+import { getCalculatorData, getLayoutData } from './api'
 import { FormStoreProvider } from './store/formModalStoreProvider'
-import { FormModal } from '@/shared/components/FormModal'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -90,19 +88,20 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const { productData, calculatorData } = await getCalculatorData()
+  const { companyInfoData } = await getLayoutData()
 
   return (
     <html lang="ru">
       <body className={manrope.className} id="content">
         <StyledComponentsRegistry>
-          <Header navLinks={headerNavLinks} />
+          <Header navLinks={headerNavLinks} data={companyInfoData} />
           <StoreProvider products={productData} calculator={calculatorData}>
             <FormStoreProvider>
               {children}
               <FormModal />
             </FormStoreProvider>
           </StoreProvider>
-          <Footer />
+          <Footer data={companyInfoData} />
         </StyledComponentsRegistry>
       </body>
     </html>

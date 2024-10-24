@@ -15,7 +15,7 @@ const Card = styled.div`
   max-width: 580px;
   width: 100%;
   overflow: hidden;
-  cursor: pointer;
+  //cursor: pointer;
 
   @media (max-width: 1300px) {
     padding: 32px;

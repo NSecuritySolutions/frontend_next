@@ -68,3 +68,13 @@ export const rgbDataURL = (r: number, g: number, b: number) =>
   `data:image/gif;base64,R0lGODlhAQABAPAA${
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`
+
+export function formatPhoneNumber(phone: string): string {
+  const digits = phone.replace(/\D/g, '')
+
+  if (digits.startsWith('7') && digits.length === 11) {
+    return `+${digits[0]} (${digits[1]}${digits[2]}${digits[3]}) ${digits[4]}${digits[5]}${digits[6]}-${digits[7]}${digits[8]}-${digits[9]}${digits[10]}`
+  } else {
+    return phone
+  }
+}
