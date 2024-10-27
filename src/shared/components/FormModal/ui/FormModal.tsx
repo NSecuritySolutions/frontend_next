@@ -120,7 +120,7 @@ const FormModal: FC = observer(() => {
       formData.set('solution', data.id.toString())
       response = await createApplicationWithSolution(formData)
     } else {
-      if (validatedData.file) {
+      if (validatedData.file?.size) {
         formData.set('file', validatedData.file as File)
       }
       response = await createApplicationWithFile(formData)

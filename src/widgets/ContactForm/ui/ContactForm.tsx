@@ -102,7 +102,7 @@ const ContactForm = () => {
     if (data.comment) {
       formData.set('comment', data.comment)
     }
-    if (data.file) {
+    if (data.file?.size) {
       formData.set('file', data.file as File)
     }
     response = await createApplicationWithFile(formData)
