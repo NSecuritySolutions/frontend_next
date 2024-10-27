@@ -129,7 +129,6 @@ const FormModal: FC = observer(() => {
     }
     if (response?.status === 201) {
       setSuccess(true)
-      reset() // TODO сделать самозакрывающуюся модалку
     } else setSuccess(false)
   }
 
@@ -199,7 +198,12 @@ const FormModal: FC = observer(() => {
   return (
     <Overlay>
       <Container>
-        <CloseButton onClick={() => modal.close()}>
+        <CloseButton
+          onClick={() => {
+            modal.close()
+            reset()
+          }}
+        >
           <ImgWrapper>
             <Image src="/icons/closeBtn.svg" width={22} height={22} alt="close" />
           </ImgWrapper>
@@ -362,7 +366,10 @@ const FormModal: FC = observer(() => {
           success={success}
           close={() => {
             setSuccess(undefined)
-            modal.close()
+            if (success) {
+              modal.close()
+              reset()
+            }
           }}
         />
       )}

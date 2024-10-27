@@ -37,6 +37,7 @@ import {
   NoBr,
 } from './styled'
 import { createApplicationWithFile } from '@/app/actions'
+import ResponseModal from '@/shared/components/FormModal/ui/ResponseModal'
 
 const MAX_FILE_SIZE = 5
 const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
@@ -64,8 +65,7 @@ type IFormInput = yup.InferType<typeof schema>
 
 const ContactForm = () => {
   const [fileError, setFileError] = useState<string | undefined>()
-
-  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [success, setSuccess] = useState<boolean>()
 
   const inputRef = useRef<typeof IMaskInput>(null)
 
@@ -107,9 +107,10 @@ const ContactForm = () => {
     }
     response = await createApplicationWithFile(formData)
 
-    if (response.status === 201) {
-      reset() // TODO сделать самозакрывающуюся модалку
-    } else console.log(response)
+    if (response?.status === 201) {
+      setSuccess(true)
+      reset()
+    } else setSuccess(false)
   }
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -247,6 +248,9 @@ const ContactForm = () => {
             />
           </Form>
         </FormColumn>
+        {success !== undefined && (
+          <ResponseModal success={success} close={() => setSuccess(undefined)} />
+        )}
       </SectionWrapper>
     </Section>
   )
