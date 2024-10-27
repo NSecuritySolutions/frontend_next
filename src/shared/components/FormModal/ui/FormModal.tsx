@@ -54,6 +54,7 @@ import {
   createApplicationWithSolution,
 } from '@/app/actions'
 import { useRouter } from 'next/navigation'
+import ResponseModal from './ResponseModal'
 
 type IFormInput = yup.InferType<typeof schema>
 
@@ -74,6 +75,7 @@ const FILE_SUPPORTED_FORMATS = ['doc', 'docx', 'xls', 'xlsx', 'pdf']
 
 const FormModal: FC = observer(() => {
   const [fileError, setFileError] = useState<string | undefined>()
+  const [success, setSuccess] = useState<boolean>()
   const inputRef = useRef<typeof IMaskInput>(null)
   const modal = useFormStore()
   const { calculator, data } = modal
@@ -125,9 +127,10 @@ const FormModal: FC = observer(() => {
       }
       response = await createApplicationWithFile(formData)
     }
-    if (response.status === 201) {
+    if (response?.status === 201) {
+      setSuccess(true)
       reset() // TODO сделать самозакрывающуюся модалку
-    } else console.log(response)
+    } else setSuccess(false)
   }
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -354,6 +357,15 @@ const FormModal: FC = observer(() => {
           </Footer>
         </Form>
       </Container>
+      {success !== undefined && (
+        <ResponseModal
+          success={success}
+          close={() => {
+            setSuccess(undefined)
+            modal.close()
+          }}
+        />
+      )}
     </Overlay>
   )
 })

@@ -319,6 +319,31 @@ const FooterDeveloperLink = styled.a`
   }
 `
 
+const Button = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: ${colors.btnPrimary};
+  color: ${colors.darkPrimary};
+  text-decoration: none;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  width: 100%;
+  height: 56px;
+  &:hover {
+    background-color: ${colors.btnPrimaryHover};
+  }
+
+  @media (max-width: 620px) {
+    font-size: 13px;
+    font-weight: 700;
+  }
+`
+
 export {
   FooterWrapper,
   FooterTop,
@@ -337,4 +362,5 @@ export {
   FooterBtnWrapper,
   FooterContactsContentWrapper,
   NoBr,
+  Button,
 }
