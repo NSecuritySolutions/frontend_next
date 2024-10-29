@@ -56,6 +56,32 @@ const Container = styled.div`
   }
 `
 
+const SmallContainer = styled.div`
+  position: relative;
+  display: flex;
+  background-color: ${colors.backgroundCardYe};
+  flex-direction: column;
+  padding: 40px;
+  border-radius: 20px;
+  gap: 20px;
+  animation: init-modal 1s;
+
+  @keyframes init-modal {
+    0% {
+      transform: translateY(150%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 620px) {
+    width: 309px;
+    padding: 32px;
+    gap: 20px;
+  }
+`
+
 const CloseButton = styled.button`
   position: absolute;
   top: 12px;
@@ -68,6 +94,11 @@ const ImgWrapper = styled.div`
   align-items: center;
   width: 40px;
   height: 40px;
+
+  @media (max-width: 620px) {
+    width: 24px;
+    height: 24px;
+  }
 `
 
 const Title = styled.p`
@@ -474,9 +505,15 @@ const CalcButton = styled.button`
   }
 `
 
+const Text = styled.p`
+  font-weigth: 400;
+  font-size: 16px;
+`
+
 export {
   Overlay,
   Container,
+  SmallContainer,
   CloseButton,
   ImgWrapper,
   Form,
@@ -508,4 +545,5 @@ export {
   CalcContentListItemTitle,
   CalcContentListItemPrice,
   CalcButton,
+  Text,
 }

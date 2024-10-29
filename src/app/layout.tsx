@@ -94,14 +94,14 @@ export default async function RootLayout({
     <html lang="ru">
       <body className={manrope.className} id="content">
         <StyledComponentsRegistry>
-          <Header navLinks={headerNavLinks} data={companyInfoData} />
-          <StoreProvider products={productData} calculator={calculatorData}>
-            <FormStoreProvider>
+          <FormStoreProvider>
+            <Header navLinks={headerNavLinks} data={companyInfoData} />
+            <StoreProvider products={productData} calculator={calculatorData}>
               {children}
               <FormModal />
-            </FormStoreProvider>
-          </StoreProvider>
-          <Footer data={companyInfoData} />
+            </StoreProvider>
+            <Footer data={companyInfoData} />
+          </FormStoreProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

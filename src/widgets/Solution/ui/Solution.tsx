@@ -21,12 +21,14 @@ import {
   ButtonsWrapper,
   Button,
 } from './styled'
-import { TCardSolutionProps } from '@/shared/constants/texts/cards-solution'
 import Link from 'next/link'
 import calculatorStore from '@/app/store/calculatorStore'
 import { SolutionProps } from '../types'
+import { useFormStore } from '@/app/store/formModalStoreProvider'
 
 const Solution: FC<SolutionProps> = ({ data }) => {
+  const modal = useFormStore()
+
   if (!data) return Loader()
 
   return (
@@ -49,9 +51,9 @@ const Solution: FC<SolutionProps> = ({ data }) => {
             <Typography size={13}>Выезд инженера - Бесплатно!</Typography>
 
             <ButtonsWrapper>
-              <Link href={'/#contact-form'} passHref legacyBehavior>
-                <Button $primary>Заказать звонок</Button>
-              </Link>
+              <Button $primary onClick={() => modal.openSolution(data)}>
+                Заказать звонок
+              </Button>
               <Link href={'/#calculator'} passHref legacyBehavior>
                 <Button onClick={() => calculatorStore.setProducts(data.equipment)}>
                   В калькулятор

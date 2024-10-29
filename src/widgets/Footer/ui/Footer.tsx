@@ -1,9 +1,8 @@
 'use client'
 import type { FC } from 'react'
 import { navColumnLists } from './temporaryConsts'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
-import { BtnLink } from '@/shared/components/BtnLink'
 import { NavColumn } from '@/shared/components/NavColumn'
 import {
   FooterBottom,
@@ -22,16 +21,19 @@ import {
   FooterBtnWrapper,
   FooterContactsContentWrapper,
   NoBr,
+  Button,
 } from './styled'
-import colors from '@/shared/constants/colors'
 import { ICompanyData } from '@/shared/constants/types/dataTypes'
 import { formatPhoneNumber } from '@/shared/constants/utils/utils'
+import { useFormStore } from '@/app/store/formModalStoreProvider'
 
 type TFooterProps = {
   data: ICompanyData[]
 }
 
 const Footer: FC<TFooterProps> = ({ data }) => {
+  const modal = useFormStore()
+  const path = usePathname()
   const router = useRouter()
 
   const handleAnchorClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -58,14 +60,12 @@ const Footer: FC<TFooterProps> = ({ data }) => {
         <NavColumn lists={navColumnLists} />
         <FooterContactsContainer>
           <FooterBtnWrapper>
-            <BtnLink
-              size="15px"
-              width="100%"
-              height="56px"
-              color={colors.darkPrimary}
-              text="Обратный звонок"
-              link="#contact-form"
-            />
+            <Button
+              href={path === '/' ? '#contact-form' : undefined}
+              onClick={path !== '/' ? () => modal.open() : undefined}
+            >
+              Обратный звонок
+            </Button>
           </FooterBtnWrapper>
           {data && (
             <FooterContactsContentWrapper>
