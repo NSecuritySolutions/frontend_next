@@ -1,18 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-
+import { type FC, useState } from 'react'
 import Cookies from 'js-cookie'
-
 import Image from 'next/image'
 
-import Link from 'next/link'
+import {
+  CookiesContainer,
+  CookiesTitle,
+  CookiesPragraph,
+  CloseButton,
+  CookiesStyledLink,
+} from './styled'
+import { BtnLink } from '@/shared/components/BtnLink'
 
-import { StyledBtnLink } from '../../BtnLink/ui/styled'
-
-import { CookiesContainer, CookiesTitle, CookiesPragraph, CloseButton } from './styled'
-
-const CookiesNotice: React.FC = () => {
+const CookiesNotice: FC = () => {
   const [isCookiesVisible, setCookiesVisible] = useState<boolean>(true)
 
   const handleBtnClick = () => {
@@ -47,13 +48,21 @@ const CookiesNotice: React.FC = () => {
           <CookiesPragraph>
             Мы используем файлы cookie для обеспечения наилучшего взаимодействия с сайтом.
           </CookiesPragraph>
+          <CookiesPragraph>
+            Ознакомиться с{' '}
+            <CookiesStyledLink
+              className="link"
+              href="/policy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              политикой конфиденциальности
+            </CookiesStyledLink>
+          </CookiesPragraph>
 
-          <Link className="link" href="/policy" target="_blank" rel="noopener noreferrer">
-            Политика конфиденциальности
-          </Link>
-
-          <StyledBtnLink
-            width="149px"
+          <BtnLink
+            text="Подтвердить"
+            width="158px"
             height="44px"
             color="accent"
             size="15px"
@@ -61,9 +70,7 @@ const CookiesNotice: React.FC = () => {
               handleBtnClick()
               setCookieForMonth()
             }}
-          >
-            Подтвердить
-          </StyledBtnLink>
+          />
         </CookiesContainer>
       )}
     </>
