@@ -18,6 +18,7 @@ import StyledComponentsRegistry from '@/app/styling/registry'
 import { StoreProvider } from './store/calculatorStoreProvider'
 import { getCalculatorData, getLayoutData } from './api'
 import { FormStoreProvider } from './store/formModalStoreProvider'
+import CsrfTokenInitializer from '@/widgets/CsrfToken/CsrfToken'
 
 const manrope = Manrope({
   subsets: ['cyrillic'],
@@ -97,6 +98,7 @@ export default async function RootLayout({
           <FormStoreProvider>
             <Header navLinks={headerNavLinks} data={companyInfoData} />
             <StoreProvider products={productData} calculator={calculatorData}>
+              <CsrfTokenInitializer />
               {children}
               <FormModal />
             </StoreProvider>

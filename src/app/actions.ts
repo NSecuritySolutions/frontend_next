@@ -6,6 +6,16 @@ function getCsrfToken() {
   if (parts.length === 2) return parts?.pop()?.split(';').shift()
 }
 
+export async function fetchAndSetCsrfToken() {
+  const csrftoken = getCsrfToken()
+  if (!csrftoken) {
+    await fetch(`${BASE_URL}/api/v1/set-csrf-token/`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+  }
+}
+
 export async function createApplicationWithFile(formData: FormData) {
   const csrftoken = getCsrfToken()
   if (csrftoken) {
