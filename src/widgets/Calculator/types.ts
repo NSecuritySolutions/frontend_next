@@ -1,62 +1,22 @@
 interface IProp {
+  field_name: string
   name: string
   value: string | number | boolean
 }
 
 interface IProduct {
   id: number
+  product_type: number
   category: { id: number; title: string }
   manufacturer: { id: number; title: string }
   article?: string
   model: string
-  image: string
+  image?: string
   description: string
-  price: number
+  price: string
   prices_in_price_lists: IPrice[]
-  polymorphic_ctype: number
   properties: IProp[]
 }
-
-interface ICamera extends IProduct {
-  type: string
-  form_factor: string
-  accommodation: string
-  resolution: string
-  dark: string
-  temperature: string
-  power_supply: string
-  microphone: string
-  micro_sd: string
-  viewing_angle: string
-  focus: string
-  microphone_details: string
-  micro_sd_details: string
-}
-
-interface IRegister extends IProduct {
-  max_resolution: string
-  quantity_cam: number
-  quantity_hdd: number
-  max_size_hdd: number
-  power_supply: string
-}
-
-interface IFACP extends IProduct {
-  alarm_loops: number
-  wireless_sensor_support: boolean
-  phone_control: boolean
-  temperature: string
-}
-
-interface ISensor extends IProduct {
-  temperature: string
-}
-
-interface IHDD extends IProduct {
-  capacity: number
-}
-
-interface IOtherProduct extends IProduct {}
 
 interface IOption {
   id: number
@@ -79,6 +39,13 @@ interface IOption {
   initial_value: number
 }
 
+interface ICalculation {
+  id: number
+  amount: string
+  filters?: string
+  product: number
+}
+
 interface IBlock {
   id: number
   position: number
@@ -87,6 +54,7 @@ interface IBlock {
   formula: IFormula
   calculator: number
   options: IOption[]
+  calculations: ICalculation[]
   quantity_selection: boolean
 }
 
@@ -103,7 +71,7 @@ interface IPrice {
   price: number
   is_show: boolean
   price_list_category: number
-  product: TProduct
+  product: IProduct
 }
 
 interface IPriceListCategory {
@@ -130,18 +98,12 @@ interface ICalculatorData {
   active: boolean
 }
 
-type TProduct = ICamera | IRegister | IFACP | ISensor | IOtherProduct | IHDD
-
 export type {
-  ICamera,
-  IRegister,
   IOption,
   IBlock,
+  ICalculation,
   IPriceList,
   ICalculatorData,
-  ISensor,
-  IOtherProduct,
   IPriceVariables,
-  TProduct,
-  IHDD,
+  IProduct,
 }

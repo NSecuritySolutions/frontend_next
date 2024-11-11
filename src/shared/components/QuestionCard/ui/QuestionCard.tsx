@@ -41,7 +41,7 @@ const QuestionCard: FC<TAnswerProps> = ({ id, question, answer, onClick, chosen,
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [titleRef, isMobile, initialHeight])
+  }, [titleRef, isMobile, initialHeight, animate, ref])
 
   function handleClick() {
     if (isMobile) {

@@ -1,14 +1,13 @@
 import { FC, useEffect, useRef, useState } from 'react'
 
 import { ProductCard } from '@/shared/components/ProductCard'
-import { items } from '@/shared/constants/texts/product-cards.ts'
 
 import { Section, SectionWrapper, SectionTitle } from './styled'
 import { BtnLink } from '@/shared/components/BtnLink'
-import { ICamera, TProduct } from '@/widgets/Calculator/types'
+import { IProduct } from '@/widgets/Calculator/types'
 
 interface ProductCardsProps {
-  data: ICamera[]
+  data: IProduct[]
 }
 
 const ProductCards: FC<ProductCardsProps> = ({ data }) => {
@@ -39,7 +38,7 @@ const ProductCards: FC<ProductCardsProps> = ({ data }) => {
         {data &&
           data
             .slice(0, visibleItems)
-            .map((item: TProduct, i: number) => <ProductCard key={i} item={item} />)}
+            .map((item: IProduct, i: number) => <ProductCard key={i} item={item} />)}
       </SectionWrapper>
       {visibleItems < data.length && (
         <BtnLink

@@ -1,4 +1,3 @@
-import { TProduct } from '@/widgets/Calculator/types'
 import { ISolution } from '@/widgets/ReadySolutionSection/types'
 import { makeAutoObservable, observable, action } from 'mobx'
 

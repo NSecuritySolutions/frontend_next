@@ -1,7 +1,7 @@
-import { TProduct } from '@/widgets/Calculator/types'
+import { IProduct } from '@/widgets/Calculator/types'
 
 export interface ProductProps {
-  data: TProduct
+  data: IProduct
 }
 
 export type TItem = {
