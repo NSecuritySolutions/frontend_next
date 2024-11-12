@@ -43,7 +43,7 @@ const Product: FC<ProductProps> = ({ data }) => {
           </ImageWrapper>
           <PriceColumnWrapper>
             <Title>
-              {data.price.toLocaleString('ru-RU', {
+              {parseFloat(data.price).toLocaleString('ru-RU', {
                 style: 'currency',
                 currency: 'RUB',
                 minimumFractionDigits: 2,

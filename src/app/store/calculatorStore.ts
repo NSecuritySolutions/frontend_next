@@ -41,6 +41,10 @@ export class CalculatorStore {
     this.animationSafe = value
   }
 
+  get changed() {
+    return this.blocks.some((block) => block.changed)
+  }
+
   get clearable() {
     if (this.blocks.length !== this.data.length) return true
     if (this.blocks.find((block) => block.changed)) return true
@@ -143,11 +147,16 @@ export class CalculatorStore {
   }
 
   createFormData() {
-    const data: CalculatorData = {
-      price: this.result,
-      blocks: this.blocks.map((block) => block.createFormData()),
+    const blocks = this.blocks
+      .filter((block) => block.changed)
+      .map((block) => block.createFormData())
+    if (blocks?.length) {
+      const data: CalculatorData = {
+        price: this.result,
+        blocks: blocks,
+      }
+      return data
     }
-    return data
   }
 }
 

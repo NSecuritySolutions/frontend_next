@@ -12,12 +12,12 @@ import styles from './page.module.css'
 
 import { getVideoPageData } from '@/app/api'
 
-import { ICamera } from '@/widgets/Calculator/types'
+import { IProduct } from '@/widgets/Calculator/types'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { solutionData, questionsData, productData } = await getVideoPageData()
 
-  const data = productData.filter((item: ICamera) => item.id?.toString() === params.id)[0]
+  const data = productData.filter((item: IProduct) => item.id?.toString() === params.id)[0]
 
   // useEffect(() => {
   //   localStorage.setItem('id', params.id)

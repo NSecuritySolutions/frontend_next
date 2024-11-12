@@ -1,14 +1,11 @@
 import { FC } from 'react'
 import { Typography } from '@/shared/components/Typography'
 import Loader from '@/shared/components/Loader/Loader'
-// import { ProductProps } from '../types'
-import { ICamera } from '@/widgets/Calculator/types'
-import { v4 as uuidv4 } from 'uuid'
 
 import {
   Card,
   ImageColumnWrapper,
-  ImageWrapper,
+  // ImageWrapper,
   PriceColumnWrapper,
   ColumnWrapper,
   ContentWrapper,

@@ -1,5 +1,5 @@
 import { Stringifier } from 'styled-components/dist/types'
-import { TProduct } from '../Calculator/types'
+import { IProduct } from '../Calculator/types'
 
 interface ExampleImage {
   id: number
@@ -11,7 +11,7 @@ interface IOurWorkProduct {
   text: string
   is_link: boolean
   amount: number
-  product: TProduct
+  product: IProduct
 }
 
 interface Example {
