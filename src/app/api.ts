@@ -51,7 +51,7 @@ export async function getLayoutData() {
 
 export async function getCalculatorData() {
   const responses = await Promise.all([
-    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/new-products/`),
     fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
   ])
 

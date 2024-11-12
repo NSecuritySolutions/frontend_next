@@ -318,7 +318,7 @@ const Calculator: React.FC = observer(() => {
               <Price>{formattedResult}</Price>
             </PriceContainer>
             <ButtonsWrapper>
-              <Button $primary onClick={() => modal.openCalc()}>
+              <Button $primary onClick={() => modal.openCalc()} disabled={!store.changed}>
                 Оформить заявку
               </Button>
               <Button>

@@ -247,8 +247,7 @@ const ButtonsWrapper = styled.div`
   }
 `
 
-const Button = styled.a<{ $primary?: boolean }>`
-  cursor: pointer;
+const Button = styled.button<{ $primary?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,6 +255,7 @@ const Button = styled.a<{ $primary?: boolean }>`
   border-radius: 12px;
   background-color: ${(props) => (props.$primary ? colors.btnPrimary : colors.backgroundPrimary)};
   white-space: nowrap;
+  font-family: var(--font-manrope);
   font-size: 15px;
   font-weight: 800;
   width: 280px;
@@ -263,9 +263,13 @@ const Button = styled.a<{ $primary?: boolean }>`
   opacity: 1;
   gap: 8px;
 
-  &:hover {
-    background-color: ${(props) =>
-      props.$primary ? colors.btnPrimaryHover : colors.btnOutlineHover};
+  &:not(:disabled):hover {
+    background-color: ${(props) => !!props.$primary && colors.btnPrimaryHover};
+    border: ${(props) => !props.$primary && `2px solid ${colors.btnPrimary}`};
+  }
+
+  &:disabled {
+    cursor: default;
   }
 
   @media (max-width: 620px) {

@@ -61,7 +61,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
           router.push(`/products/${item.id}`)
         }}
       >
-        <Img src={item.image} alt={item.model} width={260} height={261} />
+        <Img src={item.image || '/blurData/blur1.png'} alt={item.model} width={260} height={261} />
         <TextWrapper>
           <ProductPrice>{formattedPrice}</ProductPrice>
           <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>

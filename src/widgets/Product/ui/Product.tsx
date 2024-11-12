@@ -1,8 +1,6 @@
 import { FC } from 'react'
-import { Typography } from '@/shared/components/Typography'
 import Loader from '@/shared/components/Loader/Loader'
 import { ProductProps } from '../types'
-import { ICamera } from '@/widgets/Calculator/types'
 
 import {
   Card,
@@ -36,11 +34,16 @@ const Product: FC<ProductProps> = ({ data }) => {
       <ContentWrapper>
         <ImageColumnWrapper>
           <ImageWrapper>
-            <Img src={data.image} alt={data.model} width={235} height={136} />
+            <Img
+              src={data.image || '/blurData/blur1.png'}
+              alt={data.model}
+              width={235}
+              height={136}
+            />
           </ImageWrapper>
           <PriceColumnWrapper>
             <Title>
-              {data.price.toLocaleString('ru-RU', {
+              {parseFloat(data.price).toLocaleString('ru-RU', {
                 style: 'currency',
                 currency: 'RUB',
                 minimumFractionDigits: 2,

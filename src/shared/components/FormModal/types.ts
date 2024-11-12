@@ -1,4 +1,4 @@
-import { TProduct } from '@/widgets/Calculator/types'
+import { IProduct } from '@/widgets/Calculator/types'
 
 interface CalculatorData {
   price: number
@@ -9,7 +9,7 @@ interface CalculatorBlockData {
   name: string
   amount: number
   options: { name: string; value: string }[]
-  products_category: { category_id: number; products: TProduct[] }[]
+  products_category: { category_id: number; products: IProduct[] }[]
   price: number
 }
 

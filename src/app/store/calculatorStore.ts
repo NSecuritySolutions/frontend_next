@@ -6,7 +6,7 @@ import {
   ICalculatorData,
   IPriceList,
   IPriceVariables,
-  TProduct,
+  IProduct,
 } from '@/widgets/Calculator/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 import { CalculatorData } from '@/shared/components/FormModal/types'
@@ -15,11 +15,11 @@ export class CalculatorStore {
   data: IBlock[] = []
   priceList: IPriceList | undefined = undefined
   prices: IPriceVariables = {}
-  products: TProduct[] = []
+  products: IProduct[] = []
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
   animationSafe: boolean = true
-  pending_products: { product: TProduct; amount: number }[] = []
+  pending_products: { product: IProduct; amount: number }[] = []
   suitable_blocks: string[] = []
   selected_blocks: string[] = []
   constructor() {
@@ -39,6 +39,10 @@ export class CalculatorStore {
 
   setAnimationSafe = (value: boolean) => {
     this.animationSafe = value
+  }
+
+  get changed() {
+    return this.blocks.some((block) => block.changed)
   }
 
   get clearable() {
@@ -74,7 +78,7 @@ export class CalculatorStore {
     )
   }
 
-  getData(products: TProduct[], calculator: ICalculatorData[]) {
+  getData(products: IProduct[], calculator: ICalculatorData[]) {
     if (!products || !calculator) {
       this.error = true
       return
@@ -107,7 +111,7 @@ export class CalculatorStore {
     this.handleCancelSelectBlocks()
   }
 
-  setProduct(product: TProduct) {
+  setProduct(product: IProduct) {
     if (this.animationSafe) {
       const suitable_blocks: string[] = []
       this.blocks.forEach((block) => {
@@ -124,7 +128,7 @@ export class CalculatorStore {
     }
   }
 
-  setBlockProduct(product: TProduct, amount: number, blockIds: string[]) {
+  setBlockProduct(product: IProduct, amount: number, blockIds: string[]) {
     this.blocks.forEach((block) => {
       if (blockIds.includes(block.id)) block.setProduct(product, amount)
     })
@@ -143,11 +147,16 @@ export class CalculatorStore {
   }
 
   createFormData() {
-    const data: CalculatorData = {
-      price: this.result,
-      blocks: this.blocks.map((block) => block.createFormData()),
+    const blocks = this.blocks
+      .filter((block) => block.changed)
+      .map((block) => block.createFormData())
+    if (blocks?.length) {
+      const data: CalculatorData = {
+        price: this.result,
+        blocks: blocks,
+      }
+      return data
     }
-    return data
   }
 }
 
