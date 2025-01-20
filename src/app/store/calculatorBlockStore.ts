@@ -618,16 +618,13 @@ class CalculatorBlockStore {
   }
 
   private setOptions(product: IProduct, value: number | string) {
-    // const priceOptions = this.data.options.filter((option) => {
-    //   const productPrices = product.prices_in_price_lists.filter(
-    //     (price) => option.price?.id == price.id,
-    //   )
-    //   if (productPrices.length > 0) return true
-    // })
-    // if (priceOptions.length > 0)
-    //   priceOptions.map((option) => {
-    //     this.setVariableByOptionType(option.option_type, option.name, value)
-    //   })
+    const options = this.data.options.filter(
+      (option) => option.name.startsWith('self') && option.product == product.product_type,
+    )
+    if (options.length > 0)
+      options.map((option) => {
+        this.setVariableByOptionType(option.option_type, option.name, value)
+      })
   }
 
   private resetProductOptions(category: number) {
