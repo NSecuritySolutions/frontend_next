@@ -80,6 +80,7 @@ export class CalculatorStore {
 
   getData(products: IProduct[], calculator: ICalculatorData[]) {
     if (!products || !calculator) {
+      console.error('Important data is undefined')
       this.error = true
       return
     }
@@ -136,6 +137,15 @@ export class CalculatorStore {
 
   setProducts(products: IEquipment[]) {
     if (this.animationSafe) {
+      const blocks: Set<CalculatorBlockStore> = new Set()
+      products.forEach((product) => {
+        this.blocks.forEach((block) => {
+          if (block.backend_id == product.calculator_block) {
+            blocks.add(block)
+          }
+        })
+      })
+      blocks.forEach((v) => v.resetCalculationProducts())
       products.forEach((product) => {
         this.blocks
           .filter((block) => block.backend_id == product.calculator_block)

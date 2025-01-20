@@ -48,6 +48,7 @@ class CalculatorBlockStore {
   // Ключи это id категорий
   filters: Map<number, IConditionCategory> = new Map()
   products: Map<number, IProduct[]> = new Map()
+  calculationProducts: Map<number, IProduct[]> = new Map()
   productAmountDependencies: Map<number, string | undefined> = new Map()
 
   constructor(data: IBlock, price: IPriceVariables) {
@@ -56,7 +57,7 @@ class CalculatorBlockStore {
     this.data = data
     this.prev_block_amount = 0
     this.quantity_selection = data.quantity_selection
-    this.formula = data.formula.expression
+    this.formula = data.formula?.expression
     this.variables = new Map(Object.entries(price))
     this.setVariables()
     this.setupCalculations()
@@ -79,7 +80,7 @@ class CalculatorBlockStore {
 
   isOptionValueDisabled(name: string, value: string | number | boolean) {
     const optionData = this.data.options.find((option) => option.name === name)
-    if (optionData?.product) {
+    if (optionData?.product && !optionData.name.startsWith('self')) {
       return this.checkOptionValueFilter(optionData.product, name, value).length === 0
     }
     return false
@@ -164,23 +165,35 @@ class CalculatorBlockStore {
   // Итоговый расчет
   // Начало блока
   get result() {
-    let mathResult
+    let calculationResult
     try {
-      mathResult = this.data.calculations.reduce((prev, curr) => {
-        const products = calculatorStore.products.filter(
-          (product) => product.product_type == curr.product,
-        )
-        const filteredProducts = products.filter((product) =>
+      calculationResult = this.data.calculations.reduce((prev, curr) => {
+        let products: IProduct[] | undefined
+        products = this.calculationProducts.get(curr.product)
+        if (products?.length == 0) {
+          products = calculatorStore.products.filter(
+            (product) => product.product_type == curr.product,
+          )
+          if (products.length == 0) return prev
+        }
+        const filteredProducts = products!.filter((product) =>
           this.applyCalculationFilters(product, this.calculationFilters.get(curr.id)),
         )
+
         if (filteredProducts.length) {
           const minPriceProduct = filteredProducts.reduce((prevP, currP) =>
             parseFloat(prevP.price) < parseFloat(currP.price) ? prevP : currP,
           )
+          if (this.backend_id == 1) {
+            console.log(minPriceProduct)
+          }
           const result = math.evaluate(
             curr.amount.replaceAll(/\{[^}]*\}/g, minPriceProduct.price),
             this.variables,
           )
+          if (this.backend_id == 1) {
+            console.log(result)
+          }
           return prev + result
         } else return prev
       }, 0)
@@ -192,13 +205,18 @@ class CalculatorBlockStore {
 
     const filteredProducts = this.filterByMinPrice()
     const resultWithoutProducts =
-      this.variables.has('block_amount') && this.variables.get('block_amount') != 0 ? mathResult : 0
+      this.variables.has('block_amount') && this.variables.get('block_amount') != 0
+        ? calculationResult
+        : 0
     const blockFilteredProducts = filteredProducts.filter(
-      (product) => this.productAmountDependencies.get(product?.product_type) == undefined,
+      (product) => this.productAmountDependencies.get(product?.product_type) === undefined,
     )
     const otherFilteredProducts = filteredProducts.filter(
       (product) => !blockFilteredProducts.includes(product),
     )
+    if (this.backend_id == 1) {
+      console.log(filteredProducts)
+    }
     const blockFilteredProductsResult = blockFilteredProducts.reduce((sum, current) => {
       if (!current) return sum
       return sum + parseFloat(current.price)
@@ -212,6 +230,15 @@ class CalculatorBlockStore {
       blockFilteredProductsResult * (this.variables.get('block_amount') as number)
     const otherFilteredProductsResult = otherFilteredProducts.reduce((sum, current) => {
       if (!current) return sum
+      const quantity_option = this.data.options.find(
+        (option) => option.name.startsWith('self') && option.product == current.product_type,
+      )
+      if (quantity_option) {
+        return (
+          parseFloat(current.price) *
+          parseFloat(this.variables.get(quantity_option.name)?.toString() ?? '0')
+        )
+      }
       return (
         sum +
         parseFloat(current.price) *
@@ -262,6 +289,9 @@ class CalculatorBlockStore {
   private applyInitialFilters(item: IProduct, conditions: ICondition[]) {
     if (conditions.length == 0) return true
     return conditions.every((condition) => {
+      if (condition.leftPart.startsWith('self')) {
+        return true
+      }
       // Если в объекте условия отсутствует operator, значит это отслеживаемое условие
       if (!condition.operator) {
         const item_property = item.properties.find((prop) => prop.field_name === condition.leftPart)
@@ -296,7 +326,7 @@ class CalculatorBlockStore {
   }
 
   private applyCalculationFilters(item: IProduct, conditions?: ICondition[]) {
-    if (conditions?.length == 0) return false
+    if (conditions?.length == 0) return true
     const result = conditions?.every((condition) => this.applyCondition(item, condition))
     return result
   }
@@ -312,6 +342,9 @@ class CalculatorBlockStore {
 
   private applyCondition(item: IProduct, condition: ICondition) {
     const { leftPart, operator, rightPart } = condition
+    if (leftPart.startsWith('self')) {
+      return true
+    }
     const item_property = item.properties.find((prop) => prop.field_name == leftPart)
     if (!item_property) return false
     const formattedRightPart = this.formatString(rightPart!)
@@ -354,6 +387,7 @@ class CalculatorBlockStore {
     const option = this.data.options.filter((option) => option.name == name)[0]
     if (option?.product && this.products.get(option.product)!.length > 0) {
       this.products.set(option.product, [])
+      this.resetCalculationProducts()
     }
   }
 
@@ -420,8 +454,9 @@ class CalculatorBlockStore {
         }
         if (option.product) {
           // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
-          if (option.block_amount_undependent)
-            this.productAmountDependencies.set(option.product, option.amount_depend)
+          if (option.block_amount_undependent) {
+            this.productAmountDependencies.set(option.product, option.name)
+          }
           if (!this.filters.get(option.product)) {
             this.filters.set(option.product, { initial: [] })
             this.products.set(option.product, [])
@@ -442,6 +477,9 @@ class CalculatorBlockStore {
     try {
       this.data.calculations.forEach((calculation) => {
         this.parseCalculationFilters(calculation)
+        if (!this.calculationProducts.has(calculation.product)) {
+          this.calculationProducts.set(calculation.product, [])
+        }
       })
     } catch (error) {
       console.error(error)
@@ -555,11 +593,12 @@ class CalculatorBlockStore {
         this.products.set(product.product_type, [product])
         this.reverseCondition(product)
         if (this.productAmountDependencies.has(product.product_type)) {
-          if (this.productAmountDependencies.has(product.product_type))
+          if (this.productAmountDependencies.has(product.product_type)) {
             this.setProductVariable(
               this.productAmountDependencies.get(product.product_type)!,
               typeof value == 'number' ? value : 0,
             )
+          }
         } else this.setProductVariable('block_amount', typeof value == 'number' ? value : 0)
       }
     }
@@ -613,9 +652,19 @@ class CalculatorBlockStore {
       .map((option) => this.variables.set(option.name, this.initialVariables.get(option.name)!))
   }
 
+  private resetCalculationCategory(category: number) {
+    this.calculationProducts.set(category, [])
+  }
+
+  resetCalculationProducts() {
+    this.calculationProducts.forEach((_, k) => {
+      this.calculationProducts.set(k, [])
+    })
+  }
+
   checkProductsForCurrentBlock(products: IEquipment[]) {
     const result = products.reduce((result, current) => {
-      if (this.products.has(current.product.product_type))
+      if (current.product && this.products.has(current.product.product_type))
         return (
           result &&
           this.applyInitialFilters(
@@ -638,18 +687,24 @@ class CalculatorBlockStore {
     const currentBlock = this.checkProductsForCurrentBlock(products)
     if (currentBlock) {
       products.map((product) => {
-        this.resetProductOptions(product.product.product_type)
-        this.setProductByFilters(product.product, product.amount)
-        this.setOptions(product.product, product.amount)
+        if (product.product) {
+          this.resetProductOptions(product.product.product_type)
+          this.setProductByFilters(product.product, product.amount)
+          this.setOptions(product.product, product.amount)
+        }
       })
     }
   }
 
-  setProduct(product: IProduct, amount: number) {
-    if (this.products.has(product.product_type)) {
+  setProduct(product: IProduct | null, amount: number) {
+    if (product && this.products.has(product.product_type)) {
       this.resetProductOptions(product.product_type)
       this.setProductByFilters(product, amount)
       this.setOptions(product, amount)
+    }
+    if (product && this.calculationProducts.has(product.product_type)) {
+      // this.resetCalculationCategory(product.product_type)
+      this.calculationProducts.set(product.product_type, [product])
     }
   }
   // Конец блока

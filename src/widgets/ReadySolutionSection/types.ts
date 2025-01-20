@@ -10,7 +10,7 @@ interface IEquipment {
   solution: number
   text: string
   is_link: boolean
-  product: IProduct
+  product: IProduct | null
   calculator_block: number
   amount: number
 }

@@ -7,7 +7,7 @@ export async function getMainPageData() {
     fetch(`${BASE_URL}/api/v1/our-team/?active=true`),
     fetch(`${BASE_URL}/api/v1/our-works/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/new-products/`),
     fetch(`${BASE_URL}/api/v1/our-services/`),
   ])
 
@@ -74,7 +74,8 @@ export async function getVideoPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    // fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/new-products/?product_type=Камера`),
   ])
 
   if (responses.some((response) => !response.ok)) {
@@ -98,7 +99,8 @@ export async function getDomofonPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    // fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/new-products/?product_type=Камера`),
   ])
   // TODO сделать нужную категорию
 
@@ -123,7 +125,8 @@ export async function getSecurityPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    // fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/new-products/?product_type=Камера`),
     // TODO сделать нужную категорию
   ])
 
@@ -153,7 +156,7 @@ export async function getOurWorksPageData() {
 }
 
 export async function getProductById(id: string) {
-  const response = await fetch(`${BASE_URL}/api/v1/products/${id}/`)
+  const response = await fetch(`${BASE_URL}/api/v1/new-products/${id}/`)
   if (!response.ok) {
     throw new Error('Failed to fetch data')
   }
