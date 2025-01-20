@@ -64,7 +64,7 @@ const Solution: FC<SolutionProps> = ({ data }) => {
             <SectionTitle>Комплектация</SectionTitle>
             <UnorderedList>
               {data.equipment.map((item) => {
-                if (item.is_link) {
+                if (item.is_link && item.product) {
                   return (
                     <li key={item.text}>
                       <Link href={`/products/${item.product.id}`}>
