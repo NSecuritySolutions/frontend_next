@@ -3,13 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { create, all } from 'mathjs'
 import calculatorStore from '@/app/store/calculatorStore'
-import {
-  IBlock,
-  IPriceVariables,
-  IOption,
-  IProduct,
-  ICalculation,
-} from '@/widgets/Calculator/types'
+import { IBlock, IOption, IProduct, ICalculation } from '@/widgets/Calculator/types'
 import { ICondition, IConditionCategory } from '@/shared/components/CalculatorCard/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 import { CalculatorBlockData } from '@/shared/components/FormModal/types'
@@ -51,14 +45,14 @@ class CalculatorBlockStore {
   calculationProducts: Map<number, IProduct[]> = new Map()
   productAmountDependencies: Map<number, string | undefined> = new Map()
 
-  constructor(data: IBlock, price: IPriceVariables) {
+  constructor(data: IBlock) {
     this.id = uuidv4()
     this.backend_id = data.id
     this.data = data
     this.prev_block_amount = 0
     this.quantity_selection = data.quantity_selection
     this.formula = data.formula?.expression
-    this.variables = new Map(Object.entries(price))
+    this.variables = new Map()
     this.setVariables()
     this.setupCalculations()
     this.initialVariables = new Map(this.variables)
@@ -184,16 +178,10 @@ class CalculatorBlockStore {
           const minPriceProduct = filteredProducts.reduce((prevP, currP) =>
             parseFloat(prevP.price) < parseFloat(currP.price) ? prevP : currP,
           )
-          if (this.backend_id == 1) {
-            console.log(minPriceProduct)
-          }
           const result = math.evaluate(
             curr.amount.replaceAll(/\{[^}]*\}/g, minPriceProduct.price),
             this.variables,
           )
-          if (this.backend_id == 1) {
-            console.log(result)
-          }
           return prev + result
         } else return prev
       }, 0)
@@ -214,9 +202,6 @@ class CalculatorBlockStore {
     const otherFilteredProducts = filteredProducts.filter(
       (product) => !blockFilteredProducts.includes(product),
     )
-    if (this.backend_id == 1) {
-      console.log(filteredProducts)
-    }
     const blockFilteredProductsResult = blockFilteredProducts.reduce((sum, current) => {
       if (!current) return sum
       return sum + parseFloat(current.price)
@@ -455,7 +440,7 @@ class CalculatorBlockStore {
         if (option.product) {
           // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
           if (option.block_amount_undependent) {
-            this.productAmountDependencies.set(option.product, option.name)
+            this.productAmountDependencies.set(option.product, option.amount_depend)
           }
           if (!this.filters.get(option.product)) {
             this.filters.set(option.product, { initial: [] })
@@ -529,7 +514,6 @@ class CalculatorBlockStore {
     const match = condition.match(regex)
 
     if (!match) {
-      console.log(condition)
       const error = new Error(`Invalid condition string ${condition}`)
       throw error
     }
@@ -634,16 +618,16 @@ class CalculatorBlockStore {
   }
 
   private setOptions(product: IProduct, value: number | string) {
-    const priceOptions = this.data.options.filter((option) => {
-      const productPrices = product.prices_in_price_lists.filter(
-        (price) => option.price?.id == price.id,
-      )
-      if (productPrices.length > 0) return true
-    })
-    if (priceOptions.length > 0)
-      priceOptions.map((option) => {
-        this.setVariableByOptionType(option.option_type, option.name, value)
-      })
+    // const priceOptions = this.data.options.filter((option) => {
+    //   const productPrices = product.prices_in_price_lists.filter(
+    //     (price) => option.price?.id == price.id,
+    //   )
+    //   if (productPrices.length > 0) return true
+    // })
+    // if (priceOptions.length > 0)
+    //   priceOptions.map((option) => {
+    //     this.setVariableByOptionType(option.option_type, option.name, value)
+    //   })
   }
 
   private resetProductOptions(category: number) {

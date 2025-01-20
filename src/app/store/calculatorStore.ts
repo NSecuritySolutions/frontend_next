@@ -1,20 +1,12 @@
 import CalculatorBlockStore from './calculatorBlockStore'
 
 import { makeAutoObservable, computed, observable, action } from 'mobx'
-import {
-  IBlock,
-  ICalculatorData,
-  IPriceList,
-  IPriceVariables,
-  IProduct,
-} from '@/widgets/Calculator/types'
+import { IBlock, ICalculatorData, IProduct } from '@/widgets/Calculator/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 import { CalculatorData } from '@/shared/components/FormModal/types'
 
 export class CalculatorStore {
   data: IBlock[] = []
-  priceList: IPriceList | undefined = undefined
-  prices: IPriceVariables = {}
   products: IProduct[] = []
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
@@ -32,7 +24,6 @@ export class CalculatorStore {
       result: computed,
       setAnimationSafe: action,
       data: observable.ref,
-      prices: observable.ref,
       products: observable.ref,
     })
   }
@@ -59,23 +50,15 @@ export class CalculatorStore {
   }
 
   setBlocks() {
-    this.blocks = this.data.map((blockData) => new CalculatorBlockStore(blockData, this.prices))
+    this.blocks = this.data.map((blockData) => new CalculatorBlockStore(blockData))
   }
 
   setNewBlock(id: number) {
-    this.blocks.push(
-      new CalculatorBlockStore(this.data.filter((block) => block.id == id)[0], this.prices),
-    )
+    this.blocks.push(new CalculatorBlockStore(this.data.filter((block) => block.id == id)[0]))
   }
 
   removeBlock(id: number) {
     this.blocks.splice(id, 1)
-  }
-
-  formPrices() {
-    this.priceList!.categories.map((category) =>
-      category.prices.map((price) => (this.prices[price.variable_name] = price.price)),
-    )
   }
 
   getData(products: IProduct[], calculator: ICalculatorData[]) {
@@ -86,9 +69,7 @@ export class CalculatorStore {
     }
     this.products = products
     this.data = calculator[0].blocks
-    this.priceList = calculator[0].price_list
-    this.formPrices()
-    if (this.data && this.prices) {
+    if (this.data) {
       this.setBlocks()
     }
   }

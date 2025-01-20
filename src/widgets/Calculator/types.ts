@@ -14,7 +14,6 @@ interface IProduct {
   image?: string
   description: string
   price: string
-  prices_in_price_lists: IPrice[]
   properties: IProp[]
 }
 
@@ -32,7 +31,6 @@ interface IOption {
   depends_on?: number
   depends_on_value?: string
   dependencies: boolean
-  price?: IPrice
   block_amount_undependent: boolean
   amount_depend?: string
   variability_with_block_amount: boolean
@@ -64,46 +62,10 @@ interface IFormula {
   expression: string
 }
 
-interface IPrice {
-  id: number
-  name: string
-  variable_name: string
-  price: number
-  is_show: boolean
-  price_list_category: number
-  product: IProduct
-}
-
-interface IPriceListCategory {
-  id: number
-  name: string
-  price_list: number
-  prices: IPrice[]
-}
-
-interface IPriceList {
-  id: number
-  date: string
-  categories: IPriceListCategory[]
-}
-
-interface IPriceVariables {
-  [key: string]: number
-}
-
 interface ICalculatorData {
   id: number
   blocks: IBlock[]
-  price_list: IPriceList
   active: boolean
 }
 
-export type {
-  IOption,
-  IBlock,
-  ICalculation,
-  IPriceList,
-  ICalculatorData,
-  IPriceVariables,
-  IProduct,
-}
+export type { IOption, IBlock, ICalculation, ICalculatorData, IProduct }

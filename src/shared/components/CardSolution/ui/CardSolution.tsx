@@ -68,7 +68,6 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
         <Button
           $transparent
           onClick={() => {
-            console.log(data.equipment)
             calculatorStore.setProducts(data.equipment)
             const calc = document.getElementById('calculator')
             if (calc) calc.scrollIntoView({ behavior: 'smooth' })
