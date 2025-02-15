@@ -38,7 +38,7 @@ const Solution: FC<SolutionProps> = ({ data }) => {
           {/* </ImageWrapper> */}
           <PriceColumnWrapper>
             <Title>
-              {data.price!.toLocaleString('ru-RU', {
+              {(parseFloat(data.equipment_price) + parseFloat(data.price)).toLocaleString('ru-RU', {
                 style: 'currency',
                 currency: 'RUB',
                 minimumFractionDigits: 2,
@@ -52,7 +52,7 @@ const Solution: FC<SolutionProps> = ({ data }) => {
                 Заказать звонок
               </Button>
               <Link href={'/#calculator'} passHref legacyBehavior>
-                <Button onClick={() => calculatorStore.setProducts(data.equipment)}>
+                <Button onClick={() => calculatorStore.setProducts(data.equipment, true)}>
                   В калькулятор
                 </Button>
               </Link>
@@ -64,20 +64,27 @@ const Solution: FC<SolutionProps> = ({ data }) => {
             <SectionTitle>Комплектация</SectionTitle>
             <UnorderedList>
               {data.equipment.map((item) => {
-                if (item.is_link && item.product) {
+                if (item.show)
                   return (
-                    <li key={item.text}>
-                      <Link href={`/products/${item.product.id}`}>
-                        <Text $link>{item.text}</Text>
-                      </Link>
-                    </li>
+                    <>
+                      {item.is_link && item.product ? (
+                        <li key={item.text}>
+                          <div>
+                            <Link
+                              href={`/products/${item.product.id}`}
+                              style={{ display: 'inline-block' }}
+                            >
+                              <Text $link>{item.text}</Text>
+                            </Link>
+                          </div>
+                        </li>
+                      ) : (
+                        <li key={item.text}>
+                          <Text>{item.text}</Text>
+                        </li>
+                      )}
+                    </>
                   )
-                }
-                return (
-                  <li key={item.text}>
-                    <Text>{item.text}</Text>
-                  </li>
-                )
               })}
             </UnorderedList>
           </BlockWrapper>

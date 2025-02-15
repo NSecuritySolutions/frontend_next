@@ -13,6 +13,7 @@ interface IEquipment {
   product: IProduct | null
   calculator_block: number
   amount: number
+  show: boolean
 }
 
 interface ISolution {
@@ -21,7 +22,8 @@ interface ISolution {
   image: string
   tooltip_text: string
   description: string[]
-  price?: number
+  price: string
+  equipment_price: string
   tags: ITag[]
   equipment: IEquipment[]
 }

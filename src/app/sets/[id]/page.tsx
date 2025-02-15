@@ -3,6 +3,8 @@ import styles from './page.module.css'
 import { getSolutionById } from '@/app/api'
 import { Solution } from '@/widgets/Solution'
 
+export const revalidate = 60
+
 export default async function Page({ params }: { params: { id: string } }) {
   const data = await getSolutionById(params.id)
 

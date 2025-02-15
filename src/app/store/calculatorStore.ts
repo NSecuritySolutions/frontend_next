@@ -116,7 +116,7 @@ export class CalculatorStore {
     })
   }
 
-  setProducts(products: IEquipment[]) {
+  setProducts(products: IEquipment[], resetAll?: boolean) {
     if (this.animationSafe) {
       const blocks: Set<CalculatorBlockStore> = new Set()
       products.forEach((product) => {
@@ -126,6 +126,7 @@ export class CalculatorStore {
           }
         })
       })
+      if (resetAll) blocks.forEach((v) => v.prepareForProductInsert())
       blocks.forEach((v) => v.resetCalculationProducts())
       products.forEach((product) => {
         this.blocks
@@ -134,6 +135,7 @@ export class CalculatorStore {
             block.setProduct(product.product, product.amount)
           })
       })
+      if (resetAll) blocks.forEach((v) => v.finishProductInsert())
     }
   }
 

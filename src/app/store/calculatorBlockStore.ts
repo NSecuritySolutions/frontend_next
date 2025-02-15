@@ -28,14 +28,17 @@ class CalculatorBlockStore {
   id: string
   prev_block_amount: number
   data: IBlock
+  presentOptionsBeforeInsert: IOption[] = []
   presentOptions: IOption[] = []
   disabled: number = 0
   appeared: number = 0
   formula: string
   initialVariables: Map<string, string | number | boolean>
+  emptyVariables: Map<string, string | number | boolean> = new Map()
   variables: Map<string, string | number | boolean>
   variabilityVariables: Map<string, number> = new Map()
   quantity_selection: boolean
+  isProductInserting: boolean
 
   // Ключи это id дополнительных расчётов
   calculationFilters: Map<number, ICondition[]> = new Map()
@@ -47,6 +50,7 @@ class CalculatorBlockStore {
 
   constructor(data: IBlock) {
     this.id = uuidv4()
+    this.isProductInserting = false
     this.backend_id = data.id
     this.data = data
     this.prev_block_amount = 0
@@ -64,6 +68,7 @@ class CalculatorBlockStore {
       appeared: observable,
       filters: observable,
       prev_block_amount: observable,
+      isProductInserting: observable,
       changed: computed,
       result: computed,
       isOptionValueDisabled: action,
@@ -154,11 +159,20 @@ class CalculatorBlockStore {
   setPresent() {
     this.presentOptions = this.data.options.filter(this.handleIsPresent)
   }
+
+  private initializeAnimation() {
+    if (!this.isProductInserting) {
+      const prevArr = [...this.presentOptions]
+      this.setPresent()
+      this.compareArrays(prevArr, this.presentOptions)
+    }
+  }
   // Конец блока
 
   // Итоговый расчет
   // Начало блока
-  get result() {
+
+  calculationResult() {
     let calculationResult
     try {
       calculationResult = this.data.calculations.reduce((prev, curr) => {
@@ -190,52 +204,87 @@ class CalculatorBlockStore {
       calculatorStore.error = error
       return 0
     }
-
-    const filteredProducts = this.filterByMinPrice()
     const resultWithoutProducts =
       this.variables.has('block_amount') && this.variables.get('block_amount') != 0
         ? calculationResult
         : 0
+    return resultWithoutProducts
+  }
+
+  blockAmountDependsProductsResult(products: IProduct[]) {
+    const blockFilteredProductsResult = products.reduce((sum, current) => {
+      if (!current) return sum
+      return sum + parseFloat(current.price)
+    }, 0)
+    const blockAmountDependsProductsResult =
+      blockFilteredProductsResult * (this.variables.get('block_amount') as number)
+    return blockAmountDependsProductsResult
+  }
+
+  selfProductResult(product: IProduct, option: IOption) {
+    if (!this.presentOptions.find((opt) => opt === option)) return 0
+    return (
+      parseFloat(product.price) * parseFloat(this.variables.get(option.name)?.toString() ?? '0')
+    )
+  }
+
+  notSelfProductResult(product: IProduct) {
+    let amount: number
+    if (this.productAmountDependencies.get(product.product_type)) {
+      amount = this.variables.get(
+        this.productAmountDependencies.get(product.product_type)!,
+      ) as number
+    } else {
+      amount = 1
+    }
+    return parseFloat(product.price) * amount
+  }
+
+  blockAmountUndependsProductsResult(products: IProduct[]) {
+    const blockAmountUndependsProductsResult = products.reduce((sum, current) => {
+      if (!current) return sum
+      const quantity_option = this.data.options.find(
+        (option) => option.name.startsWith('self') && option.product == current.product_type,
+      )
+      if (quantity_option) return sum + this.selfProductResult(current, quantity_option)
+      return sum + this.notSelfProductResult(current)
+    }, 0)
+    return blockAmountUndependsProductsResult
+  }
+
+  formBlockResult(calc: number, blockDepends: number, blockUndepends: number) {
+    return calc + blockDepends + blockUndepends
+  }
+
+  get result() {
+    if (!this.variables.get('block_amount')) return 0
+    const calculationResult = this.calculationResult()
+
+    const filteredProducts = this.filterByMinPrice()
+
+    if (this.data.main_product) {
+      if (!filteredProducts.some((product) => product?.product_type === this.data.main_product)) {
+        return 0
+      }
+    }
+
     const blockFilteredProducts = filteredProducts.filter(
       (product) => this.productAmountDependencies.get(product?.product_type) === undefined,
     )
     const otherFilteredProducts = filteredProducts.filter(
       (product) => !blockFilteredProducts.includes(product),
     )
-    const blockFilteredProductsResult = blockFilteredProducts.reduce((sum, current) => {
-      if (!current) return sum
-      return sum + parseFloat(current.price)
-    }, 0)
-    const blockResult =
-      resultWithoutProducts *
-        ((this.filters && blockFilteredProductsResult) ||
-        Array.from(this.filters.keys()).length == 0
-          ? 1
-          : 0) +
-      blockFilteredProductsResult * (this.variables.get('block_amount') as number)
-    const otherFilteredProductsResult = otherFilteredProducts.reduce((sum, current) => {
-      if (!current) return sum
-      const quantity_option = this.data.options.find(
-        (option) => option.name.startsWith('self') && option.product == current.product_type,
-      )
-      if (quantity_option) {
-        return (
-          parseFloat(current.price) *
-          parseFloat(this.variables.get(quantity_option.name)?.toString() ?? '0')
-        )
-      }
-      return (
-        sum +
-        parseFloat(current.price) *
-          (this.productAmountDependencies.get(current.product_type)
-            ? (this.variables.get(
-                this.productAmountDependencies.get(current.product_type)!,
-              ) as number)
-            : 1)
-      )
-    }, 0)
-    const result = blockResult + (blockResult ? otherFilteredProductsResult : 0)
-    return result || 0
+
+    const blockAmountDependsProductsResult =
+      this.blockAmountDependsProductsResult(blockFilteredProducts)
+    const blockAmountUndependsProductsResult =
+      this.blockAmountUndependsProductsResult(otherFilteredProducts)
+    const result = this.formBlockResult(
+      calculationResult,
+      blockAmountDependsProductsResult,
+      blockAmountUndependsProductsResult,
+    )
+    return result
   }
 
   private filterByMinPrice() {
@@ -392,9 +441,7 @@ class CalculatorBlockStore {
       })
     }
     this.variables.set(name, value)
-    const prevArr = [...this.presentOptions]
-    this.setPresent()
-    this.compareArrays(prevArr, this.presentOptions)
+    this.initializeAnimation()
     if (!setProduct) this.checkOptionProduct(name)
   }
 
@@ -412,14 +459,21 @@ class CalculatorBlockStore {
   private setInitialVariable(option: IOption) {
     switch (option.option_type) {
       case 'checkbox':
-        this.variables.set(option.name, false)
+        this.variables.set(option.name, option.initial_value?.toLowerCase() === 'true')
+        this.emptyVariables.set(option.name, false)
         break
       case 'radio':
-        this.variables.set(option.name, option.choices!.split(';').map((part) => part.trim())[0])
+        // TODO сделать так чтобы изначально не было значений (сейчас проблема с анимацией раскрытия)
+        this.variables.set(
+          option.name,
+          option.initial_value ?? option.choices!.split(';')[0].trim(),
+        )
+        this.emptyVariables.set(option.name, option.choices!.split(';')[0].trim())
         break
       case 'counter':
       case 'number':
-        this.variables.set(option.name, 0)
+        this.variables.set(option.name, parseInt(option.initial_value ?? '0'))
+        this.emptyVariables.set(option.name, 0)
         break
       default:
         const error = new Error(`Unknown option type: ${option.option_type}`)
@@ -435,7 +489,7 @@ class CalculatorBlockStore {
         this.setInitialVariable(option)
 
         if (option.variability_with_block_amount) {
-          this.variabilityVariables.set(option.name, option.initial_value || 1)
+          this.variabilityVariables.set(option.name, parseInt(option.initial_value ?? '0') || 1)
         }
         if (option.product) {
           // Формируем словарь фильтров, если указано, что это условие для фильтра какого-то товара
@@ -593,15 +647,13 @@ class CalculatorBlockStore {
       this.prev_block_amount = parseInt(this.variables.get(name) as string)
     }
     this.variables.set(name, value)
-    const prevArr = [...this.presentOptions]
-    this.setPresent()
-    this.compareArrays(prevArr, this.presentOptions)
+    this.initializeAnimation()
   }
 
   private setVariableByOptionType(type: string, name: string, value: number | string) {
     switch (type) {
       case 'checkbox':
-        this.setProductVariable(name, value)
+        this.setProductVariable(name, value == 'true')
         break
       case 'counter':
       case 'number':
@@ -617,12 +669,28 @@ class CalculatorBlockStore {
     }
   }
 
+  private setDependenceOption(option: IOption) {
+    const dependOption = this.data.options.find((o) => o.id === option.depends_on)
+    if (dependOption) {
+      if (dependOption.depends_on) {
+        this.setDependenceOption(dependOption)
+      }
+      if (option.depends_on_value)
+        this.setVariableByOptionType(
+          dependOption.option_type,
+          dependOption.name,
+          option.depends_on_value,
+        )
+    }
+  }
+
   private setOptions(product: IProduct, value: number | string) {
     const options = this.data.options.filter(
       (option) => option.name.startsWith('self') && option.product == product.product_type,
     )
     if (options.length > 0)
       options.map((option) => {
+        if (option.depends_on) this.setDependenceOption(option)
         this.setVariableByOptionType(option.option_type, option.name, value)
       })
   }
@@ -631,6 +699,13 @@ class CalculatorBlockStore {
     this.data.options
       .filter((option) => option.product == category)
       .map((option) => this.variables.set(option.name, this.initialVariables.get(option.name)!))
+  }
+
+  resetAllOptions() {
+    this.variables = new Map(this.emptyVariables)
+    // const prevArr = [...this.presentOptions]
+    // this.setPresent()
+    // this.compareArrays(prevArr, this.presentOptions)
   }
 
   private resetCalculationCategory(category: number) {
@@ -664,6 +739,18 @@ class CalculatorBlockStore {
     else return false
   }
 
+  prepareForProductInsert() {
+    this.isProductInserting = true
+    this.resetAllOptions()
+    this.presentOptionsBeforeInsert = [...this.presentOptions]
+  }
+
+  finishProductInsert() {
+    this.setPresent()
+    this.compareArrays(this.presentOptionsBeforeInsert, this.presentOptions)
+    this.isProductInserting = false
+  }
+
   setProducts(products: IEquipment[]) {
     const currentBlock = this.checkProductsForCurrentBlock(products)
     if (currentBlock) {
@@ -679,6 +766,8 @@ class CalculatorBlockStore {
 
   setProduct(product: IProduct | null, amount: number) {
     if (product && this.products.has(product.product_type)) {
+      if (!this.data.main_product && !this.variables.get('block_amount'))
+        this.variables.set('block_amount', 1)
       this.resetProductOptions(product.product_type)
       this.setProductByFilters(product, amount)
       this.setOptions(product, amount)

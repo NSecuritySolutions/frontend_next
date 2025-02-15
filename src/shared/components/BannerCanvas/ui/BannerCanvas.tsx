@@ -1,4 +1,4 @@
-import { Dispatch, FC, RefObject, SetStateAction } from 'react'
+import { Dispatch, FC, RefObject, SetStateAction, useEffect, useRef, useState } from 'react'
 import { StyledCanvas } from './styled'
 import { CameraBannerObj } from '@/shared/components/CameraBanner'
 
@@ -9,7 +9,7 @@ interface BannerCanvasProps {
 
 const BannerCanvas: FC<BannerCanvasProps> = ({ area, setReady }) => {
   return (
-    <StyledCanvas shadows dpr={[1, 2]} camera={{ position: [3, 2, 5], fov: 50 }}>
+    <StyledCanvas shadows dpr={[1, 1]} camera={{ position: [3, 2, 5], fov: 50 }} frameloop="demand">
       <spotLight
         intensity={9000}
         position={[20, 10, 30]}

@@ -34,7 +34,7 @@ interface IOption {
   block_amount_undependent: boolean
   amount_depend?: string
   variability_with_block_amount: boolean
-  initial_value: number
+  initial_value?: string
 }
 
 interface ICalculation {
@@ -49,6 +49,7 @@ interface IBlock {
   position: number
   title: string
   image: string
+  main_product: number
   formula: IFormula
   calculator: number
   options: IOption[]

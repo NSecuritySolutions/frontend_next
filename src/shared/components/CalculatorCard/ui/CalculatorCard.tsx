@@ -48,7 +48,7 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     }, [])
 
     useEffect(() => {
-      return clearTimers
+      return clearTimers()
     }, [clearTimers])
 
     const formattedResult = result.toLocaleString('ru-RU', {
@@ -59,9 +59,18 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
     })
 
     useEffect(() => {
-      if (animationSafe && card.current) {
+      if (!store.isProductInserting) {
+        setHeight(0)
+        resize(presentOptions.length, true)
+        setPresentCount(presentOptions.length)
+      }
+    }, [store.isProductInserting, resize, presentOptions])
+
+    useEffect(() => {
+      if (calculatorStore.animationSafe && card.current) {
         if (amount == 0) {
           setPresentCount(presentOptions.length)
+          resize(presentCount, true)
         } else if (store.disabled && store.appeared) {
           setAnimationSafe(false)
           resize(store.appeared, true, false)
@@ -103,8 +112,8 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
             }, 1000),
           )
         } else if (store.appeared) {
-          setAnimationSafe(false)
           resize(store.appeared, true, false)
+          setAnimationSafe(false)
           timers.current.push(
             setTimeout(() => {
               setAnimationSafe(true)
@@ -120,7 +129,6 @@ const CalculatorCard: FC<CalculatorCardProps> = observer(
       setAnimationSafe,
       store.appeared,
       store.disabled,
-      animationSafe,
       resize,
     ])
 

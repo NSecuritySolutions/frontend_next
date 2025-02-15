@@ -32,11 +32,14 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
   const modal = useFormStore()
   const router = useRouter()
 
-  const formattedPrice = Number(data.price).toLocaleString('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
-    maximumFractionDigits: 0,
-  })
+  const formattedPrice = (parseFloat(data.equipment_price) + parseFloat(data.price)).toLocaleString(
+    'ru-RU',
+    {
+      style: 'currency',
+      currency: 'RUB',
+      maximumFractionDigits: 0,
+    },
+  )
 
   return (
     <Card>
@@ -68,7 +71,7 @@ const CardSolution: FC<CardSolutionProps> = ({ data }) => {
         <Button
           $transparent
           onClick={() => {
-            calculatorStore.setProducts(data.equipment)
+            calculatorStore.setProducts(data.equipment, true)
             const calc = document.getElementById('calculator')
             if (calc) calc.scrollIntoView({ behavior: 'smooth' })
             else router.push('/#calculator')
