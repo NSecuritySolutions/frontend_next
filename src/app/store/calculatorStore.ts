@@ -8,6 +8,7 @@ import { CalculatorData } from '@/shared/components/FormModal/types'
 export class CalculatorStore {
   data: IBlock[] = []
   products: IProduct[] = []
+  price_list?: string
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
   animationSafe: boolean = true
@@ -25,6 +26,7 @@ export class CalculatorStore {
       setAnimationSafe: action,
       data: observable.ref,
       products: observable.ref,
+      price_list: observable.ref,
     })
   }
 
@@ -67,10 +69,16 @@ export class CalculatorStore {
       this.error = true
       return
     }
-    this.products = products
-    this.data = calculator[0].blocks
-    if (this.data) {
-      this.setBlocks()
+    if (!calculator.length) {
+      console.error('Calculators empty list')
+      this.error = true
+    } else {
+      this.products = products
+      this.data = calculator[0].blocks
+      this.price_list = calculator[0].price_list
+      if (this.data) {
+        this.setBlocks()
+      }
     }
   }
 

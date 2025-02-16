@@ -67,6 +67,7 @@ interface ICalculatorData {
   id: number
   blocks: IBlock[]
   active: boolean
+  price_list?: string
 }
 
 export type { IOption, IBlock, ICalculation, ICalculatorData, IProduct }

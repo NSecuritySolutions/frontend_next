@@ -18,6 +18,7 @@ import {
   InfoGridContainer,
   InfoGrid,
   ModalOverlay,
+  ButtonLink,
 } from './styled'
 import { CalculatorCard } from '@/shared/components/CalculatorCard/index'
 import { Typography } from '@/shared/components/Typography'
@@ -321,7 +322,7 @@ const Calculator: React.FC = observer(() => {
               <Button $primary onClick={() => modal.openCalc()} disabled={!store.changed}>
                 Оформить заявку
               </Button>
-              <Button>
+              <ButtonLink href={store.price_list} target="_blank" rel="noopener noreferrer">
                 <Image
                   src="/icons/calculator/download.svg"
                   height={24}
@@ -329,7 +330,7 @@ const Calculator: React.FC = observer(() => {
                   alt="Downdload"
                 />
                 Скачать прайс
-              </Button>
+              </ButtonLink>
             </ButtonsWrapper>
           </FooterWrapper>
         </BodyWrapper>
