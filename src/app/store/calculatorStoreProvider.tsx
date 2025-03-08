@@ -2,12 +2,12 @@
 
 import { createContext, useContext, ReactNode, FC } from 'react'
 import calculatorStore, { CalculatorStore } from '@/app/store/calculatorStore'
-import { ICalculatorData, TProduct } from '@/widgets/Calculator/types'
+import { ICalculatorData, IProduct } from '@/widgets/Calculator/types'
 
 const StoreContext = createContext<CalculatorStore | null>(null)
 
 export const StoreProvider: FC<{
-  products: TProduct[]
+  products: IProduct[]
   calculator: ICalculatorData[]
   children: ReactNode
 }> = ({ products, calculator, children }) => {

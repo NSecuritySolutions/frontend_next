@@ -1,7 +1,7 @@
-import { TProduct } from '@/widgets/Calculator/types'
+import { IProduct } from '@/widgets/Calculator/types'
 
 interface ICondition {
-  leftPart: keyof TProduct
+  leftPart: keyof IProduct
   operator?: string
   rightPart?: string
   optionValue?: string

@@ -144,7 +144,7 @@ const Text = styled.p<{ $link?: boolean }>`
   font-weight: 400;
   word-break: break-word;
   color: ${(props) => (props.$link ? colors.titleBlueColor : 'none')};
-  // width: 100px;
+  width: fit-content;
 
   @media (max-width: 620px) {
     font-size: 14px;

@@ -261,7 +261,7 @@ const FormModal: FC = observer(() => {
                       {data!.title}
                     </ContentTitleText>
                     <ContentTitlePrice>
-                      {data.price?.toLocaleString('ru-RU', {
+                      {parseFloat(data.price ?? '0').toLocaleString('ru-RU', {
                         style: 'currency',
                         currency: 'RUB',
                         maximumFractionDigits: 0,

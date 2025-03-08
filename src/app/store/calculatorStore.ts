@@ -1,25 +1,18 @@
 import CalculatorBlockStore from './calculatorBlockStore'
 
 import { makeAutoObservable, computed, observable, action } from 'mobx'
-import {
-  IBlock,
-  ICalculatorData,
-  IPriceList,
-  IPriceVariables,
-  TProduct,
-} from '@/widgets/Calculator/types'
+import { IBlock, ICalculatorData, IProduct } from '@/widgets/Calculator/types'
 import { IEquipment } from '@/widgets/ReadySolutionSection/types'
 import { CalculatorData } from '@/shared/components/FormModal/types'
 
 export class CalculatorStore {
   data: IBlock[] = []
-  priceList: IPriceList | undefined = undefined
-  prices: IPriceVariables = {}
-  products: TProduct[] = []
+  products: IProduct[] = []
+  price_list?: string
   blocks: CalculatorBlockStore[] = []
   error: null | unknown = null
   animationSafe: boolean = true
-  pending_products: { product: TProduct; amount: number }[] = []
+  pending_products: { product: IProduct; amount: number }[] = []
   suitable_blocks: string[] = []
   selected_blocks: string[] = []
   constructor() {
@@ -32,13 +25,17 @@ export class CalculatorStore {
       result: computed,
       setAnimationSafe: action,
       data: observable.ref,
-      prices: observable.ref,
       products: observable.ref,
+      price_list: observable.ref,
     })
   }
 
   setAnimationSafe = (value: boolean) => {
     this.animationSafe = value
+  }
+
+  get changed() {
+    return this.blocks.some((block) => block.changed)
   }
 
   get clearable() {
@@ -55,36 +52,33 @@ export class CalculatorStore {
   }
 
   setBlocks() {
-    this.blocks = this.data.map((blockData) => new CalculatorBlockStore(blockData, this.prices))
+    this.blocks = this.data.map((blockData) => new CalculatorBlockStore(blockData))
   }
 
   setNewBlock(id: number) {
-    this.blocks.push(
-      new CalculatorBlockStore(this.data.filter((block) => block.id == id)[0], this.prices),
-    )
+    this.blocks.push(new CalculatorBlockStore(this.data.filter((block) => block.id == id)[0]))
   }
 
   removeBlock(id: number) {
     this.blocks.splice(id, 1)
   }
 
-  formPrices() {
-    this.priceList!.categories.map((category) =>
-      category.prices.map((price) => (this.prices[price.variable_name] = price.price)),
-    )
-  }
-
-  getData(products: TProduct[], calculator: ICalculatorData[]) {
+  getData(products: IProduct[], calculator: ICalculatorData[]) {
     if (!products || !calculator) {
+      console.error('Important data is undefined')
       this.error = true
       return
     }
-    this.products = products
-    this.data = calculator[0].blocks
-    this.priceList = calculator[0].price_list
-    this.formPrices()
-    if (this.data && this.prices) {
-      this.setBlocks()
+    if (!calculator.length) {
+      console.error('Calculators empty list')
+      this.error = true
+    } else {
+      this.products = products
+      this.data = calculator[0].blocks
+      this.price_list = calculator[0].price_list
+      if (this.data) {
+        this.setBlocks()
+      }
     }
   }
 
@@ -107,7 +101,7 @@ export class CalculatorStore {
     this.handleCancelSelectBlocks()
   }
 
-  setProduct(product: TProduct) {
+  setProduct(product: IProduct) {
     if (this.animationSafe) {
       const suitable_blocks: string[] = []
       this.blocks.forEach((block) => {
@@ -124,14 +118,24 @@ export class CalculatorStore {
     }
   }
 
-  setBlockProduct(product: TProduct, amount: number, blockIds: string[]) {
+  setBlockProduct(product: IProduct, amount: number, blockIds: string[]) {
     this.blocks.forEach((block) => {
       if (blockIds.includes(block.id)) block.setProduct(product, amount)
     })
   }
 
-  setProducts(products: IEquipment[]) {
+  setProducts(products: IEquipment[], resetAll?: boolean) {
     if (this.animationSafe) {
+      const blocks: Set<CalculatorBlockStore> = new Set()
+      products.forEach((product) => {
+        this.blocks.forEach((block) => {
+          if (block.backend_id == product.calculator_block) {
+            blocks.add(block)
+          }
+        })
+      })
+      if (resetAll) blocks.forEach((v) => v.prepareForProductInsert())
+      blocks.forEach((v) => v.resetCalculationProducts())
       products.forEach((product) => {
         this.blocks
           .filter((block) => block.backend_id == product.calculator_block)
@@ -139,15 +143,21 @@ export class CalculatorStore {
             block.setProduct(product.product, product.amount)
           })
       })
+      if (resetAll) blocks.forEach((v) => v.finishProductInsert())
     }
   }
 
   createFormData() {
-    const data: CalculatorData = {
-      price: this.result,
-      blocks: this.blocks.map((block) => block.createFormData()),
+    const blocks = this.blocks
+      .filter((block) => block.changed)
+      .map((block) => block.createFormData())
+    if (blocks?.length) {
+      const data: CalculatorData = {
+        price: this.result,
+        blocks: blocks,
+      }
+      return data
     }
-    return data
   }
 }
 

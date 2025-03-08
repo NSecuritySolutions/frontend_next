@@ -7,7 +7,7 @@ export async function getMainPageData() {
     fetch(`${BASE_URL}/api/v1/our-team/?active=true`),
     fetch(`${BASE_URL}/api/v1/our-works/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/new-products/`),
     fetch(`${BASE_URL}/api/v1/our-services/`),
   ])
 
@@ -51,7 +51,7 @@ export async function getLayoutData() {
 
 export async function getCalculatorData() {
   const responses = await Promise.all([
-    fetch(`${BASE_URL}/api/v1/products/`),
+    fetch(`${BASE_URL}/api/v1/new-products/`),
     fetch(`${BASE_URL}/api/v1/calculator/?active=true`),
   ])
 
@@ -74,22 +74,23 @@ export async function getVideoPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/new-products/?category=Видеонаблюдение&ordering=product_type`),
+    fetch(`${BASE_URL}/api/v1/categories/?parent__title=Видеонаблюдение&ordering=pk`),
   ])
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, solutionTags, questionsData, productData] = await Promise.all(
-    responses.map((response) => response.json()),
-  )
+  const [solutionData, solutionTags, questionsData, productData, categoriesData] =
+    await Promise.all(responses.map((response) => response.json()))
 
   return {
     solutionData,
     solutionTags,
     questionsData,
     productData,
+    categoriesData,
   }
 }
 
@@ -98,23 +99,23 @@ export async function getDomofonPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
+    fetch(`${BASE_URL}/api/v1/new-products/?category=СКУД`),
+    fetch(`${BASE_URL}/api/v1/categories/?parent__title=СКУД&ordering=pk`),
   ])
-  // TODO сделать нужную категорию
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, solutionTags, questionsData, productData] = await Promise.all(
-    responses.map((response) => response.json()),
-  )
+  const [solutionData, solutionTags, questionsData, productData, categoriesData] =
+    await Promise.all(responses.map((response) => response.json()))
 
   return {
     solutionData,
     solutionTags,
     questionsData,
     productData,
+    categoriesData,
   }
 }
 
@@ -123,23 +124,23 @@ export async function getSecurityPageData() {
     fetch(`${BASE_URL}/api/v1/ready-solutions/`),
     fetch(`${BASE_URL}/api/v1/solutions-tags/`),
     fetch(`${BASE_URL}/api/v1/questions/`),
-    fetch(`${BASE_URL}/api/v1/products/?category=Камера`),
-    // TODO сделать нужную категорию
+    fetch(`${BASE_URL}/api/v1/new-products/?category=ОПС`),
+    fetch(`${BASE_URL}/api/v1/categories/?parent__title=ОПС&ordering=pk`),
   ])
 
   if (responses.some((response) => !response.ok)) {
     throw new Error('Failed to fetch data')
   }
 
-  const [solutionData, solutionTags, questionsData, productData] = await Promise.all(
-    responses.map((response) => response.json()),
-  )
+  const [solutionData, solutionTags, questionsData, productData, categoriesData] =
+    await Promise.all(responses.map((response) => response.json()))
 
   return {
     solutionData,
     solutionTags,
     questionsData,
     productData,
+    categoriesData,
   }
 }
 
@@ -153,7 +154,7 @@ export async function getOurWorksPageData() {
 }
 
 export async function getProductById(id: string) {
-  const response = await fetch(`${BASE_URL}/api/v1/products/${id}/`)
+  const response = await fetch(`${BASE_URL}/api/v1/new-products/${id}/`)
   if (!response.ok) {
     throw new Error('Failed to fetch data')
   }

@@ -1,4 +1,4 @@
-import { Dispatch, FC, RefObject, SetStateAction, useEffect } from 'react'
+import { Dispatch, FC, RefObject, SetStateAction, useEffect, useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useThree, useFrame, GroupProps } from '@react-three/fiber'
 import { Vector3, Vector2, Quaternion, Raycaster, Plane, Bone, Group } from 'three'
@@ -11,11 +11,13 @@ interface CameraBannerObjProps {
 }
 
 const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady }) => {
+  const [corpusOnPosition, setCorpusOnPosition] = useState(true)
+  const [standOnPosition, setStandOnPosition] = useState(true)
   const ref = useRef<Group>(null)
-  const { scene } = useGLTF('/banner-camera-v6.glb')
+  const { scene } = useGLTF('/banner-camera-v7.glb', true)
   const standRef = useRef<Bone | null>(null)
   const corpusRef = useRef<Bone | null>(null)
-  const { camera, gl, size, scene: threeScene } = useThree()
+  const { camera, gl, size, scene: threeScene, invalidate } = useThree()
   const mouse = useRef(new Vector2())
   const currentWidth = useRef(area.current?.clientWidth || window.innerWidth)
   const mouseOver = useRef(false)
@@ -43,28 +45,35 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
   }, [scene])
 
   useEffect(() => {
+    let animationFrame: number
+    const vector = new Vector3()
     const handleMouseMove = (event: MouseEvent) => {
-      // Преобразуем координаты мыши
-      if (corpusRef.current && area.current) {
-        const rectArea = area.current.getBoundingClientRect()
-        const rect = gl.domElement.getBoundingClientRect()
-        const vector = new Vector3()
-        corpusRef.current.getWorldPosition(vector)
-        vector.project(camera)
-        const objectLeft = (vector.x / 2 + 0.5) * size.width
-        const objectTop = (-vector.y / 2 + 0.5) * size.height
-        const leftSide = rect.left + objectLeft
-        const topSide = rect.top + objectTop
-        const x = event.clientX - leftSide
-        const y = -(event.clientY - topSide)
+      cancelAnimationFrame(animationFrame)
+      animationFrame = requestAnimationFrame(() => {
+        if (corpusRef.current && area.current) {
+          const rectArea = area.current.getBoundingClientRect()
+          const rect = gl.domElement.getBoundingClientRect()
+          corpusRef.current.getWorldPosition(vector)
+          vector.project(camera)
+          const objectLeft = (vector.x / 2 + 0.5) * size.width
+          const objectTop = (-vector.y / 2 + 0.5) * size.height
+          const leftSide = rect.left + objectLeft
+          const topSide = rect.top + objectTop
+          const x = event.clientX - leftSide
+          const y = -(event.clientY - topSide)
 
-        currentWidth.current = event.clientX >= leftSide ? rectArea.width - leftSide : leftSide
+          currentWidth.current = event.clientX >= leftSide ? rectArea.width - leftSide : leftSide
 
-        mouse.current.set(x, y)
-      }
+          mouse.current.set(x, y)
+        }
+      })
     }
 
-    const handleMouseEnter = () => (mouseOver.current = true)
+    const handleMouseEnter = () => {
+      mouseOver.current = true
+      invalidate()
+    }
+
     const handleMouseLeave = () => (mouseOver.current = false)
 
     const currentArea = area.current
@@ -80,11 +89,16 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
         currentArea.removeEventListener('mouseleave', handleMouseLeave)
       }
     }
-  }, [camera, gl, size, area])
+  }, [camera, gl, size, area, invalidate])
 
   useFrame(() => {
+    if (!mouseOver.current && corpusOnPosition && standOnPosition) return
+    invalidate()
+
     if (mouseOver.current) {
       if (standRef.current) {
+        setCorpusOnPosition(false)
+        setStandOnPosition(false)
         const diff = new Vector2()
         diff.sub(mouse.current)
 
@@ -129,15 +143,28 @@ const CameraBannerObj: FC<CameraBannerObjProps> = ({ sceneProps, area, setReady 
         }
       }
     } else {
+      const ROTATION_THRESHOLD = 0.01
+
       if (standRef.current) {
-        const resultQuaternion = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), -0.05)
+        const targetQuaternion = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), -0.05)
+        const angleDiff = standRef.current.quaternion.angleTo(targetQuaternion)
 
-        standRef.current.quaternion.slerp(resultQuaternion, 0.05)
+        if (angleDiff > ROTATION_THRESHOLD) {
+          standRef.current.quaternion.slerp(targetQuaternion, 0.05)
+        } else {
+          setStandOnPosition(true)
+        }
       }
-      if (corpusRef.current) {
-        const resultQuaternion = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), 0)
 
-        corpusRef.current.quaternion.slerp(resultQuaternion, 0.05)
+      if (corpusRef.current) {
+        const targetQuaternion = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), 0)
+        const angleDiff = corpusRef.current.quaternion.angleTo(targetQuaternion)
+
+        if (angleDiff > ROTATION_THRESHOLD) {
+          corpusRef.current.quaternion.slerp(targetQuaternion, 0.05)
+        } else {
+          setCorpusOnPosition(true)
+        }
       }
     }
   })

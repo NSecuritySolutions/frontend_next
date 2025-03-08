@@ -1,4 +1,4 @@
-import { TProduct } from '@/widgets/Calculator/types'
+import { IProduct } from '@/widgets/Calculator/types'
 
 export type TCard = {
   item: {
@@ -12,5 +12,5 @@ export type TCard = {
 }
 
 export interface ProductCardProps {
-  item: TProduct
+  item: IProduct
 }
