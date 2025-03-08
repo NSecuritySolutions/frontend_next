@@ -13,7 +13,8 @@ import styles from './page.module.css'
 export const revalidate = 60
 
 export default async function SecurityPage() {
-  const { solutionData, solutionTags, questionsData, productData } = await getSecurityPageData()
+  const { solutionData, solutionTags, questionsData, productData, categoriesData } =
+    await getSecurityPageData()
 
   const filteredSolutions = solutionData.filter((solution: ISolution) =>
     solution.tags.some((tag) => tag.title === 'Охранно-пожарная сигнализация'),
@@ -32,7 +33,7 @@ export default async function SecurityPage() {
         data={{ solutions: filteredSolutions, tags: solutionTags }}
         withTabs={false}
       />
-      <ProductCards data={productData} />
+      <ProductCards data={productData} categories={categoriesData} />
       <Calculator />
       <Questions data={questionsData} />
       <ContactForm />

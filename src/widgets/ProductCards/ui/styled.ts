@@ -31,9 +31,7 @@ const Section = styled.section`
 const SectionWrapper = styled.div<{ $maxHeight?: number }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 20px;
-  // max-height: ${(props) => (props.$maxHeight ? `${props.$maxHeight}px` : 'none')};
   margin-bottom: 32px;
   transition: max-height 1s;
 
@@ -45,7 +43,6 @@ const SectionWrapper = styled.div<{ $maxHeight?: number }>`
 
   @media (max-width: 940px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
   }
 `
 

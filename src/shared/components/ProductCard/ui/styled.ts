@@ -12,6 +12,7 @@ const CardWrapper = styled.div`
 const CardContainer = styled.article`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   border-radius: 20px;
   padding: 20px;
   width: 380px;
@@ -33,6 +34,12 @@ const CardContainer = styled.article`
     width: 156px;
     min-height: 348px;
   }
+`
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `
 
 const Img = styled(Image)`
@@ -142,6 +149,7 @@ const ButtonWrapper = styled.div`
 `
 export {
   CardContainer,
+  ContentWrapper,
   Img,
   CardWrapper,
   ProductPrice,

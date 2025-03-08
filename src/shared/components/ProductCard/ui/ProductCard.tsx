@@ -22,6 +22,7 @@ import {
   LinkChild,
   ButtonWrapper,
   TextWrapper,
+  ContentWrapper,
 } from './styled'
 import calculatorStore from '@/app/store/calculatorStore'
 
@@ -61,28 +62,35 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
           router.push(`/products/${item.id}`)
         }}
       >
-        <Img src={item.image || '/blurData/blur1.png'} alt={item.model} width={260} height={261} />
-        <TextWrapper>
-          <ProductPrice>{formattedPrice}</ProductPrice>
-          <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>
-          <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
-          <ProductAbout>
-            {item.properties
-              .filter((prop) => (prop.value || prop.value === false) && prop.name !== 'Артикул')
-              .slice(0, 5)
-              .map((prop, index) => (
-                <li key={index}>
-                  <span style={{ fontWeight: 600 }}>{prop.name}: </span>
-                  {propToStr(prop.value)}
-                </li>
-              ))}
-          </ProductAbout>
-          <Link href={`/products/${item.id}`}>
-            <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
-              Подробнее...
-            </LinkChild>
-          </Link>
-        </TextWrapper>
+        <ContentWrapper>
+          <Img
+            src={item.image || '/blurData/blur1.png'}
+            alt={item.model}
+            width={260}
+            height={261}
+          />
+          <TextWrapper>
+            <ProductPrice>{formattedPrice}</ProductPrice>
+            <ProductTitle>{truncateStr(item.model, screenWidth)}</ProductTitle>
+            <ProductDescription>{truncateStr(item.description, screenWidth)}</ProductDescription>
+            <ProductAbout>
+              {item.properties
+                .filter((prop) => (prop.value || prop.value === false) && prop.name !== 'Артикул')
+                .slice(0, 5)
+                .map((prop, index) => (
+                  <li key={index}>
+                    <span style={{ fontWeight: 600 }}>{prop.name}: </span>
+                    {propToStr(prop.value)}
+                  </li>
+                ))}
+            </ProductAbout>
+            <Link href={`/products/${item.id}`}>
+              <LinkChild size={16} $weight={400} color={colors.titleBlueColor}>
+                Подробнее...
+              </LinkChild>
+            </Link>
+          </TextWrapper>
+        </ContentWrapper>
         <ButtonWrapper>
           {/* <BtnLink
             text="Заказать звонок"

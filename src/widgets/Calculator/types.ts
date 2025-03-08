@@ -4,6 +4,12 @@ interface IProp {
   value: string | number | boolean
 }
 
+interface IProductCategory {
+  id: number
+  title: string
+  children: Omit<IProductCategory, 'children'>[]
+}
+
 interface IProduct {
   id: number
   product_type: number
@@ -70,4 +76,4 @@ interface ICalculatorData {
   price_list?: string
 }
 
-export type { IOption, IBlock, ICalculation, ICalculatorData, IProduct }
+export type { IOption, IBlock, ICalculation, ICalculatorData, IProduct, IProductCategory }
